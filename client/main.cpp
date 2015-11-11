@@ -6,20 +6,22 @@ using namespace sf;
 int main()
 {
     // Fenêtre de rendu
-    RenderWindow app(VideoMode(600, 600, 32), "Mon superbe polygone SFML !");
-
-    // Shape carre;
-    // carre.addPoint(200, 200, Color(255, 255, 0), Color(255,255,255));
-    // carre.addPoint(400, 200, Color(255, 255, 0), Color(255,0,0));
-    // carre.addPoint(400, 400, Color(0, 255, 255), Color(0,255,0));
-    // carre.addPoint(200, 400, Color(0, 255, 255), Color(0,0,255));
-    // carre.enableFill(true); // Remplissage activé
-    // carre.enableOutline(true); // Bordures activées
-    // carre.setOutlineWidth(20); // Bordures de taille 20 pixels
+    RenderWindow app(VideoMode(900, 900, 32), "Mon superbe polygone SFML !");
+    CircleShape shape(100.f);
+    shape.setFillColor(Color::Green);
 
     // Boucle principale
     while (app.isOpen())
     {
+      // Efface l'écran (remplissage avec du noir)
+      app.clear();
+
+      // Affichage de notre carre dans la fenêtre
+      app.draw(shape);
+
+      // Affichage du contenu de la fenêtre à l'écran
+      app.display();
+
         Event event;
         while (app.waitEvent(event))
         {
@@ -28,13 +30,7 @@ int main()
                 app.close();
         }
 
-        // Efface l'écran (remplissage avec du noir)
-        app.clear();
 
-        // Affichage de notre carre dans la fenêtre
-
-        // Affichage du contenu de la fenêtre à l'écran
-        app.display();
 
     }
 
