@@ -6,7 +6,7 @@ using namespace sf;
 int main()
 {
     // Fenêtre de rendu
-    RenderWindow window(VideoMode(600, 600, 32), "R-Pint");
+    RenderWindow window(VideoMode(1920, 1080, 32), "R-Pint", Style::Fullscreen);
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
@@ -26,7 +26,12 @@ int main()
         {
             // Fenêtre fermée : on quitte
             if (event.type == Event::Closed)
+              window.close();
+            if (event.type == Event::KeyPressed)
+            {
+              if (Keyboard::isKeyPressed(Keyboard::Escape))
                 window.close();
+            }
         }
 
 
