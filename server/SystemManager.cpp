@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Mon Nov 30 05:49:40 2015 Louis Audibert
+// Last update Mon Nov 30 06:55:01 2015 Louis Audibert
 //
 
 #include "SystemManager.hh"
@@ -20,10 +20,12 @@ SystemManager::~SystemManager()
   std::cout << "SystemManager Destroyed." << std::endl;
 }
 
+/*
 ASystem *SystemManager::getSystemByComponent(E_COMPONENT type)
 {
 
 }
+*/
 
 void	SystemManager::addSystemByType(E_COMPONENT type)
 {
