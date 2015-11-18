@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Mon Nov 30 18:31:05 2015 Nicolas Charvoz
+// Last update Wed Nov 18 11:29:38 2015 Joris Bertomeu
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -13,6 +13,8 @@
 int		main(int ac, char **av)
 {
   Server	*s = new Server();
+
+  s->init();
   std::cout << "You've launched the Server of the RType" << std::endl;
 
   std::cout << "Made by La Pintade" << std::endl;
