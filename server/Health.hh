@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:29:53 2015 Louis Audibert
-// Last update Mon Nov 30 01:33:54 2015 Louis Audibert
+// Last update Mon Nov 30 05:51:35 2015 Antoine Garcia
 //
 
 #ifndef _HEALTH_HH_
@@ -13,9 +13,9 @@
 
 # include <string>
 # include <iostream>
-# include "IComponent.hh"
+# include "AComponent.hh"
 
-class Health : public IComponent
+class Health : public AComponent
 {
 private:
   int	_nbLife;

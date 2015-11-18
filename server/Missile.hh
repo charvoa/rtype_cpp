@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:48:05 2015 Louis Audibert
-// Last update Sat Nov 28 06:00:49 2015 Louis Audibert
+// Last update Mon Nov 30 05:51:54 2015 Antoine Garcia
 //
 
 #ifndef _MISSILE_HH_
@@ -13,9 +13,9 @@
 
 # include <string>
 # include <iostream>
-# include "IComponent.hh"
+# include "AComponent.hh"
 
-class Missile : public IComponent
+class Missile : public AComponent
 {
 private:
   int	_dmg;
