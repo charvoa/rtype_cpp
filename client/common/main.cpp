@@ -1,3 +1,13 @@
+//
+// main.cpp for rtype in /home/nicolas/rendu/rtype_cpp/client
+//
+// Made by Nicolas Girardot
+// Login   <girard_s@epitech.net>
+//
+// Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
+// Last update Tue Dec  1 11:47:42 2015 Nicolas Girardot
+//
+
 #include <cstdlib>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -7,7 +17,7 @@
 int main()
 {
     // Fenêtre de rendu
-  RenderWindow window(VideoMode(1920, 1080, 32), "R-Pint");//, Style::Fullscreen);
+  RenderWindow window(sf::VideoMode(1920, 1080, 32), "R-Pint");//, Style::Fullscreen);
   sf::CircleShape shape(100.f);
   shape.setFillColor(sf::Color::Green);
 
@@ -27,10 +37,10 @@ int main()
             // Fenêtre fermée : on quitte
             if (event.type == sf::Event::Closed)
               window.close();
-            if (event.type == Event::KeyPressed) /* KEYBOARD PRESSED */
+            if (event.type == sf::Event::KeyPressed) /* KEYBOARD PRESSED */
 	      {
 		std::cout << event.key.code << std::endl;
-		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		  window.close();
 	      }
 	    if (event.type == sf::Event::JoystickButtonPressed) /* JOYSTICK BUTTON PRESSED */

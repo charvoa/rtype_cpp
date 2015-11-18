@@ -5,12 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Mon Nov 30 17:00:32 2015 Viveka BARNEAUD
+// Last update Tue Dec  1 13:29:12 2015 Nicolas Charvoz
 //
 
 #ifndef RENDERWINDOW_HH_
 #define RENDERWINDOW_HH_
 
+#include <stack>
 #include "IRenderWindow.hh"
 #include "IVector2.hh"
 #include "Size.hh"
@@ -33,10 +34,13 @@ public:
   void		display();
   void		draw(const sf::Drawable &drawable, const sf::RenderStates &states = sf::RenderStates::Default);
   void		clear(const sf::Color &color = sf::Color(0, 0, 0, 255));
+  void          addPanel(PanelFactory::PanelType);
+  void          back();
 
 private:
 
   sf::RenderWindow *_window;
+  std::stack<APanel*>   _panels;
   //Size		_size;
   //PanelFactory	_panelFactory;
 };

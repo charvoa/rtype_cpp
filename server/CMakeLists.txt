@@ -1,4 +1,5 @@
 project(server)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 SET(CMAKE_CXX_COMPILER	"clang++")
 
@@ -17,4 +18,16 @@ add_executable(
   SystemPos.cpp
   SystemGun.cpp
   SystemManager.cpp
+  Server.cpp
+  AEntity.cpp
+  EntityManager.cpp
+  EntityFactory.cpp
+  CommandManager.cpp
+  Room/Room.cpp
+  Room/RoomManager.cpp
+  Player.cpp
+  PlayerManager.cpp
+  Client.cpp
+  Parameters.cpp
+  Network.cpp
 )
