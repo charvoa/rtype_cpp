@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:05:15 2015 Louis Audibert
-// Last update Mon Nov 30 05:51:06 2015 Antoine Garcia
+// Last update Tue Nov 17 23:51:32 2015 Joris Bertomeu
 //
 
 #ifndef _ICOMPONENT_HH_
@@ -19,7 +19,8 @@ protected:
   E_COMPONENT _type;
 
 public:
-  virtual ~AComponent();
+  explicit	AComponent() {};
+  virtual ~AComponent() {};
   E_COMPONENT getType();
 
 };
