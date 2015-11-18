@@ -5,13 +5,14 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Wed Nov 18 16:54:26 2015 Joris Bertomeu
+// Last update Wed Nov 18 17:10:07 2015 Joris Bertomeu
 //
 
 #ifndef		__ISOCKET_HPP_
 # define	__ISOCKET_HPP_
 
 # include	<sys/types.h>
+# include	<unistd.h>
 # include	<sys/socket.h>
 # include	<netinet/in.h>
 # include	<stdexcept>
