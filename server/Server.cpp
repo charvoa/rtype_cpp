@@ -5,12 +5,15 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Mon Nov 30 15:36:58 2015 Nicolas Charvoz
+// Last update Wed Nov 18 00:45:29 2015 Joris Bertomeu
 //
 
 #include "Server.hh"
 
-Server::Server() {}
+Server::Server()
+{
+  this->_network = new Network();
+}
 
 Server::~Server() {}
 
