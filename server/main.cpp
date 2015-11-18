@@ -5,12 +5,12 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:13:40 2015 Louis Audibert
-// Last update Sat Nov 28 05:14:14 2015 Louis Audibert
+// Last update Tue Nov 17 23:37:04 2015 Joris Bertomeu
 //
 
-#include "Server.hh"
+#include	"Server.hh"
 
-intmain(int ac, char **av)
+int		main(int ac, char **av)
 {
   std::cout << "You've launched the Server of the RType" << std::endl;
 
