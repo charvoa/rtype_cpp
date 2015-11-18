@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:53:22 2015 Louis Audibert
-// Last update Mon Nov 30 02:16:01 2015 Louis Audibert
+// Last update Mon Nov 30 05:59:24 2015 Louis Audibert
 //
 
 #include "SystemPos.hh"
 
 SystemPos::SystemPos()
 {
-
+  _component = new Position();
 }
 
 SystemPos::~SystemPos()

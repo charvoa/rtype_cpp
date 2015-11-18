@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:05:15 2015 Louis Audibert
-// Last update Tue Nov 17 23:51:32 2015 Joris Bertomeu
+// Last update Tue Nov 17 23:55:23 2015 Joris Bertomeu
 //
 
 #ifndef _ICOMPONENT_HH_

@@ -1,11 +1,11 @@
 /*
-** e_Component.h for rtype in /home/audibel/rendu/rtype_cpp/server
+** E_Component.hh for rtype in /home/audibel/rendu/rtype_cpp/server
 **
 ** Made by Louis Audibert
 ** Login   <audibel@epitech.net>
 **
 ** Started on  Sat Nov 28 05:06:04 2015 Louis Audibert
-// Last update Mon Nov 30 05:56:11 2015 Antoine Garcia
+// Last update Mon Nov 30 06:04:16 2015 Louis Audibert
 */
 
 #ifndef _E_COMPONENT_H_

@@ -5,9 +5,9 @@ add_executable(
   main.cpp
   Health.cpp
   Missile.cpp
+  Laser.cpp
+  Rifle.cpp
   SystemHealth.cpp
   SystemPos.cpp
-  Laser.cpp
   SystemGun.cpp
-  Rifle.cpp
 )
