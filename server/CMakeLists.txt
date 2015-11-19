@@ -2,7 +2,7 @@ project(RTYPE_SERVER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-# SET(CMAKE_CXX_COMPILER	"clang++")
+SET(CMAKE_CXX_COMPILER	"clang++")
 
 add_executable( server_rtype
   main.cpp
