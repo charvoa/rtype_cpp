@@ -1,5 +1,9 @@
 project(RTYPE_SERVER)
 
+set(EXECUTABLE_NAME "server_rtype")
+
+cmake_minimum_required(VERSION 3.2)
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 SET(CMAKE_CXX_COMPILER	"clang++")
@@ -26,7 +30,6 @@ add_executable( server_rtype
   Room/Room.cpp
   Room/RoomManager.cpp
   Player.cpp
-  PlayerManager.cpp
   Client.cpp
   Parameters.cpp
   Network.cpp
@@ -35,4 +38,8 @@ add_executable( server_rtype
   ../common/Thread/ThreadUnix.cpp
 )
 
-target_link_libraries(server_rtype pthread)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+
+find_package (Threads)
+
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_THREAD_LIBS_INIT})
