@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -6,7 +7,7 @@ using namespace sf;
 int main()
 {
     // Fenêtre de rendu
-    RenderWindow window(VideoMode(1920, 1080, 32), "R-Pint", Style::Fullscreen);
+    Window window(VideoMode(1920, 1080, 32), "R-Pint"), Style::Fullscreen);
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
@@ -32,6 +33,8 @@ int main()
               if (Keyboard::isKeyPressed(Keyboard::Escape))
                 window.close();
             }
+            if (Joystick::isButtonPressed(0,1))
+              std::cout << "Button on XBOX controller is pressed" << std::endl;
         }
 
 
