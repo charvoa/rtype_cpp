@@ -1,5 +1,5 @@
-#ifndef BIND_H
-#define BIND_H
+#ifndef BIND_HH
+#define BIND_HH
 
 
 class Bind
@@ -35,4 +35,4 @@ private:
     sf::Event::joystick _joystick;
 };
 
-#endif // BIND_H
+#endif // BIND_HH

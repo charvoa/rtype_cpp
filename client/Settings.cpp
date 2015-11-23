@@ -1,5 +1,5 @@
-#include "settings.h"
-#include "settingsloader.h"
+#include "Settings.hh"
+#include "SettingsLoader.hh"
 
 Settings::Settings(std::string const& filepath)
 {
@@ -12,7 +12,14 @@ Settings::Settings(Volume vol, std::vector<Bind> binds, Settings::Difficulty dif
 {
     _volume = vol;
     _binds = binds;
-    _difficulty = difficulty;
+    _defaultDifficulty = difficulty;
+}
+
+Settings::Settings(Settings const& copy)
+{
+    _volume = copy._volume;
+    _binds = copy._binds;
+    _defaultDifficulty = copy._defaultDifficulty;
 }
 
 Settings::~Settings(){}

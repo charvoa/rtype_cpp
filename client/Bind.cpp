@@ -1,4 +1,4 @@
-#include "bind.h"
+#include "bind.hh"
 
 Bind::Bind(Bind::BindType type, sf::Event::key key, sf::Event::Joystick joystick)
 {

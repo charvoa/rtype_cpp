@@ -1,8 +1,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "bind.h"
-#include "volume.h"
+#include "Bind.hh"
+#include "Volume.hh"
 
 class Settings
 {
@@ -16,6 +16,7 @@ public:
 
     Settings(std::string const& filepath);
     Settings(Volume, std::vector<Bind>, Settings::Difficulty);
+    Settings(Settings const&)
     ~Settings();
 
     Volume getVolume() const;
