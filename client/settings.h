@@ -1,38 +1,41 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "bind.h"
+#include "volume.h"
+
 class Settings
 {
 public:
-    Settings();
+    typedef enum e_difficulty
+    {
+        EASY_MODE,
+        MEDIUM_MODE,
+        HARD_MODE
+    } Difficulty;
+
+    Settings(std::string const& filepath);
+    Settings(Volume, std::vector<Bind>, Settings::Difficulty);
     ~Settings();
 
     Volume getVolume() const;
-    Bind getBinds() const;
-    int getDefaultDifficulty() const;
-    int getCurrentDifficulty() const;
+    std::vector<Bind> getBinds() const;
+    Settings::Difficulty getDefaultDifficulty() const;
+    Settings::Difficulty getCurrentDifficulty() const;
 
-    void setVolume(int, int, int);
     void setVolume(Volume);
     void setBind(Bind);
-    void setDefaultDifficulty(int);
-    void setDifficulty(int);
+    void setDefaultDifficulty(Settings::Difficulty);
+    void setDifficulty(Settings::Difficulty);
 
     void loadSettings();
     void resetDefault();
 
-    class SettingsLoader : public IParser
-    {
-
-    };
-
 private:
     std::vector<Bind> _binds;
     Volume  _volume;
-    int _defaultDifficulty;
-    int _difficulty;
-    Settings *_defaultSettings;
-
+    Settings::Difficulty _defaultDifficulty;
+    Settings::Difficulty _difficulty;
 };
 
 #endif // SETTINGS_H

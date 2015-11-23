@@ -15,7 +15,10 @@ public:
         MOVE_DOWN_BIND,
         MOVE_LEFT_BIND,
         MOVE_RIGHT_BIND,
-        LEAVE_GAME_BIND
+        LEAVE_GAME_BIND,
+        WEAPON_1,
+        WEAPON_2,
+        WEAPON_3
     } BindType;
 
     Bind::BindType getType() const;
