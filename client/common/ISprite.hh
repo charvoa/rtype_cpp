@@ -1,3 +1,13 @@
+//
+// ISprite.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// 
+// Made by Serge Heitzler
+// Login   <sergeheitzler@epitech.net>
+// 
+// Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
+// Last update Mon Nov 23 08:18:53 2015 Serge Heitzler
+//
+
 #ifndef ISPRITE_HH_
 #define ISPRITE_HH_
 

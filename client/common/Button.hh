@@ -1,7 +1,18 @@
+//
+// Button.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// 
+// Made by Serge Heitzler
+// Login   <sergeheitzler@epitech.net>
+// 
+// Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
+// Last update Mon Nov 23 08:19:51 2015 Serge Heitzler
+//
+
 #ifndef BUTTON_HH_
 #define BUTTON_HH_
 
 #include "IText.hh"
+#include "ISprite.hh"
 
 typedef enum StateButton
   {
@@ -10,7 +21,7 @@ typedef enum StateButton
     DISABLED
   };
 
-class	        Button
+class	        Button : public AMenuElement
 {
 
   Button();
@@ -24,9 +35,11 @@ private:
   ISprite		_backgroundSelected;
   
 public:
-
-  unsigned int		getWidth();
-  unsigned int		getHeight();
+  
+  bool			mousePressEvent(sf::Event& event);
+  bool			mouseReleaseEvent(sf::Event& event);
+  bool			mouseEntered(sf::Event& event);
+  bool			mouseLeft(sf::Event& event);
 
 };
 

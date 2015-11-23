@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sergeheitzler/rendu/rtype_cpp/client/common/main.cpp
+cstdlib
+-
+iostream
+-
+SFML/Graphics.hpp
+-
+
