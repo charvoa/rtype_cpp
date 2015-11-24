@@ -16,7 +16,7 @@ public:
 
     Settings(std::string const& filepath);
     Settings(Volume, std::vector<Bind>, Settings::Difficulty);
-    Settings(Settings const&)
+    Settings(Settings const&);
     ~Settings();
 
     Volume getVolume() const;
@@ -31,6 +31,7 @@ public:
 
     void loadSettings();
     void resetDefault();
+    void save() const;
 
 private:
     std::vector<Bind> _binds;

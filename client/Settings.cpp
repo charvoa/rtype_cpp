@@ -60,6 +60,10 @@ void    Settings::setBind(Bind bind)
     }
 }
 
+void    Settings::save() const
+{
+}
+
 void    Settings::setDefaultDifficulty(Settings::Difficulty diff)
 {
     _defaultDifficulty = diff;
