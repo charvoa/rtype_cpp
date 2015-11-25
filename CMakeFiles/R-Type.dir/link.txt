@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++11 -g    CMakeFiles/R-Type.dir/client/common/main.cpp.o CMakeFiles/R-Type.dir/client/common/RenderWindow.cpp.o CMakeFiles/R-Type.dir/client/common/Vector2.cpp.o  -o R-Type -rdynamic -lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio 
