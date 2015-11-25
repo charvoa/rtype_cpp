@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:31 2015 Serge Heitzler
-// Last update Mon Nov 23 08:18:32 2015 Serge Heitzler
+// Last update Tue Nov 24 01:27:13 2015 Serge Heitzler
 //
 
 #ifndef TEXTURE_HH_
@@ -13,8 +13,9 @@
 
 #include <string>
 #include "IVector2u.hh"
+#include "ITexture.hh"
 
-class	        Texture
+class	        Texture : public ITexture
 {
 
   Texture();

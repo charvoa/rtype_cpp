@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Mon Nov 23 08:18:42 2015 Serge Heitzler
+// Last update Tue Nov 24 04:45:10 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -14,7 +14,7 @@
 #include "IRenderWindow.hh"
 #include "Size.hh"
 
-class	        RenderWindow
+class	        RenderWindow : public IRenderWindow
 {
 
   RenderWindow();

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:43 2015 Serge Heitzler
-// Last update Mon Nov 23 08:19:44 2015 Serge Heitzler
+// Last update Tue Nov 24 04:45:41 2015 Serge Heitzler
 //
 
 #ifndef FONT_HH_
@@ -14,7 +14,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-class	        Font
+class	        Font : public IFont
 {
 
   Font();
