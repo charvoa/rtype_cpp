@@ -1,25 +1,73 @@
-#include "settingsloader.h"
+#include "SettingsLoader.hh"
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
-    _ifs = new std::ifstream(_filepath.c_str());
+    std::ifstream ifs(_filepath.c_str());
     _ofs = new std::ofstream(_filepath.c_str(), ios::out);
+    char    *buffer;
 
-    _fileExists = false;
-    if (_ifs.good())
-        _fileExists = true;
+    if (!ifs.good())
+    {
+        _fileExists = false;
+        return;
+    }
+    _fileExists = true;
+    ifs.seekg(0, _ifs.end);
+    int         sizeFile = _ifs.tellg();
+    ifs.seekg(0, _ifs.beg);
+
+    ifs.read(buffer, sizeFile);
+    _buffer = buffer;
+    free(buffer);
 }
 
 SettingsLoader::~SettingsLoader() {}
 
 std::string     SettingsLoader::getValueOf(std::string const& label) const
 {
+    std::string ret;
+    std::string buffer;
 
+    buffer << _ifs;
+    if (buffer.find(label) == std::string::npos)
+        return "LABEL_NOT_FOUND";
+    ret = buffer.substr(buffer.find(label), std::string::npos);
+    ret = ret.substr(ret.find("="), ret.find("\n"));
+    return (ret);
 }
 
 void        SettingsLoader::setValueOf(std::string const& label, std::string const& value) const
 {
+}
 
+int         SettingsLoader::getGlobalVolume() const
+{
+    int     global = 50;
+    std::string globalString(getValueOf("global"));
+
+    if (globalString != "LABEL_NOT_FOUND")
+        global = stringToInteger(globalString);
+    return global;
+}
+
+int         SettingsLoader::getEffectsVolume() const
+{
+    int     effects = 50;
+    std::string effectsString(getValueOf("effects"));
+
+    if (effectsString != "LABEL_NOT_FOUND")
+        effects = stringToInteger(effectsString);
+    return effects;
+}
+
+int         SettingsLoader::getMusicVolume() const
+{
+    int     music = 50;
+    std::string musicString(getValueOf("music"));
+
+    if (musicString != "LABEL_NOT_FOUND")
+        music = stringToInteger(musicString);
+    return music;
 }
 
 Volume      SettingsLoader::getVolume() const
@@ -31,9 +79,9 @@ Volume      SettingsLoader::getVolume() const
 
     if (_fileExists == false)
         return (ret);
-    global = stringToInteger(getValueOf("global"));
-    effects = stringToInteger(getValueOf("effects"));
-    music = stringToInteger(getValueOf("music"));
+    global = getGlobalVolume();
+    effects = getEffectsVolume();
+    music = getMusicVolume();
     ret.setEffects(effects);
     ret.setGlobal(global);
     ret.setMusic(music);
@@ -135,10 +183,130 @@ std::string     SettingsLoader::joystickToString(sf::Event::Joystick) const
 
 std::string     SettingsLoader::keyToString(sf::Event::key key) const
 {
+    switch (key) {
+    case Num0:
+        return "0_KEY";
+    case Num1:
+        return "1_KEY";
+    case Num2:
+        return "2_KEY";
+    case Num3:
+        return "3_KEY";
+    case Num4:
+        return "4_KEY";
+    case Num5:
+        return "5_KEY";
+    case Num6:
+        return "6_KEY";
+    case Num7:
+        return "7_KEY";
+    case Num8:
+        return "8_KEY";
+    case Num9:
+        return "9_KEY";
+        return "ARROW_UP_KEY";
+        return "ARROW_DOWN_KEY";
+        return "ARROW_LEFT_KEY";
+        return "ARROW_RIGHT_KEY";
+        return "SPACE_KEY";
+        return "ESCAPE_KEY";
+    case A:
+        return "A_KEY";
+    case Z:
+        return "Z_KEY";
+    case E:
+        return "E_KEY";
+    case R:
+        return "R_KEY";
+    case T:
+        return "T_KEY";
+    case Y:
+        return "Y_KEY";
+    case U:
+        return "U_KEY";
+    case I:
+        return "I_KEY";
+    case O:
+        return "O_KEY";
+    case P:
+        return "P_KEY";
+        return "^_KEY";
+        return "$_KEY";
+    case Return:
+        return "RETURN_KEY";
+    case Q:
+        return "Q_KEY";
+    case S:
+        return "S_KEY";
+    case D:
+        return "D_KEY";
+    case F:
+        return "F_KEY";
+    case G:
+        return "G_KEY";
+    case H:
+        return "H_KEY";
+    case J:
+        return "J_KEY";
+    case K:
+        return "K_KEY";
+    case L:
+        return "L_KEY";
+    case M:
+        return "M_KEY";
+        return "ù_KEY";
+        return "*_KEY";
+        return "<_KEY";
+        return ")_KEY";
+        return "=_KEY";
+    case W:
+        return "W_KEY";
+    case X:
+        return "X_KEY";
+    case C:
+        return "C_KEY";
+    case V:
+        return "V_KEY";
+    case B:
+        return "B_KEY";
+    case N:
+        return "N_KEY";
+        return ",_KEY";
+        return ";_KEY";
+        return ":_KEY";
+        return "!_KEY";
+    case Numpad0:
+        return "PAD_0_KEY";
+    case Numpad1:
+        return "PAD_1_KEY";
+    case Numpad2:
+        return "PAD_2_KEY";
+    case Numpad3:
+        return "PAD_3_KEY";
+    case Numpad4:
+        return "PAD_4_KEY";
+    case Numpad5:
+        return "PAD_5_KEY";
+    case Numpad6:
+        return "PAD_6_KEY";
+    case Numpad7:
+        return "PAD_7_KEY";
+    case Numpad8:
+        return "PAD_8_KEY";
+    case Numpad9:
+        return "PAD_9_KEY";
+    default:
+        return "NO_BIND";
+    }
 }
 
 std::string     SettingsLoader::bindToString(Bind bind)
 {
+    std::string bindType = bindTypeToString(bind.getType());
+    std::string joystick = joystickToString(bind.getJoystick());
+    std::string key = keyToString(bind.getKey());
+
+    bindType+="="+key+","+joystick+"\n";
 }
 
 void        SettingsLoader::saveSettings(Settings *settings) const

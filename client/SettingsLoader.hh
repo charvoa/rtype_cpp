@@ -1,8 +1,8 @@
-#ifndef SETTINGSLOADER_H
-#define SETTINGSLOADER_H
+#ifndef SETTINGSLOADER_HH
+#define SETTINGSLOADER_HH
 
-#include "iparser.h"
-#include "settings.h"
+#include "IParser.hh"
+#include "Settings.hh"
 
 class SettingsLoader : public IParser
 {
@@ -15,6 +15,9 @@ public:
 
     Settings    *parseSettings() const;
     Volume      getVolume() const;
+    int         getGlobalVolume() const;
+    int         getEffectsVolume() const;
+    int         getMusicVolume() const;
     std::vector<Bind>   getBinds() const;
     Settings::Difficulty    getDefaultDifficulty() const;
 
@@ -31,8 +34,9 @@ public:
 private:
     const std::string _filepath;
     bool    _fileExists;
-    std::ifstream   *_ifs;
+//    std::ifstream   *_ifs;
     std::ofstream   *_ofs;
+    std::string     _rdbuffer;
 };
 
-#endif // SETTINGSLOADER_H
+#endif // SETTINGSLOADER_HH
