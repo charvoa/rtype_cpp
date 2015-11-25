@@ -5,7 +5,7 @@
 ## Login   <girard_s@epitech.net>
 ##
 ## Started on  Mon Oct 19 11:47:59 2015 Nicolas Girardot
-## Last update Sun Nov  8 14:25:33 2015 Nicolas Girardot
+## Last update Wed Nov 18 11:10:01 2015 Nicolas Charvoz
 ## Last update Mon Nov  2 18:26:32 2015 Nicolas Charvoz
 ##
 
@@ -19,7 +19,7 @@ SRC_MAIN	=	$(SRC) common/main.cpp
 
 OBJ_MAIN	=	$(SRC_MAIN:.cpp=.o)
 
-LDFLAGS		= -lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS		=	-lsfml-graphics -lsfml-window -lsfml-system
 
 CPPFLAGS	=	-Wall -Wextra -Werror
 
