@@ -6,11 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/sergeheitzler/rendu/rtype_cpp/client/common/main.cpp
-cstdlib
--
-iostream
--
-SFML/Graphics.hpp
--
+/home/nicolas/rendu/rtype_cpp/client/common/IVector2.hh
+
+/home/nicolas/rendu/rtype_cpp/client/common/Vector2.cpp
+Vector2.hh
+/home/nicolas/rendu/rtype_cpp/client/common/Vector2.hh
+
+/home/nicolas/rendu/rtype_cpp/client/common/Vector2.hh
+IVector2.hh
+/home/nicolas/rendu/rtype_cpp/client/common/IVector2.hh
 
