@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Sat Nov 28 06:01:21 2015 Louis Audibert
+// Last update Sat Nov 28 06:13:18 2015 Louis Audibert
 //
 
 #include "Missile.hh"
 
 Missile::Missile()
 {
-  _dmg = 20;
+  _dmg = 50;
 }
 
 Missile::~Missile()
