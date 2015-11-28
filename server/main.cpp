@@ -1,16 +1,16 @@
 //
-// main.cpp for  in /home/nicolaschr/rendu/rtype_cpp/server
+// main.cpp for rtype in /home/audibel/rendu/rtype_cpp/server
 //
-// Made by Nicolas Charvoz
-// Login   <nicolaschr@epitech.net>
+// Made by Louis Audibert
+// Login   <audibel@epitech.net>
 //
-// Started on  Wed Nov 25 16:45:13 2015 Nicolas Charvoz
-// Last update Wed Nov 25 16:45:59 2015 Nicolas Charvoz
+// Started on  Sat Nov 28 05:13:40 2015 Louis Audibert
+// Last update Sat Nov 28 05:14:14 2015 Louis Audibert
 //
 
 #include "Server.hh"
 
-int		main(int ac, char **av)
+intmain(int ac, char **av)
 {
   std::cout << "You've launched the Server of the RType" << std::endl;
 
