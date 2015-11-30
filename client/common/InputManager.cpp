@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Mon Nov 30 06:16:38 2015 Serge Heitzler
+// Last update Mon Nov 30 06:34:28 2015 Serge Heitzler
 //
 
 #include "InputManager.hh"
@@ -26,11 +26,6 @@ inputmanager::inputmanager(InputType type)
       
       //_functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::?));
     }
-}
-
-InputManager::InputManager(const std::string& pathToFile)
-{
-
 }
 
 InputManager::~InputManager()
@@ -95,7 +90,7 @@ std::map<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event&
   return std::make_pair(globalPosition.x, globalPosition.y);
 }
 
-std::map<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(IRenderWindow &window, sf::Event& event)
+void						InputManager::joystickHardwareEvent(IRenderWindow &window, sf::Event& event)
 {
   // changer la texture du controller à display
 }
