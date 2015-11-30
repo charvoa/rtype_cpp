@@ -5,7 +5,7 @@
 ** Login   <audibel@epitech.net>
 **
 ** Started on  Sat Nov 28 05:06:04 2015 Louis Audibert
-// Last update Sat Nov 28 05:13:06 2015 Louis Audibert
+// Last update Mon Nov 30 05:56:11 2015 Antoine Garcia
 */
 
 #ifndef _E_COMPONENT_H_
@@ -18,6 +18,6 @@ typedef enum E_COMPONENT
     E_LASER,
     E_RIFLE,
     E_MISSILE
-  };
+  }		E_COMPONENT;
 
 #endif /* _E_COMPONENT_H_ */
