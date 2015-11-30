@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:05:15 2015 Louis Audibert
-// Last update Mon Nov 30 01:43:31 2015 Louis Audibert
+// Last update Mon Nov 30 06:14:31 2015 Louis Audibert
 //
 
 #ifndef _ICOMPONENT_HH_
@@ -13,13 +13,14 @@
 
 # include "E_Component.hh"
 
-class IComponent {
+class AComponent {
 
-private:
+protected:
   E_COMPONENT _type;
 
 public:
-  virtual ~IComponent();
+  AComponent(){};
+  virtual ~AComponent(){};
   E_COMPONENT getType();
 
 };
