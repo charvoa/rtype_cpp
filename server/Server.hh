@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Wed Nov 25 16:50:59 2015 Nicolas Charvoz
+// Last update Mon Nov 30 01:40:13 2015 Louis Audibert
 //
 
 #ifndef SERVER_HH_
@@ -33,10 +33,10 @@ public:
   private:
 
   ANetwork *_network;
-  RoomManager *_roomManager;
-  GameManager *_gameManager;
-  ClientManager *_clientManager;
-  CommandManager *_commandManager;
+  RoomManager _roomManager;
+  GameManager _gameManager;
+  ClientManager _clientManager;
+  CommandManager _commandManager;
 
 };
 
