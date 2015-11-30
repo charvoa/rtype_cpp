@@ -1,0 +1,14 @@
+﻿La génération a démarré 30/11/2015 14:42:08.
+     1>Projet "C:\Users\Vi\Desktop\rtype_cpp\client\R-Type.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>ClCompile:
+         H:\VisualStudio\VC\bin\CL.exe /c /IC:\Users\Vi\Desktop\rtype_cpp\client\build /I"C:\Users\Vi\Desktop\SFML-2.3.2\include" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"..\R-Type.dir\Debug\\" /Fd"..\R-Type.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt  -std=c++11 C:\Users\Vi\Desktop\rtype_cpp\client\common\RenderWindow.cpp
+     1>cl : Ligne de commande warning D9002: option '-std=c++11' inconnue ignorée
+         RenderWindow.cpp
+     1>C:\Users\Vi\Desktop\SFML-2.3.2\include\SFML/Window/ContextSettings.hpp(78): error C3646: 'attributeFlags' : spécificateur de substitution inconnu
+     1>C:\Users\Vi\Desktop\SFML-2.3.2\include\SFML/Window/ContextSettings.hpp(78): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\Users\Vi\Desktop\SFML-2.3.2\include\SFML/Window/ContextSettings.hpp(67): error C2614: 'sf::ContextSettings' : initialisation de membre non conforme : 'attributeFlags' n'est ni une base ni un membre
+     1>Génération du projet "C:\Users\Vi\Desktop\rtype_cpp\client\R-Type.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
+
+ÉCHEC de la build.
+
+Temps écoulé 00:00:00.55
