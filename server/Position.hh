@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:15:28 2015 Louis Audibert
-// Last update Sat Nov 28 05:26:41 2015 Louis Audibert
+// Last update Mon Nov 30 01:31:51 2015 Louis Audibert
 //
 
 #ifndef _POSITION_HH_
@@ -23,6 +23,7 @@ private:
 
 public:
   Position();
+  Position(int x, int y);
   ~Position();
 
   int	getX() const;

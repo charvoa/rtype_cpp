@@ -5,12 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:29:53 2015 Louis Audibert
-// Last update Sat Nov 28 05:40:37 2015 Louis Audibert
+// Last update Mon Nov 30 01:33:54 2015 Louis Audibert
 //
 
 #ifndef _HEALTH_HH_
 # define _HEALTH_HH_
 
+# include <string>
+# include <iostream>
 # include "IComponent.hh"
 
 class Health : public IComponent
