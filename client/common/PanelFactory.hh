@@ -30,12 +30,7 @@ public:
         LOADING_PANEL
     } PanelType;
 
-  void    createPanel(PanelType);
-
-  APanel  *getPanel() const;
-
-private:
-    APanel  *_panel;
+  APanel    *createPanel(PanelType);
 };
 
 #endif // PANELFACTORY_H

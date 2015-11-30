@@ -24,6 +24,8 @@ public:
   std::string getValueOfKey(std::string const&) const;
   std::string setValueOfJoystick(std::string const&) const;
 
+  std::string removeSpaces(std::string const&) const;
+
   Settings    *parseSettings() const;
   Volume      getVolume() const;
   int         getGlobalVolume() const;

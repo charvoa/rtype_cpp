@@ -34,8 +34,8 @@ public:
     ~Bind();
 
     Bind::BindType getType() const;
-    sf::Event::key getKey() const;
-    sf::Event::joystick getJoystick() const;
+    sf::Event getKey() const;
+    sf::Event getJoystick() const;
 
     void setType(Bind::BindType);
     void setKey(sf::Event::key);
@@ -43,8 +43,8 @@ public:
 
 private:
     Bind::BindType _type;
-    sf::Event::key _key;
-    sf::Event::joystick _joystick;
+    sf::Event _key;
+    sf::Event _joystick;
 };
 
 #endif // BIND_HH

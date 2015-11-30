@@ -25,6 +25,21 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
 
 SettingsLoader::~SettingsLoader() {}
 
+std::string     SettingsLoader::removeSpaces(std::string const& str) const
+{
+    unsigned int it = 0;
+    unsigned int end = str.length();
+
+    while (it != end)
+    {
+        if (str.at(it) == ' ' ||
+            str.at(it) == '\t')
+            str.erase(it, 1);
+        ++it;
+    }
+    return (str);
+}
+
 std::string     SettingsLoader::getValueOf(std::string const& label) const
 {
     std::string	line;
@@ -33,6 +48,7 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
 
     while (std::getline(*_ifs, line))
       {
+        line = removeSpaces(line);
         if (line.find(label) != std::string::npos)
         {
 	  _ifs->clear();
