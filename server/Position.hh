@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:15:28 2015 Louis Audibert
-// Last update Mon Nov 30 01:31:51 2015 Louis Audibert
+// Last update Mon Nov 30 05:52:12 2015 Antoine Garcia
 //
 
 #ifndef _POSITION_HH_
@@ -13,9 +13,9 @@
 
 # include <string>
 # include <iostream>
-# include "IComponent.hh"
+# include "AComponent.hh"
 
-class Position : public IComponent
+class Position : public AComponent
 {
 private:
   int	_x;
