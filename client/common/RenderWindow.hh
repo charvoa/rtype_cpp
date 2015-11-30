@@ -5,13 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Tue Nov 24 04:45:10 2015 Serge Heitzler
+// Last update Mon Nov 30 04:45:08 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
 #define RENDERWINDOW_HH_
 
 #include "IRenderWindow.hh"
+#include "IVector2.hh"
 #include "Size.hh"
 
 class	        RenderWindow : public IRenderWindow
@@ -25,7 +26,7 @@ class	        RenderWindow : public IRenderWindow
   bool		isOpen();
   bool		pollEvent(sf::Event& event);
   bool	        waitEvent(sf::Event& event);
-  IVector2u    	getSize();
+  IVector2    	getSize();
   void		SetVerticalSyncEnabled(bool value);
   void		setMouseCursorVisible(bool value);
   void		setKeyRepeatRepeatEnabled(bool value);

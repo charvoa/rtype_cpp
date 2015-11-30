@@ -5,17 +5,17 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Nov 25 02:39:28 2015 Serge Heitzler
+// Last update Mon Nov 30 05:49:10 2015 Serge Heitzler
 //
 
 #ifndef IVECTOR2_HH_
 #define IVECTOR2_HH_
 
-
+template <typename T>
 class	        IVector2
 {
 
-  IVector2(int x, int y);
+  IVector2(T x, T y);
   ~IVector2();
 
 };

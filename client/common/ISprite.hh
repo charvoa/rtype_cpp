@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
-// Last update Mon Nov 23 08:18:53 2015 Serge Heitzler
+// Last update Wed Nov 25 06:32:13 2015 Serge Heitzler
 //
 
 #ifndef ISPRITE_HH_
@@ -14,19 +14,19 @@
 #include "ITexture.hh"
 #include "IColor.hh"
 
-class	        ISprite
+class		      ISprite
 {
 
   ISprite(const ITexture& texture);
   ~ISprite();
 
-  void		setTexture(const ITexture& texture) = 0;
-  void		setColor(const IColor& color) = 0;
-  void		setPosition(float x, float y) = 0;
-  void		scale(float ratio) = 0;
-  void		setOrigin(float x, float y) = 0;
-  void		move (float x, float y) = 0;
-  void		rotate(float angle) = 0;
+  virtual void		setTexture(const ITexture& texture) = 0;
+  virtual void		setColor(const IColor& color) = 0;
+  virtual void		setPosition(float x, float y) = 0;
+  virtual void		scale(float ratio) = 0;
+  virtual void		setOrigin(float x, float y) = 0;
+  virtual void		move (float x, float y) = 0;
+  virtual void		rotate(float angle) = 0;
 
 };
 

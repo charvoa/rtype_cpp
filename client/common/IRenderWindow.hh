@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Mon Nov 23 08:20:14 2015 Serge Heitzler
+// Last update Wed Nov 25 06:33:30 2015 Serge Heitzler
 //
 
 #ifndef IRENDERWINDOW_HH_
@@ -16,22 +16,22 @@
 #include "IVideoMode.hh"
 #include "IVector2u.hh"
 
-class	        IRenderWindow
+class  		      IRenderWindow
 {
 
   IRenderWindow();
   ~IRenderWindow();
 
-  void		create(IVideoMode mode, const std::string&, Uint32, const contextSettings&) = 0;
-  void		close() = 0;
-  bool		isOpen() = 0;
-  bool		pollEvent(sf::Event& event) = 0;
-  bool	        waitEvent(sf::Event& event) = 0;
-  IVector2u    	getSize() = 0;
-  void		SetVerticalSyncEnabled(bool value) = 0;
-  void		setMouseCursorVisible(bool value) = 0;
-  void		setKeyRepeatRepeatEnabled(bool value) = 0;
-  void		display() = 0;
+  virtual void		create(IVideoMode mode, const std::string&, Uint32, const contextSettings&) = 0;
+  virtual void		close() = 0;
+  virtual bool		isOpen() = 0;
+  virtual bool		pollEvent(sf::Event& event) = 0;
+  virtual bool	        waitEvent(sf::Event& event) = 0;
+  virtual IVector2    	getSize() = 0;
+  virtual void		SetVerticalSyncEnabled(bool value) = 0;
+  virtual void		setMouseCursorVisible(bool value) = 0;
+  virtual void		setKeyRepeatRepeatEnabled(bool value) = 0;
+  virtual void		display() = 0;
   
 };
 

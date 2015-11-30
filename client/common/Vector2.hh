@@ -5,22 +5,23 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Nov 25 02:43:23 2015 Serge Heitzler
+// Last update Mon Nov 30 06:18:34 2015 Serge Heitzler
 //
 
 #ifndef VECTOR2_HH_
 #define VECTOR2_HH_
 
+template <typename T>
 class	        Vector2 : public IVector2
 {
 
-  Vector2(int x, int y);
+  Vector2(T x, T y);
   ~Vector2();
 
 public:
 
-  int		_x;
-  int		_y;
+  T		_x;
+  T		_y;
 
 };
 
