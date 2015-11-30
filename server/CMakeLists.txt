@@ -11,4 +11,5 @@ add_executable(
   SystemHealth.cpp
   SystemPos.cpp
   SystemGun.cpp
+  SystemManager.cpp
 )
