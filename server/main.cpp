@@ -4,11 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-<<<<<<< HEAD
-// Last update Mon Nov 30 17:49:35 2015 Nicolas Charvoz
-=======
-// Last update Wed Nov 18 00:44:54 2015 Joris Bertomeu
->>>>>>> 88c5d4ce10d96bb0a460feae097821933fc30ca6
+// Last update Mon Nov 30 18:31:05 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 

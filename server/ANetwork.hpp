@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Mon Nov 30 18:17:35 2015 Nicolas Charvoz
+// Last update Mon Nov 30 18:30:40 2015 Nicolas Charvoz
 //
 
 #ifndef ANETWORK_HH_
@@ -26,10 +26,6 @@ public :
     char _data[49];
   } t_frame;
 
-private:
-  ISocket	*_socket;
-
-public:
   ANetwork() {};
   virtual	~ANetwork() {};
   virtual void	create(int port_, int sockType_, const std::string &addr_) = 0;
@@ -39,6 +35,10 @@ public:
   virtual int	write(void *) = 0;
   virtual void	close() = 0;
   virtual void	accept(ISocket *) = 0;
+
+private:
+  ISocket	*_socket;
+
 };
 
 #endif
