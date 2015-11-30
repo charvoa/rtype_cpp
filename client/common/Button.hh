@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Mon Nov 23 08:19:51 2015 Serge Heitzler
+// Last update Mon Nov 30 09:56:56 2015 Viveka BARNEAUD
 //
 
 #ifndef BUTTON_HH_

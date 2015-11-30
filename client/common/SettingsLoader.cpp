@@ -1,3 +1,13 @@
+//
+// SettingsLoader.cpp for SettingsLoader in /home/barnea_v/rendu/rtype_cpp/client/common
+// 
+// Made by Viveka BARNEAUD
+// Login   <barnea_v@epitech.net>
+// 
+// Started on  Mon Nov 30 09:50:19 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 09:50:20 2015 Viveka BARNEAUD
+//
+
 #include "SettingsLoader.hh"
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
@@ -23,7 +33,6 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
 
     while (std::getline(*_ifs, line))
       {
-	std::cout << "LINE : [" << line << "]" << std::endl;
         if (line.find(label) != std::string::npos)
         {
 	  _ifs->clear();
@@ -32,11 +41,25 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
         }
       }
     _ifs->clear();
-    return ("NOT_FOUND");
+    return ("LABEL_NOT_FOUND");
 }
 
-void        SettingsLoader::setValueOf(std::string const& label, std::string const& value) const
+std::string	SettingsLoader::getValueOfKey(std::string const& label) const
 {
+  std::string	toSplit(getValueOf(label));
+  std::string	ret;
+
+  ret = toSplit.substr(0, toSplit.find(","));
+  return (ret);
+}
+
+std::string	SettingsLoader::getValueOfJoystick(std::string const& label) const
+{
+  std::string	toSplit(getValueOf(label));
+  std::string	ret;
+
+  ret = toSplit.substr(toSplit.find(",") + 1, std::string::npos);
+  return (ret);
 }
 
 int         SettingsLoader::getGlobalVolume() const
@@ -88,7 +111,57 @@ Volume      SettingsLoader::getVolume() const
     return (ret);
 }
 
-std::vector<Bind>   SettingsLoader::getBinds() const
+std::vector<std::string>	SettingsLoader::getKeys() const
+{
+  std::string		move_up(stringToKey(getValueOfKey("move_up")));
+  std::string		move_down(stringToKey(getValueOfKey("move_down")));
+  std::string		move_left(stringToKey(getValueOfKey("move_left")));
+  std::string		move_right(stringToKey(getValueOfKey("move_right")));
+  std::string		shoot(stringToKey(getValueOfKey("shoot")));
+  std::string		weapon1(stringToKey(getValueOfKey("weapon1")));
+  std::string		weapon2(stringToKey(getValueOfKey("weapon2")));
+  std::string		weapon3(stringToKey(getValueOfKey("weapon3")));
+  std::string		leave_game(stringToKey(getValueOfKey("leave_game")));
+  std::vector<std::string>	ret;
+
+  ret.push_back(move_up);
+  ret.push_back(move_down);
+  ret.push_back(move_left);
+  ret.push_back(move_right);
+  ret.push_back(shoot);
+  ret.push_back(weapon1);
+  ret.push_back(weapon2);
+  ret.push_back(weapon3);
+  ret.push_back(leave_game);
+  return (ret);
+}
+
+std::vector<std::string>	SettingsLoader::getJoysticks() const
+{
+  std::string		move_up(stringToJoystick(getValueOfJoystick("move_up")));
+  std::string		move_down(stringToJoystick(getValueOfJoystick("move_down")));
+  std::string		move_left(stringToJoystick(getValueOfJoystick("move_left")));
+  std::string		move_right(stringToJoystick(getValueOfJoystick("move_right")));
+  std::string		shoot(stringToJoystick(getValueOfJoystick("shoot")));
+  std::string		weapon1(stringToJoystick(getValueOfJoystick("weapon1")));
+  std::string		weapon2(stringToJoystick(getValueOfJoystick("weapon2")));
+  std::string		weapon3(stringToJoystick(getValueOfJoystick("weapon3")));
+  std::string		leave_game(stringToJoystick(getValueOfJoystick("leave_game")));
+  std::vector<std::string>	ret;
+
+  ret.push_back(move_up);
+  ret.push_back(move_down);
+  ret.push_back(move_left);
+  ret.push_back(move_right);
+  ret.push_back(shoot);
+  ret.push_back(weapon1);
+  ret.push_back(weapon2);
+  ret.push_back(weapon3);
+  ret.push_back(leave_game);
+  return (ret);
+}
+
+std::vector<Bind>	SettingsLoader::createDefaultBinds() const
 {
     Bind    moveUp(Bind::MOVE_UP_BIND, sf::Event::key.Up, sf::Event::joystick::TODO);
     Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Event::key.Down, sf::Event::joystick::TODO);
@@ -100,7 +173,6 @@ std::vector<Bind>   SettingsLoader::getBinds() const
     Bind    weapon3(Bind::WEAPON_3, sf::Event::key.Num3, sf::Event::joystick::TODO);
     Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Event::Escape, sf::Event::joystick::TODO);
     std::vector<Bind>   defaultBinds;
-    std::vector<Bind>   binds;
 
     defaultBinds.push_back(moveUp);
     defaultBinds.push_back(moveDown);
@@ -111,30 +183,48 @@ std::vector<Bind>   SettingsLoader::getBinds() const
     defaultBinds.push_back(weapon2);
     defaultBinds.push_back(weapon3);
     defaultBinds.push_back(leaveGame);
+    return (defaultBinds);
+}
+
+std::vector<Bind>   SettingsLoader::getBinds() const
+{
+    Bind    moveUp(Bind::MOVE_UP_BIND, sf::Event::key.Up, sf::Event::joystick::TODO);
+    Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Event::key.Down, sf::Event::joystick::TODO);
+    Bind    moveLeft(Bind::MOVE_LEFT_BIND, sf::Event::key.Left, sf::Event::joystick::TODO);
+    Bind    moveRight(Bind::MOVE_RIGHT_BIND, sf::Event::key.Right, sf::Event::joystick::TODO);
+    Bind    shoot(Bind::ATTACK_BIND, sf::Event::key.Space, sf::Event::joystick::TODO);
+    Bind    weapon1(Bind::WEAPON_1, sf::Event::key.Num1, sf::Event::joystick::TODO);
+    Bind    weapon2(Bind::WEAPON_2, sf::Event::key.Num2, sf::Event::joystick::TODO);
+    Bind    weapon3(Bind::WEAPON_3, sf::Event::key.Num3, sf::Event::joystick::TODO);
+    Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Event::Escape, sf::Event::joystick::TODO);
+    std::vector<Bind>   binds;
 
     if (_fileExists == false)
-        return (defaultBinds);
+      return (createDefaultBinds());
 
-    moveUp.setKey(stringToKey(getValueOf("move_up")));
-    moveDown.setKey(stringToKey(getValueOf("move_down")));
-    moveLeft.setKey(stringToKey(getValueOf("move_left")));
-    moveRight.setKey(stringToKey(getValueOf("move_right")));
-    shoot.setKey(stringToKey(getValueOf("shoot")));
-    weapon1.setKey(stringToKey(getValueOf("weapon1")));
-    weapon2.setKey(stringToKey(getValueOf("weapon2")));
-    weapon3.setKey(stringToKey(getValueOf("weapon3")));
-    leaveGame.setKey(stringToKey(getValueOf("leave_game")));
+    std::vector<std::string>keys = getKeys();
+    std::vector<std::string>joysticks = getJoysticks();
+    std::vector<std::string>::const_iterator itk = keys.begin();
+    std::vector<Bind>::iterator itb = binds.begin();
+    std::vector<std::string>::const_iterator endk = keys.end();
+    std::vector<std::string>::const_iterator itj = joysticks.begin();
 
-    binds.push_back(moveUp);
-    binds.push_back(moveDown);
-    binds.push_back(moveLeft);
-    binds.push_back(moveRight);
+    binds.push_back(move_up);
+    binds.push_back(move_down);
+    binds.push_back(move_left);
+    binds.push_back(move_right);
     binds.push_back(shoot);
     binds.push_back(weapon1);
     binds.push_back(weapon2);
     binds.push_back(weapon3);
-    binds.push_back(leaveGame);
-
+    binds.push_back(leave_game);
+    while (itk != endk)
+      {
+	(*itb).setKey(*itk);
+	(*itb).setJoystick(*itj);
+	itk++;
+	itj++;
+      }
     return (binds);
 }
 
@@ -313,4 +403,11 @@ void        SettingsLoader::saveSettings(Settings *settings) const
     std::string settingsString(settingsToString(settings));
 
     _ofs << settingsString;
+}
+
+Settings	*SettingsLoader::parseSettings() const
+{
+  Settings	*ret = new Settings(getVolume(), getBinds(), getDefaultDifficulty());
+
+  return (ret);
 }

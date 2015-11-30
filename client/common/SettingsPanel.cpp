@@ -1,3 +1,13 @@
+//
+// SettingsPanel.cpp for SettingsPanel in /home/barnea_v/rendu/rtype_cpp/client/common
+// 
+// Made by Viveka BARNEAUD
+// Login   <barnea_v@epitech.net>
+// 
+// Started on  Mon Nov 30 09:50:13 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 09:50:13 2015 Viveka BARNEAUD
+//
+
 #include "SettingsPanel.hh"
 
 SettingsPanel::SettingsPanel(RenderWindow *parent) : APanel(parent)
