@@ -5,11 +5,11 @@
 ** Login   <audibel@epitech.net>
 **
 ** Started on  Sat Nov 28 05:06:04 2015 Louis Audibert
-// Last update Mon Nov 30 06:04:16 2015 Louis Audibert
+// Last update Mon Nov 30 06:44:02 2015 Louis Audibert
 */
 
-#ifndef _E_COMPONENT_H_
-# define _E_COMPONENT_H_
+#ifndef _E_COMPONENT_HH_
+# define _E_COMPONENT_HH_
 
 typedef enum E_COMPONENT
   {
@@ -20,4 +20,4 @@ typedef enum E_COMPONENT
     E_MISSILE
   }		E_COMPONENT;
 
-#endif /* _E_COMPONENT_H_ */
+#endif /* _E_COMPONENT_HH_ */
