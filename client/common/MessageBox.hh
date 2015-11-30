@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:07 2015 Serge Heitzler
-// Last update Mon Nov 23 08:18:09 2015 Serge Heitzler
+// Last update Mon Nov 30 09:53:25 2015 Viveka BARNEAUD
 //
 
 #ifndef MESSAGEBOX_HH_
