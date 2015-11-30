@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Mon Nov 30 06:04:15 2015 Serge Heitzler
+// Last update Mon Nov 30 06:34:12 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -31,7 +31,7 @@ class	        InputManager : public IInputManager
   std::map<unsigned int, unsigned int>		joystickMovedAt(sf::Event& event);
   std::map<unsigned int, unsigned int>		mouseMovedAt(sf::Event& event);
   std::map<unsigned int, unsigned int>		joystickPressedAt(sf::Event& event);
-  std::map<unsigned int, unsigned int>		joystickHardwareEvent(IRenderWindow &window, sf::Event& event);
+  void						joystickHardwareEvent(IRenderWindow &window, sf::Event& event);
 
 private:
   
