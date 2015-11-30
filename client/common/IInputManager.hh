@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Mon Nov 30 05:37:06 2015 Serge Heitzler
+// Last update Mon Nov 30 06:34:50 2015 Serge Heitzler
 //
 
 #ifndef IINPUTMANAGER_HH_
@@ -21,7 +21,6 @@ class		      IInputManager
 public:
   
   IInputManager();
-  IInputManager(const std::string& pathToFile);
   ~IInputManager();
 
     bool						isMouseInWindow(IVector2 posMouse) = 0;
@@ -30,7 +29,7 @@ public:
   std::map<unsigned int, unsigned int>		joystickMovedAt(sf::Event& event) = 0;
   std::map<unsigned int, unsigned int>		mouseMovedAt(sf::Event& event) = 0;
   std::map<unsigned int, unsigned int>		joystickPressedAt(sf::Event& event) = 0;
-  std::map<unsigned int, unsigned int>		joystickHardwareEvent(IRenderWindow &window, sf::Event& event) = 0;
+  void						joystickHardwareEvent(IRenderWindow &window, sf::Event& event) = 0;
 
 private:
 
