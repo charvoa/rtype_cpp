@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:48:05 2015 Louis Audibert
-// Last update Mon Nov 30 05:53:17 2015 Antoine Garcia
+// Last update Mon Nov 30 06:18:22 2015 Louis Audibert
 //
 
 #ifndef _LASER_HH_
@@ -13,7 +13,7 @@
 
 # include <string>
 # include <iostream>
-# include "AComponent.hh"
+# include "AComponent.hpp"
 
 class Laser : public AComponent
 {
