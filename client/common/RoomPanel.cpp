@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 17:28:03 2015 Viveka BARNEAUD
 //
 
 #include "RoomPanel.hh"
@@ -23,10 +23,10 @@ void    RoomPanel::difficulty(Settings::Difficulty diff)
 
 void    RoomPanel::start()
 {
-
+  // _parent->changeDePanel(LOADING_PANEL)
 }
 
 void    RoomPanel::back()
 {
-
+  // _parent->changeDePanel(PLAY_PANEL)
 }
