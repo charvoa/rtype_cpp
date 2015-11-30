@@ -1,8 +1,19 @@
+//
+// SettingsPanel.hh for SettingsPanel in /home/barnea_v/rendu/rtype_cpp/client/common
+// 
+// Made by Viveka BARNEAUD
+// Login   <barnea_v@epitech.net>
+// 
+// Started on  Mon Nov 30 09:51:58 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 09:59:36 2015 Viveka BARNEAUD
+//
+
 #ifndef SETTINGSPANEL_H
 #define SETTINGSPANEL_H
 
 #include "APanel.hh"
 #include "Bind.hh"
+#include "Button.hh"
 
 class SettingsPanel : public APanel
 {

@@ -1,6 +1,15 @@
+//
+// Volume.hh for Volume in /home/barnea_v/rendu/rtype_cpp/client/common
+// 
+// Made by Viveka BARNEAUD
+// Login   <barnea_v@epitech.net>
+// 
+// Started on  Mon Nov 30 09:49:58 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 09:52:37 2015 Viveka BARNEAUD
+//
+
 #ifndef VOLUME_H
 #define VOLUME_H
-
 
 class Volume
 {

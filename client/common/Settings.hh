@@ -1,6 +1,18 @@
+//
+// Settings.hh for Settings in /home/barnea_v/rendu/rtype_cpp/client/common
+// 
+// Made by Viveka BARNEAUD
+// Login   <barnea_v@epitech.net>
+// 
+// Started on  Mon Nov 30 09:51:49 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 09:51:50 2015 Viveka BARNEAUD
+//
+
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <string>
+#include <vector>
 #include "Bind.hh"
 #include "Volume.hh"
 

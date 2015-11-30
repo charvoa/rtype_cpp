@@ -5,12 +5,13 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Wed Nov 25 10:15:29 2015 Nicolas Girardot
+// Last update Mon Nov 30 10:03:22 2015 Viveka BARNEAUD
 //
 
 #ifndef PANELFACTORY_H
 #define PANELFACTORY_H
 
+#include "APanel.hh"
 
 class PanelFactory
 {
@@ -29,9 +30,9 @@ public:
         LOADING_PANEL
     } PanelType;
 
-    void    createPanel(PanelType);
+  void    createPanel(PanelType);
 
-    APanel  *getPanel() const;
+  APanel  *getPanel() const;
 
 private:
     APanel  *_panel;
