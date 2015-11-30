@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:20:17 2015 Serge Heitzler
-// Last update Mon Nov 23 08:20:18 2015 Serge Heitzler
+// Last update Wed Nov 25 06:31:43 2015 Serge Heitzler
 //
 
 #ifndef ITEXT_HH_
@@ -15,16 +15,16 @@
 #include "IFont.hh"
 #include "IColor.hh"
 
-class	        IText
+class		      IText
 {
 
   IText();
   ~IText();
 
-  void		setFont(IFont& font) = 0;
-  void		setColor(IColor& color) = 0;
-  void		setSize(unsigned int size) = 0;
-  void		setString(const std::string& title) = 0;
+  virtual void		setFont(IFont& font) = 0;
+  virtual void		setColor(IColor& color) = 0;
+  virtual void		setSize(unsigned int size) = 0;
+  virtual void		setString(const std::string& title) = 0;
 
 };
 

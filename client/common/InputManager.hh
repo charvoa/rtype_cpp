@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Wed Nov 25 05:34:38 2015 Serge Heitzler
+// Last update Mon Nov 30 06:04:15 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -13,15 +13,33 @@
 
 #include "IInputManager.hh"
 
+typedef enum InputType
+  {
+    MENU_INPUT,
+    GAME_INPUT
+  };
+
 class	        InputManager : public IInputManager
 {
 
-  InputManager();
-  InputManager(const std::string& pathToFile);
+  InputManager(InputType inputType);
   ~InputManager();
 
-  void		create();
+  bool						isMouseInWindow(IVector2 posMouse);
+  int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement);
+  int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement);
+  std::map<unsigned int, unsigned int>		joystickMovedAt(sf::Event& event);
+  std::map<unsigned int, unsigned int>		mouseMovedAt(sf::Event& event);
+  std::map<unsigned int, unsigned int>		joystickPressedAt(sf::Event& event);
+  std::map<unsigned int, unsigned int>		joystickHardwareEvent(IRenderWindow &window, sf::Event& event);
+
+private:
   
+  typedef std::map<sf::Event, funcs>PointersOnFuncs;
+  typedef void(IInputManager::*funcs)(APanel &panel);
+  funcs _ptr;
+  PointersOnFuncs	        _functions;
+
 };
 
 #endif /* !INPUTMANAGER_HH_ */

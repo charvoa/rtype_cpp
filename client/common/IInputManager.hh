@@ -1,11 +1,11 @@
 //
 // IIputManager.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Nov 25 05:49:46 2015 Serge Heitzler
+// Last update Mon Nov 30 05:37:06 2015 Serge Heitzler
 //
 
 #ifndef IINPUTMANAGER_HH_
@@ -15,26 +15,25 @@
 #include <string>
 #include <map>
 
-typedef	enum	MenuEvent
-{
-};
-
-class	        IInputManager
+class		      IInputManager
 {
 
+public:
+  
   IInputManager();
   IInputManager(const std::string& pathToFile);
   ~IInputManager();
 
-  void		create() = 0;
+    bool						isMouseInWindow(IVector2 posMouse) = 0;
+  int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement) = 0;
+  int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement) = 0;
+  std::map<unsigned int, unsigned int>		joystickMovedAt(sf::Event& event) = 0;
+  std::map<unsigned int, unsigned int>		mouseMovedAt(sf::Event& event) = 0;
+  std::map<unsigned int, unsigned int>		joystickPressedAt(sf::Event& event) = 0;
+  std::map<unsigned int, unsigned int>		joystickHardwareEvent(IRenderWindow &window, sf::Event& event) = 0;
 
 private:
 
-  typedef std::map<MenuEvent, funcs>PointersOnFuncs;
-  typedef void(IInputManager::*funcs)(DataFromClient &data);
-  funcs _ptr;
-  PointersOnFuncs	        _functions;
-  
 };
 
 #endif /* !IINPUTMANAGER_HH_ */

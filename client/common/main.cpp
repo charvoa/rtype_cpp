@@ -7,8 +7,13 @@
 int main()
 {
     // Fenêtre de rendu
+<<<<<<< HEAD
+  RenderWindow window(VideoMode(1920, 1080, 32), "R-Pint");//, Style::Fullscreen);
+  
+=======
   RenderWindow window(sf::VideoMode(1920, 1080, 32), "R-Pint", sf::Style::Fullscreen);
 
+>>>>>>> 02a251ffe5f072a58c677484f844235795494e85
   sf::CircleShape shape(100.f);
   shape.setFillColor(sf::Color::Green);
 
@@ -28,6 +33,56 @@ int main()
             // Fenêtre fermée : on quitte
             if (event.type == sf::Event::Closed)
               window.close();
+<<<<<<< HEAD
+            if (event.type == Event::KeyPressed) /* KEYBOARD PRESSED */
+	      {
+		std::cout << event.key.code << std::endl;
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		  window.close();
+	      }
+	    if (event.type == sf::Event::JoystickButtonPressed) /* JOYSTICK BUTTON PRESSED */
+	      {
+		std::cout << "joystick button pressed!" << std::endl;
+		std::cout << "button: " << event.joystickButton.button << std::endl;
+	      }
+	    if (event.type == sf::Event::MouseButtonPressed)
+	      {
+		if (event.mouseButton.button == sf::Mouse::Left) /* CLIQUE SOURIS GAUCHE */
+		  {
+		    std::cout << "the left button was pressed" << std::endl;
+		    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+		    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+		  }
+	      }
+	    if (event.type == sf::Event::MouseMoved) /* MOUVEMENT DE LA SOURIS */
+	      {
+		std::cout << "new mouse x: " << event.mouseMove.x << std::endl;
+		std::cout << "new mouse y: " << event.mouseMove.y << std::endl;
+	      }
+	    if (event.type == sf::Event::JoystickMoved) /* JOYSTICK MOVED */
+	      {
+		if (event.joystickMove.axis == sf::Joystick::X)
+		  {
+		    std::cout << "X axis moved!" << std::endl;
+		    std::cout << "new position: " << event.joystickMove.position << std::endl;
+		  }
+		if (event.joystickMove.axis == sf::Joystick::Y)
+		  {
+		    std::cout << "Y axis moved!" << std::endl;
+		    std::cout << "new position: " << event.joystickMove.position << std::endl;
+		  }
+		if (event.joystickMove.axis == sf::Joystick::Z)
+		  {
+		    std::cout << "Z axis moved!" << std::endl;
+		    std::cout << "new position: " << event.joystickMove.position << std::endl;
+		  }
+		if (event.joystickMove.axis == sf::Joystick::R)
+		  {
+		    std::cout << "R axis moved!" << std::endl;
+		    std::cout << "new position: " << event.joystickMove.position << std::endl;
+		  }
+	      }
+=======
             if (event.type == sf::Event::KeyPressed)
 	      {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -35,6 +90,7 @@ int main()
 	      }
             if (sf::Joystick::isButtonPressed(0,1))
               std::cout << "Button on XBOX controller is pressed" << std::endl;
+>>>>>>> 02a251ffe5f072a58c677484f844235795494e85
 	  }
     }
     return EXIT_SUCCESS;
