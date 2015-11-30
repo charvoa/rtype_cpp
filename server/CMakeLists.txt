@@ -3,6 +3,8 @@ project(server)
 add_executable(
   ./server
   main.cpp
+  Server.cpp
+  Network.cpp
   Health.cpp
   Missile.cpp
   Laser.cpp

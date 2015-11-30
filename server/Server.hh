@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Mon Nov 30 17:49:58 2015 Nicolas Charvoz
+// Last update Mon Nov 30 18:14:09 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -13,7 +13,7 @@
 
 # include <iostream>
 # include <string>
-# include "ANetwork.hh"
+# include "Network.hh"
 # include "RoomManager.hh"
 # include "GameManager.hh"
 # include "ClientManager.hh"
@@ -30,7 +30,7 @@ public:
   bool createGame();
   bool createRoom();
 
-  private:
+private:
 
   ANetwork *_network;
   RoomManager _roomManager;
