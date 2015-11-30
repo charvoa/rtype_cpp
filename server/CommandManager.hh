@@ -5,14 +5,34 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Wed Nov 25 16:44:48 2015 Nicolas Charvoz
+// Last update Mon Nov 30 18:00:07 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HH_
 # define COMMANDMANAGER_HH_
 
+# include <map>
+# include "E_Command.hh"
+# include "ANetwork.hh"
+
 class		CommandManager
 {
+
+public:
+
+  CommandManager();
+  ~CommandManager();
+  bool addFunction(E_COMMAND, bool (*cmd)(ANetwork::t_frame frame));
+
+  template <typename T>
+  bool executeCommand(ANetwork::t_frame frame, T&) {
+
+  }
+
+  private:
+
+  std::map<E_COMMAND, bool (*)(ANetwork::t_frame frame)> _commands;
+
 };
 
 #endif
