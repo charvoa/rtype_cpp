@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 05:45:15 2015 Antoine Garcia
+// Last update Tue Dec  1 05:48:40 2015 Antoine Garcia
 //
 
 #include <cstdlib>
@@ -18,7 +18,7 @@ RoomManager::RoomManager()_room(0)
 RoomManager::~RoomManager()
 {}
 
-std::string&	RoomManager::generateId()
+std::string	RoomManager::generateId()
 {
   std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   std::string id;
@@ -28,6 +28,7 @@ std::string&	RoomManager::generateId()
       int	random_variable = std::rand() % str.size() + 1;
       id += str[random_variable];
     }
+  return id;
 }
 
 void	RoomManager::createNewRoom()
