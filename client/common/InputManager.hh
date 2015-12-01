@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Tue Dec  1 06:11:09 2015 Serge Heitzler
+// Last update Tue Dec  1 11:38:50 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -25,6 +25,8 @@ class	        InputManager : public IInputManager
   InputManager(InputType inputType);
   ~InputManager();
 
+  std::map<unsigned int, unsigned int>   		joystickPressedAt(sf::Event &event);
+  std::map<unsigned int, unsigned int>   		joystickMovedInDirection(sf::Event &event);
   bool						isMouseInWindow(IVector2 posMouse);
   int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement);
   int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement);
@@ -33,6 +35,7 @@ class	        InputManager : public IInputManager
   std::map<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event);
   std::map<unsigned int, unsigned int>		joystickPressedAt(sf::Event& event);
   std::map<unsigned int, unsigned int>	       	joystickHardwareEvent(IRenderWindow &window, sf::Event& event);
+  void						methodChecker(sf::Event &event);
 
 private:
   

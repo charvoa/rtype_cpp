@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Tue Dec  1 01:23:08 2015 Serge Heitzler
-// Last update Tue Dec  1 11:21:35 2015 Serge Heitzler
+// Last update Tue Dec  1 11:46:19 2015 Serge Heitzler
 //
 
 #include "ProtocoleClient.hh"
@@ -120,6 +120,6 @@ void		ProtocoleClient::methodChecker(t_frame &frame)
   for (std::map<RequestFromClient, funcs>::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == frame._idRequest)
-	(*this.*_functions[frame._idRequest)](frame);
+	(*this.*_functions[frame._idRequest])(frame);
     }
 }

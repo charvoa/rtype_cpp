@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Tue Dec  1 08:09:10 2015 Serge Heitzler
+// Last update Tue Dec  1 11:38:54 2015 Serge Heitzler
 //
 
 #include "InputManager.hh"
@@ -120,6 +120,15 @@ std::map<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::Ev
 
     }
   return std::make_pair(0, 0);
+}
+
+void		InputManager::methodChecker(sf::Event &event)
+{
+  for (std::map<RequestFromClient, funcs>::iterator it = _functions.begin(); it != _functions.end(); ++it)
+    {
+      if ((*it).first == event)
+	(*this.*_functions[event)](event);
+    }
 }
 
 /* ACTION ON EVENT
