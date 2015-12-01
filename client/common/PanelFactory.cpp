@@ -13,7 +13,7 @@
 #include "SettingsPanel.hh"
 #include "GamePanel.hh"
 #include "DemoPanel.hh"
-#include "PlayPanel.hh"
+#include "JoinPanel.hh"
 #include "StartPanel.hh"
 #include "LoadingPanel.hh"
 
@@ -36,8 +36,8 @@ APanel		*PanelFactory::createPanel(PanelType type)
       return (new GamePanel);
     case DEMO_PANEL:
       return (new DemoPanel);
-    case PLAY_PANEL:
-      return (new PlayPanel);
+    case JOIN_PANEL:
+      return (new JoinPanel);
     case START_PANEL:
       return (new StartPanel);
   }

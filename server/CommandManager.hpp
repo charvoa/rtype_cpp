@@ -5,11 +5,11 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Tue Dec  1 11:40:14 2015 Nicolas Charvoz
+// Last update Tue Dec  1 14:10:12 2015 Nicolas Charvoz
 //
 
-#ifndef COMMANDMANAGER_HH_
-# define COMMANDMANAGER_HH_
+#ifndef COMMANDMANAGER_HPP_
+# define COMMANDMANAGER_HPP_
 
 # include <map>
 # include "E_Command.hh"
@@ -20,13 +20,14 @@ class		CommandManager
 
 public:
 
-  CommandManager() {};
-  ~CommandManager() {};
+  CommandManager();
+  ~CommandManager();
   bool addFunction(E_COMMAND, bool (*cmd)(ANetwork::t_frame frame));
 
   template <typename T>
   bool executeCommand(ANetwork::t_frame frame, T &other) {
-
+    bool (*cmd)(ANetwork::t_frame) = _commands[(E_COMMAND)frame._idRequest];
+    other.cmd;
   }
 
   private:

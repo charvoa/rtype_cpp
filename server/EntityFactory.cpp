@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Tue Dec  1 02:18:14 2015 Louis Audibert
+// Last update Tue Dec  1 04:29:13 2015 Louis Audibert
 //
 
 #include "EntityFactory.hh"
@@ -28,6 +28,7 @@ int	EntityFactory::generateNewID()
 
 AEntity	*EntityFactory::createEntity()
 {
+  std::cout << "new AEntity created !" << std::endl;
   return (new AEntity(generateNewID()));
 }
 

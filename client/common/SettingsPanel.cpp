@@ -57,7 +57,7 @@ void    SettingsPanel::defaultSettings()
 
 void    SettingsPanel::back()
 {
-  // _parent->changerDePanel(START_PANEL)
+    _parent->back();
 }
 
 void    SettingsPanel::save()

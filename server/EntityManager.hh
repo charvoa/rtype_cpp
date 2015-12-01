@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Tue Dec  1 02:45:26 2015 Louis Audibert
+// Last update Tue Dec  1 04:35:51 2015 Louis Audibert
 //
 
 #ifndef _ENTITYMANAGER_HH_
@@ -30,6 +30,7 @@ public:
   bool		createEntity();
   bool		createEntitiesFromFolder(const std::string &filename);
   void		removeEntity(AEntity &entity);
+  void		removeEntityById(int id);
   AEntity	*getEntityById(int id);
   std::vector<AEntity*> getEntitiesByType(E_ENTITYTYPE type);
   void		update();

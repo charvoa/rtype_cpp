@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Tue Dec  1 02:55:10 2015 Louis Audibert
+// Last update Tue Dec  1 04:33:20 2015 Louis Audibert
 //
 
 #include "AEntity.hh"
 
 AEntity::AEntity(int id) : _id(id)
 {
-
+  std::cout << "new AEntity created !" << std::endl;
 }
 
 AEntity::~AEntity()
@@ -41,6 +41,7 @@ bool	AEntity::update(int health)
 void	AEntity::addSystem(E_COMPONENT type)
 {
   _systemManager.addSystemByType(type);
+  std::cout << "New System added !" << std::endl;
 }
 
 bool	AEntity::setType(E_ENTITYTYPE type)

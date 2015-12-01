@@ -23,10 +23,10 @@ void    RoomPanel::difficulty(Settings::Difficulty diff)
 
 void    RoomPanel::start()
 {
-  // _parent->changeDePanel(LOADING_PANEL)
+    _parent->addPanel(LOADING_PANEL);
 }
 
 void    RoomPanel::back()
 {
-  // _parent->changeDePanel(PLAY_PANEL)
+    _parent->back();
 }
