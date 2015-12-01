@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Tue Dec  1 05:12:23 2015 Louis Audibert
+// Last update Tue Dec  1 05:19:01 2015 Louis Audibert
 //
 
 #include "EntityManager.hh"
@@ -38,7 +38,11 @@ void	EntityManager::removeEntity(AEntity &entity)
   for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if (entity.getId() == (*it)->getId())
-	_entities.erase(_entities.begin()+i);
+	{
+	  _entities.erase(_entities.begin()+i);
+	  std::cout << "Entity removed" << std::endl;
+	  break;
+	}
       i++;
     }
 }
