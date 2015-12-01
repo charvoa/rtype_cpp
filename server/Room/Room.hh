@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Tue Dec  1 05:24:45 2015 Antoine Garcia
+// Last update Tue Dec  1 05:30:39 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
@@ -17,7 +17,7 @@ class	Room
 {
   std::string	_id;
 public:
-  Room(std::string &id);
+  Room(const std::string &id);
   ~Room();
 };
 
