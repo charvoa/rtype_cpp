@@ -12,9 +12,17 @@ add_executable(
   SystemPos.cpp
   SystemGun.cpp
   SystemManager.cpp
+  Server.cpp
   AEntity.cpp
   EntityManager.cpp
   EntityFactory.cpp
   CommandManager.cpp
+<<<<<<< HEAD
+  Room/Room.cpp
+  Room/RoomManager.cpp
+  Player.cpp
+  Client.cpp
+=======
   Parameters.cpp
+>>>>>>> 78e281cfa471320d44ffe9b29f97ef23327cfc41
 )
