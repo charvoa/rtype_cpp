@@ -5,14 +5,14 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 02:15:00 2015 Antoine Garcia
+// Last update Tue Dec  1 14:53:43 2015 Nicolas Charvoz
 //
 
 #include <cstdlib>
 #include <ctime>
 #include "RoomManager.hh"
 
-RoomManager::RoomManager()_room(0)
+RoomManager::RoomManager() : _rooms(0)
 {}
 
 RoomManager::~RoomManager()
