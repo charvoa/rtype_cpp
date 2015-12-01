@@ -5,39 +5,40 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Mon Nov 30 18:30:40 2015 Nicolas Charvoz
+// Last update Wed Nov 18 16:53:49 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HH_
 # define ANETWORK_HH_
 
 # include	<string>
-# include	"ISocket.hpp"
+# include	"Socket.hh"
 
-class ANetwork {
+class ANetwork
+{
+protected:
+  char			_buffer[4096];
+  ISocket		*_socket;
 
 public :
-  typedef struct s_frame {
-    short int _keyPintade;
-    unsigned char _requestType;
-    unsigned int _idRequest;
-    int _crc;
-    int _sizeData;
-    char _data[49];
-  } t_frame;
+  typedef struct	s_frame {
+    short int		_keyPintade;
+    unsigned char	_requestType;
+    unsigned int	_idRequest;
+    int			_crc;
+    int			_sizeData;
+    char		_data[49];
+  }			t_frame;
 
   ANetwork() {};
   virtual	~ANetwork() {};
   virtual void	create(int port_, int sockType_, const std::string &addr_) = 0;
   virtual void	bind() = 0;
   virtual void	listen() = 0;
-  virtual void	*read() = 0;
-  virtual int	write(void *) = 0;
+  virtual void	*read(int) = 0;
+  virtual int	write(void *, int) = 0;
   virtual void	close() = 0;
   virtual void	accept(ISocket *) = 0;
-
-private:
-  ISocket	*_socket;
 
 };
 
