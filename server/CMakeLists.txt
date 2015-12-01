@@ -12,4 +12,7 @@ add_executable(
   SystemPos.cpp
   SystemGun.cpp
   SystemManager.cpp
+  AEntity.cpp
+  EntityManager.cpp
+  EntityFactory.cpp
 )
