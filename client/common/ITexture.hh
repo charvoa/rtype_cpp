@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:47 2015 Serge Heitzler
-// Last update Wed Nov 25 06:31:19 2015 Serge Heitzler
+// Last update Tue Dec  1 02:57:05 2015 Serge Heitzler
 //
 
 #ifndef ITEXTURE_HH_
@@ -17,11 +17,8 @@
 class		      ITexture
 {
 
-  ITexture();
-  ~ITexture();
-
   virtual bool		loadFromFile(const std::string& path, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height) = 0;
-  virtual IVector2u    	getSize() = 0;
+  virtual IVector2    	getSize() = 0;
   virtual void		setSmooth(bool value) = 0;
 
 };
