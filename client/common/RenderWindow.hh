@@ -11,6 +11,7 @@
 #ifndef RENDERWINDOW_HH_
 #define RENDERWINDOW_HH_
 
+#include <stack>
 #include "IRenderWindow.hh"
 #include "IVector2.hh"
 #include "Size.hh"
@@ -33,10 +34,13 @@ public:
   void		display();
   void		draw(const sf::Drawable &drawable, const sf::RenderStates &states = sf::RenderStates::Default);
   void		clear(const sf::Color &color = sf::Color(0, 0, 0, 255));
+  void          addPanel(PanelFactory::PanelType);
+  void          back();
 
 private:
 
   sf::RenderWindow *_window;
+  std::stack<APanel*>   _panels;
   //Size		_size;
   //PanelFactory	_panelFactory;
 };

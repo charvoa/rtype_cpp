@@ -14,19 +14,21 @@
 #include "Button.hh"
 #include "APanel.hh"
 
-class StartPanel
+class StartPanel : public APanel
 {
 public:
     StartPanel(RenderWindow *);
     ~StartPanel();
 
-    void    play();
+    void    createRoom();
+    void    joinRoom();
     void    demo();
     void    settings();
     void    exit();
 
 private:
-    Button  _playButton;
+    Button  _createRoomButton;
+    Button  _joinRoomButton;
     Button  _demoButton;
     Button  _settingsButton;
     Button  _exitButton;

@@ -8,8 +8,8 @@
 // Last update Mon Nov 30 10:03:22 2015 Viveka BARNEAUD
 //
 
-#ifndef PANELFACTORY_H
-#define PANELFACTORY_H
+#ifndef PANELFACTORY_HH
+#define PANELFACTORY_HH
 
 #include "APanel.hh"
 
@@ -25,7 +25,7 @@ public:
         SETTINGS_PANEL,
         GAME_PANEL,
         DEMO_PANEL,
-        PLAY_PANEL,
+        JOIN_PANEL,
         START_PANEL,
         LOADING_PANEL
     } PanelType;
@@ -33,4 +33,4 @@ public:
   APanel    *createPanel(PanelType);
 };
 
-#endif // PANELFACTORY_H
+#endif // PANELFACTORY_HH
