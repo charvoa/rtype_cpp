@@ -5,14 +5,15 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Tue Dec  1 02:14:53 2015 Antoine Garcia
+// Last update Tue Dec  1 04:21:53 2015 Louis Audibert
 //
 
 #ifndef _ROOMMANAGER_HH_
 # define _ROOMMANAGER_HH_
 
-#include <string>
-#include "Room.hh"
+# include <string>
+# include <vector>
+# include "Room.hh"
 
 class	RoomManager
 {
