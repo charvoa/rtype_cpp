@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:45:35 2015 Antoine Garcia
-// Last update Mon Nov 30 08:49:56 2015 Antoine Garcia
+// Last update Tue Dec  1 20:40:54 2015 Nicolas Girardot
 //
 
 #ifndef _THREAD_HH_
@@ -13,15 +13,17 @@
 
 class	AThread
 {
-  unsigned int	_id;
-  bool		_joinable;
+protected:
+  void			*_function;
+  void			*_parameters;
+  unsigned int		_id;
 public:
-  virtual ~AThread(){};
-  unsigned int getId() = 0;
-  bool		joinable() = 0;
-  void		join() = 0;
-  void		exit() = 0;
-  void		run() = 0;
+  virtual	~AThread(){};
+  virtual unsigned int	getId() = 0;
+  virtual void		attach(void (*)(), void *) = 0;
+  virtual int		join() = 0;
+  virtual void		exit() = 0;
+  virtual int		run() = 0;
 };
 
 #endif
