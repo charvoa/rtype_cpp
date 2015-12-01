@@ -24,37 +24,22 @@ PanelFactory::PanelFactory()
 
 PanelFactory::~PanelFactory() {}
 
-void		PanelFactory::createPanel(PanelType type)
+APanel		*PanelFactory::createPanel(PanelType type)
 {
-  if (_panel != NULL)
-    delete _panel;
   switch (type)
     {
     case ROOM_PANEL:
-      _panel = new RoomPanel;
-      break;
+      return (new RoomPanel);
     case SETTINGS_PANEL:
-      _panel = new SettingsPanel;
-      break;
+      return (new SettingsPanel);
     case GAME_PANEL:
-      _panel = new GamePanel;
-      break;
+      return (new GamePanel);
     case DEMO_PANEL:
-      _panel = new DemoPanel;
-      break;
+      return (new DemoPanel);
     case PLAY_PANEL:
-      _panel = new PlayPanel;
-      break;
+      return (new PlayPanel);
     case START_PANEL:
-      _panel = new StartPanel;
-      break;
-    case LOADING_PANEL:
-      _panel = new LoadingPanel;
-      break;
-    }
-}
-
-APanel		*PanelFactory::getPanel() const
-{
-  return (_panel);
+      return (new StartPanel);
+  }
+    return (new LoadingPanel);
 }

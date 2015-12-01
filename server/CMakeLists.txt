@@ -3,6 +3,8 @@ project(server)
 add_executable(
   ./server
   main.cpp
+  Server.cpp
+  Network.cpp
   Health.cpp
   Missile.cpp
   Laser.cpp
@@ -11,4 +13,5 @@ add_executable(
   SystemHealth.cpp
   SystemPos.cpp
   SystemGun.cpp
+  SystemManager.cpp
 )

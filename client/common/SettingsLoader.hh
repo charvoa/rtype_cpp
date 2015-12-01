@@ -5,12 +5,14 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:51:54 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:51:54 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 16:57:17 2015 Viveka BARNEAUD
 //
 
 #ifndef SETTINGSLOADER_HH
 #define SETTINGSLOADER_HH
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Event.hpp>
 #include "IParser.hh"
 #include "Settings.hh"
 
@@ -23,6 +25,8 @@ public:
   std::string getValueOf(std::string const&) const;
   std::string getValueOfKey(std::string const&) const;
   std::string setValueOfJoystick(std::string const&) const;
+
+  std::string removeSpaces(std::string const&) const;
 
   Settings    *parseSettings() const;
   Volume      getVolume() const;
@@ -42,8 +46,8 @@ public:
   sf::Event::key  stringToKey(std::string const&) const;
   sf::Event::joystick stringToJoystick(std::string const&) const;
 
-  std::string keyToString(sf::Event::key) const;
-  std::string joystickToString(sf::Event::Joystick) const;
+  std::string keyToString(sf::Event) const;
+  std::string joystickToString(sf::Event) const;
   std::string bindTypeToString(Bind::BindType) const;
 
 private:

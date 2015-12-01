@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:51 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:55:48 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 16:54:49 2015 Viveka BARNEAUD
 //
 
 #ifndef BIND_HH
@@ -30,21 +30,21 @@ public:
         WEAPON_3
     } BindType;
 
-    Bind(Bind::BindType, sf::Event::key, sf::Event::joystick);
+    Bind(Bind::BindType, sf::Event, sf::Event);
     ~Bind();
 
     Bind::BindType getType() const;
-    sf::Event::key getKey() const;
-    sf::Event::joystick getJoystick() const;
+    sf::Event getKey() const;
+    sf::Event getJoystick() const;
 
     void setType(Bind::BindType);
-    void setKey(sf::Event::key);
-    void setJoystick(sf::Event::joystick);
+    void setKey(sf::Event);
+    void setJoystick(sf::Event);
 
 private:
     Bind::BindType _type;
-    sf::Event::key _key;
-    sf::Event::joystick _joystick;
+    sf::Event _key;
+    sf::Event _joystick;
 };
 
 #endif // BIND_HH
