@@ -1,0 +1,18 @@
+project(server)
+
+add_executable(
+  ./server
+  main.cpp
+  Health.cpp
+  Missile.cpp
+  Laser.cpp
+  Rifle.cpp
+  Position.cpp
+  SystemHealth.cpp
+  SystemPos.cpp
+  SystemGun.cpp
+  SystemManager.cpp
+  AEntity.cpp
+  EntityManager.cpp
+  EntityFactory.cpp
+)

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:38:40 2015 Louis Audibert
-// Last update Mon Nov 30 06:19:53 2015 Louis Audibert
+// Last update Mon Nov 30 08:03:11 2015 Louis Audibert
 //
 
 #ifndef _ASYSTEM_HH_
@@ -19,6 +19,8 @@ protected:
   AComponent *_component;
 
 public:
+  explicit ASystem(){};
+  virtual ~ASystem(){};
   AComponent *getComponent() const;
 };
 
