@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:44:36 2015 Louis Audibert
-// Last update Tue Dec  1 15:31:30 2015 Nicolas Charvoz
+// Last update Tue Dec  1 15:36:47 2015 Nicolas Charvoz
 //
 
 #include "PlayerManager.hh"
@@ -38,5 +38,5 @@ Player			&PlayerManager::getPlayerById(int id)
       if (id == (*it).getId())
 	return (*it);
     }
-  throw new std::exception();
+  throw std::logic_error("No player found with this id");
 }

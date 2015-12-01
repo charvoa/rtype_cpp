@@ -5,12 +5,13 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 15:32:00 2015 Nicolas Charvoz
+// Last update Tue Dec  1 15:37:45 2015 Nicolas Charvoz
 //
 
-#include <cstdlib>
-#include <ctime>
-#include "RoomManager.hh"
+# include <cstdlib>
+# include <ctime>
+# include <stdexcept>
+# include "RoomManager.hh"
 
 RoomManager::RoomManager() : _rooms(0)
 {}
@@ -44,7 +45,7 @@ Room&	RoomManager::getRoombyId(const std::string &id)
       if((*it).getId() == id)
 	return (*it);
     }
-  throw new std::exception();
+  throw std::logic_error("No room with this id found");
 }
 
 bool	RoomManager::roomExists(const std::string &id) const
