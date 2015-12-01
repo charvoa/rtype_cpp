@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Tue Dec  1 10:54:03 2015 Serge Heitzler
+// Last update Tue Dec  1 11:22:14 2015 Serge Heitzler
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -21,8 +21,8 @@ class	        ProtocoleClient
   
 private:
 
-  typedef std::map<ProtocoleClient::RequestFromServer, funcs>PointersOnFuncs;
-  typedef void(ProtocoleClient::*funcs)();
+  typedef std::map<RequestFromServer, funcs>PointersOnFuncs;
+  typedef void(ProtocoleClient::*funcs)(t_frame &frame);
   funcs				_ptr;
   PointersOnFuncs	        _functions;
 
