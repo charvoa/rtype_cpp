@@ -5,13 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:44:31 2015 Louis Audibert
-// Last update Tue Dec  1 05:53:54 2015 Louis Audibert
+// Last update Tue Dec  1 15:31:05 2015 Nicolas Charvoz
 //
 
 #ifndef _PLAYERMANAGER_HH_
 # define _PLAYERMANAGER_HH_
 
 # include <vector>
+# include <exception>
 # include "Client.hh"
 # include "Player.hh"
 

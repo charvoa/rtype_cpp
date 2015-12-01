@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 15:02:54 2015 Nicolas Charvoz
+// Last update Tue Dec  1 15:32:00 2015 Nicolas Charvoz
 //
 
 #include <cstdlib>
@@ -44,7 +44,7 @@ Room&	RoomManager::getRoombyId(const std::string &id)
       if((*it).getId() == id)
 	return (*it);
     }
-  // return NULL;
+  throw new std::exception();
 }
 
 bool	RoomManager::roomExists(const std::string &id) const
