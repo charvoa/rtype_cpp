@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Mon Nov 30 09:56:56 2015 Viveka BARNEAUD
+// Last update Tue Dec  1 14:46:43 2015 Serge Heitzler
 //
 
 #ifndef BUTTON_HH_
@@ -13,6 +13,7 @@
 
 #include "IText.hh"
 #include "ISprite.hh"
+#include "AMenuElement.hh"
 
 typedef enum StateButton
   {
@@ -24,7 +25,7 @@ typedef enum StateButton
 class	        Button : public AMenuElement
 {
 
-  Button();
+  Button(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
   ~Button();
 
 private:

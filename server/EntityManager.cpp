@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Tue Dec  1 05:19:01 2015 Louis Audibert
+// Last update Tue Dec  1 13:06:13 2015 Louis Audibert
 //
 
 #include "EntityManager.hh"
 
 EntityManager::EntityManager()
 {
-
+  _id = 0;
 }
 
 EntityManager::~EntityManager()
@@ -20,15 +20,21 @@ EntityManager::~EntityManager()
   std::cout << "EntityManager Destroyed" << std::endl;
 }
 
-bool	EntityManager::createEntity()
+bool	EntityManager::createEntity(E_ENTITYTYPE type)
 {
-  _entities.push_back(_entityFactory.createEntity());
+  AEntity *newEntity = _entityFactory.createEntity(_id);
+  newEntity->setType(type);
+  _entities.push_back(newEntity);
+  //_entities.push_back(_entityFactory.createEntity(_id));
   return (true);
 }
 
-bool	EntityManager::createEntitiesFromFolder(const std::string &filename)
+bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_ENTITYTYPE type)
 {
-  _entities.push_back(_entityFactory.createEntity(filename));
+  AEntity *newEntity = _entityFactory.createEntity(filename, _id);
+  newEntity->setType(type);
+  _entities.push_back(newEntity);
+  //_entities.push_back(_entityFactory.createEntity(filename, _id));
   return (true);
 }
 

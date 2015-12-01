@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Tue Dec  1 15:03:15 2015 Nicolas Charvoz
+// Last update Tue Dec  1 08:19:03 2015 Antoine Garcia
 //
 
 #ifndef _ROOMMANAGER_HH_
@@ -14,6 +14,7 @@
 # include <string>
 # include <vector>
 # include "Room.hh"
+# include "../Client.hh"
 
 class	RoomManager
 {
@@ -22,9 +23,9 @@ class	RoomManager
 public:
   RoomManager();
   ~RoomManager();
-  void	createNewRoom();
+  void	createNewRoom(Client&);
   Room&	getRoombyId(const std::string &id);
-  bool	roomExists(const std::string &id) const;
+  bool	roomExists(const std::string &id);
 };
 
 #endif

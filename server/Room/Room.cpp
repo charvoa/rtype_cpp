@@ -5,15 +5,17 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec  1 15:00:39 2015 Nicolas Charvoz
+// Last update Tue Dec  1 08:28:47 2015 Antoine Garcia
 //
 
 #include "Room.hh"
 
 Room::Room() {}
 
-Room::Room(const std::string &id):_id(id)
-{}
+Room::Room(const std::string &id, Client &client):_id(id)
+{
+
+}
 
 Room::~Room()
 {}
