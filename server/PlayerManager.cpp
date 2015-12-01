@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:44:36 2015 Louis Audibert
-// Last update Tue Dec  1 06:01:55 2015 Louis Audibert
+// Last update Tue Dec  1 06:13:32 2015 Louis Audibert
 //
 
 #include "PlayerManager.hh"
@@ -22,7 +22,7 @@ PlayerManager::~PlayerManager()
 
 bool	PlayerManager::createPlayer(Client &client)
 {
-  _players.push_back(new Player(client));
+  _players.push_back(Player(client));
   return (true);
 }
 
@@ -35,7 +35,7 @@ Player			&PlayerManager::getPlayerById(int id)
 {
   for (std::vector<Player>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
-      if (id == (*it)->getId())
+      if (id == (*it).getId())
 	return (*it);
     }
   return (NULL);

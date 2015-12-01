@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Tue Dec  1 14:47:17 2015 Nicolas Charvoz
+// Last update Tue Dec  1 06:16:10 2015 Louis Audibert
 //
 
 #ifndef PLAYER_HH_
@@ -13,10 +13,12 @@
 
 # include "ANetwork.hpp"
 # include "Client.hh"
+# include "AEntity.hh"
 # include <string>
 # include <iostream>
 
-class Player {
+class Player : public AEntity
+{
 
   private:
 
