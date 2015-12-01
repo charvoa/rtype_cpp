@@ -5,20 +5,21 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Tue Dec  1 08:22:23 2015 Antoine Garcia
+// Last update Tue Dec  1 08:28:38 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
 # define _ROOM_HH_
 
-#include <vector>
-#include <string>
-#include "../Client.hh"
+# include <vector>
+# include <string>
+# include "../Client.hh"
+# include "../ClientManager.hh"
 
 class	Room
 {
   std::string	_id;
-  std::vector<Client>	_clients;
+  ClientManager	_clientManager;
 public:
   Room();
   Room(const std::string &id, Client&);
