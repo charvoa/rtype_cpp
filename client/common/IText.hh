@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:20:17 2015 Serge Heitzler
-// Last update Wed Nov 25 06:31:43 2015 Serge Heitzler
+// Last update Tue Dec  1 02:52:24 2015 Serge Heitzler
 //
 
 #ifndef ITEXT_HH_
@@ -17,9 +17,6 @@
 
 class		      IText
 {
-
-  IText();
-  ~IText();
 
   virtual void		setFont(IFont& font) = 0;
   virtual void		setColor(IColor& color) = 0;

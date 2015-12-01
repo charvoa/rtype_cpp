@@ -1,11 +1,11 @@
 //
 // Color.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Mon Nov 23 08:20:04 2015 Serge Heitzler
-// Last update Mon Nov 23 08:20:06 2015 Serge Heitzler
+// Last update Mon Nov 30 16:59:46 2015 Nicolas Girardot
 //
 
 #ifndef COLOR_HH_
@@ -16,18 +16,20 @@
 
 class	        Color : public IColor
 {
-
-  Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+public:
+  Color();
   ~Color();
+  static sf::Color getColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
-  sf::Color		_black = sf::Color::Black;
-  sf::Color		_white = sf::Color::White;
-  sf::Color		_red = sf::Color::Red;
-  sf::Color		_green = sf::Color::Green;
-  sf::Color		_blue = sf::Color::Blue;
-  sf::Color		_yellow = sf::Color::Yellow;
-  sf::Color		_magenta = sf::Color::Magenta;
-  sf::Color		_cyan = sf::Color::Cyan;
+
+  sf::Color		_black;
+  sf::Color		_white;
+  sf::Color		_red;
+  sf::Color		_green;
+  sf::Color		_blue;
+  sf::Color		_yellow;
+  sf::Color		_magenta;
+  sf::Color		_cyan;
 
 };
 
