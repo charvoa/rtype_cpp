@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 06:38:49 2015 Antoine Garcia
+// Last update Tue Dec  1 06:42:15 2015 Antoine Garcia
 //
 
 #include <cstdlib>
@@ -47,7 +47,7 @@ Room&	RoomManager::getRoombyId(const std::string &id)
   // return NULL;
 }
 
-bool	RoomManager::roomExists(const std::string &id) const
+bool	RoomManager::roomExists(const std::string &id)
 {
   for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
