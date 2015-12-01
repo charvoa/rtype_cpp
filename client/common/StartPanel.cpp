@@ -18,14 +18,19 @@ StartPanel::StartPanel(RenderWindow *parent) : APanel(parent)
 
 StartPanel::~StartPanel() {}
 
-void        StartPanel::play()
+void        StartPanel::joinRoom()
 {
-  // _parent->changeDePanel(PLAY_PANEL)
+    _parent->addPanel(JOIN_PANEL);
+}
+
+void        StartPanel::createRoom()
+{
+    _parent->addPanel(ROOM_PANEL);
 }
 
 void        StartPanel::demo()
 {
-  // _parent->changeDePanel(DEMO_PANEL)
+    _parent->addPanel(DEMO_PANEL);
 }
 
 void        StartPanel::exit()
@@ -35,5 +40,5 @@ void        StartPanel::exit()
 
 void        StartPanel::settings()
 {
-  // _parent->changeDePanel(SETTINGS_PANEL)
+    _parent->addPanel(SETTINGS_PANEL);
 }

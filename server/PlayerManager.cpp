@@ -5,14 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:44:36 2015 Louis Audibert
-// Last update Tue Dec  1 06:13:32 2015 Louis Audibert
+// Last update Tue Dec  1 15:36:47 2015 Nicolas Charvoz
 //
 
 #include "PlayerManager.hh"
 
 PlayerManager::PlayerManager()
 {
-
 }
 
 PlayerManager::~PlayerManager()
@@ -33,10 +32,11 @@ std::vector<Player>	&PlayerManager::getAllPlayers()
 
 Player			&PlayerManager::getPlayerById(int id)
 {
-  for (std::vector<Player>::iterator it = _players.begin(); it != _players.end(); ++it)
+  for (std::vector<Player>::iterator it = _players.begin();
+       it != _players.end(); ++it)
     {
       if (id == (*it).getId())
 	return (*it);
     }
-  return (NULL);
+  throw std::logic_error("No player found with this id");
 }

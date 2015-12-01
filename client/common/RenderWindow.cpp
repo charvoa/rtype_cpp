@@ -75,3 +75,18 @@ void	RenderWindow::clear(const sf::Color &color)
 {
   _window->clear(color);
 }
+
+void    RenderWindow::addPanel(PanelFactory::PanelType type)
+{
+    PanelFactory fact();
+    APanel  *panel = fact.createPanel(type);
+
+    _panels.push(panel);
+    panel->show();
+}
+
+void    RenderWindow::back()
+{
+    _panels.pop(panel);
+    (_panels.top())->render();
+}
