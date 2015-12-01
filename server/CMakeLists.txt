@@ -17,8 +17,12 @@ add_executable(
   EntityManager.cpp
   EntityFactory.cpp
   CommandManager.cpp
+<<<<<<< HEAD
   Room/Room.cpp
   Room/RoomManager.cpp
   Player.cpp
   Client.cpp
+=======
+  Parameters.cpp
+>>>>>>> 78e281cfa471320d44ffe9b29f97ef23327cfc41
 )

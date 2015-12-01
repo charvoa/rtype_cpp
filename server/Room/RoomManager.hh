@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Tue Dec  1 04:21:53 2015 Louis Audibert
+// Last update Tue Dec  1 05:48:48 2015 Antoine Garcia
 //
 
 #ifndef _ROOMMANAGER_HH_
@@ -18,7 +18,7 @@
 class	RoomManager
 {
   std::vector<Room>	_rooms;
-  std::string&	generateId();
+  std::string	generateId();
 public:
   RoomManager();
   ~RoomManager();
