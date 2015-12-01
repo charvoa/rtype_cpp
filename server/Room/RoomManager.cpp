@@ -5,12 +5,13 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 15:02:54 2015 Nicolas Charvoz
+// Last update Tue Dec  1 10:38:37 2015 Antoine Garcia
 //
 
-#include <cstdlib>
-#include <ctime>
-#include "RoomManager.hh"
+# include <cstdlib>
+# include <ctime>
+# include <stdexcept>
+# include "RoomManager.hh"
 
 RoomManager::RoomManager() : _rooms(0)
 {}
@@ -31,9 +32,9 @@ std::string	RoomManager::generateId()
   return id;
 }
 
-void	RoomManager::createNewRoom()
+void	RoomManager::createNewRoom(Client &client)
 {
-  Room	room(generateId());
+  Room	room(generateId(), client);
   _rooms.push_back(room);
 }
 
@@ -44,10 +45,15 @@ Room&	RoomManager::getRoombyId(const std::string &id)
       if((*it).getId() == id)
 	return (*it);
     }
-  // return NULL;
+  throw std::logic_error("No room with this id found");
 }
 
-bool	RoomManager::roomExists(const std::string &id) const
+bool	RoomManager::roomExists(const std::string &id)
 {
-  return (true);
+  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+    {
+      if((*it).getId() == id)
+	return (true);
+    }
+  return (false);
 }
