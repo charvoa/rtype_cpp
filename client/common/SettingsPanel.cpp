@@ -5,9 +5,10 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:13 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:50:13 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 17:25:54 2015 Viveka BARNEAUD
 //
 
+#include "PanelFactory.hh"
 #include "SettingsPanel.hh"
 
 SettingsPanel::SettingsPanel(RenderWindow *parent) : APanel(parent)
@@ -56,7 +57,7 @@ void    SettingsPanel::defaultSettings()
 
 void    SettingsPanel::back()
 {
-
+  // _parent->changerDePanel(START_PANEL)
 }
 
 void    SettingsPanel::save()

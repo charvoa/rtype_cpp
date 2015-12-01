@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:27:31 2015 Louis Audibert
-// Last update Mon Nov 30 06:30:36 2015 Louis Audibert
+// Last update Mon Nov 30 07:13:27 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMMANAGER_HH_

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Wed Nov 25 16:34:08 2015 Nicolas Girardot
+// Last update Tue Dec  1 11:51:35 2015 Nicolas Girardot
 //
 
 #include "RenderWindow.hh"
@@ -42,7 +42,7 @@ bool RenderWindow::waitEvent(sf::Event& event)
 
 IVector2	RenderWindow::getSize() const
 {
-  Vector2 vector(_window->getSize().x, _window->getSize().y);
+  Vector2<int> vector(_window->getSize().x, _window->getSize().y);
   return vector;
 }
 
