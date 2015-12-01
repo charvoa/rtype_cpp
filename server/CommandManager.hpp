@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Mon Nov 30 18:31:26 2015 Nicolas Charvoz
+// Last update Tue Dec  1 11:40:14 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HH_
@@ -25,7 +25,7 @@ public:
   bool addFunction(E_COMMAND, bool (*cmd)(ANetwork::t_frame frame));
 
   template <typename T>
-  bool executeCommand(ANetwork::t_frame frame, T&) {
+  bool executeCommand(ANetwork::t_frame frame, T &other) {
 
   }
 
