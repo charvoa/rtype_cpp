@@ -15,4 +15,5 @@ add_executable(
   AEntity.cpp
   EntityManager.cpp
   EntityFactory.cpp
+  CommandManager.cpp
 )
