@@ -5,12 +5,13 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Tue Dec  1 02:04:57 2015 Antoine Garcia
+// Last update Tue Dec  1 02:14:53 2015 Antoine Garcia
 //
 
 #ifndef _ROOMMANAGER_HH_
 # define _ROOMMANAGER_HH_
 
+#include <string>
 #include "Room.hh"
 
 class	RoomManager
