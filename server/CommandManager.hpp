@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Tue Dec  1 12:10:00 2015 Nicolas Charvoz
+// Last update Tue Dec  1 14:10:12 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HPP_
@@ -20,8 +20,8 @@ class		CommandManager
 
 public:
 
-  CommandManager() {};
-  ~CommandManager() {};
+  CommandManager();
+  ~CommandManager();
   bool addFunction(E_COMMAND, bool (*cmd)(ANetwork::t_frame frame));
 
   template <typename T>
