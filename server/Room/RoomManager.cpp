@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 06:42:15 2015 Antoine Garcia
+// Last update Tue Dec  1 08:20:55 2015 Antoine Garcia
 //
 
 #include <cstdlib>
@@ -31,9 +31,9 @@ std::string	RoomManager::generateId()
   return id;
 }
 
-void	RoomManager::createNewRoom()
+void	RoomManager::createNewRoom(Client &client)
 {
-  Room	room(generateId());
+  Room	room(generateId(), client);
   _rooms.push_back(room);
 }
 
