@@ -23,4 +23,5 @@ add_executable(
   PlayerManager.cpp
   Client.cpp
   Parameters.cpp
+  Network.cpp
 )
