@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
-// Last update Wed Nov 25 06:32:13 2015 Serge Heitzler
+// Last update Tue Dec  1 02:56:56 2015 Serge Heitzler
 //
 
 #ifndef ISPRITE_HH_
@@ -16,9 +16,6 @@
 
 class		      ISprite
 {
-
-  ISprite(const ITexture& texture);
-  ~ISprite();
 
   virtual void		setTexture(const ITexture& texture) = 0;
   virtual void		setColor(const IColor& color) = 0;

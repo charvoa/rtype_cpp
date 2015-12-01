@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Mon Nov 30 06:34:28 2015 Serge Heitzler
+// Last update Mon Nov 30 08:01:48 2015 Serge Heitzler
 //
 
 #include "InputManager.hh"
@@ -14,6 +14,7 @@
 
 inputmanager::inputmanager(InputType type)
 {
+  _functions.insert(std::make_pair(sf::Event::JoystickConnectEvent, &InputManager::joystickHardwareEvent));
   if (type == InputType::MENU_INPUT)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedInMenuAt));
@@ -23,8 +24,9 @@ inputmanager::inputmanager(InputType type)
     }
   else
     {
-      
-      //_functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::?));
+      _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedAt));
+      _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
+      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::?));
     }
 }
 
@@ -32,6 +34,13 @@ InputManager::~InputManager()
 {
 
 }
+
+
+std::map<unsigned int, unsigned int>   		InputManager::joystickPressedAt(sf::Event &event)
+{
+  
+}
+
 
 bool						InputManager::isMouseInWindow(IVector2 posMouse)
 {
@@ -66,8 +75,10 @@ std::map<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::Ev
   IVector2	globalPosition = sf::Mouse::getPosition();
   int		newPosX = globalPosition.x;
   int		newPosY = globalPosition.y;
-  int		ratioXMovement = window.getSize().x / 100; // ratio avec la vélocité du déplacement à voir (si j'appuie fort ou doucement sur le joystic de déplacement)
+  int		ratioXMovement = window.getSize().x / 100;
   int		ratioYMovement = window.getSize().y / 100;
+  // TODO
+  // ratio avec la vélocité du déplacement à voir (si j'appuie fort ou doucement sur le joystic de déplacement)
 
   if (this->isMouseInWindow(globalPosition))
     {
@@ -90,9 +101,22 @@ std::map<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event&
   return std::make_pair(globalPosition.x, globalPosition.y);
 }
 
-void						InputManager::joystickHardwareEvent(IRenderWindow &window, sf::Event& event)
+std::map<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::Event& event)
 {
+  // TODO
   // changer la texture du controller à display
+  if (event.type == sf::Event::JoystickConnected)
+    {
+      std::cout << "joystick connected: " << event.joystickConnect.joystickId << std::endl;
+
+    }
+
+  if (event.type == sf::Event::JoystickDisconnected)
+    {
+      std::cout << "joystick disconnected: " << event.joystickConnect.joystickId << std::endl;
+
+    }
+  return std::make_pair(0, 0);
 }
 
 
