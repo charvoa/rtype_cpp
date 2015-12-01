@@ -5,14 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Mon Nov 30 08:01:48 2015 Serge Heitzler
+// Last update Tue Dec  1 08:09:10 2015 Serge Heitzler
 //
 
 #include "InputManager.hh"
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
-inputmanager::inputmanager(InputType type)
+Inputmanager::Inputmanager(InputType type)
 {
   _functions.insert(std::make_pair(sf::Event::JoystickConnectEvent, &InputManager::joystickHardwareEvent));
   if (type == InputType::MENU_INPUT)
@@ -26,7 +26,7 @@ inputmanager::inputmanager(InputType type)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedAt));
       _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
-      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::?));
+      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::CHOISIRUNNOMDEFONCTION));
     }
 }
 
@@ -35,12 +35,15 @@ InputManager::~InputManager()
 
 }
 
-
 std::map<unsigned int, unsigned int>   		InputManager::joystickPressedAt(sf::Event &event)
 {
   
 }
 
+std::map<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
+{
+  // 8 directions
+}
 
 bool						InputManager::isMouseInWindow(IVector2 posMouse)
 {
@@ -118,20 +121,6 @@ std::map<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::Ev
     }
   return std::make_pair(0, 0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ACTION ON EVENT
 
