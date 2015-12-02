@@ -24,12 +24,12 @@ Bind::BindType Bind::getType() const
     return _type;
 }
 
-sf::Event::key Bind::getKey() const
+sf::Event Bind::getKey() const
 {
     return _key;
 }
 
-sf::Event::joystick Bind::getJoystick() const
+sf::Event Bind::getJoystick() const
 {
     return _joystick;
 }

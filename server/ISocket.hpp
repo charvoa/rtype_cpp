@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Wed Nov 18 17:10:07 2015 Joris Bertomeu
+// Last update Thu Nov 19 00:21:19 2015 Joris Bertomeu
 //
 
 #ifndef		__ISOCKET_HPP_
@@ -16,6 +16,8 @@
 # include	<sys/socket.h>
 # include	<netinet/in.h>
 # include	<stdexcept>
+# include	<string.h>
+# include	<errno.h>
 
 class		ISocket
 {
@@ -23,6 +25,7 @@ public:
   explicit	ISocket() {};
   virtual	~ISocket() {};
   virtual void	*read() = 0;
+  virtual int	getPort() const = 0;
   virtual void	close() = 0;
   virtual int	write(void *) = 0;
   virtual int	getFd() const = 0;

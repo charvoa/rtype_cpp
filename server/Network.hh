@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:21:04 2015 Joris Bertomeu
-// Last update Wed Nov 18 16:53:58 2015 Joris Bertomeu
+// Last update Wed Nov 18 23:46:29 2015 Joris Bertomeu
 //
 
 #ifndef		__NETWORK_HH_
@@ -25,7 +25,7 @@ public:
   virtual void	*read(int);
   virtual int	write(void *, int);
   virtual void	close();
-  virtual void	accept(ISocket *);
+  virtual ISocket	*accept();
 };
 
 #endif

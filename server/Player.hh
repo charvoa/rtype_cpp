@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Tue Dec  1 06:16:10 2015 Louis Audibert
+// Last update Wed Dec  2 02:33:43 2015 Louis Audibert
 //
 
 #ifndef PLAYER_HH_
@@ -29,7 +29,7 @@ class Player : public AEntity
 
   public:
 
-  Player(const Client &);
+  Player(int id, const Client &);
   ~Player();
   const Client &getClient() const;
   const std::string &getUsername() const;

@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:57:49 2015 Joris Bertomeu
-// Last update Wed Nov 18 16:54:36 2015 Joris Bertomeu
+// Last update Thu Nov 19 00:00:41 2015 Joris Bertomeu
 //
 
 #ifndef			__SOCKET_HH_
@@ -26,7 +26,9 @@ private:
 
 public:
   Socket(int type_, int domain_, int port_);
+  Socket(int fd_, ISocket *);
   virtual		~Socket();
+  virtual int		getPort() const;
   virtual int		getFd() const;
   virtual int		getType() const;
   virtual int		getDomain() const;

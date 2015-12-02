@@ -1,11 +1,17 @@
-project(server)
+project(RTYPE_SERVER)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(EXECUTABLE_NAME "server_rtype")
 
-# SET(CMAKE_CXX_COMPILER	"clang++")
+cmake_minimum_required(VERSION 2.6)
 
-add_executable(
-  ./server
+#SET(CMAKE_CXX_COMPILER	"clang++")
+
+if(CMAKE_COMPILER_IS_GNUCC)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Werror")
+endif(CMAKE_COMPILER_IS_GNUCC)
+
+add_executable( server_rtype
   main.cpp
   Server.cpp
   Network.cpp
@@ -26,11 +32,18 @@ add_executable(
   CommandManager.cpp
   Room/Room.cpp
   Room/RoomManager.cpp
+  PlayerFactory.cpp
   Player.cpp
-  PlayerManager.cpp
   Client.cpp
   Parameters.cpp
   Network.cpp
   GameManager.cpp
   Game.cpp
+  ../common/Thread/ThreadUnix.cpp
 )
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+
+find_package (Threads)
+
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_THREAD_LIBS_INIT})

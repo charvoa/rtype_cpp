@@ -20,7 +20,7 @@ public:
     PanelFactory();
     ~PanelFactory();
 
-    enum e_panelType
+    typedef enum e_panelType
     {
         ROOM_PANEL,
         SETTINGS_PANEL,
