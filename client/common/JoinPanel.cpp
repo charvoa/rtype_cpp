@@ -1,5 +1,6 @@
 #include "JoinPanel.hh"
 #include "PanelFactory.hh"
+#include "RenderWindow.hh"
 
 JoinPanel::JoinPanel() : APanel()
 {

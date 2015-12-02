@@ -11,8 +11,8 @@
 #ifndef SETTINGSLOADER_HH
 #define SETTINGSLOADER_HH
 
+#include <fstream>
 #include <SFML/Graphics.hpp>
-#include <SFML/Event.hpp>
 #include "IParser.hh"
 #include "Settings.hh"
 
@@ -43,12 +43,13 @@ public:
   void    saveSettings(Settings *) const;
 
   int     stringToInteger(std::string const&) const;
-  sf::Event::key  stringToKey(std::string const&) const;
-  sf::Event::joystick stringToJoystick(std::string const&) const;
+  sf::Event	stringToKey(std::string const&) const;
+  sf::Event stringToJoystick(std::string const&) const;
 
   std::string keyToString(sf::Event) const;
   std::string joystickToString(sf::Event) const;
   std::string bindTypeToString(Bind::BindType) const;
+  std::string bindToString(Bind) const;
 
 private:
   const std::string _filepath;
