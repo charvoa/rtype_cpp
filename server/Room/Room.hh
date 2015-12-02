@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Wed Dec  2 05:56:46 2015 Antoine Garcia
+// Last update Wed Dec  2 06:48:50 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
@@ -15,11 +15,13 @@
 # include <string>
 # include "../Client.hh"
 # include "../ClientManager.hh"
+# include "../Parameters.hh"
 
 class	Room
 {
   std::string	_id;
   ClientManager	_clientManager;
+  Parameters	_parameter;
 public:
   Room();
   Room(const std::string &id, Client&);
@@ -27,6 +29,8 @@ public:
   const std::string&	getId() const;
   void	addPlayer(Client &);
   std::vector<Client>&	getAllPlayers();
+  void			setParameters(Parameters &);
+  const Parameters&	getParameters() const;
 };
 
 
