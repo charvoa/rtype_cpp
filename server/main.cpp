@@ -4,13 +4,17 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Wed Dec  2 13:22:22 2015 Nicolas Charvoz
+// Last update Wed Dec  2 15:17:23 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
-#include	"Server.hh"
-#include	"EntityManager.hh"
-#include	"../common/Thread/ThreadUnix.hh"
+# include	"Server.hh"
+# include	"EntityManager.hh"
+#ifdef __unix__
+# include	"../common/Thread/ThreadUnix.hpp"
+#elif defined(_WIN32) || defined(WIN32)
+# include 	"../common/Thread/ThreadWin.hpp"
+#endif
 
 void function()
 {
