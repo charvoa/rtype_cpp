@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:22:39 2015 Joris Bertomeu
-// Last update Wed Dec  2 13:24:27 2015 Nicolas Charvoz
+// Last update Thu Nov 19 03:25:34 2015 Joris Bertomeu
 //
 
 #include	"Network.hh"
@@ -26,15 +26,17 @@ void	Network::create(int port_, int sockType_, const std::string &addr_)
   (void)addr_;
   std::cout << "Create" <<std::endl;
   this->_socket = new Socket(sockType_, SOCK_STREAM, port_);
-
 }
 
 void	Network::bind()
 {
+  std::cout << "Network :: Bind on port " << ntohs(this->_socket->getAddr()->sin_port) << std::endl;
   if (::bind(this->_socket->getFd(),
 	   (struct sockaddr *) this->_socket->getAddr(),
-	   sizeof(this->_socket->getAddr())) < 0)
+	     sizeof(this->_socket->getAddr())) < 0) {
+    this->_socket->close();
     throw (std::logic_error(std::string("Error while binding : " + std::string(strerror(errno)))));
+  }
 }
 
 void	Network::listen()
@@ -60,13 +62,13 @@ void	Network::close()
   this->_socket->close();
 }
 
-ISocket	*Network::accept()
+ISocket			*Network::accept()
 {
-  int	fd;
-  struct sockaddr_in addr;
+  int			fd;
+  struct sockaddr_in	addr;
   socklen_t		len;
 
-  std::cout << "Network :: Accept" << std::endl;
+  std::cout << "Network :: Accept (" << ntohs(this->_socket->getAddr()->sin_port) << ")" << std::endl;
   fd = ::accept(this->_socket->getFd(), (struct sockaddr *) &addr, &len);
   if (fd < 0)
     throw (std::logic_error(std::string("Error while accepting : " + std::string(strerror(errno)))));

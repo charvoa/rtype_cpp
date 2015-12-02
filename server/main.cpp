@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Wed Dec  2 15:17:23 2015 Nicolas Charvoz
+// Last update Wed Dec  2 15:26:50 2015 Nicolas Girardot
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -33,10 +33,9 @@ int		main(int ac, char **av)
 
     std::cout << "Made by La Pintade" << std::endl;
     s->run();
-    // AThread *thread = new ThreadUnix();
-
-    // thread->attach(&function, NULL);
-    // thread->run();
+    AThread *thread = new Thread(2);
+    thread->attach(&function, NULL);
+    thread->run();
   } catch (const std::exception &e) {
     std::cout << "Error catched : " << e.what() << std::endl;
   }

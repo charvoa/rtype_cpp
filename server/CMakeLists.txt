@@ -38,6 +38,7 @@ add_executable( server_rtype
   PlayerFactory.cpp
   Player.cpp
   Client.cpp
+  ../common/Thread/ThreadFactory.cpp
   Parameters.cpp
   Network.cpp
   GameManager.cpp
