@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:31 2015 Serge Heitzler
-// Last update Wed Dec  2 04:46:51 2015 Serge Heitzler
+// Last update Wed Dec  2 05:35:51 2015 Serge Heitzler
 //
 
 #ifndef		TEXTURE_HH_
@@ -28,6 +28,7 @@ public:
   bool		loadFromFile(const std::string& path, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height);
   IVector2    	getSize();
   void		setSmooth(bool value);
+  sf::Texture  	getTexture();
 
 private:
 

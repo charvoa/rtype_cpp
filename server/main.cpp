@@ -4,13 +4,14 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Wed Dec  2 15:06:03 2015 Nicolas Girardot
-// Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
-//
 
-#include	"Server.hh"
-#include	"EntityManager.hh"
-#include	"../common/Thread/ThreadUnix.hpp"
+# include	"Server.hh"
+# include	"EntityManager.hh"
+#ifdef __unix__
+# include	"../common/Thread/ThreadUnix.hpp"
+#elif defined(_WIN32) || defined(WIN32)
+# include 	"../common/Thread/ThreadWin.hpp"
+#endif
 
 void function()
 {
@@ -29,10 +30,10 @@ int		main(int ac, char **av)
 
     std::cout << "Made by La Pintade" << std::endl;
     s->run();
-    // AThread *thread = new ThreadUnix();
+    AThread *thread = new Thread(2);
 
-    // thread->attach(&function, NULL);
-    // thread->run();
+    thread->attach(&function, NULL);
+    thread->run();
   } catch (const std::exception &e) {
     std::cout << "Error catched : " << e.what() << std::endl;
   }

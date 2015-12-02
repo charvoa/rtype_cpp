@@ -5,12 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
-// Last update Tue Dec  1 02:56:56 2015 Serge Heitzler
+// Last update Wed Dec  2 06:04:04 2015 Serge Heitzler
 //
 
 #ifndef ISPRITE_HH_
 #define ISPRITE_HH_
 
+#include <SFML/Graphics.hpp>
 #include "ITexture.hh"
 #include "IColor.hh"
 
@@ -22,7 +23,7 @@ class		      ISprite
   virtual void		setPosition(float x, float y) = 0;
   virtual void		scale(float ratio) = 0;
   virtual void		setOrigin(float x, float y) = 0;
-  virtual void		move (float x, float y) = 0;
+  virtual void		move(float x, float y) = 0;
   virtual void		rotate(float angle) = 0;
 
 };

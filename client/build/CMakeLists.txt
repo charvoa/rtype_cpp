@@ -42,7 +42,10 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Settings.cpp
   ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
+  ../common/Sprite.cpp
   ../common/StartPanel.cpp
+  ../common/Text.cpp
+  ../common/Texture.cpp
   ../common/Volume.cpp
   )
 

@@ -5,11 +5,11 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 17:46:33 2015 Nicolas Girardot
-// Last update Wed Dec  2 15:01:51 2015 Nicolas Charvoz
+// Last update Wed Dec  2 15:12:15 2015 Nicolas Charvoz
 //
 
-#ifndef _THREADWIN_HH_
-#define _THREADWIN_HH_
+#ifndef _THREADWIN_HPP_
+#define _THREADWIN_HPP_
 
 #include <windows.h>
 #include "AThread.hpp"
