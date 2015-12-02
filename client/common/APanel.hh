@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Wed Dec  2 07:50:20 2015 Serge Heitzler
+// Last update Wed Dec  2 08:19:31 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -31,6 +31,8 @@ private:
   std::vector<Texture*>			_textures;
   std::vector<Sprite*>	      		_sprites;
 
+  void					render();
+  void					hide();
 };
 
 #endif // APANEL_HH

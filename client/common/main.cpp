@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Wed Dec  2 06:56:47 2015 Serge Heitzler
+// Last update Wed Dec  2 08:19:46 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -18,23 +18,24 @@
 int main()
 {
     // Fenêtre de rendu
-  RenderWindow window(sf::VideoMode(1920, 1080, 32), "R-Pint");//, Style::Fullscreen);
+	RenderWindow *window = RenderWindow::getInstance();
+	window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
 
   sf::CircleShape shape;
   shape.setFilColor(sf::Color::Green);
   
   // Efface l'écran (remplissage avec du noir)
-  window.clear();
+  window->clear();
 
   window.draw(shape);
 
   // Affichage du contenu de la fenêtre à l'écran
-  window.display();
+  window->display();
   // Boucle principale
-  while (window.isOpen())
+  while (window->isOpen())
     {
       sf::Event event;
-        while (window.waitEvent(event))
+        while (window->waitEvent(event))
 	  {
 	  }
     }

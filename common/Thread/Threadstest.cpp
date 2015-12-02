@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 20:07:39 2015 Nicolas Girardot
-// Last update Wed Dec  2 15:14:46 2015 Nicolas Charvoz
+// Last update Wed Dec  2 16:58:47 2015 Nicolas Charvoz
 //
 
 #include <iostream>
@@ -18,19 +18,25 @@
 #else
 #endif
 
-void	first()
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <stdio.h>
+
+void *first(void *args)
 {
-  while (true)
-    std::cout << "Tata" << std::endl;
+  std::cout << (char*)args << std::endl;
 }
 
 int	main()
 {
+  char *s = (char*)malloc(4 * sizeof(char));
+
+  strcpy(s, "lol");
+  s[4] = 0;
+
   AThread *thread = new Thread(1);
-  thread->attach(&first, NULL);
+  thread->attach(&first, (void*)s);
   thread->run();
-  while (true)
-    {
-      std::cout << "TOTO" << std::endl;
-    }
+  thread->join();
 }

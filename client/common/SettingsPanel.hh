@@ -11,6 +11,8 @@
 #ifndef SETTINGSPANEL_H
 #define SETTINGSPANEL_H
 
+#include "Volume.hh"
+#include "Settings.hh"
 #include "APanel.hh"
 #include "Bind.hh"
 #include "Button.hh"
@@ -28,6 +30,7 @@ public:
     void    defaultSettings();
     void    back();
     void    save();
+	void	render();
 
 private:
     Button  _effectsVolume;

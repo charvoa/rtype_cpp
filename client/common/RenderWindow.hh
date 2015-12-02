@@ -21,7 +21,6 @@
 class	        RenderWindow : public IRenderWindow
 {
 public:
-  RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
   ~RenderWindow();
 
   static RenderWindow *getInstance();
@@ -40,10 +39,11 @@ public:
   void      back();
   Settings	*getSettings();
   void		setSettings(Settings*);
+  void		setWindow(sf::VideoMode, std::string const& title);
 
 private:
 	static RenderWindow *_renderWindow;
-	
+	RenderWindow();
   sf::RenderWindow	*_window;
   std::stack<APanel*>   _panels;
   Settings		*_settings;

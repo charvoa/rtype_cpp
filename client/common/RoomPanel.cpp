@@ -8,6 +8,7 @@
 // Last update Mon Nov 30 17:28:03 2015 Viveka BARNEAUD
 //
 
+#include "RenderWindow.hh"
 #include "RoomPanel.hh"
 
 RoomPanel::RoomPanel() : APanel()
@@ -29,4 +30,9 @@ void    RoomPanel::start()
 void    RoomPanel::back()
 {
 	(RenderWindow::getInstance())->back();
+}
+
+void	RoomPanel::render()
+{
+
 }
