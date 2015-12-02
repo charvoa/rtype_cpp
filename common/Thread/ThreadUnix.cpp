@@ -12,7 +12,7 @@
 
 ThreadUnix::ThreadUnix()
 {
-  _id = pthread_self();
+  //_id = pthread_self();
 }
 
 unsigned int	ThreadUnix::getId()
