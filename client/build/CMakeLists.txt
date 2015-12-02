@@ -20,7 +20,9 @@ configure_file(
   "${PROJECT_BINARY_DIR}/config.h"
   )
 include_directories("${PROJECT_BINARY_DIR}")
-set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
+if(CMAKE_COMPILER_IS_GNUCXX)
+  set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Define sources and executable
@@ -29,6 +31,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
+  ../common/VideoMode.cpp
   ../common/APanel.cpp
   ../common/Bind.cpp
   ../common/DemoPanel.cpp
@@ -40,7 +43,10 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Settings.cpp
   ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
+  ../common/Sprite.cpp
   ../common/StartPanel.cpp
+  ../common/Text.cpp
+  ../common/Texture.cpp
   ../common/Volume.cpp
   )
 

@@ -5,19 +5,40 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Tue Dec  1 11:51:35 2015 Nicolas Girardot
+// Last update Wed Dec  2 16:42:12 2015 Nicolas Girardot
 //
 
 #include "RenderWindow.hh"
 
-RenderWindow::RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style, const sf::ContextSettings& settings)
+RenderWindow::RenderWindow()
 {
-  _window = new sf::RenderWindow(mode, title, style, settings);
+}
+
+RenderWindow	*RenderWindow::getInstance()
+{
+	if (!_renderWindow)
+		_renderWindow = new RenderWindow();
+	return _renderWindow;
 }
 
 RenderWindow::~RenderWindow()
 {
 
+}
+
+void		RenderWindow::setWindow(sf::VideoMode vm, std::string const& title)
+{
+	_window = new sf::RenderWindow(vm, title);
+}
+
+void		RenderWindow::setSettings(Settings *settings)
+{
+	_settings = new Settings(*settings);
+}
+
+Settings	*RenderWindow::getSettings()
+{
+	return _settings;
 }
 
 void RenderWindow::close()
@@ -81,11 +102,11 @@ void    RenderWindow::addPanel(PanelFactory::PanelType type)
     PanelFactory factory;
 
     _panels.push(factory.createPanel(type));
-    (_panels.top)->render();
+    _panels.top()->render();
 }
 
 void    RenderWindow::back()
 {
     _panels.pop();
-    (_panels.top)->render();
+    _panels.top()->render();
 }

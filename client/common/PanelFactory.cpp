@@ -41,5 +41,5 @@ APanel		*PanelFactory::createPanel(PanelType type)
     case START_PANEL:
       return (new StartPanel);
   }
-    return (new LoadingPanel);
+  return (new LoadingPanel);
 }

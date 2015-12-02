@@ -8,14 +8,15 @@
 // Last update Mon Nov 30 09:50:20 2015 Viveka BARNEAUD
 //
 
+#include <cstdlib>
 #include "SettingsLoader.hh"
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
   _ifs = new std::ifstream(_filepath.c_str());
-  _ofs = new std::ofstream(_filepath.c_str(), ios::out);
+  _ofs = new std::ofstream(_filepath.c_str(), std::ios::out);
 
-  if (!ifs.good())
+  if (!_ifs->good())
     {
       _fileExists = false;
       return;
@@ -44,7 +45,7 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
 {
     std::string	line;
     std::string	value;
-    _ifs->seekg(0, ifs->beg);
+    _ifs->seekg(0, _ifs->beg);
 
     while (std::getline(*_ifs, line))
       {
@@ -108,6 +109,11 @@ int         SettingsLoader::getMusicVolume() const
     return music;
 }
 
+int			SettingsLoader::stringToInteger(std::string const& str)
+{
+	return (std::stoi(str));
+}
+
 Volume      SettingsLoader::getVolume() const
 {
     int     global = 0;
@@ -125,6 +131,11 @@ Volume      SettingsLoader::getVolume() const
     ret.setMusic(music);
 
     return (ret);
+}
+
+sf::Event			SettingsLoader::stringToKey(std::string const& str)
+{
+
 }
 
 std::vector<std::string>	SettingsLoader::getKeys() const
@@ -150,6 +161,11 @@ std::vector<std::string>	SettingsLoader::getKeys() const
   ret.push_back(weapon3);
   ret.push_back(leave_game);
   return (ret);
+}
+
+sf::Event		SettingsLoader::stringToJoystick(std::string const& str)
+{
+	
 }
 
 std::vector<std::string>	SettingsLoader::getJoysticks() const
@@ -220,10 +236,10 @@ std::vector<Bind>   SettingsLoader::getBinds() const
 
     std::vector<std::string>keys = getKeys();
     std::vector<std::string>joysticks = getJoysticks();
-    std::vector<std::string>::const_iterator itk = keys.begin();
+    std::vector<std::string>::iterator itk = keys.begin();
     std::vector<Bind>::iterator itb = binds.begin();
     std::vector<std::string>::const_iterator endk = keys.end();
-    std::vector<std::string>::const_iterator itj = joysticks.begin();
+    std::vector<std::string>::iterator itj = joysticks.begin();
 
     binds.push_back(move_up);
     binds.push_back(move_down);
@@ -282,14 +298,14 @@ std::string     SettingsLoader::bindTypeToString(Bind::BindType type) const
     }
 }
 
-std::string     SettingsLoader::joystickToString(sf::Event::Joystick) const
+std::string     SettingsLoader::joystickToString(sf::Event joystick) const
 {
 }
 
-std::string     SettingsLoader::keyToString(sf::Event::key key) const
+std::string     SettingsLoader::keyToString(sf::Event key) const
 {
     switch (key) {
-    case Num0:
+	case Num0:
         return "0_KEY";
     case Num1:
         return "1_KEY";
@@ -412,6 +428,7 @@ std::string     SettingsLoader::bindToString(Bind bind)
     std::string key = keyToString(bind.getKey());
 
     bindType+="="+key+","+joystick+"\n";
+	return bindType;
 }
 
 void        SettingsLoader::saveSettings(Settings *settings) const

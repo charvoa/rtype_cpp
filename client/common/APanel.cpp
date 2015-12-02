@@ -5,17 +5,16 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:51:10 2015 Viveka BARNEAUD
+// Last update Wed Dec  2 06:15:23 2015 Serge Heitzler
 //
 
 #include "APanel.hh"
 
-APanel::APanel(RenderWindow *parent)
+APanel::APanel()
 {
-    _parent = parent;
 }
 
-APanel::~APanel() {}
+APanel::~APanel(){}
 
 void		APanel::render()
 {

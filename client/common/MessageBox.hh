@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:07 2015 Serge Heitzler
-// Last update Mon Nov 30 09:53:25 2015 Viveka BARNEAUD
+// Last update Wed Dec  2 04:40:27 2015 Serge Heitzler
 //
 
 #ifndef MESSAGEBOX_HH_
@@ -14,15 +14,13 @@
 class	        MessageBox : public AMenuElement
 {
 
+public:
   MessageBox();
   ~MessageBox();
 
 private:
 
-  
-public:
-
-  // Determiner
+    // Determiner
   
 };
 
