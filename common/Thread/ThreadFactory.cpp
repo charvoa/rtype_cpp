@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 14:55:14 2015 Nicolas Girardot
-// Last update Wed Dec  2 14:58:07 2015 Nicolas Girardot
+// Last update Wed Dec  2 15:19:27 2015 Nicolas Girardot
 //
 
 #include "ThreadFactory.hh"
@@ -20,7 +20,7 @@ ThreadFactory::~ThreadFactory()
 
 }
 
-Thread	*createThread()
+Thread	*ThreadFactory::createThread()
 {
   _idnbr++;
   return (new Thread(_idnbr));

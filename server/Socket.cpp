@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:01:36 2015 Joris Bertomeu
-// Last update Wed Dec  2 13:26:41 2015 Nicolas Charvoz
+// Last update Thu Nov 19 03:31:25 2015 Joris Bertomeu
 //
 
 #include	"Socket.hh"
@@ -19,6 +19,8 @@ Socket::Socket(int type_, int domain_, int port_)
   if ((this->_fd = socket(domain_, type_, 0)) < 0)
     throw (std::logic_error("Error while opening socket"));
   std::cout << "Socket created on port " << this->_port << " with fd " << this->_fd << std::endl;
+  //::close(this->_fd);
+  bzero(&(this->_servAddr), sizeof(struct sockaddr_in));
   this->_servAddr.sin_family = domain_;
   this->_servAddr.sin_addr.s_addr = INADDR_ANY;
   this->_servAddr.sin_port = htons(port_);
@@ -60,9 +62,7 @@ int	Socket::getProtocol() const
 
 void	*Socket::read()
 {
-  void *s = NULL;
-
-  return s;
+  return (NULL);
 }
 
 int	Socket::write(void *data)
