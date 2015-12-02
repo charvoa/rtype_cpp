@@ -5,14 +5,14 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 14:42:54 2015 Nicolas Girardot
-// Last update Wed Dec  2 13:29:24 2015 Nicolas Girardot
+// Last update Wed Dec  2 13:37:20 2015 Nicolas Girardot
 //
 
 #include "ThreadUnix.hh"
 
 ThreadUnix::ThreadUnix()
 {
-  _id = (int)pthread_self();
+  _id = (unsigned int)pthread_self();
 }
 
 unsigned int	ThreadUnix::getId()
