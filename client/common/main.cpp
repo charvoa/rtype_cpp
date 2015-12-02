@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Wed Dec  2 04:32:48 2015 Serge Heitzler
+// Last update Wed Dec  2 06:05:39 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -13,19 +13,22 @@
 #include <SFML/Graphics.hpp>
 #include "RenderWindow.hh"
 #include "Texture.hh"
+#include "Sprite.hh"
 
 int main()
 {
     // Fenêtre de rendu
   RenderWindow window(sf::VideoMode(1920, 1080, 32), "R-Pint");//, Style::Fullscreen);
 
-  Texture backgroundSpace;
-  backgroundSpace.loadFromFile("../../common/res/sprites/background.jpg");
+  Texture backgroundSpaceTexture;
+  backgroundSpaceTexture.loadFromFile("../../common/res/sprites/background.jpg");
+
+  Sprite backgroundSpace;
 
   // Efface l'écran (remplissage avec du noir)
   window.clear();
 
-  window.draw(backgroundSpace);
+  window.draw(backgroundSpace.getSprite());
 
   // Affichage du contenu de la fenêtre à l'écran
   window.display();

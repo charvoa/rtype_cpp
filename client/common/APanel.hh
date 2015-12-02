@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:51:02 2015 Viveka BARNEAUD
+// Last update Wed Dec  2 05:50:49 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -13,16 +13,19 @@
 
 #include "RenderWindow.hh"
 
-class APanel
+class		APanel
 {
 public:
-    APanel(RenderWindow *parent);
-    ~APanel();
+  
+  APanel(RenderWindow *parent);
+  ~APanel();
 
-	void		render();
-	void		hide();
+  void		render();
+  void		hide();
+  
 protected:
-    RenderWindow  *_parent;
+  
+  RenderWindow	*_parent;
 };
 
 #endif // APANEL_HH

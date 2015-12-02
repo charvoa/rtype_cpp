@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Wed Dec  2 00:56:24 2015 Serge Heitzler
+// Last update Wed Dec  2 05:30:46 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -40,7 +40,7 @@ public:
 
 private:
 
-  sf::RenderWindow *_window;
+  sf::RenderWindow	*_window;
   std::stack<APanel*>   _panels;
   //Size		_size;
   //PanelFactory	_panelFactory;
