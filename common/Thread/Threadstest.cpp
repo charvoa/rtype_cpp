@@ -5,15 +5,15 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 20:07:39 2015 Nicolas Girardot
-// Last update Wed Dec  2 15:02:09 2015 Nicolas Charvoz
+// Last update Wed Dec  2 15:14:46 2015 Nicolas Charvoz
 //
 
 #include <iostream>
 #include <string>
 
-#ifdef __linux__
+#ifdef __unix__
 #	include "ThreadUnix.hpp"
-#elif _WIN32
+#elif defined(_WIN32) || defined(WIN32)
 #	include "ThreadWin.hpp"
 #else
 #endif
