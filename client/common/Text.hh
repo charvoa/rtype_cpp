@@ -1,11 +1,11 @@
 //
 // Text.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Wed Dec  2 02:22:28 2015 Serge Heitzler
+// Last update Wed Dec  2 16:56:16 2015 Nicolas Girardot
 //
 
 #ifndef TEXT_HH_
@@ -21,7 +21,7 @@ class	        Text : public IText
 {
 
   Text();
-  Text(const String &string, const IFont &font, unsigned int characterSize=30);
+  Text(const std::string &string, const IFont &font, unsigned int characterSize=30);
   ~Text();
 
   void			setFont(IFont& font);

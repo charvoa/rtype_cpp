@@ -18,7 +18,7 @@
 class SettingsPanel : public APanel
 {
 public:
-    SettingsPanel(RenderWindow *);
+    SettingsPanel();
     ~SettingsPanel();
 
     void    setGlobalVolume(int);

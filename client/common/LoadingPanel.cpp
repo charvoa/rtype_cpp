@@ -11,7 +11,7 @@
 #include "LoadingPanel.hh"
 #include "SettingsLoader.hh"
 
-LoadingPanel::LoadingPanel(RenderWindow *parent) : APanel(parent)
+LoadingPanel::LoadingPanel() : APanel()
 {
     Settings    *settings = new Settings("PersonnalConfig.ini");
 

@@ -8,9 +8,10 @@
 // Last update Mon Nov 30 17:28:03 2015 Viveka BARNEAUD
 //
 
+#include "RenderWindow.hh"
 #include "RoomPanel.hh"
 
-RoomPanel::RoomPanel(RenderWindow *parent) : APanel(parent)
+RoomPanel::RoomPanel() : APanel()
 {
 }
 
@@ -18,15 +19,15 @@ RoomPanel::~RoomPanel() {}
 
 void    RoomPanel::difficulty(Settings::Difficulty diff)
 {
-    _parent->getSettings->setDifficulty(diff);
+	(RenderWindow::getInstance())->getSettings->setDifficulty(diff);
 }
 
 void    RoomPanel::start()
 {
-    _parent->addPanel(LOADING_PANEL);
+	(RenderWindow::getInstance())->addPanel(PanelFactory::LOADING_PANEL);
 }
 
 void    RoomPanel::back()
 {
-    _parent->back();
+	(RenderWindow::getInstance())->back();
 }

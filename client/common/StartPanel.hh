@@ -17,7 +17,7 @@
 class StartPanel : public APanel
 {
 public:
-    StartPanel(RenderWindow *);
+    StartPanel();
     ~StartPanel();
 
     void    createRoom();

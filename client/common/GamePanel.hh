@@ -6,7 +6,7 @@
 class GamePanel : public APanel
 {
 public:
-    GamePanel(RenderWindow*);
+    GamePanel();
     ~GamePanel();
 };
 
