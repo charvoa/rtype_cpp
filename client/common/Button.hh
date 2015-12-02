@@ -33,6 +33,7 @@ public:
   bool			mouseReleaseEvent(sf::Event& event);
   bool			mouseEntered(sf::Event& event);
   bool			mouseLeft(sf::Event& event);
+  void			render();
 
 private:
 

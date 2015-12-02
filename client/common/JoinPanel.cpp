@@ -28,3 +28,8 @@ void    JoinPanel::back()
 {
   RenderWindow::getInstance()->back();
 }
+
+void	JoinPanel::render()
+{
+
+}

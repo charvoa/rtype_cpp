@@ -5,15 +5,37 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 17:26:39 2015 Viveka BARNEAUD
+// Last update Wed Dec  2 08:15:56 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
 #include "StartPanel.hh"
+#include "RenderWindow.hh"
 
 StartPanel::StartPanel() : APanel()
 {
+  Texture backgroundSpaceTexture;
+  Texture earthTexture;
+  Texture cockpitTexture;
+  
+  Sprite backgroundSpace;
+  Sprite earth;
+  Sprite cockpit;
+  
+  backgroundSpaceTexture.loadFromFile("../../common/res/sprites/background.jpg");
+  earthTexture.loadFromFile("../../common/res/sprites/planet_earth_backgorund.png");
+  cockpitTexture.loadFromFile("../../common/res/sprites/cockpit.png");
 
+  backgroundSpace.setTexture(backgroundSpaceTexture);
+  earth.setTexture(earthTexture);
+  cockpit.setTexture(cockpitTexture);
+
+
+
+  // POSITION AT CENTER
+  //  backgroundSpace.setPosition(0, 0);
+  //  earth.setPosition();
+  //  cockpit.setPosition(0, 0);
 }
 
 StartPanel::~StartPanel() {}
@@ -41,4 +63,9 @@ void        StartPanel::exit()
 void        StartPanel::settings()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
+}
+
+void		StartPanel::render()
+{
+
 }

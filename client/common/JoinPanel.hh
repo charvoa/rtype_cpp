@@ -12,6 +12,7 @@ public:
 
     void    join();
     void    back();
+	void	render();
 private:
     Button  _joinButton;
     Button  _backButton;

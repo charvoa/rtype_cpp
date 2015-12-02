@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Wed Dec  2 06:05:39 2015 Serge Heitzler
+// Last update Wed Dec  2 08:19:46 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -21,15 +21,13 @@ int main()
 	RenderWindow *window = RenderWindow::getInstance();
 	window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
 
-  Texture backgroundSpaceTexture;
-  backgroundSpaceTexture.loadFromFile("../../common/res/sprites/background.jpg");
-
-  Sprite backgroundSpace;
-
+  sf::CircleShape shape;
+  shape.setFilColor(sf::Color::Green);
+  
   // Efface l'écran (remplissage avec du noir)
   window->clear();
 
-  window->draw(backgroundSpace.getSprite());
+  window.draw(shape);
 
   // Affichage du contenu de la fenêtre à l'écran
   window->display();
