@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Thu Nov 19 00:23:48 2015 Joris Bertomeu
+// Last update Wed Dec  2 13:23:15 2015 Nicolas Charvoz
 //
 
 #include "Server.hh"
@@ -31,8 +31,14 @@ void Server::run()
 
   std::cout << "Server :: Run" << std::endl;
   client = dynamic_cast<Socket*>(this->_network->accept());
+
+  (void)client;
 }
 
-bool Server::createGame() {}
+bool Server::createGame() {
+  return true;
+}
 
-bool Server::createRoom() {}
+bool Server::createRoom() {
+  return true;
+}

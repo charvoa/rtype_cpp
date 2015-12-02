@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:22:39 2015 Joris Bertomeu
-// Last update Thu Nov 19 00:22:58 2015 Joris Bertomeu
+// Last update Wed Dec  2 13:24:27 2015 Nicolas Charvoz
 //
 
 #include	"Network.hh"
@@ -23,8 +23,10 @@ Network::~Network()
 
 void	Network::create(int port_, int sockType_, const std::string &addr_)
 {
-  std::cout << "Create" << std::endl;
+  (void)addr_;
+  std::cout << "Create" <<std::endl;
   this->_socket = new Socket(sockType_, SOCK_STREAM, port_);
+
 }
 
 void	Network::bind()

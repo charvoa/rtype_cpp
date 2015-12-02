@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:01:36 2015 Joris Bertomeu
-// Last update Thu Nov 19 00:01:14 2015 Joris Bertomeu
+// Last update Wed Dec  2 13:24:59 2015 Nicolas Charvoz
 //
 
 #include	"Socket.hh"
@@ -65,7 +65,7 @@ void	*Socket::read()
 
 int	Socket::write(void *data)
 {
-
+  return 1;
 }
 
 struct sockaddr_in	*Socket::getAddr()

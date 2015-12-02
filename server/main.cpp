@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Thu Nov 19 00:04:35 2015 Joris Bertomeu
+// Last update Wed Dec  2 13:22:22 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -21,6 +21,8 @@ int		main(int ac, char **av)
 {
   Server	*s = new Server();
 
+  (void)ac;
+  (void)av;
   try {
     s->init();
     std::cout << "You've launched the Server of the RType" << std::endl;
