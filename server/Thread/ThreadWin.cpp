@@ -8,22 +8,21 @@
 // Last update Tue Dec  1 20:05:59 2015 Nicolas Girardot
 //
 
-
-#include "ThreadWin"
+#include "ThreadWin.hh"
 
 ThreadWin::ThreadWin()
 {
-
+	_id = GetCurrentThreadId();
 }
 
 unsigned int	ThreadWin::getId()
 {
-  return getCurrentThreadId();
+  return _id;
 }
 
-int		ThreadWin::attach(void *(*function)(void *data))
+void		ThreadWin::attach(void(*function)(), void *data)
 {
-  _function = function;
+  _function = (void *)function;
   _parameters = data;
 }
 
@@ -34,10 +33,10 @@ int		ThreadWin::join()
 
 void		ThreadWin::exit()
 {
-  ExitThread(_thread);
+  ExitThread((DWORD)_thread);
 }
 
 int		ThreadWin::run()
 {
-  return (CreateThread(NULL, 0, _function, _parameters, 0, NULL));
+  return (DWORD)(CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)_function, _parameters, 0, NULL));
 }
