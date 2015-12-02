@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 10:38:37 2015 Antoine Garcia
+// Last update Wed Dec  2 01:30:18 2015 Antoine Garcia
 //
 
 # include <cstdlib>
@@ -56,4 +56,16 @@ bool	RoomManager::roomExists(const std::string &id)
 	return (true);
     }
   return (false);
+}
+
+void	RoomManager::deleteRoom(const std::string &id)
+{
+  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+    {
+      if((*it).getId() == id)
+	{
+	  _rooms.erase(it);
+	  return;
+	}
+    }
 }
