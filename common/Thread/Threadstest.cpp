@@ -5,18 +5,18 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 20:07:39 2015 Nicolas Girardot
-// Last update Wed Dec  2 09:57:40 2015 Nicolas Charvoz
+// Last update Wed Dec  2 15:02:09 2015 Nicolas Charvoz
 //
 
 #include <iostream>
 #include <string>
 
 #ifdef __linux__
-#	include "ThreadUnix.hh"
+#	include "ThreadUnix.hpp"
 #elif _WIN32
-#	include "ThreadWin.hh"
+#	include "ThreadWin.hpp"
 #else
-#endif;
+#endif
 
 void	first()
 {
@@ -26,12 +26,7 @@ void	first()
 
 int	main()
 {
-#ifdef __linux__
-  AThread *thread = new ThreadUnix();
-#elif _WIN3
-  AThread *thread = new ThreadWin();
-#else
-#endif
+  AThread *thread = new Thread(1);
   thread->attach(&first, NULL);
   thread->run();
   while (true)

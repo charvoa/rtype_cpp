@@ -5,11 +5,11 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 17:46:33 2015 Nicolas Girardot
-// Last update Wed Dec  2 15:08:15 2015 Nicolas Girardot
+// Last update Wed Dec  2 15:11:46 2015 Nicolas Girardot
 //
 
-#ifndef _THREADWIN_HH_
-#define _THREADWIN_HH_
+#ifndef _THREADUNIX_HPP_
+#define _THREADUNIX_HPP_
 
 #include <pthread.h>
 #include "AThread.hpp"
@@ -18,11 +18,11 @@ class Thread : public AThread
 {
   pthread_t	_thread;
 public:
-  ThreadWin(unsigned int id) : _id(id) {};
+  Thread(unsigned int id) {_id = id;};
   unsigned int	getId() {
     return _id;
   };
-  void		attach(void(*)(), void *) {
+  void		attach(void(*function)(), void *data) {
     _function = (void*)function;
     _parameters = data;
   };
