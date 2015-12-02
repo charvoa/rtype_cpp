@@ -2,7 +2,7 @@ project(RTYPE_SERVER)
 
 set(EXECUTABLE_NAME "server_rtype")
 
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 2.6)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
