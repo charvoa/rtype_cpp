@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Wed Dec  2 05:50:49 2015 Serge Heitzler
+// Last update Wed Dec  2 06:15:50 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -17,7 +17,7 @@ class		APanel
 {
 public:
   
-  APanel(RenderWindow *parent);
+  APanel();
   ~APanel();
 
   void		render();
@@ -25,7 +25,6 @@ public:
   
 protected:
   
-  RenderWindow	*_parent;
 };
 
 #endif // APANEL_HH
