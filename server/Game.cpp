@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Tue Dec  1 17:46:50 2015 Nicolas Charvoz
+// Last update Wed Dec  2 09:24:07 2015 Nicolas Charvoz
 //
 
 #include "Game.hh"
@@ -16,7 +16,10 @@ Game::~Game() {}
 
 void Game::addPlayers(std::vector<Player> &) {}
 
-void Game::setParameters(Parameters &p) {}
+void Game::setParameters(Parameters &p)
+{
+  _params = p;
+}
 
 bool Game::run() {}
 

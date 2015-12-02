@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Tue Dec  1 17:44:09 2015 Nicolas Charvoz
+// Last update Wed Dec  2 09:24:05 2015 Nicolas Charvoz
 //
 
 #ifndef GAME_HH_
@@ -25,6 +25,7 @@ private:
   EntityManager _eM;
   PlayerManager _pM;
   std::queue<E_COMMAND> _commandQueue;
+  Parameters _params;
 
   public:
 
