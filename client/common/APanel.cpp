@@ -15,4 +15,14 @@ APanel::APanel(RenderWindow *parent)
     _parent = parent;
 }
 
-APanel::~Apanel() {}
+APanel::~APanel() {}
+
+void		APanel::render()
+{
+
+}
+
+void		APanel::hide()
+{
+
+}

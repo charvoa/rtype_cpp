@@ -12,7 +12,6 @@
 #define BIND_HH
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Event.hpp>
 
 class Bind
 {
