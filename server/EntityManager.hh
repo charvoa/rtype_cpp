@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Tue Dec  1 13:02:51 2015 Louis Audibert
+// Last update Wed Dec  2 02:35:14 2015 Louis Audibert
 //
 
 #ifndef _ENTITYMANAGER_HH_
@@ -16,12 +16,14 @@
 # include "EntityFactory.hh"
 # include "AEntity.hh"
 # include "E_EntityType.hh"
+# include "PlayerFactory.hh"
 
 class EntityManager
 {
 private:
   int		_id;
   EntityFactory _entityFactory;
+  PlayerFactory _playerFactory;
   std::vector<AEntity*> _entities;
 
 public:
@@ -29,6 +31,7 @@ public:
   ~EntityManager();
 
   bool		createEntity(E_ENTITYTYPE type);
+  bool		createEntity(E_ENTITYTYPE type, const Client &);
   bool		createEntitiesFromFolder(const std::string &filename, E_ENTITYTYPE type);
   void		removeEntity(AEntity &entity);
   void		removeEntityById(int id);

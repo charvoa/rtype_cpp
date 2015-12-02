@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Wed Dec  2 11:33:51 2015 Nicolas Charvoz
+// Last update Wed Dec  2 02:39:29 2015 Louis Audibert
 //
 
 #ifndef GAME_HH_

@@ -2,11 +2,11 @@ project(RTYPE_SERVER)
 
 set(EXECUTABLE_NAME "server_rtype")
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 2.6)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-SET(CMAKE_CXX_COMPILER	"clang++")
+#SET(CMAKE_CXX_COMPILER	"clang++")
 
 add_executable( server_rtype
   main.cpp
@@ -29,6 +29,7 @@ add_executable( server_rtype
   CommandManager.cpp
   Room/Room.cpp
   Room/RoomManager.cpp
+  PlayerFactory.cpp
   Player.cpp
   Client.cpp
   Parameters.cpp
