@@ -18,8 +18,8 @@ public:
   APanel();
   ~APanel();
 
-  void		render();
-  void		hide();
+  virtual void		render();
+  virtual void		hide();
 };
 
 #endif // APANEL_HH

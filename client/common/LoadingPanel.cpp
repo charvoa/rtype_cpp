@@ -19,3 +19,8 @@ LoadingPanel::LoadingPanel() : APanel()
 }
 
 LoadingPanel::~LoadingPanel() {}
+
+void		LoadingPanel::render()
+{
+
+}

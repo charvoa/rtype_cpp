@@ -10,6 +10,7 @@
 
 #include "PanelFactory.hh"
 #include "StartPanel.hh"
+#include "RenderWindow.hh"
 
 StartPanel::StartPanel() : APanel()
 {
@@ -41,4 +42,9 @@ void        StartPanel::exit()
 void        StartPanel::settings()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
+}
+
+void		StartPanel::render()
+{
+
 }

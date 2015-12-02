@@ -8,6 +8,8 @@ class GamePanel : public APanel
 public:
     GamePanel();
     ~GamePanel();
+
+	void render();
 };
 
 #endif // GAMEPANEL_H

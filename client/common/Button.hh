@@ -11,8 +11,8 @@
 #ifndef BUTTON_HH_
 #define BUTTON_HH_
 
-#include "IText.hh"
-#include "ISprite.hh"
+#include "Text.hh"
+#include "Sprite.hh"
 #include "AMenuElement.hh"
 
 class	        Button : public AMenuElement
@@ -37,9 +37,9 @@ public:
 private:
 
 	StateButton	       	_state;
-	IText			_title;
-	ISprite		_backgroundNormal;
-	ISprite		_backgroundSelected;
+	Text			_title;
+	Sprite		_backgroundNormal;
+	Sprite		_backgroundSelected;
 };
 
 #endif /* !BUTTON_HH_ */

@@ -25,6 +25,7 @@ public:
     void    demo();
     void    settings();
     void    exit();
+	void	render();
 
 private:
     Button  _createRoomButton;
