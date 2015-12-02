@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Wed Dec  2 04:35:47 2015 Antoine Garcia
+// Last update Wed Dec  2 04:40:24 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_

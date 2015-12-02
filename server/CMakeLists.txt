@@ -39,6 +39,7 @@ add_executable( server_rtype
   Network.cpp
   GameManager.cpp
   Game.cpp
+  ClientManager.cpp
   ../common/Thread/ThreadUnix.cpp
 )
 
