@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Wed Dec  2 13:33:59 2015 Nicolas Charvoz
+// Last update Wed Dec  2 17:18:38 2015 Nicolas Charvoz
 //
 
 #include "Game.hh"
@@ -38,5 +38,5 @@ bool Game::run() {
 }
 
 void Game::addCommandToQueue(ANetwork::t_frame frame) {
-  (void)frame;
+  _commandQueue.push((E_COMMAND)frame._idRequest);
 }
