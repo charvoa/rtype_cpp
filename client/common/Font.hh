@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:43 2015 Serge Heitzler
-// Last update Tue Nov 24 04:45:41 2015 Serge Heitzler
+// Last update Wed Dec  2 02:12:25 2015 Serge Heitzler
 //
 
 #ifndef FONT_HH_
@@ -18,9 +18,11 @@ class	        Font : public IFont
 {
 
   Font();
+  Font(const std::string &filename);
   ~Font();
 
   void		loadFromFile(const std::string &filename);
+  sf::Font     	getFont();
 
 public:
   

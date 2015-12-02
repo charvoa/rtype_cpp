@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Tue Dec  1 11:43:28 2015 Nicolas Girardot
+// Last update Wed Dec  2 02:38:29 2015 Serge Heitzler
 //
 
 #ifndef IRENDERWINDOW_HH_

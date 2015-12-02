@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Mon Nov 30 16:56:12 2015 Nicolas Girardot
-// Last update Mon Nov 30 16:59:39 2015 Nicolas Girardot
+// Last update Wed Dec  2 01:18:57 2015 Serge Heitzler
 //
 
 #include "Color.hh"
@@ -18,7 +18,6 @@ sf::Color		Color::_blue = sf::Color::Blue;
 sf::Color		Color::_yellow = sf::Color::Yellow;
 sf::Color		Color::_magenta = sf::Color::Magenta;
 sf::Color		Color::_cyan = sf::Color::Cyan;
-
 
 Color::Color()
 {
