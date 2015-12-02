@@ -43,7 +43,6 @@ add_executable( server_rtype
   GameManager.cpp
   Game.cpp
   ClientManager.cpp
-  ../common/Thread/ThreadUnix.cpp
 )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
