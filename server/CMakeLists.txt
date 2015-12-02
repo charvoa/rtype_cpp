@@ -25,8 +25,8 @@ add_executable( server_rtype
   CommandManager.cpp
   Room/Room.cpp
   Room/RoomManager.cpp
+  PlayerFactory.cpp
   Player.cpp
-  PlayerManager.cpp
   Client.cpp
   Parameters.cpp
   Network.cpp
