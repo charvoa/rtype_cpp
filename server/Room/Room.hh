@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Wed Dec  2 04:40:24 2015 Antoine Garcia
+// Last update Wed Dec  2 05:56:46 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
@@ -26,6 +26,7 @@ public:
   ~Room();
   const std::string&	getId() const;
   void	addPlayer(Client &);
+  std::vector<Client>&	getAllPlayers();
 };
 
 
