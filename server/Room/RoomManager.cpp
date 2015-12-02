@@ -5,12 +5,13 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  1 15:32:00 2015 Nicolas Charvoz
+// Last update Wed Dec  2 01:30:18 2015 Antoine Garcia
 //
 
-#include <cstdlib>
-#include <ctime>
-#include "RoomManager.hh"
+# include <cstdlib>
+# include <ctime>
+# include <stdexcept>
+# include "RoomManager.hh"
 
 RoomManager::RoomManager() : _rooms(0)
 {}
@@ -31,9 +32,9 @@ std::string	RoomManager::generateId()
   return id;
 }
 
-void	RoomManager::createNewRoom()
+void	RoomManager::createNewRoom(Client &client)
 {
-  Room	room(generateId());
+  Room	room(generateId(), client);
   _rooms.push_back(room);
 }
 
@@ -44,10 +45,27 @@ Room&	RoomManager::getRoombyId(const std::string &id)
       if((*it).getId() == id)
 	return (*it);
     }
-  throw new std::exception();
+  throw std::logic_error("No room with this id found");
 }
 
-bool	RoomManager::roomExists(const std::string &id) const
+bool	RoomManager::roomExists(const std::string &id)
 {
-  return (true);
+  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+    {
+      if((*it).getId() == id)
+	return (true);
+    }
+  return (false);
+}
+
+void	RoomManager::deleteRoom(const std::string &id)
+{
+  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+    {
+      if((*it).getId() == id)
+	{
+	  _rooms.erase(it);
+	  return;
+	}
+    }
 }

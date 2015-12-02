@@ -23,7 +23,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Define sources and executable
-set(EXECUTABLE_NAME "R-Type")
+set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
   ../common/main.cpp
   ../common/RenderWindow.cpp
@@ -49,9 +49,13 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 #Find any version 2.X of SFML
 #See the FindSFML.cmake file for additional details and instructions
 find_package(SFML 2 REQUIRED system window graphics network audio)
+
+#Find Thread
+find_package (Threads)
+
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
-  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
 
