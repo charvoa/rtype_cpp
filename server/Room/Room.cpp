@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  2 05:16:20 2015 Antoine Garcia
+// Last update Wed Dec  2 05:56:37 2015 Antoine Garcia
 //
 
 #include "Room.hh"
@@ -28,4 +28,9 @@ const std::string &Room::getId() const
 void	Room::addPlayer(Client &client)
 {
   _clientManager.addClients(client);
+}
+
+std::vector<Client>&	Room::getAllPlayers()
+{
+  return _clientManager.getAllClients();
 }

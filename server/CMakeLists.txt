@@ -4,7 +4,7 @@ set(EXECUTABLE_NAME "server_rtype")
 
 cmake_minimum_required(VERSION 2.6)
 
-#SET(CMAKE_CXX_COMPILER	"clang++")
+#SET(CMAKE_CXX_COMPILER	"g++-5")
 
 if(CMAKE_COMPILER_IS_GNUCC)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -43,7 +43,6 @@ add_executable( server_rtype
   GameManager.cpp
   Game.cpp
   ClientManager.cpp
-  ../common/Thread/ThreadUnix.cpp
 )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
