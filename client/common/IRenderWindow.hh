@@ -5,14 +5,16 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Dec  2 02:38:29 2015 Serge Heitzler
+// Last update Wed Dec  2 06:38:45 2015 Serge Heitzler
 //
 
 #ifndef IRENDERWINDOW_HH_
 #define IRENDERWINDOW_HH_
 
+
 #include <string>
 #include <cstdint>
+#define Uint32 uint32_t 
 #include <SFML/Window/ContextSettings.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderStates.hpp>

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Wed Dec  2 13:23:15 2015 Nicolas Charvoz
+// Last update Thu Nov 19 03:22:30 2015 Joris Bertomeu
 //
 
 #include "Server.hh"
@@ -20,7 +20,7 @@ Server::~Server() {}
 void Server::init()
 {
   std::cout << "Server :: Init" << std::endl;
-  this->_network->create(4241, AF_INET, std::string(""));
+  this->_network->create(12343, AF_INET, std::string(""));
   this->_network->bind();
   this->_network->listen();
 }

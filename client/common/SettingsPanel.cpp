@@ -11,9 +11,9 @@
 #include "PanelFactory.hh"
 #include "SettingsPanel.hh"
 
-SettingsPanel::SettingsPanel(RenderWindow *parent) : APanel(parent)
+SettingsPanel::SettingsPanel() : APanel()
 {
-    _tmp = new Settings(parent->getSettings());
+    _tmp = new Settings((RenderWindow::getInstance())->getSettings());
 }
 
 SettingsPanel::~SettingsPanel()
@@ -57,10 +57,10 @@ void    SettingsPanel::defaultSettings()
 
 void    SettingsPanel::back()
 {
-    _parent->back();
+	(RenderWindow::getInstance())->back();
 }
 
 void    SettingsPanel::save()
 {
-    _parent->setSettings(_tmp);
+	(RenderWindow::getInstance())->setSettings(_tmp);
 }

@@ -19,7 +19,7 @@
 class RoomPanel : public APanel
 {
 public:
-    RoomPanel(RenderWindow *);
+    RoomPanel();
     ~RoomPanel();
 
     void    difficulty(Settings::Difficulty);
