@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Wed Dec  2 06:48:50 2015 Antoine Garcia
+// Last update Wed Dec  2 07:47:42 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
@@ -22,6 +22,7 @@ class	Room
   std::string	_id;
   ClientManager	_clientManager;
   Parameters	_parameter;
+  Client	_owner;
 public:
   Room();
   Room(const std::string &id, Client&);
