@@ -12,6 +12,7 @@
 #define RENDERWINDOW_HH_
 
 #include <stack>
+#include "Settings.hh"
 #include "IRenderWindow.hh"
 #include "PanelFactory.hh"
 #include "IVector2.hh"
@@ -20,10 +21,9 @@
 class	        RenderWindow : public IRenderWindow
 {
 public:
-
-  RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
   ~RenderWindow();
 
+  static RenderWindow *getInstance();
   void		close();
   bool		isOpen();
   bool		pollEvent(sf::Event& event);
@@ -37,11 +37,16 @@ public:
   void		clear(const sf::Color &color = sf::Color(0, 0, 0, 255));
   void      addPanel(PanelFactory::PanelType);
   void      back();
+  Settings	*getSettings();
+  void		setSettings(Settings*);
 
 private:
-
+	static RenderWindow *_renderWindow;
+	RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
+	
   sf::RenderWindow	*_window;
   std::stack<APanel*>   _panels;
+  Settings		*_settings;
   //Size		_size;
   //PanelFactory	_panelFactory;
 };

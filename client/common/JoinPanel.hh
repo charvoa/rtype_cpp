@@ -7,7 +7,7 @@
 class JoinPanel : public APanel
 {
 public:
-    JoinPanel(RenderWindow*);
+    JoinPanel();
     ~JoinPanel();
 
     void    join();

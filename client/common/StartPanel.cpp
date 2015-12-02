@@ -11,7 +11,7 @@
 #include "PanelFactory.hh"
 #include "StartPanel.hh"
 
-StartPanel::StartPanel(RenderWindow *parent) : APanel(parent)
+StartPanel::StartPanel() : APanel()
 {
 
 }
@@ -20,17 +20,17 @@ StartPanel::~StartPanel() {}
 
 void        StartPanel::joinRoom()
 {
-    _parent->addPanel(JOIN_PANEL);
+	(RenderWindow::getInstance())->addPanel(PanelFactory::JOIN_PANEL);
 }
 
 void        StartPanel::createRoom()
 {
-    _parent->addPanel(ROOM_PANEL);
+	(RenderWindow::getInstance())->addPanel(PanelFactory::ROOM_PANEL);
 }
 
 void        StartPanel::demo()
 {
-    _parent->addPanel(DEMO_PANEL);
+	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
 }
 
 void        StartPanel::exit()
@@ -40,5 +40,5 @@ void        StartPanel::exit()
 
 void        StartPanel::settings()
 {
-    _parent->addPanel(SETTINGS_PANEL);
+	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
 }

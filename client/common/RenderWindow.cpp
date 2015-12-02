@@ -15,9 +15,24 @@ RenderWindow::RenderWindow(sf::VideoMode mode, const std::string &title, uint32_
   _window = new sf::RenderWindow(mode, title, style, settings);
 }
 
+RenderWindow	*RenderWindow::getInstance()
+{
+	return _renderWindow;
+}
+
 RenderWindow::~RenderWindow()
 {
 
+}
+
+void		RenderWindow::setSettings(Settings *settings)
+{
+	_settings = new Settings(settings);
+}
+
+Settings	*RenderWindow::getSettings()
+{
+	return _settings;
 }
 
 void RenderWindow::close()

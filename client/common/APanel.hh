@@ -22,9 +22,6 @@ public:
 
   void		render();
   void		hide();
-  
-protected:
-  
 };
 
 #endif // APANEL_HH

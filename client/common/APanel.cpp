@@ -12,7 +12,6 @@
 
 APanel::APanel()
 {
-    _parent = parent;
 }
 
 APanel::~APanel(){}

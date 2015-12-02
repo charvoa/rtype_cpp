@@ -17,7 +17,7 @@
 class LoadingPanel : public APanel
 {
 public:
-    LoadingPanel(RenderWindow *parent);
+    LoadingPanel();
     ~LoadingPanel();
 
 private:

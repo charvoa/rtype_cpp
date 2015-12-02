@@ -6,7 +6,7 @@
 class DemoPanel : public APanel
 {
 public:
-    DemoPanel(RenderWindow*);
+    DemoPanel();
     ~DemoPanel();
 };
 
