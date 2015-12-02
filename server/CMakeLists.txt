@@ -30,7 +30,6 @@ add_executable( server_rtype
   Room/Room.cpp
   Room/RoomManager.cpp
   Player.cpp
-  PlayerManager.cpp
   Client.cpp
   Parameters.cpp
   Network.cpp
