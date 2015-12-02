@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:32:11 2015 Louis Audibert
-// Last update Tue Dec  1 05:35:34 2015 Louis Audibert
+// Last update Wed Dec  2 08:28:57 2015 Louis Audibert
 //
 
 #ifndef _PARAMETERS_HH_
 # define _PARAMETERS_HH_
 
 # include <iostream>
-# include "E_Difficulty.hh"
+# include "../common/E_Difficulty.hh"
 
 class Parameters
 {
