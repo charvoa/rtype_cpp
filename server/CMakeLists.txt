@@ -32,4 +32,7 @@ add_executable( server_rtype
   Network.cpp
   GameManager.cpp
   Game.cpp
+  ../common/Thread/ThreadUnix.cpp
 )
+
+target_link_libraries(server_rtype pthread)
