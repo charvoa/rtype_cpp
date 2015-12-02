@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Tue Dec  1 14:05:18 2015 Serge Heitzler
-// Last update Tue Dec  1 14:46:52 2015 Serge Heitzler
+// Last update Wed Dec  2 04:40:00 2015 Serge Heitzler
 //
 
 #ifndef PROGRESSBAR_HH_
@@ -15,6 +15,8 @@
 
 class	        ProgressBar : public AMenuElement
 {
+
+public:
 
   ProgressBar(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
   ~ProgressBar();

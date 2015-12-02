@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:04 2015 Serge Heitzler
-// Last update Mon Nov 30 16:59:46 2015 Nicolas Girardot
+// Last update Wed Dec  2 02:44:21 2015 Serge Heitzler
 //
 
 #ifndef COLOR_HH_
@@ -20,7 +20,6 @@ public:
   Color();
   ~Color();
   static sf::Color getColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-
 
   sf::Color		_black;
   sf::Color		_white;

@@ -5,25 +5,33 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:31 2015 Serge Heitzler
-// Last update Wed Nov 25 06:34:33 2015 Serge Heitzler
+// Last update Wed Dec  2 04:46:51 2015 Serge Heitzler
 //
 
-#ifndef TEXTURE_HH_
-#define TEXTURE_HH_
+#ifndef		TEXTURE_HH_
+#define		TEXTURE_HH_
 
-#include <string>
-#include "IVector2u.hh"
-#include "ITexture.hh"
+#include	<SFML/Graphics.hpp>
+#include	<string>
+#include	"IVector2.hh"
+#include	"ITexture.hh"
 
 class	        Texture : public ITexture
 {
 
+public:
+  
   Texture();
   ~Texture();
 
+  bool		loadFromFile(const std::string& path);
   bool		loadFromFile(const std::string& path, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height);
-  IVector2u    	getSize();
+  IVector2    	getSize();
   void		setSmooth(bool value);
+
+private:
+
+  sf::Texture	_texture;
 
 };
 
