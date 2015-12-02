@@ -18,7 +18,8 @@
 int main()
 {
     // Fenêtre de rendu
-  RenderWindow window(sf::VideoMode(1920, 1080, 32), "R-Pint");//, Style::Fullscreen);
+	RenderWindow *window = RenderWindow::getInstance();
+	window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
 
   Texture backgroundSpaceTexture;
   backgroundSpaceTexture.loadFromFile("../../common/res/sprites/background.jpg");
@@ -26,17 +27,17 @@ int main()
   Sprite backgroundSpace;
 
   // Efface l'écran (remplissage avec du noir)
-  window.clear();
+  window->clear();
 
-  window.draw(backgroundSpace.getSprite());
+  window->draw(backgroundSpace.getSprite());
 
   // Affichage du contenu de la fenêtre à l'écran
-  window.display();
+  window->display();
   // Boucle principale
-  while (window.isOpen())
+  while (window->isOpen())
     {
       sf::Event event;
-        while (window.waitEvent(event))
+        while (window->waitEvent(event))
 	  {
 	  }
     }

@@ -10,13 +10,14 @@
 
 #include "RenderWindow.hh"
 
-RenderWindow::RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style, const sf::ContextSettings& settings)
+RenderWindow::RenderWindow()
 {
-  _window = new sf::RenderWindow(mode, title, style, settings);
 }
 
 RenderWindow	*RenderWindow::getInstance()
 {
+	if (!_renderWindow)
+		_renderWindow = new RenderWindow();
 	return _renderWindow;
 }
 
@@ -25,9 +26,14 @@ RenderWindow::~RenderWindow()
 
 }
 
+void		RenderWindow::setWindow(sf::VideoMode vm, std::string const& title)
+{
+	_window = new sf::RenderWindow(vm, title);
+}
+
 void		RenderWindow::setSettings(Settings *settings)
 {
-	_settings = new Settings(settings);
+	_settings = new Settings(*settings);
 }
 
 Settings	*RenderWindow::getSettings()
