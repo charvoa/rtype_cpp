@@ -15,33 +15,31 @@
 #include "ISprite.hh"
 #include "AMenuElement.hh"
 
-typedef enum StateButton
-  {
-    NORMAL,
-    SELECTED,
-    DISABLED
-  };
-
 class	        Button : public AMenuElement
 {
-
-  Button(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
-  ~Button();
-
-private:
-
-  StateButton	       	_state;
-  IText			_title;
-  ISprite		_backgroundNormal;
-  ISprite		_backgroundSelected;
-  
 public:
-  
+	Button();
+	~Button();
+
+  typedef enum e_stateButton
+    {
+      NORMAL,
+      SELECTED,
+      DISABLED
+    } StateButton;
+
+
   bool			mousePressEvent(sf::Event& event);
   bool			mouseReleaseEvent(sf::Event& event);
   bool			mouseEntered(sf::Event& event);
   bool			mouseLeft(sf::Event& event);
 
+private:
+
+	StateButton	       	_state;
+	IText			_title;
+	ISprite		_backgroundNormal;
+	ISprite		_backgroundSelected;
 };
 
 #endif /* !BUTTON_HH_ */

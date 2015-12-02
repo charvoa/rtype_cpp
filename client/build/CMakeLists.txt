@@ -20,6 +20,7 @@ configure_file(
   "${PROJECT_BINARY_DIR}/config.h"
   )
 include_directories("${PROJECT_BINARY_DIR}")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Define sources and executable
@@ -27,7 +28,21 @@ set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
   ../common/main.cpp
   ../common/RenderWindow.cpp
-  ../common/Vector2.cpp)
+  ../common/Vector2.cpp
+  ../common/APanel.cpp
+  ../common/Bind.cpp
+  ../common/DemoPanel.cpp
+  ../common/GamePanel.cpp
+  ../common/JoinPanel.cpp
+  ../common/LoadingPanel.cpp
+  ../common/PanelFactory.cpp
+  ../common/RoomPanel.cpp
+  ../common/Settings.cpp
+  ../common/SettingsLoader.cpp
+  ../common/SettingsPanel.cpp
+  ../common/StartPanel.cpp
+  ../common/Volume.cpp
+  )
 
 
 # Detect and add SFML
@@ -38,6 +53,8 @@ find_package(SFML 2 REQUIRED system window graphics network audio)
 
 #Find Thread
 find_package (Threads)
+
+message("CMAKE_BUILD_TYPE is ${CMAKE_CXX_FLAGS}")
 
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
