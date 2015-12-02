@@ -8,12 +8,13 @@
 // Last update Mon Nov 30 17:25:54 2015 Viveka BARNEAUD
 //
 
+#include "RenderWindow.hh"
 #include "PanelFactory.hh"
 #include "SettingsPanel.hh"
 
 SettingsPanel::SettingsPanel() : APanel()
 {
-    _tmp = new Settings((RenderWindow::getInstance())->getSettings());
+    _tmp = new Settings(*(RenderWindow::getInstance())->getSettings());
 }
 
 SettingsPanel::~SettingsPanel()
@@ -63,4 +64,9 @@ void    SettingsPanel::back()
 void    SettingsPanel::save()
 {
 	(RenderWindow::getInstance())->setSettings(_tmp);
+}
+
+void	SettingsPanel::render()
+{
+
 }

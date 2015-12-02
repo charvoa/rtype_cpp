@@ -25,6 +25,7 @@ public:
     void    difficulty(Settings::Difficulty);
     void    start();
     void    back();
+	void	render();
 
 private:
     Button  _startButton;

@@ -17,12 +17,13 @@
 
 class	        AMenuElement
 {
-
+public:
   AMenuElement(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
   ~AMenuElement();
 
   Position		&getPosition();
   Size			&getSize();
+  virtual void			render();
 
 private:
 

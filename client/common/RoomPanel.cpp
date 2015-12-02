@@ -31,3 +31,8 @@ void    RoomPanel::back()
 {
 	(RenderWindow::getInstance())->back();
 }
+
+void	RoomPanel::render()
+{
+
+}
