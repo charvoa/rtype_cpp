@@ -8,8 +8,8 @@
 // Last update Mon Nov 30 09:51:24 2015 Viveka BARNEAUD
 //
 
-#ifndef IPANEL
-#define IPANEL
+#ifndef IPANEL_HH
+#define IPANEL_HH
 
 class   IPanel
 {
@@ -17,5 +17,4 @@ class   IPanel
     virtual void hide() = 0;
 };
 
-#endif // IPANEL
-
+#endif // IPANEL_HH

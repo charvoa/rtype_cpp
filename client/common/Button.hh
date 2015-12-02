@@ -14,19 +14,8 @@
 #include "IText.hh"
 #include "ISprite.hh"
 
-typedef enum StateButton
-  {
-    NORMAL,
-    SELECTED,
-    DISABLED
-  };
-
 class	        Button : public AMenuElement
 {
-
-  Button();
-  ~Button();
-
 private:
 
   StateButton	       	_state;
@@ -36,6 +25,16 @@ private:
   
 public:
   
+  typedef enum e_stateButton
+    {
+      NORMAL,
+      SELECTED,
+      DISABLED
+    } StateButton;
+
+  Button();
+  ~Button();
+
   bool			mousePressEvent(sf::Event& event);
   bool			mouseReleaseEvent(sf::Event& event);
   bool			mouseEntered(sf::Event& event);

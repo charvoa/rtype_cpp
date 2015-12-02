@@ -27,7 +27,21 @@ set(EXECUTABLE_NAME "R-Type")
 add_executable(${EXECUTABLE_NAME}
   ../common/main.cpp
   ../common/RenderWindow.cpp
-  ../common/Vector2.cpp)
+  ../common/Vector2.cpp
+  ../common/APanel.cpp
+  ../common/Bind.cpp
+  ../common/DemoPanel.cpp
+  ../common/GamePanel.cpp
+  ../common/JoinPanel.cpp
+  ../common/LoadingPanel.cpp
+  ../common/PanelFactory.cpp
+  ../common/RoomPanel.cpp
+  ../common/Settings.cpp
+  ../common/SettingsLoader.cpp
+  ../common/SettingsPanel.cpp
+  ../common/StartPanel.cpp
+  ../common/Volume.cpp
+  )
 
 
 # Detect and add SFML

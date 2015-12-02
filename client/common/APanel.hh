@@ -12,14 +12,15 @@
 #define APANEL_HH
 
 #include "RenderWindow.hh"
-#include "IPanel.hh"
 
-class APanel : public IPanel
+class APanel
 {
 public:
     APanel(RenderWindow *parent);
-    ~Apanel();
+    ~APanel();
 
+	void		render();
+	void		hide();
 protected:
     RenderWindow  *_parent;
 };
