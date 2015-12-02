@@ -5,19 +5,24 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 07:49:14 2015 Louis Audibert
-// Last update Tue Dec  1 07:55:39 2015 Louis Audibert
+// Last update Wed Dec  2 02:29:07 2015 Louis Audibert
 //
 
 #ifndef _PLAYERFACTORY_HH_
 # define _PLAYERFACTORY_HH_
 
+# include <iostream>
 # include "Client.hh"
 # include "Player.hh"
 
 class PlayerFactory
 {
-private:
 
+public:
+  PlayerFactory();
+  ~PlayerFactory();
+
+  Player	*createPlayer(int &id, const Client &client);
 };
 
 #endif /* _PLAYERFACTORY_HH_ */

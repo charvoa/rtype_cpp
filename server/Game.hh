@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Wed Dec  2 11:33:51 2015 Nicolas Charvoz
+// Last update Wed Dec  2 02:39:29 2015 Louis Audibert
 //
 
 #ifndef GAME_HH_
@@ -14,7 +14,6 @@
 # include "E_Command.hh"
 # include "Parameters.hh"
 # include "EntityManager.hh"
-# include "PlayerManager.hh"
 # include "Client.hh"
 # include "E_EntityType.hh"
 # include <queue>
