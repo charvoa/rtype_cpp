@@ -5,14 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:29:32 2015 Nicolas Charvoz
-// Last update Wed Dec  2 02:34:40 2015 Louis Audibert
+// Last update Wed Dec  2 13:28:54 2015 Nicolas Charvoz
 //
 
 #include "Player.hh"
 
 Player::Player(int id, const Client &c) : AEntity(id)
 {
-
+  (void)c;
 }
 
 Player::~Player() {}

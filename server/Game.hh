@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Wed Dec  2 02:39:29 2015 Louis Audibert
+// Last update Wed Dec  2 13:33:38 2015 Nicolas Charvoz
 //
 
 #ifndef GAME_HH_
@@ -22,14 +22,15 @@ class Game {
 
 private:
 
+  Parameters _params;
   int _id;
   EntityManager _eM;
   std::queue<E_COMMAND> _commandQueue;
-  Parameters _params;
   Client _client;
 
-  public:
+public:
 
+  Game();
   Game(const Parameters&, const Client&, int);
   ~Game();
   void addClients(std::vector<Client> &);

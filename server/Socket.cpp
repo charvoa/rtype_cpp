@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:01:36 2015 Joris Bertomeu
-// Last update Wed Dec  2 13:24:59 2015 Nicolas Charvoz
+// Last update Wed Dec  2 13:26:41 2015 Nicolas Charvoz
 //
 
 #include	"Socket.hh"
@@ -60,11 +60,14 @@ int	Socket::getProtocol() const
 
 void	*Socket::read()
 {
+  void *s = NULL;
 
+  return s;
 }
 
 int	Socket::write(void *data)
 {
+  (void)data;
   return 1;
 }
 
