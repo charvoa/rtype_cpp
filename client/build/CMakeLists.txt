@@ -20,6 +20,7 @@ configure_file(
   "${PROJECT_BINARY_DIR}/config.h"
   )
 include_directories("${PROJECT_BINARY_DIR}")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Define sources and executable
@@ -52,6 +53,8 @@ find_package(SFML 2 REQUIRED system window graphics network audio)
 
 #Find Thread
 find_package (Threads)
+
+message("CMAKE_BUILD_TYPE is ${CMAKE_CXX_FLAGS}")
 
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})

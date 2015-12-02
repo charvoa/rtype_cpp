@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Tue Dec  1 13:06:13 2015 Louis Audibert
+// Last update Wed Dec  2 02:35:59 2015 Louis Audibert
 //
 
 #include "EntityManager.hh"
@@ -26,6 +26,14 @@ bool	EntityManager::createEntity(E_ENTITYTYPE type)
   newEntity->setType(type);
   _entities.push_back(newEntity);
   //_entities.push_back(_entityFactory.createEntity(_id));
+  return (true);
+}
+
+bool	EntityManager::createEntity(E_ENTITYTYPE type, const Client &client)
+{
+  AEntity *newEntity = _playerFactory.createPlayer(_id, client);
+  newEntity->setType(type);
+  _entities.push_back(newEntity);
   return (true);
 }
 

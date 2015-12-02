@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Wed Dec  2 11:17:25 2015 Nicolas Charvoz
+// Last update Wed Dec  2 13:22:07 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HPP_
@@ -29,6 +29,7 @@ public:
   {
     bool (*cmd)(ANetwork::t_frame) = _commands[(E_COMMAND)frame._idRequest];
     other.cmd(frame);
+    return true;
   }
 
   private:

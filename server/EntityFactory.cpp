@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Tue Dec  1 13:06:41 2015 Louis Audibert
+// Last update Wed Dec  2 13:28:02 2015 Nicolas Charvoz
 //
 
 #include "EntityFactory.hh"
@@ -30,6 +30,7 @@ AEntity	*EntityFactory::createEntity(int &id)
 AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
 {
   //temporary
+  (void) filename;
   id += 1;
   return (new AEntity(id));
 }
