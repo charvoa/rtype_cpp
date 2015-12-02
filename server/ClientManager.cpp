@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Wed Dec  2 05:16:15 2015 Antoine Garcia
+// Last update Wed Dec  2 05:56:04 2015 Antoine Garcia
 //
 
 # include "ClientManager.hh"
@@ -25,4 +25,9 @@ bool	ClientManager::clientExists(Client &client)
 void	ClientManager::addClients(Client &client)
 {
   _clients.push_back(client);
+}
+
+std::vector<Client>&	ClientManager::getAllClients()
+{
+  return (_clients);
 }
