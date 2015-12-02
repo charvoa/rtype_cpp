@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Wed Dec  2 11:32:23 2015 Nicolas Charvoz
+// Last update Wed Dec  2 11:35:41 2015 Nicolas Charvoz
 //
 
 #include "Game.hh"
@@ -19,6 +19,11 @@ Game::~Game() {}
 
 void Game::addClients(std::vector<Client> &p)
 {
+  for (std::vector<Client>::iterator it = p.begin();
+       it != p.end() ; ++it)
+    {
+      _eM.createEntity(E_PLAYER, (*it));
+    }
 }
 
 void Game::setParameters(Parameters &p)
