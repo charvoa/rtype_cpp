@@ -14,9 +14,9 @@
 #ifdef __linux__
 #	include "ThreadUnix.hh"
 #elif _WIN32
+#	include "ThreadWin.hh"
 #else
-#endif
-
+#endif;
 
 void	first()
 {
@@ -26,7 +26,7 @@ void	first()
 
 int	main()
 {
-  AThread *thread = new ThreadUnix();
+  AThread *thread = new ThreadWin();
   thread->attach(&first, NULL);
   thread->run();
   while (true)
