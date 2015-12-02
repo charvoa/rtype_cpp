@@ -39,7 +39,7 @@ public:
   void      back();
   Settings	*getSettings();
   void		setSettings(Settings*);
-  void		setWindow(sf::VideoMode, std::string const& title)
+  void		setWindow(sf::VideoMode, std::string const& title);
 
 private:
 	static RenderWindow *_renderWindow;

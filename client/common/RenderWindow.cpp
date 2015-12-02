@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Tue Dec  1 11:51:35 2015 Nicolas Girardot
+// Last update Wed Dec  2 16:42:12 2015 Nicolas Girardot
 //
 
 #include "RenderWindow.hh"
@@ -102,11 +102,11 @@ void    RenderWindow::addPanel(PanelFactory::PanelType type)
     PanelFactory factory;
 
     _panels.push(factory.createPanel(type));
-    (_panels.top)->render();
+    _panels.top()->render();
 }
 
 void    RenderWindow::back()
 {
     _panels.pop();
-    (_panels.top)->render();
+    _panels.top()->render();
 }

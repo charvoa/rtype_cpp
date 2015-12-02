@@ -11,8 +11,6 @@
 #ifndef APANEL_HH
 #define APANEL_HH
 
-#include "RenderWindow.hh"
-
 class		APanel
 {
 public:

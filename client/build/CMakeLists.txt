@@ -31,6 +31,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
+  ../common/VideoMode.cpp
   ../common/APanel.cpp
   ../common/Bind.cpp
   ../common/DemoPanel.cpp
