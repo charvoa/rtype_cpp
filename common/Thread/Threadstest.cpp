@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 20:07:39 2015 Nicolas Girardot
-// Last update Tue Dec  1 20:39:57 2015 Nicolas Girardot
+// Last update Wed Dec  2 09:49:31 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -26,7 +26,12 @@ void	first()
 
 int	main()
 {
+#ifdef __linux__
   AThread *thread = new ThreadWin();
+#elif _WIN3
+  AThread *thread = new ThreadWin();
+#else
+#endif
   thread->attach(&first, NULL);
   thread->run();
   while (true)
