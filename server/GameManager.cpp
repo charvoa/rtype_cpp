@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:26:52 2015 Nicolas Charvoz
-// Last update Tue Dec  1 17:44:37 2015 Nicolas Charvoz
+// Last update Wed Dec  2 13:19:28 2015 Nicolas Charvoz
 //
 
 #include "GameManager.hh"
@@ -16,6 +16,6 @@ GameManager::~GameManager() {}
 
 Game &GameManager::createGame() {}
 
-Game &GameManager::getGameById() const {}
+Game &GameManager::getGameById() {}
 
-Game &GameManager::getGameByClient(Client &c) const {}
+Game &GameManager::getGameByClient(Client &c) {}
