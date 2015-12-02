@@ -14,7 +14,6 @@
 # include "E_Command.hh"
 # include "Parameters.hh"
 # include "EntityManager.hh"
-# include "PlayerManager.hh"
 # include "Client.hh"
 # include "E_EntityType.hh"
 # include <queue>
