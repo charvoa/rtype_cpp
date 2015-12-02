@@ -5,11 +5,11 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 17:46:33 2015 Nicolas Girardot
-// Last update Wed Dec  2 15:01:40 2015 Nicolas Charvoz
+// Last update Wed Dec  2 15:08:16 2015 Nicolas Charvoz
 //
 
-#ifndef _THREADWIN_HH_
-#define _THREADWIN_HH_
+#ifndef _THREADUNIX_HPP_
+#define _THREADUNIX_HPP_
 
 #include <pthread.h>
 #include "AThread.hpp"
