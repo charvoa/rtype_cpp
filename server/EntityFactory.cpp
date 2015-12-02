@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Tue Dec  1 04:29:13 2015 Louis Audibert
+// Last update Wed Dec  2 13:28:02 2015 Nicolas Charvoz
 //
 
 #include "EntityFactory.hh"
 
 EntityFactory::EntityFactory()
 {
-  _id = 0;
+
 }
 
 EntityFactory::~EntityFactory()
@@ -20,20 +20,17 @@ EntityFactory::~EntityFactory()
   std::cout << "EntityFactory Destroyed" << std::endl;
 }
 
-int	EntityFactory::generateNewID()
-{
-  _id += 1;
-  return (_id);
-}
-
-AEntity	*EntityFactory::createEntity()
+AEntity	*EntityFactory::createEntity(int &id)
 {
   std::cout << "new AEntity created !" << std::endl;
-  return (new AEntity(generateNewID()));
+  id += 1;
+  return (new AEntity(id));
 }
 
-AEntity *EntityFactory::createEntity(const std::string &filename)
+AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
 {
   //temporary
-  return (new AEntity(generateNewID()));
+  (void) filename;
+  id += 1;
+  return (new AEntity(id));
 }

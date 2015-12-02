@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:23:44 2015 Louis Audibert
-// Last update Mon Nov 30 05:58:58 2015 Louis Audibert
+// Last update Wed Dec  2 13:27:23 2015 Nicolas Charvoz
 //
 
 #include "SystemGun.hh"
@@ -22,6 +22,8 @@ SystemGun::SystemGun(E_COMPONENT type)
       break;
     case E_MISSILE:
       _component = new Missile();
+      break;
+    default:
       break;
     }
 }

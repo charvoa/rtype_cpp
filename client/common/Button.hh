@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Mon Nov 30 09:56:56 2015 Viveka BARNEAUD
+// Last update Tue Dec  1 14:46:43 2015 Serge Heitzler
 //
 
 #ifndef BUTTON_HH_
@@ -13,34 +13,33 @@
 
 #include "IText.hh"
 #include "ISprite.hh"
-
-typedef enum StateButton
-  {
-    NORMAL,
-    SELECTED,
-    DISABLED
-  };
+#include "AMenuElement.hh"
 
 class	        Button : public AMenuElement
 {
-
-  Button();
-  ~Button();
-
-private:
-
-  StateButton	       	_state;
-  IText			_title;
-  ISprite		_backgroundNormal;
-  ISprite		_backgroundSelected;
-  
 public:
-  
+	Button();
+	~Button();
+
+  typedef enum e_stateButton
+    {
+      NORMAL,
+      SELECTED,
+      DISABLED
+    } StateButton;
+
+
   bool			mousePressEvent(sf::Event& event);
   bool			mouseReleaseEvent(sf::Event& event);
   bool			mouseEntered(sf::Event& event);
   bool			mouseLeft(sf::Event& event);
 
+private:
+
+	StateButton	       	_state;
+	IText			_title;
+	ISprite		_backgroundNormal;
+	ISprite		_backgroundSelected;
 };
 
 #endif /* !BUTTON_HH_ */

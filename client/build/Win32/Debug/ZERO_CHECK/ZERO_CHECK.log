@@ -1,0 +1,17 @@
+﻿La génération a démarré 02/12/2015 11:43:22.
+     1>Projet "C:\Users\Vi\Desktop\RTYPE\client\build\ZERO_CHECK.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>CustomBuild:
+         Checking Build System
+         CMake is re-running because C:/Users/Vi/Desktop/RTYPE/client/build/CMakeFiles/generate.stamp is out-of-date.
+           the file 'C:/Users/Vi/Desktop/RTYPE/client/build/CMakeLists.txt'
+           is newer than 'C:/Users/Vi/Desktop/RTYPE/client/build/CMakeFiles/generate.stamp.depend'
+           result='-1'
+         -- Found SFML 2.3.2 in C:/Users/Vi/Desktop/SFML-2.3.2/include
+         -- Configuring done
+         -- Generating done
+         -- Build files have been written to: C:/Users/Vi/Desktop/RTYPE/client/build
+     1>Génération du projet "C:\Users\Vi\Desktop\RTYPE\client\build\ZERO_CHECK.vcxproj" terminée (Build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:00.68

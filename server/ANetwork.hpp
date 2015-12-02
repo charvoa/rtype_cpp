@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Wed Nov 18 16:53:49 2015 Joris Bertomeu
+// Last update Wed Nov 18 23:46:38 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HH_
@@ -38,7 +38,7 @@ public :
   virtual void	*read(int) = 0;
   virtual int	write(void *, int) = 0;
   virtual void	close() = 0;
-  virtual void	accept(ISocket *) = 0;
+  virtual ISocket	*accept() = 0;
 
 };
 
