@@ -5,16 +5,21 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Wed Dec  2 09:24:07 2015 Nicolas Charvoz
+// Last update Wed Dec  2 11:32:23 2015 Nicolas Charvoz
 //
 
 #include "Game.hh"
 
-Game::Game() {}
+Game::Game(const Parameters &params_, const Client &client_, int id_)
+  : _params(params_), _client(client_), _id(id_)
+{
+}
 
 Game::~Game() {}
 
-void Game::addPlayers(std::vector<Player> &) {}
+void Game::addClients(std::vector<Client> &p)
+{
+}
 
 void Game::setParameters(Parameters &p)
 {
