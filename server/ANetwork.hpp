@@ -5,14 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Wed Nov 18 23:46:38 2015 Joris Bertomeu
+// Last update Thu Dec  3 05:07:27 2015 Louis Audibert
 //
 
 #ifndef ANETWORK_HH_
 # define ANETWORK_HH_
 
 # include	<string>
-# include	"Socket.hh"
+# include	<Socket.hh>
 
 class ANetwork
 {

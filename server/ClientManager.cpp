@@ -5,11 +5,11 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Wed Dec  2 06:22:05 2015 Antoine Garcia
+// Last update Thu Dec  3 05:10:43 2015 Louis Audibert
 //
 
 # include <stdexcept>
-# include "ClientManager.hh"
+# include <ClientManager.hh>
 
 ClientManager::ClientManager()
 {}

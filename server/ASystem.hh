@@ -5,13 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:38:40 2015 Louis Audibert
-// Last update Wed Dec  2 13:48:01 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:07:20 2015 Louis Audibert
 //
 
 #ifndef _ASYSTEM_HH_
 # define _ASYSTEM_HH_
 
-# include "AComponent.hpp"
+# include <AComponent.hpp>
 
 class ASystem
 {

@@ -5,10 +5,10 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 11:32:51 2015 Nicolas Charvoz
-// Last update Wed Dec  2 13:15:49 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:11:14 2015 Louis Audibert
 //
 
-#include "CommandManager.hpp"
+#include <CommandManager.hpp>
 
 CommandManager::CommandManager() {}
 
