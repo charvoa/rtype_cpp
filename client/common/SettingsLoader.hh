@@ -1,11 +1,11 @@
 //
 // SettingsLoader.hh for SettingsLoader in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:51:54 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 16:57:17 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 16:47:07 2015 Nicolas Girardot
 //
 
 #ifndef SETTINGSLOADER_HH
@@ -19,12 +19,12 @@
 class SettingsLoader : public IParser
 {
 public:
-  SettingsLoader(std::string const& filepath);
+  SettingsLoader(const std::string & filepath);
   ~SettingsLoader();
 
-  std::string getValueOf(std::string const&) const;
-  std::string getValueOfKey(std::string const&) const;
-  std::string setValueOfJoystick(std::string const&) const;
+  std::string getValueOf(const std::string &) const;
+  std::string getValueOfKey(const std::string &) const;
+  std::string setValueOfJoystick(const std::string &) const;
 
   std::string removeSpaces(std::string const&) const;
 

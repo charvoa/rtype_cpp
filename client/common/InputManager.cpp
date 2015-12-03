@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Tue Dec  1 11:38:54 2015 Serge Heitzler
+// Last update Thu Dec  3 15:55:44 2015 Nicolas Girardot
 //
 
 #include "InputManager.hh"
@@ -35,11 +35,6 @@ InputManager::~InputManager()
 
 }
 
-std::map<unsigned int, unsigned int>   		InputManager::joystickPressedAt(sf::Event &event)
-{
-  
-}
-
 std::map<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
 {
   // 8 directions
@@ -60,7 +55,7 @@ int						InputManager::moveXAxis(sf::Event& event, int mousePosX, int ratioXMove
   if (event.joystickMove.position < 0)
     newPosX = mousePosX - ratioXMovement;
   else
-    newPosX = mousePosX + ratioXMovement;  
+    newPosX = mousePosX + ratioXMovement;
 }
 
 int						InputManager::moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement)

@@ -1,11 +1,11 @@
 //
 // APanel.hh for APanel in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Wed Dec  2 08:19:31 2015 Serge Heitzler
+// Last update Thu Dec  3 16:13:21 2015 Nicolas Girardot
 //
 
 #ifndef APANEL_HH
@@ -13,26 +13,25 @@
 
 #include <vector>
 #include "AMenuElement.hh"
-#include "RenderWindow.hh"
+#include "Texture.hh"
+#include "Sprite.hh"
 
 class		APanel
 {
 public:
-  
+
   APanel();
   ~APanel();
 
   void		render();
   void		hide();
+  std::vector<AMenuElement*>		getElements();
 
 private:
 
   std::vector<AMenuElement*>		_elements;
   std::vector<Texture*>			_textures;
   std::vector<Sprite*>	      		_sprites;
-
-  void					render();
-  void					hide();
 };
 
 #endif // APANEL_HH

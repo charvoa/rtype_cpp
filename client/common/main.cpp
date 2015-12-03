@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Wed Dec  2 08:19:46 2015 Serge Heitzler
+// Last update Thu Dec  3 15:01:36 2015 Nicolas Girardot
 //
 
 #include <cstdlib>
@@ -22,12 +22,12 @@ int main()
 	window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
 
   sf::CircleShape shape;
-  shape.setFilColor(sf::Color::Green);
-  
+  shape.setFillColor(sf::Color::Green);
+
   // Efface l'écran (remplissage avec du noir)
   window->clear();
 
-  window.draw(shape);
+  window->draw(shape);
 
   // Affichage du contenu de la fenêtre à l'écran
   window->display();

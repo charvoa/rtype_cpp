@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Wed Dec  2 06:47:41 2015 Serge Heitzler
+// Last update Thu Dec  3 16:14:12 2015 Nicolas Girardot
 //
 
 #ifndef RENDERWINDOW_HH_

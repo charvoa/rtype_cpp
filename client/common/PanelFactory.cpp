@@ -1,11 +1,11 @@
 //
 // PanelFactory.cpp for PanelFactory in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:51:41 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 10:08:02 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 16:40:19 2015 Nicolas Girardot
 //
 
 #include "PanelFactory.hh"
@@ -40,6 +40,7 @@ APanel		*PanelFactory::createPanel(PanelType type)
       return (new JoinPanel);
     case START_PANEL:
       return (new StartPanel);
-  }
-  return (new LoadingPanel);
+    default:
+      return (new LoadingPanel);
+    }
 }

@@ -1,11 +1,11 @@
 //
 // SettingsLoader.cpp for SettingsLoader in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:50:19 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:50:20 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 17:43:29 2015 Nicolas Girardot
 //
 
 #include <cstdlib>
@@ -165,7 +165,7 @@ std::vector<std::string>	SettingsLoader::getKeys() const
 
 sf::Event		SettingsLoader::stringToJoystick(std::string const& str)
 {
-	
+
 }
 
 std::vector<std::string>	SettingsLoader::getJoysticks() const
@@ -427,8 +427,8 @@ std::string     SettingsLoader::bindToString(Bind bind)
     std::string joystick = joystickToString(bind.getJoystick());
     std::string key = keyToString(bind.getKey());
 
-    bindType+="="+key+","+joystick+"\n";
-	return bindType;
+    bindType += "=" + key + "," + joystick + "\n";
+    return bindType;
 }
 
 void        SettingsLoader::saveSettings(Settings *settings) const
