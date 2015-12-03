@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Thu Dec  3 15:56:14 2015 Nicolas Girardot
+// Last update Thu Dec  3 11:36:45 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -29,7 +29,7 @@ public:
 
   std::map<unsigned int, unsigned int>         	joystickPressedAt(sf::Event &event);
   std::map<unsigned int, unsigned int>         	joystickMovedInDirection(sf::Event &event);
-  bool						isMouseInWindow(IVector2 posMouse);
+  bool						isMouseInWindow(Vector2 posMouse);
   int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement);
   int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement);
   std::map<unsigned int, unsigned int>		joystickMovedInMenuAt(sf::Event& event);

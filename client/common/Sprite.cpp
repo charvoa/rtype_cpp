@@ -5,14 +5,18 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
+<<<<<<< HEAD
 // Last update Thu Dec  3 20:46:11 2015 Nicolas Girardot
+=======
+// Last update Thu Dec  3 10:49:09 2015 Serge Heitzler
+>>>>>>> bc6b45cebd27936c0cb9f6e5071edd2993d0d62f
 //
 
 #include "Sprite.hh"
 
 Sprite::Sprite()
 {
-
+  _sprite.setOrigin(0.5, 0.5);
 }
 
 Sprite::~Sprite()

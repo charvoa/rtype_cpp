@@ -48,7 +48,6 @@ add_executable(${EXECUTABLE_NAME}
   ../common/ISprite.hh
   ../common/IText.hh
   ../common/ITexture.hh
-  ../common/IVector2.hh
   ../common/JoinPanel.hh
   ../common/LoadingPanel.hh
   ../common/MessageBox.hh
@@ -78,12 +77,12 @@ add_executable(${EXECUTABLE_NAME}
   ../common/GamePanel.cpp
   ../common/JoinPanel.cpp
   ../common/LoadingPanel.cpp
+  ../common/StartPanel.cpp
   ../common/PanelFactory.cpp
   ../common/RoomPanel.cpp
   ../common/Settings.cpp
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
-  ../common/StartPanel.cpp
   ../common/Text.cpp
   ../common/Texture.cpp
   ../common/Volume.cpp
