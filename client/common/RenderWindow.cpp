@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Wed Dec  2 16:42:12 2015 Nicolas Girardot
+// Last update Thu Dec  3 11:32:04 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -16,9 +16,9 @@ RenderWindow::RenderWindow()
 
 RenderWindow	*RenderWindow::getInstance()
 {
-	if (!_renderWindow)
-		_renderWindow = new RenderWindow();
-	return _renderWindow;
+  if (!_renderWindow)
+    _renderWindow = new RenderWindow();
+  return _renderWindow;
 }
 
 RenderWindow::~RenderWindow()
@@ -28,17 +28,17 @@ RenderWindow::~RenderWindow()
 
 void		RenderWindow::setWindow(sf::VideoMode vm, std::string const& title)
 {
-	_window = new sf::RenderWindow(vm, title);
+  _window = new sf::RenderWindow(vm, title);
 }
 
 void		RenderWindow::setSettings(Settings *settings)
 {
-	_settings = new Settings(*settings);
+  _settings = new Settings(*settings);
 }
 
 Settings	*RenderWindow::getSettings()
 {
-	return _settings;
+  return _settings;
 }
 
 void RenderWindow::close()
@@ -61,9 +61,9 @@ bool RenderWindow::waitEvent(sf::Event& event)
   return (_window->waitEvent(event));
 }
 
-IVector2	RenderWindow::getSize() const
+Vector2	RenderWindow::getSize() const
 {
-  Vector2<int> vector(_window->getSize().x, _window->getSize().y);
+  Vector2 vector(_window->getSize().x, _window->getSize().y);
   return vector;
 }
 

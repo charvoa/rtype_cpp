@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Wed Dec  2 08:15:56 2015 Serge Heitzler
+// Last update Thu Dec  3 10:58:00 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
@@ -14,6 +14,7 @@
 
 StartPanel::StartPanel() : APanel()
 {
+  RenderWindow *window = RenderWindow::getInstance();
   Texture backgroundSpaceTexture;
   Texture earthTexture;
   Texture cockpitTexture;
@@ -29,13 +30,11 @@ StartPanel::StartPanel() : APanel()
   backgroundSpace.setTexture(backgroundSpaceTexture);
   earth.setTexture(earthTexture);
   cockpit.setTexture(cockpitTexture);
+  
 
-
-
-  // POSITION AT CENTER
-  //  backgroundSpace.setPosition(0, 0);
-  //  earth.setPosition();
-  //  cockpit.setPosition(0, 0);
+  backgroundSpace.setPosition(window->getSize()._x / 2, window->getSize()._y / 2);
+  earth.setPosition(window->getSize()._x, window->getSize()._y);
+  cockpit.setPosition(window->getSize()._x / 2, window->getSize()._y / 2);
 }
 
 StartPanel::~StartPanel() {}

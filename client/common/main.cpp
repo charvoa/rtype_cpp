@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Thu Dec  3 15:01:36 2015 Nicolas Girardot
+// Last update Thu Dec  3 11:04:52 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -17,9 +17,9 @@
 
 int main()
 {
-    // Fenêtre de rendu
-	RenderWindow *window = RenderWindow::getInstance();
-	window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
+  // Fenêtre de rendu
+  RenderWindow *window = RenderWindow::getInstance();
+  window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
 
   sf::CircleShape shape;
   shape.setFillColor(sf::Color::Green);

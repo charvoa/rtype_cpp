@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 16:13:34 2015 Nicolas Girardot
+// Last update Thu Dec  3 11:32:30 2015 Serge Heitzler
 //
 
 #include "APanel.hh"
