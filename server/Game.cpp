@@ -5,10 +5,10 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Wed Dec  2 17:18:38 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:16:22 2015 Louis Audibert
 //
 
-#include "Game.hh"
+#include <Game.hh>
 
 Game::Game() {}
 

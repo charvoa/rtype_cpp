@@ -5,14 +5,14 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:21:04 2015 Joris Bertomeu
-// Last update Wed Nov 18 23:46:29 2015 Joris Bertomeu
+// Last update Thu Dec  3 05:22:02 2015 Louis Audibert
 //
 
 #ifndef		__NETWORK_HH_
 # define	__NETWORK_HH_
 
 # include	<iostream>
-# include	"ANetwork.hpp"
+# include	<ANetwork.hpp>
 
 class		Network : public ANetwork
 {

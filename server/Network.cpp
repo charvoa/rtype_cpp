@@ -5,10 +5,10 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:22:39 2015 Joris Bertomeu
-// Last update Thu Nov 19 03:25:34 2015 Joris Bertomeu
+// Last update Thu Dec  3 05:22:08 2015 Louis Audibert
 //
 
-#include	"Network.hh"
+#include	<Network.hh>
 #include	<iostream>
 
 Network::Network()

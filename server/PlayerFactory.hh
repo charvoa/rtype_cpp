@@ -5,15 +5,15 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 07:49:14 2015 Louis Audibert
-// Last update Wed Dec  2 02:29:07 2015 Louis Audibert
+// Last update Thu Dec  3 05:27:18 2015 Louis Audibert
 //
 
 #ifndef _PLAYERFACTORY_HH_
 # define _PLAYERFACTORY_HH_
 
 # include <iostream>
-# include "Client.hh"
-# include "Player.hh"
+# include <Client.hh>
+# include <Player.hh>
 
 class PlayerFactory
 {

@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:32:07 2015 Louis Audibert
-// Last update Tue Dec  1 05:39:43 2015 Louis Audibert
+// Last update Thu Dec  3 05:22:25 2015 Louis Audibert
 //
 
-#include "Parameters.hh"
+#include <Parameters.hh>
 
 Parameters::Parameters()
 {

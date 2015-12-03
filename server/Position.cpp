@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:20:29 2015 Louis Audibert
-// Last update Mon Nov 30 01:32:29 2015 Louis Audibert
+// Last update Thu Dec  3 05:27:39 2015 Louis Audibert
 //
 
-#include "Position.hh"
+#include <Position.hh>
 
 Position::Position() : _x(0), _y(0)
 {

@@ -5,13 +5,13 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Dec  2 18:06:01 2015 Nicolas Charvoz
-// Last update Wed Dec  2 21:17:30 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:20:31 2015 Louis Audibert
 //
 
 #ifndef MUTEX_HPP_
 # define MUTEX_HPP_
 
-# include "AMutex.hh"
+# include <AMutex.hh>
 # include <mutex>
 
 class Mutex : public AMutex {

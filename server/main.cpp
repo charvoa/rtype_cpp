@@ -4,19 +4,19 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Wed Dec  2 23:51:59 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:18:57 2015 Louis Audibert
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
-# include	"Server.hh"
-# include	"EntityManager.hh"
+# include	<Server.hh>
+# include	<EntityManager.hh>
 #ifdef __unix__
 # include	"../common/Thread/ThreadUnix.hpp"
 #elif defined(_WIN32) || defined(WIN32)
 # include 	"../common/Thread/ThreadWin.hpp"
 #endif
 
-#include "Mutex.hpp"
+#include <Mutex.hpp>
 #include <chrono>
 #include <thread>
 

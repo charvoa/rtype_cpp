@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Wed Dec  2 07:47:42 2015 Antoine Garcia
+// Last update Thu Dec  3 05:28:27 2015 Louis Audibert
 //
 
 #ifndef _ROOM_HH_
@@ -13,9 +13,9 @@
 
 # include <vector>
 # include <string>
-# include "../Client.hh"
-# include "../ClientManager.hh"
-# include "../Parameters.hh"
+# include <Client.hh>
+# include <ClientManager.hh>
+# include <Parameters.hh>
 
 class	Room
 {

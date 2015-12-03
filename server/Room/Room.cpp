@@ -5,10 +5,10 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  2 07:46:47 2015 Antoine Garcia
+// Last update Thu Dec  3 05:28:32 2015 Louis Audibert
 //
 
-#include "Room.hh"
+#include <Room.hh>
 
 Room::Room() {}
 

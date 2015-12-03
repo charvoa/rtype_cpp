@@ -5,10 +5,10 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:26:52 2015 Nicolas Charvoz
-// Last update Wed Dec  2 13:31:58 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:17:29 2015 Louis Audibert
 //
 
-#include "GameManager.hh"
+#include <GameManager.hh>
 
 GameManager::GameManager() {}
 

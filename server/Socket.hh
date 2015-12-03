@@ -5,13 +5,13 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:57:49 2015 Joris Bertomeu
-// Last update Thu Nov 19 00:00:41 2015 Joris Bertomeu
+// Last update Thu Dec  3 05:30:23 2015 Louis Audibert
 //
 
 #ifndef			__SOCKET_HH_
 # define		__SOCKET_HH_
 
-# include		"ISocket.hpp"
+# include		<ISocket.hpp>
 
 class			Socket : public ISocket
 {

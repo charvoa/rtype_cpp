@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Sat Nov 28 06:13:18 2015 Louis Audibert
+// Last update Thu Dec  3 05:19:41 2015 Louis Audibert
 //
 
-#include "Missile.hh"
+#include <Missile.hh>
 
 Missile::Missile()
 {

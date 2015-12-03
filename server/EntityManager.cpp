@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Wed Dec  2 02:35:59 2015 Louis Audibert
+// Last update Thu Dec  3 05:15:25 2015 Louis Audibert
 //
 
-#include "EntityManager.hh"
+#include <EntityManager.hh>
 
 EntityManager::EntityManager()
 {

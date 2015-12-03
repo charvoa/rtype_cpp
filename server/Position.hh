@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:15:28 2015 Louis Audibert
-// Last update Mon Nov 30 06:18:10 2015 Louis Audibert
+// Last update Thu Dec  3 05:27:35 2015 Louis Audibert
 //
 
 #ifndef _POSITION_HH_
@@ -13,7 +13,7 @@
 
 # include <string>
 # include <iostream>
-# include "AComponent.hpp"
+# include <AComponent.hpp>
 
 class Position : public AComponent
 {

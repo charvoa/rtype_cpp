@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Sat Nov 28 05:55:56 2015 Louis Audibert
+// Last update Thu Dec  3 05:18:09 2015 Louis Audibert
 //
 
-#include "Laser.hh"
+#include <Laser.hh>
 
 Laser::Laser()
 {
