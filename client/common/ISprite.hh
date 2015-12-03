@@ -5,20 +5,20 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
-// Last update Wed Dec  2 16:51:09 2015 Nicolas Girardot
+// Last update Thu Dec  3 20:47:08 2015 Nicolas Girardot
 //
 
 #ifndef ISPRITE_HH_
 #define ISPRITE_HH_
 
 #include <SFML/Graphics.hpp>
-#include "ITexture.hh"
+#include "Texture.hh"
 #include "IColor.hh"
 
 class		      ISprite
 {
 public:
-  virtual void		setTexture(const ITexture& texture) = 0;
+  virtual void		setTexture(const Texture& texture) = 0;
   virtual void		setColor(const IColor& color) = 0;
   virtual void		setPosition(float x, float y) = 0;
   virtual void		scale(float ratio) = 0;
