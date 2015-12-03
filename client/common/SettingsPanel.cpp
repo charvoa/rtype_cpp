@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:13 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 17:25:54 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 14:01:46 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -24,27 +24,30 @@ SettingsPanel::~SettingsPanel()
 
 void    SettingsPanel::setGlobalVolume(int global)
 {
-    Volume vol = _tmp->getVolume();
+  (void)global;
+    //   Volume vol = _tmp->getVolume();
 
-    vol.setGlobal(global);
-    _tmp->setVolume(vol);
+    // vol.setGlobal(global);
+    // _tmp->setVolume(vol);
 }
 
 void    SettingsPanel::setEffectsVolume(int effects)
 {
-    Volume vol = _tmp->getVolume();
+  (void)effects;
+    //   Volume vol = _tmp->getVolume();
 
-    vol.setEffects(effects);
-    _tmp->setVolume(vol);
+    // vol.setEffects(effects);
+    // _tmp->setVolume(vol);
 }
 
 void    SettingsPanel::setMusicVolume(int music)
 {
-    Volume vol = _tmp->getVolume();
+  (void)music;
+    //   Volume vol = _tmp->getVolume();
 
-    vol.setMusic(music);
-    _tmp->setVolume(vol);
-}
+    // vol.setMusic(music);
+    // _tmp->setVolume(vol);
+}   // 
 
 void    SettingsPanel::setBind(Bind bind)
 {

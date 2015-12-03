@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Mon Nov 30 16:56:12 2015 Nicolas Girardot
-// Last update Thu Dec  3 12:46:33 2015 Serge Heitzler
+// Last update Thu Dec  3 13:59:20 2015 Serge Heitzler
 //
 
 #include "Color.hh"
@@ -27,42 +27,42 @@ sf::Color	Color::getColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 Color::Tint	Color::blackColor()
 {
-  return (Color::Tint::Black);
+  return (Color::Tint::BLACK);
 }
 
 Color::Tint	Color::whiteColor()
 {
-  return (Color::Tint::White);
+  return (Color::Tint::WHITE);
 }
 
 Color::Tint	Color::redColor()
 {
-  return (Color::Tint::Red);
+  return (Color::Tint::RED);
 }
 
 Color::Tint	Color::greenColor()
 {
-  return (Color::Tint::Green);
+  return (Color::Tint::GREEN);
 }
 
 Color::Tint	Color::blueColor()
 {
-  return (Color::Tint::Blue);
+  return (Color::Tint::BLUE);
 }
 
 Color::Tint	Color::yellowColor()
 {
-  return (Color::Tint::Yellow);
+  return (Color::Tint::YELLOW);
 }
 
 Color::Tint	Color::magentaColor()
 {
-  return (Color::Tint::Magenta);
+  return (Color::Tint::MAGENTA);
 }
 
 Color::Tint	Color::cyanColor()
 {
-  return (Color::Tint::Cyan);
+  return (Color::Tint::CYAN);
 }
 
 sf::Color	Color::getSFColor(Color::Tint color)
@@ -85,5 +85,7 @@ sf::Color	Color::getSFColor(Color::Tint color)
       return sf::Color::Magenta;
     case CYAN:
       return sf::Color::Cyan;
+    default:
+      return sf::Color::Transparent;
     }
 }

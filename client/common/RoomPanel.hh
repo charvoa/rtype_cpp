@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 16:38:02 2015 Nicolas Girardot
+// Last update Thu Dec  3 13:26:35 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -29,11 +29,11 @@ public:
   void	render();
 
 private:
-  Button  _startButton;
-  Button  _easyButton;
-  Button  _mediumButton;
-  Button  _hardButton;
-  Button  _backButton;
+  // Button  _startButton;
+  // Button  _easyButton;
+  // Button  _mediumButton;
+  // Button  _hardButton;
+  // Button  _backButton;
   //std::map<Player*, Component*> _playersList;
 };
 

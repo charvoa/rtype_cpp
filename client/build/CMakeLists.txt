@@ -31,7 +31,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/AMenuElement.hh
   ../common/APanel.hh
   ../common/Bind.hh
-  ../common/Button.hh
+#  ../common/Button.hh
   ../common/Color.hh
   ../common/DemoPanel.hh
   ../common/Event.hh
@@ -73,7 +73,10 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Vector2.cpp
   ../common/APanel.cpp
   ../common/Bind.cpp
+#  ../common/Button.cpp
+  ../common/Color.cpp
   ../common/DemoPanel.cpp
+  ../common/Font.cpp
   ../common/GamePanel.cpp
   ../common/JoinPanel.cpp
   ../common/LoadingPanel.cpp

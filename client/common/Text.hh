@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Thu Dec  3 21:53:43 2015 Nicolas Girardot
+// Last update Thu Dec  3 13:35:19 2015 Serge Heitzler
 //
 
 #ifndef TEXT_HH_
@@ -15,11 +15,12 @@
 #include <string>
 #include "IText.hh"
 #include "Font.hh"
-#include "IColor.hh"
+#include "Color.hh"
 
 class	        Text : public IText
 {
 
+public:
   Text(const std::string &string, Font &font, unsigned int characterSize=30);
   ~Text();
 

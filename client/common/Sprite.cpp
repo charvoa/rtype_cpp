@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Thu Dec  3 12:55:52 2015 Serge Heitzler
+// Last update Thu Dec  3 13:32:05 2015 Serge Heitzler
 //
 
 #include "Sprite.hh"
@@ -53,4 +53,9 @@ void			Sprite::move(float x, float y)
 void			Sprite::rotate(float angle)
 {
   _sprite.rotate(angle);
+}
+
+sf::Sprite     		Sprite::getSprite()
+{
+  return _sprite;
 }

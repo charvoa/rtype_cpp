@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Wed Dec  2 16:55:46 2015 Nicolas Girardot
+// Last update Thu Dec  3 13:22:44 2015 Serge Heitzler
 //
 
 #ifndef BUTTON_HH_
@@ -26,7 +26,7 @@ public:
       NORMAL,
       SELECTED,
       DISABLED
-    } StateButton;
+    }		StateButton;
 
 
   bool			mousePressEvent(sf::Event& event);

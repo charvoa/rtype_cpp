@@ -7,15 +7,15 @@
 class JoinPanel : public APanel
 {
 public:
-    JoinPanel();
-    ~JoinPanel();
-
-    void    join();
-    void    back();
-	void	render();
+  JoinPanel();
+  ~JoinPanel();
+  
+  void    join();
+  void    back();
+  void	render();
 private:
-    Button  _joinButton;
-    Button  _backButton;
+  //  Button  _joinButton;
+  //  Button  _backButton;
 };
 
 #endif // JOINPANEL_HH

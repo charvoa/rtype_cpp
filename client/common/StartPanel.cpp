@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 12:13:17 2015 Serge Heitzler
+// Last update Thu Dec  3 14:02:42 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
@@ -24,7 +24,7 @@ StartPanel::StartPanel() : APanel()
   Sprite cockpit;
   
   backgroundSpaceTexture.loadFromFile("../../common/res/sprites/background.jpg");
-  earthTexture.loadFromFile("../../common/res/sprites/planet_earth_backgorund.png");
+  earthTexture.loadFromFile("../../common/res/sprites/planet_earth_background.png");
   cockpitTexture.loadFromFile("../../common/res/sprites/cockpit.png");
 
   backgroundSpace.setTexture(backgroundSpaceTexture);

@@ -5,13 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Thu Dec  3 12:52:28 2015 Serge Heitzler
+// Last update Thu Dec  3 13:36:38 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
 #define SPRITE_HH_
 
 #include "ISprite.hh"
+#include "Color.hh"
 
 class		      Sprite : public ISprite
 {

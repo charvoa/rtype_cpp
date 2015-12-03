@@ -5,11 +5,12 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Thu Dec  3 11:32:04 2015 Serge Heitzler
+// Last update Thu Dec  3 13:50:17 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
 
+RenderWindow *RenderWindow::_renderWindow = NULL;
 RenderWindow::RenderWindow()
 {
 }

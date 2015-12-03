@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:19 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 17:43:29 2015 Nicolas Girardot
+// Last update Thu Dec  3 13:19:53 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -383,6 +383,8 @@ std::string     SettingsLoader::bindTypeToString(Bind::BindType type) const
         return "weapon2";
     case Bind::WEAPON_3:
         return "weapon3";
+    default:
+      return "";
     }
 }
 

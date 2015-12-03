@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Thu Dec  3 12:06:07 2015 Serge Heitzler
+// Last update Thu Dec  3 14:07:07 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -29,8 +29,7 @@ int main()
   window->clear();
 
   StartPanel	start;
-
-  
+  //  start.render();
 
   window->draw(shape);
 
