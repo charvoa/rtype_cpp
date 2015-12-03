@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Thu Dec  3 12:03:48 2015 Serge Heitzler
+// Last update Thu Dec  3 12:06:07 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -14,6 +14,7 @@
 #include "RenderWindow.hh"
 #include "Texture.hh"
 #include "Sprite.hh"
+#include "StartPanel.hh"
 
 int main()
 {

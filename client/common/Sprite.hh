@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Thu Dec  3 20:46:16 2015 Nicolas Girardot
+// Last update Thu Dec  3 12:52:28 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
@@ -20,8 +20,8 @@ public:
   Sprite();
   ~Sprite();
 
-  void			setTexture(const Texture& texture);
-  void			setColor(const IColor& color);
+  void			setTexture(Texture& texture);
+  void			setColor(Color::Tint color);
   void			setPosition(float x, float y);
   void			scale(float ratio);
   void			setOrigin(float x, float y);

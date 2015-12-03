@@ -5,11 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-<<<<<<< HEAD
-// Last update Thu Dec  3 20:46:11 2015 Nicolas Girardot
-=======
-// Last update Thu Dec  3 10:49:09 2015 Serge Heitzler
->>>>>>> bc6b45cebd27936c0cb9f6e5071edd2993d0d62f
+// Last update Thu Dec  3 12:55:52 2015 Serge Heitzler
 //
 
 #include "Sprite.hh"
@@ -24,14 +20,14 @@ Sprite::~Sprite()
 
 }
 
-void			Sprite::setTexture(const Texture& texture)
+void			Sprite::setTexture(Texture& texture)
 {
   _sprite.setTexture(texture.getTexture());
 }
 
-void			Sprite::setColor(const IColor& color)
+void			Sprite::setColor(Color::Tint tint)
 {
-  _sprite.setColor(color);
+  _sprite.setColor(Color::getSFColor(tint));
 }
 
 void			Sprite::setPosition(float x, float y)
@@ -41,7 +37,7 @@ void			Sprite::setPosition(float x, float y)
 
 void			Sprite::scale(float ratio)
 {
-  _sprite.scale(ratio);
+  _sprite.scale(ratio, ratio);
 }
 
 void			Sprite::setOrigin(float x, float y)

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 12:03:21 2015 Serge Heitzler
+// Last update Thu Dec  3 12:13:17 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
@@ -35,9 +35,9 @@ StartPanel::StartPanel() : APanel()
   earth.setPosition(window->getSize()._x, window->getSize()._y);
   cockpit.setPosition(window->getSize()._x / 2, window->getSize()._y / 2);
 
-  this->getSprites().push_back(backgroundSpace.getSprite());
-  this->getSprites().push_back(earth.getSprite());
-  this->getSprites().push_back(cockpit.getSprite());
+  this->getSprites().push_back(&backgroundSpace);
+  this->getSprites().push_back(&earth);
+  this->getSprites().push_back(&cockpit);
 }
 
 StartPanel::~StartPanel() {}
