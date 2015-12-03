@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 11:32:30 2015 Serge Heitzler
+// Last update Thu Dec  3 11:59:08 2015 Serge Heitzler
 //
 
 #include "APanel.hh"
@@ -15,14 +15,20 @@ APanel::APanel(){}
 
 APanel::~APanel(){}
 
+void		APanel::update()
+{
+  
+}
+
 void		APanel::render()
 {
   unsigned int		i = 0;
 
   if (this->getElements().size() > 0)
     while (i++ < this->getElements().size())
-      ;
-      //(RenderWindow::getInstance())->draw(this->getElements().at(i));
+      {
+	(RenderWindow::getInstance())->draw(this->getSprites().at(i)->getSprite());
+      }
 }
 
 void		APanel::hide()
@@ -33,4 +39,9 @@ void		APanel::hide()
 std::vector<AMenuElement*>		APanel::getElements()
 {
   return _elements;
+}
+
+std::vector<Sprite*>			APanel::getSprites()
+{
+  return _sprites;
 }

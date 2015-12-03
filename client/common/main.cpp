@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Thu Dec  3 11:04:52 2015 Serge Heitzler
+// Last update Thu Dec  3 12:03:48 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -26,6 +26,10 @@ int main()
 
   // Efface l'écran (remplissage avec du noir)
   window->clear();
+
+  StartPanel	start;
+
+  
 
   window->draw(shape);
 

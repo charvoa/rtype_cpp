@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:52:52 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 11:53:08 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -17,22 +17,23 @@
 class StartPanel : public APanel
 {
 public:
-    StartPanel();
-    ~StartPanel();
-
-    void    createRoom();
-    void    joinRoom();
-    void    demo();
-    void    settings();
-    void    exit();
-	void	render();
+  StartPanel();
+  ~StartPanel();
+  
+  void		createRoom();
+  void		joinRoom();
+  void		demo();
+  void		settings();
+  void		exit();
+  void		render();
+  void	        update();
 
 private:
-    Button  _createRoomButton;
-    Button  _joinRoomButton;
-    Button  _demoButton;
-    Button  _settingsButton;
-    Button  _exitButton;
+  //    Button  _createRoomButton;
+  //    Button  _joinRoomButton;
+  //    Button  _demoButton;
+  //    Button  _settingsButton;
+  //    Button  _exitButton;
 };
 
 #endif // STARTPANEL_H
