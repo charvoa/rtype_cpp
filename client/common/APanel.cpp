@@ -5,11 +5,11 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 11:59:08 2015 Serge Heitzler
+// Last update Thu Dec  3 21:58:44 2015 Nicolas Girardot
 //
 
 #include "APanel.hh"
-//#include "RenderWindow.hh"
+#include "RenderWindow.hh"
 
 APanel::APanel(){}
 
@@ -17,7 +17,7 @@ APanel::~APanel(){}
 
 void		APanel::update()
 {
-  
+
 }
 
 void		APanel::render()
