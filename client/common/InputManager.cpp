@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Thu Dec  3 15:55:44 2015 Nicolas Girardot
+// Last update Thu Dec  3 11:35:36 2015 Serge Heitzler
 //
 
 #include "InputManager.hh"
@@ -40,7 +40,7 @@ std::map<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(
   // 8 directions
 }
 
-bool						InputManager::isMouseInWindow(IVector2 posMouse)
+bool						InputManager::isMouseInWindow(Vector2 posMouse)
 {
   if (posMouse.x >= 0 && posMouse.x < window.getSize().x
       && posMouse.y >= 0 && posMouse.y < window.getSize().y)

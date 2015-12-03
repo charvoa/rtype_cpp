@@ -5,14 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Wed Dec  2 06:02:36 2015 Serge Heitzler
+// Last update Thu Dec  3 10:49:09 2015 Serge Heitzler
 //
 
 #include "Sprite.hh"
 
 Sprite::Sprite()
 {
-
+  _sprite.setOrigin(0.5, 0.5);
 }
 
 Sprite::~Sprite()
