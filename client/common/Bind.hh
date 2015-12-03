@@ -29,21 +29,21 @@ public:
         WEAPON_3
     } BindType;
 
-  Bind(Bind::BindType, sf::Event, sf::Event);
+  Bind(Bind::BindType, sf::Keyboard::Key, sf::Joystick::Axis);
   ~Bind();
 
   Bind::BindType getType() const;
-  sf::Event getKey() const;
-  sf::Event getJoystick() const;
+  sf::Keyboard::Key getKey() const;
+  sf::Joystick::Axis getJoystick() const;
 
   void setType(Bind::BindType);
-  void setKey(sf::Event);
-  void setJoystick(sf::Event);
+  void setKey(sf::Keyboard::Key);
+  void setJoystick(sf::Joystick::Axis);
 
 private:
   Bind::BindType _type;
-  sf::Event _key;
-  sf::Event _joystick;
+  sf::Keyboard::Key _key;
+  sf::Joystick::Axis _joystick;
 };
 
 #endif // BIND_HH
