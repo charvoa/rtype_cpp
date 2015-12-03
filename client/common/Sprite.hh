@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Wed Dec  2 16:50:58 2015 Nicolas Girardot
+// Last update Thu Dec  3 20:46:16 2015 Nicolas Girardot
 //
 
 #ifndef SPRITE_HH_
@@ -13,14 +13,14 @@
 
 #include "ISprite.hh"
 
-class		      Sprite
+class		      Sprite : public ISprite
 {
 
 public:
   Sprite();
   ~Sprite();
 
-  void			setTexture(const ITexture& texture);
+  void			setTexture(const Texture& texture);
   void			setColor(const IColor& color);
   void			setPosition(float x, float y);
   void			scale(float ratio);

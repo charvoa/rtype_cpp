@@ -81,13 +81,13 @@ add_executable(${EXECUTABLE_NAME}
   ../common/PanelFactory.cpp
   ../common/RoomPanel.cpp
   ../common/Settings.cpp
-  ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
   ../common/StartPanel.cpp
   ../common/Text.cpp
   ../common/Texture.cpp
   ../common/Volume.cpp
+  ../common/SettingsLoader.cpp
   )
 
 
