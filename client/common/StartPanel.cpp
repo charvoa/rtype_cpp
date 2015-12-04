@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Fri Dec  4 08:39:54 2015 Serge Heitzler
+// Last update Fri Dec  4 10:57:13 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
@@ -41,6 +41,8 @@ StartPanel::StartPanel() //: APanel()
   earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
   cockpit->setPosition(0, 0);
 
+  backgroundSpace->scale(1.5);
+  
   _sprites.push_back(*backgroundSpace);
   _sprites.push_back(*earth);
   _sprites.push_back(*cockpit);
@@ -78,5 +80,12 @@ void        StartPanel::settings()
 
 void		StartPanel::update()
 {
+  static int i = 0;
+  
   _sprites.at(1).rotate(0.0007);
+  if (i % 10000 < 5000)
+    _sprites.at(0).move(-0.01,-0.01);
+  else
+    _sprites.at(0).move(0.01,0.01);
+  i++;
 }
