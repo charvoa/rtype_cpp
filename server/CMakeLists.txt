@@ -14,7 +14,7 @@ if(CMAKE_COMPILER_IS_GNUCC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wundef -Winline")
 endif(CMAKE_COMPILER_IS_GNUCC)
 
-include_directories(. ../common Room)
+include_directories(. ../common Room ../common/Thread)
 
 add_executable( server_rtype
   main.cpp
@@ -76,6 +76,8 @@ add_executable( server_rtype
   ClientManager.cpp
   ClientManager.hh
   ../common/E_Difficulty.hh
+  ../common/Thread/Mutex.hpp
+  ../common/Thread/AMutex.hh
 )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
