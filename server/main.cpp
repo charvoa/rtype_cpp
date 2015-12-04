@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Thu Dec  3 05:18:57 2015 Louis Audibert
+// Last update Fri Dec  4 23:16:48 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -20,31 +20,15 @@
 #include <chrono>
 #include <thread>
 
-std::map<std::string, std::string> g_pages;
 AMutex *m;
 
 void *save_page(void *s)
 {
-
-  std::string result = "fake content";
-
   m->lock();
-  g_pages[(const std::string&)s] = result;
+  std::cout << "this thread is called" << std::endl;
   m->unlock();
-
   return s;
 }
-
-void save_page2(const std::string &url)
-{
-
-  std::string result = "fake content";
-
-  m->lock();
-  g_pages[url] = result;
-  m->unlock();
-}
-
 
 int		main(int ac, char **av)
 {
@@ -55,31 +39,19 @@ int		main(int ac, char **av)
 
   m = new Mutex();
 
-  std::thread t1(save_page2, "http://foo");
-  std::thread t2(save_page2, "http://bar");
+  AThread *t1 = new Thread(1);
+  AThread *t2 = new Thread(2);
 
-  t1.join();
-  t2.join();
+  char str1[] = "http://foo";
+  char str2[] = "http://bar";
 
-  // AThread *t1 = new Thread(1);
-  // AThread *t2 = new Thread(2);
+  t1->attach(&save_page, (void*)str1);
+  t2->attach(&save_page, (void*)str2);
 
-  // char *str1 = "http://foo";
-  // char *str2 = "http://bar";
-
-  // t1->attach(&save_page, (void*)str1);
-  // t2->attach(&save_page, (void*)str2);
-
-  // t1->run();
-  // t2->run();
-  // t1->join();
-  // t2->join();
-
-  m->lock();
-  for (const auto &pair : g_pages) {
-    std::cout << pair.first << " => " << pair.second << '\n';
-  }
-  m->unlock();
+  t1->run();
+  t2->run();
+  t1->join();
+  t2->join();
 
   try {
     s->init();
