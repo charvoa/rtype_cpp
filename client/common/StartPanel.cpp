@@ -1,11 +1,11 @@
 //
 // StartPanel.cpp for StartPanel in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Fri Dec  4 03:40:57 2015 Serge Heitzler
+// Last update Fri Dec  4 17:12:10 2015 Nicolas Girardot
 //
 
 #include "PanelFactory.hh"
@@ -16,20 +16,20 @@
 StartPanel::StartPanel() //: APanel()
 {
   //  RenderWindow *window = RenderWindow::getInstance();
-  Texture cockpitTexture;
-  
-  Sprite cockpit;
+  Texture *cockpitTexture = new Texture;
 
-  
-  
-  cockpitTexture.loadFromFile("../../common/res/sprites/cockpit.png");
+  Sprite *cockpit = new Sprite;
 
 
-  cockpit.setTexture(cockpitTexture);
-  
-  cockpit.setPosition(0, 0);//window->getSize()._x / 3, window->getSize()._y / 3);
 
-  _sprites.push_back(cockpit);
+  cockpitTexture->loadFromFile("../../common/res/sprites/cockpit.png");
+
+
+  cockpit->setTexture(*cockpitTexture);
+
+  cockpit->setPosition(0, 0);//window->getSize()._x / 3, window->getSize()._y / 3);
+
+  _sprites.push_back(*cockpit);
   // this->getSprites().push_back(&backgroundSpace);
   // this->getSprites().push_back(&earth);
   // this->getSprites().push_back(&cockpit);
@@ -69,5 +69,5 @@ void        StartPanel::settings()
 
 void		StartPanel::update()
 {
-  
+
 }

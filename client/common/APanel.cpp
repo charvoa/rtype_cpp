@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Fri Dec  4 03:40:57 2015 Serge Heitzler
+// Last update Fri Dec  4 17:09:10 2015 Nicolas Girardot
 //
 
 #include "APanel.hh"
@@ -27,7 +27,7 @@ void		APanel::render()
   if (this->getSprites().size() > 0)
     while (i < this->getSprites().size())
       {
-	std::cout << "toto" << std::endl;
+	std::cout << i << std::endl;
 	(RenderWindow::getInstance())->draw(this->_sprites.at(i).getSprite());
 	std::cout << this->_sprites.at(i).getSprite().getPosition().x << std::endl;
 	i++;
