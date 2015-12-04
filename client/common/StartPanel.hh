@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 11:53:08 2015 Serge Heitzler
+// Last update Thu Dec  3 22:48:41 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -25,9 +25,11 @@ public:
   void		demo();
   void		settings();
   void		exit();
-  void		render();
   void	        update();
 
+  Texture	_cockpitTexture;
+  Sprite	_cockpit;
+  
 private:
   //    Button  _createRoomButton;
   //    Button  _joinRoomButton;

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
-// Last update Thu Dec  3 12:52:42 2015 Serge Heitzler
+// Last update Fri Dec  4 03:25:36 2015 Serge Heitzler
 //
 
 #ifndef ISPRITE_HH_

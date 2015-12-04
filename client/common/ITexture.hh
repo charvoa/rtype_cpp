@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:47 2015 Serge Heitzler
-// Last update Thu Dec  3 13:09:41 2015 Serge Heitzler
+// Last update Fri Dec  4 03:31:37 2015 Serge Heitzler
 //
 
 #ifndef ITEXTURE_HH_

@@ -5,39 +5,34 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 14:02:42 2015 Serge Heitzler
+// Last update Fri Dec  4 03:40:57 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
 #include "StartPanel.hh"
 #include "RenderWindow.hh"
+#include <iostream>
 
-StartPanel::StartPanel() : APanel()
+StartPanel::StartPanel() //: APanel()
 {
-  RenderWindow *window = RenderWindow::getInstance();
-  Texture backgroundSpaceTexture;
-  Texture earthTexture;
+  //  RenderWindow *window = RenderWindow::getInstance();
   Texture cockpitTexture;
   
-  Sprite backgroundSpace;
-  Sprite earth;
   Sprite cockpit;
+
   
-  backgroundSpaceTexture.loadFromFile("../../common/res/sprites/background.jpg");
-  earthTexture.loadFromFile("../../common/res/sprites/planet_earth_background.png");
+  
   cockpitTexture.loadFromFile("../../common/res/sprites/cockpit.png");
 
-  backgroundSpace.setTexture(backgroundSpaceTexture);
-  earth.setTexture(earthTexture);
+
   cockpit.setTexture(cockpitTexture);
   
-  backgroundSpace.setPosition(window->getSize()._x / 2, window->getSize()._y / 2);
-  earth.setPosition(window->getSize()._x, window->getSize()._y);
-  cockpit.setPosition(window->getSize()._x / 2, window->getSize()._y / 2);
+  cockpit.setPosition(0, 0);//window->getSize()._x / 3, window->getSize()._y / 3);
 
-  this->getSprites().push_back(&backgroundSpace);
-  this->getSprites().push_back(&earth);
-  this->getSprites().push_back(&cockpit);
+  _sprites.push_back(cockpit);
+  // this->getSprites().push_back(&backgroundSpace);
+  // this->getSprites().push_back(&earth);
+  // this->getSprites().push_back(&cockpit);
 }
 
 StartPanel::~StartPanel() {}
@@ -67,10 +62,10 @@ void        StartPanel::settings()
 	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
 }
 
-void		StartPanel::render()
-{
+// void		StartPanel::render()
+// {
 
-}
+// }
 
 void		StartPanel::update()
 {
