@@ -5,11 +5,11 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Thu Dec  3 05:07:27 2015 Louis Audibert
+// Last update Fri Dec  4 23:39:10 2015 Nicolas Charvoz
 //
 
-#ifndef ANETWORK_HH_
-# define ANETWORK_HH_
+#ifndef ANETWORK_HPP_
+# define ANETWORK_HPP_
 
 # include	<string>
 # include	<Socket.hh>
