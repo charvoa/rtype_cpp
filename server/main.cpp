@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Fri Dec  4 23:16:48 2015 Nicolas Charvoz
+// Last update Fri Dec  4 23:55:51 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -17,6 +17,8 @@
 #endif
 
 #include <Mutex.hpp>
+#include <ANetwork.hpp>
+#include <CreateRequest.hpp>
 #include <chrono>
 #include <thread>
 
@@ -37,6 +39,8 @@ int		main(int ac, char **av)
   (void)ac;
   (void)av;
 
+
+  /* TEST */
   m = new Mutex();
 
   AThread *t1 = new Thread(1);
@@ -52,6 +56,18 @@ int		main(int ac, char **av)
   t2->run();
   t1->join();
   t2->join();
+
+
+  ANetwork::t_frame frame;
+
+  char data[49];
+  bzero(&data, 0);
+  strcpy(data, "lol");
+
+  frame = CreateRequest::create(4567, 1, 1, 12, 3, data);
+
+  std::cout << "frame data : " << CreateRequest::getData(frame) << std::endl;
+  /* FIN DU GAME */
 
   try {
     s->init();

@@ -78,6 +78,7 @@ add_executable( server_rtype
   ../common/E_Difficulty.hh
   ../common/Thread/Mutex.hpp
   ../common/Thread/AMutex.hh
+  CreateRequest.hpp
 )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
