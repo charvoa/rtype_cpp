@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Fri Dec  4 03:40:58 2015 Serge Heitzler
+// Last update Fri Dec  4 08:34:04 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -30,7 +30,6 @@ int main()
   window->clear();
 
   StartPanel	start;
-  start.render();
 
   // sf::Texture texture;
   // sf::Sprite sprite;
@@ -43,12 +42,14 @@ int main()
   //window->draw(shape);
 
   // Affichage du contenu de la fenêtre à l'écran
-  window->display();
   // Boucle principale
   while (window->isOpen())
     {
+      start.update();
+      start.render();
+  window->display();
       sf::Event event;
-        while (window->waitEvent(event))
+        while (window->pollEvent(event))
 	  {
 	  }
     }

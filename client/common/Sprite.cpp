@@ -5,15 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Fri Dec  4 03:25:21 2015 Serge Heitzler
+// Last update Fri Dec  4 08:31:36 2015 Serge Heitzler
 //
 
 #include "Sprite.hh"
 
 Sprite::Sprite()
 {
-  // Get size texture x/2 && y/2
-  _sprite.setOrigin(0.5, 0.5);
 }
 
 Sprite::~Sprite()
@@ -43,6 +41,7 @@ void			Sprite::scale(float ratio)
 
 void			Sprite::setOrigin(float x, float y)
 {
+  // Get size texture x/2 && y/2
   _sprite.setOrigin(x, y);
 }
 
