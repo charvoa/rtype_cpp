@@ -5,55 +5,15 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Fri Dec  4 08:34:04 2015 Serge Heitzler
+// Last update Sat Dec  5 10:48:15 2015 Nicolas Girardot
 //
 
-#include <cstdlib>
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "RenderWindow.hh"
-#include "Texture.hh"
-#include "Sprite.hh"
-#include "StartPanel.hh"
+#include "Client.hh"
 
 int main()
 {
-  // Fenêtre de rendu
-  RenderWindow *window = RenderWindow::getInstance();
-  window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
-
-  // sf::CircleShape shape(50);
-  // shape.setFillColor(sf::Color::Green);
-
-  // Efface l'écran (remplissage avec du noir)
-
-  window->clear();
-
-  StartPanel	start;
-
-  // sf::Texture texture;
-  // sf::Sprite sprite;
-  
-  // texture.loadFromFile("../../common/res/sprites/cockpit.png");
-  // sprite.setTexture(texture);
-  // window->draw(sprite);
-
-  
-  //window->draw(shape);
-
-  // Affichage du contenu de la fenêtre à l'écran
-  // Boucle principale
-  while (window->isOpen())
-    {
-      start.update();
-      start.render();
-  window->display();
-      sf::Event event;
-        while (window->pollEvent(event))
-	  {
-	  }
-    }
-    return EXIT_SUCCESS;
+  Client *cli = new Client();
+  cli->Start();
 }
 
 
