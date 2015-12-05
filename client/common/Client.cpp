@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sat Dec  5 16:12:32 2015 Nicolas Girardot
+// Last update Sat Dec  5 18:45:24 2015 Nicolas Girardot
 //
 
 #include "Client.hh"
@@ -27,7 +27,7 @@ void	Client::Start()
   RenderWindow *window = RenderWindow::getInstance();
   _network = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("127.0.0.1");
+  _network->connect("10.16.253.141");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
