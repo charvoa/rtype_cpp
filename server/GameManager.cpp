@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:26:52 2015 Nicolas Charvoz
-// Last update Sat Dec  5 16:03:03 2015 Nicolas Charvoz
+// Last update Sat Dec  5 16:47:59 2015 Nicolas Charvoz
 //
 
 #include <GameManager.hh>
@@ -14,9 +14,11 @@ GameManager::GameManager() {}
 
 GameManager::~GameManager() {}
 
-Game &GameManager::createGame() {
-  Game *g = new Game();
-  return *g;
+void GameManager::createGame(const Parameters &p_, std::vector<Client> &clients_,
+			     const std::string &id_) {
+  Game *g = new Game(p_, clients_, id_);
+
+  _game.add(*g);
 }
 
 Game &GameManager::getGameById(const std::string &s)
