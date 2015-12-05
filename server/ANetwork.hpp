@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 12:12:55 2015 Joris Bertomeu
+// Last update Sat Dec  5 12:25:39 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
@@ -16,7 +16,7 @@
 
 class ANetwork
 {
-protected:
+public:
    typedef enum		e_TYPE {
     TCP_MODE,
     UDP_MODE
