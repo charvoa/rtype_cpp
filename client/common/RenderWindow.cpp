@@ -5,19 +5,21 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Tue Dec  1 11:51:35 2015 Nicolas Girardot
+// Last update Thu Dec  3 13:50:17 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
 
-RenderWindow::RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style, const sf::ContextSettings& settings)
+RenderWindow *RenderWindow::_renderWindow = NULL;
+RenderWindow::RenderWindow()
 {
-  _window = new sf::RenderWindow(mode, title, style, settings);
 }
 
 RenderWindow	*RenderWindow::getInstance()
 {
-	return _renderWindow;
+  if (!_renderWindow)
+    _renderWindow = new RenderWindow();
+  return _renderWindow;
 }
 
 RenderWindow::~RenderWindow()
@@ -25,14 +27,19 @@ RenderWindow::~RenderWindow()
 
 }
 
+void		RenderWindow::setWindow(sf::VideoMode vm, std::string const& title)
+{
+  _window = new sf::RenderWindow(vm, title);
+}
+
 void		RenderWindow::setSettings(Settings *settings)
 {
-	_settings = new Settings(settings);
+  _settings = new Settings(*settings);
 }
 
 Settings	*RenderWindow::getSettings()
 {
-	return _settings;
+  return _settings;
 }
 
 void RenderWindow::close()
@@ -55,9 +62,9 @@ bool RenderWindow::waitEvent(sf::Event& event)
   return (_window->waitEvent(event));
 }
 
-IVector2	RenderWindow::getSize() const
+Vector2	RenderWindow::getSize() const
 {
-  Vector2<int> vector(_window->getSize().x, _window->getSize().y);
+  Vector2 vector(_window->getSize().x, _window->getSize().y);
   return vector;
 }
 
@@ -96,11 +103,11 @@ void    RenderWindow::addPanel(PanelFactory::PanelType type)
     PanelFactory factory;
 
     _panels.push(factory.createPanel(type));
-    (_panels.top)->render();
+    _panels.top()->render();
 }
 
 void    RenderWindow::back()
 {
     _panels.pop();
-    (_panels.top)->render();
+    _panels.top()->render();
 }

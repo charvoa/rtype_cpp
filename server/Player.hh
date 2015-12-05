@@ -5,15 +5,15 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Wed Dec  2 02:33:43 2015 Louis Audibert
+// Last update Thu Dec  3 05:26:46 2015 Louis Audibert
 //
 
 #ifndef PLAYER_HH_
 # define PLAYER_HH_
 
-# include "ANetwork.hpp"
-# include "Client.hh"
-# include "AEntity.hh"
+# include <ANetwork.hpp>
+# include <Client.hh>
+# include <AEntity.hh>
 # include <string>
 # include <iostream>
 

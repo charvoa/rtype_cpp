@@ -1,11 +1,11 @@
 //
 // Settings.hh for Settings in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:51:49 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:51:50 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 17:40:34 2015 Nicolas Girardot
 //
 
 #ifndef SETTINGS_H
@@ -28,7 +28,6 @@ public:
 
     Settings(std::string const& filepath);
     Settings(Volume, std::vector<Bind>, Settings::Difficulty);
-    Settings(Settings const&);
     ~Settings();
 
     Volume getVolume() const;
@@ -36,8 +35,9 @@ public:
     Settings::Difficulty getDefaultDifficulty() const;
     Settings::Difficulty getCurrentDifficulty() const;
 
+    void update(Settings const&);
     void setVolume(Volume);
-    void setBind(Bind);
+    void setBind(Bind &);
     void setDefaultDifficulty(Settings::Difficulty);
     void setDifficulty(Settings::Difficulty);
 

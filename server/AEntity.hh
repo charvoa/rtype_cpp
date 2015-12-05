@@ -5,16 +5,16 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Tue Dec  1 02:53:52 2015 Louis Audibert
+// Last update Thu Dec  3 05:13:34 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
 # define _AENTITY_HH_
 
 # include <iostream>
-# include "E_EntityType.hh"
-# include "E_Component.hh"
-# include "SystemManager.hh"
+# include <E_EntityType.hh>
+# include <E_Component.hh>
+# include <SystemManager.hh>
 
 class AEntity
 {

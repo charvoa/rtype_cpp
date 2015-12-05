@@ -5,13 +5,13 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Wed Dec  2 06:22:07 2015 Antoine Garcia
+// Last update Thu Dec  3 05:29:12 2015 Louis Audibert
 //
 
 # include <cstdlib>
 # include <ctime>
 # include <stdexcept>
-# include "RoomManager.hh"
+# include <RoomManager.hh>
 
 RoomManager::RoomManager() : _rooms(0)
 {}

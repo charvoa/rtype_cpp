@@ -5,15 +5,15 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:50:45 2015 Louis Audibert
-// Last update Mon Nov 30 02:18:36 2015 Louis Audibert
+// Last update Thu Dec  3 05:33:05 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMPOS_HH_
 # define _SYSTEMPOS_HH_
 
 # include <iostream>
-# include "ASystem.hh"
-# include "Position.hh"
+# include <ASystem.hh>
+# include <Position.hh>
 
 class SystemPos : public ASystem
 {

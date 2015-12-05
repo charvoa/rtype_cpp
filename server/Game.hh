@@ -5,17 +5,17 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Wed Dec  2 13:33:38 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:16:15 2015 Louis Audibert
 //
 
 #ifndef GAME_HH_
 # define GAME_HH_
 
-# include "E_Command.hh"
-# include "Parameters.hh"
-# include "EntityManager.hh"
-# include "Client.hh"
-# include "E_EntityType.hh"
+# include <E_Command.hh>
+# include <Parameters.hh>
+# include <EntityManager.hh>
+# include <Client.hh>
+# include <E_EntityType.hh>
 # include <queue>
 
 class Game {

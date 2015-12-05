@@ -5,10 +5,11 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Dec  2 00:29:28 2015 Serge Heitzler
-// Last update Wed Dec  2 04:46:11 2015 Serge Heitzler
+// Last update Fri Dec  4 03:41:19 2015 Serge Heitzler
 //
 
 #include "Texture.hh"
+#include <iostream>
 
 Texture::Texture()
 {
@@ -18,20 +19,23 @@ Texture::Texture()
 Texture::~Texture()
 {}
 
-bool		Texture::loadFromFile(const std::string& path)
+void		Texture::loadFromFile(const std::string& path)
 {
-  _texture.loadFromFile(path);
+  if (_texture.loadFromFile(path))
+    std::cout << "success" << std::endl;
+  else
+    std::cout << "error" << std::endl;
 }
 
-bool		Texture::loadFromFile(const std::string& path, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height)
+void		Texture::loadFromFile(const std::string& path, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height)
 {
-  _texture.loadFromFile(path, posX, posY, width, height);
+  _texture.loadFromFile(path, sf::IntRect(posX, posY, width, height));
 }
 
-IVector2    	Texture::getSize()
+Vector2    	Texture::getSize()
 {
-  sf::Vector2	size = _texture.getSize();
-  return IVector2(size.x, size.y);
+  sf::Vector2<unsigned int> size = _texture.getSize();
+  return Vector2(size.x, size.y);
 }
 
 void		Texture::setSmooth(bool value)
@@ -39,7 +43,7 @@ void		Texture::setSmooth(bool value)
   _texture.setSmooth(value);
 }
 
-sf::Texture	Texture::getTexture()
+sf::Texture	&Texture::getTexture()
 {
   return _texture;
 }

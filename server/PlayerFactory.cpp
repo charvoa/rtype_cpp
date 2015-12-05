@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 07:49:08 2015 Louis Audibert
-// Last update Wed Dec  2 02:33:26 2015 Louis Audibert
+// Last update Thu Dec  3 05:27:23 2015 Louis Audibert
 //
 
-#include "PlayerFactory.hh"
+#include <PlayerFactory.hh>
 
 PlayerFactory::PlayerFactory()
 {

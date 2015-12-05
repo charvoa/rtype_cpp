@@ -1,19 +1,54 @@
 //
 // StartPanel.cpp for StartPanel in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 17:26:39 2015 Viveka BARNEAUD
+// Last update Fri Dec  4 10:57:13 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
 #include "StartPanel.hh"
+#include "RenderWindow.hh"
+#include <iostream>
 
-StartPanel::StartPanel() : APanel()
+StartPanel::StartPanel() //: APanel()
 {
+  RenderWindow *window = RenderWindow::getInstance();
+  Texture *backgroundSpaceTexture = new Texture;
+  Texture *earthTexture = new Texture;
+  Texture *cockpitTexture = new Texture;
 
+  Sprite *backgroundSpace = new Sprite;
+  Sprite *earth = new Sprite;
+  Sprite *cockpit = new Sprite;
+
+
+
+  backgroundSpaceTexture->loadFromFile("../../common/res/sprites/background.png");
+  earthTexture->loadFromFile("../../common/res/sprites/planet_earth_background.png");
+  cockpitTexture->loadFromFile("../../common/res/sprites/cockpit.png");
+
+
+  earth->setOrigin(earthTexture->getSize()._x / 2, earthTexture->getSize()._y / 2);
+  
+  backgroundSpace->setTexture(*backgroundSpaceTexture);
+  earth->setTexture(*earthTexture);
+  cockpit->setTexture(*cockpitTexture);
+
+  backgroundSpace->setPosition(0, 0);
+  earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
+  cockpit->setPosition(0, 0);
+
+  backgroundSpace->scale(1.5);
+  
+  _sprites.push_back(*backgroundSpace);
+  _sprites.push_back(*earth);
+  _sprites.push_back(*cockpit);
+  // this->getSprites().push_back(&backgroundSpace);
+  // this->getSprites().push_back(&earth);
+  //  this->getSprites().push_back(*cockpit);
 }
 
 StartPanel::~StartPanel() {}
@@ -41,4 +76,16 @@ void        StartPanel::exit()
 void        StartPanel::settings()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
+}
+
+void		StartPanel::update()
+{
+  static int i = 0;
+  
+  _sprites.at(1).rotate(0.0007);
+  if (i % 10000 < 5000)
+    _sprites.at(0).move(-0.01,-0.01);
+  else
+    _sprites.at(0).move(0.01,0.01);
+  i++;
 }

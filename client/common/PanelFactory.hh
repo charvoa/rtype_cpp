@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Wed Dec  2 04:40:10 2015 Serge Heitzler
+// Last update Thu Dec  3 16:13:53 2015 Nicolas Girardot
 //
 
 #ifndef PANELFACTORY_HH
@@ -20,7 +20,8 @@ public:
     PanelFactory();
     ~PanelFactory();
 
-    typedef enum e_panelType
+
+   typedef enum e_panelType
     {
         ROOM_PANEL,
         SETTINGS_PANEL,
@@ -34,4 +35,4 @@ public:
   APanel    *createPanel(PanelType);
 };
 
-#endif // PANELFACTORY_HH
+#endif

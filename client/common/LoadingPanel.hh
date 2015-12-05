@@ -20,6 +20,7 @@ public:
     LoadingPanel();
     ~LoadingPanel();
 
+	void render();
 private:
     InputManager    *_settings;
 };

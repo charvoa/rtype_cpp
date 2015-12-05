@@ -5,10 +5,10 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:29:32 2015 Nicolas Charvoz
-// Last update Wed Dec  2 04:39:04 2015 Louis Audibert
+// Last update Thu Dec  3 05:26:52 2015 Louis Audibert
 //
 
-#include "Player.hh"
+#include <Player.hh>
 
 Player::Player(int id, const Client &c) : AEntity(id)
 {

@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Tue Dec  1 04:33:20 2015 Louis Audibert
+// Last update Thu Dec  3 05:06:24 2015 Louis Audibert
 //
 
-#include "AEntity.hh"
+#include <AEntity.hh>
 
 AEntity::AEntity(int id) : _id(id)
 {

@@ -5,15 +5,15 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Wed Dec  2 13:22:07 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:11:07 2015 Louis Audibert
 //
 
 #ifndef COMMANDMANAGER_HPP_
 # define COMMANDMANAGER_HPP_
 
 # include <map>
-# include "E_Command.hh"
-# include "ANetwork.hpp"
+# include <E_Command.hh>
+# include <ANetwork.hpp>
 
 class		CommandManager
 {

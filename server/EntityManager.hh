@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Wed Dec  2 02:35:14 2015 Louis Audibert
+// Last update Thu Dec  3 05:15:19 2015 Louis Audibert
 //
 
 #ifndef _ENTITYMANAGER_HH_
@@ -13,10 +13,10 @@
 
 # include <vector>
 # include <iostream>
-# include "EntityFactory.hh"
-# include "AEntity.hh"
-# include "E_EntityType.hh"
-# include "PlayerFactory.hh"
+# include <EntityFactory.hh>
+# include <AEntity.hh>
+# include <E_EntityType.hh>
+# include <PlayerFactory.hh>
 
 class EntityManager
 {

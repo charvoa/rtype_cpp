@@ -5,22 +5,18 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 04:21:14 2015 Serge Heitzler
-// Last update Tue Dec  1 11:59:29 2015 Nicolas Girardot
+// Last update Thu Dec  3 11:30:40 2015 Serge Heitzler
 //
 
 #include "Vector2.hh"
 
-template <typename T>
-Vector2<T>::Vector2(T x, T y)
+Vector2::Vector2(float x, float y)
 {
   _x = x;
   _y = y;
 }
 
-template <typename T>
-Vector2<T>::~Vector2()
+Vector2::~Vector2()
 {
 
 }
-
-template class Vector2<int>;

@@ -8,6 +8,8 @@ class DemoPanel : public APanel
 public:
     DemoPanel();
     ~DemoPanel();
+
+	void render();
 };
 
 #endif // DEMOPANEL_HH

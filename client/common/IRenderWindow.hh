@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Dec  2 06:38:45 2015 Serge Heitzler
+// Last update Thu Dec  3 11:34:14 2015 Serge Heitzler
 //
 
 #ifndef IRENDERWINDOW_HH_
@@ -29,7 +29,7 @@ public:
   virtual void		clear(const sf::Color& color) = 0;
   virtual bool		pollEvent(sf::Event& event) = 0;
   virtual bool	        waitEvent(sf::Event& event) = 0;
-  virtual IVector2    	getSize() const = 0;
+  virtual Vector2   	getSize() const = 0;
   virtual void		setVerticalSyncEnabled(bool value) = 0;
   virtual void		setMouseCursorVisible(bool value) = 0;
   virtual void		setKeyRepeatEnabled(bool value) = 0;

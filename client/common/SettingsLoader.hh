@@ -1,30 +1,30 @@
 //
 // SettingsLoader.hh for SettingsLoader in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:51:54 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 16:57:17 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 16:47:07 2015 Nicolas Girardot
 //
 
 #ifndef SETTINGSLOADER_HH
 #define SETTINGSLOADER_HH
 
+#include <fstream>
 #include <SFML/Graphics.hpp>
-#include <SFML/Event.hpp>
 #include "IParser.hh"
 #include "Settings.hh"
 
 class SettingsLoader : public IParser
 {
 public:
-  SettingsLoader(std::string const& filepath);
+  SettingsLoader(const std::string & filepath);
   ~SettingsLoader();
 
-  std::string getValueOf(std::string const&) const;
-  std::string getValueOfKey(std::string const&) const;
-  std::string setValueOfJoystick(std::string const&) const;
+  std::string getValueOf(const std::string &) const;
+  std::string getValueOfKey(const std::string &) const;
+  std::string getValueOfJoystick(const std::string &) const;
 
   std::string removeSpaces(std::string const&) const;
 
@@ -38,21 +38,28 @@ public:
   std::vector<Bind>   getBinds() const;
 
   Settings::Difficulty    getDefaultDifficulty() const;
-  void		createDefaultBinds() const;
+  std::vector<Bind>		createDefaultBinds() const;
 
   void    saveSettings(Settings *) const;
 
   int     stringToInteger(std::string const&) const;
-  sf::Event::key  stringToKey(std::string const&) const;
-  sf::Event::joystick stringToJoystick(std::string const&) const;
+  sf::Keyboard::Key	stringToKey(std::string const&) const;
+  sf::Joystick::Axis stringToJoystick(std::string const&) const;
 
-  std::string keyToString(sf::Event) const;
-  std::string joystickToString(sf::Event) const;
+  bool	keyExists(std::string const&) const;
+  bool	axisExists(std::string const&) const;
+
+  std::string keyToString(sf::Keyboard::Key) const;
+  std::string joystickToString(sf::Joystick::Axis) const;
   std::string bindTypeToString(Bind::BindType) const;
+  std::string bindToString(Bind) const;
+  std::string settingsToString(Settings const&) const;
 
 private:
   const std::string _filepath;
   bool    _fileExists;
+  std::map<std::string, sf::Keyboard::Key> _stringKeys;
+  std::map<std::string, sf::Joystick::Axis> _stringAxis;
   std::ifstream   *_ifs;
   std::ofstream   *_ofs;
 };

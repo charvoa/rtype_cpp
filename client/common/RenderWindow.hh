@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Wed Dec  2 06:37:33 2015 Serge Heitzler
+// Last update Thu Dec  3 13:40:57 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -15,7 +15,7 @@
 #include "Settings.hh"
 #include "IRenderWindow.hh"
 #include "PanelFactory.hh"
-#include "IVector2.hh"
+#include "Vector2.hh"
 #include "Size.hh"
 
 class	        RenderWindow : public IRenderWindow
@@ -28,7 +28,7 @@ public:
   bool		isOpen();
   bool		pollEvent(sf::Event& event);
   bool	        waitEvent(sf::Event& event);
-  IVector2    	getSize() const;
+  Vector2   	getSize() const;
   void		setVerticalSyncEnabled(bool value);
   void		setMouseCursorVisible(bool value);
   void		setKeyRepeatEnabled(bool value);
@@ -39,11 +39,11 @@ public:
   void      back();
   Settings	*getSettings();
   void		setSettings(Settings*);
+  void		setWindow(sf::VideoMode, std::string const& title);
 
 private:
-	static RenderWindow *_renderWindow;
-	RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
-	
+  RenderWindow();
+  static RenderWindow *_renderWindow;
   sf::RenderWindow	*_window;
   std::stack<APanel*>   _panels;
   Settings		*_settings;
