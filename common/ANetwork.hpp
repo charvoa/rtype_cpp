@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 14:29:07 2015 Joris Bertomeu
+// Last update Sat Dec  5 15:18:39 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
@@ -48,6 +48,7 @@ public :
   virtual void		connect(const std::string &) = 0;
   virtual t_frame	read() = 0;
   virtual int		write(t_frame) = 0;
+  virtual void		select() = 0;
 };
 
 #endif
