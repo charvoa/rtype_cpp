@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 07:15:41 2015 Antoine Garcia
+// Last update Sat Dec  5 07:23:41 2015 Antoine Garcia
 //
 
 #include <Network.hpp>
@@ -38,12 +38,12 @@ void Server::run()
 }
 
 bool Server::createGame(ANetwork::t_frame frame, void *data) {
-  Client	&client = *reinterpret_cast<Client *>(data);
-
-  _roomManager.createNewRoom(client);
   return true;
 }
 
 bool Server::createRoom(ANetwork::t_frame frame, void *data) {
+  Client	&client = *reinterpret_cast<Client *>(data);
+
+  _roomManager.createNewRoom(client);
   return true;
 }
