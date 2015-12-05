@@ -19,7 +19,7 @@ include_directories(. ../common Room ../common/Thread)
 add_executable( server_rtype
   main.cpp
   Server.cpp
-  ISocket.hpp
+  #ISocket.hpp
   E_Component.hh
   AComponent.hpp
   Health.cpp

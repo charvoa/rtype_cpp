@@ -5,14 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 12:25:39 2015 Joris Bertomeu
+// Last update Sat Dec  5 13:30:35 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
 # define ANETWORK_HPP_
 
 # include	<string>
-# include	<Socket.hpp>
+# include	<ISocket.hpp>
 
 class ANetwork
 {
@@ -28,12 +28,12 @@ protected:
 
 public :
   typedef struct	s_frame {
-    short int		_keyPintade;
-    unsigned char	_requestType;
-    unsigned int	_idRequest;
-    int			_crc;
-    int			_sizeData;
-    char		_data[49];
+    short int		keyPintade;
+    unsigned char	requestType;
+    unsigned int	idRequest;
+    int			crc;
+    int			sizeData;
+    char		data[49];
   }			t_frame;
 
   ANetwork() {};
@@ -45,7 +45,7 @@ public :
   virtual int		write(void *, int) = 0;
   virtual void		close() = 0;
   virtual ISocket	*accept() = 0;
-
+  virtual void		connect(const std::string &) = 0;
 };
 
 #endif
