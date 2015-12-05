@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Sat Dec  5 06:17:38 2015 Antoine Garcia
+// Last update Sat Dec  5 07:04:44 2015 Antoine Garcia
 //
 
 #ifndef SERVER_HH_
@@ -27,8 +27,8 @@ public:
   ~Server();
   void init();
   void run();
-  bool createGame();
-  bool createRoom();
+  bool createGame(ANetwork::t_frame frame, void *data);
+  bool createRoom(ANetwork::t_frame frame, void *data);
 
 private:
 
