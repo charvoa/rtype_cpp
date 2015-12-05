@@ -5,13 +5,17 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Sat Dec  5 06:49:42 2015 Serge Heitzler
+// Last update Sat Dec  5 17:35:22 2015 Nicolas Girardot
 //
 
 #include <iostream>
 //#include <SFML/Mouse.hpp>
 #include "InputManager.hh"
 #include "RenderWindow.hh"
+#include "Client.hh"
+#include "../../common/CreateRequest.hpp"
+#include "../../common/CRC.hpp"
+#include "../../common/ANetwork.hpp"
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -49,7 +53,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
 bool						InputManager::isMouseInWindow(Vector2 posMouse)
 {
   RenderWindow *window = RenderWindow::getInstance();
-  
+
   if (posMouse._x >= 0 && posMouse._x < window->getSize()._x
       && posMouse._y >= 0 && posMouse._y < window->getSize()._y)
     return true;
@@ -105,7 +109,10 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
+  Network *net = Client::getNetwork();
   std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
+  net->write(sender);
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
