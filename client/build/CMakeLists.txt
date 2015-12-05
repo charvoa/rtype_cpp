@@ -28,6 +28,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # Define sources and executable
 set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
+  ../../common/Network.hpp
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
