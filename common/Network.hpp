@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 14:30:39 2015 Joris Bertomeu
+// Last update Sat Dec  5 15:22:46 2015 Joris Bertomeu
 //
 
 #ifndef				__NETWORK_HPP__
@@ -20,6 +20,7 @@ private:
   ISocket			*_socket;
   int				_port;
   struct sockaddr_in		serv_addr;
+  fd_set			_fdList;
 
 public:
   explicit			Network() {};
@@ -30,6 +31,8 @@ public:
     else
       this->_socket = new Socket(AF_INET, SOCK_DGRAM);
     this->_port = port;
+    FD_ZERO(&_fdList);
+    FD_SET(this->_socket->getFd(), &_fdList);
   };
   virtual void			bind() {
     bzero((char *) &serv_addr, sizeof(serv_addr));
@@ -77,7 +80,8 @@ public:
 	  (char *) &serv_addr.sin_addr.s_addr,
 	  server->h_length);
     serv_addr.sin_port = htons(this->_port);
-    if (::connect(this->_socket->getFd(), (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+    if (::connect(this->_socket->getFd(),
+		  (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
       throw (std::logic_error("Network :: Error while connecting"));
   };
 
@@ -90,6 +94,19 @@ public:
 
   virtual int			write(t_frame frame) {
     return (this->_socket->write(&frame, sizeof(t_frame)));
+  }
+
+  virtual void			select() {
+    if (::select(FD_SETSIZE, &_fdList, NULL, NULL, NULL) < 0)
+      throw (std::logic_error("Network :: Error while selecting"));
+  };
+
+  void				listenSocket(ISocket *socket) {
+    FD_SET(socket->getFd(), &_fdList);
+  };
+
+  void				unlistenSocket(ISocket *socket) {
+    FD_CLR(socket->getFd(), &_fdList);
   }
 };
 
