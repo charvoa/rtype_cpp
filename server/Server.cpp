@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 15:48:16 2015 Joris Bertomeu
+// Last update Sat Dec  5 16:49:55 2015 Joris Bertomeu
 //
 
 #include <Network.hpp>
@@ -32,9 +32,7 @@ void Server::run()
 
   std::cout << "Server :: Run" << std::endl;
   while (1) {
-    this->_network->select();
-
-    client = dynamic_cast<Socket*>(this->_network->accept());
+    client = dynamic_cast<Socket*>(this->_network->select());
     std::cout << (char*) client->read(4096) << std::endl;
   }
 }

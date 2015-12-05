@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 15:22:46 2015 Joris Bertomeu
+// Last update Sat Dec  5 16:48:40 2015 Joris Bertomeu
 //
 
 #ifndef				__NETWORK_HPP__
@@ -21,6 +21,7 @@ private:
   int				_port;
   struct sockaddr_in		serv_addr;
   fd_set			_fdList;
+  fd_set			_activeFDList;
 
 public:
   explicit			Network() {};
@@ -96,9 +97,22 @@ public:
     return (this->_socket->write(&frame, sizeof(t_frame)));
   }
 
-  virtual void			select() {
-    if (::select(FD_SETSIZE, &_fdList, NULL, NULL, NULL) < 0)
+  virtual ISocket		*select() {
+    this->_activeFDList = this->_fdList;
+    if (::select(FD_SETSIZE, &_activeFDList, NULL, NULL, NULL) < 0)
       throw (std::logic_error("Network :: Error while selecting"));
+    for (int i = 0; i < FD_SETSIZE; i++) {
+      if (FD_ISSET(i, &_activeFDList)) {
+	if (i == this->_socket->getFd()) {
+	  ISocket *s = this->accept();
+	  this->listenSocket(s);
+	  return (s);
+	}
+	else
+	  return (new Socket(i));
+      }
+    }
+    return (NULL);
   };
 
   void				listenSocket(ISocket *socket) {
@@ -107,7 +121,7 @@ public:
 
   void				unlistenSocket(ISocket *socket) {
     FD_CLR(socket->getFd(), &_fdList);
-  }
+  };
 };
 
 #endif
