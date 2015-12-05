@@ -5,17 +5,17 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec  5 16:46:02 2015 Nicolas Charvoz
+// Last update Sat Dec  5 17:25:47 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
 
 Game::Game() {}
 
-Game::Game(const Parameters &params_, const std::vector<Client> &client_,
-	   const std::string &id_)
-  : _params(params_), _id(id_)
+Game::Game(const Parameters &params_, std::vector<Client> &client_,
+	   const std::string &id_) : _params(params_), _id(id_)
 {
+  this->addClients(client_);
 }
 
 Game::~Game() {}
@@ -47,9 +47,4 @@ void Game::addCommandToQueue(ANetwork::t_frame frame)
 const std::string &Game::getId() const
 {
   return _id;
-}
-
-const Client &Game::getClient() const
-{
-  return _client;
 }
