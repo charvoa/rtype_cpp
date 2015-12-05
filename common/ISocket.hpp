@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Sat Dec  5 12:21:57 2015 Joris Bertomeu
+// Last update Sat Dec  5 13:23:48 2015 Joris Bertomeu
 //
 
 #ifndef		__ISOCKET_HPP_
@@ -18,6 +18,7 @@
 # include	<stdexcept>
 # include	<string.h>
 # include	<errno.h>
+#include	<netdb.h>
 
 class		ISocket
 {

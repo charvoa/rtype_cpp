@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 12:28:35 2015 Joris Bertomeu
+// Last update Sat Dec  5 13:24:08 2015 Joris Bertomeu
 //
 
 #ifndef			__NETWORK_HPP__
@@ -63,6 +63,23 @@ public:
   virtual int			write(void *data, int size) {
     return (this->_socket->write(data, size));
   }
+
+  virtual void			connect(const std::string &serverIP) {
+    struct hostent		*server;
+
+    server = gethostbyname(serverIP.c_str());
+    if (server == NULL) {
+      throw (std::logic_error("Network :: Server IP is not valid"));
+    }
+    bzero((char *) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    bcopy((char *) server->h_addr,
+	  (char *) &serv_addr.sin_addr.s_addr,
+	  server->h_length);
+    serv_addr.sin_port = htons(this->_port);
+    if (::connect(this->_socket->getFd(), (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+      throw (std::logic_error("Network :: Error while connecting"));
+  };
 };
 
 #endif

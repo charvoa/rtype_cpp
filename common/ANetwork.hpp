@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 04:54:35 2015 Antoine Garcia
+// Last update Sat Dec  5 13:23:01 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
@@ -45,7 +45,7 @@ public :
   virtual int		write(void *, int) = 0;
   virtual void		close() = 0;
   virtual ISocket	*accept() = 0;
-
+  virtual void		connect(const std::string &) = 0;
 };
 
 #endif
