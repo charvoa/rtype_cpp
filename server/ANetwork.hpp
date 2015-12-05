@@ -5,17 +5,23 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Fri Dec  4 23:39:10 2015 Nicolas Charvoz
+// Last update Sat Dec  5 12:12:55 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
 # define ANETWORK_HPP_
 
 # include	<string>
-# include	<Socket.hh>
+# include	<Socket.hpp>
 
 class ANetwork
 {
+protected:
+   typedef enum		e_TYPE {
+    TCP_MODE,
+    UDP_MODE
+  }			TYPE;
+
 protected:
   char			_buffer[4096];
   ISocket		*_socket;
@@ -31,13 +37,13 @@ public :
   }			t_frame;
 
   ANetwork() {};
-  virtual	~ANetwork() {};
-  virtual void	create(int port_, int sockType_, const std::string &addr_) = 0;
-  virtual void	bind() = 0;
-  virtual void	listen() = 0;
-  virtual void	*read(int) = 0;
-  virtual int	write(void *, int) = 0;
-  virtual void	close() = 0;
+  virtual		~ANetwork() {};
+  virtual void		init(int port_, ANetwork::TYPE type) = 0;
+  virtual void		bind() = 0;
+  virtual void		listen(int) = 0;
+  virtual void		*read(int) = 0;
+  virtual int		write(void *, int) = 0;
+  virtual void		close() = 0;
   virtual ISocket	*accept() = 0;
 
 };

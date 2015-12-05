@@ -4,7 +4,7 @@ set(EXECUTABLE_NAME "server_rtype")
 
 cmake_minimum_required(VERSION 2.6)
 
-#SET(CMAKE_CXX_COMPILER	"g++-5")
+SET(CMAKE_CXX_COMPILER	"clang++")
 
 if(CMAKE_COMPILER_IS_GNUCC)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -20,11 +20,7 @@ add_executable( server_rtype
   main.cpp
   Server.hh
   Server.cpp
-  Network.hh
-  Network.cpp
   ISocket.hpp
-  Socket.cpp
-  Socket.hh
   E_Component.hh
   AComponent.hpp
   Health.cpp
@@ -68,7 +64,6 @@ add_executable( server_rtype
   ../common/Thread/ThreadFactory.cpp
   Parameters.cpp
   ANetwork.hpp
-  Network.cpp
   GameManager.cpp
   GameManager.hh
   Game.cpp
