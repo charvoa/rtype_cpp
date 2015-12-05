@@ -5,26 +5,26 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 13:24:08 2015 Joris Bertomeu
+// Last update Sat Dec  5 13:41:21 2015 Joris Bertomeu
 //
 
-#ifndef			__NETWORK_HPP__
-# define		__NETWORK_HPP__
+#ifndef				__NETWORK_HPP__
+# define			__NETWORK_HPP__
 
-# include		<ANetwork.hpp>
-# include		<Socket.hpp>
+# include			<ANetwork.hpp>
+# include			<Socket.hpp>
 
-class			Network : public ANetwork
+class				Network : public ANetwork
 {
 private:
-  ISocket		*_socket;
-  int			_port;
-  struct sockaddr_in	serv_addr;
+  ISocket			*_socket;
+  int				_port;
+  struct sockaddr_in		serv_addr;
 
 public:
-  explicit		Network() {};
-  virtual		~Network() {};
-  void			init(int port, Network::TYPE type) {
+  explicit			Network() {};
+  virtual			~Network() {};
+  void				init(int port, Network::TYPE type) {
     if (type == Network::TCP_MODE)
       this->_socket = new Socket(AF_INET, SOCK_STREAM);
     else
