@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Sat Dec  5 16:57:06 2015 Nicolas Charvoz
+// Last update Sat Dec  5 17:11:19 2015 Nicolas Charvoz
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -25,14 +25,12 @@ public:
   CreateRequest() {};
   ~CreateRequest() {};
 
-  static ANetwork::t_frame create(unsigned char type_,
-				  unsigned int id_, int crc_, int size_,
+  static ANetwork::t_frame create(unsigned char type_, int crc_, int size_,
 				  const std::string &data_)
   {
     ANetwork::t_frame frame;
 
     frame.keyPintade = KEY_PINTADE;
-    frame.requestType = type_;
     frame.idRequest = id_;
     frame.crc = crc_;
     frame.sizeData = size_;
@@ -43,10 +41,6 @@ public:
 
   static short int getKey(ANetwork::t_frame &frame) {
     return frame.keyPintade;
-  };
-
-  static unsigned char  getType(ANetwork::t_frame &frame) {
-    return frame.requestType;
   };
 
   static unsigned int getId(ANetwork::t_frame &frame) {
