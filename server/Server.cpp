@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 07:23:41 2015 Antoine Garcia
+// Last update Sat Dec  5 17:05:29 2015 Nicolas Charvoz
 //
 
 #include <Network.hpp>
@@ -32,18 +32,23 @@ void Server::run()
 
   std::cout << "Server :: Run" << std::endl;
   while (1) {
+    this->_network->select();
+
     client = dynamic_cast<Socket*>(this->_network->accept());
     std::cout << (char*) client->read(4096) << std::endl;
   }
 }
 
 bool Server::createGame(ANetwork::t_frame frame, void *data) {
+  (void) frame;
+  (void) data;
   return true;
 }
 
 bool Server::createRoom(ANetwork::t_frame frame, void *data) {
   Client	&client = *reinterpret_cast<Client *>(data);
 
+  (void) frame;
   _roomManager.createNewRoom(client);
   return true;
 }

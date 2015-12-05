@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 15:18:39 2015 Joris Bertomeu
+// Last update Sat Dec  5 17:12:54 2015 Nicolas Charvoz
 //
 
 #ifndef ANETWORK_HPP_
@@ -23,13 +23,11 @@ public:
   }			TYPE;
 
 protected:
-  char			_buffer[4096];
   ISocket		*_socket;
 
 public :
   typedef struct	s_frame {
     short int		keyPintade;
-    unsigned char	requestType;
     unsigned int	idRequest;
     int			crc;
     int			sizeData;
