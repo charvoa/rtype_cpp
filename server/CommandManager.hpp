@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Thu Dec  3 05:11:07 2015 Louis Audibert
+// Last update Sat Dec  5 05:29:33 2015 Louis Audibert
 //
 
 #ifndef COMMANDMANAGER_HPP_
@@ -27,7 +27,7 @@ public:
   template <typename T>
   bool executeCommand(ANetwork::t_frame frame, T &other)
   {
-    bool (*cmd)(ANetwork::t_frame) = _commands[(E_COMMAND)frame._idRequest];
+    bool (*cmd)(ANetwork::t_frame) = _commands[(E_COMMAND)frame.idRequest];
     other.cmd(frame);
     return true;
   }
