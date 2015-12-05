@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Thu Dec  3 05:29:12 2015 Louis Audibert
+// Last update Sat Dec  5 09:10:56 2015 Antoine Garcia
 //
 
 # include <cstdlib>
@@ -36,6 +36,7 @@ void	RoomManager::createNewRoom(Client &client)
 {
   Room	room(generateId(), client);
   _rooms.push_back(room);
+  std::cout << "Create Room With Id" << room.getId() << std::endl;
 }
 
 Room&	RoomManager::getRoombyId(const std::string &id)
