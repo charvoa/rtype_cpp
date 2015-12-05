@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Sat Dec  5 12:10:11 2015 Joris Bertomeu
+// Last update Sat Dec  5 06:17:38 2015 Antoine Garcia
 //
 
 #ifndef SERVER_HH_
@@ -13,7 +13,7 @@
 
 # include <iostream>
 # include <string>
-# include <Network.hpp>
+# include <ANetwork.hpp>
 # include <RoomManager.hh>
 # include <GameManager.hh>
 # include <ClientManager.hh>

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Sat Dec  5 13:33:57 2015 Joris Bertomeu
+// Last update Sat Dec  5 05:31:35 2015 Louis Audibert
 //
 
 #ifndef COMMANDMANAGER_HPP_

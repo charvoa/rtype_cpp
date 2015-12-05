@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Sat Dec  5 04:53:41 2015 Serge Heitzler
+// Last update Sat Dec  5 05:36:52 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -19,6 +19,7 @@
 #include "Sprite.hh"
 #include "StartPanel.hh"
 #include "InputManager.hh"
+#include "PanelFactory.hh"
 
 class	Client
 {

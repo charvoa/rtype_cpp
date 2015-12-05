@@ -5,9 +5,10 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 13:52:23 2015 Joris Bertomeu
+// Last update Sat Dec  5 14:08:06 2015 Joris Bertomeu
 //
 
+#include <Network.hpp>
 #include <Server.hh>
 
 Server::Server()

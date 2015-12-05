@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Sat Dec  5 03:58:32 2015 Serge Heitzler
+// Last update Sat Dec  5 05:55:57 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -13,18 +13,12 @@
 
 #include "IInputManager.hh"
 
-typedef enum					InputType
-  {
-    MENU_INPUT,
-    GAME_INPUT
-  }						InputType;
-
 class					        InputManager : public IInputManager
 {
 
 public:
 
-  InputManager(InputType inputType);
+  InputManager();
   ~InputManager();
 
   std::pair<unsigned int, unsigned int>        	joystickPressedAt(sf::Event &event);
@@ -38,6 +32,7 @@ public:
   std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event);
   std::pair<unsigned int, unsigned int>	       	joystickHardwareEvent(sf::Event& event);
   void						methodChecker(sf::Event &event);
+  void						setInputType(InputType inputType);
 
 private:
 

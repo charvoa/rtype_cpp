@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Fri Dec  4 20:23:57 2015 Nicolas Girardot
+// Last update Sat Dec  5 05:32:16 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -105,14 +105,20 @@ void	RenderWindow::clear(const sf::Color &color)
 
 void    RenderWindow::addPanel(PanelFactory::PanelType type)
 {
-    PanelFactory factory;
+  type = type;
+  //    PanelFactory factory;
 
-    _panels.push(factory.createPanel(type));
-    _panels.top()->render();
+    //    _panels.push(factory.createPanel(type));
+    //    _panels.top()->render();
 }
 
 void    RenderWindow::back()
 {
-    _panels.pop();
-    _panels.top()->render();
+  //    _panels.pop();
+  //    _panels.top()->render();
+}
+
+std::stack<APanel*>	&RenderWindow::getPanels()
+{
+  return _panels;
 }

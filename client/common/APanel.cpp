@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Sat Dec  5 02:14:51 2015 Serge Heitzler
+// Last update Sat Dec  5 05:43:52 2015 Serge Heitzler
 //
 
 #include "APanel.hh"
@@ -17,7 +17,7 @@ APanel::~APanel(){}
 
 void		APanel::update()
 {
-
+  std::cout << "update APANEL" << std::endl;
 }
 
 void		APanel::render()
@@ -45,4 +45,9 @@ std::vector<AMenuElement*>		&APanel::getElements()
 std::vector<Sprite>			&APanel::getSprites()
 {
   return _sprites;
+}
+
+InputManager	&APanel::getInputManager()
+{
+  return _inputManager;
 }

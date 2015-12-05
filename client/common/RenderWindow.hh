@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Fri Dec  4 20:22:06 2015 Nicolas Girardot
+// Last update Sat Dec  5 05:32:07 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -41,6 +41,7 @@ public:
   Settings	*getSettings();
   void		setSettings(Settings*);
   void		setWindow(sf::VideoMode, std::string const& title);
+  std::stack<APanel*>	&getPanels();
 
 private:
   RenderWindow();
