@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Sat Dec  5 05:58:22 2015 Serge Heitzler
+// Last update Sat Dec  5 06:59:55 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -14,7 +14,7 @@
 #include "RenderWindow.hh"
 #include "InputManager.hh"
 
-StartPanel::StartPanel() //: APanel()
+StartPanel::StartPanel()
 {
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::MENU_INPUT);
@@ -22,32 +22,38 @@ StartPanel::StartPanel() //: APanel()
   Texture *backgroundSpaceTexture = new Texture;
   Texture *earthTexture = new Texture;
   Texture *cockpitTexture = new Texture;
+  Texture *logoTexture = new Texture;
 
   Sprite *backgroundSpace = new Sprite;
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
+  Sprite *logo = new Sprite;
 
   
-  backgroundSpaceTexture->loadFromFile("../../common/res/sprites/background.png");
-  earthTexture->loadFromFile("../../common/res/sprites/planet_earth_background.png");
-  cockpitTexture->loadFromFile("../../common/res/sprites/cockpit.png");
-
+  backgroundSpaceTexture->loadFromFile("../common/misc/background.png");
+  earthTexture->loadFromFile("../common/misc/planet_earth_background.png");
+  cockpitTexture->loadFromFile("../common/misc/cockpit.png");
+  logoTexture->loadFromFile("../common/misc/rtype_logo.png");
 
   earth->setOrigin(earthTexture->getSize()._x / 2, earthTexture->getSize()._y / 2);
+  logo->setOrigin(logoTexture->getSize()._x / 2, logoTexture->getSize()._y / 2);
   
   backgroundSpace->setTexture(*backgroundSpaceTexture);
   earth->setTexture(*earthTexture);
   cockpit->setTexture(*cockpitTexture);
+  logo->setTexture(*logoTexture);
 
   backgroundSpace->setPosition(0, 0);
   earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
   cockpit->setPosition(0, 0);
+  logo->setPosition(window->getSize()._x / 2, window->getSize()._y / 6);
 
   backgroundSpace->scale(1.1);
   
   _sprites.push_back(*backgroundSpace);
   _sprites.push_back(*earth);
   _sprites.push_back(*cockpit);
+  _sprites.push_back(*logo);
   // this->getSprites().push_back(&backgroundSpace);
   // this->getSprites().push_back(&earth);
   //  this->getSprites().push_back(*cockpit);
