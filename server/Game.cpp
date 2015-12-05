@@ -5,14 +5,15 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec  5 05:31:19 2015 Louis Audibert
+// Last update Sat Dec  5 15:49:02 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
 
 Game::Game() {}
 
-Game::Game(const Parameters &params_, const Client &client_, int id_)
+Game::Game(const Parameters &params_, const Client &client_,
+	   const std::string &id_)
   : _params(params_), _id(id_), _client(client_)
 {
 }
@@ -33,10 +34,22 @@ void Game::setParameters(Parameters &p)
   _params = p;
 }
 
-bool Game::run() {
+bool Game::run()
+{
   return true;
 }
 
-void Game::addCommandToQueue(ANetwork::t_frame frame) {
+void Game::addCommandToQueue(ANetwork::t_frame frame)
+{
   _commandQueue.push((E_COMMAND)frame.idRequest);
+}
+
+const std::string &Game::getId() const
+{
+  return _id;
+}
+
+const Client &Game::getClient() const
+{
+  return _client;
 }

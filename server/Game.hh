@@ -5,17 +5,18 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Thu Dec  3 05:16:15 2015 Louis Audibert
+// Last update Sat Dec  5 16:18:50 2015 Nicolas Charvoz
 //
 
-#ifndef GAME_HH_
-# define GAME_HH_
+#ifndef _GAME_HH_
+# define _GAME_HH_
 
 # include <E_Command.hh>
 # include <Parameters.hh>
 # include <EntityManager.hh>
 # include <Client.hh>
 # include <E_EntityType.hh>
+# include <stdexcept>
 # include <queue>
 
 class Game {
@@ -23,7 +24,7 @@ class Game {
 private:
 
   Parameters _params;
-  int _id;
+  std::string _id;
   EntityManager _eM;
   std::queue<E_COMMAND> _commandQueue;
   Client _client;
@@ -31,10 +32,12 @@ private:
 public:
 
   Game();
-  Game(const Parameters&, const Client&, int);
+  Game(const Parameters&, const Client&, const std::string&);
   ~Game();
   void addClients(std::vector<Client> &);
   void setParameters(Parameters &);
+  const std::string &getId() const;
+  const Client &getClient() const;
   bool run();
   void addCommandToQueue(ANetwork::t_frame);
 
