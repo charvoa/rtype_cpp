@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Fri Dec  4 23:54:21 2015 Nicolas Charvoz
+// Last update Sat Dec  5 13:33:19 2015 Joris Bertomeu
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -30,38 +30,38 @@ public:
   {
     ANetwork::t_frame frame;
 
-    frame._keyPintade = key_;
-    frame._requestType = type_;
-    frame._idRequest = id_;
-    frame._crc = crc_;
-    frame._sizeData = size_;
-    strcpy(frame._data, data_);
+    frame.keyPintade = key_;
+    frame.requestType = type_;
+    frame.idRequest = id_;
+    frame.crc = crc_;
+    frame.sizeData = size_;
+    strcpy(frame.data, data_);
 
     return frame;
   };
 
   static short int getKey(ANetwork::t_frame &frame) {
-    return frame._keyPintade;
+    return frame.keyPintade;
   };
 
   static unsigned char  getType(ANetwork::t_frame &frame) {
-    return frame._requestType;
+    return frame.requestType;
   };
 
   static unsigned int getId(ANetwork::t_frame &frame) {
-    return frame._idRequest;
+    return frame.idRequest;
   };
 
   static int getCrc(ANetwork::t_frame &frame) {
-    return frame._crc;
+    return frame.crc;
   };
 
   static int getSize(ANetwork::t_frame &frame) {
-    return frame._sizeData;
+    return frame.sizeData;
   };
 
   static char *getData(ANetwork::t_frame &frame) {
-    return frame._data;
+    return frame.data;
   };
 
 };
