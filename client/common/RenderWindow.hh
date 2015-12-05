@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Thu Dec  3 13:40:57 2015 Serge Heitzler
+// Last update Fri Dec  4 20:22:06 2015 Nicolas Girardot
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -31,6 +31,7 @@ public:
   Vector2   	getSize() const;
   void		setVerticalSyncEnabled(bool value);
   void		setMouseCursorVisible(bool value);
+  void		setFramerateLimit(unsigned int limit);
   void		setKeyRepeatEnabled(bool value);
   void		display();
   void		draw(const sf::Drawable &drawable, const sf::RenderStates &states = sf::RenderStates::Default);

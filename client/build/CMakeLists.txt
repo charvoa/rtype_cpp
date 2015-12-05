@@ -28,46 +28,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # Define sources and executable
 set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
-  ../common/AMenuElement.hh
-  ../common/APanel.hh
-  ../common/Bind.hh
-#  ../common/Button.hh
-  ../common/Color.hh
-  ../common/DemoPanel.hh
-  ../common/Event.hh
-  ../common/Font.hh
-  ../common/GamePanel.hh
-  ../common/IColor.hh
-  ../common/IEvent.hh
-  ../common/IFont.hh
-  ../common/IInputManager.hh
-  ../common/InputManager.hh
-  ../common/IPanel.hh
-  ../common/IParser.hh
-  ../common/IRenderWindow.hh
-  ../common/ISprite.hh
-  ../common/IText.hh
-  ../common/ITexture.hh
-  ../common/JoinPanel.hh
-  ../common/LoadingPanel.hh
-  ../common/MessageBox.hh
-  ../common/Network.hh
-  ../common/PanelFactory.hh
-  ../common/Position.hh
-  ../common/ProgressBar.hh
-  ../common/ProtocoleClient.hh
-  ../common/RenderWindow.hh
-  ../common/RoomPanel.hh
-  ../common/Settings.hh
-  ../common/SettingsLoader.hh
-  ../common/SettingsPanel.hh
-  ../common/Size.hh
-  ../common/Sprite.hh
-  ../common/StartPanel.hh
-  ../common/Text.hh
-  ../common/Texture.hh
-  ../common/Vector2.hh
-  ../common/Volume.hh
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
@@ -84,6 +44,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/StartPanel.cpp
   ../common/PanelFactory.cpp
   ../common/RoomPanel.cpp
+  ../common/Client.cpp
   ../common/Settings.cpp
   ../common/Text.cpp
   ../common/Texture.cpp
