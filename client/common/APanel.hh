@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Sat Dec  5 02:15:05 2015 Serge Heitzler
+// Last update Sat Dec  5 05:46:57 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -16,6 +16,7 @@
 #include "AMenuElement.hh"
 #include "Texture.hh"
 #include "Sprite.hh"
+#include "InputManager.hh"
 
 class		APanel
 {
@@ -24,17 +25,19 @@ public:
   APanel();
   ~APanel();
 
-  void		update();
-  void		render();
-  void		hide();
+  virtual void		update();
+  virtual void		render();
+  virtual void		hide();
   std::vector<AMenuElement*>		&getElements();
   std::vector<Sprite>			&getSprites();
+  InputManager				&getInputManager();
 
   std::vector<Sprite>	      		_sprites;
   std::vector<Texture>			_textures;
 private:
 
   std::vector<AMenuElement*>		_elements;
+  InputManager				_inputManager;
 };
 
 #endif // APANEL_HH

@@ -5,17 +5,20 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Sat Dec  5 01:10:42 2015 Serge Heitzler
+// Last update Sat Dec  5 05:58:22 2015 Serge Heitzler
 //
 
+#include <iostream>
 #include "PanelFactory.hh"
 #include "StartPanel.hh"
 #include "RenderWindow.hh"
-#include <iostream>
+#include "InputManager.hh"
 
 StartPanel::StartPanel() //: APanel()
 {
   RenderWindow *window = RenderWindow::getInstance();
+  getInputManager().setInputType(InputType::MENU_INPUT);
+  
   Texture *backgroundSpaceTexture = new Texture;
   Texture *earthTexture = new Texture;
   Texture *cockpitTexture = new Texture;

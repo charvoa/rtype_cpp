@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Sat Dec  5 04:49:36 2015 Serge Heitzler
+// Last update Sat Dec  5 05:50:11 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -14,12 +14,15 @@
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
-InputManager::InputManager(InputType type)
+InputManager::InputManager(){}
+
+InputManager::~InputManager(){}
+
+void			InputManager::setInputType(InputType type)
 {
   _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
   _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
 
-  
   if (type == InputType::MENU_INPUT)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedInMenuAt));
@@ -33,11 +36,6 @@ InputManager::InputManager(InputType type)
       _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
       //      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::CHOISIRUNNOMDEFONCTION));
     }
-}
-
-InputManager::~InputManager()
-{
-
 }
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)

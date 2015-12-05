@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Sat Dec  5 03:58:44 2015 Serge Heitzler
+// Last update Sat Dec  5 06:06:43 2015 Serge Heitzler
 //
 
 #ifndef							IINPUTMANAGER_HH_
@@ -15,6 +15,7 @@
 #include						<string>
 #include						<map>
 #include						"IRenderWindow.hh"
+#include						"InputTypeEnum.hh"
 
 class							IInputManager
 {

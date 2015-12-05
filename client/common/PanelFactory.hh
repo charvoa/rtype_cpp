@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Thu Dec  3 16:13:53 2015 Nicolas Girardot
+// Last update Sat Dec  5 05:35:20 2015 Serge Heitzler
 //
 
 #ifndef PANELFACTORY_HH
@@ -32,7 +32,7 @@ public:
         LOADING_PANEL
     } PanelType;
 
-  APanel    *createPanel(PanelType);
+  static APanel    *createPanel(PanelType);
 };
 
 #endif
