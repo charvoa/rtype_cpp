@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:11:19 2015 Nicolas Charvoz
+// Last update Sat Dec  5 17:13:44 2015 Nicolas Charvoz
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -25,7 +25,7 @@ public:
   CreateRequest() {};
   ~CreateRequest() {};
 
-  static ANetwork::t_frame create(unsigned char type_, int crc_, int size_,
+  static ANetwork::t_frame create(unsigned char id_, int crc_, int size_,
 				  const std::string &data_)
   {
     ANetwork::t_frame frame;
