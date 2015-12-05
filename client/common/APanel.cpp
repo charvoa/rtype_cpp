@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Fri Dec  4 08:15:36 2015 Serge Heitzler
+// Last update Sat Dec  5 02:14:51 2015 Serge Heitzler
 //
 
 #include "APanel.hh"
@@ -37,12 +37,12 @@ void		APanel::hide()
 
 }
 
-std::vector<AMenuElement*>		APanel::getElements()
+std::vector<AMenuElement*>		&APanel::getElements()
 {
   return _elements;
 }
 
-std::vector<Sprite>			APanel::getSprites()
+std::vector<Sprite>			&APanel::getSprites()
 {
   return _sprites;
 }

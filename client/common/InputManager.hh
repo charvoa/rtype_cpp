@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Thu Dec  3 11:36:45 2015 Serge Heitzler
+// Last update Sat Dec  5 03:58:32 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -27,22 +27,23 @@ public:
   InputManager(InputType inputType);
   ~InputManager();
 
-  std::map<unsigned int, unsigned int>         	joystickPressedAt(sf::Event &event);
-  std::map<unsigned int, unsigned int>         	joystickMovedInDirection(sf::Event &event);
+  std::pair<unsigned int, unsigned int>        	joystickPressedAt(sf::Event &event);
+  std::pair<unsigned int, unsigned int>        	joystickMovedInDirection(sf::Event &event);
   bool						isMouseInWindow(Vector2 posMouse);
   int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement);
   int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement);
-  std::map<unsigned int, unsigned int>		joystickMovedInMenuAt(sf::Event& event);
-  std::map<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event);
-  std::map<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event);
-  std::map<unsigned int, unsigned int>	       	joystickHardwareEvent(IRenderWindow &window, sf::Event& event);
+  std::pair<unsigned int, unsigned int>		joystickMovedInMenuAt(sf::Event& event);
+  std::pair<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event);
+  std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event);
+  std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event);
+  std::pair<unsigned int, unsigned int>	       	joystickHardwareEvent(sf::Event& event);
   void						methodChecker(sf::Event &event);
 
 private:
 
-  typedef void(IInputManager::*funcs)(APanel &panel);
+  typedef std::pair<unsigned int, unsigned int>(InputManager::*funcs)(sf::Event &event);
   funcs _ptr;
-  typedef std::map<sf::Event, funcs>PointersOnFuncs;
+  typedef std::map<sf::Event::EventType, funcs>PointersOnFuncs;
   PointersOnFuncs	        _functions;
 
 };

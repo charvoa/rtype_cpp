@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Fri Dec  4 08:34:04 2015 Serge Heitzler
+// Last update Sat Dec  5 04:24:06 2015 Serge Heitzler
 //
 
 #include <cstdlib>
@@ -15,6 +15,7 @@
 #include "Texture.hh"
 #include "Sprite.hh"
 #include "StartPanel.hh"
+#include "InputManager.hh"
 
 int main()
 {
@@ -31,27 +32,18 @@ int main()
 
   StartPanel	start;
 
-  // sf::Texture texture;
-  // sf::Sprite sprite;
-  
-  // texture.loadFromFile("../../common/res/sprites/cockpit.png");
-  // sprite.setTexture(texture);
-  // window->draw(sprite);
-
-  
-  //window->draw(shape);
-
+  InputManager	*startInput = new InputManager(InputType::MENU_INPUT);
   // Affichage du contenu de la fenêtre à l'écran
   // Boucle principale
   while (window->isOpen())
     {
       start.update();
       start.render();
-  window->display();
+      window->display();
       sf::Event event;
-        while (window->pollEvent(event))
-	  {
-	  }
+      while (window->pollEvent(event)){
+	startInput->methodChecker(event);
+      }
     }
     return EXIT_SUCCESS;
 }

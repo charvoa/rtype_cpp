@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Dec  2 02:33:19 2015 Serge Heitzler
-// Last update Wed Dec  2 02:37:40 2015 Serge Heitzler
+// Last update Sat Dec  5 01:38:41 2015 Serge Heitzler
 //
 
 #ifndef EVENT_HH_
@@ -13,7 +13,7 @@
 
 #include "IEvent.hh"
 
-class  		      Event
+class  		      Event : public IEvent
 {
 
   sf::Event		getEvent();

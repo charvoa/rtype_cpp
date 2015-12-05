@@ -79,6 +79,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Font.cpp
   ../common/GamePanel.cpp
   ../common/JoinPanel.cpp
+  ../common/InputManager.cpp
   ../common/LoadingPanel.cpp
   ../common/StartPanel.cpp
   ../common/PanelFactory.cpp

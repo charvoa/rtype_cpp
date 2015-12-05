@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Fri Dec  4 10:57:13 2015 Serge Heitzler
+// Last update Sat Dec  5 01:10:42 2015 Serge Heitzler
 //
 
 #include "PanelFactory.hh"
@@ -24,8 +24,7 @@ StartPanel::StartPanel() //: APanel()
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
 
-
-
+  
   backgroundSpaceTexture->loadFromFile("../../common/res/sprites/background.png");
   earthTexture->loadFromFile("../../common/res/sprites/planet_earth_background.png");
   cockpitTexture->loadFromFile("../../common/res/sprites/cockpit.png");
@@ -41,7 +40,7 @@ StartPanel::StartPanel() //: APanel()
   earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
   cockpit->setPosition(0, 0);
 
-  backgroundSpace->scale(1.5);
+  backgroundSpace->scale(1.1);
   
   _sprites.push_back(*backgroundSpace);
   _sprites.push_back(*earth);
