@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:22:39 2015 Joris Bertomeu
-// Last update Thu Nov 19 03:25:34 2015 Joris Bertomeu
+// Last update Thu Nov 19 05:33:25 2015 Joris Bertomeu
 //
 
 #include	"Network.hh"
@@ -48,13 +48,12 @@ void	*Network::read(int size)
 {
   if (size >= 4096)
     throw (std::logic_error("Read size must be < 4096"));
-  ::read(this->_socket->getFd(), this->_buffer, size);
-  return (&(this->_buffer[0]));
+  return (this->_socket->read(size));
 }
 
 int	Network::write(void *data, int size)
 {
-  return (::write(this->_socket->getFd(), data, size));
+  return (this->_socket->write(data, size));
 }
 
 void	Network::close()
@@ -66,11 +65,13 @@ ISocket			*Network::accept()
 {
   int			fd;
   struct sockaddr_in	addr;
-  socklen_t		len;
+  socklen_t		len = sizeof(addr);
 
-  std::cout << "Network :: Accept (" << ntohs(this->_socket->getAddr()->sin_port) << ")" << std::endl;
+  std::cout << "Network :: Accept (" << this->_socket->getFd() << ")" << std::endl;
   fd = ::accept(this->_socket->getFd(), (struct sockaddr *) &addr, &len);
-  if (fd < 0)
+  if (fd < 0) {
+    this->_socket->close();
     throw (std::logic_error(std::string("Error while accepting : " + std::string(strerror(errno)))));
+  }
   return (new Socket(fd, this->_socket));
 }

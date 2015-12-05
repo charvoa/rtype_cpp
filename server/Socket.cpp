@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Wed Nov 18 00:01:36 2015 Joris Bertomeu
-// Last update Thu Nov 19 03:31:25 2015 Joris Bertomeu
+// Last update Thu Nov 19 05:38:55 2015 Joris Bertomeu
 //
 
 #include	"Socket.hh"
@@ -16,14 +16,22 @@ Socket::Socket(int type_, int domain_, int port_)
   this->_port = port_;
   this->_type = type_;
   this->_domain = domain_;
-  if ((this->_fd = socket(domain_, type_, 0)) < 0)
+  if ((this->_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     throw (std::logic_error("Error while opening socket"));
   std::cout << "Socket created on port " << this->_port << " with fd " << this->_fd << std::endl;
-  //::close(this->_fd);
   bzero(&(this->_servAddr), sizeof(struct sockaddr_in));
-  this->_servAddr.sin_family = domain_;
-  this->_servAddr.sin_addr.s_addr = INADDR_ANY;
-  this->_servAddr.sin_port = htons(port_);
+  if (::bind(this->_fd,
+	     (struct sockaddr *) &(this->_servAddr),
+	     sizeof(this->_servAddr)) < 0) {
+    this->close();
+    throw (std::logic_error(std::string("Error while binding : " + std::string(strerror(errno)))));
+  }
+  ::listen(this->_fd, 5);
+  struct sockaddr_in	addr;
+  socklen_t		len = sizeof(addr);
+
+  std::cout << "Socket :: Accept (" << this->_fd << ")" << std::endl;
+  ::accept(this->_fd, (struct sockaddr *) &addr, &len);
 }
 
 Socket::Socket(int fd_, ISocket *s_)
@@ -60,15 +68,15 @@ int	Socket::getProtocol() const
   return (this->_protocol);
 }
 
-void	*Socket::read()
+void	*Socket::read(int size)
 {
-  return (NULL);
+  ::read(this->_fd, this->_buff, size);
+  return (&(this->_buff[0]));
 }
 
-int	Socket::write(void *data)
+int	Socket::write(void *data, int size)
 {
-  (void)data;
-  return 1;
+  return (::write(this->_fd, data, size));
 }
 
 struct sockaddr_in	*Socket::getAddr()
