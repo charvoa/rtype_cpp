@@ -5,10 +5,11 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Sat Dec  5 05:50:11 2015 Serge Heitzler
+// Last update Sat Dec  5 06:49:42 2015 Serge Heitzler
 //
 
 #include <iostream>
+//#include <SFML/Mouse.hpp>
 #include "InputManager.hh"
 #include "RenderWindow.hh"
 
@@ -85,14 +86,14 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
 
   // TODO
   // ratio avec la vélocité du déplacement à voir (si j'appuie fort ou doucement sur le joystic de déplacement)
-
   if (this->isMouseInWindow(Vector2(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)))
     {
       if (event.joystickMove.axis == sf::Joystick::X)
-	newPosY = this->moveYAxis(event, newPosY, ratioYMovement);
-      if (event.joystickMove.axis == sf::Joystick::Y)
 	newPosX = this->moveXAxis(event, newPosX, ratioXMovement);
+      if (event.joystickMove.axis == sf::Joystick::Y)
+	newPosY = this->moveYAxis(event, newPosY, ratioYMovement);
     }
+  sf::Mouse::setPosition(sf::Vector2i(newPosX, newPosY));
   return std::make_pair((unsigned int)newPosX, (unsigned int)newPosY);
 }
 

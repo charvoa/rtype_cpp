@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Fri Dec  4 23:57:01 2015 Nicolas Charvoz
+// Last update Sat Dec  5 13:37:46 2015 Joris Bertomeu
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -56,7 +56,6 @@ int		main(int ac, char **av)
   t2->run();
   t1->join();
   t2->join();
-
 
   ANetwork::t_frame frame;
 
