@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 16:50:45 2015 Joris Bertomeu
+// Last update Sat Dec  5 17:28:29 2015 Joris Bertomeu
 //
 
 #include <Network.hpp>
@@ -24,6 +24,7 @@ void Server::init()
   this->_network->init(4253, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
+  this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
 }
 
 void Server::run()
@@ -33,7 +34,8 @@ void Server::run()
   std::cout << "Server :: Run" << std::endl;
   while (1) {
     client = dynamic_cast<Socket*>(this->_network->select());
-    std::cout << (char*) client->read(4096) << std::endl;
+    this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->read(sizeof(ANetwork::t_frame))))), dynamic_cast<void*>(client), this);
+    //std::cout << (char*) client->read(4096) << std::endl;
   }
 }
 

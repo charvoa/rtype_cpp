@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sat Dec  5 12:18:43 2015 Joris Bertomeu
+// Last update Sat Dec  5 17:00:00 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
