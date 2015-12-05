@@ -5,9 +5,10 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 12:31:32 2015 Joris Bertomeu
+// Last update Sat Dec  5 14:08:06 2015 Joris Bertomeu
 //
 
+#include <Network.hpp>
 #include <Server.hh>
 
 Server::Server()
@@ -22,7 +23,7 @@ void Server::init()
   std::cout << "Server :: Init" << std::endl;
   this->_network->init(4253, ANetwork::TCP_MODE);
   this->_network->bind();
-  this->_network->listen(10);
+  this->_network->listen(24);
 }
 
 void Server::run()
