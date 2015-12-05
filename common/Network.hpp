@@ -5,26 +5,26 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 13:24:08 2015 Joris Bertomeu
+// Last update Sat Dec  5 14:30:39 2015 Joris Bertomeu
 //
 
-#ifndef			__NETWORK_HPP__
-# define		__NETWORK_HPP__
+#ifndef				__NETWORK_HPP__
+# define			__NETWORK_HPP__
 
-# include		<ANetwork.hpp>
-# include		<Socket.hpp>
+# include			<ANetwork.hpp>
+# include			<Socket.hpp>
 
-class			Network : public ANetwork
+class				Network : public ANetwork
 {
 private:
-  ISocket		*_socket;
-  int			_port;
-  struct sockaddr_in	serv_addr;
+  ISocket			*_socket;
+  int				_port;
+  struct sockaddr_in		serv_addr;
 
 public:
-  explicit		Network() {};
-  virtual		~Network() {};
-  void			init(int port, Network::TYPE type) {
+  explicit			Network() {};
+  virtual			~Network() {};
+  void				init(int port, Network::TYPE type) {
     if (type == Network::TCP_MODE)
       this->_socket = new Socket(AF_INET, SOCK_STREAM);
     else
@@ -80,6 +80,17 @@ public:
     if (::connect(this->_socket->getFd(), (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
       throw (std::logic_error("Network :: Error while connecting"));
   };
+
+  virtual t_frame		read() {
+    t_frame			frame;
+
+    memcpy(&frame, this->_socket->read(sizeof(t_frame)), sizeof(t_frame));
+    return (frame);
+  };
+
+  virtual int			write(t_frame frame) {
+    return (this->_socket->write(&frame, sizeof(t_frame)));
+  }
 };
 
 #endif
