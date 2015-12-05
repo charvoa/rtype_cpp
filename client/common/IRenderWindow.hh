@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Thu Dec  3 11:34:14 2015 Serge Heitzler
+// Last update Fri Dec  4 20:23:30 2015 Nicolas Girardot
 //
 
 #ifndef IRENDERWINDOW_HH_
@@ -14,7 +14,7 @@
 
 #include <string>
 #include <cstdint>
-#define Uint32 uint32_t 
+#define Uint32 uint32_t
 #include <SFML/Window/ContextSettings.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -31,6 +31,7 @@ public:
   virtual bool	        waitEvent(sf::Event& event) = 0;
   virtual Vector2   	getSize() const = 0;
   virtual void		setVerticalSyncEnabled(bool value) = 0;
+  virtual void		setFramerateLimit(unsigned int limit) = 0;
   virtual void		setMouseCursorVisible(bool value) = 0;
   virtual void		setKeyRepeatEnabled(bool value) = 0;
   virtual void		display() = 0;

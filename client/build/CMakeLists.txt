@@ -83,6 +83,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/StartPanel.cpp
   ../common/PanelFactory.cpp
   ../common/RoomPanel.cpp
+  ../common/Client.cpp
   ../common/Settings.cpp
   ../common/Text.cpp
   ../common/Texture.cpp
