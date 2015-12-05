@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:11:29 2015 Nicolas Charvoz
+// Last update Sat Dec  5 17:12:54 2015 Nicolas Charvoz
 //
 
 #ifndef ANETWORK_HPP_
@@ -23,7 +23,6 @@ public:
   }			TYPE;
 
 protected:
-  char			_buffer[4096];
   ISocket		*_socket;
 
 public :
