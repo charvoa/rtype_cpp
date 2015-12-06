@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Mon Nov 30 01:40:13 2015 Louis Audibert
+// Last update Sat Dec  5 07:04:44 2015 Antoine Garcia
 //
 
 #ifndef SERVER_HH_
@@ -13,11 +13,11 @@
 
 # include <iostream>
 # include <string>
-# include "ANetwork.hh"
-# include "RoomManager.hh"
-# include "GameManager.hh"
-# include "ClientManager.hh"
-# include "CommandManager.hh"
+# include <ANetwork.hpp>
+# include <RoomManager.hh>
+# include <GameManager.hh>
+# include <ClientManager.hh>
+# include <CommandManager.hpp>
 
 class Server {
 
@@ -27,10 +27,10 @@ public:
   ~Server();
   void init();
   void run();
-  bool createGame();
-  bool createRoom();
+  bool createGame(ANetwork::t_frame frame, void *data);
+  bool createRoom(ANetwork::t_frame frame, void *data);
 
-  private:
+private:
 
   ANetwork *_network;
   RoomManager _roomManager;

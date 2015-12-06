@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:35 2015 Serge Heitzler
-// Last update Mon Nov 23 08:19:36 2015 Serge Heitzler
+// Last update Tue Dec  1 02:56:43 2015 Serge Heitzler
 //
 
 #ifndef IFONT_HH_
@@ -13,13 +13,10 @@
 
 #include <string>
 
-class	        IFont
+class		      IFont
 {
 
-  IFont();
-  ~IFont();
-
-  void		loadFromFile(const std::string &filename) = 0;
+  virtual void		loadFromFile(const std::string &filename) = 0;
 
 };
 

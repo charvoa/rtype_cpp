@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:52:52 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 22:48:41 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -14,22 +14,28 @@
 #include "Button.hh"
 #include "APanel.hh"
 
-class StartPanel
+class StartPanel : public APanel
 {
 public:
-    StartPanel(RenderWindow *);
-    ~StartPanel();
+  StartPanel();
+  ~StartPanel();
+  
+  void		createRoom();
+  void		joinRoom();
+  void		demo();
+  void		settings();
+  void		exit();
+  void	        update();
 
-    void    play();
-    void    demo();
-    void    settings();
-    void    exit();
-
+  Texture	_cockpitTexture;
+  Sprite	_cockpit;
+  
 private:
-    Button  _playButton;
-    Button  _demoButton;
-    Button  _settingsButton;
-    Button  _exitButton;
+  //    Button  _createRoomButton;
+  //    Button  _joinRoomButton;
+  //    Button  _demoButton;
+  //    Button  _settingsButton;
+  //    Button  _exitButton;
 };
 
 #endif // STARTPANEL_H

@@ -5,14 +5,24 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:04 2015 Nicolas Charvoz
-// Last update Wed Nov 25 16:43:48 2015 Nicolas Charvoz
+// Last update Thu Dec  3 05:10:49 2015 Louis Audibert
 //
 
 #ifndef CLIENTMANAGER_HH_
 # define CLIENTMANAGER_HH_
 
-class ClientManager {
+# include <vector>
+# include <Client.hh>
 
+class ClientManager {
+  std::vector<Client>	_clients;
+public:
+  ClientManager();
+  ~ClientManager();
+  bool	clientExists(Client &);
+  void	addClients(Client &);
+  std::vector<Client>&	getAllClients();
+  Client&	getClientByFd(int fd);
 };
 
 #endif

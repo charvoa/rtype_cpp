@@ -17,9 +17,10 @@
 class LoadingPanel : public APanel
 {
 public:
-    LoadingPanel(RenderWindow *parent);
+    LoadingPanel();
     ~LoadingPanel();
 
+	void render();
 private:
     InputManager    *_settings;
 };

@@ -1,18 +1,17 @@
 //
 // Bind.hh for Bind in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:50:51 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:55:48 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 17:14:46 2015 Nicolas Girardot
 //
 
 #ifndef BIND_HH
 #define BIND_HH
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Event.hpp>
 
 class Bind
 {
@@ -30,21 +29,21 @@ public:
         WEAPON_3
     } BindType;
 
-    Bind(Bind::BindType, sf::Event::key, sf::Event::joystick);
-    ~Bind();
+  Bind(Bind::BindType, sf::Keyboard::Key, sf::Joystick::Axis);
+  ~Bind();
 
-    Bind::BindType getType() const;
-    sf::Event::key getKey() const;
-    sf::Event::joystick getJoystick() const;
+  Bind::BindType getType() const;
+  sf::Keyboard::Key getKey() const;
+  sf::Joystick::Axis getJoystick() const;
 
-    void setType(Bind::BindType);
-    void setKey(sf::Event::key);
-    void setJoystick(sf::Event::joystick);
+  void setType(Bind::BindType);
+  void setKey(sf::Keyboard::Key);
+  void setJoystick(sf::Joystick::Axis);
 
 private:
-    Bind::BindType _type;
-    sf::Event::key _key;
-    sf::Event::joystick _joystick;
+  Bind::BindType _type;
+  sf::Keyboard::Key _key;
+  sf::Joystick::Axis _joystick;
 };
 
 #endif // BIND_HH

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:48:05 2015 Louis Audibert
-// Last update Sat Nov 28 05:56:54 2015 Louis Audibert
+// Last update Thu Dec  3 05:18:04 2015 Louis Audibert
 //
 
 #ifndef _LASER_HH_
@@ -13,9 +13,9 @@
 
 # include <string>
 # include <iostream>
-# include "IComponent.hh"
+# include <AComponent.hpp>
 
-class Laser : public IComponent
+class Laser : public AComponent
 {
 private:
   int	_dmg;

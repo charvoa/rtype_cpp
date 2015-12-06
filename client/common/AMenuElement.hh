@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:58 2015 Serge Heitzler
-// Last update Mon Nov 23 08:19:59 2015 Serge Heitzler
+// Last update Tue Dec  1 14:46:28 2015 Serge Heitzler
 //
 
 #ifndef AMENUELEMENT_HH_
@@ -17,12 +17,13 @@
 
 class	        AMenuElement
 {
-
-  AMenuElement();
+public:
+  AMenuElement(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
   ~AMenuElement();
 
   Position		&getPosition();
   Size			&getSize();
+  virtual void			render();
 
 private:
 

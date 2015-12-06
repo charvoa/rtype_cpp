@@ -1,11 +1,11 @@
 //
 // Settings.cpp for Settings in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:50:24 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:50:25 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 17:41:52 2015 Nicolas Girardot
 //
 
 #include "Settings.hh"
@@ -15,7 +15,7 @@ Settings::Settings(std::string const& filepath)
 {
     SettingsLoader loader(filepath);
 
-    this = loader.parseSettings();
+    this->update(*loader.parseSettings());
 }
 
 Settings::Settings(Volume vol, std::vector<Bind> binds, Settings::Difficulty difficulty)
@@ -25,14 +25,14 @@ Settings::Settings(Volume vol, std::vector<Bind> binds, Settings::Difficulty dif
     _defaultDifficulty = difficulty;
 }
 
-Settings::Settings(Settings const& copy)
+Settings::~Settings(){}
+
+void	Settings::update(Settings const& copy)
 {
     _volume = copy._volume;
     _binds = copy._binds;
     _defaultDifficulty = copy._defaultDifficulty;
 }
-
-Settings::~Settings(){}
 
 Volume  Settings::getVolume() const
 {
@@ -54,19 +54,19 @@ Settings::Difficulty    Settings::getCurrentDifficulty() const
     return _difficulty;
 }
 
-void    Settings::setBind(Bind bind)
+void    Settings::setBind(Bind &bind)
 {
     std::vector<Bind>::iterator it = _binds.begin();
     std::vector<Bind>::iterator end = _binds.end();
 
     while (it != end)
     {
-        if (bind.getType() == (*it)->getType())
+      if (bind.getType() == (*it).getType())
         {
-            *it = bind;
-            return;
+	  *it = bind;
+	  return;
         }
-        it++;
+      it++;
     }
 }
 
@@ -88,12 +88,12 @@ void    Settings::loadSettings()
 {
     SettingsLoader  loader("PersonnalConfig.ini");
 
-    this = loader.parseSettings();
+    this->update(*loader.parseSettings());
 }
 
 void    Settings::resetDefault()
 {
     SettingsLoader  loader("DefaultConfig.ini");
 
-    this = loader.parseSettings();
+    this->update(*loader.parseSettings());
 }

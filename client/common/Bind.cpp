@@ -5,12 +5,12 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:51:14 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:51:17 2015 Viveka BARNEAUD
+// Last update Mon Nov 30 16:55:21 2015 Viveka BARNEAUD
 //
 
 #include "Bind.hh"
 
-Bind::Bind(Bind::BindType type, sf::Event::key key, sf::Event::Joystick joystick)
+Bind::Bind(Bind::BindType type, sf::Keyboard::Key key, sf::Joystick::Axis joystick)
 {
     _type = type;
     _key = key;
@@ -24,12 +24,12 @@ Bind::BindType Bind::getType() const
     return _type;
 }
 
-sf::Event::key Bind::getKey() const
+sf::Keyboard::Key Bind::getKey() const
 {
     return _key;
 }
 
-sf::Event::joystick Bind::getJoystick() const
+sf::Joystick::Axis Bind::getJoystick() const
 {
     return _joystick;
 }
@@ -39,12 +39,12 @@ void    Bind::setType(Bind::BindType type)
     _type = type;
 }
 
-void    Bind::setKey(sf::Event::key key)
+void    Bind::setKey(sf::Keyboard::Key key)
 {
     _key = key;
 }
 
-void    Bind::setJoystick(sf::Event::joystick joystick)
+void    Bind::setJoystick(sf::Joystick::Axis joystick)
 {
     _joystick = joystick;
 }

@@ -4,16 +4,74 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Started on  Sat Nov 28 05:13:40 2015 Louis Audibert
-// Last update Sat Nov 28 05:14:14 2015 Louis Audibert
+// Last update Sat Dec  5 17:14:20 2015 Nicolas Charvoz
+// Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
-#include "Server.hh"
+# include	<Server.hh>
+# include	<EntityManager.hh>
+#ifdef __unix__
+# include	"../common/Thread/ThreadUnix.hpp"
+#elif defined(_WIN32) || defined(WIN32)
+# include 	"../common/Thread/ThreadWin.hpp"
+#endif
 
-intmain(int ac, char **av)
+#include <Mutex.hpp>
+#include <ANetwork.hpp>
+#include <CreateRequest.hpp>
+#include <chrono>
+#include <thread>
+
+AMutex *m;
+
+void *save_page(void *s)
 {
-  std::cout << "You've launched the Server of the RType" << std::endl;
+  m->lock();
+  std::cout << "this thread is called" << std::endl;
+  m->unlock();
+  return s;
+}
 
-  std::cout << "Made by La Pintade" << std::endl;
+int		main(int ac, char **av)
+{
+  Server	*s = new Server();
+
+  (void)ac;
+  (void)av;
+
+
+  /* TEST */
+  m = new Mutex();
+
+  AThread *t1 = new Thread(1);
+  AThread *t2 = new Thread(2);
+
+  char str1[] = "http://foo";
+  char str2[] = "http://bar";
+
+  t1->attach(&save_page, (void*)str1);
+  t2->attach(&save_page, (void*)str2);
+
+  t1->run();
+  t2->run();
+  t1->join();
+  t2->join();
+
+  ANetwork::t_frame frame;
+
+  frame = CreateRequest::create(1, 12, 3, "data");
+
+  std::cout << "frame data : " << CreateRequest::getData(frame) << std::endl;
+  /* FIN DU GAME */
+
+  try {
+    s->init();
+    std::cout << "You've launched the Server of the RType" << std::endl;
+
+    std::cout << "Made by La Pintade" << std::endl;
+    s->run();
+  } catch (const std::exception &e) {
+    std::cout << "Error catched : " << e.what() << std::endl;
+  }
   return (0);
 }

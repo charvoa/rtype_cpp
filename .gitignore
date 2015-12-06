@@ -6,3 +6,6 @@ CMakeScripts
 Makefile
 cmake_install.cmake
 install_manifest.txt
+R-Type.dir
+server_rtype
+client_rtype
