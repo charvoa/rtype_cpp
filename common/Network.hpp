@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 16:48:40 2015 Joris Bertomeu
+// Last update Sat Dec  5 18:22:28 2015 Joris Bertomeu
 //
 
 #ifndef				__NETWORK_HPP__
@@ -22,19 +22,21 @@ private:
   struct sockaddr_in		serv_addr;
   fd_set			_fdList;
   fd_set			_activeFDList;
+  Network::TYPE			_connectionMode;
 
 public:
   explicit			Network() {};
   virtual			~Network() {};
   void				init(int port, Network::TYPE type) {
     if (type == Network::TCP_MODE)
-      this->_socket = new Socket(AF_INET, SOCK_STREAM);
+      this->_socket = new Socket(AF_INET, SOCK_STREAM, 0);
     else
-      this->_socket = new Socket(AF_INET, SOCK_DGRAM);
+      this->_socket = new Socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     this->_port = port;
     FD_ZERO(&_fdList);
     FD_SET(this->_socket->getFd(), &_fdList);
   };
+
   virtual void			bind() {
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
@@ -46,6 +48,8 @@ public:
   };
 
   virtual void			listen(int max) {
+    if (this->_connectionMode == Network::UDP_MODE)
+      throw (std::logic_error("Network :: Listen for UDP Mode not allowed"));
     ::listen(this->_socket->getFd(), max);
   };
 
@@ -53,6 +57,8 @@ public:
     struct sockaddr_in	cli_addr;
     socklen_t		clilen = sizeof(cli_addr);
 
+    if (this->_connectionMode == Network::UDP_MODE)
+      throw (std::logic_error("Network :: Accept for UDP Mode not allowed"));
     return (new Socket(::accept(this->_socket->getFd(),
 				(struct sockaddr *) &cli_addr, &clilen)));
   }
@@ -71,6 +77,9 @@ public:
   virtual void			connect(const std::string &serverIP) {
     struct hostent		*server;
 
+    if (this->_connectionMode == Network::UDP_MODE)
+      if (inet_aton(serverIP.c_str(), &serv_addr.sin_addr) == 0)
+	throw (std::logic_error("Network :: Error while connecting ..."));
     server = gethostbyname(serverIP.c_str());
     if (server == NULL) {
       throw (std::logic_error("Network :: Server IP is not valid"));

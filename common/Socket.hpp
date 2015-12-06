@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sat Dec  5 17:00:00 2015 Joris Bertomeu
+// Last update Sat Dec  5 18:23:04 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -20,6 +20,7 @@
 # include	<netinet/in.h>
 # include	<stdexcept>
 # include	<ISocket.hpp>
+# include	<arpa/inet.h>
 
 class		Socket : public ISocket
 {
@@ -27,8 +28,8 @@ class		Socket : public ISocket
   int		_fd;
 
  public:
-  Socket(int domain, int protocol) {
-    this->_fd = socket(domain, protocol, 0);
+  Socket(int domain, int type, int protocol) {
+    this->_fd = socket(domain, type, protocol);
     if (this->_fd < 0)
       throw (std::logic_error("Socket :: Creating Error"));
   };
