@@ -5,12 +5,14 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Sat Dec  5 09:10:56 2015 Antoine Garcia
+// Last update Sun Dec  6 07:29:18 2015 Antoine Garcia
 //
 
 # include <cstdlib>
 # include <ctime>
 # include <stdexcept>
+# include <algorithm>
+# include <random>
 # include <RoomManager.hh>
 
 RoomManager::RoomManager() : _rooms(0)
@@ -23,10 +25,12 @@ std::string	RoomManager::generateId()
 {
   std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   std::string id;
-  std::srand(std::time(0));
+  std::random_device rd;
+  std::mt19937 mt(rd());
+  std::uniform_int_distribution<int> dist(0, str.size() - 1);
   for (int i = 0; i < 4; i++)
     {
-      int	random_variable = std::rand() % str.size() + 1;
+      int	random_variable = dist(mt);
       id += str[random_variable];
     }
   return id;
