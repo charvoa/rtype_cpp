@@ -5,37 +5,50 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Wed Nov 25 16:34:25 2015 Nicolas Girardot
+// Last update Sat Dec  5 05:32:07 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
 #define RENDERWINDOW_HH_
 
+#include <stack>
+#include "Settings.hh"
 #include "IRenderWindow.hh"
+#include "PanelFactory.hh"
+#include "Vector2.hh"
 #include "Size.hh"
 
 class	        RenderWindow : public IRenderWindow
 {
 public:
-
-  RenderWindow(sf::VideoMode mode, const std::string &title, uint32_t style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
   ~RenderWindow();
 
+  static RenderWindow *getInstance();
   void		close();
   bool		isOpen();
   bool		pollEvent(sf::Event& event);
   bool	        waitEvent(sf::Event& event);
-  IVector2    	getSize() const;
+  Vector2   	getSize() const;
   void		setVerticalSyncEnabled(bool value);
   void		setMouseCursorVisible(bool value);
+  void		setFramerateLimit(unsigned int limit);
   void		setKeyRepeatEnabled(bool value);
   void		display();
   void		draw(const sf::Drawable &drawable, const sf::RenderStates &states = sf::RenderStates::Default);
   void		clear(const sf::Color &color = sf::Color(0, 0, 0, 255));
+  void      addPanel(PanelFactory::PanelType);
+  void      back();
+  Settings	*getSettings();
+  void		setSettings(Settings*);
+  void		setWindow(sf::VideoMode, std::string const& title);
+  std::stack<APanel*>	&getPanels();
 
 private:
-
-  sf::RenderWindow *_window;
+  RenderWindow();
+  static RenderWindow *_renderWindow;
+  sf::RenderWindow	*_window;
+  std::stack<APanel*>   _panels;
+  Settings		*_settings;
   //Size		_size;
   //PanelFactory	_panelFactory;
 };

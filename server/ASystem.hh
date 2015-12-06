@@ -5,21 +5,23 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:38:40 2015 Louis Audibert
-// Last update Mon Nov 30 02:16:50 2015 Louis Audibert
+// Last update Thu Dec  3 05:07:20 2015 Louis Audibert
 //
 
 #ifndef _ASYSTEM_HH_
 # define _ASYSTEM_HH_
 
-# include "IComponent.hh"
+# include <AComponent.hpp>
 
 class ASystem
 {
 protected:
-  IComponent *_component;
+  AComponent *_component;
 
 public:
-  IComponent *getComponent() const;
+  explicit ASystem(){};
+  virtual ~ASystem(){};
+  AComponent *getComponent() const;
 };
 
 #endif /* _ASYSTEM_HH_ */

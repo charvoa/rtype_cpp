@@ -5,37 +5,34 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Mon Nov 30 10:03:22 2015 Viveka BARNEAUD
+// Last update Sat Dec  5 05:35:20 2015 Serge Heitzler
 //
 
-#ifndef PANELFACTORY_H
-#define PANELFACTORY_H
+#ifndef PANELFACTORY_HH
+#define PANELFACTORY_HH
 
 #include "APanel.hh"
 
 class PanelFactory
 {
+
 public:
     PanelFactory();
     ~PanelFactory();
 
-    enum e_panelType
+
+   typedef enum e_panelType
     {
         ROOM_PANEL,
         SETTINGS_PANEL,
         GAME_PANEL,
         DEMO_PANEL,
-        PLAY_PANEL,
+        JOIN_PANEL,
         START_PANEL,
         LOADING_PANEL
     } PanelType;
 
-  void    createPanel(PanelType);
-
-  APanel  *getPanel() const;
-
-private:
-    APanel  *_panel;
+  static APanel    *createPanel(PanelType);
 };
 
-#endif // PANELFACTORY_H
+#endif

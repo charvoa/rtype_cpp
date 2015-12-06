@@ -5,10 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:33:26 2015 Louis Audibert
-// Last update Mon Nov 30 01:35:09 2015 Louis Audibert
+// Last update Thu Dec  3 05:17:48 2015 Louis Audibert
 //
 
-#include "Health.hh"
+#include <Health.hh>
 
 Health::Health()
 {

@@ -1,11 +1,11 @@
 //
 // PanelFactory.cpp for PanelFactory in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:51:41 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 10:08:02 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 16:40:19 2015 Nicolas Girardot
 //
 
 #include "PanelFactory.hh"
@@ -13,7 +13,7 @@
 #include "SettingsPanel.hh"
 #include "GamePanel.hh"
 #include "DemoPanel.hh"
-#include "PlayPanel.hh"
+#include "JoinPanel.hh"
 #include "StartPanel.hh"
 #include "LoadingPanel.hh"
 
@@ -24,37 +24,23 @@ PanelFactory::PanelFactory()
 
 PanelFactory::~PanelFactory() {}
 
-void		PanelFactory::createPanel(PanelType type)
+APanel		*PanelFactory::createPanel(PanelType type)
 {
-  if (_panel != NULL)
-    delete _panel;
   switch (type)
     {
     case ROOM_PANEL:
-      _panel = new RoomPanel;
-      break;
+      return (new RoomPanel);
     case SETTINGS_PANEL:
-      _panel = new SettingsPanel;
-      break;
+      return (new SettingsPanel);
     case GAME_PANEL:
-      _panel = new GamePanel;
-      break;
+      return (new GamePanel);
     case DEMO_PANEL:
-      _panel = new DemoPanel;
-      break;
-    case PLAY_PANEL:
-      _panel = new PlayPanel;
-      break;
+      return (new DemoPanel);
+    case JOIN_PANEL:
+      return (new JoinPanel);
     case START_PANEL:
-      _panel = new StartPanel;
-      break;
-    case LOADING_PANEL:
-      _panel = new LoadingPanel;
-      break;
+      return (new StartPanel);
+    default:
+      return (new LoadingPanel);
     }
-}
-
-APanel		*PanelFactory::getPanel() const
-{
-  return (_panel);
 }

@@ -1,40 +1,40 @@
 //
 // IIputManager.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Nov 25 05:49:46 2015 Serge Heitzler
+// Last update Sat Dec  5 06:06:43 2015 Serge Heitzler
 //
 
-#ifndef IINPUTMANAGER_HH_
-#define IINPUTMANAGER_HH_
+#ifndef							IINPUTMANAGER_HH_
+#define							IINPUTMANAGER_HH_
 
-#include <SFML/Graphics.hpp>
-#include <string>
-#include <map>
+#include						<SFML/Graphics.hpp>
+#include						<string>
+#include						<map>
+#include						"IRenderWindow.hh"
+#include						"InputTypeEnum.hh"
 
-typedef	enum	MenuEvent
-{
-};
-
-class	        IInputManager
+class							IInputManager
 {
 
-  IInputManager();
-  IInputManager(const std::string& pathToFile);
-  ~IInputManager();
+public:
 
-  void		create() = 0;
+  virtual std::pair<unsigned int, unsigned int>        	joystickPressedAt(sf::Event &event) = 0;
+  virtual std::pair<unsigned int, unsigned int>        	joystickMovedInDirection(sf::Event &event) = 0;
+  virtual bool						isMouseInWindow(Vector2 posMouse) = 0;
+  virtual int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement) = 0;
+  virtual int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement) = 0;
+  virtual std::pair<unsigned int, unsigned int>		joystickMovedInMenuAt(sf::Event& event) = 0;
+  virtual std::pair<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event) = 0;
+  virtual std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event) = 0;
+  virtual std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event) = 0;
+  virtual std::pair<unsigned int, unsigned int>		joystickHardwareEvent(sf::Event& event) = 0;
 
 private:
 
-  typedef std::map<MenuEvent, funcs>PointersOnFuncs;
-  typedef void(IInputManager::*funcs)(DataFromClient &data);
-  funcs _ptr;
-  PointersOnFuncs	        _functions;
-  
 };
 
-#endif /* !IINPUTMANAGER_HH_ */
+#endif							/* !IINPUTMANAGER_HH_ */

@@ -1,11 +1,11 @@
 //
 // Volume.cpp for Volume in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:52:07 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:52:08 2015 Viveka BARNEAUD
+// Last update Thu Dec  3 16:42:05 2015 Nicolas Girardot
 //
 
 #include "Volume.hh"
@@ -16,6 +16,9 @@ Volume::Volume(int global, int effects, int music)
     _effects = effects;
     _music = music;
 }
+
+
+Volume::Volume(){}
 
 Volume::~Volume(){}
 

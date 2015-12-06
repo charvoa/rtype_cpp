@@ -5,21 +5,23 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Wed Nov 25 16:36:31 2015 Nicolas Girardot
+// Last update Fri Dec  4 20:23:30 2015 Nicolas Girardot
 //
 
 #ifndef IRENDERWINDOW_HH_
 #define IRENDERWINDOW_HH_
 
+
 #include <string>
 #include <cstdint>
+#define Uint32 uint32_t
 #include <SFML/Window/ContextSettings.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include "IVideoMode.hh"
 #include "Vector2.hh"
 
-class	        IRenderWindow
+class  		      IRenderWindow
 {
 public:
   virtual void		close() = 0;
@@ -27,8 +29,9 @@ public:
   virtual void		clear(const sf::Color& color) = 0;
   virtual bool		pollEvent(sf::Event& event) = 0;
   virtual bool	        waitEvent(sf::Event& event) = 0;
-  virtual IVector2    	getSize() const = 0;
+  virtual Vector2   	getSize() const = 0;
   virtual void		setVerticalSyncEnabled(bool value) = 0;
+  virtual void		setFramerateLimit(unsigned int limit) = 0;
   virtual void		setMouseCursorVisible(bool value) = 0;
   virtual void		setKeyRepeatEnabled(bool value) = 0;
   virtual void		display() = 0;
