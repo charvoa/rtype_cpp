@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:13:44 2015 Nicolas Charvoz
+// Last update Sun Dec  6 08:45:53 2015 Antoine Garcia
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -13,6 +13,7 @@
 
 # define KEY_PINTADE 2965
 
+# include <cstring>
 # include <string>
 # include <iostream>
 # include <E_Command.hh>
