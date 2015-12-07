@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Dec  7 15:16:50 2015 Nicolas Girardot
+// Last update Mon Dec  7 15:19:02 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -13,6 +13,7 @@
 #include "StartPanel.hh"
 #include "RenderWindow.hh"
 #include "InputManager.hh"
+#include "Button.hh"
 
 StartPanel::StartPanel()
 {
@@ -57,6 +58,16 @@ StartPanel::StartPanel()
   // this->getSprites().push_back(&backgroundSpace);
   // this->getSprites().push_back(&earth);
   //  this->getSprites().push_back(*cockpit);
+
+  // Button
+
+  std::string name = "toto";
+  std::string fileDefault = "../common/misc/MicroDesignDefault.png";
+  std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
+  Button *startButton = new Button(Vector2(window->getSize()._x / 2, window->getSize()._y / 3), Vector2(200, 50), name, fileDefault, fileHighlight, fileDefault);
+  getElements().push_back(// static_cast<AMenuElement*>
+			  (startButton));
+
 }
 
 StartPanel::~StartPanel() {}

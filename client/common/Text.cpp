@@ -5,10 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 00:59:53 2015 Serge Heitzler
-// Last update Thu Dec  3 21:59:06 2015 Nicolas Girardot
+// Last update Sat Dec  5 07:47:30 2015 Serge Heitzler
 //
 
 #include "Text.hh"
+
+Text::Text()
+{
+}
 
 Text::Text(const std::string &string, Font &font, unsigned int characterSize)
 {
@@ -34,10 +38,15 @@ void			Text::setColor(Color::Tint color)
 
 void			Text::setSize(unsigned int size)
 {
-  _fontSize = size;
+  _text.setCharacterSize(size);
 }
 
 void			Text::setString(const std::string& title)
 {
   _text.setString(title);
+}
+
+sf::Text		&Text::getText()
+{
+  return _text;
 }
