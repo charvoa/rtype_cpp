@@ -5,31 +5,32 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:58 2015 Serge Heitzler
-// Last update Tue Dec  1 14:46:28 2015 Serge Heitzler
+// Last update Mon Dec  7 01:08:47 2015 Serge Heitzler
 //
 
 #ifndef AMENUELEMENT_HH_
 #define AMENUELEMENT_HH_
 
 #include <SFML/Graphics.hpp>
-#include "Position.hh"
-#include "Size.hh"
+#include "Sprite.hh"
+#include "Texture.hh"
 
 class	        AMenuElement
 {
 public:
-  AMenuElement(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+  AMenuElement();
   ~AMenuElement();
 
-  Position		&getPosition();
-  Size			&getSize();
   virtual void			render();
-
-private:
-
-  Position		_position;
-  Size			_size;
+  virtual void			update(std::pair<unsigned int, unsigned int> pair);
+  Sprite			&getSprite();
+  Texture			&getHighlightTexture();
   
+protected:
+
+    Sprite		*_sprite;
+    Texture		*_highlight;
+
 };
 
 #endif /* !AMENUELEMENT_HH_ */

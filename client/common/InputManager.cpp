@@ -5,11 +5,10 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Sat Dec  5 06:49:42 2015 Serge Heitzler
+// Last update Mon Dec  7 00:44:26 2015 Serge Heitzler
 //
 
 #include <iostream>
-//#include <SFML/Mouse.hpp>
 #include "InputManager.hh"
 #include "RenderWindow.hh"
 
@@ -100,6 +99,9 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
 std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Event& event)
 {
   std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
+
+  (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
+  
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 

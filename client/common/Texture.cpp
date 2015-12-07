@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Dec  2 00:29:28 2015 Serge Heitzler
-// Last update Fri Dec  4 03:41:19 2015 Serge Heitzler
+// Last update Sat Dec  5 07:25:39 2015 Serge Heitzler
 //
 
 #include "Texture.hh"
@@ -21,10 +21,7 @@ Texture::~Texture()
 
 void		Texture::loadFromFile(const std::string& path)
 {
-  if (_texture.loadFromFile(path))
-    std::cout << "success" << std::endl;
-  else
-    std::cout << "error" << std::endl;
+  _texture.loadFromFile(path);
 }
 
 void		Texture::loadFromFile(const std::string& path, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height)
