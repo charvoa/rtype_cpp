@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:32:07 2015 Louis Audibert
-// Last update Thu Dec  3 05:22:25 2015 Louis Audibert
+// Last update Sat Dec  5 10:32:55 2015 Antoine Garcia
 //
 
 #include <Parameters.hh>
@@ -17,7 +17,7 @@ Parameters::Parameters()
 
 Parameters::~Parameters()
 {
-  std::cout << "Parameters Destroyed" << std::endl;
+
 }
 
 void	Parameters::setDifficulty(E_DIFFICULTY difficulty)

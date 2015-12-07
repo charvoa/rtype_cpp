@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 14:29:07 2015 Joris Bertomeu
+// Last update Sat Dec  5 16:51:01 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
@@ -23,13 +23,11 @@ public:
   }			TYPE;
 
 protected:
-  char			_buffer[4096];
   ISocket		*_socket;
 
 public :
   typedef struct	s_frame {
     short int		keyPintade;
-    unsigned char	requestType;
     unsigned int	idRequest;
     int			crc;
     int			sizeData;
@@ -48,6 +46,7 @@ public :
   virtual void		connect(const std::string &) = 0;
   virtual t_frame	read() = 0;
   virtual int		write(t_frame) = 0;
+  virtual ISocket	*select() = 0;
 };
 
 #endif

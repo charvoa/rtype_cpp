@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Sat Dec  5 13:37:46 2015 Joris Bertomeu
+// Last update Sat Dec  5 17:14:20 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -59,11 +59,7 @@ int		main(int ac, char **av)
 
   ANetwork::t_frame frame;
 
-  char data[49];
-  bzero(&data, 0);
-  strcpy(data, "lol");
-
-  frame = CreateRequest::create(4567, 1, 1, 12, 3, data);
+  frame = CreateRequest::create(1, 12, 3, "data");
 
   std::cout << "frame data : " << CreateRequest::getData(frame) << std::endl;
   /* FIN DU GAME */

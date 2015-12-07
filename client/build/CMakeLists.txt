@@ -19,7 +19,7 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h"
   )
-include_directories("${PROJECT_BINARY_DIR}" ../common ../unix ../windows ../../common)
+include_directories("${PROJECT_BINARY_DIR}" ../common ../unix ../windows ../../common ../../server)
 if(CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
 endif(CMAKE_COMPILER_IS_GNUCXX)
@@ -28,6 +28,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # Define sources and executable
 set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
+  ../../common/Network.hpp
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp

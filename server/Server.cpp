@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 14:08:06 2015 Joris Bertomeu
+// Last update Mon Dec  7 01:20:46 2015 Antoine Garcia
 //
 
 #include <Network.hpp>
@@ -24,23 +24,39 @@ void Server::init()
   this->_network->init(4253, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
+  this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
 }
 
 void Server::run()
 {
-  Socket	*client;
+  Client	*client;
 
   std::cout << "Server :: Run" << std::endl;
   while (1) {
-    client = dynamic_cast<Socket*>(this->_network->accept());
-    std::cout << (char*) client->read(4096) << std::endl;
-  }
+    client = new Client(dynamic_cast<Socket*>(this->_network->select()));
+    this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+					 client, this);
+   }
 }
 
-bool Server::createGame() {
+bool Server::createGame(ANetwork::t_frame frame, void *data) {
+  (void) frame;
+  (void) data;
   return true;
 }
 
-bool Server::createRoom() {
+bool Server::createRoom(ANetwork::t_frame frame, void *data) {
+  Client	&client = *reinterpret_cast<Client *>(data);
+
+  (void) frame;
+  _roomManager.createNewRoom(client);
   return true;
+}
+
+bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
+{
+   Client	&client = *reinterpret_cast<Client *>(data);
+
+   _roomManager.getRoombyId(frame.data).addPlayer(client);
+   return true;
 }
