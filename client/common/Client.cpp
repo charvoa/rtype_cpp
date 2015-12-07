@@ -5,13 +5,14 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec  7 10:49:51 2015 Nicolas Girardot
+// Last update Mon Dec  7 15:14:10 2015 Nicolas Girardot
 //
 
 #include "Client.hh"
 #include <SFML/Audio.hpp>
 
 Network	*Client::_network = NULL;
+Sound *Client::_sound = NULL;
 Client::Client()
 {
 
@@ -31,10 +32,9 @@ void	Client::Start()
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  sf::Music Music;
-  if (!Music.openFromFile("../common/misc/menuMusic.ogg"))
-    return;
-  Music.play();
+  _sound = new Sound();
+  _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
+  _sound->playMusic("mainMenu");
   while(window->isOpen())
     {
       window->getPanels().top()->update();
@@ -54,4 +54,11 @@ Network	*Client::getNetwork()
   if (!_network)
     _network = new Network();
   return _network;
+}
+
+Sound		*Client::getSound()
+{
+  if (!_sound)
+    _sound = new Sound();
+  return _sound;
 }

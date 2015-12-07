@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Sat Dec  5 16:23:10 2015 Nicolas Girardot
+// Last update Mon Dec  7 15:11:11 2015 Nicolas Girardot
 //
 
 #ifndef CLIENT_HH_
@@ -21,6 +21,7 @@
 #include "StartPanel.hh"
 #include "InputManager.hh"
 #include "PanelFactory.hh"
+#include "SoundManager.hh"
 
 class	Client
 {
@@ -29,8 +30,10 @@ public:
   ~Client();
   void	Start();
   static Network	*getNetwork();
+  static Sound		*getSound();
 private:
   static Network	*_network;
+  static Sound		*_sound;
 };
 
 #endif
