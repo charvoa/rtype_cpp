@@ -5,10 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Thu Dec  3 05:14:56 2015 Louis Audibert
+// Last update Mon Dec  7 08:12:52 2015 Louis Audibert
 //
 
 #include <EntityFactory.hh>
+#include <dlfcn.h>
+
+#include "libs/LittleMonster.hh"
 
 EntityFactory::EntityFactory()
 {
@@ -30,7 +33,21 @@ AEntity	*EntityFactory::createEntity(int &id)
 AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
 {
   //temporary
-  (void) filename;
+  (void)filename;
+  void* handle = dlopen("./libs/littlemonster.so", RTLD_LAZY);
+
+  //  LittleMonster* (*create)(int);
+  void (*updateFunc)(AEntity*);
+
+  //  create = (LittleMonster* (*)(int))dlsym(handle, "create_object");
+  updateFunc = (void (*)(AEntity*))dlsym(handle, "update");
+
+  //  LittleMonster* monster = (LittleMonster*)create(id);
+
+  updateFunc(new AEntity(id));
+
+  //monster->update(new AEntity(id));
+  //blabla
   id += 1;
   return (new AEntity(id));
 }

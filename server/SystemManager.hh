@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:27:31 2015 Louis Audibert
-// Last update Thu Dec  3 05:32:44 2015 Louis Audibert
+// Last update Mon Dec  7 06:04:18 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMMANAGER_HH_
@@ -14,7 +14,7 @@
 # include <iostream>
 # include <vector>
 # include <E_Component.hh>
-# include <ASystem.hh>
+# include <ASystem.hpp>
 # include <SystemPos.hh>
 # include <SystemHealth.hh>
 # include <SystemGun.hh>
