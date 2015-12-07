@@ -5,46 +5,107 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Sat Dec  5 05:43:52 2015 Serge Heitzler
+// Last update Mon Dec  7 12:08:16 2015 Serge Heitzler
 //
 
+#include <iostream>
+#include <map>
 #include "APanel.hh"
 #include "RenderWindow.hh"
-#include <iostream>
+
 APanel::APanel(){}
 
 APanel::~APanel(){}
 
-void		APanel::update()
+void		APanel::update(){}
+
+void		APanel::setUserInterface(){}
+
+void		APanel::updateOnEvent(std::pair<unsigned int, unsigned int> pair)
 {
-  std::cout << "update APANEL" << std::endl;
+  unsigned int		i = 0;
+  while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+    {
+      this->_userInterface.at(i)->update(pair);
+      i++;
+    }  
 }
 
 void		APanel::render()
 {
+  this->drawBackgrounds();
+  this->drawUserInterface();
+  this->drawLabels();
+  this->drawInGame();
+}
+
+void					APanel::drawBackgrounds()
+{
   unsigned int		i = 0;
 
-  if (this->getSprites().size() > 0)
-    while (i < this->getSprites().size())
-      {
-	(RenderWindow::getInstance())->draw(this->_sprites.at(i).getSprite());
-	i++;
-      }
+  while (i < this->_backgrounds.size() && this->_backgrounds.size() > 0)
+    {
+      (RenderWindow::getInstance())->draw(this->_backgrounds.at(i).getSprite());
+      i++;
+    }
 }
 
-void		APanel::hide()
+void					APanel::drawUserInterface()
 {
+  unsigned int		i = 0;
 
+  while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+    {
+      (RenderWindow::getInstance())->draw(this->_userInterface.at(i)->getSprite().getSprite());
+      i++;
+    }
 }
 
-std::vector<AMenuElement*>		&APanel::getElements()
+void					APanel::drawLabels()
 {
-  return _elements;
+  unsigned int		i = 0;
+
+  i = 0;
+  while (i < this->_labels.size() && this->_labels.size() > 0)
+    {
+      (RenderWindow::getInstance())->draw(this->_labels.at(i).getText());
+      i++;
+    }
 }
 
-std::vector<Sprite>			&APanel::getSprites()
+void					APanel::drawInGame()
 {
-  return _sprites;
+  unsigned int		i = 0;
+
+  i = 0;
+  while (i < this->_inGame.size() && this->_inGame.size() > 0)
+    {
+      (RenderWindow::getInstance())->draw(this->_inGame.at(i).getSprite());
+      i++;
+    }
+}
+
+
+void		APanel::hide(){}
+
+std::vector<AMenuElement*>		&APanel::getUserInterface()
+{
+  return _userInterface;
+}
+
+std::vector<Sprite>			&APanel::getBackgrounds()
+{
+  return _backgrounds;
+}
+
+std::vector<Text>			&APanel::getLabels()
+{
+  return _labels;
+}
+
+std::vector<Sprite>			&APanel::getInGame()
+{
+  return _inGame;
 }
 
 InputManager	&APanel::getInputManager()

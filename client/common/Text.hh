@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Thu Dec  3 13:35:19 2015 Serge Heitzler
+// Last update Mon Dec  7 12:01:20 2015 Serge Heitzler
 //
 
 #ifndef TEXT_HH_
@@ -13,14 +13,17 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "Vector2.hh"
 #include "IText.hh"
 #include "Font.hh"
 #include "Color.hh"
+#include "AMenuElement.hh"
 
 class	        Text : public IText
 {
 
 public:
+  Text();
   Text(const std::string &string, Font &font, unsigned int characterSize=30);
   ~Text();
 
@@ -28,12 +31,15 @@ public:
   void			setColor(Color::Tint);
   void			setSize(unsigned int size);
   void			setString(const std::string& title);
-
+  void			setPosition(Vector2 pos);
+  void		        setOrigin(float x, float y);
+  void		        setStyle(uint32_t style);
+  sf::Text		&getText();
+  
 private :
 
-  std::string		_string;
   sf::Text		_text;
-  unsigned int		_fontSize;
+  
 };
 
 #endif /* !TEXT_HH_ */

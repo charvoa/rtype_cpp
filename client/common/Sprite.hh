@@ -5,12 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Fri Dec  4 03:25:26 2015 Serge Heitzler
+// Last update Mon Dec  7 10:46:07 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
 #define SPRITE_HH_
 
+#include <map>
 #include "ISprite.hh"
 #include "Color.hh"
 
@@ -28,8 +29,10 @@ public:
   void			setOrigin(float x, float y);
   void			move(float x, float y);
   void			rotate(float angle);
-  sf::Sprite		getSprite();
-
+  void			setTextureRect(float posX, float posY, float width, float height);
+  std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>>			getGlobalBounds();
+  sf::Sprite		&getSprite();
+  
 private:
 
   sf::Sprite		_sprite;

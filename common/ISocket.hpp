@@ -5,20 +5,11 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Sat Dec  5 13:23:48 2015 Joris Bertomeu
+// Last update Sun Dec  6 08:45:28 2015 Antoine Garcia
 //
 
 #ifndef		__ISOCKET_HPP_
 # define	__ISOCKET_HPP_
-
-# include	<sys/types.h>
-# include	<unistd.h>
-# include	<sys/socket.h>
-# include	<netinet/in.h>
-# include	<stdexcept>
-# include	<string.h>
-# include	<errno.h>
-#include	<netdb.h>
 
 class		ISocket
 {

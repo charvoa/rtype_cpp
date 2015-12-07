@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Sat Dec  5 17:14:20 2015 Nicolas Charvoz
+// Last update Mon Dec  7 15:10:40 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -43,8 +43,8 @@ int		main(int ac, char **av)
   /* TEST */
   m = new Mutex();
 
-  AThread *t1 = new Thread(1);
-  AThread *t2 = new Thread(2);
+  std::unique_ptr<AThread> t1(new Thread(1));
+  std::unique_ptr<AThread> t2(new Thread(2));
 
   char str1[] = "http://foo";
   char str2[] = "http://bar";
