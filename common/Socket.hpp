@@ -5,20 +5,20 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sat Dec  5 18:23:04 2015 Joris Bertomeu
+// Last update Sun Dec  6 08:45:26 2015 Antoine Garcia
 //
 
 #ifndef		__SOCKET__HPP_
 # define	__SOCKET__HPP_
 
-# include	<stdio.h>
-# include	<unistd.h>
-# include	<stdlib.h>
-# include	<string.h>
 # include	<sys/types.h>
+# include	<unistd.h>
 # include	<sys/socket.h>
 # include	<netinet/in.h>
 # include	<stdexcept>
+# include	<string.h>
+# include	<errno.h>
+#include	<netdb.h>
 # include	<ISocket.hpp>
 # include	<arpa/inet.h>
 
