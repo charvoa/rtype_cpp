@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Mon Dec  7 01:08:36 2015 Serge Heitzler
+// Last update Mon Dec  7 10:29:27 2015 Serge Heitzler
 //
 
 #ifndef BUTTON_HH_
@@ -36,17 +36,15 @@ public:
   void		        update(std::pair<unsigned int, unsigned int> pair);
   void			render();
   void			setState(StateButton state);
-  void			setTitle(const std::string &title);
   Texture      		&getNormalTexture();
-  //  Texture      		&getHighlightTexture();
+  Texture      		&getHighlightTexture();
   Texture      		&getSelectTexture();
 
 private:
 
   StateButton	       	_state;
-  Text			*_title;
   Texture		*_normal;
-  //  Texture		*_highlight;
+  Texture		*_highlight;
   Texture		*_select;
 };
 

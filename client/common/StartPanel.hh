@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 22:48:41 2015 Serge Heitzler
+// Last update Mon Dec  7 06:10:52 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -26,6 +26,7 @@ public:
   void		settings();
   void		exit();
   void	        update();
+  void	        setUserInterface();
 
   Texture	_cockpitTexture;
   Sprite	_cockpit;

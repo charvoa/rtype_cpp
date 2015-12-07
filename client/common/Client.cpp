@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec  7 01:54:51 2015 Serge Heitzler
+// Last update Mon Dec  7 11:17:12 2015 Serge Heitzler
 //
 
 #include "Client.hh"
@@ -30,7 +30,12 @@ void	Client::Start()
   //  _network->connect("10.16.253.141");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
+
+  std::cout << "TEST" << std::endl;
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
+  std::cout << "TEST" << std::endl;
+  window->getPanels().top()->setUserInterface();
+  std::cout << window->getPanels().size() << std::endl;
   sf::Music Music;
   if (!Music.openFromFile("../common/misc/menuMusic.ogg"))
     return;
@@ -42,9 +47,9 @@ void	Client::Start()
       window->display();
       sf::Event event;
       while (window->pollEvent(event))
-	{
-	  window->getPanels().top()->getInputManager().methodChecker(event);
-	}
+      	{
+      	  window->getPanels().top()->getInputManager().methodChecker(event);
+      	}
     }
   _network->close();
 }

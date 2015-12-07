@@ -5,9 +5,10 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Sat Dec  5 07:30:19 2015 Serge Heitzler
-// Last update Mon Dec  7 01:09:15 2015 Serge Heitzler
+// Last update Mon Dec  7 11:10:03 2015 Serge Heitzler
 //
 
+#include <iostream>
 #include "AMenuElement.hh"
 
 AMenuElement::AMenuElement()
@@ -33,10 +34,4 @@ void			AMenuElement::update(std::pair<unsigned int, unsigned int> pair)
 Sprite			&AMenuElement::getSprite()
 {
   return *_sprite;
-}
-
-Texture			&AMenuElement::getHighlightTexture
-()
-{
-  return *_highlight;
 }
