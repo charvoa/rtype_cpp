@@ -5,9 +5,10 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Sat Dec  5 04:52:19 2015 Serge Heitzler
+// Last update Mon Dec  7 10:38:48 2015 Nicolas Girardot
 //
 
+#include <SFML/Audio.hpp>
 #include "Client.hh"
 
 int main()
