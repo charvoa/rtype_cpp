@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:32:36 2015 Joris Bertomeu
+// Last update Mon Dec  7 01:01:06 2015 Antoine Garcia
 //
 
 #include <Network.hpp>
@@ -51,4 +51,12 @@ bool Server::createRoom(ANetwork::t_frame frame, void *data) {
   (void) frame;
   _roomManager.createNewRoom(client);
   return true;
+}
+
+bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
+{
+   Client	&client = *reinterpret_cast<Client *>(data);
+
+   _roomManager.getRoombyId(frame.data).addPlayer(client);
+   return true;
 }
