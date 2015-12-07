@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Dec  2 17:01:11 2015 Nicolas Charvoz
-// Last update Wed Dec  2 17:01:13 2015 Nicolas Charvoz
+// Last update Mon Dec  7 15:08:05 2015 Nicolas Charvoz
 //
 
 #ifndef _THREADUNIX_HPP_

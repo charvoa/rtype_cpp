@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Mon Dec  7 01:20:46 2015 Antoine Garcia
+// Last update Mon Dec  7 07:48:30 2015 Antoine Garcia
 //
 
 #include <Network.hpp>
@@ -25,6 +25,7 @@ void Server::init()
   this->_network->bind();
   this->_network->listen(24);
   this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
+  this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
 }
 
 void Server::run()
@@ -32,11 +33,13 @@ void Server::run()
   Client	*client;
 
   std::cout << "Server :: Run" << std::endl;
-  while (1) {
-    client = new Client(dynamic_cast<Socket*>(this->_network->select()));
-    this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-					 client, this);
-   }
+  while (1)
+    {
+      client = new Client(dynamic_cast<Socket*>(this->_network->select()));
+      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+					   client, this);
+
+    }
 }
 
 bool Server::createGame(ANetwork::t_frame frame, void *data) {

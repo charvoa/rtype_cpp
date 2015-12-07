@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Dec  7 12:16:35 2015 Serge Heitzler
+// Last update Mon Dec  7 12:21:54 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -24,7 +24,7 @@ void		StartPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::MENU_INPUT);
-  
+
   Texture *backgroundSpaceTexture = new Texture;
   Texture *earthTexture = new Texture;
   Texture *cockpitTexture = new Texture;
@@ -34,7 +34,7 @@ void		StartPanel::setUserInterface()
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
   Sprite *logo = new Sprite;
-  
+
   backgroundSpaceTexture->loadFromFile("../common/misc/background.png");
   earthTexture->loadFromFile("../common/misc/planet_earth_background.png");
   cockpitTexture->loadFromFile("../common/misc/cockpit.png");
@@ -42,7 +42,7 @@ void		StartPanel::setUserInterface()
 
   earth->setOrigin(earthTexture->getSize()._x / 2, earthTexture->getSize()._y / 2);
   logo->setOrigin(logoTexture->getSize()._x / 2, logoTexture->getSize()._y / 2);
-  
+
   backgroundSpace->setTexture(*backgroundSpaceTexture);
   earth->setTexture(*earthTexture);
   cockpit->setTexture(*cockpitTexture);
@@ -65,7 +65,6 @@ void		StartPanel::setUserInterface()
 
   std::string fileDefault = "../common/misc/MicroDesignDefault.png";
   std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
-
   std::string name = "CREATE";
     ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.3), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
     name = "JOIN";
