@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Mon Dec  7 03:02:11 2015 Antoine Garcia
+// Last update Mon Dec  7 03:04:06 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -28,7 +28,7 @@ const std::string &Room::getId() const
 
 void	Room::addPlayer(Client &client)
 {
-  if (this->getAllPlayers < 4)
+  if (this->getAllPlayers().size() < 4)
     {
       _clientManager.addClients(client);
     }
