@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:25:47 2015 Nicolas Charvoz
+// Last update Mon Dec  7 15:21:01 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -36,6 +36,7 @@ void Game::setParameters(Parameters &p)
 
 bool Game::run()
 {
+
   return true;
 }
 
