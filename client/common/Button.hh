@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Thu Dec  3 13:22:44 2015 Serge Heitzler
+// Last update Mon Dec  7 01:08:36 2015 Serge Heitzler
 //
 
 #ifndef BUTTON_HH_
@@ -19,6 +19,7 @@ class	        Button : public AMenuElement
 {
 public:
   Button();
+  Button(Vector2 pos, Vector2 size, const std::string &title, const std::string &normal, const std::string &highlight, const std::string &select);
   ~Button();
 
   typedef enum e_stateButton
@@ -28,19 +29,25 @@ public:
       DISABLED
     }		StateButton;
 
-
   bool			mousePressEvent(sf::Event& event);
   bool			mouseReleaseEvent(sf::Event& event);
   bool			mouseEntered(sf::Event& event);
   bool			mouseLeft(sf::Event& event);
+  void		        update(std::pair<unsigned int, unsigned int> pair);
   void			render();
+  void			setState(StateButton state);
+  void			setTitle(const std::string &title);
+  Texture      		&getNormalTexture();
+  //  Texture      		&getHighlightTexture();
+  Texture      		&getSelectTexture();
 
 private:
 
   StateButton	       	_state;
-  Text			_title;
-  Sprite		_backgroundNormal;
-  Sprite		_backgroundSelected;
+  Text			*_title;
+  Texture		*_normal;
+  //  Texture		*_highlight;
+  Texture		*_select;
 };
 
 #endif /* !BUTTON_HH_ */

@@ -34,7 +34,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Vector2.cpp
   ../common/APanel.cpp
   ../common/Bind.cpp
-#  ../common/Button.cpp
+  ../common/Button.cpp
   ../common/Color.cpp
   ../common/DemoPanel.cpp
   ../common/Font.cpp
@@ -45,6 +45,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/StartPanel.cpp
   ../common/PanelFactory.cpp
   ../common/RoomPanel.cpp
+  ../common/AMenuElement.cpp
   ../common/Client.cpp
   ../common/Settings.cpp
   ../common/Text.cpp
