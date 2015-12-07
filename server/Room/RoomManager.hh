@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Thu Dec  3 05:29:06 2015 Louis Audibert
+// Last update Mon Dec  7 01:35:04 2015 Antoine Garcia
 //
 
 #ifndef _ROOMMANAGER_HH_

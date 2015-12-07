@@ -5,11 +5,11 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sat Dec  5 18:57:59 2015 Nicolas Charvoz
+// Last update Mon Dec  7 12:06:50 2015 Nicolas Charvoz
 //
 
 #include "Client.hh"
-
+#include <SFML/Audio.hpp>
 
 Network	*Client::_network = NULL;
 Client::Client()
@@ -31,6 +31,10 @@ void	Client::Start()
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
+  sf::Music Music;
+  if (!Music.openFromFile("../common/misc/menuMusic.ogg"))
+    return;
+  Music.play();
   while(window->isOpen())
     {
       window->getPanels().top()->update();

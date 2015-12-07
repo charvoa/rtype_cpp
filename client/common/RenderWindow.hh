@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Sat Dec  5 05:32:07 2015 Serge Heitzler
+// Last update Sat Dec  5 07:49:32 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -16,7 +16,6 @@
 #include "IRenderWindow.hh"
 #include "PanelFactory.hh"
 #include "Vector2.hh"
-#include "Size.hh"
 
 class	        RenderWindow : public IRenderWindow
 {
@@ -36,8 +35,8 @@ public:
   void		display();
   void		draw(const sf::Drawable &drawable, const sf::RenderStates &states = sf::RenderStates::Default);
   void		clear(const sf::Color &color = sf::Color(0, 0, 0, 255));
-  void      addPanel(PanelFactory::PanelType);
-  void      back();
+  void		addPanel(PanelFactory::PanelType);
+  void		back();
   Settings	*getSettings();
   void		setSettings(Settings*);
   void		setWindow(sf::VideoMode, std::string const& title);
@@ -49,8 +48,6 @@ private:
   sf::RenderWindow	*_window;
   std::stack<APanel*>   _panels;
   Settings		*_settings;
-  //Size		_size;
-  //PanelFactory	_panelFactory;
 };
 
 #endif /* !RENDERWINDOW_HH_ */
