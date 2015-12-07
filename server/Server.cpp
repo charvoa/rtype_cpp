@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Mon Dec  7 01:01:06 2015 Antoine Garcia
+// Last update Mon Dec  7 01:20:46 2015 Antoine Garcia
 //
 
 #include <Network.hpp>
@@ -29,13 +29,13 @@ void Server::init()
 
 void Server::run()
 {
-  Socket	*client;
+  Client	*client;
 
   std::cout << "Server :: Run" << std::endl;
   while (1) {
-    client = dynamic_cast<Socket*>(this->_network->select());
-    this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->read(sizeof(ANetwork::t_frame))))),
-					 dynamic_cast<void*>(client), this);
+    client = new Client(dynamic_cast<Socket*>(this->_network->select()));
+    this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+					 client, this);
    }
 }
 

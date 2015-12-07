@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:21:37 2015 Nicolas Charvoz
-// Last update Sat Dec  5 16:08:35 2015 Nicolas Charvoz
+// Last update Mon Dec  7 01:15:55 2015 Antoine Garcia
 //
 
 #ifndef CLIENT_HH_
@@ -21,6 +21,7 @@ private:
 
 public:
   Client();
+  Client(ISocket *);
   ~Client();
   ISocket *getSocket() const;
   bool operator==(const Client&) const;
