@@ -26,10 +26,7 @@ Server::~Server() {}
 void Server::init(int port)
 {
   std::cout << "Server :: Init" << std::endl;
-  this->_network->init(port, ANetwork::UDP_MODE);
-  this->_network->connect("192.168.0.21");
-  this->_network->write("Salut\r\n", 7);
-  std::cout << (char*) this->_network->read(4096) << std::endl;
+  this->_network->init(port, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
   this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
@@ -46,7 +43,7 @@ void Server::run()
     {
       client = new Client(dynamic_cast<Socket*>(this->_network->select()));
       //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
-      client->getSocket()->write((void*) "Salut\r\n", 7);
+      //client->getSocket()->write((void*) "Salut\r\n", 7);
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
       client, this);
     }
