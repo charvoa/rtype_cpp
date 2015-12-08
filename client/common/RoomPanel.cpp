@@ -5,34 +5,56 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 16:40:34 2015 Nicolas Girardot
+// Last update Tue Dec  8 01:33:54 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
 #include "RoomPanel.hh"
 
-RoomPanel::RoomPanel() : APanel()
+RoomPanel::RoomPanel(){}
+
+RoomPanel::~RoomPanel(){}
+
+
+void	        RoomPanel::setUserInterface()
 {
+  //  RenderWindow *window = RenderWindow::getInstance();
+  getInputManager().setInputType(InputType::MENU_INPUT);
+
+  Texture *backgroundSpaceTexture = new Texture;
+
+  Sprite *backgroundSpace = new Sprite;
+
+  backgroundSpaceTexture->loadFromFile("../common/misc/roomPanel.png");
+
+  backgroundSpace->setTexture(*backgroundSpaceTexture);
+
+  backgroundSpace->setPosition(0, 0);
+  
+  _backgrounds.push_back(*backgroundSpace);
 }
 
-RoomPanel::~RoomPanel() {}
-
-void    RoomPanel::difficulty(Settings::Difficulty diff)
+void		RoomPanel::difficulty(Settings::Difficulty diff)
 {
   (RenderWindow::getInstance())->getSettings()->setDifficulty(diff);
 }
 
-void    RoomPanel::start()
+void		RoomPanel::start()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::LOADING_PANEL);
 }
 
-void    RoomPanel::back()
+void		RoomPanel::back()
 {
 	(RenderWindow::getInstance())->back();
 }
 
-void	RoomPanel::render()
+void		RoomPanel::render()
+{
+
+}
+
+void	RoomPanel::update()
 {
 
 }

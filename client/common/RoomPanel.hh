@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 13:26:35 2015 Serge Heitzler
+// Last update Tue Dec  8 01:33:37 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -20,13 +20,16 @@
 class RoomPanel : public APanel
 {
 public:
+  
   RoomPanel();
   ~RoomPanel();
 
-  void    difficulty(Settings::Difficulty);
-  void    start();
-  void    back();
-  void	render();
+  void			difficulty(Settings::Difficulty);
+  void			start();
+  void			back();
+  void			render();
+  void			update();
+  void			setUserInterface();
 
 private:
   // Button  _startButton;
