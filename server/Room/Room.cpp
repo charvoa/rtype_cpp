@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec  8 13:08:08 2015 Antoine Garcia
+// Last update Tue Dec  8 13:10:19 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -62,8 +62,8 @@ void	Room::addPlayer(Client &client)
 {
   if (this->getAllPlayers().size() < 4)
     {
-      _clientManager.addClients(client);
       sendPlayerJoin(client);
+      _clientManager.addClients(client);
       sendRoomPlayerJoin(client);
     }
   sendError(client);
