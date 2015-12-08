@@ -33,6 +33,7 @@ public:
     else
       this->_socket = new Socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     this->_port = port;
+    this->_connectionMode = type;
     FD_ZERO(&_fdList);
     FD_SET(this->_socket->getFd(), &_fdList);
   };
@@ -113,9 +114,13 @@ public:
     for (int i = 0; i < FD_SETSIZE; i++) {
       if (FD_ISSET(i, &_activeFDList)) {
 	if (i == this->_socket->getFd()) {
-	  ISocket *s = this->accept();
-	  this->listenSocket(s);
-	  return (s);
+	  if (this->_connectionMode == ANetwork::UDP_MODE) {
+	    return (new Socket(i, ANetwork::UDP_MODE));
+	  } else {
+	    ISocket *s = this->accept();
+	    this->listenSocket(s);
+	    return (s);
+	  }
 	}
 	else
 	  return (new Socket(i));
