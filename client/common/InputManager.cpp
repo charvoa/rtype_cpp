@@ -5,18 +5,20 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 11:13:28 2015 Nicolas Girardot
+// Last update Tue Dec  8 14:23:17 2015 Nicolas Girardot
 //
 
 #include <iostream>
-#include "InputManager.hh"
-#include "RenderWindow.hh"
-#include "Client.hh"
-#include "../../common/CreateRequest.hpp"
-#include "../../common/CRC.hpp"
-#include "../../common/ANetwork.hpp"
+#include <InputManager.hh>
+#include <RenderWindow.hh>
+#include <Client.hh>
+#include <CreateRequest.hpp>
+#include <CRC.hpp>
+#include <ANetwork.hpp>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
+
+extern std::string g_a;
 
 InputManager::InputManager(){}
 
@@ -113,10 +115,20 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  Network *net = Client::getNetwork();
+  if (event.mouseButton.button == sf::Mouse::Left)
+    {
+      Network *net = Client::getNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
+      net->write(sender);
+    }
+  else if (event.mouseButton.button == sf::Mouse::Right)
+    {
+      std::cout << "GA IS :::::::::::::::::::::::::::::" << g_a << std::endl;
+      Network *net = Client::getNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)4, CRC::calcCRC(g_a), 4, g_a);
+      net->write(sender);
+    }
   std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
-  net->write(sender);
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 

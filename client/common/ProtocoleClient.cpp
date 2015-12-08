@@ -5,10 +5,38 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 01:23:08 2015 Serge Heitzler
-// Last update Tue Dec  8 11:05:27 2015 Nicolas Girardot
+// Last update Tue Dec  8 15:41:06 2015 Nicolas Girardot
 //
 
-#include "ProtocoleClient.hh"
+
+#include <string>
+#include <sstream>
+#include <vector>
+#include <ProtocoleClient.hh>
+#include <StartPanel>
+
+
+std::string	g_a = "";
+
+/////Function to split data
+
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+  std::stringstream ss(s);
+  std::string item;
+  while (std::getline(ss, item, delim)) {
+    elems.push_back(item);
+  }
+  return elems;
+}
+
+
+std::vector<std::string> split(const std::string &s, char delim) {
+  std::vector<std::string> elems;
+  split(s, delim, elems);
+  return elems;
+}
+
+////
 
 ProtocoleClient::ProtocoleClient()
 {
@@ -47,8 +75,10 @@ void		ProtocoleClient::display(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
 {
-  (void) frame;
-  std::cout << "Working" << std::endl;
+  std::cout << "Is before" << std::endl;
+  std::vector<std::string> x = split(frame.data, ';');
+  void (x);
+  StartPanel::createRoom();
 }
 
 void		ProtocoleClient::createRoomSuccess(ANetwork::t_frame &frame)
