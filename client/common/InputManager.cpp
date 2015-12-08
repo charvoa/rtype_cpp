@@ -104,7 +104,7 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
   std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
 
   (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-  
+
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 

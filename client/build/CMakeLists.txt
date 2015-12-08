@@ -19,7 +19,7 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h"
   )
-include_directories("${PROJECT_BINARY_DIR}" ../common ../unix ../windows ../../common ../../server)
+include_directories("${PROJECT_BINARY_DIR}" ../common ../unix ../windows ../../common ../../server ../../common/Thread)
 if(CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
 endif(CMAKE_COMPILER_IS_GNUCXX)
@@ -29,6 +29,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
   ../../common/Network.hpp
+  ../../common/Thread/ThreadUnix.hpp
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
@@ -52,6 +53,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Text.cpp
   ../common/Texture.cpp
   ../common/Volume.cpp
+  ../common/ProtocoleClient.cpp
   ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
