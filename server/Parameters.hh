@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:32:11 2015 Louis Audibert
-// Last update Thu Dec  3 05:26:20 2015 Louis Audibert
+// Last update Tue Dec  8 22:26:43 2015 Nicolas Charvoz
 //
 
 #ifndef _PARAMETERS_HH_
@@ -17,14 +17,14 @@
 class Parameters
 {
 private:
-  E_DIFFICULTY	_difficulty;
+  E_Difficulty	_difficulty;
 
 public:
   Parameters();
   ~Parameters();
 
-  void	setDifficulty(E_DIFFICULTY difficulty);
-  E_DIFFICULTY	getDifficulty() const;
+  void	setDifficulty(E_Difficulty difficulty);
+  E_Difficulty	getDifficulty() const;
 };
 
 #endif /* _PARAMETERS_HH_ */

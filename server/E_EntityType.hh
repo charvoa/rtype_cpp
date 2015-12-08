@@ -5,16 +5,16 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:42:37 2015 Louis Audibert
-// Last update Mon Nov 30 06:44:21 2015 Louis Audibert
+// Last update Tue Dec  8 22:17:47 2015 Nicolas Charvoz
 //
 
 #ifndef _E_ENTITYTYPE_HH_
 # define _E_ENTITYTYPE_HH_
 
-typedef enum E_ENTITYTYPE
+enum E_EntityType
   {
     E_BOT,
     E_PLAYER
-  }		E_ENTITYTYPE;
+  };
 
 #endif /* _E_ENTITYTYPE_H_ */

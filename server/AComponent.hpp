@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Dec  2 17:43:05 2015 Nicolas Charvoz
-// Last update Wed Dec  2 17:43:06 2015 Nicolas Charvoz
+// Last update Tue Dec  8 22:22:57 2015 Nicolas Charvoz
 //
 
 #ifndef _ICOMPONENT_HH_
@@ -16,12 +16,12 @@
 class AComponent {
 
 protected:
-  E_COMPONENT _type;
+  E_Component _type;
 
 public:
   explicit	AComponent() {};
   virtual ~AComponent() {};
-  E_COMPONENT getType();
+  E_Component getType();
 
 };
 
