@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Tue Dec  8 16:29:54 2015 Nicolas Charvoz
+// Last update Tue Dec  8 22:11:21 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HPP_
@@ -23,12 +23,12 @@ class		CommandManager
 public:
   CommandManager();
   ~CommandManager();
-  bool addFunction(E_COMMAND, bool (Server::*cmd)(ANetwork::t_frame frame, void*));
+  bool addFunction(E_Command, bool (Server::*cmd)(ANetwork::t_frame frame, void*));
 
   template <typename T>
   bool executeCommand(ANetwork::t_frame frame, void *data, T *other)
   {
-    bool (Server::*cmd)(ANetwork::t_frame, void*) = _commands[(E_COMMAND)frame.idRequest];
+    bool (Server::*cmd)(ANetwork::t_frame, void*) = _commands[(E_Command)frame.idRequest];
 
     (dynamic_cast<Server*>(other)->*cmd)(frame, data);
     // other->cmd(frame, data);
@@ -37,7 +37,7 @@ public:
 
   private:
 
-  std::map<E_COMMAND, bool (Server::*)(ANetwork::t_frame, void*)> _commands;
+  std::map<E_Command, bool (Server::*)(ANetwork::t_frame, void*)> _commands;
 
 };
 
