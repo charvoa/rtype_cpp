@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec  8 22:12:47 2015 Nicolas Girardot
+// Last update Tue Dec  8 22:29:01 2015 Nicolas Girardot
 //
 
 
@@ -14,7 +14,7 @@
 #include <vector>
 #include <ProtocoleClient.hh>
 #include <StartPanel.hh>
-
+#include <RoomPanel.hh>
 
 std::string	g_a = "JVYO";
 
@@ -75,9 +75,8 @@ void		ProtocoleClient::display(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
 {
-  std::cout << frame.data << " :: Data WAS THIS" << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  StartPanel::createRoom();
+  StartPanel::goToRoom(x, 0);
 }
 
 void		ProtocoleClient::createRoomSuccess(ANetwork::t_frame &frame)
@@ -93,7 +92,7 @@ void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
 void		ProtocoleClient::joinSuccess(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  //StartPanel::goToRoom(x, 1);
+  StartPanel::goToRoom(x, 1);
 }
 
 void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
@@ -108,7 +107,8 @@ void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::newPlayerConnected(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  RoomPanel::newPlayer(x.at(0));
 }
 
 void		ProtocoleClient::playerLeft(ANetwork::t_frame &frame)
