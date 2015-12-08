@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 22:16:12 2015 Nicolas Girardot
+// Last update Tue Dec  8 22:52:55 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -115,11 +115,11 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
 {
   std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
 
-  if (event.mouseButton.button == sf::Mouse::Left)
+  if (event.mouseButton.button == sf::Mouse::Right)
     {
 
       Network *net = Client::getNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)4, CRC::calcCRC("MNEH"), 0, "MNEH");
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)4, CRC::calcCRC(""), 0, "");
       net->write(sender);
     }
 
