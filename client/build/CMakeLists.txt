@@ -40,7 +40,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/ButtonFactory.cpp
   ../common/Color.cpp
   ../common/DemoPanel.cpp
- #  ../common/Font.cpp
+  ../common/SFont.cpp
   ../common/GamePanel.cpp
   ../common/JoinPanel.cpp
   ../common/InputManager.cpp

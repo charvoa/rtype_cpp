@@ -5,16 +5,16 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Tue Dec  8 02:13:59 2015 Serge Heitzler
-// Last update Tue Dec  8 04:42:43 2015 Serge Heitzler
+// Last update Tue Dec  8 08:19:37 2015 Serge Heitzler
 //
 
 #include "Player.hh"
 
 Player::Player()
 {
-  _username = "toto";
-  _isCurrentClient = true;
-  _isReadyToStart = true;
+  _username = "";
+  _isCurrentClient = false;
+  _isReadyToStart = false;
 }
 
 Player::~Player()
@@ -22,7 +22,7 @@ Player::~Player()
   
 }
 
-void			Player::setUsename(std::string &username)
+void			Player::setUsername(std::string &username)
 {
   _username = username;
 }

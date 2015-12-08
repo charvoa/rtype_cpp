@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec  8 16:30:34 2015 Nicolas Girardot
+// Last update Tue Dec  8 08:41:09 2015 Serge Heitzler
 //
 
 
@@ -75,9 +75,9 @@ void		ProtocoleClient::display(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
 {
-  (void) frame;
-  //std::vector<std::string> x = split(frame.data, ';');
-  StartPanel::goToRoom();
+  std::cout << frame.data << " :: Data WAS THIS" << std::endl;
+  std::vector<std::string> x = split(frame.data, ';');
+  StartPanel::goToRoom(x, 0);
 }
 
 void		ProtocoleClient::createRoomSuccess(ANetwork::t_frame &frame)
@@ -92,7 +92,8 @@ void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::joinSuccess(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  StartPanel::goToRoom(x, 1);
 }
 
 void		ProtocoleClient::joinError(ANetwork::t_frame &frame)

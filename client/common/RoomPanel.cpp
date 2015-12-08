@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 16:28:48 2015 Nicolas Girardot
+// Last update Tue Dec  8 08:36:29 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -31,31 +31,17 @@ void	        RoomPanel::setUserInterface()
 
   Texture *backgroundSpaceTexture = new Texture;
 
-  std::cout << "3" << std::endl;
   Sprite *backgroundSpace = new Sprite;
 
-  std::cout << "4" << std::endl;
   backgroundSpaceTexture->loadFromFile("../common/misc/roomPanel.png");
 
-  std::cout << "5" << std::endl;
   backgroundSpace->setTexture(*backgroundSpaceTexture);
 
-  std::cout << "6" << std::endl;
   backgroundSpace->setPosition(0, 0);
 
-  std::cout << "7" << std::endl;
   backgroundSpace->scale(1.1);
 
-
-
-
-
-
-  std::cout << "8" << std::endl;
   _backgrounds.push_back(*backgroundSpace);
-
-
-  std::cout << "9" << std::endl;
 
   std::string fileDefault = "../common/misc/MicroDesignDefault.png";
   std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
@@ -66,49 +52,70 @@ void	        RoomPanel::setUserInterface()
   name = "LAUNCH";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
 
+  
 
 
-  std::cout << "11" << std::endl;
 
-  this->updatePlayers();
-
-  std::cout << "12" << std::endl;
-
+  
 }
 
-
-void		RoomPanel::updatePlayers()
+void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 {
   RenderWindow *window = RenderWindow::getInstance();
-  Player *player = new Player;
-  _players.push_back(player);
-  _players.push_back(player);
-
   unsigned int i = 0;
 
-  while (i < _players.size())
+  std::cout << "BITE" << std::endl;
+  while (i < vector.size() - 2)
     {
-      Text		       	*id = new Text();
-      id->setString(std::to_string(i + 1));
-      id->setSize(40);
-      id->setStyle(1);
-      id->setOrigin(id->getText().getGlobalBounds().width / 2, id->getText().getGlobalBounds().height / 2);
-      id->setPosition(Vector2(0.1 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
-      id->setColor(Color::BLACK);
+      Player *player = new Player;
+      Text   *username = new Text();
 
-      Text		       	*username = new Text();
-      username->setString(_players.at(i)->getUsername());
+
+      player->setUsername(vector.at(i));
+
+  std::cout << "BITE" << std::endl;
+      username->setString(player->getUsername());
       username->setSize(40);
       username->setStyle(1);
       username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
       username->setPosition(Vector2(0.2 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
       username->setColor(Color::BLACK);
 
-      window->getPanels().top()->getLabels().push_back(*id);
+
+  std::cout << "BITE" << std::endl;
       window->getPanels().top()->getLabels().push_back(*username);
+
+      _players.push_back(player);
       i++;
+  std::cout << "BITE" << std::endl;
     }
 
+  std::cout << "BITE" << std::endl;
+
+  
+  std::cout << vector.at(0) << std::endl;
+
+  if (from == 0)
+    _players.at(0)->setCurrentClient(true);
+  else
+    _players.at(vector.size() - 3)->setCurrentClient(true);    
+
+    std::cout << "BAAAATE" << std::endl;
+
+  
+  std::cout << vector.size() << std::endl;
+    Text		       	*roomID = new Text();
+ 
+      roomID->setString(vector.at(vector.size() - 2));
+      roomID->setSize(60);
+      roomID->setStyle(1);
+      roomID->setOrigin(roomID->getText().getGlobalBounds().width / 2, roomID->getText().getGlobalBounds().height / 2);
+      roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.95 * window->getSize()._y));
+      roomID->setColor(Color::BLACK);
+
+      _labels.push_back(*roomID);
+
+  
 }
 
 

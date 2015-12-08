@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Tue Dec  8 16:15:04 2015 Nicolas Girardot
+// Last update Tue Dec  8 07:37:28 2015 Serge Heitzler
 //
 
 #ifndef TEXT_HH_
@@ -15,7 +15,7 @@
 #include <string>
 #include "Vector2.hh"
 #include "IText.hh"
-//#include "Font.hh"
+#include "SFont.hh"
 #include "Color.hh"
 #include "AMenuElement.hh"
 
@@ -24,10 +24,10 @@ class	        Text : public IText
 
 public:
   Text();
-  Text(const std::string &string, sf::Font &font, unsigned int characterSize=30);
+  Text(const std::string &string, SFont &font, unsigned int characterSize=30);
   ~Text();
 
-  void			setFont(sf::Font& font);
+  void			setFont(SFont& font);
   void			setColor(Color::Tint);
   void			setSize(unsigned int size);
   void			setString(const std::string& title);
