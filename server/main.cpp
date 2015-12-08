@@ -37,6 +37,9 @@ int		main(int ac, char **av)
     s->run();
   } catch (const std::exception &e) {
     std::cout << "Error catched : " << e.what() << std::endl;
+# ifdef _WIN32
+	system("PAUSE");
+# endif
   }
   return (0);
 }

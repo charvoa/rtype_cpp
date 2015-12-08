@@ -90,21 +90,16 @@ public:
 	  memset((char *)&serv_addr, 0, sizeof(serv_addr));
 	  serv_addr.sin_family = AF_INET;
 	  serv_addr.sin_port = htons(this->_port);
+	  serv_addr.sin_addr.s_addr = inet_addr(serverIP.c_str());
 	  if (this->_connectionMode == Network::UDP_MODE) {
 		  if (inet_addr(serverIP.c_str()) == INADDR_NONE)
 			  throw (std::logic_error("Network :: Error while connecting ..."));
-		  memcpy((char *) inet_addr(serverIP.c_str()),
-			  (char *)&serv_addr.sin_addr,
-			  server->h_length);
+		  //serv_addr.sin_addr.s_addr = inet_addr(serverIP.c_str());
 		  this->_socket->setForUDP(&(this->serv_addr));
-	  }
-	  else {
-		  memcpy((char *)server->h_addr,
-			  (char *)&serv_addr.sin_addr.s_addr,
-			  server->h_length);
-		  if (::connect(this->_socket->getFd(),
-			  (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
-			  throw (std::logic_error("Network :: Error while connecting"));
+	  } else {
+		  if (::connect(this->_socket->getFd(), (SOCKADDR *) &serv_addr, sizeof(serv_addr)) < 0) {
+			  throw (std::logic_error(std::string("Network :: Error while connecting : " + std::string(strerror(errno)))));
+		  }
 	  }
   };
 

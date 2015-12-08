@@ -71,7 +71,6 @@ class		Socket : public ISocket
 
   void		close() {
 	  WSACleanup();
-    //::close(this->_fd);
   };
 
   SOCKET		getFd() const {
@@ -80,6 +79,7 @@ class		Socket : public ISocket
 
   virtual void		setForUDP(SOCKADDR_IN *s) {
 	  this->_me = *s;
+	  this->_init = true;
   };
 
 private:
