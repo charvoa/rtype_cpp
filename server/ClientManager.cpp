@@ -5,9 +5,11 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Thu Dec  3 05:10:43 2015 Louis Audibert
+// Last update Tue Dec  8 02:10:47 2015 Antoine Garcia
 //
 
+# include <algorithm>
+# include <iterator>
 # include <stdexcept>
 # include <ClientManager.hh>
 
@@ -41,4 +43,13 @@ Client&		ClientManager::getClientByFd(int fd)
 	return (*it);
     }
 throw std::logic_error("No client with this fd found");
+}
+
+int		ClientManager::getClientPosition(Client &client)
+{
+  std::vector<Client>::iterator	it;
+
+  it = std::find(_clients.begin(), _clients.end(), client);
+  int	pos = std::distance(_clients.begin(), it);
+  return pos;
 }
