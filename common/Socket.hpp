@@ -43,6 +43,7 @@ class		Socket : public ISocket
   Socket(int fd) {
     this->_fd = fd;
     this->_mode = SOCK_STREAM;
+	this->_init = false;
   };
 
   Socket(int fd, int mode) {

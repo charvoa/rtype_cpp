@@ -14,7 +14,7 @@
 # include			<ANetwork.hpp>
 # include			<SocketWin.hpp>
 # include			<list>
-# define			_WINSOCK_DEPRECATED_NO_WARNINGS
+# define			_WINSOCK_DEPRECATED_NO_WARNINGS 1
 
 class				Network : public ANetwork
 {
@@ -40,6 +40,7 @@ public:
     FD_ZERO(&_fdList);
     FD_SET(this->_socket->getFd(), &_fdList);
 	this->_fdSize = 2;
+	this->_connectionMode = type;
   };
 
   virtual void			bind() {
@@ -80,24 +81,31 @@ public:
   }
 
   virtual void			connect(const std::string &serverIP) {
-    struct hostent		*server;
+	  struct hostent		*server;
 
-    //if (this->_connectionMode == Network::UDP_MODE)
-      //if (inet_aton(serverIP.c_str(), &serv_addr.sin_addr) == 0)
-	//throw (std::logic_error("Network :: Error while connecting ..."));
-    server = gethostbyname(serverIP.c_str());
-    if (server == NULL) {
-      throw (std::logic_error("Network :: Server IP is not valid"));
-    }
-    memset((char *) &serv_addr, 0, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-    memcpy((char *) server->h_addr,
-	  (char *) &serv_addr.sin_addr.s_addr,
-	  server->h_length);
-    serv_addr.sin_port = htons(this->_port);
-    if (::connect(this->_socket->getFd(),
-		  (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
-      throw (std::logic_error("Network :: Error while connecting"));
+	  server = gethostbyname(serverIP.c_str());
+	  if (server == NULL) {
+		  throw (std::logic_error("Network :: Server IP is not valid"));
+	  }
+	  memset((char *)&serv_addr, 0, sizeof(serv_addr));
+	  serv_addr.sin_family = AF_INET;
+	  serv_addr.sin_port = htons(this->_port);
+	  if (this->_connectionMode == Network::UDP_MODE) {
+		  if (inet_addr(serverIP.c_str()) == INADDR_NONE)
+			  throw (std::logic_error("Network :: Error while connecting ..."));
+		  memcpy((char *) inet_addr(serverIP.c_str()),
+			  (char *)&serv_addr.sin_addr,
+			  server->h_length);
+		  this->_socket->setForUDP(&(this->serv_addr));
+	  }
+	  else {
+		  memcpy((char *)server->h_addr,
+			  (char *)&serv_addr.sin_addr.s_addr,
+			  server->h_length);
+		  if (::connect(this->_socket->getFd(),
+			  (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
+			  throw (std::logic_error("Network :: Error while connecting"));
+	  }
   };
 
   virtual t_frame		read() {
@@ -118,9 +126,14 @@ public:
     if ((ret = ::select(FD_SETSIZE, &_activeFDList, NULL, NULL, NULL)) == SOCKET_ERROR)
       throw (std::logic_error("Network :: Error while selecting"));
     if (FD_ISSET(this->_socket->getFd(), &_activeFDList)) {
+		if (this->_connectionMode == ANetwork::UDP_MODE) {
+			return (new Socket(this->_socket->getFd(), SOCK_DGRAM));
+		}
+		else {
 			ISocket *s = this->accept();
 			this->listenSocket(s);
 			return (s);
+		}
 		} else {
 		for (std::list<ISocket*>::iterator it = this->_sList.begin(); it != this->_sList.end(); ++it) {
 				if (FD_ISSET(dynamic_cast<Socket*>(*it)->getFd(), &_activeFDList))
