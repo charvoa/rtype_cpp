@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 07:05:17 2015 Serge Heitzler
+// Last update Tue Dec  8 07:33:32 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,6 +15,10 @@
 #include <Button.hh>
 #include <ButtonFactory.hh>
 #include <RoomPanel.hh>
+#include <Network.hpp>
+#include <Client.hh>
+#include <CRC.hpp>
+#include <CreateRequest.hpp>
 
 StartPanel::StartPanel(){}
 
@@ -55,7 +59,7 @@ void		StartPanel::setUserInterface()
   logo->scale(0.5);
 
   backgroundSpace->scale(1.1);
-  
+
   _backgrounds.push_back(*backgroundSpace);
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
@@ -83,18 +87,24 @@ void		StartPanel::setUserInterface()
     _functions.push_back((APanel::funcs)&StartPanel::settings);
     _functions.push_back((APanel::funcs)&StartPanel::credits);
     _functions.push_back((APanel::funcs)&StartPanel::exit);
-    
 }
 
 void        StartPanel::createRoom()
 {
+  Network *net = Client::getNetwork();
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
+  net->write(sender);
+}
+
+void        StartPanel::goToRoom()
+{
   RenderWindow *window = RenderWindow::getInstance();
-  
-  
+
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
   std::cout << "GOUT BITE" << std::endl;
 }
+
 
 void        StartPanel::joinRoom()
 {

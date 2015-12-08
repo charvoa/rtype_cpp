@@ -5,15 +5,15 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 18:22:28 2015 Joris Bertomeu
+// Last update Tue Dec  8 15:50:43 2015 Nicolas Charvoz
 //
 
-#ifndef				__NETWORK_HPP__
-# define			__NETWORK_HPP__
+#ifndef				__NETWORKWIN_HPP__
+# define			__NETWORKWIN_HPP__
 
 # include			<ANetwork.hpp>
 # include			<SocketWin.hpp>
-# include			<list>;
+# include			<list>
 # define			_WINSOCK_DEPRECATED_NO_WARNINGS
 
 class				Network : public ANetwork
@@ -125,7 +125,7 @@ public:
 		for (std::list<ISocket*>::iterator it = this->_sList.begin(); it != this->_sList.end(); ++it) {
 				if (FD_ISSET(dynamic_cast<Socket*>(*it)->getFd(), &_activeFDList))
 					return (dynamic_cast<Socket*>(*it));
-			}	
+			}
 		}
     return (NULL);
   };

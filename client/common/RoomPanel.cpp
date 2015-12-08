@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 04:41:11 2015 Serge Heitzler
+// Last update Tue Dec  8 16:01:43 2015 Nicolas Girardot
 //
 
 #include "RenderWindow.hh"
@@ -25,41 +25,57 @@ RoomPanel::~RoomPanel(){}
 void	        RoomPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
+
+  std::cout << "1" << std::endl;
   getInputManager().setInputType(InputType::MENU_INPUT);
 
+
+  std::cout << "2zz" << std::endl;
   Texture *backgroundSpaceTexture = new Texture;
 
+  std::cout << "3" << std::endl;
   Sprite *backgroundSpace = new Sprite;
 
+  std::cout << "4" << std::endl;
     backgroundSpaceTexture->loadFromFile("../common/misc/roomPanel.png");
 
+  std::cout << "5" << std::endl;
   backgroundSpace->setTexture(*backgroundSpaceTexture);
 
+  std::cout << "6" << std::endl;
   backgroundSpace->setPosition(0, 0);
 
+  std::cout << "7" << std::endl;
   backgroundSpace->scale(1.1);
 
 
 
 
 
-  
+
+  std::cout << "8" << std::endl;
   _backgrounds.push_back(*backgroundSpace);
 
 
+  std::cout << "9" << std::endl;
 
   std::string fileDefault = "../common/misc/MicroDesignDefault.png";
   std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
   std::string name = "BACK";
+
+  std::cout << "10" << std::endl;
   ButtonFactory::create(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.95), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
   name = "LAUNCH";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
 
 
 
-  
+  std::cout << "11" << std::endl;
+
   this->updatePlayers();
-  
+
+  std::cout << "12" << std::endl;
+
 }
 
 
@@ -94,7 +110,7 @@ void		RoomPanel::updatePlayers()
       window->getPanels().top()->getLabels().push_back(*username);
       i++;
     }
-  
+
 }
 
 
