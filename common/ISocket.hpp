@@ -23,7 +23,7 @@ public:
   virtual int	write(void *, int) = 0;
 # ifdef _WIN32
   virtual SOCKET	getFd() const = 0;
-  virtual void		setForUDP(struct SOCKADDR_IN *s) = 0;
+  virtual void		setForUDP(SOCKADDR_IN *s) = 0;
 # else
   virtual int	getFd() const = 0;
   virtual void	setForUDP(struct sockaddr_in *s) = 0;

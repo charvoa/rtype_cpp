@@ -65,6 +65,10 @@ class		Socket : public ISocket
   SOCKET		getFd() const {
     return (this->_fd);
   };
+
+  virtual void		setForUDP(SOCKADDR_IN *s) {
+
+  }
 };
 
 #endif

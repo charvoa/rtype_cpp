@@ -29,9 +29,9 @@ void Server::init(int port)
   this->_network->init(port, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
-  this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
-  this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
-  this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
+  //this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
+  //this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
+  //this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
 }
 
 void Server::run()
