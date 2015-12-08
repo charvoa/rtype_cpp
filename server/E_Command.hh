@@ -5,13 +5,13 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 17:38:04 2015 Nicolas Charvoz
-// Last update Mon Nov 30 17:38:50 2015 Nicolas Charvoz
+// Last update Tue Dec  8 22:09:10 2015 Nicolas Charvoz
 //
 
 #ifndef E_COMMAND_HH_
 # define E_COMMAND_HH_
 
-enum E_COMMAND {
+enum E_Command {
   C_CREATEROOM = 1,
   C_CHANGESETTINGS = 2,
   C_JOINROOM = 3,
