@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 16:01:43 2015 Nicolas Girardot
+// Last update Tue Dec  8 16:06:45 2015 Nicolas Girardot
 //
 
 #include "RenderWindow.hh"
@@ -26,18 +26,16 @@ void	        RoomPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-  std::cout << "1" << std::endl;
   getInputManager().setInputType(InputType::MENU_INPUT);
 
 
-  std::cout << "2zz" << std::endl;
   Texture *backgroundSpaceTexture = new Texture;
 
   std::cout << "3" << std::endl;
   Sprite *backgroundSpace = new Sprite;
 
   std::cout << "4" << std::endl;
-    backgroundSpaceTexture->loadFromFile("../common/misc/roomPanel.png");
+  backgroundSpaceTexture->loadFromFile("../common/misc/roomPanel.png");
 
   std::cout << "5" << std::endl;
   backgroundSpace->setTexture(*backgroundSpaceTexture);
