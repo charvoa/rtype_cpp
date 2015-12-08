@@ -11,11 +11,11 @@
 #ifndef COMMANDMANAGER_HPP_
 # define COMMANDMANAGER_HPP_
 
-# include <map>
-# include <E_Command.hh>
-# include <ANetwork.hpp>
+# include	<map>
+# include	<E_Command.hh>
+# include	<ANetwork.hpp>
 
-class Server;
+class		Server;
 
 class		CommandManager
 {
@@ -37,7 +37,7 @@ public:
 
   private:
 
-  std::map<E_COMMAND, bool (Server::*)(ANetwork::t_frame frame, void*)> _commands;
+  std::map<E_COMMAND, bool (Server::*)(ANetwork::t_frame, void*)> _commands;
 
 };
 

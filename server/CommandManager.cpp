@@ -16,6 +16,6 @@ CommandManager::~CommandManager() {}
 
 bool CommandManager::addFunction(E_COMMAND type, bool (Server::*cmd)(ANetwork::t_frame frame, void *data))
 {
-  _commands[type] = cmd;
+  this->_commands[type] = cmd;
   return true;
 }
