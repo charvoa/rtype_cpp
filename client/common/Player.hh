@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Tue Dec  8 02:14:08 2015 Serge Heitzler
-// Last update Tue Dec  8 04:40:04 2015 Serge Heitzler
+// Last update Tue Dec  8 08:19:59 2015 Serge Heitzler
 //
 
 #ifndef PLAYER_HH_
@@ -19,7 +19,7 @@ public:
   
   Player();
   ~Player();
-  void		        setUsename(std::string &username);
+  void		        setUsername(std::string &username);
   void			setCurrentClient(bool is);
   void			setReadyToStart(bool is);
   std::string		&getUsername();

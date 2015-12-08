@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 16:00:12 2015 Nicolas Girardot
+// Last update Tue Dec  8 08:19:19 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,6 +15,10 @@
 #include <Button.hh>
 #include <ButtonFactory.hh>
 #include <RoomPanel.hh>
+#include <Network.hpp>
+#include <Client.hh>
+#include <CRC.hpp>
+#include <CreateRequest.hpp>
 
 StartPanel::StartPanel(){}
 
@@ -78,22 +82,38 @@ void		StartPanel::setUserInterface()
 
 
 
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-
+    _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    _functions.push_back((APanel::funcs)&StartPanel::joinRoom);
+    _functions.push_back((APanel::funcs)&StartPanel::settings);
+    _functions.push_back((APanel::funcs)&StartPanel::credits);
+    _functions.push_back((APanel::funcs)&StartPanel::exit);
 }
 
 void        StartPanel::createRoom()
+{
+  Network *net = Client::getNetwork();
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
+  net->write(sender);
+}
+
+// void        StartPanel::goToRoom()
+// {
+//   RenderWindow *window = RenderWindow::getInstance();
+
+//   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
+//   window->getPanels().top()->setUserInterface();
+// }
+
+void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
+  static_cast<RoomPanel*>(window->getPanels().top())->updatePlayers(vector, from);
   std::cout << "GOUT BITE" << std::endl;
 }
+
 
 void        StartPanel::joinRoom()
 {
@@ -102,6 +122,12 @@ void        StartPanel::joinRoom()
 }
 
 void        StartPanel::demo()
+{
+	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
+        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
+}
+
+void        StartPanel::credits()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
         (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
@@ -129,8 +155,3 @@ void		StartPanel::update()
     _backgrounds.at(0).move(0.01,0.01);
   i++;
 }
-
-// std::vector<funcs>		&getFuncs()
-// {
-//   return _functions;
-// }

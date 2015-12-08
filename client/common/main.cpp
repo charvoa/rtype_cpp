@@ -5,14 +5,16 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Mon Dec  7 10:38:48 2015 Nicolas Girardot
+// Last update Tue Dec  8 16:13:36 2015 Nicolas Girardot
 //
 
 #include <SFML/Audio.hpp>
 #include "Client.hh"
+#include <X11/Xlib.h>
 
 int main()
 {
+  XInitThreads();
   Client *cli = new Client();
   cli->Start();
 }

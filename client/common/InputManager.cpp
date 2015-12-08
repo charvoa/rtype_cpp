@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 15:52:22 2015 Nicolas Girardot
+// Last update Tue Dec  8 07:38:26 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -117,9 +117,6 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
 
   if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
     {
-      Network *net = Client::getNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
-      net->write(sender);
     }
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }

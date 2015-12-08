@@ -40,7 +40,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/ButtonFactory.cpp
   ../common/Color.cpp
   ../common/DemoPanel.cpp
-  ../common/Font.cpp
+  ../common/SFont.cpp
   ../common/GamePanel.cpp
   ../common/JoinPanel.cpp
   ../common/InputManager.cpp
@@ -75,7 +75,7 @@ message("CMAKE_BUILD_TYPE is ${CMAKE_CXX_FLAGS}")
 
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
-  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} -lX11)
 endif()
 
 
