@@ -29,9 +29,9 @@ void Server::init(int port)
   this->_network->init(port, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
-  //this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
-  //this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
-  //this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
+  this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
+  this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
+  this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
 }
 
 void Server::run()
@@ -42,10 +42,10 @@ void Server::run()
   while (1)
     {
       client = new Client(dynamic_cast<Socket*>(this->_network->select()));
-      std::cout << (char*) client->getSocket()->read(4096) << std::endl;
+      //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
       client->getSocket()->write((void*) "Salut\r\n", 7);
-      //this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-      //client, this);
+      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+      client, this);
     }
 }
 
