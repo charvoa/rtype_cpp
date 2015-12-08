@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec  8 15:58:02 2015 Nicolas Girardot
+// Last update Tue Dec  8 16:25:19 2015 Nicolas Girardot
 //
 
 
@@ -78,7 +78,7 @@ void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
   (void) frame;
   std::cout << "Is before" << std::endl;
   //std::vector<std::string> x = split(frame.data, ';');
-  StartPanel::createRoom();
+  StartPanel::goToRoom();
   std::cout << "Is Before" << std::endl;
 }
 
