@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 07:33:32 2015 Serge Heitzler
+// Last update Tue Dec  8 07:36:49 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -146,8 +146,3 @@ void		StartPanel::update()
     _backgrounds.at(0).move(0.01,0.01);
   i++;
 }
-
-// std::vector<funcs>		&getFuncs()
-// {
-//   return _functions;
-// }

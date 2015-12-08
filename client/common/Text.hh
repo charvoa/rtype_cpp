@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Tue Dec  8 07:27:39 2015 Serge Heitzler
+// Last update Tue Dec  8 07:37:28 2015 Serge Heitzler
 //
 
 #ifndef TEXT_HH_
@@ -35,11 +35,11 @@ public:
   void		        setOrigin(float x, float y);
   void		        setStyle(uint32_t style);
   sf::Text		&getText();
-  
+
 private :
 
   sf::Text		_text;
-  
+
 };
 
 #endif /* !TEXT_HH_ */

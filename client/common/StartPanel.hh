@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 07:26:15 2015 Serge Heitzler
+// Last update Tue Dec  8 07:37:38 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H

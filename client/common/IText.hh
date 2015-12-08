@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:17 2015 Serge Heitzler
-// Last update Tue Dec  8 07:28:10 2015 Serge Heitzler
+// Last update Tue Dec  8 07:35:45 2015 Serge Heitzler
 //
 
 #ifndef ITEXT_HH_
@@ -17,7 +17,7 @@
 
 class		      IText
 {
-  
+
 public:
   virtual void		setFont(SFont& font) = 0;
   virtual void		setColor(Color::Tint color) = 0;
