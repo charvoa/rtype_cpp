@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec  8 17:15:28 2015 Nicolas Girardot
+// Last update Tue Dec  8 17:37:46 2015 Nicolas Girardot
 //
 
 
@@ -16,7 +16,7 @@
 #include <StartPanel.hh>
 
 
-std::string	g_a = "";
+std::string	g_a = "JVYO";
 
 /////Function to split data
 
@@ -77,7 +77,7 @@ void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
 {
   std::cout << frame.data << " :: Data WAS THIS" << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  StartPanel::goToRoom(x, 0);
+  StartPanel::createRoom();
 }
 
 void		ProtocoleClient::createRoomSuccess(ANetwork::t_frame &frame)
@@ -93,7 +93,7 @@ void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
 void		ProtocoleClient::joinSuccess(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  StartPanel::goToRoom(x, 1);
+  //StartPanel::goToRoom(x, 1);
 }
 
 void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
