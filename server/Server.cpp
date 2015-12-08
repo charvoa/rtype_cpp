@@ -5,10 +5,15 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Tue Dec  8 15:38:51 2015 Nicolas Charvoz
+// Last update Tue Dec  8 15:55:31 2015 Nicolas Charvoz
 //
 
-#include <Network.hpp>
+#ifdef _WIN32
+# include <NetworkWin.hpp>
+#else
+# include <Network.hpp>
+#endif
+
 #include <Server.hh>
 
 Server::Server()
