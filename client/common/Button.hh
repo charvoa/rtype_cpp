@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Mon Dec  7 10:29:27 2015 Serge Heitzler
+// Last update Tue Dec  8 05:05:56 2015 Serge Heitzler
 //
 
 #ifndef BUTTON_HH_
@@ -33,7 +33,8 @@ public:
   bool			mouseReleaseEvent(sf::Event& event);
   bool			mouseEntered(sf::Event& event);
   bool			mouseLeft(sf::Event& event);
-  void		        update(std::pair<unsigned int, unsigned int> pair);
+  void		        updateOnMove(std::pair<unsigned int, unsigned int> pair);
+  bool		        updateOnPress(std::pair<unsigned int, unsigned int> pair);
   void			render();
   void			setState(StateButton state);
   Texture      		&getNormalTexture();

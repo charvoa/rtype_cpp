@@ -1,11 +1,11 @@
 //
-// Protocole.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// ProtocoleClient.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
 //
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
 //
-// Started on  Tue Dec  1 01:23:08 2015 Serge Heitzler
-// Last update Tue Dec  8 15:41:06 2015 Nicolas Girardot
+// Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
+// Last update Tue Dec  8 15:58:02 2015 Nicolas Girardot
 //
 
 
@@ -13,7 +13,7 @@
 #include <sstream>
 #include <vector>
 #include <ProtocoleClient.hh>
-#include <StartPanel>
+#include <StartPanel.hh>
 
 
 std::string	g_a = "";
@@ -75,10 +75,11 @@ void		ProtocoleClient::display(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
 {
+  (void) frame;
   std::cout << "Is before" << std::endl;
-  std::vector<std::string> x = split(frame.data, ';');
-  void (x);
+  //std::vector<std::string> x = split(frame.data, ';');
   StartPanel::createRoom();
+  std::cout << "Is Before" << std::endl;
 }
 
 void		ProtocoleClient::createRoomSuccess(ANetwork::t_frame &frame)

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 14:23:17 2015 Nicolas Girardot
+// Last update Tue Dec  8 15:52:22 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -106,29 +106,21 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 {
   std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
 
-  //  (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-  (RenderWindow::getInstance())->getPanels().top()->updateOnEvent(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
+  (RenderWindow::getInstance())->getPanels().top()->updateOnMove(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
 
-  //  	  window->getPanels().top()->updateOnEvent();
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  if (event.mouseButton.button == sf::Mouse::Left)
+  std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
+
+  if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
     {
       Network *net = Client::getNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
       net->write(sender);
     }
-  else if (event.mouseButton.button == sf::Mouse::Right)
-    {
-      std::cout << "GA IS :::::::::::::::::::::::::::::" << g_a << std::endl;
-      Network *net = Client::getNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)4, CRC::calcCRC(g_a), 4, g_a);
-      net->write(sender);
-    }
-  std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
