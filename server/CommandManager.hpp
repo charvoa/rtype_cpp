@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:24:29 2015 Joris Bertomeu
+// Last update Tue Dec  8 16:29:54 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HPP_
@@ -37,7 +37,7 @@ public:
 
   private:
 
-  std::map<E_COMMAND, bool (Server::*)(ANetwork::t_frame frame, void*)> _commands;
+  std::map<E_COMMAND, bool (Server::*)(ANetwork::t_frame, void*)> _commands;
 
 };
 
