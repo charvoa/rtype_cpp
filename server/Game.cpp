@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Mon Dec  7 15:21:01 2015 Nicolas Charvoz
+// Last update Mon Dec  7 15:38:58 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -15,6 +15,9 @@ Game::Game() {}
 Game::Game(const Parameters &params_, std::vector<Client> &client_,
 	   const std::string &id_) : _params(params_), _id(id_)
 {
+  srand(time(NULL));
+
+
   this->addClients(client_);
 }
 
