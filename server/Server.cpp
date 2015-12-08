@@ -42,9 +42,10 @@ void Server::run()
   while (1)
     {
       client = new Client(dynamic_cast<Socket*>(this->_network->select()));
-      //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
-      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-					   client, this);
+      std::cout << (char*) client->getSocket()->read(4096) << std::endl;
+      client->getSocket()->write((void*) "Salut\r\n", 7);
+      //this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+      //client, this);
     }
 }
 

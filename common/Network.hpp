@@ -115,7 +115,7 @@ public:
       if (FD_ISSET(i, &_activeFDList)) {
 	if (i == this->_socket->getFd()) {
 	  if (this->_connectionMode == ANetwork::UDP_MODE) {
-	    return (new Socket(i, ANetwork::UDP_MODE));
+	    return (new Socket(i, SOCK_DGRAM));
 	  } else {
 	    ISocket *s = this->accept();
 	    this->listenSocket(s);
