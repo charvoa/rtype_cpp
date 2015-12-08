@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:04 2015 Nicolas Charvoz
-// Last update Thu Dec  3 05:10:49 2015 Louis Audibert
+// Last update Tue Dec  8 01:11:07 2015 Antoine Garcia
 //
 
 #ifndef CLIENTMANAGER_HH_
@@ -23,6 +23,7 @@ public:
   void	addClients(Client &);
   std::vector<Client>&	getAllClients();
   Client&	getClientByFd(int fd);
+  int		getClientPosition(Client &);
 };
 
 #endif
