@@ -10,7 +10,9 @@
 
 #ifndef		__ISOCKET_HPP_
 # define	__ISOCKET_HPP_
-
+# ifdef		_WIN32
+#  include	<winsock2.h>
+# endif
 class		ISocket
 {
 public:
@@ -19,7 +21,11 @@ public:
   virtual void	*read(int) = 0;
   virtual void	close() = 0;
   virtual int	write(void *, int) = 0;
+# ifdef _WIN32
+  virtual SOCKET	getFd() const = 0;
+# else
   virtual int	getFd() const = 0;
+# endif
 };
 
 #endif

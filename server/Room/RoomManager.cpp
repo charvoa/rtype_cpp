@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Mon Dec  7 01:47:30 2015 Antoine Garcia
+// Last update Tue Dec  8 01:58:34 2015 Antoine Garcia
 //
 
 # include <CRC.hpp>

@@ -1,19 +1,20 @@
 //
-// InputManager.cpp for InputManager in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// InputManager.cpp for rtype in /home/nicolas/rendu/rtype_cpp/client/build
 //
-// Made by Serge Heitzler
-// Login   <sergeheitzler@epitech.net>
+// Made by Nicolas Girardot
+// Login   <girard_s@epitech.net>
 //
-// Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
+// Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
+// Last update Tue Dec  8 06:42:51 2015 Serge Heitzler
 //
 
 #include <iostream>
-#include "InputManager.hh"
-#include "RenderWindow.hh"
-#include "Client.hh"
-#include "../../common/CreateRequest.hpp"
-#include "../../common/CRC.hpp"
-#include "../../common/ANetwork.hpp"
+#include <InputManager.hh>
+#include <RenderWindow.hh>
+#include <Client.hh>
+#include <CreateRequest.hpp>
+#include <CRC.hpp>
+#include <ANetwork.hpp>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -103,11 +104,8 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 {
   std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
 
-  //  (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
   (RenderWindow::getInstance())->getPanels().top()->updateOnMove(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
   
-  //  	  window->getPanels().top()->updateOnEvent();
-
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 

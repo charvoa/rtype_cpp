@@ -4,23 +4,21 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Mon Dec  7 15:10:40 2015 Nicolas Charvoz
+// Last update Tue Dec  8 15:37:13 2015 Nicolas Charvoz
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
 # include	<Server.hh>
 # include	<EntityManager.hh>
 #ifdef __unix__
-# include	"../common/Thread/ThreadUnix.hpp"
+# include	<ThreadUnix.hpp>
 #elif defined(_WIN32) || defined(WIN32)
-# include 	"../common/Thread/ThreadWin.hpp"
+# include 	<ThreadWin.hpp>
 #endif
 
 #include <Mutex.hpp>
 #include <ANetwork.hpp>
 #include <CreateRequest.hpp>
-#include <chrono>
-#include <thread>
 
 AMutex *m;
 
@@ -65,7 +63,9 @@ int		main(int ac, char **av)
   /* FIN DU GAME */
 
   try {
-    s->init();
+    if (av[1])
+      s->init(atoi(av[1]));
+    s->init(4253);
     std::cout << "You've launched the Server of the RType" << std::endl;
 
     std::cout << "Made by La Pintade" << std::endl;
