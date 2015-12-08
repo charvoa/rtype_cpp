@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 22:52:55 2015 Nicolas Girardot
+// Last update Tue Dec  8 23:04:21 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -119,7 +119,7 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
     {
 
       Network *net = Client::getNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)4, CRC::calcCRC(""), 0, "");
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("2HW4"), 0, "2HW4");
       net->write(sender);
     }
 

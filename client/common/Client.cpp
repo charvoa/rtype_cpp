@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec  8 12:24:47 2015 Antoine Garcia
+// Last update Tue Dec  8 23:03:40 2015 Nicolas Girardot
 //
 
 #include <Client.hh>
@@ -29,6 +29,7 @@ void	*readdisp(void *s)
       try
 	{
 	  a = Client::getNetwork()->read();
+	  std::cout << "Data Is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
