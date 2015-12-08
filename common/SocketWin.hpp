@@ -16,6 +16,7 @@
 # include	<errno.h>
 # include	<winsock2.h>
 # include	<ISocket.hpp>
+# include	<iostream>
 # pragma comment(lib, "ws2_32.lib")
 
 class		Socket : public ISocket
