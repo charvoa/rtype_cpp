@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec  8 02:57:57 2015 Antoine Garcia
+// Last update Tue Dec  8 13:10:19 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -44,7 +44,7 @@ void	Room::sendRoomPlayerJoin(Client &client)
   int	clientPos = _clientManager.getClientPosition(client);
   for (it = clients.begin() ; it != clients.end() ; ++it)
     {
-      std::string sendData = "player" + std::to_string(clientPos) + ";" + std::to_string(_clientManager.getClientPosition(*it));
+      std::string sendData = "player" + std::to_string(clientPos);
       ANetwork::t_frame frame = CreateRequest::create((unsigned char)106, CRC::calcCRC(sendData), 0, sendData);
       (*it).getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
     }
@@ -52,20 +52,21 @@ void	Room::sendRoomPlayerJoin(Client &client)
 
 void	Room::sendError(Client &client)
 {
-	std::string sendData = "Too many players";
+  std::string sendData = "Too many players";
 
-    ANetwork::t_frame frame = CreateRequest::create((unsigned char)104, CRC::calcCRC(sendData), 0, sendData);
+  ANetwork::t_frame frame = CreateRequest::create((unsigned char)104, CRC::calcCRC(sendData), 0, sendData);
+  client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
 }
 
 void	Room::addPlayer(Client &client)
 {
   if (this->getAllPlayers().size() < 4)
     {
-      _clientManager.addClients(client);
       sendPlayerJoin(client);
+      _clientManager.addClients(client);
       sendRoomPlayerJoin(client);
     }
-  //sendError();
+  sendError(client);
 }
 
 std::vector<Client>&	Room::getAllPlayers()

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Tue Dec  8 15:55:31 2015 Nicolas Charvoz
+// Last update Tue Dec  8 12:29:15 2015 Antoine Garcia
 //
 
 #ifdef _WIN32
@@ -41,9 +41,11 @@ void Server::run()
   std::cout << "Server :: Run" << std::endl;
   while (1)
     {
-      client = new Client(dynamic_cast<Socket*>(this->_network->select()));
+      client = new Client(this->_network->select());
+      //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
+      //client->getSocket()->write((void*) "Salut\r\n", 7);
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-					   client, this);
+      client, this);
     }
 }
 

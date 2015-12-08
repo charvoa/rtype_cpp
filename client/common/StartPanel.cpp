@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 13:26:13 2015 Serge Heitzler
+// Last update Tue Dec  8 13:30:58 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -95,14 +95,6 @@ void        StartPanel::createRoom()
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
   net->write(sender);
 }
-
-// void        StartPanel::goToRoom()
-// {
-//   RenderWindow *window = RenderWindow::getInstance();
-
-//   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
-//   window->getPanels().top()->setUserInterface();
-// }
 
 void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 {
