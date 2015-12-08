@@ -78,19 +78,22 @@ public:
   virtual void			connect(const std::string &serverIP) {
     struct hostent		*server;
 
-    if (this->_connectionMode == Network::UDP_MODE)
-      if (inet_aton(serverIP.c_str(), &serv_addr.sin_addr) == 0)
-	throw (std::logic_error("Network :: Error while connecting ..."));
     server = gethostbyname(serverIP.c_str());
     if (server == NULL) {
       throw (std::logic_error("Network :: Server IP is not valid"));
     }
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    bcopy((char *) server->h_addr,
-	  (char *) &serv_addr.sin_addr.s_addr,
-	  server->h_length);
     serv_addr.sin_port = htons(this->_port);
+    if (this->_connectionMode == Network::UDP_MODE) {
+      if (inet_aton(serverIP.c_str(), &serv_addr.sin_addr) == 0)
+	throw (std::logic_error("Network :: Error while connecting ..."));
+      this->_socket->setForUDP(&(this->serv_addr));
+    } else {
+      bcopy((char *) server->h_addr,
+	    (char *) &serv_addr.sin_addr.s_addr,
+	    server->h_length);
+    }
     if (::connect(this->_socket->getFd(),
 		  (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
       throw (std::logic_error("Network :: Error while connecting"));

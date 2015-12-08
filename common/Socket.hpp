@@ -55,6 +55,11 @@ class		Socket : public ISocket
 
   };
 
+  virtual void		setForUDP(struct sockaddr_in *s) {
+    this->_init = true;
+    this->_me = *s;
+  };
+  
   void		*read(int size) {
     if (this->_mode == SOCK_STREAM)
       return (this->read_tcp(size));
