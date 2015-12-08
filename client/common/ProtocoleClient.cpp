@@ -1,11 +1,11 @@
 //
-// Protocole.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-//
+// ProtocoleClient.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// 
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-//
-// Started on  Tue Dec  1 01:23:08 2015 Serge Heitzler
-// Last update Tue Dec  8 11:05:27 2015 Nicolas Girardot
+// 
+// Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
+// Last update Tue Dec  8 06:45:01 2015 Serge Heitzler
 //
 
 #include "ProtocoleClient.hh"

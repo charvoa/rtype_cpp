@@ -47,6 +47,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/LoadingPanel.cpp
   ../common/StartPanel.cpp
   ../common/PanelFactory.cpp
+  ../common/Player.cpp
   ../common/RoomPanel.cpp
   ../common/AMenuElement.cpp
   ../common/Client.cpp

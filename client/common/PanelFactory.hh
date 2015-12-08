@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Sat Dec  5 05:35:20 2015 Serge Heitzler
+// Last update Tue Dec  8 03:18:12 2015 Serge Heitzler
 //
 
 #ifndef PANELFACTORY_HH

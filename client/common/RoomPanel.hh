@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 13:26:35 2015 Serge Heitzler
+// Last update Tue Dec  8 03:03:29 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -15,26 +15,26 @@
 #include "Button.hh"
 #include "Settings.hh"
 #include "APanel.hh"
-//#include "Player.hh"
+#include "Player.hh"
 
 class RoomPanel : public APanel
 {
 public:
+  
   RoomPanel();
   ~RoomPanel();
 
-  void    difficulty(Settings::Difficulty);
-  void    start();
-  void    back();
-  void	render();
+  void			difficulty(Settings::Difficulty);
+  void			start();
+  void			back();
+  void			update();
+  void			setUserInterface();
+  void			updatePlayers();
 
 private:
-  // Button  _startButton;
-  // Button  _easyButton;
-  // Button  _mediumButton;
-  // Button  _hardButton;
-  // Button  _backButton;
-  //std::map<Player*, Component*> _playersList;
+
+  std::vector<Player*> _players;
+  
 };
 
 #endif // ROOMPANEL_H

@@ -5,16 +5,16 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 11:13:28 2015 Nicolas Girardot
+// Last update Tue Dec  8 06:42:51 2015 Serge Heitzler
 //
 
 #include <iostream>
-#include "InputManager.hh"
-#include "RenderWindow.hh"
-#include "Client.hh"
-#include "../../common/CreateRequest.hpp"
-#include "../../common/CRC.hpp"
-#include "../../common/ANetwork.hpp"
+#include <InputManager.hh>
+#include <RenderWindow.hh>
+#include <Client.hh>
+#include <CreateRequest.hpp>
+#include <CRC.hpp>
+#include <ANetwork.hpp>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -104,19 +104,25 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 {
   std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
 
-  //  (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-  (RenderWindow::getInstance())->getPanels().top()->updateOnEvent(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-
-  //  	  window->getPanels().top()->updateOnEvent();
+  (RenderWindow::getInstance())->getPanels().top()->updateOnMove(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
+  
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  Network *net = Client::getNetwork();
   std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
-  net->write(sender);
+  
+
+    if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
+      {
+	Network *net = Client::getNetwork();
+	ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
+	net->write(sender);
+      }
+
+
+  
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
