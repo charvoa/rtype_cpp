@@ -13,7 +13,7 @@
 
 # include			<ANetwork.hpp>
 # include			<SocketWin.hpp>
-# include			<list>;
+# include			<list>
 # define			_WINSOCK_DEPRECATED_NO_WARNINGS
 
 class				Network : public ANetwork
