@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:17 2015 Serge Heitzler
-// Last update Mon Dec  7 12:01:25 2015 Serge Heitzler
+// Last update Tue Dec  8 16:17:00 2015 Nicolas Girardot
 //
 
 #ifndef ITEXT_HH_
@@ -17,9 +17,9 @@
 
 class		      IText
 {
-  
+
 public:
-  virtual void		setFont(Font& font) = 0;
+  virtual void		setFont(sf::Font& font) = 0;
   virtual void		setColor(Color::Tint color) = 0;
   virtual void		setSize(unsigned int size) = 0;
   virtual void		setString(const std::string& title) = 0;

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 06:39:40 2015 Serge Heitzler
+// Last update Tue Dec  8 16:00:12 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -55,7 +55,7 @@ void		StartPanel::setUserInterface()
   logo->scale(0.5);
 
   backgroundSpace->scale(1.1);
-  
+
   _backgrounds.push_back(*backgroundSpace);
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
@@ -83,14 +83,13 @@ void		StartPanel::setUserInterface()
     // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
     // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
     // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    
+
 }
 
 void        StartPanel::createRoom()
 {
   RenderWindow *window = RenderWindow::getInstance();
-  
-  
+
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
   std::cout << "GOUT BITE" << std::endl;

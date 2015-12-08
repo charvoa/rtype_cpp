@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 00:59:53 2015 Serge Heitzler
-// Last update Tue Dec  8 03:11:06 2015 Serge Heitzler
+// Last update Tue Dec  8 16:27:53 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -19,7 +19,7 @@ Text::Text()
   _text.setFont(*font);
 }
 
-Text::Text(const std::string &string, Font &font, unsigned int characterSize)
+Text::Text(const std::string &string, sf::Font &font, unsigned int characterSize)
 {
   (void)font;
 
@@ -34,9 +34,9 @@ Text::~Text()
 
 }
 
-void			Text::setFont(Font& font)
+void			Text::setFont(sf::Font& font)
 {
-  _text.setFont(font.getFont());
+  _text.setFont(font);
 }
 
 void			Text::setColor(Color::Tint color)
