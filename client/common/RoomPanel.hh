@@ -5,13 +5,14 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 08:18:11 2015 Serge Heitzler
+// Last update Tue Dec  8 13:16:28 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
 #define ROOMPANEL_H
 
 #include <map>
+#include <string>
 #include <Button.hh>
 #include <Settings.hh>
 #include <APanel.hh>
@@ -25,6 +26,7 @@ public:
   ~RoomPanel();
 
   void			difficulty(Settings::Difficulty);
+  static void  		newPlayer(std::string &newUsername);
   void			start();
   void			back();
   void			update();

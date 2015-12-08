@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 08:36:29 2015 Serge Heitzler
+// Last update Tue Dec  8 13:27:24 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -59,12 +59,20 @@ void	        RoomPanel::setUserInterface()
   
 }
 
+void		RoomPanel::newPlayer(std::string &newUsername)
+{
+  Player *player = new Player;
+  Text   *username = new Text();
+
+  player->setUsername(vector.at(i));
+  _players.push_back(player);
+}
+
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 {
   RenderWindow *window = RenderWindow::getInstance();
   unsigned int i = 0;
 
-  std::cout << "BITE" << std::endl;
   while (i < vector.size() - 2)
     {
       Player *player = new Player;
@@ -72,38 +80,21 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 
 
       player->setUsername(vector.at(i));
-
-  std::cout << "BITE" << std::endl;
       username->setString(player->getUsername());
       username->setSize(40);
       username->setStyle(1);
       username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
       username->setPosition(Vector2(0.2 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
       username->setColor(Color::BLACK);
-
-
-  std::cout << "BITE" << std::endl;
       window->getPanels().top()->getLabels().push_back(*username);
-
       _players.push_back(player);
       i++;
-  std::cout << "BITE" << std::endl;
     }
-
-  std::cout << "BITE" << std::endl;
-
-  
-  std::cout << vector.at(0) << std::endl;
-
   if (from == 0)
     _players.at(0)->setCurrentClient(true);
   else
     _players.at(vector.size() - 3)->setCurrentClient(true);    
 
-    std::cout << "BAAAATE" << std::endl;
-
-  
-  std::cout << vector.size() << std::endl;
     Text		       	*roomID = new Text();
  
       roomID->setString(vector.at(vector.size() - 2));
