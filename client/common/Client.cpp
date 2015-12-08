@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec  8 15:49:04 2015 Nicolas Girardot
+// Last update Tue Dec  8 12:24:47 2015 Antoine Garcia
 //
 
 #include <Client.hh>
@@ -73,7 +73,6 @@ void	Client::Start()
   t->run();
   while(window->isOpen())
     {
-      std::cout << window->getPanels().size() << std::endl;
       window->getPanels().top()->update();
       window->getPanels().top()->render();
       window->display();
