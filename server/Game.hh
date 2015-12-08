@@ -18,6 +18,7 @@
 # include <E_EntityType.hh>
 # include <stdexcept>
 # include <queue>
+# include <time.h>
 
 class Game {
 

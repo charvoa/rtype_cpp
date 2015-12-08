@@ -8,7 +8,6 @@
 // Last update Mon Dec  7 07:48:30 2015 Antoine Garcia
 //
 
-#include <Network.hpp>
 #include <Server.hh>
 
 Server::Server()
@@ -24,8 +23,8 @@ void Server::init()
   this->_network->init(4253, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
-  this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
-  this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
+  //this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
+  //this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
 }
 
 void Server::run()
@@ -35,10 +34,14 @@ void Server::run()
   std::cout << "Server :: Run" << std::endl;
   while (1)
     {
-      client = new Client(dynamic_cast<Socket*>(this->_network->select()));
-      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-					   client, this);
-
+		try {
+			client = new Client(dynamic_cast<Socket*>(this->_network->select()));
+			std::cout << "Received : " << (char*) client->getSocket()->read(4096) << std::endl;
+			//this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+			//			   client, this);
+		} catch (const std::exception &e) {
+			std::cout << "Server :: Run :: Error into main loop : " << e.what() << std::endl;
+		}
     }
 }
 

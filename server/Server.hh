@@ -13,7 +13,11 @@
 
 # include <iostream>
 # include <string>
-# include <ANetwork.hpp>
+# ifdef _WIN32
+#  include <NetworkWin.hpp>
+# else
+#  include <Network.hpp>
+# endif
 # include <RoomManager.hh>
 # include <GameManager.hh>
 # include <ClientManager.hh>

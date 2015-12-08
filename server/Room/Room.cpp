@@ -52,7 +52,7 @@ void	Room::sendRoomPlayerJoin(Client &client)
 
 void	Room::sendError(Client &client)
 {
-  std::string sendData = "Too many players"
+	std::string sendData = "Too many players";
 
     ANetwork::t_frame frame = CreateRequest::create((unsigned char)104, CRC::calcCRC(sendData), 0, sendData);
 }
@@ -65,7 +65,7 @@ void	Room::addPlayer(Client &client)
       sendPlayerJoin(client);
       sendRoomPlayerJoin(client);
     }
-  sendError();
+  //sendError();
 }
 
 std::vector<Client>&	Room::getAllPlayers()
