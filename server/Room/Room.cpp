@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec  8 02:57:57 2015 Antoine Garcia
+// Last update Tue Dec  8 05:09:50 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -52,9 +52,9 @@ void	Room::sendRoomPlayerJoin(Client &client)
 
 void	Room::sendError(Client &client)
 {
-  std::string sendData = "Too many players"
+  std::string sendData = "Too many players";
 
-    ANetwork::t_frame frame = CreateRequest::create((unsigned char)104, CRC::calcCRC(sendData), 0, sendData);
+  ANetwork::t_frame frame = CreateRequest::create((unsigned char)104, CRC::calcCRC(sendData), 0, sendData);
 }
 
 void	Room::addPlayer(Client &client)
@@ -65,7 +65,7 @@ void	Room::addPlayer(Client &client)
       sendPlayerJoin(client);
       sendRoomPlayerJoin(client);
     }
-  sendError();
+  sendError(client);
 }
 
 std::vector<Client>&	Room::getAllPlayers()
