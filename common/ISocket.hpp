@@ -23,7 +23,7 @@ public:
   virtual int	write(void *, int) = 0;
 # ifdef _WIN32
   virtual SOCKET	getFd() const = 0;
-# elif
+# else
   virtual int	getFd() const = 0;
 # endif
 };
