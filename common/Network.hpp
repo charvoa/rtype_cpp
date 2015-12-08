@@ -93,10 +93,10 @@ public:
       bcopy((char *) server->h_addr,
 	    (char *) &serv_addr.sin_addr.s_addr,
 	    server->h_length);
+      if (::connect(this->_socket->getFd(),
+		    (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+	throw (std::logic_error("Network :: Error while connecting"));
     }
-    if (::connect(this->_socket->getFd(),
-		  (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
-      throw (std::logic_error("Network :: Error while connecting"));
   };
 
   virtual t_frame		read() {
