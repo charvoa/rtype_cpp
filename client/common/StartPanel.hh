@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 06:38:16 2015 Serge Heitzler
+// Last update Tue Dec  8 07:04:26 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -20,8 +20,9 @@ public:
   StartPanel();
   ~StartPanel();
   
-  static void		createRoom();
+  void		createRoom();
   void		joinRoom();
+  void	        credits();
   void		demo();
   void		settings();
   void		exit();

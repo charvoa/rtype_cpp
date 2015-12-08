@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 06:39:40 2015 Serge Heitzler
+// Last update Tue Dec  8 07:05:17 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -78,11 +78,11 @@ void		StartPanel::setUserInterface()
 
 
 
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
-    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    _functions.push_back((APanel::funcs)&StartPanel::joinRoom);
+    _functions.push_back((APanel::funcs)&StartPanel::settings);
+    _functions.push_back((APanel::funcs)&StartPanel::credits);
+    _functions.push_back((APanel::funcs)&StartPanel::exit);
     
 }
 
@@ -103,6 +103,12 @@ void        StartPanel::joinRoom()
 }
 
 void        StartPanel::demo()
+{
+	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
+        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
+}
+
+void        StartPanel::credits()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
         (RenderWindow::getInstance())->getPanels().top()->setUserInterface();

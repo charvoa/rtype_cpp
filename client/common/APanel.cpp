@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 06:39:14 2015 Serge Heitzler
+// Last update Tue Dec  8 06:58:50 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -38,7 +38,7 @@ bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
     {
       if (this->_userInterface.at(i)->updateOnPress(pair))
 	{
-	  //(*this.*_functions.at(i))();
+	  (*this.*_functions.at(i))();
 	  return true;
 	}
       i++;
