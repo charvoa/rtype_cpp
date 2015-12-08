@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:27:31 2015 Louis Audibert
-// Last update Thu Dec  3 05:32:44 2015 Louis Audibert
+// Last update Tue Dec  8 22:23:11 2015 Nicolas Charvoz
 //
 
 #ifndef _SYSTEMMANAGER_HH_
@@ -28,8 +28,8 @@ public:
   SystemManager();
   ~SystemManager();
 
-  ASystem *getSystemByComponent(E_COMPONENT type);
-  void	addSystemByType(E_COMPONENT type);
+  ASystem *getSystemByComponent(E_Component type);
+  void	addSystemByType(E_Component type);
 };
 
 #endif /* _SYSTEMMANAGER_HH_ */

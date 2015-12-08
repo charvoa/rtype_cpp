@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Thu Dec  3 05:06:24 2015 Louis Audibert
+// Last update Tue Dec  8 22:24:24 2015 Nicolas Charvoz
 //
 
 #include <AEntity.hh>
@@ -38,19 +38,19 @@ bool	AEntity::update(int health)
   return (true);
 }
 
-void	AEntity::addSystem(E_COMPONENT type)
+void	AEntity::addSystem(E_Component type)
 {
   _systemManager.addSystemByType(type);
   std::cout << "New System added !" << std::endl;
 }
 
-bool	AEntity::setType(E_ENTITYTYPE type)
+bool	AEntity::setType(E_EntityType type)
 {
   _type = type;
   return (true);
 }
 
-E_ENTITYTYPE	AEntity::getType() const
+E_EntityType	AEntity::getType() const
 {
   return (_type);
 }

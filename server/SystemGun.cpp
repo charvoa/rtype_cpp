@@ -5,12 +5,12 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:23:44 2015 Louis Audibert
-// Last update Thu Dec  3 05:31:04 2015 Louis Audibert
+// Last update Tue Dec  8 22:23:43 2015 Nicolas Charvoz
 //
 
 #include <SystemGun.hh>
 
-SystemGun::SystemGun(E_COMPONENT type)
+SystemGun::SystemGun(E_Component type)
 {
   switch (type)
     {

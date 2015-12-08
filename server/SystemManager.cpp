@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Thu Dec  3 05:32:49 2015 Louis Audibert
+// Last update Tue Dec  8 22:24:03 2015 Nicolas Charvoz
 //
 
 #include <SystemManager.hh>
@@ -20,7 +20,7 @@ SystemManager::~SystemManager()
   std::cout << "SystemManager Destroyed." << std::endl;
 }
 
-ASystem *SystemManager::getSystemByComponent(E_COMPONENT type)
+ASystem *SystemManager::getSystemByComponent(E_Component type)
 {
   for (std::vector<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
     {
@@ -34,7 +34,7 @@ ASystem *SystemManager::getSystemByComponent(E_COMPONENT type)
   return (NULL);
 }
 
-void	SystemManager::addSystemByType(E_COMPONENT type)
+void	SystemManager::addSystemByType(E_Component type)
 {
   if (!(getSystemByComponent(type)))
     {

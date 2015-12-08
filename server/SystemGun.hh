@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:21:19 2015 Louis Audibert
-// Last update Thu Dec  3 05:30:57 2015 Louis Audibert
+// Last update Tue Dec  8 22:25:09 2015 Nicolas Charvoz
 //
 
 #ifndef _SYSTEMGUN_HH_
@@ -20,7 +20,7 @@
 class SystemGun : public ASystem
 {
 public:
-  SystemGun(E_COMPONENT type);
+  SystemGun(E_Component type);
   ~SystemGun();
 };
 
