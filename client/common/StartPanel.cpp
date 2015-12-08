@@ -5,16 +5,16 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Dec  7 12:21:54 2015 Serge Heitzler
+// Last update Tue Dec  8 16:00:12 2015 Nicolas Girardot
 //
 
 #include <iostream>
-#include "PanelFactory.hh"
-#include "StartPanel.hh"
-#include "RenderWindow.hh"
-#include "InputManager.hh"
-#include "Button.hh"
-#include "ButtonFactory.hh"
+#include <PanelFactory.hh>
+#include <StartPanel.hh>
+#include <RenderWindow.hh>
+#include <Button.hh>
+#include <ButtonFactory.hh>
+#include <RoomPanel.hh>
 
 StartPanel::StartPanel(){}
 
@@ -55,7 +55,7 @@ void		StartPanel::setUserInterface()
   logo->scale(0.5);
 
   backgroundSpace->scale(1.1);
-  
+
   _backgrounds.push_back(*backgroundSpace);
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
@@ -75,21 +75,36 @@ void		StartPanel::setUserInterface()
     ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.6), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
     name = "EXIT";
     ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+
+
+
+    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+    // _functions.push_back((APanel::funcs)&StartPanel::createRoom);
+
+}
+
+void        StartPanel::createRoom()
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+  window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
+  window->getPanels().top()->setUserInterface();
+  std::cout << "GOUT BITE" << std::endl;
 }
 
 void        StartPanel::joinRoom()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::JOIN_PANEL);
-}
-
-void        StartPanel::createRoom()
-{
-	(RenderWindow::getInstance())->addPanel(PanelFactory::ROOM_PANEL);
+        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
 }
 
 void        StartPanel::demo()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
+        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
 }
 
 void        StartPanel::exit()
@@ -100,6 +115,7 @@ void        StartPanel::exit()
 void        StartPanel::settings()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
+        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
 }
 
 void		StartPanel::update()
@@ -113,3 +129,8 @@ void		StartPanel::update()
     _backgrounds.at(0).move(0.01,0.01);
   i++;
 }
+
+// std::vector<funcs>		&getFuncs()
+// {
+//   return _functions;
+// }

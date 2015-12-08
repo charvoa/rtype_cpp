@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:25:49 2015 Nicolas Charvoz
+// Last update Tue Dec  8 15:36:23 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -18,7 +18,6 @@
 # include <E_EntityType.hh>
 # include <stdexcept>
 # include <queue>
-# include <time.h>
 
 class Game {
 
@@ -27,7 +26,7 @@ private:
   Parameters _params;
   std::string _id;
   EntityManager _eM;
-  std::queue<E_COMMAND> _commandQueue;
+  std::queue<ANetwork::t_frame> _commandQueue;
 
 public:
 

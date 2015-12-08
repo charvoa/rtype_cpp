@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:58 2015 Serge Heitzler
-// Last update Mon Dec  7 10:54:17 2015 Serge Heitzler
+// Last update Tue Dec  8 05:06:09 2015 Serge Heitzler
 //
 
 #ifndef AMENUELEMENT_HH_
@@ -21,7 +21,8 @@ public:
   ~AMenuElement();
 
   virtual void			render();
-  virtual void			update(std::pair<unsigned int, unsigned int> pair);
+  virtual void			updateOnMove(std::pair<unsigned int, unsigned int> pair);
+  virtual bool			updateOnPress(std::pair<unsigned int, unsigned int> pair);
 
   Sprite			&getSprite();
   

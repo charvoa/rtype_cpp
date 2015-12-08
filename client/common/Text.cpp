@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 00:59:53 2015 Serge Heitzler
-// Last update Mon Dec  7 12:17:10 2015 Serge Heitzler
+// Last update Tue Dec  8 03:11:06 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,7 +15,7 @@ Text::Text()
 {
   sf::Font *font = new sf::Font;
 
-  font->loadFromFile("../common/misc/fonts/prometheus.ttf");
+  font->loadFromFile("../common/misc/fonts/galaxy.ttf");
   _text.setFont(*font);
 }
 

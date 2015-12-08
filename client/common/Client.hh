@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Mon Dec  7 15:11:11 2015 Nicolas Girardot
+// Last update Tue Dec  8 01:34:42 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -19,6 +19,7 @@
 #include "Texture.hh"
 #include "Sprite.hh"
 #include "StartPanel.hh"
+#include "RoomPanel.hh"
 #include "InputManager.hh"
 #include "PanelFactory.hh"
 #include "SoundManager.hh"

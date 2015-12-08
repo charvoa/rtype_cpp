@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Mon Dec  7 12:17:43 2015 Serge Heitzler
+// Last update Tue Dec  8 06:22:29 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -26,7 +26,8 @@ public:
   APanel();
   ~APanel();
 
-  virtual void		updateOnEvent(std::pair<unsigned int, unsigned int> pair);
+  virtual void		updateOnMove(std::pair<unsigned int, unsigned int> pair);
+  virtual bool		updateOnPress(std::pair<unsigned int, unsigned int> pair);
   virtual void		update();
   virtual void		render();
   virtual void		hide();
@@ -50,6 +51,10 @@ protected:
   std::vector<Text>			_labels;
   std::vector<Sprite>	      		_inGame;
   InputManager				_inputManager;
+
+  typedef void(APanel::*funcs)();
+  std::vector<funcs>			_functions;
+  
 };
 
 #endif // APANEL_HH

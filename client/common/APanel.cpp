@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Mon Dec  7 12:08:16 2015 Serge Heitzler
+// Last update Tue Dec  8 06:39:14 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -21,14 +21,29 @@ void		APanel::update(){}
 
 void		APanel::setUserInterface(){}
 
-void		APanel::updateOnEvent(std::pair<unsigned int, unsigned int> pair)
+void		APanel::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 {
   unsigned int		i = 0;
   while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
     {
-      this->_userInterface.at(i)->update(pair);
+      this->_userInterface.at(i)->updateOnMove(pair);
       i++;
     }  
+}
+
+bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
+{
+  unsigned int		i = 0;
+  while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+    {
+      if (this->_userInterface.at(i)->updateOnPress(pair))
+	{
+	  //(*this.*_functions.at(i))();
+	  return true;
+	}
+      i++;
+    }
+  return false;
 }
 
 void		APanel::render()
@@ -112,3 +127,4 @@ InputManager	&APanel::getInputManager()
 {
   return _inputManager;
 }
+
