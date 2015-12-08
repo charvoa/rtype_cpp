@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Mon Dec  7 01:45:17 2015 Serge Heitzler
+// Last update Mon Dec  7 10:46:07 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
@@ -31,8 +31,8 @@ public:
   void			rotate(float angle);
   void			setTextureRect(float posX, float posY, float width, float height);
   std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>>			getGlobalBounds();
-  sf::Sprite		getSprite();
-
+  sf::Sprite		&getSprite();
+  
 private:
 
   sf::Sprite		_sprite;

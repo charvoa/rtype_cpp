@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:19:58 2015 Serge Heitzler
-// Last update Mon Dec  7 01:08:47 2015 Serge Heitzler
+// Last update Mon Dec  7 10:54:17 2015 Serge Heitzler
 //
 
 #ifndef AMENUELEMENT_HH_
@@ -13,7 +13,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Sprite.hh"
-#include "Texture.hh"
 
 class	        AMenuElement
 {
@@ -23,13 +22,12 @@ public:
 
   virtual void			render();
   virtual void			update(std::pair<unsigned int, unsigned int> pair);
+
   Sprite			&getSprite();
-  Texture			&getHighlightTexture();
   
 protected:
 
-    Sprite		*_sprite;
-    Texture		*_highlight;
+  Sprite			*_sprite;
 
 };
 

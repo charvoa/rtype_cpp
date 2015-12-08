@@ -37,6 +37,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Bind.cpp
   ../common/SoundManager.cpp
   ../common/Button.cpp
+  ../common/ButtonFactory.cpp
   ../common/Color.cpp
   ../common/DemoPanel.cpp
   ../common/Font.cpp

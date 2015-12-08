@@ -5,20 +5,28 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 00:59:53 2015 Serge Heitzler
-// Last update Sat Dec  5 07:47:30 2015 Serge Heitzler
+// Last update Mon Dec  7 12:17:10 2015 Serge Heitzler
 //
 
+#include <iostream>
 #include "Text.hh"
 
 Text::Text()
 {
+  sf::Font *font = new sf::Font;
+
+  font->loadFromFile("../common/misc/fonts/prometheus.ttf");
+  _text.setFont(*font);
 }
 
 Text::Text(const std::string &string, Font &font, unsigned int characterSize)
 {
+  (void)font;
+
   _text.setString(string);
   _text.setCharacterSize(characterSize);
-  _text.setFont(font.getFont());
+  //  _text.setFont(font.getFont());
+  //  _text.setFont(font);
 }
 
 Text::~Text()
@@ -46,7 +54,22 @@ void			Text::setString(const std::string& title)
   _text.setString(title);
 }
 
-sf::Text		&Text::getText()
+void			Text::setPosition(Vector2 pos)
+{
+  _text.setPosition(sf::Vector2f(pos._x, pos._y));
+}
+
+void		        Text::setOrigin(float x, float y)
+{
+  _text.setOrigin(x, y);
+}
+
+void		        Text::setStyle(uint32_t style)
+{
+  _text.setStyle(style);
+}
+
+sf::Text	       	&Text::getText()
 {
   return _text;
 }

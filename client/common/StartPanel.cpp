@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Dec  7 15:19:02 2015 Nicolas Girardot
+// Last update Mon Dec  7 12:21:54 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -14,8 +14,13 @@
 #include "RenderWindow.hh"
 #include "InputManager.hh"
 #include "Button.hh"
+#include "ButtonFactory.hh"
 
-StartPanel::StartPanel()
+StartPanel::StartPanel(){}
+
+StartPanel::~StartPanel(){}
+
+void		StartPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::MENU_INPUT);
@@ -29,7 +34,6 @@ StartPanel::StartPanel()
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
   Sprite *logo = new Sprite;
-
 
   backgroundSpaceTexture->loadFromFile("../common/misc/background.png");
   earthTexture->loadFromFile("../common/misc/planet_earth_background.png");
@@ -48,29 +52,30 @@ StartPanel::StartPanel()
   earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
   cockpit->setPosition(0, 0);
   logo->setPosition(window->getSize()._x / 2, window->getSize()._y / 6);
+  logo->scale(0.5);
 
   backgroundSpace->scale(1.1);
-
-  _sprites.push_back(*backgroundSpace);
-  _sprites.push_back(*earth);
-  _sprites.push_back(*cockpit);
-  _sprites.push_back(*logo);
-  // this->getSprites().push_back(&backgroundSpace);
-  // this->getSprites().push_back(&earth);
-  //  this->getSprites().push_back(*cockpit);
+  
+  _backgrounds.push_back(*backgroundSpace);
+  _backgrounds.push_back(*earth);
+  _backgrounds.push_back(*cockpit);
+  _backgrounds.push_back(*logo);
 
   // Button
 
-  std::string name = "toto";
   std::string fileDefault = "../common/misc/MicroDesignDefault.png";
   std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
-  Button *startButton = new Button(Vector2(window->getSize()._x / 2, window->getSize()._y / 3), Vector2(200, 50), name, fileDefault, fileHighlight, fileDefault);
-  getElements().push_back(// static_cast<AMenuElement*>
-			  (startButton));
-
+  std::string name = "CREATE";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.3), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+    name = "JOIN";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.4), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+    name = "SETTINGS";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.5), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+    name = "CREDITS";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.6), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+    name = "EXIT";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
 }
-
-StartPanel::~StartPanel() {}
 
 void        StartPanel::joinRoom()
 {
@@ -101,10 +106,10 @@ void		StartPanel::update()
 {
   static int i = 0;
 
-  _sprites.at(1).rotate(0.005);
+  _backgrounds.at(1).rotate(0.0009);
   if (i % 10000 < 5000)
-    _sprites.at(0).move(-0.01,-0.01);
+    _backgrounds.at(0).move(-0.01,-0.01);
   else
-    _sprites.at(0).move(0.01,0.01);
+    _backgrounds.at(0).move(0.01,0.01);
   i++;
 }
