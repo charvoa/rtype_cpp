@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Mon Dec  7 15:38:58 2015 Nicolas Charvoz
+// Last update Tue Dec  8 10:16:53 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -39,13 +39,29 @@ void Game::setParameters(Parameters &p)
 
 bool Game::run()
 {
+  //CREATE NB OF BASE ENEMY
+
+  // CREATE ENEMY
+
+  // WHILE !GAME_OVER
+  //---WHILE ENEMY > 0
+  // POP RANDOM TYPE ENEMY
+
+  // CHECK ENEMY
+  // MOVE ENEMY
+  // CHECK IF ENEMY HAS GONE THROUGH MAP = DEAD
+  // ENEMY = 5 * STAGE * DIFF
+  // CHECK IF STAGE % 5 -> POP BOSS (LIFE *= DIFFICULTY)
+  // RANDOM BONUS POP
+  // --- IF DESTROYED BONUS GOT
+
 
   return true;
 }
 
 void Game::addCommandToQueue(ANetwork::t_frame frame)
 {
-  _commandQueue.push((E_COMMAND)frame.idRequest);
+  _commandQueue.push(frame);
 }
 
 const std::string &Game::getId() const
