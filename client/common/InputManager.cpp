@@ -1,10 +1,11 @@
 //
-// InputManager.cpp for InputManager in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// InputManager.cpp for rtype in /home/nicolas/rendu/rtype_cpp/client/build
 //
-// Made by Serge Heitzler
-// Login   <sergeheitzler@epitech.net>
+// Made by Nicolas Girardot
+// Login   <girard_s@epitech.net>
 //
-// Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
+// Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
+// Last update Tue Dec  8 11:13:28 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -105,9 +106,8 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 
   //  (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
   (RenderWindow::getInstance())->getPanels().top()->updateOnEvent(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-  
-  //  	  window->getPanels().top()->updateOnEvent();
 
+  //  	  window->getPanels().top()->updateOnEvent();
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 
