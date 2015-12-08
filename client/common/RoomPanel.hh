@@ -5,17 +5,17 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 03:03:29 2015 Serge Heitzler
+// Last update Tue Dec  8 08:18:11 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
 #define ROOMPANEL_H
 
 #include <map>
-#include "Button.hh"
-#include "Settings.hh"
-#include "APanel.hh"
-#include "Player.hh"
+#include <Button.hh>
+#include <Settings.hh>
+#include <APanel.hh>
+#include <Player.hh>
 
 class RoomPanel : public APanel
 {
@@ -29,7 +29,7 @@ public:
   void			back();
   void			update();
   void			setUserInterface();
-  void			updatePlayers();
+  void			updatePlayers(std::vector<std::string> &vector, int from);
 
 private:
 

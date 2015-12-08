@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 07:36:49 2015 Serge Heitzler
+// Last update Tue Dec  8 08:19:19 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -96,12 +96,21 @@ void        StartPanel::createRoom()
   net->write(sender);
 }
 
-void        StartPanel::goToRoom()
+// void        StartPanel::goToRoom()
+// {
+//   RenderWindow *window = RenderWindow::getInstance();
+
+//   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
+//   window->getPanels().top()->setUserInterface();
+// }
+
+void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
+  static_cast<RoomPanel*>(window->getPanels().top())->updatePlayers(vector, from);
   std::cout << "GOUT BITE" << std::endl;
 }
 
