@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec  8 13:51:56 2015 Serge Heitzler
+// Last update Wed Dec  9 00:56:16 2015 Antoine Garcia
 //
 
 #include <Client.hh>
@@ -54,7 +54,7 @@ void	Client::Start()
   RenderWindow *window = RenderWindow::getInstance();
   _network = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("192.168.1.25");
+  _network->connect("10.16.253.125");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
 

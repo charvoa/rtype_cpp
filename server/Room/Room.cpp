@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  9 00:53:47 2015 Antoine Garcia
+// Last update Wed Dec  9 00:56:46 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -33,7 +33,7 @@ void	Room::sendPlayerJoin(Client &client)
     {
       sendData += std::string("player") + std::to_string(i + 1) + ";";
     }
-  sendData += + _id + ";" + "1";
+  sendData +=  _id + ";" + "1";
   ANetwork::t_frame frame = CreateRequest::create((unsigned char)103, CRC::calcCRC(sendData), 0, sendData);
   client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
 }
