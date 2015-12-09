@@ -5,19 +5,21 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:25:49 2015 Nicolas Charvoz
+// Last update Wed Dec  9 15:26:10 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
 # define _GAME_HH_
 
-# include <E_Command.hh>
+# include <ProtocoleEnum.hh>
 # include <Parameters.hh>
 # include <EntityManager.hh>
 # include <Client.hh>
 # include <E_EntityType.hh>
+# include <Mutex.hpp>
 # include <stdexcept>
 # include <queue>
+
 
 class Game {
 
@@ -26,7 +28,8 @@ private:
   Parameters _params;
   std::string _id;
   EntityManager _eM;
-  std::queue<E_COMMAND> _commandQueue;
+  std::queue<ANetwork::t_frame> _commandQueue;
+  AMutex *_mutex;
 
 public:
 

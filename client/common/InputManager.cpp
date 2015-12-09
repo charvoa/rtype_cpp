@@ -1,21 +1,24 @@
 //
-// InputManager.cpp for InputManager in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// InputManager.cpp for rtype in /home/nicolas/rendu/rtype_cpp/client/build
 //
-// Made by Serge Heitzler
-// Login   <sergeheitzler@epitech.net>
+// Made by Nicolas Girardot
+// Login   <girard_s@epitech.net>
 //
-// Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
+// Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
+// Last update Wed Dec  9 11:24:52 2015 Nicolas Girardot
 //
 
 #include <iostream>
-#include "InputManager.hh"
-#include "RenderWindow.hh"
-#include "Client.hh"
-#include "../../common/CreateRequest.hpp"
-#include "../../common/CRC.hpp"
-#include "../../common/ANetwork.hpp"
+#include <InputManager.hh>
+#include <RenderWindow.hh>
+#include <Client.hh>
+#include <CreateRequest.hpp>
+#include <CRC.hpp>
+#include <ANetwork.hpp>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
+
+extern std::string g_a;
 
 InputManager::InputManager(){}
 
@@ -101,22 +104,24 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Event& event)
 {
-  std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
-
-  //  (RenderWindow::getInstance())->getPanels().top()->getElements().at(0)->update(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-  (RenderWindow::getInstance())->getPanels().top()->updateOnEvent(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
-  
-  //  	  window->getPanels().top()->updateOnEvent();
+  (RenderWindow::getInstance())->getPanels().top()->updateOnMove(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
 
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  Network *net = Client::getNetwork();
-  std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
-  net->write(sender);
+  if (event.mouseButton.button == sf::Mouse::Right)
+    {
+
+	  ANetwork *net = Client::getNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("2QNP"), 0, "2QNP");
+      net->write(sender);
+    }
+
+  else if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
+    {
+    }
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
@@ -153,7 +158,7 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::E
 
 void		InputManager::methodChecker(sf::Event &event)
 {
-  std::cout << "check: " << std::endl;
+  std::cout << "---| New Event |---" << std::endl;
   for (std::map<sf::Event::EventType, funcs>::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == event.type)

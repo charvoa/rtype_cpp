@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Sun Dec  6 08:45:53 2015 Antoine Garcia
+// Last update Wed Dec  9 15:27:26 2015 Nicolas Charvoz
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -16,7 +16,7 @@
 # include <cstring>
 # include <string>
 # include <iostream>
-# include <E_Command.hh>
+# include <ProtocoleEnum.hh>
 # include <ANetwork.hpp>
 
 class CreateRequest {

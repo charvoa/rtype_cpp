@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Mon Dec  7 01:47:30 2015 Antoine Garcia
+// Last update Wed Dec  9 05:42:59 2015 Antoine Garcia
 //
 
 # include <CRC.hpp>
@@ -43,7 +43,7 @@ void	RoomManager::createNewRoom(Client &client)
 {
   Room	room(generateId(), client);
   _rooms.push_back(room);
-  std::string	sendData = "player1;" + room.getId() + ";player1;" + "player1";
+  std::string	sendData = "player1;" + room.getId() + ";1";
   ANetwork::t_frame frame = CreateRequest::create((unsigned char)101, CRC::calcCRC(sendData), 0, sendData);
   client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
   std::cout << "Create Room With Id" << room.getId() << std::endl;
@@ -75,6 +75,7 @@ void	RoomManager::deleteRoom(const std::string &id)
     {
       if((*it).getId() == id)
 	{
+	  std::cout << "DELETE ROOM" << std::endl;
 	  _rooms.erase(it);
 	  return;
 	}

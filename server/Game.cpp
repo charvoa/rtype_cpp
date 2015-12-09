@@ -5,16 +5,22 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Mon Dec  7 15:21:01 2015 Nicolas Charvoz
+// Last update Wed Dec  9 13:32:06 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
 
-Game::Game() {}
+Game::Game()
+{
+  _mutex = new Mutex();
+}
 
 Game::Game(const Parameters &params_, std::vector<Client> &client_,
 	   const std::string &id_) : _params(params_), _id(id_)
 {
+  //  srand(time(NULL));
+
+
   this->addClients(client_);
 }
 
@@ -36,13 +42,41 @@ void Game::setParameters(Parameters &p)
 
 bool Game::run()
 {
+  int nbEnemy = 5;
+  int stage = 1;
+
+  std::cout << "Game :: run() " << std::endl;
+
+  while (true)
+    {
+      nbEnemy = 5 * stage * nbEnemy;
+    }
+
+
+  //CREATE NB OF BASE ENEMY
+
+  // CREATE ENEMY
+
+  // WHILE !GAME_OVER
+  //---WHILE ENEMY > 0
+  // POP RANDOM TYPE ENEMY
+
+  // CHECK ENEMY
+  // MOVE ENEMY
+  // CHECK IF ENEMY HAS GONE THROUGH MAP = DEAD
+  // ENEMY = 5 * STAGE * DIFF
+  // CHECK IF STAGE % 5 -> POP BOSS (LIFE *= DIFFICULTY)
+  // RANDOM BONUS POP
+  // --- IF DESTROYED BONUS GOT
 
   return true;
 }
 
 void Game::addCommandToQueue(ANetwork::t_frame frame)
 {
-  _commandQueue.push((E_COMMAND)frame.idRequest);
+  _mutex->lock();
+  _commandQueue.push(frame);
+  _mutex->unlock();
 }
 
 const std::string &Game::getId() const

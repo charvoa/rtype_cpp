@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 00:59:53 2015 Serge Heitzler
-// Last update Mon Dec  7 12:17:10 2015 Serge Heitzler
+// Last update Tue Dec  8 07:41:35 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,18 +15,16 @@ Text::Text()
 {
   sf::Font *font = new sf::Font;
 
-  font->loadFromFile("../common/misc/fonts/prometheus.ttf");
+  font->loadFromFile("../common/misc/fonts/galaxy.ttf");
   _text.setFont(*font);
 }
 
-Text::Text(const std::string &string, Font &font, unsigned int characterSize)
+Text::Text(const std::string &string, SFont &font, unsigned int characterSize)
 {
   (void)font;
 
   _text.setString(string);
   _text.setCharacterSize(characterSize);
-  //  _text.setFont(font.getFont());
-  //  _text.setFont(font);
 }
 
 Text::~Text()
@@ -34,7 +32,7 @@ Text::~Text()
 
 }
 
-void			Text::setFont(Font& font)
+void			Text::setFont(SFont& font)
 {
   _text.setFont(font.getFont());
 }

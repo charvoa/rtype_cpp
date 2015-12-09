@@ -5,10 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Mon Dec  7 07:48:30 2015 Antoine Garcia
 //
 
-#include <Network.hpp>
+#ifdef _WIN32
+# include <NetworkWin.hpp>
+#else
+# include <Network.hpp>
+#endif
+
 #include <Server.hh>
 
 Server::Server()
@@ -18,14 +22,16 @@ Server::Server()
 
 Server::~Server() {}
 
-void Server::init()
+void Server::init(int port)
 {
   std::cout << "Server :: Init" << std::endl;
-  this->_network->init(4253, ANetwork::TCP_MODE);
+  this->_network->init(port, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
   this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
   this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
+  this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
+  this->_commandManager.addFunction(C_PLAYERLEFT, &Server::playerLeftRoom);
 }
 
 void Server::run()
@@ -35,24 +41,76 @@ void Server::run()
   std::cout << "Server :: Run" << std::endl;
   while (1)
     {
-      client = new Client(dynamic_cast<Socket*>(this->_network->select()));
+      client = new Client(this->_network->select());
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-					   client, this);
-
+      client, this);
     }
 }
 
-bool Server::createGame(ANetwork::t_frame frame, void *data) {
-  (void) frame;
-  (void) data;
+void *newGameThread(void *data)
+{
+  Server::serializeThread *s = reinterpret_cast<Server::serializeThread*>(data);
+
+  std::cout << "Server :: void* newGameThread" << std::endl;
+
+  Server *me = s->server;
+
+  Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
+  std::vector<Client> c = me->_roomManager.getRoombyId(s->frame.data)
+    .getAllPlayers();
+  std::string str(me->_roomManager.getRoombyId(s->frame.data).getId());
+
+  if ((me->_gameManager.createGame(p, c, s->frame.data))) {
+    for (std::vector<Client>::iterator it = c.begin();
+	 it != c.end() ; ++it)
+      {
+	ANetwork::t_frame frame = CreateRequest::create((unsigned char)
+							S_GAME_LAUNCHED,
+						  CRC::calcCRC(""), 0, "");
+	(*it).getSocket()->write(reinterpret_cast<void*>(&frame),
+				 sizeof(ANetwork::t_frame));
+      }
+    me->_gameManager.getGameById(s->frame.data).run();
+    me->_roomManager.deleteRoom(s->frame.data);
+  }
+  else {
+    for (std::vector<Client>::iterator it = c.begin();
+	 it != c.end() ; ++it)
+      {
+	ANetwork::t_frame frame = CreateRequest::create((unsigned char)
+							S_GAME_NOT_LAUNCHED,
+						  CRC::calcCRC(""), 0, "");
+	(*it).getSocket()->write(reinterpret_cast<void*>(&frame),
+				 sizeof(ANetwork::t_frame));
+      }
+  }
+  return data;
+}
+
+bool Server::createGame(ANetwork::t_frame frame, void *data)
+{
+  Server::serializeThread *s = new Server::serializeThread;
+
+  s->server = this;
+  s->client = reinterpret_cast<Client*>(data);
+  s->frame = frame;
+
+  ThreadFactory *tF = new ThreadFactory;
+  std::unique_ptr<AThread> t1(tF->createThread());
+
+  t1->attach(&newGameThread, reinterpret_cast<void*>(s));
+  t1->run();
+  t1->join();
+
   return true;
 }
 
-bool Server::createRoom(ANetwork::t_frame frame, void *data) {
-  Client	&client = *reinterpret_cast<Client *>(data);
-
+bool Server::createRoom(ANetwork::t_frame frame, void *data)
+{
   (void) frame;
+  Client	&client = *reinterpret_cast<Client *>(data);
   _roomManager.createNewRoom(client);
+
   return true;
 }
 
@@ -62,4 +120,17 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
 
    _roomManager.getRoombyId(frame.data).addPlayer(client);
    return true;
+}
+
+bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
+{
+  Client	&client = *reinterpret_cast<Client *>(data);
+  Room	room = _roomManager.getRoombyId(frame.data);
+  if (room.getAllPlayers().size() == 1)
+    _roomManager.deleteRoom(frame.data);
+  else
+    {
+      room.deletePlayer(client);
+    }
+  return true;
 }

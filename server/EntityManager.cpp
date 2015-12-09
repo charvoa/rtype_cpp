@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Tue Dec  8 07:03:52 2015 Louis Audibert
+// Last update Wed Dec  9 06:48:43 2015 Louis Audibert
 //
 
 #include <EntityManager.hh>
@@ -20,7 +20,7 @@ EntityManager::~EntityManager()
   std::cout << "EntityManager Destroyed" << std::endl;
 }
 
-bool	EntityManager::createEntity(E_ENTITYTYPE type)
+bool	EntityManager::createEntity(E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(_id);
   newEntity->setType(type);
@@ -29,7 +29,7 @@ bool	EntityManager::createEntity(E_ENTITYTYPE type)
   return (true);
 }
 
-bool	EntityManager::createEntity(E_ENTITYTYPE type, const Client &client)
+bool	EntityManager::createEntity(E_EntityType type, const Client &client)
 {
   AEntity *newEntity = _playerFactory.createPlayer(_id, client);
   newEntity->setType(type);
@@ -37,7 +37,7 @@ bool	EntityManager::createEntity(E_ENTITYTYPE type, const Client &client)
   return (true);
 }
 
-bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_ENTITYTYPE type)
+bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);
   newEntity->setType(type);
@@ -86,7 +86,7 @@ AEntity	*EntityManager::getEntityById(int id)
   return (NULL);
 }
 
-std::vector<AEntity*> EntityManager::getEntitiesByType(E_ENTITYTYPE type)
+std::vector<AEntity*> EntityManager::getEntitiesByType(E_EntityType type)
 {
   std::vector<AEntity*> entitiesByType;
   for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)

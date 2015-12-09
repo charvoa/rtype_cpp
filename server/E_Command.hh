@@ -5,13 +5,13 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 17:38:04 2015 Nicolas Charvoz
-// Last update Mon Nov 30 17:38:50 2015 Nicolas Charvoz
+// Last update Wed Dec  9 05:36:09 2015 Antoine Garcia
 //
 
 #ifndef E_COMMAND_HH_
 # define E_COMMAND_HH_
 
-enum E_COMMAND {
+enum E_Command {
   C_CREATEROOM = 1,
   C_CHANGESETTINGS = 2,
   C_JOINROOM = 3,
@@ -19,7 +19,8 @@ enum E_COMMAND {
   C_MOVE = 5,
   C_SHOOT = 6,
   C_LOADSPRITESUCCESS = 7,
-  C_LOADSPRITEERROR = 8
+  C_LOADSPRITEERROR = 8,
+  C_PLAYERLEFT = 13
 };
 
 #endif

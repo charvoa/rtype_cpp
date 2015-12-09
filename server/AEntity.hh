@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Wed Dec  9 01:35:53 2015 Louis Audibert
+// Last update Wed Dec  9 06:51:33 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -20,7 +20,7 @@ class AEntity
 {
 protected:
   int		_id;
-  E_ENTITYTYPE	_type;
+  E_EntityType	_type;
   SystemManager	_systemManager;
   char		_color;
 

@@ -5,10 +5,10 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Mon Nov 30 16:56:12 2015 Nicolas Girardot
-// Last update Thu Dec  3 13:59:20 2015 Serge Heitzler
+// Last update Wed Dec  9 13:49:45 2015 Nicolas Girardot
 //
 
-#include "Color.hh"
+#include <Color.hh>
 
 Color::Color()
 {

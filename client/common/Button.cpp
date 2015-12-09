@@ -1,15 +1,15 @@
 //
 // Button.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Thu Dec  3 13:22:09 2015 Serge Heitzler
-// Last update Mon Dec  7 11:05:40 2015 Serge Heitzler
+// Last update Wed Dec  9 13:43:00 2015 Nicolas Girardot
 //
 
 #include <iostream>
-#include "Button.hh"
+#include <Button.hh>
 
 Button::Button()
 {
@@ -43,14 +43,30 @@ Texture			&Button::getSelectTexture()
   return *_select;
 }
 
-void			Button::update(std::pair<unsigned int, unsigned int> pair)
+void			Button::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 {
   std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
-  
+
   if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
     this->getSprite().setTexture(this->getHighlightTexture());
   else
     this->getSprite().setTexture(this->getNormalTexture());
+}
+
+bool			Button::updateOnPress(std::pair<unsigned int, unsigned int> pair)
+{
+  std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
+
+  if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
+    {
+      this->getSprite().setTexture(this->getHighlightTexture());
+      return true;
+    }
+  else
+    {
+      this->getSprite().setTexture(this->getNormalTexture());
+      return false;
+    }
 }
 
 void			Button::render()

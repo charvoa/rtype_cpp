@@ -5,7 +5,11 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Mon Dec  7 00:56:38 2015 Antoine Garcia
+<<<<<<< HEAD
+// Last update Wed Dec  9 14:15:42 2015 Nicolas Charvoz
+=======
+// Last update Wed Dec  9 05:37:48 2015 Antoine Garcia
+>>>>>>> 7c8310b843fa51172673d4465ae5d0faae029f39
 //
 
 #ifndef SERVER_HH_
@@ -13,29 +17,45 @@
 
 # include <iostream>
 # include <string>
+# include <memory>
 # include <ANetwork.hpp>
+# ifdef _WIN32
+#  include <NetworkWin.hpp>
+# else
+#  include <Network.hpp>
+# endif
 # include <RoomManager.hh>
 # include <GameManager.hh>
 # include <ClientManager.hh>
 # include <CommandManager.hpp>
+# include <ThreadFactory.hh>
+# include <CreateRequest.hpp>
 
 class Server {
+
+public:
+  struct serializeThread {
+    Server *server;
+    Client *client;
+    ANetwork::t_frame frame;
+  };
 
 public:
 
   Server();
   ~Server();
-  void init();
+  void init(int);
   void run();
   bool createGame(ANetwork::t_frame frame, void *data);
   bool createRoom(ANetwork::t_frame frame, void *data);
   bool joinRoom(ANetwork::t_frame frame, void *data);
+  bool	playerLeftRoom(ANetwork::t_frame frame, void *data);
+  RoomManager _roomManager;
+  GameManager _gameManager;
 
 private:
 
   ANetwork *_network;
-  RoomManager _roomManager;
-  GameManager _gameManager;
   ClientManager _clientManager;
   CommandManager _commandManager;
 
