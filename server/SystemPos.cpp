@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:53:22 2015 Louis Audibert
-// Last update Thu Dec  3 05:33:11 2015 Louis Audibert
+// Last update Tue Dec  8 01:20:19 2015 Louis Audibert
 //
 
 #include <SystemPos.hh>
@@ -13,6 +13,7 @@
 SystemPos::SystemPos()
 {
   _component = new Position();
+  std::cout << "new SystemPos created." << std::endl;
 }
 
 SystemPos::~SystemPos()

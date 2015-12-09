@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Tue Dec  8 22:19:49 2015 Nicolas Charvoz
+// Last update Wed Dec  9 06:48:43 2015 Louis Audibert
 //
 
 #include <EntityManager.hh>
@@ -25,7 +25,7 @@ bool	EntityManager::createEntity(E_EntityType type)
   AEntity *newEntity = _entityFactory.createEntity(_id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  //_entities.push_back(_entityFactory.createEntity(_id));
+  _entities.push_back(_entityFactory.createEntity(_id));
   return (true);
 }
 

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Wed Dec  9 04:59:57 2015 Serge Heitzler
+// Last update Wed Dec  9 15:00:24 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -24,6 +24,7 @@
 
 
 ANetwork	*Client::_network = NULL;
+ANetwork	*Client::_UDPnetwork = NULL;
 Sound *Client::_sound = NULL;
 
 void	*readdisp(void *s)
@@ -61,9 +62,11 @@ void	Client::Start()
   RenderWindow *window = RenderWindow::getInstance();
 
   _network = new Network();
+  _UDPnetwork = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  //  _network->connect("10.16.253.120");
-  _network->connect("127.0.0.1");
+  _UDPnetwork->init(4254, ANetwork::UDP_MODE);
+  //_UDPnetwork->connect("0");
+  _network->connect("10.16.253.14");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
 
@@ -100,6 +103,13 @@ ANetwork	*Client::getNetwork()
   if (!_network)
     _network = new Network();
   return _network;
+}
+
+ANetwork	*Client::getUDPNetwork()
+{
+  if (!_UDPnetwork)
+    _UDPnetwork = new Network();
+  return _UDPnetwork;
 }
 
 Sound		*Client::getSound()

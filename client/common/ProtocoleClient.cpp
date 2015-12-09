@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec  8 22:29:01 2015 Nicolas Girardot
+// Last update Wed Dec  9 15:19:18 2015 Nicolas Girardot
 //
 
 
@@ -66,6 +66,7 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(NEW_WAVE, &ProtocoleClient::newWave));
   _functions.insert(std::make_pair(END_GAME, &ProtocoleClient::endGame));
   _functions.insert(std::make_pair(LOAD_SPRITES, &ProtocoleClient::loadSprites));
+  _functions.insert(std::make_pair(GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
 }
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
@@ -102,6 +103,7 @@ void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
 {
+  std::cout << "Game Is launched" << std::endl;
   (void) frame;
 }
 
@@ -113,7 +115,8 @@ void		ProtocoleClient::newPlayerConnected(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::playerLeft(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  RoomPanel::playerLeft(x);
 }
 
 void		ProtocoleClient::changeHost(ANetwork::t_frame &frame)
@@ -153,6 +156,12 @@ void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::loadSprites(ANetwork::t_frame &frame)
 {
+  (void) frame;
+}
+
+void		ProtocoleClient::gameNotLaunched(ANetwork::t_frame &frame)
+{
+  std::cout << "GAME IS NOT LAUCNEHD" << std::endl;
   (void) frame;
 }
 
