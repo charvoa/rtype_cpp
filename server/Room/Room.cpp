@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  9 06:53:50 2015 Antoine Garcia
+// Last update Wed Dec  9 09:11:10 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -42,7 +42,7 @@ void	Room::sendRoomPlayerJoin(Client &client)
 {
   std::vector<Client>::iterator	it;
   std::vector<Client> clients = getAllPlayers();
-  int	clientPos = _clientManager.getClientPosition(client);
+  int	clientPos = _clientManager.getClientPosition(client) + 1;
   for (it = clients.begin() ; it != clients.end() ; ++it)
     {
       std::string sendData = "player" + std::to_string(clientPos);
@@ -79,7 +79,7 @@ void	Room::sendPlayerLeft(int playerID)
   for (it = clients.begin(); it != clients.end(); ++it)
     {
       std::string sendData = "player" + std::to_string(playerID);
-      sendData += ";player" + std::to_string(_clientManager.getClientPosition(*it));
+      sendData += ";player" + std::to_string(_clientManager.getClientPosition(*it) + 1);
       ANetwork::t_frame frame = CreateRequest::create(S_PLAYER_LEFT, CRC::calcCRC(sendData), 0, sendData);
       (*it).getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
     }
@@ -87,7 +87,7 @@ void	Room::sendPlayerLeft(int playerID)
 
 void	Room::deletePlayer(Client &client)
 {
-  int playerID = _clientManager.getClientPosition(client);
+  int playerID = _clientManager.getClientPosition(client) + 1;
   _clientManager.deleteClient(client);
   sendPlayerLeft(playerID);
 }
