@@ -113,6 +113,7 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
 {
    Client	&client = *reinterpret_cast<Client *>(data);
 
+   std::cout << "SERVER :: JoinRoom" << std::endl;
    _roomManager.getRoombyId(frame.data).addPlayer(client);
    return true;
 }
