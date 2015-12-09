@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Tue Dec  8 22:23:28 2015 Nicolas Charvoz
+// Last update Wed Dec  9 06:57:53 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -23,7 +23,6 @@ protected:
   E_EntityType	_type;
   SystemManager	_systemManager;
   char		_color;
-  //  AI		_brain;
 
 public:
   AEntity(int id);
@@ -31,10 +30,12 @@ public:
 
   bool	update(int, int);
   bool	update(int);
+  // virtual void update();
   void	addSystem(E_Component type);
   bool	setType(E_EntityType type);
   E_EntityType getType() const;
   int	getId() const;
+  SystemManager *getSystemManager();
 };
 
 #endif /* _AENTITY_HH_ */
