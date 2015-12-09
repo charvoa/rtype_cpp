@@ -5,14 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:58 2015 Nicolas Charvoz
-// Last update Tue Dec  8 22:11:21 2015 Nicolas Charvoz
+// Last update Wed Dec  9 15:27:43 2015 Nicolas Charvoz
 //
 
 #ifndef COMMANDMANAGER_HPP_
 # define COMMANDMANAGER_HPP_
 
 # include <map>
-# include <E_Command.hh>
+# include <ProtocoleEnum.hh>
 # include <ANetwork.hpp>
 
 class Server;

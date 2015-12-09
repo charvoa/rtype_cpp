@@ -5,13 +5,13 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Wed Dec  9 10:49:57 2015 Nicolas Charvoz
+// Last update Wed Dec  9 15:26:10 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
 # define _GAME_HH_
 
-# include <E_Command.hh>
+# include <ProtocoleEnum.hh>
 # include <Parameters.hh>
 # include <EntityManager.hh>
 # include <Client.hh>

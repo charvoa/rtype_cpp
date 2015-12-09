@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Wed Dec  9 12:03:51 2015 Nicolas Charvoz
+// Last update Wed Dec  9 15:31:09 2015 Nicolas Charvoz
 //
 
 #ifdef _WIN32
@@ -62,11 +62,30 @@ void *newGameThread(void *data)
     .getAllPlayers();
   std::string str(me->_roomManager.getRoombyId(s->frame.data).getId());
 
-  me->_gameManager.createGame(p, c, s->frame.data);
-
-  me->_gameManager.getGameById(s->frame.data).run();
-
-  me->_roomManager.deleteRoom(s->frame.data);
+  if ((me->_gameManager.createGame(p, c, s->frame.data))) {
+    for (std::vector<Client>::iterator it = c.begin();
+	 it != c.end() ; ++it)
+      {
+	ANetwork::t_frame frame = CreateRequest::create((unsigned char)
+							S_GAME_LAUNCHED,
+						  CRC::calcCRC(""), 0, "");
+	(*it).getSocket()->write(reinterpret_cast<void*>(&frame),
+				 sizeof(ANetwork::t_frame));
+      }
+    me->_gameManager.getGameById(s->frame.data).run();
+    me->_roomManager.deleteRoom(s->frame.data);
+  }
+  else {
+    for (std::vector<Client>::iterator it = c.begin();
+	 it != c.end() ; ++it)
+      {
+	ANetwork::t_frame frame = CreateRequest::create((unsigned char)
+							S_GAME_NOT_LAUNCHED,
+						  CRC::calcCRC(""), 0, "");
+	(*it).getSocket()->write(reinterpret_cast<void*>(&frame),
+				 sizeof(ANetwork::t_frame));
+      }
+  }
   return data;
 }
 
@@ -86,6 +105,7 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
 
   t1->run();
   t1->join();
+
   return true;
 }
 

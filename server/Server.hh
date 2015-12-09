@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Tue Dec  8 15:35:02 2015 Nicolas Charvoz
+// Last update Wed Dec  9 14:15:42 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -25,6 +25,7 @@
 # include <ClientManager.hh>
 # include <CommandManager.hpp>
 # include <ThreadFactory.hh>
+# include <CreateRequest.hpp>
 
 class Server {
 
