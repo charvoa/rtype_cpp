@@ -5,13 +5,13 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 07:40:42 2015 Serge Heitzler
+// Last update Wed Dec  9 13:42:01 2015 Nicolas Girardot
 //
 
 #include <iostream>
 #include <map>
-#include "APanel.hh"
-#include "RenderWindow.hh"
+#include <APanel.hh>
+#include <RenderWindow.hh>
 
 APanel::APanel(){}
 
@@ -28,7 +28,7 @@ void		APanel::updateOnMove(std::pair<unsigned int, unsigned int> pair)
     {
       this->_userInterface.at(i)->updateOnMove(pair);
       i++;
-    }  
+    }
 }
 
 bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
@@ -127,4 +127,3 @@ InputManager	&APanel::getInputManager()
 {
   return _inputManager;
 }
-
