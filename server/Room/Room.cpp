@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  9 06:11:24 2015 Antoine Garcia
+// Last update Wed Dec  9 06:53:50 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -34,7 +34,7 @@ void	Room::sendPlayerJoin(Client &client)
       sendData += std::string("player") + std::to_string(i + 1) + ";";
     }
   sendData +=  _id + ";" + "1";
-  ANetwork::t_frame frame = CreateRequest::create((unsigned char)103, CRC::calcCRC(sendData), 0, sendData);
+  ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS, CRC::calcCRC(sendData), 0, sendData);
   client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
 }
 
@@ -46,7 +46,7 @@ void	Room::sendRoomPlayerJoin(Client &client)
   for (it = clients.begin() ; it != clients.end() ; ++it)
     {
       std::string sendData = "player" + std::to_string(clientPos);
-      ANetwork::t_frame frame = CreateRequest::create((unsigned char)106, CRC::calcCRC(sendData), 0, sendData);
+      ANetwork::t_frame frame = CreateRequest::create(S_NEW_PLAYER_CONNECTED, CRC::calcCRC(sendData), 0, sendData);
       if ((*it).getSocket()->getFd() != client.getSocket()->getFd())
 	(*it).getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
     }
@@ -56,7 +56,7 @@ void	Room::sendError(Client &client)
 {
   std::string sendData = "Too many players";
 
-  ANetwork::t_frame frame = CreateRequest::create((unsigned char)104, CRC::calcCRC(sendData), 0, sendData);
+  ANetwork::t_frame frame = CreateRequest::create(S_JOIN_ERROR, CRC::calcCRC(sendData), 0, sendData);
   client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
 }
 
@@ -80,7 +80,7 @@ void	Room::sendPlayerLeft(int playerID)
     {
       std::string sendData = "player" + std::to_string(playerID);
       sendData += ";player" + std::to_string(_clientManager.getClientPosition(*it));
-      ANetwork::t_frame frame = CreateRequest::create((unsigned char)107, CRC::calcCRC(sendData), 0, sendData);
+      ANetwork::t_frame frame = CreateRequest::create(S_PLAYER_LEFT, CRC::calcCRC(sendData), 0, sendData);
       (*it).getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
     }
 }
