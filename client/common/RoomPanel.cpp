@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 04:47:37 2015 Serge Heitzler
+// Last update Wed Dec  9 06:36:07 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -70,7 +70,7 @@ void		RoomPanel::newPlayer(std::string &newUsername)
   player->setUsername(newUsername);
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().push_back(player);
 
-  unsigned int i =  static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size() - 1;
+  unsigned int i = static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size() - 1;
   
   username->setString(newUsername);
   username->setSize(40);
@@ -96,6 +96,25 @@ void		RoomPanel::newPlayer(std::string &newUsername)
 std::vector<Player*>	&RoomPanel::getPlayers()
 {
   return _players;
+}
+
+void		RoomPanel::playerLeft(std::vector<std::string> &vector)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+  unsigned int i = 0;
+
+  std::cout << "FIRST USERNAME" << vector.at(0) << std::endl;
+  std::cout << "SECOND USERNAME " << vector.at(1) << std::endl;
+  while (i < (static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size()))
+    static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
+  
+  std::size_t pos = vector.at(0).find("Player");
+  unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
+  
+  static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().erase(static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().begin() + idToRemove - 1);
+  pos = vector.at(1).find("Player");
+  unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
+  static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
@@ -159,11 +178,8 @@ void		RoomPanel::difficulty(Settings::Difficulty diff)
 void		RoomPanel::launchGame()
 {
   ANetwork *net = Client::getNetwork();
-  std::cout << "TOOTOTOTOTOTOT " << std::endl;
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)4, CRC::calcCRC(_idRoom), 0, _idRoom);
-  std::cout << "TOOTOTOTOTOTOT " << std::endl;
   net->write(sender);
-  std::cout << "TOOTOTOTOTOTOT " << std::endl;
   //  (RenderWindow::getInstance())->addPanel(PanelFactory::GAME_PANEL);
 }
 

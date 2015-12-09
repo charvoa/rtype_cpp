@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Wed Dec  9 04:59:57 2015 Serge Heitzler
+// Last update Wed Dec  9 05:01:17 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -63,7 +63,7 @@ void	Client::Start()
   _network = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
   //  _network->connect("10.16.253.120");
-  _network->connect("127.0.0.1");
+  _network->connect("0");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
 

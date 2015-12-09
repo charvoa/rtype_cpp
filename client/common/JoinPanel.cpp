@@ -5,13 +5,17 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Wed Dec  9 03:16:34 2015 Serge Heitzler
+// Last update Wed Dec  9 08:13:53 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
 #include <PanelFactory.hh>
 #include <RenderWindow.hh>
 #include <ButtonFactory.hh>
+#include <ANetwork.hpp>
+#include <CreateRequest.hpp>
+#include <CRC.hpp>
+#include <Client.hh>
 #include <iostream>
 
 JoinPanel::JoinPanel()
@@ -23,7 +27,7 @@ JoinPanel::~JoinPanel() {}
 void	        JoinPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
-  getInputManager().setInputType(InputType::MENU_INPUT);
+  getInputManager().setInputType(InputType::JOIN_INPUT);
 
   Texture *backgroundSpaceTexture = new Texture;
   Texture *earthTexture = new Texture;
@@ -80,16 +84,45 @@ void	        JoinPanel::setUserInterface()
 
     _functions.push_back((APanel::funcs)&JoinPanel::back);
     _functions.push_back((APanel::funcs)&JoinPanel::join);
+
+
+
+    Text		       	*text = new Text();
+    
+    text->setString("");
+    text->setSize(50);
+    text->setStyle(1);
+    text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
+    text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+    text->setColor(Color::WHITE);
+    _labels.push_back(*text);
 }
 
 void    JoinPanel::join()
 {
-  // ANetwork *net = Client::getNetwork();
-  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC(ID_ROOM), 0, ID_ROOM);
-  // net->write(sender);
+  ANetwork *net = Client::getNetwork();
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_JOIN_ROOM, CRC::calcCRC(_room), 0, _room);
+  net->write(sender);
 }
 
 void    JoinPanel::back()
 {
   RenderWindow::getInstance()->back();
+}
+
+void    JoinPanel::updateOnTextEntered(int key)
+{
+  if (_room.size() >= 4)
+    {
+      if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z)
+	_room += static_cast<char>(key + 65);
+      if (key >= sf::Keyboard::Num0 && key <= sf::Keyboard::Num9)
+	_room += static_cast<char>(key + 22);
+    }
+  if (key == sf::Keyboard::Return && _room.size() > 0)
+    _room.pop_back();
+  if (_room.size() == 4)
+    if (key == sf::Keyboard::BackSpace)
+      this->join();
+  _labels.at(2).setString(_room);
 }
