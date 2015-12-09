@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Wed Dec  9 17:01:01 2015 Nicolas Charvoz
+// Last update Wed Dec  9 12:31:09 2015 Antoine Garcia
 //
 
 #ifndef SERVER_HH_
@@ -52,7 +52,7 @@ public:
 private:
 
   ANetwork *_network;
-  ClientManager _clientManager;
+  //ClientManager _clientManager;
   CommandManager _commandManager;
 
 };
