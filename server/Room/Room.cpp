@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  9 05:35:25 2015 Antoine Garcia
+// Last update Wed Dec  9 05:47:01 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -70,6 +70,11 @@ void	Room::addPlayer(Client &client)
     }
   else
     sendError(client);
+}
+
+void	Room::deletePlayer(Client &client)
+{
+  _clientManager.deleteClient(client);
 }
 
 const std::vector<Client>&	Room::getAllPlayers() const

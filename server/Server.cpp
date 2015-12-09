@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Wed Dec  9 05:37:47 2015 Antoine Garcia
+// Last update Wed Dec  9 05:48:19 2015 Antoine Garcia
 //
 
 #ifdef _WIN32
@@ -110,5 +110,13 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
 
 bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
 {
+  Client	&client = *reinterpret_cast<Client *>(data);
+  Room	room = _roomManager.getRoombyId(frame.data);
+  if (room.getAllPlayers().size() == 1)
+    _roomManager.deleteRoom(frame.data);
+  else
+    {
+      room.deletePlayer(client);
+    }
   return true;
 }
