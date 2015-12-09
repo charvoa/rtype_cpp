@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Wed Dec  9 15:19:18 2015 Nicolas Girardot
+// Last update Wed Dec  9 17:23:20 2015 Nicolas Girardot
 //
 
 
@@ -50,23 +50,23 @@ ProtocoleClient::~ProtocoleClient()
 
 void		ProtocoleClient::initProtocoleClient()
 {
-  _functions.insert(std::make_pair(DISPLAY, &ProtocoleClient::display));
-  _functions.insert(std::make_pair(CREATE_ROOM, &ProtocoleClient::createRoom));
-  _functions.insert(std::make_pair(CREATE_ROOM_ERROR, &ProtocoleClient::createRoomError));
-  _functions.insert(std::make_pair(JOIN_SUCCESS, &ProtocoleClient::joinSuccess));
-  _functions.insert(std::make_pair(JOIN_ERROR, &ProtocoleClient::joinError));
-  _functions.insert(std::make_pair(GAME_LAUNCHED, &ProtocoleClient::gameLaunched));
-  _functions.insert(std::make_pair(NEW_PLAYER_CONNECTED, &ProtocoleClient::newPlayerConnected));
-  _functions.insert(std::make_pair(PLAYER_LEFT, &ProtocoleClient::playerLeft));
-  _functions.insert(std::make_pair(CHANGE_HOST, &ProtocoleClient::changeHost));
-  _functions.insert(std::make_pair(DIE, &ProtocoleClient::die));
-  _functions.insert(std::make_pair(PLAYER_DEAD, &ProtocoleClient::playerDead));
-  _functions.insert(std::make_pair(LIFE, &ProtocoleClient::life));
-  _functions.insert(std::make_pair(SCORE, &ProtocoleClient::score));
-  _functions.insert(std::make_pair(NEW_WAVE, &ProtocoleClient::newWave));
-  _functions.insert(std::make_pair(END_GAME, &ProtocoleClient::endGame));
-  _functions.insert(std::make_pair(LOAD_SPRITES, &ProtocoleClient::loadSprites));
-  _functions.insert(std::make_pair(GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
+  _functions.insert(std::make_pair(S_DISPLAY, &ProtocoleClient::display));
+  _functions.insert(std::make_pair(S_CREATE_ROOM, &ProtocoleClient::createRoom));
+  _functions.insert(std::make_pair(S_CREATE_ROOM_ERROR, &ProtocoleClient::createRoomError));
+  _functions.insert(std::make_pair(S_JOIN_SUCCESS, &ProtocoleClient::joinSuccess));
+  _functions.insert(std::make_pair(S_JOIN_ERROR, &ProtocoleClient::joinError));
+  _functions.insert(std::make_pair(S_GAME_LAUNCHED, &ProtocoleClient::gameLaunched));
+  _functions.insert(std::make_pair(S_NEW_PLAYER_CONNECTED, &ProtocoleClient::newPlayerConnected));
+  _functions.insert(std::make_pair(S_PLAYER_LEFT, &ProtocoleClient::playerLeft));
+  _functions.insert(std::make_pair(S_CHANGE_HOST, &ProtocoleClient::changeHost));
+  _functions.insert(std::make_pair(S_DIE, &ProtocoleClient::die));
+  _functions.insert(std::make_pair(S_PLAYER_DEAD, &ProtocoleClient::playerDead));
+  _functions.insert(std::make_pair(S_LIFE, &ProtocoleClient::life));
+  _functions.insert(std::make_pair(S_SCORE, &ProtocoleClient::score));
+  _functions.insert(std::make_pair(S_NEW_WAVE, &ProtocoleClient::newWave));
+  _functions.insert(std::make_pair(S_END_GAME, &ProtocoleClient::endGame));
+  _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
+  _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
 }
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
