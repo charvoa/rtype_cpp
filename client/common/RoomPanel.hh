@@ -5,7 +5,6 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 06:17:51 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -21,7 +20,7 @@
 class RoomPanel : public APanel
 {
 public:
-  
+
   RoomPanel();
   ~RoomPanel();
 
@@ -34,7 +33,7 @@ public:
   void			setUserInterface();
   void			updatePlayers(std::vector<std::string> &vector, int from);
   std::vector<Player*>	&getPlayers();
-  
+
 private:
 
   std::vector<Player*> _players;
