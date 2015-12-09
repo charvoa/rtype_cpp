@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:28:50 2015 Serge Heitzler
+// Last update Wed Dec  9 08:33:01 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -112,6 +112,7 @@ void    JoinPanel::back()
 
 void    JoinPanel::updateOnTextEntered(int key)
 {
+  std::cout << "PRESSED" << std::endl;
   if (_room.size() < 4)
     {
       if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z)
@@ -119,10 +120,10 @@ void    JoinPanel::updateOnTextEntered(int key)
       if (key >= sf::Keyboard::Num0 && key <= sf::Keyboard::Num9)
 	_room += static_cast<char>(key + 22);
     }
-  if (key == sf::Keyboard::Return && _room.size() > 0)
+  if (key == sf::Keyboard::BackSpace && _room.size() > 0)
     _room.pop_back();
-  if (_room.size() == 4)
-    if (key == sf::Keyboard::BackSpace)
+  if (key == sf::Keyboard::Return)
+    if (_room.size() == 4)
       this->join();
   _labels.at(2).setString(_room);
 }
