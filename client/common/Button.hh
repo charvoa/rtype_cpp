@@ -5,15 +5,15 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Tue Dec  8 05:05:56 2015 Serge Heitzler
+// Last update Wed Dec  9 13:48:46 2015 Nicolas Girardot
 //
 
 #ifndef BUTTON_HH_
 #define BUTTON_HH_
 
-#include "Text.hh"
-#include "Sprite.hh"
-#include "AMenuElement.hh"
+#include <Text.hh>
+#include <Sprite.hh>
+#include <AMenuElement.hh>
 
 class	        Button : public AMenuElement
 {

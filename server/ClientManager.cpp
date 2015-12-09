@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Tue Dec  8 02:39:43 2015 Antoine Garcia
+// Last update Wed Dec  9 05:33:10 2015 Antoine Garcia
 //
 
 # include <algorithm>
@@ -30,7 +30,19 @@ void	ClientManager::addClients(Client &client)
   _clients.push_back(client);
 }
 
-std::vector<Client>&	ClientManager::getAllClients()
+void	ClientManager::deleteClient(Client &client)
+{
+   for(std::vector<Client>::iterator it = _clients.begin(); it != _clients.end();++it)
+     {
+       if ((*it) == client)
+	 {
+	 _clients.erase(it);
+	 return;
+	 }
+     }
+}
+
+const std::vector<Client>&	ClientManager::getAllClients() const
 {
   return (_clients);
 }

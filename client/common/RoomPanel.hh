@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 14:28:04 2015 Serge Heitzler
+// Last update Wed Dec  9 04:40:19 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -27,7 +27,7 @@ public:
 
   void			difficulty(Settings::Difficulty);
   static void  		newPlayer(std::string &newUsername);
-  void			start();
+  void			launchGame();
   void			back();
   void			update();
   void			setUserInterface();
@@ -37,7 +37,7 @@ public:
 private:
 
   std::vector<Player*> _players;
-  
+  std::string		_idRoom;
 };
 
-#endif // ROOMPANEL_H
+#endif /* !ROOMPANEL_HH_ */

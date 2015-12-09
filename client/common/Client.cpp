@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Wed Dec  9 09:58:58 2015 Nicolas Girardot
+// Last update Wed Dec  9 04:59:57 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -62,12 +62,12 @@ void	Client::Start()
 
   _network = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("10.16.253.120");
+  //  _network->connect("10.16.253.120");
+  _network->connect("127.0.0.1");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
 
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  //window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
 
 
@@ -75,10 +75,12 @@ void	Client::Start()
   _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
   _sound->playMusic("mainMenu");
   std::unique_ptr<AThread> t(new Thread(1));
+
   char str1[] = "";
   (void) str1;
   t->attach(&readdisp, (void *)str1);
   t->run();
+
   while(window->isOpen())
     {
       window->getPanels().top()->update();

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 13:30:58 2015 Serge Heitzler
+// Last update Wed Dec  9 02:59:41 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -19,6 +19,7 @@
 #include <Client.hh>
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
+#include <JoinPanel.hh>
 
 StartPanel::StartPanel(){}
 
@@ -108,13 +109,10 @@ void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 
 void        StartPanel::joinRoom()
 {
-  // FAIRE POP UNE MESSAGE BOX ET PAS UN NOUVEAU PANEL
+  RenderWindow *window = RenderWindow::getInstance();
 
-  
-  // (RenderWindow::getInstance())->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
-  // (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
-  // static_cast<RoomPanel*>(window->getPanels().top())->updatePlayers(vector, from);
-
+  window->getPanels().push(static_cast<JoinPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::JOIN_PANEL)));
+  window->getPanels().top()->setUserInterface();
 }
 
 void        StartPanel::demo()
@@ -131,7 +129,7 @@ void        StartPanel::credits()
 
 void        StartPanel::exit()
 {
-
+  (RenderWindow::getInstance())->close();
 }
 
 void        StartPanel::settings()

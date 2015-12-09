@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Wed Dec  9 15:31:09 2015 Nicolas Charvoz
 //
 
 #ifdef _WIN32
@@ -32,6 +31,7 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
   this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
   this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
+  this->_commandManager.addFunction(C_PLAYERLEFT, &Server::playerLeftRoom);
 }
 
 void Server::run()
@@ -42,8 +42,6 @@ void Server::run()
   while (1)
     {
       client = new Client(this->_network->select());
-      //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
-      //client->getSocket()->write((void*) "Salut\r\n", 7);
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
       client, this);
     }
@@ -93,7 +91,6 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
 {
   Server::serializeThread *s = new Server::serializeThread;
 
-
   s->server = this;
   s->client = reinterpret_cast<Client*>(data);
   s->frame = frame;
@@ -102,7 +99,6 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
   std::unique_ptr<AThread> t1(tF->createThread());
 
   t1->attach(&newGameThread, reinterpret_cast<void*>(s));
-
   t1->run();
   t1->join();
 
@@ -113,7 +109,6 @@ bool Server::createRoom(ANetwork::t_frame frame, void *data)
 {
   (void) frame;
   Client	&client = *reinterpret_cast<Client *>(data);
-
   _roomManager.createNewRoom(client);
 
   return true;
@@ -125,4 +120,17 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
 
    _roomManager.getRoombyId(frame.data).addPlayer(client);
    return true;
+}
+
+bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
+{
+  Client	&client = *reinterpret_cast<Client *>(data);
+  Room	room = _roomManager.getRoombyId(frame.data);
+  if (room.getAllPlayers().size() == 1)
+    _roomManager.deleteRoom(frame.data);
+  else
+    {
+      room.deletePlayer(client);
+    }
+  return true;
 }
