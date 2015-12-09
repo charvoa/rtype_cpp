@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec  8 22:52:55 2015 Nicolas Girardot
+// Last update Tue Dec  8 14:02:01 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -104,8 +104,6 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Event& event)
 {
-  std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
-
   (RenderWindow::getInstance())->getPanels().top()->updateOnMove(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
 
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
@@ -113,8 +111,6 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
-
   if (event.mouseButton.button == sf::Mouse::Right)
     {
 
@@ -162,7 +158,7 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::E
 
 void		InputManager::methodChecker(sf::Event &event)
 {
-  std::cout << "check: " << std::endl;
+  std::cout << "---| New Event |---" << std::endl;
   for (std::map<sf::Event::EventType, funcs>::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == event.type)

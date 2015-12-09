@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 13:43:49 2015 Serge Heitzler
+// Last update Tue Dec  8 14:28:04 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
