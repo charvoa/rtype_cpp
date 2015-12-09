@@ -21,6 +21,7 @@ add_executable( server_rtype
   Server.cpp
   #ISocket.hpp
   E_Component.hh
+  DLLoader.hpp
   AComponent.hpp
   Health.cpp
   Missile.cpp

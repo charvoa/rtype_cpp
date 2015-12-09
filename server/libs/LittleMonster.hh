@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:42:25 2015 Louis Audibert
-// Last update Mon Dec  7 07:25:27 2015 Louis Audibert
+// Last update Tue Dec  8 07:07:22 2015 Louis Audibert
 //
 
 #ifndef _LITTLEMONSTER_HH_
@@ -17,6 +17,7 @@
 class LittleMonster : public AEntity
 {
 private:
+  int	_direction;
   int	_health;
   int	_x;
   int	_y;
@@ -25,7 +26,7 @@ public:
   LittleMonster(int id);
   ~LittleMonster();
 
-  virtual void update(AEntity *);
+  virtual void update();
 };
 
 #endif

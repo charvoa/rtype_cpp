@@ -5,12 +5,11 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Mon Dec  7 08:12:52 2015 Louis Audibert
+// Last update Wed Dec  9 06:42:17 2015 Louis Audibert
 //
 
 #include <EntityFactory.hh>
 #include <dlfcn.h>
-
 #include "libs/LittleMonster.hh"
 
 EntityFactory::EntityFactory()
@@ -32,22 +31,39 @@ AEntity	*EntityFactory::createEntity(int &id)
 
 AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
 {
-  //temporary
+ //temporary
   (void)filename;
-  void* handle = dlopen("./libs/littlemonster.so", RTLD_LAZY);
 
-  //  LittleMonster* (*create)(int);
-  void (*updateFunc)(AEntity*);
+  // LittleMonster* (*create)(int);
 
-  //  create = (LittleMonster* (*)(int))dlsym(handle, "create_object");
-  updateFunc = (void (*)(AEntity*))dlsym(handle, "update");
+  // void* handle = dlopen("./libs/littlemonster.so", RTLD_LAZY);
 
-  //  LittleMonster* monster = (LittleMonster*)create(id);
+  // create = reinterpret_cast<LittleMonster* (*)(int)>(dlsym(handle, "create_object"));
 
-  updateFunc(new AEntity(id));
+  // LittleMonster* monster = (LittleMonster*)create(id);
 
-  //monster->update(new AEntity(id));
-  //blabla
-  id += 1;
+  // monster->addSystem(E_HEALTH);
+  // monster->addSystem(E_POSITION);
+
+  // //std::cout << "before call to update function in EntityFactory" << std::endl;
+
+  // std::cout << "health before update = " << dynamic_cast<Health*>(monster->getSystemManager()->getSystemByComponent(E_HEALTH)->getComponent())->getLife() << std::endl;
+
+  // monster->update();
+
+  // std::cout << "health after update = " << dynamic_cast<Health*>(monster->getSystemManager()->getSystemByComponent(E_HEALTH)->getComponent())->getLife() << std::endl;
+
+  // const std::string lib = "littlemonster.so";
+
+  // DLLoader<AEntity*> loader(lib, id);
+  // AEntity *monster = loader.getInstance();
+  // monster->setType(E_BOT);
+  // monster->addSystem(E_HEALTH);
+  //monster->addSystem(E_POSITION);
+  //monster->update();
+
+  // id += 1;
+  // return (monster);
+  id++;
   return (new AEntity(id));
 }

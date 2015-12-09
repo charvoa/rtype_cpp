@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Mon Dec  7 15:10:40 2015 Nicolas Charvoz
+// Last update Wed Dec  9 06:41:14 2015 Louis Audibert
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -63,6 +63,13 @@ int		main(int ac, char **av)
 
   std::cout << "frame data : " << CreateRequest::getData(frame) << std::endl;
   /* FIN DU GAME */
+
+  // EntityFactory *fac = new EntityFactory();
+
+  // const std::string test = "test";
+  // int			idtest = 1;
+  // int			&id = idtest;
+  // fac->createEntity(test, id);
 
   try {
     s->init();
