@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Wed Dec  9 12:03:51 2015 Nicolas Charvoz
+// Last update Wed Dec  9 05:37:47 2015 Antoine Garcia
 //
 
 #ifdef _WIN32
@@ -32,6 +32,7 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
   this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
   this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
+  this->_commandManager.addFunction(C_PLAYERLEFT, &Server::playerLeftRoom);
 }
 
 void Server::run()
@@ -105,4 +106,9 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
 
    _roomManager.getRoombyId(frame.data).addPlayer(client);
    return true;
+}
+
+bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
+{
+  return true;
 }
