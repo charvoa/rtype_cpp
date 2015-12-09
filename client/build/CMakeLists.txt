@@ -21,15 +21,13 @@ configure_file(
   )
 include_directories("${PROJECT_BINARY_DIR}" ../common ../unix ../windows ../../common ../../server ../../common/Thread)
 if(CMAKE_COMPILER_IS_GNUCXX)
-  set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra")
+  set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra" -std=c++11)
 endif(CMAKE_COMPILER_IS_GNUCXX)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
-  ../../common/Network.hpp
-  ../../common/Thread/ThreadUnix.hpp
   ../common/main.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp

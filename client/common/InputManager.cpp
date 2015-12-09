@@ -114,7 +114,7 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
   if (event.mouseButton.button == sf::Mouse::Right)
     {
 
-      Network *net = Client::getNetwork();
+	  ANetwork *net = Client::getNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("75JI"), 0, "75JI");
       net->write(sender);
     }

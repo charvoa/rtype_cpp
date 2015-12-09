@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <map>
-#include <ANetwork.hpp>
+#include "../ANetwork.hpp"
 #include <ProtocoleEnum.hh>
 
 class			ProtocoleClient

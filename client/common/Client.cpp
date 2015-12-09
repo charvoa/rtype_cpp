@@ -8,16 +8,22 @@
 // Last update Wed Dec  9 09:58:58 2015 Nicolas Girardot
 //
 
-#include <Client.hh>
-#include <ANetwork.hpp>
+#ifdef _WIN32
+#include "../NetworkWin.hpp"
+#include <ThreadWin.hpp>
+#else
+#include "../Network.hpp"
 #include <ThreadUnix.hpp>
+#endif
+
+#include <Client.hh>
 #include <ProtocoleClient.hh>
 #include <SFML/Audio.hpp>
 #include <chrono>
 #include <thread>
 
 
-Network	*Client::_network = NULL;
+ANetwork	*Client::_network = NULL;
 Sound *Client::_sound = NULL;
 
 void	*readdisp(void *s)
@@ -53,9 +59,10 @@ Client::~Client()
 void	Client::Start()
 {
   RenderWindow *window = RenderWindow::getInstance();
+
   _network = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  _network->connect("10.16.253.120");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
 
@@ -86,7 +93,7 @@ void	Client::Start()
   _network->close();
 }
 
-Network	*Client::getNetwork()
+ANetwork	*Client::getNetwork()
 {
   if (!_network)
     _network = new Network();
