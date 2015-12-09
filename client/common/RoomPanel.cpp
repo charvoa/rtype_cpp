@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 13:48:17 2015 Serge Heitzler
+// Last update Tue Dec  8 14:30:57 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -75,7 +75,19 @@ void		RoomPanel::newPlayer(std::string &newUsername)
   username->setStyle(1);
   username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
   username->setPosition(Vector2(0.2 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
-  username->setColor(Color::BLACK);  
+  switch (i)
+    {
+    case 0:
+      username->setColor(Color::BLUE);
+    case 1:
+      username->setColor(Color::RED);
+    case 2:
+      username->setColor(Color::GREEN);
+    case 3:
+      username->setColor(Color::YELLOW);
+    default:
+      username->setColor(Color::BLACK);
+    }
   window->getPanels().top()->getLabels().push_back(*username);
 }
 
@@ -94,17 +106,32 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       Player *player = new Player;
       Text   *username = new Text();
 
-
       player->setUsername(vector.at(i));
       username->setString(player->getUsername());
       username->setSize(40);
       username->setStyle(1);
       username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
       username->setPosition(Vector2(0.2 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
-      username->setColor(Color::BLACK);
+
+      switch (i)
+	{
+	case 0:
+	  username->setColor(Color::BLUE);
+	case 1:
+	  username->setColor(Color::RED);
+	case 2:
+	  username->setColor(Color::GREEN);
+	case 3:
+	  username->setColor(Color::YELLOW);
+	default:
+	  username->setColor(Color::BLACK);
+	}
+
       window->getPanels().top()->getLabels().push_back(*username);
       _players.push_back(player);
       i++;
+      
+
     }
   if (from == 0)
     _players.at(0)->setCurrentClient(true);
