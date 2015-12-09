@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Tue Dec  8 11:05:01 2015 Nicolas Girardot
+// Last update Wed Dec  9 15:10:54 2015 Nicolas Girardot
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -33,7 +33,8 @@ typedef enum RequestFromServer
       SCORE = 112,
       NEW_WAVE = 113,
       END_GAME = 114,
-      LOAD_SPRITES = 115
+      LOAD_SPRITES = 115,
+      GAME_NOT_LAUNCHED = 125
   } RequestFromServer;
 
 #endif /* PROTOCOLEENUM_HH_ */
