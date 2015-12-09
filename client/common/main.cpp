@@ -10,11 +10,16 @@
 
 #include <SFML/Audio.hpp>
 #include "Client.hh"
+#ifdef _WIN32
+#else
 #include <X11/Xlib.h>
-
+#endif
 int main()
 {
+	#ifdef _WIN32
+	#else
   XInitThreads();
+#endif
   Client *cli = new Client();
   cli->Start();
 }

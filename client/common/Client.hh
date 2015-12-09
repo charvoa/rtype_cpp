@@ -14,15 +14,15 @@
 #include <cstdlib>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <Network.hpp>
-#include "RenderWindow.hh"
-#include "Texture.hh"
-#include "Sprite.hh"
-#include "StartPanel.hh"
-#include "RoomPanel.hh"
-#include "InputManager.hh"
-#include "PanelFactory.hh"
-#include "SoundManager.hh"
+#include "../ANetwork.hpp"
+#include <RenderWindow.hh>
+#include <Texture.hh>
+#include <Sprite.hh>
+#include <StartPanel.hh>
+#include <RoomPanel.hh>
+#include <InputManager.hh>
+#include <PanelFactory.hh>
+#include <SoundManager.hh>
 
 class	Client
 {
@@ -30,10 +30,10 @@ public:
   Client();
   ~Client();
   void	Start();
-  static Network	*getNetwork();
+  static ANetwork	*getNetwork();
   static Sound		*getSound();
 private:
-  static Network	*_network;
+  static ANetwork	*_network;
   static Sound		*_sound;
 };
 

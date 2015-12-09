@@ -15,7 +15,7 @@
 #include <Button.hh>
 #include <ButtonFactory.hh>
 #include <RoomPanel.hh>
-#include <Network.hpp>
+#include <ANetwork.hpp>
 #include <Client.hh>
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
@@ -91,7 +91,7 @@ void		StartPanel::setUserInterface()
 
 void        StartPanel::createRoom()
 {
-  Network *net = Client::getNetwork();
+  ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
   net->write(sender);
 }
