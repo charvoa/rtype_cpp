@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  9 05:47:01 2015 Antoine Garcia
+// Last update Wed Dec  9 06:11:24 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -72,9 +72,24 @@ void	Room::addPlayer(Client &client)
     sendError(client);
 }
 
+void	Room::sendPlayerLeft(int playerID)
+{
+  std::vector<Client>::iterator	it;
+  std::vector<Client>	clients = getAllPlayers();
+  for (it = clients.begin(); it != clients.end(); ++it)
+    {
+      std::string sendData = "player" + std::to_string(playerID);
+      sendData += ";player" + std::to_string(_clientManager.getClientPosition(*it));
+      ANetwork::t_frame frame = CreateRequest::create((unsigned char)107, CRC::calcCRC(sendData), 0, sendData);
+      (*it).getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
+    }
+}
+
 void	Room::deletePlayer(Client &client)
 {
+  int playerID = _clientManager.getClientPosition(client);
   _clientManager.deleteClient(client);
+  sendPlayerLeft(playerID);
 }
 
 const std::vector<Client>&	Room::getAllPlayers() const

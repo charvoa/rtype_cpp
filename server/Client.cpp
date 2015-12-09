@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:22:49 2015 Nicolas Charvoz
-// Last update Wed Dec  9 05:30:57 2015 Antoine Garcia
+// Last update Wed Dec  9 06:10:28 2015 Antoine Garcia
 //
 
 #include <Client.hh>
@@ -27,4 +27,9 @@ bool Client::operator==(const Client &other) const
     return true;
   else
     return false;
+}
+
+bool Client::operator!=(const Client &other) const
+{
+  return (!(*this == other));
 }

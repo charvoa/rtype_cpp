@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Wed Dec  9 05:47:08 2015 Antoine Garcia
+// Last update Wed Dec  9 06:10:55 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
@@ -28,6 +28,7 @@ class	Room
   void		sendPlayerJoin(Client &);
   void		sendRoomPlayerJoin(Client &);
   void		sendError(Client &);
+  void		sendPlayerLeft(int playerID);
 public:
   Room();
   Room(const std::string &id, Client&);
