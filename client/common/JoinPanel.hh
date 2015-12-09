@@ -9,13 +9,13 @@ class JoinPanel : public APanel
 public:
   JoinPanel();
   ~JoinPanel();
-  
-  void    join();
-  void    back();
-  void	render();
+
+  void			setUserInterface();
+  void		        join();
+  void			back();
+
 private:
-  //  Button  _joinButton;
-  //  Button  _backButton;
+
 };
 
 #endif // JOINPANEL_HH
