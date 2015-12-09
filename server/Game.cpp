@@ -5,12 +5,15 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Tue Dec  8 15:44:09 2015 Nicolas Charvoz
+// Last update Wed Dec  9 12:04:45 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
 
-Game::Game() {}
+Game::Game()
+{
+  _mutex = new Mutex();
+}
 
 Game::Game(const Parameters &params_, std::vector<Client> &client_,
 	   const std::string &id_) : _params(params_), _id(id_)
@@ -39,6 +42,17 @@ void Game::setParameters(Parameters &p)
 
 bool Game::run()
 {
+  int nbEnemy = 5;
+  int stage = 1;
+
+  std::cout << "Game :: run() " << std::endl;
+
+  while (true)
+    {
+      nbEnemy = 5 * stage * nbEnemy;
+    }
+
+
   //CREATE NB OF BASE ENEMY
 
   // CREATE ENEMY
@@ -55,13 +69,14 @@ bool Game::run()
   // RANDOM BONUS POP
   // --- IF DESTROYED BONUS GOT
 
-
   return true;
 }
 
 void Game::addCommandToQueue(ANetwork::t_frame frame)
 {
+  _mutex->lock();
   _commandQueue.push(frame);
+  _mutex->unlock();
 }
 
 const std::string &Game::getId() const
