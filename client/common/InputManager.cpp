@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec  9 09:59:31 2015 Nicolas Girardot
+// Last update Wed Dec  9 11:24:52 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -115,7 +115,7 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
     {
 
 	  ANetwork *net = Client::getNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("75JI"), 0, "75JI");
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("2QNP"), 0, "2QNP");
       net->write(sender);
     }
 
