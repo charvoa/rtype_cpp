@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:00:10 2015 Serge Heitzler
+// Last update Wed Dec  9 08:21:49 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,6 +15,7 @@
 #include <CreateRequest.hpp>
 #include <CRC.hpp>
 #include <ANetwork.hpp>
+#include <JoinPanel.hh>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -163,7 +164,10 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::E
 std::pair<unsigned int, unsigned int>		InputManager::textEnteredInJoinPanel(sf::Event& event)
 {
   if ((event.key.code >= sf::Keyboard::A && event.key.code <= sf::Keyboard::Z) || (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) || event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::BackSpace)
-   (RenderWindow::getInstance())->getPanels().top()-> updateOnTextEntered(event.key.code);
+    {
+      RenderWindow *window = RenderWindow::getInstance();
+      static_cast<JoinPanel*>(window->getPanels().top())->updateOnTextEntered(event.key.code);
+    }
     return std::make_pair(0, 0);
 }
 

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:13:53 2015 Serge Heitzler
+// Last update Wed Dec  9 08:17:45 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -101,7 +101,7 @@ void	        JoinPanel::setUserInterface()
 void    JoinPanel::join()
 {
   ANetwork *net = Client::getNetwork();
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_JOIN_ROOM, CRC::calcCRC(_room), 0, _room);
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_JOINROOM, CRC::calcCRC(_room), 0, _room);
   net->write(sender);
 }
 

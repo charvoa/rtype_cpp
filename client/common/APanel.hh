@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 06:22:29 2015 Serge Heitzler
+// Last update Wed Dec  9 13:42:15 2015 Nicolas Girardot
 //
 
 #ifndef APANEL_HH
@@ -13,11 +13,11 @@
 
 #include <vector>
 #include <string>
-#include "AMenuElement.hh"
-#include "Texture.hh"
-#include "Text.hh"
-#include "Sprite.hh"
-#include "InputManager.hh"
+#include <AMenuElement.hh>
+#include <Texture.hh>
+#include <Text.hh>
+#include <Sprite.hh>
+#include <InputManager.hh>
 
 class		APanel
 {
@@ -32,7 +32,7 @@ public:
   virtual void		render();
   virtual void		hide();
   virtual void	        setUserInterface();
-  
+
   std::vector<Sprite>			&getBackgrounds();
   std::vector<AMenuElement*>   		&getUserInterface();
   std::vector<Text>	  		&getLabels();
@@ -43,7 +43,7 @@ public:
   void					drawUserInterface();
   void					drawLabels();
   void					drawInGame();
-  
+
 protected:
 
   std::vector<Sprite>	      		_backgrounds;
@@ -54,7 +54,7 @@ protected:
 
   typedef void(APanel::*funcs)();
   std::vector<funcs>			_functions;
-  
+
 };
 
 #endif // APANEL_HH

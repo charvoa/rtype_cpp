@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:43:04 2015 Nicolas Charvoz
-// Last update Tue Dec  8 01:11:07 2015 Antoine Garcia
+// Last update Wed Dec  9 05:32:18 2015 Antoine Garcia
 //
 
 #ifndef CLIENTMANAGER_HH_
@@ -21,7 +21,8 @@ public:
   ~ClientManager();
   bool	clientExists(Client &);
   void	addClients(Client &);
-  std::vector<Client>&	getAllClients();
+  void	deleteClient(Client &);
+  const std::vector<Client>&	getAllClients() const;
   Client&	getClientByFd(int fd);
   int		getClientPosition(Client &);
 };

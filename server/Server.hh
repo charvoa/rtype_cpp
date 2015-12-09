@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Tue Dec  8 15:35:02 2015 Nicolas Charvoz
+// Last update Wed Dec  9 17:01:01 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -25,6 +25,7 @@
 # include <ClientManager.hh>
 # include <CommandManager.hpp>
 # include <ThreadFactory.hh>
+# include <CreateRequest.hpp>
 
 class Server {
 
@@ -44,7 +45,7 @@ public:
   bool createGame(ANetwork::t_frame frame, void *data);
   bool createRoom(ANetwork::t_frame frame, void *data);
   bool joinRoom(ANetwork::t_frame frame, void *data);
-
+  bool	playerLeftRoom(ANetwork::t_frame frame, void *data);
   RoomManager _roomManager;
   GameManager _gameManager;
 
@@ -55,5 +56,8 @@ private:
   CommandManager _commandManager;
 
 };
+
+void sendMessage(std::vector<Client>&, unsigned char);
+void *newGameThread(void*);
 
 #endif

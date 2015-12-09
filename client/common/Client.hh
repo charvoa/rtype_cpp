@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Tue Dec  8 01:34:42 2015 Serge Heitzler
+// Last update Wed Dec  9 14:19:59 2015 Nicolas Girardot
 //
 
 #ifndef CLIENT_HH_
@@ -31,9 +31,11 @@ public:
   ~Client();
   void	Start();
   static ANetwork	*getNetwork();
+  static ANetwork	*getUDPNetwork();
   static Sound		*getSound();
 private:
   static ANetwork	*_network;
+  static ANetwork	*_UDPnetwork;
   static Sound		*_sound;
 };
 

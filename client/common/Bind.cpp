@@ -1,14 +1,14 @@
 //
 // Bind.cpp for Bind in /home/barnea_v/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Viveka BARNEAUD
 // Login   <barnea_v@epitech.net>
-// 
+//
 // Started on  Mon Nov 30 09:51:14 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 16:55:21 2015 Viveka BARNEAUD
+// Last update Wed Dec  9 13:42:40 2015 Nicolas Girardot
 //
 
-#include "Bind.hh"
+#include <Bind.hh>
 
 Bind::Bind(Bind::BindType type, sf::Keyboard::Key key, sf::Joystick::Axis joystick)
 {
