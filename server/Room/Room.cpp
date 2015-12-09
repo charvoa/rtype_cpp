@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec  8 14:27:23 2015 Antoine Garcia
+// Last update Wed Dec  9 00:56:46 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -31,8 +31,9 @@ void	Room::sendPlayerJoin(Client &client)
   std::string sendData;
   for (unsigned int i = 0; i < getAllPlayers().size(); i++)
     {
-      sendData += std::string("player") + std::to_string(i + 1) + ";" + _id + ";" + "1;";
+      sendData += std::string("player") + std::to_string(i + 1) + ";";
     }
+  sendData +=  _id + ";" + "1";
   ANetwork::t_frame frame = CreateRequest::create((unsigned char)103, CRC::calcCRC(sendData), 0, sendData);
   client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
 }
@@ -44,7 +45,7 @@ void	Room::sendRoomPlayerJoin(Client &client)
   int	clientPos = _clientManager.getClientPosition(client);
   for (it = clients.begin() ; it != clients.end() ; ++it)
     {
-      std::string sendData = "player" + std::to_string(clientPos + 1);
+      std::string sendData = "player" + std::to_string(clientPos);
       ANetwork::t_frame frame = CreateRequest::create((unsigned char)106, CRC::calcCRC(sendData), 0, sendData);
       if ((*it).getSocket()->getFd() != client.getSocket()->getFd())
 	(*it).getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));

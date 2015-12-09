@@ -5,19 +5,25 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Wed Dec  9 04:44:16 2015 Serge Heitzler
+// Last update Wed Dec  9 04:59:57 2015 Serge Heitzler
 //
 
-#include <Client.hh>
-#include <ANetwork.hpp>
+#ifdef _WIN32
+#include "../NetworkWin.hpp"
+#include <ThreadWin.hpp>
+#else
+#include "../Network.hpp"
 #include <ThreadUnix.hpp>
+#endif
+
+#include <Client.hh>
 #include <ProtocoleClient.hh>
 #include <SFML/Audio.hpp>
 #include <chrono>
 #include <thread>
 
 
-Network	*Client::_network = NULL;
+ANetwork	*Client::_network = NULL;
 Sound *Client::_sound = NULL;
 
 void	*readdisp(void *s)
@@ -29,6 +35,7 @@ void	*readdisp(void *s)
       try
 	{
 	  a = Client::getNetwork()->read();
+	  std::cout << "Data Is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
@@ -52,15 +59,15 @@ Client::~Client()
 void	Client::Start()
 {
   RenderWindow *window = RenderWindow::getInstance();
+
   _network = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("10.16.253.14");
-  //  _network->connect("127.0.0.1");
+  //  _network->connect("10.16.253.120");
+  _network->connect("127.0.0.1");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
 
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  //window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
 
 
@@ -68,10 +75,12 @@ void	Client::Start()
   _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
   _sound->playMusic("mainMenu");
   std::unique_ptr<AThread> t(new Thread(1));
+
   char str1[] = "";
   (void) str1;
   t->attach(&readdisp, (void *)str1);
   t->run();
+
   while(window->isOpen())
     {
       window->getPanels().top()->update();
@@ -86,7 +95,7 @@ void	Client::Start()
   _network->close();
 }
 
-Network	*Client::getNetwork()
+ANetwork	*Client::getNetwork()
 {
   if (!_network)
     _network = new Network();

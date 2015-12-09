@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Mon Nov 30 15:35:42 2015 Nicolas Charvoz
-// Last update Tue Dec  8 12:29:15 2015 Antoine Garcia
+// Last update Wed Dec  9 12:03:51 2015 Nicolas Charvoz
 //
 
 #ifdef _WIN32
@@ -62,9 +62,11 @@ void *newGameThread(void *data)
     .getAllPlayers();
   std::string str(me->_roomManager.getRoombyId(s->frame.data).getId());
 
-  me->_gameManager.createGame(p, c, str);
+  me->_gameManager.createGame(p, c, s->frame.data);
 
-  me->_roomManager.deleteRoom(str);
+  me->_gameManager.getGameById(s->frame.data).run();
+
+  me->_roomManager.deleteRoom(s->frame.data);
   return data;
 }
 

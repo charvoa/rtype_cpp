@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Tue Dec  8 15:36:23 2015 Nicolas Charvoz
+// Last update Wed Dec  9 10:49:57 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -16,8 +16,10 @@
 # include <EntityManager.hh>
 # include <Client.hh>
 # include <E_EntityType.hh>
+# include <Mutex.hpp>
 # include <stdexcept>
 # include <queue>
+
 
 class Game {
 
@@ -27,6 +29,7 @@ private:
   std::string _id;
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
+  AMutex *_mutex;
 
 public:
 

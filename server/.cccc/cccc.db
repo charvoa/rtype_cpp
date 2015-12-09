@@ -1,0 +1,328 @@
+CCCC_Module@AEntity@@
+CCCC_Module@Client@@
+CCCC_Module@ClientManager@@
+CCCC_Module@CommandManager@@
+CCCC_Module@E_Component@@
+CCCC_Module@E_Difficulty@@
+CCCC_Module@E_EntityType@@
+CCCC_Module@EntityFactory@@
+CCCC_Module@EntityManager@@
+CCCC_Module@Game@@
+CCCC_Module@GameManager@@
+CCCC_Module@Health@@
+CCCC_Module@ISocket@@
+CCCC_Module@Laser@@
+CCCC_Module@Missile@@
+CCCC_Module@Parameters@@
+CCCC_Module@Player@@
+CCCC_Module@PlayerFactory@@
+CCCC_Module@Position@@
+CCCC_Module@Rifle@@
+CCCC_Module@Server@@
+CCCC_Module@SystemGun@@
+CCCC_Module@SystemHealth@@
+CCCC_Module@SystemManager@@
+CCCC_Module@SystemPos@@
+CCCC_Module@anonymous@@
+CCCC_Module@char@builtin@
+CCCC_ModExt@char@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@double@builtin@
+CCCC_ModExt@double@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@float@builtin@
+CCCC_ModExt@float@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@int@builtin@
+CCCC_ModExt@int@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@long@builtin@
+CCCC_ModExt@long@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@string@@
+CCCC_Module@t_frame@@
+CCCC_Module@vector@@
+CCCC_Module@void@builtin@
+CCCC_ModExt@void@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Member@AEntity@AEntity@@(int)@
+CCCC_MemExt@AEntity@AEntity@@(int)@AEntity.cpp@13@definition@F????@LOC:4 COM:9 MVG:0@?@d@
+CCCC_Member@AEntity@addSystem@@(E_Component)@
+CCCC_MemExt@AEntity@addSystem@@(E_Component)@AEntity.cpp@41@definition@F????@LOC:5 COM:0 MVG:0@?@d@
+CCCC_Member@AEntity@getId@@()@
+CCCC_MemExt@AEntity@getId@@()@AEntity.cpp@58@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@AEntity@getType@@()@
+CCCC_MemExt@AEntity@getType@@()@AEntity.cpp@53@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@AEntity@setType@@(E_EntityType)@
+CCCC_MemExt@AEntity@setType@@(E_EntityType)@AEntity.cpp@47@definition@F????@LOC:5 COM:0 MVG:1@?@d@
+CCCC_Member@AEntity@update@@(int)@
+CCCC_MemExt@AEntity@update@@(int)@AEntity.cpp@32@definition@F????@LOC:8 COM:0 MVG:3@?@d@
+CCCC_Member@AEntity@update@@(int,int)@
+CCCC_MemExt@AEntity@update@@(int,int)@AEntity.cpp@23@definition@F????@LOC:8 COM:0 MVG:3@?@d@
+CCCC_Member@AEntity@~AEntity@@()@
+CCCC_MemExt@AEntity@~AEntity@@()@AEntity.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Client@Client@@()@
+CCCC_MemExt@Client@Client@@()@Client.cpp@13@definition@F????@LOC:1 COM:8 MVG:0@?@d@
+CCCC_Member@Client@Client@@(ISocket *)@
+CCCC_MemExt@Client@Client@@(ISocket *)@Client.cpp@15@definition@F????@LOC:2 COM:0 MVG:0@?@d@
+CCCC_Member@Client@getSocket@@()@
+CCCC_MemExt@Client@getSocket@@()@Client.cpp@20@definition@T????@LOC:3 COM:0 MVG:1@?@d@
+CCCC_Member@Client@operator ==@@(const Client &)@
+CCCC_MemExt@Client@operator ==@@(const Client &)@Client.cpp@24@definition@T????@LOC:5 COM:0 MVG:1@?@d@
+CCCC_Member@Client@~Client@@()@
+CCCC_MemExt@Client@~Client@@()@Client.cpp@18@definition@F????@LOC:1 COM:0 MVG:0@?@d@
+CCCC_Member@ClientManager@ClientManager@@()@
+CCCC_MemExt@ClientManager@ClientManager@@()@ClientManager.cpp@16@definition@F????@LOC:2 COM:8 MVG:0@?@d@
+CCCC_Member@ClientManager@addClients@@(Client &)@
+CCCC_MemExt@ClientManager@addClients@@(Client &)@ClientManager.cpp@28@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@ClientManager@clientExists@@(Client &)@
+CCCC_MemExt@ClientManager@clientExists@@(Client &)@ClientManager.cpp@22@definition@F????@LOC:5 COM:0 MVG:1@?@d@
+CCCC_Member@ClientManager@getAllClients@@()@
+CCCC_MemExt@ClientManager@getAllClients@@()@ClientManager.cpp@33@definition@F????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@ClientManager@getClientByFd@@(int)@
+CCCC_MemExt@ClientManager@getClientByFd@@(int)@ClientManager.cpp@38@definition@F????@LOC:9 COM:0 MVG:3@?@d@
+CCCC_Member@ClientManager@getClientPosition@@(Client &)@
+CCCC_MemExt@ClientManager@getClientPosition@@(Client &)@ClientManager.cpp@48@definition@F????@LOC:7 COM:0 MVG:1@?@d@
+CCCC_Member@ClientManager@~ClientManager@@()@
+CCCC_MemExt@ClientManager@~ClientManager@@()@ClientManager.cpp@19@definition@F????@LOC:2 COM:0 MVG:0@?@d@
+CCCC_Member@CommandManager@CommandManager@@()@
+CCCC_MemExt@CommandManager@CommandManager@@()@CommandManager.cpp@13@definition@F????@LOC:1 COM:8 MVG:0@?@d@
+CCCC_Member@CommandManager@addFunction@@(...)@
+CCCC_MemExt@CommandManager@addFunction@@(...)@CommandManager.cpp@17@definition@F????@LOC:5 COM:0 MVG:1@?@d@
+CCCC_Member@CommandManager@~CommandManager@@()@
+CCCC_MemExt@CommandManager@~CommandManager@@()@CommandManager.cpp@15@definition@F????@LOC:1 COM:0 MVG:0@?@d@
+CCCC_Member@EntityFactory@EntityFactory@@()@
+CCCC_MemExt@EntityFactory@EntityFactory@@()@EntityFactory.cpp@13@definition@F????@LOC:3 COM:8 MVG:0@?@d@
+CCCC_Member@EntityFactory@createEntity@@(const string &,int &)@
+CCCC_MemExt@EntityFactory@createEntity@@(const string &,int &)@EntityFactory.cpp@30@definition@F????@LOC:6 COM:1 MVG:1@?@d@
+CCCC_Member@EntityFactory@createEntity@@(int &)@
+CCCC_MemExt@EntityFactory@createEntity@@(int &)@EntityFactory.cpp@23@definition@F????@LOC:6 COM:0 MVG:1@?@d@
+CCCC_Member@EntityFactory@~EntityFactory@@()@
+CCCC_MemExt@EntityFactory@~EntityFactory@@()@EntityFactory.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@EntityManager@EntityManager@@()@
+CCCC_MemExt@EntityManager@EntityManager@@()@EntityManager.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@EntityManager@createEntitiesFromFolder@@(const string &,E_EntityType)@
+CCCC_MemExt@EntityManager@createEntitiesFromFolder@@(const string &,E_EntityType)@EntityManager.cpp@40@definition@F????@LOC:7 COM:1 MVG:1@?@d@
+CCCC_Member@EntityManager@createEntity@@(E_EntityType)@
+CCCC_MemExt@EntityManager@createEntity@@(E_EntityType)@EntityManager.cpp@23@definition@F????@LOC:7 COM:1 MVG:1@?@d@
+CCCC_Member@EntityManager@createEntity@@(E_EntityType,const Client &)@
+CCCC_MemExt@EntityManager@createEntity@@(E_EntityType,const Client &)@EntityManager.cpp@32@definition@F????@LOC:7 COM:0 MVG:1@?@d@
+CCCC_Member@EntityManager@getEntitiesByType@@(E_EntityType)@
+CCCC_MemExt@EntityManager@getEntitiesByType@@(E_EntityType)@EntityManager.cpp@89@definition@F????@LOC:10 COM:0 MVG:3@?@d@
+CCCC_Member@EntityManager@getEntityById@@(int)@
+CCCC_MemExt@EntityManager@getEntityById@@(int)@EntityManager.cpp@79@definition@F????@LOC:9 COM:0 MVG:4@?@d@
+CCCC_Member@EntityManager@removeEntity@@(AEntity &)@
+CCCC_MemExt@EntityManager@removeEntity@@(AEntity &)@EntityManager.cpp@49@definition@F????@LOC:14 COM:0 MVG:3@?@d@
+CCCC_Member@EntityManager@removeEntityById@@(int)@
+CCCC_MemExt@EntityManager@removeEntityById@@(int)@EntityManager.cpp@64@definition@F????@LOC:14 COM:0 MVG:3@?@d@
+CCCC_Member@EntityManager@update@@()@
+CCCC_MemExt@EntityManager@update@@()@EntityManager.cpp@100@definition@F????@LOC:3 COM:0 MVG:0@?@d@
+CCCC_Member@EntityManager@~EntityManager@@()@
+CCCC_MemExt@EntityManager@~EntityManager@@()@EntityManager.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Game@Game@@()@
+CCCC_MemExt@Game@Game@@()@Game.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Game@Game@@(const Parameters &,vector &,const string &)@
+CCCC_MemExt@Game@Game@@(const Parameters &,vector &,const string &)@Game.cpp@18@definition@F????@LOC:5 COM:1 MVG:0@?@d@
+CCCC_Member@Game@addClients@@(vector &)@
+CCCC_MemExt@Game@addClients@@(vector &)@Game.cpp@29@definition@F????@LOC:8 COM:0 MVG:1@?@d@
+CCCC_Member@Game@addCommandToQueue@@(t_frame)@
+CCCC_MemExt@Game@addCommandToQueue@@(t_frame)@Game.cpp@73@definition@F????@LOC:6 COM:0 MVG:0@?@d@
+CCCC_Member@Game@getId@@()@
+CCCC_MemExt@Game@getId@@()@Game.cpp@80@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Game@run@@()@
+CCCC_MemExt@Game@run@@()@Game.cpp@43@definition@F????@LOC:10 COM:12 MVG:2@?@d@
+CCCC_Member@Game@setParameters@@(Parameters &)@
+CCCC_MemExt@Game@setParameters@@(Parameters &)@Game.cpp@38@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Game@~Game@@()@
+CCCC_MemExt@Game@~Game@@()@Game.cpp@27@definition@F????@LOC:1 COM:0 MVG:0@?@d@
+CCCC_Member@GameManager@GameManager@@()@
+CCCC_MemExt@GameManager@GameManager@@()@GameManager.cpp@13@definition@F????@LOC:1 COM:8 MVG:0@?@d@
+CCCC_Member@GameManager@createGame@@(const Parameters &,vector &,const string &)@
+CCCC_MemExt@GameManager@createGame@@(const Parameters &,vector &,const string &)@GameManager.cpp@17@definition@F????@LOC:5 COM:0 MVG:0@?@d@
+CCCC_Member@GameManager@getGameByClient@@(const Client &)@
+CCCC_MemExt@GameManager@getGameByClient@@(const Client &)@GameManager.cpp@36@definition@F????@LOC:6 COM:8 MVG:1@?@d@
+CCCC_Member@GameManager@getGameById@@(const string &)@
+CCCC_MemExt@GameManager@getGameById@@(const string &)@GameManager.cpp@24@definition@F????@LOC:11 COM:0 MVG:3@?@d@
+CCCC_Member@GameManager@~GameManager@@()@
+CCCC_MemExt@GameManager@~GameManager@@()@GameManager.cpp@15@definition@F????@LOC:1 COM:0 MVG:0@?@d@
+CCCC_Member@Health@Health@@()@
+CCCC_MemExt@Health@Health@@()@Health.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Health@getLife@@()@
+CCCC_MemExt@Health@getLife@@()@Health.cpp@23@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Health@setLife@@(int)@
+CCCC_MemExt@Health@setLife@@(int)@Health.cpp@28@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Health@~Health@@()@
+CCCC_MemExt@Health@~Health@@()@Health.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Laser@Laser@@()@
+CCCC_MemExt@Laser@Laser@@()@Laser.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Laser@getDamages@@()@
+CCCC_MemExt@Laser@getDamages@@()@Laser.cpp@23@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Laser@~Laser@@()@
+CCCC_MemExt@Laser@~Laser@@()@Laser.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Missile@Missile@@()@
+CCCC_MemExt@Missile@Missile@@()@Missile.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Missile@getDamages@@()@
+CCCC_MemExt@Missile@getDamages@@()@Missile.cpp@23@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Missile@~Missile@@()@
+CCCC_MemExt@Missile@~Missile@@()@Missile.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Parameters@Parameters@@()@
+CCCC_MemExt@Parameters@Parameters@@()@Parameters.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Parameters@getDifficulty@@()@
+CCCC_MemExt@Parameters@getDifficulty@@()@Parameters.cpp@28@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Parameters@setDifficulty@@(E_Difficulty)@
+CCCC_MemExt@Parameters@setDifficulty@@(E_Difficulty)@Parameters.cpp@23@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Parameters@~Parameters@@()@
+CCCC_MemExt@Parameters@~Parameters@@()@Parameters.cpp@18@definition@F????@LOC:3 COM:0 MVG:0@?@d@
+CCCC_Member@Player@Player@@(int,const Client &)@
+CCCC_MemExt@Player@Player@@(int,const Client &)@Player.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Player@getClient@@()@
+CCCC_MemExt@Player@getClient@@()@Player.cpp@20@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Player@getScore@@()@
+CCCC_MemExt@Player@getScore@@()@Player.cpp@35@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Player@getUsername@@()@
+CCCC_MemExt@Player@getUsername@@()@Player.cpp@25@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Player@isOwner@@()@
+CCCC_MemExt@Player@isOwner@@()@Player.cpp@30@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Player@~Player@@()@
+CCCC_MemExt@Player@~Player@@()@Player.cpp@18@definition@F????@LOC:1 COM:0 MVG:0@?@d@
+CCCC_Member@PlayerFactory@PlayerFactory@@()@
+CCCC_MemExt@PlayerFactory@PlayerFactory@@()@PlayerFactory.cpp@13@definition@F????@LOC:3 COM:8 MVG:0@?@d@
+CCCC_Member@PlayerFactory@createPlayer@@(int &,const Client &)@
+CCCC_MemExt@PlayerFactory@createPlayer@@(int &,const Client &)@PlayerFactory.cpp@23@definition@F????@LOC:6 COM:0 MVG:1@?@d@
+CCCC_Member@PlayerFactory@~PlayerFactory@@()@
+CCCC_MemExt@PlayerFactory@~PlayerFactory@@()@PlayerFactory.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Position@Position@@()@
+CCCC_MemExt@Position@Position@@()@Position.cpp@13@definition@F????@LOC:3 COM:8 MVG:0@?@d@
+CCCC_Member@Position@Position@@(int,int)@
+CCCC_MemExt@Position@Position@@(int,int)@Position.cpp@18@definition@F????@LOC:3 COM:0 MVG:0@?@d@
+CCCC_Member@Position@getX@@()@
+CCCC_MemExt@Position@getX@@()@Position.cpp@28@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Position@getY@@()@
+CCCC_MemExt@Position@getY@@()@Position.cpp@33@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Position@setX@@(int)@
+CCCC_MemExt@Position@setX@@(int)@Position.cpp@38@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Position@setY@@(int)@
+CCCC_MemExt@Position@setY@@(int)@Position.cpp@43@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Position@~Position@@()@
+CCCC_MemExt@Position@~Position@@()@Position.cpp@23@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Rifle@Rifle@@()@
+CCCC_MemExt@Rifle@Rifle@@()@Rifle.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Rifle@getDamages@@()@
+CCCC_MemExt@Rifle@getDamages@@()@Rifle.cpp@23@definition@T????@LOC:4 COM:0 MVG:1@?@d@
+CCCC_Member@Rifle@~Rifle@@()@
+CCCC_MemExt@Rifle@~Rifle@@()@Rifle.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@Server@Server@@()@
+CCCC_MemExt@Server@Server@@()@Server.cpp@19@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@Server@createGame@@(t_frame,void *)@
+CCCC_MemExt@Server@createGame@@(t_frame,void *)@Server.cpp@71@definition@F????@LOC:13 COM:0 MVG:1@?@d@
+CCCC_Member@Server@createRoom@@(t_frame,void *)@
+CCCC_MemExt@Server@createRoom@@(t_frame,void *)@Server.cpp@90@definition@F????@LOC:7 COM:0 MVG:1@?@d@
+CCCC_Member@Server@init@@(int)@
+CCCC_MemExt@Server@init@@(int)@Server.cpp@26@definition@F????@LOC:10 COM:0 MVG:0@?@d@
+CCCC_Member@Server@joinRoom@@(t_frame,void *)@
+CCCC_MemExt@Server@joinRoom@@(t_frame,void *)@Server.cpp@100@definition@F????@LOC:6 COM:0 MVG:1@?@d@
+CCCC_Member@Server@run@@()@
+CCCC_MemExt@Server@run@@()@Server.cpp@37@definition@F????@LOC:11 COM:2 MVG:1@?@d@
+CCCC_Member@Server@~Server@@()@
+CCCC_MemExt@Server@~Server@@()@Server.cpp@24@definition@F????@LOC:1 COM:0 MVG:0@?@d@
+CCCC_Member@SystemGun@SystemGun@@(E_Component)@
+CCCC_MemExt@SystemGun@SystemGun@@(E_Component)@SystemGun.cpp@13@definition@F????@LOC:17 COM:8 MVG:5@?@d@
+CCCC_Member@SystemGun@~SystemGun@@()@
+CCCC_MemExt@SystemGun@~SystemGun@@()@SystemGun.cpp@31@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@SystemHealth@SystemHealth@@()@
+CCCC_MemExt@SystemHealth@SystemHealth@@()@SystemHealth.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@SystemHealth@update@@(int)@
+CCCC_MemExt@SystemHealth@update@@(int)@SystemHealth.cpp@23@definition@F????@LOC:5 COM:0 MVG:1@?@d@
+CCCC_Member@SystemHealth@~SystemHealth@@()@
+CCCC_MemExt@SystemHealth@~SystemHealth@@()@SystemHealth.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@SystemManager@SystemManager@@()@
+CCCC_MemExt@SystemManager@SystemManager@@()@SystemManager.cpp@13@definition@F????@LOC:3 COM:8 MVG:0@?@d@
+CCCC_Member@SystemManager@addSystemByType@@(E_Component)@
+CCCC_MemExt@SystemManager@addSystemByType@@(E_Component)@SystemManager.cpp@37@definition@F????@LOC:18 COM:0 MVG:5@?@d@
+CCCC_Member@SystemManager@getSystemByComponent@@(E_Component)@
+CCCC_MemExt@SystemManager@getSystemByComponent@@(E_Component)@SystemManager.cpp@23@definition@F????@LOC:13 COM:0 MVG:13@?@d@
+CCCC_Member@SystemManager@~SystemManager@@()@
+CCCC_MemExt@SystemManager@~SystemManager@@()@SystemManager.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@SystemPos@SystemPos@@()@
+CCCC_MemExt@SystemPos@SystemPos@@()@SystemPos.cpp@13@definition@F????@LOC:4 COM:8 MVG:0@?@d@
+CCCC_Member@SystemPos@update@@(int,int)@
+CCCC_MemExt@SystemPos@update@@(int,int)@SystemPos.cpp@23@definition@F????@LOC:6 COM:0 MVG:1@?@d@
+CCCC_Member@SystemPos@~SystemPos@@()@
+CCCC_MemExt@SystemPos@~SystemPos@@()@SystemPos.cpp@18@definition@F????@LOC:4 COM:0 MVG:0@?@d@
+CCCC_Member@anonymous@main@@(int,char **)@
+CCCC_MemExt@anonymous@main@@(int,char **)@main.cpp@23@definition@F????@LOC:18 COM:8 MVG:2@?@d@
+CCCC_Member@anonymous@newGameThread@@(void *)@
+CCCC_MemExt@anonymous@newGameThread@@(void *)@Server.cpp@52@definition@F????@LOC:13 COM:0 MVG:1@?@d@
+CCCC_UseRel@E_Component@AEntity@
+CCCC_UseExt@E_Component@AEntity@AEntity.cpp@41@pass by value@F????@*@?@P@
+CCCC_UseRel@E_EntityType@AEntity@
+CCCC_UseExt@E_EntityType@AEntity@AEntity.cpp@47@pass by value@F????@*@?@P@
+CCCC_UseRel@ISocket@Client@
+CCCC_UseExt@ISocket@Client@Client.cpp@15@pass by reference@F????@*@?@p@
+CCCC_UseRel@Client@ClientManager@
+CCCC_UseExt@Client@ClientManager@ClientManager.cpp@22@pass by reference@F????@*@?@p@
+CCCC_UseExt@Client@ClientManager@ClientManager.cpp@28@pass by reference@F????@*@?@p@
+CCCC_UseExt@Client@ClientManager@ClientManager.cpp@48@pass by reference@F????@*@?@p@
+CCCC_UseRel@string@EntityFactory@
+CCCC_UseExt@string@EntityFactory@EntityFactory.cpp@30@pass by reference@F????@*@?@p@
+CCCC_UseRel@AEntity@EntityManager@
+CCCC_UseExt@AEntity@EntityManager@EntityManager.cpp@49@pass by reference@F????@*@?@p@
+CCCC_UseRel@Client@EntityManager@
+CCCC_UseExt@Client@EntityManager@EntityManager.cpp@32@pass by reference@F????@*@?@p@
+CCCC_UseRel@E_EntityType@EntityManager@
+CCCC_UseExt@E_EntityType@EntityManager@EntityManager.cpp@23@pass by value@F????@*@?@P@
+CCCC_UseExt@E_EntityType@EntityManager@EntityManager.cpp@32@pass by value@F????@*@?@P@
+CCCC_UseExt@E_EntityType@EntityManager@EntityManager.cpp@40@pass by value@F????@*@?@P@
+CCCC_UseExt@E_EntityType@EntityManager@EntityManager.cpp@89@pass by value@F????@*@?@P@
+CCCC_UseRel@string@EntityManager@
+CCCC_UseExt@string@EntityManager@EntityManager.cpp@40@pass by reference@F????@*@?@p@
+CCCC_UseRel@Parameters@Game@
+CCCC_UseExt@Parameters@Game@Game.cpp@18@pass by reference@F????@*@?@p@
+CCCC_UseExt@Parameters@Game@Game.cpp@38@pass by reference@F????@*@?@p@
+CCCC_UseRel@string@Game@
+CCCC_UseExt@string@Game@Game.cpp@19@pass by reference@F????@*@?@p@
+CCCC_UseRel@t_frame@Game@
+CCCC_UseExt@t_frame@Game@Game.cpp@73@pass by value@F????@*@?@P@
+CCCC_UseRel@vector@Game@
+CCCC_UseExt@vector@Game@Game.cpp@18@pass by reference@F????@*@?@p@
+CCCC_UseExt@vector@Game@Game.cpp@29@pass by reference@F????@*@?@p@
+CCCC_UseRel@Client@GameManager@
+CCCC_UseExt@Client@GameManager@GameManager.cpp@36@pass by reference@F????@*@?@p@
+CCCC_UseRel@Parameters@GameManager@
+CCCC_UseExt@Parameters@GameManager@GameManager.cpp@17@pass by reference@F????@*@?@p@
+CCCC_UseRel@string@GameManager@
+CCCC_UseExt@string@GameManager@GameManager.cpp@18@pass by reference@F????@*@?@p@
+CCCC_UseExt@string@GameManager@GameManager.cpp@24@pass by reference@F????@*@?@p@
+CCCC_UseRel@vector@GameManager@
+CCCC_UseExt@vector@GameManager@GameManager.cpp@17@pass by reference@F????@*@?@p@
+CCCC_UseRel@E_Difficulty@Parameters@
+CCCC_UseExt@E_Difficulty@Parameters@Parameters.cpp@23@pass by value@F????@*@?@P@
+CCCC_UseRel@Client@Player@
+CCCC_UseExt@Client@Player@Player.cpp@13@pass by reference@?????@*@?@p@
+CCCC_UseRel@Client@PlayerFactory@
+CCCC_UseExt@Client@PlayerFactory@PlayerFactory.cpp@23@pass by reference@F????@*@?@p@
+CCCC_UseRel@t_frame@Server@
+CCCC_UseExt@t_frame@Server@Server.cpp@71@pass by value@F????@*@?@P@
+CCCC_UseExt@t_frame@Server@Server.cpp@90@pass by value@F????@*@?@P@
+CCCC_UseExt@t_frame@Server@Server.cpp@100@pass by value@F????@*@?@P@
+CCCC_UseRel@E_Component@SystemGun@
+CCCC_UseExt@E_Component@SystemGun@SystemGun.cpp@13@pass by value@?????@*@?@P@
+CCCC_UseRel@E_Component@SystemManager@
+CCCC_UseExt@E_Component@SystemManager@SystemManager.cpp@23@pass by value@F????@*@?@P@
+CCCC_UseExt@E_Component@SystemManager@SystemManager.cpp@37@pass by value@F????@*@?@P@
+CCCC_RejExt@AEntity.cpp@1@<file scope items>@T????@LOC:0 COM:0 MVG:0@?@r@
+CCCC_RejExt@Client.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@ClientManager.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@CommandManager.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@EntityFactory.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@EntityManager.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Game.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@GameManager.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Health.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Laser.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@main.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Missile.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Parameters.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Player.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@PlayerFactory.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Position.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Rifle.cpp@1@<file scope items>@T????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@Server.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@SystemGun.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@SystemHealth.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@SystemManager.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
+CCCC_RejExt@SystemPos.cpp@1@<file scope items>@F????@LOC:1 COM:1 MVG:0@?@r@
