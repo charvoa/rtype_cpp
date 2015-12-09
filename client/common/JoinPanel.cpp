@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:17:45 2015 Serge Heitzler
+// Last update Wed Dec  9 08:28:50 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -112,7 +112,7 @@ void    JoinPanel::back()
 
 void    JoinPanel::updateOnTextEntered(int key)
 {
-  if (_room.size() >= 4)
+  if (_room.size() < 4)
     {
       if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z)
 	_room += static_cast<char>(key + 65);
