@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Tue Dec  8 15:50:43 2015 Nicolas Charvoz
+// Last update Wed Dec  9 15:25:19 2015 Nicolas Charvoz
 //
 
 #ifndef				__NETWORKWIN_HPP__
@@ -14,6 +14,7 @@
 # include			<ANetwork.hpp>
 # include			<SocketWin.hpp>
 # include			<list>
+# inclue			<ProtocoleEnum>
 # define			_WINSOCK_DEPRECATED_NO_WARNINGS 1
 
 class				Network : public ANetwork

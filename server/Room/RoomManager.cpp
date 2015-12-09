@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Tue Dec  8 01:58:34 2015 Antoine Garcia
+// Last update Wed Dec  9 05:42:59 2015 Antoine Garcia
 //
 
 # include <CRC.hpp>
@@ -75,6 +75,7 @@ void	RoomManager::deleteRoom(const std::string &id)
     {
       if((*it).getId() == id)
 	{
+	  std::cout << "DELETE ROOM" << std::endl;
 	  _rooms.erase(it);
 	  return;
 	}

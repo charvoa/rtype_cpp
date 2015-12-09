@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec  5 18:22:28 2015 Joris Bertomeu
+// Last update Wed Dec  9 15:24:49 2015 Nicolas Charvoz
 //
 
 #ifndef				__NETWORK_HPP__
@@ -13,6 +13,7 @@
 
 # include			<ANetwork.hpp>
 # include			<Socket.hpp>
+# include			<ProtocoleEnum.hh>
 
 class				Network : public ANetwork
 {
