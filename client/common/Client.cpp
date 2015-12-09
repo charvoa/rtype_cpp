@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:27:42 2015 Serge Heitzler
+// Last update Wed Dec  9 08:37:23 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -64,7 +64,7 @@ void	Client::Start()
   _network = new Network();
   _UDPnetwork = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  //  _network->connect("0");
+  //_network->connect("0");
   _network->connect("10.16.253.14");
   _UDPnetwork->init(4254, ANetwork::UDP_MODE);
   //_UDPnetwork->connect("0");

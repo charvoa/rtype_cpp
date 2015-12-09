@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:33:01 2015 Serge Heitzler
+// Last update Wed Dec  9 08:39:39 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -79,23 +79,23 @@ void	        JoinPanel::setUserInterface()
   std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
   std::string name = "BACK";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
-    name = "JOIN";
-    ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+  name = "JOIN";
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
 
-    _functions.push_back((APanel::funcs)&JoinPanel::back);
-    _functions.push_back((APanel::funcs)&JoinPanel::join);
+  _functions.push_back((APanel::funcs)&JoinPanel::back);
+  _functions.push_back((APanel::funcs)&JoinPanel::join);
+  
 
 
-
-    Text		       	*text = new Text();
-    
-    text->setString("");
-    text->setSize(50);
-    text->setStyle(1);
-    text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
-    text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
-    text->setColor(Color::WHITE);
-    _labels.push_back(*text);
+  Text		       	*text = new Text();
+  
+  text->setString("");
+  text->setSize(50);
+  text->setStyle(1);
+  text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
+  text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+  text->setColor(Color::WHITE);
+  _labels.push_back(*text);
 }
 
 void    JoinPanel::join()
