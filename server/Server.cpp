@@ -47,6 +47,16 @@ void Server::run()
     }
 }
 
+void sendMessage(std::vector<Client> &c ,unsigned char type)
+{
+   for (std::vector<Client>::iterator it = c.begin();
+	 it != c.end() ; ++it)
+      {
+	ANetwork::t_frame frame = CreateRequest::create(type, CRC::calcCRC(""), 0, "");
+	(*it).getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+      }
+}
+
 void *newGameThread(void *data)
 {
   Server::serializeThread *s = reinterpret_cast<Server::serializeThread*>(data);
@@ -58,32 +68,17 @@ void *newGameThread(void *data)
   Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
   std::vector<Client> c = me->_roomManager.getRoombyId(s->frame.data)
     .getAllPlayers();
-  std::string str(me->_roomManager.getRoombyId(s->frame.data).getId());
 
-  if ((me->_gameManager.createGame(p, c, s->frame.data))) {
-    for (std::vector<Client>::iterator it = c.begin();
-	 it != c.end() ; ++it)
-      {
-	ANetwork::t_frame frame = CreateRequest::create((unsigned char)
-							S_GAME_LAUNCHED,
-						  CRC::calcCRC(""), 0, "");
-	(*it).getSocket()->write(reinterpret_cast<void*>(&frame),
-				 sizeof(ANetwork::t_frame));
-      }
-    me->_gameManager.getGameById(s->frame.data).run();
-    me->_roomManager.deleteRoom(s->frame.data);
-  }
-  else {
-    for (std::vector<Client>::iterator it = c.begin();
-	 it != c.end() ; ++it)
-      {
-	ANetwork::t_frame frame = CreateRequest::create((unsigned char)
-							S_GAME_NOT_LAUNCHED,
-						  CRC::calcCRC(""), 0, "");
-	(*it).getSocket()->write(reinterpret_cast<void*>(&frame),
-				 sizeof(ANetwork::t_frame));
-      }
-  }
+  if ((me->_gameManager.createGame(p, c, s->frame.data)))
+    {
+      sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
+      me->_gameManager.getGameById(s->frame.data).run();
+      me->_roomManager.deleteRoom(s->frame.data);
+    }
+  else
+    {
+      sendMessage(c, (unsigned char)S_GAME_NOT_LAUNCHED);
+    }
   return data;
 }
 

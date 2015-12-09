@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Wed Dec  9 15:47:26 2015 Nicolas Charvoz
+// Last update Wed Dec  9 17:01:01 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -56,5 +56,8 @@ private:
   CommandManager _commandManager;
 
 };
+
+void sendMessage(std::vector<Client>&, unsigned char);
+void *newGameThread(void*);
 
 #endif

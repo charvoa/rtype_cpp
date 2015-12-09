@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:26:52 2015 Nicolas Charvoz
-// Last update Wed Dec  9 15:01:16 2015 Nicolas Charvoz
+// Last update Wed Dec  9 17:02:41 2015 Nicolas Charvoz
 //
 
 #include <GameManager.hh>
@@ -21,7 +21,6 @@ bool GameManager::createGame(const Parameters &p_, std::vector<Client> &clients_
 
   try {
     _games.push_back(*g);
-    throw std::exception();
   } catch (const std::exception &e) {
     std::cout << e.what() << std::endl;
     return false;
