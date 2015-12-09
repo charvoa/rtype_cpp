@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 02:59:41 2015 Serge Heitzler
+// Last update Wed Dec  9 08:55:09 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -99,11 +99,15 @@ void        StartPanel::createRoom()
 
 void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 {
+  std::cout << "VAGINITE" << std::endl;
   RenderWindow *window = RenderWindow::getInstance();
 
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
+  std::cout << "VAGINITE" << std::endl;
   window->getPanels().top()->setUserInterface();
+  std::cout << "VAGINITE" << std::endl;
   static_cast<RoomPanel*>(window->getPanels().top())->updatePlayers(vector, from);
+  std::cout << "VAGINITE" << std::endl;
 }
 
 

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Sat Dec  5 05:55:57 2015 Serge Heitzler
+// Last update Wed Dec  9 07:38:33 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -33,6 +33,7 @@ public:
   std::pair<unsigned int, unsigned int>	       	joystickHardwareEvent(sf::Event& event);
   void						methodChecker(sf::Event &event);
   void						setInputType(InputType inputType);
+  std::pair<unsigned int, unsigned int>	        textEnteredInJoinPanel(sf::Event& event);
 
 private:
 

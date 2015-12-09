@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec  9 11:24:52 2015 Nicolas Girardot
+// Last update Wed Dec  9 08:21:49 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,6 +15,7 @@
 #include <CreateRequest.hpp>
 #include <CRC.hpp>
 #include <ANetwork.hpp>
+#include <JoinPanel.hh>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -29,7 +30,7 @@ void			InputManager::setInputType(InputType type)
   _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
   _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
 
-  if (type == InputType::MENU_INPUT)
+  if (type == InputType::MENU_INPUT || type == InputType::JOIN_INPUT)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedInMenuAt));
       _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
@@ -42,6 +43,11 @@ void			InputManager::setInputType(InputType type)
       _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
       //      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::CHOISIRUNNOMDEFONCTION));
     }
+  if (type == InputType::JOIN_INPUT)
+    {
+      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::textEnteredInJoinPanel));
+    }
+  
 }
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
@@ -113,8 +119,7 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
 {
   if (event.mouseButton.button == sf::Mouse::Right)
     {
-
-	  ANetwork *net = Client::getNetwork();
+      ANetwork *net = Client::getNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("2QNP"), 0, "2QNP");
       net->write(sender);
     }
@@ -154,6 +159,16 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::E
 
     }
   return std::make_pair(0, 0);
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::textEnteredInJoinPanel(sf::Event& event)
+{
+  if ((event.key.code >= sf::Keyboard::A && event.key.code <= sf::Keyboard::Z) || (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) || event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::BackSpace)
+    {
+      RenderWindow *window = RenderWindow::getInstance();
+      static_cast<JoinPanel*>(window->getPanels().top())->updateOnTextEntered(event.key.code);
+    }
+    return std::make_pair(0, 0);
 }
 
 void		InputManager::methodChecker(sf::Event &event)

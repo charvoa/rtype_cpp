@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 13:42:01 2015 Nicolas Girardot
+// Last update Wed Dec  9 08:44:39 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -15,7 +15,10 @@
 
 APanel::APanel(){}
 
-APanel::~APanel(){}
+APanel::~APanel()
+{
+  std::cout << "DESTRUCTOR APANEL" << std::endl;
+}
 
 void		APanel::update(){}
 

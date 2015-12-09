@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Dec  7 03:02:01 2015 Serge Heitzler
-// Last update Wed Dec  9 13:43:14 2015 Nicolas Girardot
+// Last update Wed Dec  9 08:16:35 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -36,6 +36,5 @@ void			ButtonFactory::create(Vector2 pos, Vector2 size, std::string &title, std:
   (RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
 
   (RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(*text);
-
 
 }
