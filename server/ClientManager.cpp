@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Wed Dec  9 14:04:40 2015 Antoine Garcia
+// Last update Thu Dec 10 03:57:06 2015 Antoine Garcia
 //
 
 # include <iostream>
@@ -61,9 +61,12 @@ throw std::logic_error("No client with this fd found");
 int		ClientManager::getClientPosition(Client *client)
 {
   std::vector<Client *>::iterator	it;
-
-  it = std::find(_clients.begin(), _clients.end(), client);
-  int	pos = std::distance(_clients.begin(), it);
-  std::cout << "POSITION " << pos << std::endl;
-  return pos;
+  int	i = 0;
+  for (it = _clients.begin(); it != _clients.end(); ++it)
+    {
+      if (*(*it) == *client)
+	return i;
+      i++;
+    }
+  return 0;
 }

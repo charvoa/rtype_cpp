@@ -139,13 +139,13 @@ public:
     return (NULL);
   };
 
-  void				listenSocket(ISocket *socket) {
+  virtual void				listenSocket(ISocket *socket) {
 	  this->_fdSize += 1;
 	  this->_sList.push_back(socket);
     FD_SET(socket->getFd(), &_fdList);
   };
 
-  void				unlistenSocket(ISocket *socket) {
+  virtual void				unlistenSocket(ISocket *socket) {
 	  this->_fdSize -= 1;
 	  this->_sList.remove(socket);
     FD_CLR(socket->getFd(), &_fdList);

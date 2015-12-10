@@ -37,13 +37,19 @@ void Server::init(int port)
 void Server::run()
 {
   Client	*client;
+  void		*data;
 
   std::cout << "Server :: Run" << std::endl;
   while (1)
     {
       client = new Client(this->_network->select());
-      //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
-      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
+      if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
+	this->_network->unlistenSocket(client->getSocket());
+	continue;
+      }
+      //std::cout << std::string(((ANetwork::t_frame*) data)->data) << std::endl;
+      //client->getSocket()->write((void*) CreateRequest::create(1, 2, 3, "Thank you !", true), sizeof(ANetwork::t_frame));
+      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
 					   client, this);
     }
 }

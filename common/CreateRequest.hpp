@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Wed Dec  9 15:27:26 2015 Nicolas Charvoz
+// Last update Thu Dec 10 04:56:37 2015 Louis Audibert
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -35,7 +35,24 @@ public:
     frame.idRequest = id_;
     frame.crc = crc_;
     frame.sizeData = size_;
-    strcpy(frame.data, data_.c_str());
+    memset(frame.data, 0, 49);
+    memcpy(frame.data, data_.c_str(), data_.size());
+
+    return frame;
+  };
+
+  static ANetwork::t_frame *create(unsigned char id_, int crc_, int size_,
+				   const std::string &data_, bool ret)
+  {
+    ANetwork::t_frame *frame = (ANetwork::t_frame*) malloc(sizeof(ANetwork::t_frame));
+
+    (void)ret;
+    frame->keyPintade = KEY_PINTADE;
+    frame->idRequest = id_;
+    frame->crc = crc_;
+    frame->sizeData = size_;
+    memset(frame->data, 0, 49);
+    memcpy(frame->data, data_.c_str(), data_.size());
 
     return frame;
   };

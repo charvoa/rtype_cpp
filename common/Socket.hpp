@@ -77,6 +77,7 @@ class		Socket : public ISocket
   };
 
   void		close() {
+    ::shutdown(this->_fd, SHUT_RDWR);
     ::close(this->_fd);
   };
 
@@ -90,7 +91,10 @@ private:
 
     data = malloc(size + 1);
     bzero(data, size + 1);
-    ::read(this->_fd, data, size);
+    if (::read(this->_fd, data, size) <= 0) {
+      this->close();
+      return (NULL);
+    }
     return (data);
   };
 
