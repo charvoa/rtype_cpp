@@ -5,7 +5,8 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:10:07 2015 Nicolas Charvoz
+
+// Last update Thu Dec 10 20:55:23 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -43,6 +44,7 @@ public:
   ~Server();
   void init(int);
   void run();
+  bool handshake(ANetwork::t_frame frame, void *data);
   bool createGame(ANetwork::t_frame frame, void *data);
   bool createRoom(ANetwork::t_frame frame, void *data);
   bool joinRoom(ANetwork::t_frame frame, void *data);

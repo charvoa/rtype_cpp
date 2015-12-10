@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:45:35 2015 Antoine Garcia
-// Last update Wed Dec  2 15:47:15 2015 Nicolas Charvoz
+// Last update Thu Dec 10 09:41:59 2015 Serge Heitzler
 //
 
 #ifndef _THREAD_HH_
@@ -24,6 +24,7 @@ public:
   virtual void		attach(void *(*fn)(void*), void *) = 0;
   virtual int		join() = 0;
   virtual void		exit() = 0;
+  virtual void	        cancel() = 0;
   virtual int		run() = 0;
 };
 

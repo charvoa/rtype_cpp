@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Thu Dec 10 20:13:22 2015 Nicolas Charvoz
+// Last update Thu Dec 10 20:58:16 2015 Nicolas Charvoz
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -13,24 +13,25 @@
 
 typedef enum E_Command
   {
-    S_HANDSHAKE_UDP = 1,
-    C_HANDSHAKE = 2,
-    C_CREATEROOM = 2,
-    C_CHANGE_SETTINGS = 4,
-    C_JOINROOM = 5,
-    C_PLAYERLEFT = 6,
-    C_LAUNCHGAME = 7,
-    C_MOVE = 8,
-    C_SHOOT = 9,
-    C_LOAD_SPRITE_SUCCESS = 10,
-    C_LOAD_SPRITE_ERROR = 11,
-    C_LOAD_SPRITE_IN_PROGRESS = 12,
-    C_SEND_MD5 = 13
+    C_INIT_UDP = 1,
+    C_HANDSHAKE_UDP = 2,
+    C_HANDSHAKE = 3,
+    C_CREATE_ROOM = 4,
+    C_CHANGE_SETTINGS = 5,
+    C_JOIN_ROOM = 6,
+    C_PLAYER_LEFT = 7,
+    C_LAUNCH_GAME = 8,
+    C_MOVE = 9,
+    C_SHOOT = 10,
+    C_LOAD_SPRITE_SUCCESS = 11,
+    C_LOAD_SPRITE_ERROR = 12,
+    C_LOAD_SPRITE_IN_PROGRESS = 13,
+    C_SEND_MD5 = 14
   } E_Command;
 
 typedef enum RequestFromServer
   {
-    S_HANDSHAKE_UDP = 100,
+    S_INIT_UDP = 100,
     S_HANDSHAKE = 101,
     S_DISPLAY = 102,
     S_CREATE_ROOM = 103,

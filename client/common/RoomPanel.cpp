@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 07:06:26 2015 Serge Heitzler
+// Last update Thu Dec 10 11:02:59 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -126,19 +126,48 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   while (i < (static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size()))
     {
       static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::WHITE);
       i++;
     }
   
   std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
+
+
+  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToRemove + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 1).setString("");
+
   
-  static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().erase(static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().begin() + idToRemove - 1);
   pos = vector.at(1).find("player");
   unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
+
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
+  
+  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToChange + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(idToChange + 1));
+
+  switch (idToChange)
+    {
+    case 0:
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::BLUE);
+      break;
+    case 1:
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::RED);
+      break;
+    case 2:
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::GREEN);
+      break;
+    case 3:
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::YELLOW);
+      break;
+    default:
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::WHITE);
+      break;
+    }
+  
 
   static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
 
+  
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
@@ -241,7 +270,7 @@ void		RoomPanel::difficulty(Settings::Difficulty diff)
 void		RoomPanel::launchGame()
 {
   ANetwork *net = Client::getNetwork();
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_LAUNCHGAME, CRC::calcCRC(_idRoom), 0, _idRoom);
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_LAUNCH_GAME, CRC::calcCRC(_idRoom), 0, _idRoom);
   net->write(sender);
   //  (RenderWindow::getInstance())->addPanel(PanelFactory::GAME_PANEL);
 }
@@ -249,7 +278,7 @@ void		RoomPanel::launchGame()
 void		RoomPanel::back()
 {
   ANetwork *net = Client::getNetwork();
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_PLAYERLEFT, CRC::calcCRC(_idRoom), 0, _idRoom);
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_PLAYER_LEFT, CRC::calcCRC(_idRoom), 0, _idRoom);
   net->write(sender);
   (RenderWindow::getInstance())->back();
 }

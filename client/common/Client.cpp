@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 17:14:42 2015 Nicolas Girardot
+// Last update Thu Dec 10 11:06:44 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -47,6 +47,7 @@ void	*readdisp(void *s)
 	  std::cout << e.what() << std::endl;
 	}
     }
+  
   return s;
 }
 
@@ -67,29 +68,35 @@ void	Client::Start()
   _network = new Network();
   _UDPnetwork = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
-  _network->write(sender);
-  //_network->connect("10.16.253.14");
+  //_network->connect("0");
+  
+   // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
+   // _network->write(sender);
+  std::cout << "LA" << std::endl;
+  _network->connect("10.16.252.241");
   _UDPnetwork->init(4254, ANetwork::UDP_MODE);
   //_UDPnetwork->connect("0");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->clear();
+  std::cout << "LA" << std::endl;
 
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
   window->getPanels().top()->setUserInterface();
+  std::cout << "LA" << std::endl;
 
 
   _sound = new Sound();
   _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
   _sound->playMusic("mainMenu");
   std::unique_ptr<AThread> t(new Thread(1));
+  std::cout << "LA" << std::endl;
 
   char str1[] = "";
   (void) str1;
   t->attach(&readdisp, (void *)str1);
   t->run();
 
+  std::cout << "LA" << std::endl;
   while(window->isOpen())
     {
       window->getPanels().top()->update();
@@ -99,8 +106,9 @@ void	Client::Start()
       while (window->pollEvent(event))
       	{
       	  window->getPanels().top()->getInputManager().methodChecker(event);
-      	}
+      	}   
     }
+  //  t->cancel();
   _network->close();
 }
 
