@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 10:54:40 2015 Serge Heitzler
+// Last update Thu Dec 10 11:02:59 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -135,7 +135,7 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
 
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToRemove + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
-
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 1).setString("");
 
   
   pos = vector.at(1).find("player");
