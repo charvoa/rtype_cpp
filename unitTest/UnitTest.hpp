@@ -20,6 +20,7 @@ public:
     try {
       this->_network.init(atoi(argv[2]), (!strcmp(argv[3], "-t")) ? ANetwork::TCP_MODE : ANetwork::UDP_MODE);
       this->_network.connect(std::string(argv[1]));
+      
     } catch (const std::exception &e) {
       throw (std::logic_error(e.what()));
     }
