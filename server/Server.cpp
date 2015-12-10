@@ -102,28 +102,31 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
   s->frame = frame;
   s->port = _port++;
 
-  // TELL CLIENT WHO HE IS FOR UDP
 
+  // TELL CLIENT WHO HE IS FOR UDP
+  std::vector<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
   std::stringstream ss;
   int i = 0;
 
-  std::vector<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
   for (std::vector<Client *>::iterator it = c.begin();
        it != c.end() ; ++it)
     {
       ss << _port;
       ss << ";";
       ss << i;
-      ANetwork::t_frame frame = CreateRequest::create((unsigned char)S_INIT_UDP,
+      std::cout << "DATA SEND" << ss.str().c_str() << std::endl;
+      ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_INIT_UDP,
 						      CRC::calcCRC(ss.str().c_str()),
 						      0,
 						      ss.str().c_str());
-      (*it)->getSocket()->write(reinterpret_cast<void*>(&frame),
+      (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),
 				sizeof(ANetwork::t_frame));
       i++;
       ss.str("");
       ss.clear();
     }
+
+
 
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());

@@ -6,7 +6,7 @@
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
 
-// Last update Thu Dec 10 21:12:08 2015 Nicolas Charvoz
+// Last update Thu Dec 10 23:00:58 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -52,13 +52,13 @@ public:
   bool	playerLeftRoom(ANetwork::t_frame frame, void *data);
   RoomManager _roomManager;
   GameManager _gameManager;
+  int _port;
 
 private:
 
   ANetwork *_network;
   //ClientManager _clientManager;
   CommandManager _commandManager;
-  int _port;
 
 };
 

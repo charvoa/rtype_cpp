@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:53:47 2015 Nicolas Charvoz
+// Last update Thu Dec 10 22:49:45 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -43,26 +43,38 @@ void Game::setParameters(Parameters &p)
   _params = p;
 }
 
+void handleCommand(void *data)
+{
+  std::cout << "Game :: handleCommand" << std::endl;
+  std::cout << std::string(((ANetwork::t_frame*)data)->data) << std::endl;
+}
+
 void *readThread(void *sData)
 {
   Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
 
-  Network *n = s->network;
+  ANetwork *n = s->network;
   Game *me = s->game;
+
+  std::cout << "Game :: readThread" << std::endl;
+  void *data;
 
   while (1)
     {
-      void *data;
+      std::cout << "BOUCLE " << std::endl;
       Client *client = new Client(n->select());
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
 	{
+	  std::cout << "CA RENTRE DANS LE IF" << std::endl;
 	  n->unlistenSocket(client->getSocket());
 	  continue;
 	}
-      std::cout << std::string(((ANetwork::t_frame*)data)->data) << std::endl;
-      client->getSocket()->
-	write((void*)CreateRequest::create(1, 2, 3, "Thank You", true),
-	      sizeof(ANetwork::t_frame));
+      std::cout << "DATA : "<<
+	std::string(((ANetwork::t_frame*)data)->data) << std::endl;
+      handleCommand(data);
+      client->getSocket()->write((void*)CreateRequest::create(1, 2, 3, "Thank You",
+							      true),
+	    sizeof(ANetwork::t_frame));
     }
 }
 
@@ -73,9 +85,19 @@ bool Game::run()
 
   std::cout << "Game :: run() " << std::endl;
 
+  ThreadFactory *tF = new ThreadFactory;
+  std::unique_ptr<AThread> t1(tF->createThread());
+
+  Game::dataThread *dT = new Game::dataThread;
+
+  dT->game = this;
+  dT->network = this->_network;
+  t1->attach(&readThread, reinterpret_cast<void*>(dT));
+
+  t1->run();
+  t1->join();
   while (true)
     {
-
       nbEnemy = 5 * stage * nbEnemy;
     }
 

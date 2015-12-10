@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:53:32 2015 Nicolas Charvoz
+// Last update Thu Dec 10 22:10:16 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -16,7 +16,9 @@
 # include <EntityManager.hh>
 # include <Client.hh>
 # include <E_EntityType.hh>
+# include <ThreadFactory.hh>
 # include <Mutex.hpp>
+# include <memory>
 # include <CreateRequest.hpp>
 # ifdef _WIN32
 #	include <NetworkWin.hpp>
@@ -36,13 +38,12 @@ private:
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
-  ANetwork *_network;
 
 public:
 
   struct dataThread {
     Game *game;
-    Network *network;
+    ANetwork *network;
   };
 
   Game();
@@ -54,6 +55,9 @@ public:
   const Client &getClient() const;
   bool run();
   void addCommandToQueue(ANetwork::t_frame);
+
+
+  ANetwork *_network;
 
 };
 
