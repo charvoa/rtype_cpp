@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:39:39 2015 Serge Heitzler
+// Last update Thu Dec 10 05:45:32 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -65,8 +65,6 @@ void	        JoinPanel::setUserInterface()
 
   backgroundSpace->scale(1.1);
 
-  std::cout << "SIZE " << _backgrounds.size() << std::endl;
-
   _backgrounds.push_back(*backgroundSpace);
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
@@ -79,7 +77,7 @@ void	        JoinPanel::setUserInterface()
   std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
   std::string name = "BACK";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
-  name = "JOIN";
+  name = "ACCESS";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
 
   _functions.push_back((APanel::funcs)&JoinPanel::back);
@@ -87,15 +85,27 @@ void	        JoinPanel::setUserInterface()
   
 
 
+  Text		       	*id = new Text();
+  
+  id->setString("");
+  id->setSize(50);
+  id->setStyle(1);
+  id->setOrigin(id->getText().getGlobalBounds().width / 2, id->getText().getGlobalBounds().height / 2);
+  id->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+  id->setColor(Color::WHITE);
+  _labels.push_back(*id);
+
   Text		       	*text = new Text();
   
-  text->setString("");
-  text->setSize(50);
+  text->setString("ENTER ROOM ID TO JOIN :");
+  text->setSize(80);
   text->setStyle(1);
   text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
-  text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+  text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.3));
   text->setColor(Color::WHITE);
   _labels.push_back(*text);
+
+
 }
 
 void    JoinPanel::join()
@@ -112,7 +122,7 @@ void    JoinPanel::back()
 
 void    JoinPanel::updateOnTextEntered(int key)
 {
-  std::cout << "PRESSED" << std::endl;
+  RenderWindow *window = RenderWindow::getInstance();
   if (_room.size() < 4)
     {
       if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z)
@@ -125,5 +135,8 @@ void    JoinPanel::updateOnTextEntered(int key)
   if (key == sf::Keyboard::Return)
     if (_room.size() == 4)
       this->join();
+  
   _labels.at(2).setString(_room);
+  _labels.at(2).setOrigin(_labels.at(2).getText().getGlobalBounds().width / 2, _labels.at(2).getText().getGlobalBounds().height / 2);
+  _labels.at(2).setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
 }
