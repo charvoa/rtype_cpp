@@ -6,7 +6,7 @@
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
 
-// Last update Thu Dec 10 20:55:23 2015 Nicolas Charvoz
+// Last update Thu Dec 10 21:12:08 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -27,6 +27,7 @@
 # include <CommandManager.hpp>
 # include <ThreadFactory.hh>
 # include <CreateRequest.hpp>
+# include <sstream>
 
 class Server {
 
