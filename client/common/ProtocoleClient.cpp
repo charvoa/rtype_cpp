@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Wed Dec  9 17:23:20 2015 Nicolas Girardot
+// Last update Thu Dec 10 17:05:53 2015 Nicolas Girardot
 //
 
 
@@ -50,6 +50,7 @@ ProtocoleClient::~ProtocoleClient()
 
 void		ProtocoleClient::initProtocoleClient()
 {
+  _functions.insert(std::make_pair(S_HANDSHAKE, &ProtocoleClient::handshake));
   _functions.insert(std::make_pair(S_DISPLAY, &ProtocoleClient::display));
   _functions.insert(std::make_pair(S_CREATE_ROOM, &ProtocoleClient::createRoom));
   _functions.insert(std::make_pair(S_CREATE_ROOM_ERROR, &ProtocoleClient::createRoomError));
@@ -67,6 +68,11 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_END_GAME, &ProtocoleClient::endGame));
   _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
+}
+
+void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
+{
+  (void) frame;
 }
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
@@ -115,8 +121,11 @@ void		ProtocoleClient::newPlayerConnected(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::playerLeft(ANetwork::t_frame &frame)
 {
+  std::cout << "JACQUES" << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "JACQUES" << std::endl;
   RoomPanel::playerLeft(x);
+  std::cout << "JACQUES" << std::endl;
 }
 
 void		ProtocoleClient::changeHost(ANetwork::t_frame &frame)
@@ -167,9 +176,12 @@ void		ProtocoleClient::gameNotLaunched(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::methodChecker(ANetwork::t_frame &frame)
 {
+  std::cout << "JACQUES" << std::endl;
   for (PointersOnFuncs::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
+  std::cout << "JACQUES" << std::endl;
       if ((*it).first == frame.idRequest)
 	(*this.*_functions[static_cast<RequestFromServer>(frame.idRequest)])(frame);
     }
+  std::cout << "JACQUES" << std::endl;
 }

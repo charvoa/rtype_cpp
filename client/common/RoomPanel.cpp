@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 02:17:04 2015 Serge Heitzler
+// Last update Thu Dec 10 07:06:26 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -91,33 +91,22 @@ void	RoomPanel::addNbPlayers()
   _nbPlayers++;
 }
 
+std::vector<Texture*>	&RoomPanel::getTextures()
+{
+  return _spaceShipsTextures;
+}
+
+
 void		RoomPanel::newPlayer(std::string &newUsername)
 {
   RenderWindow *window = RenderWindow::getInstance();
+  unsigned int i = static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers();
 
-  // GET LE NOMBRE DE PLAYER DANS LA ROOM
-  unsigned int i = static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() - 1;
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString(newUsername);    
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setOrigin(static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).getText().getGlobalBounds().width / 2, static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).getText().getGlobalBounds().height / 2);
+  
+  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(i + 1));
 
-  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString(newUsername);
-
-  // switch (i)
-  //   {
-  //   case 0:
-  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::BLUE);
-  //     break;
-  //   case 1:
-  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::RED);
-  //     break;
-  //   case 2:
-  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::GREEN);
-  //     break;
-  //   case 3:
-  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::YELLOW);
-  //     break;
-  //   default:
-  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::BLACK);
-  //     break;
-  //   }
   static_cast<RoomPanel*>(window->getPanels().top())->addNbPlayers();
 }
 
@@ -135,17 +124,21 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   std::cout << "SECOND USERNAME " << vector.at(1) << std::endl;
 
   while (i < (static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size()))
-    static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
+    {
+      static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
+      i++;
+    }
   
-  std::size_t pos = vector.at(0).find("Player");
+  std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
   
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().erase(static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().begin() + idToRemove - 1);
-  pos = vector.at(1).find("Player");
+  pos = vector.at(1).find("player");
   unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
 
   static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
+
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
@@ -160,7 +153,6 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       getPlayers().at(i)->setUsername(vector.at(i));
       _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
       getLabels().at(i + 2).setString(vector.at(i));
-      //      getLabels().at(i + 2).setColor(Color::WHITE);
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
       _nbPlayers++;
       i++;

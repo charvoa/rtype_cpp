@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Dec  9 04:57:09 2015 Serge Heitzler
-// Last update Wed Dec  9 08:12:38 2015 Serge Heitzler
+// Last update Thu Dec 10 05:41:18 2015 Serge Heitzler
 //
 
 #ifndef JOINPANEL_HH
@@ -29,6 +29,8 @@ public:
 private:
 
   std::string		_room;
+  SFont			_filledFont;
+  SFont			_emptyFont;
 };
 
 #endif // JOINPANEL_HH

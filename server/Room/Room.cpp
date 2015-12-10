@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec  9 14:08:38 2015 Antoine Garcia
+// Last update Thu Dec 10 06:04:44 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -49,7 +49,10 @@ void	Room::sendRoomPlayerJoin(Client *client)
       std::string sendData = "player" + std::to_string(clientPos);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_PLAYER_CONNECTED, CRC::calcCRC(sendData), 0, sendData);
       if ((*it)->getSocket()->getFd() != client->getSocket()->getFd())
-	(*it)->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
+	{
+	  int test = (*it)->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
+	  std::cout << "I WROTE " << test << "to FD" << (*it)->getSocket()->getFd() << std::endl;
+	}
     }
 }
 
@@ -94,7 +97,7 @@ void	Room::sendPlayerLeft(int playerID)
 void	Room::deletePlayer(Client *client)
 {
   int playerID = _clientManager->getClientPosition(client) + 1;
-   _clientManager->deleteClient(client);
+  _clientManager->deleteClient(client);
    sendPlayerLeft(playerID);
 }
 
