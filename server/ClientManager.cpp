@@ -5,9 +5,10 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Wed Dec  9 05:33:10 2015 Antoine Garcia
+// Last update Thu Dec 10 03:57:06 2015 Antoine Garcia
 //
 
+# include <iostream>
 # include <algorithm>
 # include <iterator>
 # include <stdexcept>
@@ -19,49 +20,53 @@ ClientManager::ClientManager()
 ClientManager::~ClientManager()
 {}
 
-bool	ClientManager::clientExists(Client &client)
+bool	ClientManager::clientExists(Client *client)
 {
   (void)client;
   return (true);
 }
 
-void	ClientManager::addClients(Client &client)
+void	ClientManager::addClients(Client *client)
 {
   _clients.push_back(client);
 }
 
-void	ClientManager::deleteClient(Client &client)
+void	ClientManager::deleteClient(Client *client)
 {
-   for(std::vector<Client>::iterator it = _clients.begin(); it != _clients.end();++it)
-     {
-       if ((*it) == client)
-	 {
-	 _clients.erase(it);
-	 return;
-	 }
-     }
+  for (std::vector<Client *>::iterator it = _clients.begin(); it != _clients.end(); ++it)
+    {
+      if (*(*it) == *client)
+	{
+	  it = _clients.erase(it);
+	  return;
+	}
+    }
 }
 
-const std::vector<Client>&	ClientManager::getAllClients() const
+std::vector<Client*>&	ClientManager::getAllClients()
 {
   return (_clients);
 }
 
-Client&		ClientManager::getClientByFd(int fd)
+Client*		ClientManager::getClientByFd(int fd)
 {
-  for(std::vector<Client>::iterator it = _clients.begin(); it != _clients.end();++it)
+  for(std::vector<Client*>::iterator it = _clients.begin(); it != _clients.end();++it)
     {
-      if ((*it).getSocket()->getFd() == fd)
+      if ((*it)->getSocket()->getFd() == fd)
 	return (*it);
     }
 throw std::logic_error("No client with this fd found");
 }
 
-int		ClientManager::getClientPosition(Client &client)
+int		ClientManager::getClientPosition(Client *client)
 {
-  std::vector<Client>::iterator	it;
-
-  it = std::find(_clients.begin(), _clients.end(), client);
-  int	pos = std::distance(_clients.begin(), it);
-  return pos;
+  std::vector<Client *>::iterator	it;
+  int	i = 0;
+  for (it = _clients.begin(); it != _clients.end(); ++it)
+    {
+      if (*(*it) == *client)
+	return i;
+      i++;
+    }
+  return 0;
 }

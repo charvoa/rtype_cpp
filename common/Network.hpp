@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Wed Dec  9 15:24:49 2015 Nicolas Charvoz
+// Last update Wed Dec  9 18:17:25 2015 Nicolas Charvoz
 //
 
 #ifndef				__NETWORK_HPP__
@@ -58,6 +58,8 @@ public:
   virtual ISocket		*accept() {
     struct sockaddr_in	cli_addr;
     socklen_t		clilen = sizeof(cli_addr);
+
+    std::cout << "ISOCKET ACCEPT" << std::endl;
 
     if (this->_connectionMode == Network::UDP_MODE)
       throw (std::logic_error("Network :: Accept for UDP Mode not allowed"));
@@ -133,11 +135,11 @@ public:
     return (NULL);
   };
 
-  void				listenSocket(ISocket *socket) {
+  virtual void				listenSocket(ISocket *socket) {
     FD_SET(socket->getFd(), &_fdList);
   };
 
-  void				unlistenSocket(ISocket *socket) {
+  virtual void				unlistenSocket(ISocket *socket) {
     FD_CLR(socket->getFd(), &_fdList);
   };
 };
