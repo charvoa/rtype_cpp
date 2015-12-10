@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 21:09:17 2015 Nicolas Girardot
+// Last update Thu Dec 10 21:18:17 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -76,8 +76,8 @@ void	Client::Start()
   _network->connect("10.16.252.241");
   _UDPnetwork->init(4254, ANetwork::UDP_MODE);
   //_UDPnetwork->connect("0");
-  window->setFramerateLimit(60);
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
+  window->setFramerateLimit(60);
   window->clear();
   std::cout << "LA" << std::endl;
 
