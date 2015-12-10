@@ -1,15 +1,15 @@
 //
-// RoomPanel.hh for RoomPanel in /home/barnea_v/rendu/rtype_cpp/client/common
-//
-// Made by Viveka BARNEAUD
-// Login   <barnea_v@epitech.net>
-//
-// Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 02:14:43 2015 Serge Heitzler
+// RoomPanel.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// 
+// Made by Serge Heitzler
+// Login   <sergeheitzler@epitech.net>
+// 
+// Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
+// Last update Thu Dec 10 02:21:07 2015 Serge Heitzler
 //
 
-#ifndef ROOMPANEL_H
-#define ROOMPANEL_H
+#ifndef ROOMPANEL_HH_
+#define ROOMPANEL_HH_
 
 #include <map>
 #include <string>

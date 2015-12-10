@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Wed Dec  9 15:26:10 2015 Nicolas Charvoz
+// Last update Wed Dec  9 14:15:22 2015 Antoine Garcia
 //
 
 #ifndef _GAME_HH_
@@ -34,9 +34,9 @@ private:
 public:
 
   Game();
-  Game(const Parameters&, std::vector<Client>&, const std::string&);
+  Game(const Parameters&, std::vector<Client *>&, const std::string&);
   ~Game();
-  void addClients(std::vector<Client> &);
+  void addClients(std::vector<Client *> &);
   void setParameters(Parameters &);
   const std::string &getId() const;
   const Client &getClient() const;

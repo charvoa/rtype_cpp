@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Wed Dec  9 06:51:50 2015 Antoine Garcia
+// Last update Wed Dec  9 12:58:03 2015 Antoine Garcia
 //
 
 # include <CRC.hpp>
@@ -39,18 +39,19 @@ std::string	RoomManager::generateId()
   return id;
 }
 
-void	RoomManager::createNewRoom(Client &client)
+void	RoomManager::createNewRoom(Client *client)
 {
   Room	room(generateId(), client);
   _rooms.push_back(room);
   std::string	sendData = "player1;" + room.getId() + ";1";
   ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS, CRC::calcCRC(sendData), 0, sendData);
-  client.getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
+  client->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
   std::cout << "Create Room With Id" << room.getId() << std::endl;
 }
 
 Room&	RoomManager::getRoombyId(const std::string &id)
 {
+  // return _rooms.front();
   for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
