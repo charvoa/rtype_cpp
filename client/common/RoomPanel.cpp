@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 05:05:40 2015 Serge Heitzler
+// Last update Thu Dec 10 06:08:05 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -248,7 +248,7 @@ void		RoomPanel::back()
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_PLAYERLEFT, CRC::calcCRC(_idRoom), 0, _idRoom);
   net->write(sender);
-  (RenderWindow::getInstance())->back();
+  //  (RenderWindow::getInstance())->back();
 }
 
 void	RoomPanel::update()

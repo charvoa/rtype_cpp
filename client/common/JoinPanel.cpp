@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Thu Dec 10 05:45:32 2015 Serge Heitzler
+// Last update Thu Dec 10 05:57:33 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -84,7 +84,6 @@ void	        JoinPanel::setUserInterface()
   _functions.push_back((APanel::funcs)&JoinPanel::join);
   
 
-
   Text		       	*id = new Text();
   
   id->setString("");
@@ -104,8 +103,6 @@ void	        JoinPanel::setUserInterface()
   text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.3));
   text->setColor(Color::WHITE);
   _labels.push_back(*text);
-
-
 }
 
 void    JoinPanel::join()
