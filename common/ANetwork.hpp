@@ -47,6 +47,8 @@ public :
   virtual t_frame	read() = 0;
   virtual int		write(t_frame) = 0;
   virtual ISocket	*select() = 0;
+  virtual void		listenSocket(ISocket *socket) = 0;
+  virtual void		unlistenSocket(ISocket *socket) = 0;
 };
 
 #endif
