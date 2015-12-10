@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 06:08:05 2015 Serge Heitzler
+// Last update Thu Dec 10 06:47:54 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -124,7 +124,10 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   std::cout << "SECOND USERNAME " << vector.at(1) << std::endl;
 
   while (i < (static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size()))
-    static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
+    {
+      static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
+      i++;
+    }
   
   std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
@@ -136,6 +139,7 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
   static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
 
+  Client::getNetwork()->read();
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
@@ -248,7 +252,7 @@ void		RoomPanel::back()
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_PLAYERLEFT, CRC::calcCRC(_idRoom), 0, _idRoom);
   net->write(sender);
-  //  (RenderWindow::getInstance())->back();
+  (RenderWindow::getInstance())->back();
 }
 
 void	RoomPanel::update()
