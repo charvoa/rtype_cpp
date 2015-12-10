@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 01:38:13 2015 Serge Heitzler
+// Last update Thu Dec 10 02:17:04 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -73,40 +73,52 @@ void	        RoomPanel::setUserInterface()
   _spaceShipsTextures.push_back(greenShipTexture);
   _spaceShipsTextures.push_back(yellowShipTexture);
 
-  
   this->createPlayers();
+}
+
+unsigned int	RoomPanel::getNbPlayers()
+{
+  return _nbPlayers;
+}
+
+void	RoomPanel::minusNbPlayers()
+{
+  _nbPlayers--;
+}
+
+void	RoomPanel::addNbPlayers()
+{
+  _nbPlayers++;
 }
 
 void		RoomPanel::newPlayer(std::string &newUsername)
 {
   RenderWindow *window = RenderWindow::getInstance();
-  Player *player = new Player;
-  Text   *username = new Text();
 
-  player->setUsername(newUsername);
-  static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().push_back(player);
+  // GET LE NOMBRE DE PLAYER DANS LA ROOM
+  unsigned int i = static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() - 1;
 
-  unsigned int i = static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size() - 1;
-  
-  username->setString(newUsername);
-  username->setSize(40);
-  username->setStyle(1);
-  //  username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
-  username->setPosition(Vector2(0.2 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
-  switch (i)
-    {
-    case 0:
-      username->setColor(Color::BLUE);
-    case 1:
-      username->setColor(Color::RED);
-    case 2:
-      username->setColor(Color::GREEN);
-    case 3:
-      username->setColor(Color::YELLOW);
-    default:
-      username->setColor(Color::BLACK);
-    }
-  window->getPanels().top()->getLabels().push_back(*username);
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString(newUsername);
+
+  // switch (i)
+  //   {
+  //   case 0:
+  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::BLUE);
+  //     break;
+  //   case 1:
+  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::RED);
+  //     break;
+  //   case 2:
+  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::GREEN);
+  //     break;
+  //   case 3:
+  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::YELLOW);
+  //     break;
+  //   default:
+  //     static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::BLACK);
+  //     break;
+  //   }
+  static_cast<RoomPanel*>(window->getPanels().top())->addNbPlayers();
 }
 
 std::vector<Player*>	&RoomPanel::getPlayers()
@@ -132,6 +144,8 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   pos = vector.at(1).find("Player");
   unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
+
+  static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
@@ -142,17 +156,18 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 
   while (i < vector.size() - 2)
     {
+      std::cout << vector.at(i) << std::endl;
       getPlayers().at(i)->setUsername(vector.at(i));
       _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
       getLabels().at(i + 2).setString(vector.at(i));
       //      getLabels().at(i + 2).setColor(Color::WHITE);
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
+      _nbPlayers++;
       i++;
     }
   i--;
   _players.at(i)->setCurrentClient(true);
 
-  std::cout << "i " << i << std::endl;
   switch (i)
     {
     case 0:
@@ -204,7 +219,7 @@ void		RoomPanel::createPlayers()
       username->setStyle(1);
       username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
       username->setPosition(Vector2(0.2 * (i + 1) * window->getSize()._x, 0.8 * window->getSize()._y));
-      username->setColor(Color::CYAN);
+      username->setColor(Color::WHITE);
       
 
       window->getPanels().top()->getBackgrounds().push_back(*blackShip);
@@ -222,6 +237,7 @@ void		RoomPanel::createPlayers()
     roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.95 * window->getSize()._y));
     roomID->setColor(Color::WHITE);
     _labels.push_back(*roomID);
+    _nbPlayers = 0;
 }
 
 

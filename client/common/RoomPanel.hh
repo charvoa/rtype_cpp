@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 00:06:59 2015 Serge Heitzler
+// Last update Thu Dec 10 02:14:43 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -26,7 +26,7 @@ public:
   ~RoomPanel();
 
   void			difficulty(Settings::Difficulty);
-  static void			playerLeft(std::vector<std::string> &vector);
+  static void  		playerLeft(std::vector<std::string> &vector);
   static void  		newPlayer(std::string &newUsername);
   void			launchGame();
   void			back();
@@ -35,12 +35,17 @@ public:
   void			updatePlayers(std::vector<std::string> &vector, int from);
   void			createPlayers();
   std::vector<Player*>	&getPlayers();
+  unsigned int		getNbPlayers();
+  void			minusNbPlayers();
+  void			addNbPlayers();
+
   
 private:
 
   std::vector<Player*> _players;
   std::string		_idRoom;
   std::vector<Texture*>	_spaceShipsTextures;
+  unsigned int		_nbPlayers;
 };
 
 #endif /* !ROOMPANEL_HH_ */
