@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 06:47:54 2015 Serge Heitzler
+// Last update Thu Dec 10 07:06:26 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -139,7 +139,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
   static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
 
-  Client::getNetwork()->read();
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
