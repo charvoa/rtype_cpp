@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 08:55:09 2015 Serge Heitzler
+// Last update Thu Dec 10 10:53:17 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -93,21 +93,17 @@ void		StartPanel::setUserInterface()
 void        StartPanel::createRoom()
 {
   ANetwork *net = Client::getNetwork();
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_CREATE_ROOM, CRC::calcCRC(""), 0, "");
   net->write(sender);
 }
 
 void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 {
-  std::cout << "VAGINITE" << std::endl;
   RenderWindow *window = RenderWindow::getInstance();
 
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
-  std::cout << "VAGINITE" << std::endl;
   window->getPanels().top()->setUserInterface();
-  std::cout << "VAGINITE" << std::endl;
   static_cast<RoomPanel*>(window->getPanels().top())->updatePlayers(vector, from);
-  std::cout << "VAGINITE" << std::endl;
 }
 
 
