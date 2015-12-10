@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Wed Dec  9 14:14:55 2015 Antoine Garcia
+// Last update Thu Dec 10 19:53:47 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -16,11 +16,14 @@ Game::Game()
 }
 
 Game::Game(const Parameters &params_, std::vector<Client *> &client_,
-	   const std::string &id_) : _params(params_), _id(id_)
+	   const std::string &id_, int port_) : _params(params_), _id(id_)
 {
   //  srand(time(NULL));
 
 
+  this->_network = new Network();
+  this->_network->init(port_, ANetwork::UDP_MODE);
+  this->_network->bind();
   this->addClients(client_);
 }
 
@@ -40,6 +43,29 @@ void Game::setParameters(Parameters &p)
   _params = p;
 }
 
+void *readThread(void *sData)
+{
+  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
+
+  Network *n = s->network;
+  Game *me = s->game;
+
+  while (1)
+    {
+      void *data;
+      Client *client = new Client(n->select());
+      if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
+	{
+	  n->unlistenSocket(client->getSocket());
+	  continue;
+	}
+      std::cout << std::string(((ANetwork::t_frame*)data)->data) << std::endl;
+      client->getSocket()->
+	write((void*)CreateRequest::create(1, 2, 3, "Thank You", true),
+	      sizeof(ANetwork::t_frame));
+    }
+}
+
 bool Game::run()
 {
   int nbEnemy = 5;
@@ -49,6 +75,7 @@ bool Game::run()
 
   while (true)
     {
+
       nbEnemy = 5 * stage * nbEnemy;
     }
 

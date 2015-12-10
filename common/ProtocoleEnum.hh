@@ -5,14 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Thu Dec 10 11:41:34 2015 Serge Heitzler
+// Last update Thu Dec 10 20:58:16 2015 Nicolas Charvoz
 //
 
 #ifndef PROTOCOLEENUM_HH_
 #define PROTOCOLEENUM_HH_
 
 typedef enum E_Command
-  {    
+  {
     C_INIT_UDP = 1,
     C_HANDSHAKE_UDP = 2,
     C_HANDSHAKE = 3,
@@ -40,18 +40,18 @@ typedef enum RequestFromServer
     S_JOIN_ERROR = 106,
     S_GAME_LAUNCHED = 107,
     S_GAME_NOT_LAUNCHED = 108,
-    S_NEW_PLAYER_CONNECTED = 110,
-    S_PLAYER_LEFT = 111,
-    S_CHANGE_HOST = 112,
-    S_DIE = 113,
-    S_PLAYER_DEAD = 114,
-    S_LIFE = 115,
-    S_SCORE = 116,
-    S_NEW_WAVE = 117,
-    S_END_GAME = 118,
-    S_LOAD_SPRITES = 119,
-    S_CHECK_MD5 = 120,
-    S_FILE_TOTAL_SIZE = 121
+    S_NEW_PLAYER_CONNECTED = 109,
+    S_PLAYER_LEFT = 110,
+    S_CHANGE_HOST = 111,
+    S_DIE = 112,
+    S_PLAYER_DEAD = 113,
+    S_LIFE = 114,
+    S_SCORE = 115,
+    S_NEW_WAVE = 116,
+    S_END_GAME = 117,
+    S_LOAD_SPRITES = 118,
+    S_CHECK_MD5 = 119,
+    S_FILE_TOTAL_SIZE = 120
   } RequestFromServer;
 
 #endif /* PROTOCOLEENUM_HH_ */

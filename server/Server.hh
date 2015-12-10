@@ -5,7 +5,8 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:58:05 2015 Nicolas Girardot
+
+// Last update Thu Dec 10 20:55:23 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -34,6 +35,7 @@ public:
     Server *server;
     Client *client;
     ANetwork::t_frame frame;
+    int port;
   };
 
 public:
@@ -55,6 +57,7 @@ private:
   ANetwork *_network;
   //ClientManager _clientManager;
   CommandManager _commandManager;
+  int _port;
 
 };
 

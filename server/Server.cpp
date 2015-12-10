@@ -17,6 +17,7 @@
 
 Server::Server()
 {
+  _port = 40000;
   this->_network = new Network();
 }
 
@@ -60,8 +61,10 @@ void sendMessage(std::vector<Client *> &c ,unsigned char type)
    for (std::vector<Client *>::iterator it = c.begin();
 	 it != c.end() ; ++it)
       {
-	ANetwork::t_frame frame = CreateRequest::create(type, CRC::calcCRC(""), 0, "");
-	(*it)->getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+	ANetwork::t_frame frame = CreateRequest::create(type,
+							CRC::calcCRC(""), 0, "");
+	(*it)->getSocket()->write(reinterpret_cast<void*>(&frame),
+				  sizeof(ANetwork::t_frame));
       }
 }
 
@@ -74,9 +77,10 @@ void *newGameThread(void *data)
   Server *me = s->server;
 
   Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
-  std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
+  std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data)
+    .getAllPlayers();
 
-  if ((me->_gameManager.createGame(p, c, s->frame.data)))
+  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port)))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
       me->_gameManager.getGameById(s->frame.data).run();
@@ -96,6 +100,28 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
   s->server = this;
   s->client = reinterpret_cast<Client*>(data);
   s->frame = frame;
+  s->port = _port++;
+
+  // TELL CLIENT WHO HE IS FOR UDP
+  std::stringstream ss;
+  int i = 0;
+
+   for (std::vector<Client *>::iterator it = c.begin();
+	 it != c.end() ; ++it)
+      {
+	ss << _port;
+	ss << ";";
+	ss << i;
+	ANetwork::t_frame frame = CreateRequest::create((unsigned char)S_INIT_UDP,
+							CRC::calcCRC(ss.str().c_str()),
+							0,
+							ss.str().c_str());
+	(*it)->getSocket()->write(reinterpret_cast<void*>(&frame),
+				  sizeof(ANetwork::t_frame));
+	i++;
+	ss.str("");
+	ss.clear();
+      }
 
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
