@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Thu Dec 10 17:06:33 2015 Nicolas Girardot
+// Last update Thu Dec 10 19:53:56 2015 Nicolas Girardot
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -14,11 +14,11 @@
 typedef enum E_Command
   {
     C_HANDSHAKE = 1,
-    C_CREATEROOM = 2,
+    C_CREATE_ROOM = 2,
     C_CHANGE_SETTINGS = 3,
-    C_JOINROOM = 4,
-    C_PLAYERLEFT = 5,
-    C_LAUNCHGAME = 6,
+    C_JOIN_ROOM = 4,
+    C_PLAYER_LEFT = 5,
+    C_LAUNCH_GAME = 6,
     C_MOVE = 7,
     C_SHOOT = 8,
     C_LOAD_SPRITE_SUCCESS = 9,

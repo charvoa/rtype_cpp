@@ -28,10 +28,11 @@ void Server::init(int port)
   this->_network->init(port, ANetwork::TCP_MODE);
   this->_network->bind();
   this->_network->listen(24);
-  this->_commandManager.addFunction(C_CREATEROOM, &Server::createRoom);
-  this->_commandManager.addFunction(C_JOINROOM, &Server::joinRoom);
-  this->_commandManager.addFunction(C_LAUNCHGAME, &Server::createGame);
-  this->_commandManager.addFunction(C_PLAYERLEFT, &Server::playerLeftRoom);
+  this->_commandManager.addFunction(C_HANDSHAKE, &Server::handshake);
+  this->_commandManager.addFunction(C_CREATE_ROOM, &Server::createRoom);
+  this->_commandManager.addFunction(C_JOIN_ROOM, &Server::joinRoom);
+  this->_commandManager.addFunction(C_LAUNCH_GAME, &Server::createGame);
+  this->_commandManager.addFunction(C_PLAYER_LEFT, &Server::playerLeftRoom);
 }
 
 void Server::run()
@@ -123,6 +124,13 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
    _roomManager.getRoombyId(frame.data).addPlayer(client);
 
    return true;
+}
+
+bool	Server::handshake(ANetwork::t_frame frame, void *data)
+{
+  (void) frame;
+  (void) data;
+  return true;
 }
 
 bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
