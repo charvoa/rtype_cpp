@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 06:17:51 2015 Serge Heitzler
+// Last update Thu Dec 10 00:06:59 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_H
@@ -33,12 +33,14 @@ public:
   void			update();
   void			setUserInterface();
   void			updatePlayers(std::vector<std::string> &vector, int from);
+  void			createPlayers();
   std::vector<Player*>	&getPlayers();
   
 private:
 
   std::vector<Player*> _players;
   std::string		_idRoom;
+  std::vector<Texture*>	_spaceShipsTextures;
 };
 
 #endif /* !ROOMPANEL_HH_ */

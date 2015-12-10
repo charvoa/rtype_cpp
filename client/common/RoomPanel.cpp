@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 08:59:36 2015 Serge Heitzler
+// Last update Thu Dec 10 01:38:13 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -28,13 +28,10 @@ RoomPanel::~RoomPanel(){}
 void	        RoomPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
+  Texture *backgroundSpaceTexture = new Texture;
+  Sprite *backgroundSpace = new Sprite;
 
   getInputManager().setInputType(InputType::MENU_INPUT);
-
-
-  Texture *backgroundSpaceTexture = new Texture;
-
-  Sprite *backgroundSpace = new Sprite;
 
   backgroundSpaceTexture->loadFromFile("../common/misc/room_background.png");
 
@@ -59,6 +56,25 @@ void	        RoomPanel::setUserInterface()
   _functions.push_back((APanel::funcs)&RoomPanel::back);
   _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
 
+  Texture *blackShipTexture = new Texture;
+  blackShipTexture->loadFromFile("../common/misc/player_black.png");
+  Texture *blueShipTexture = new Texture;
+  blueShipTexture->loadFromFile("../common/misc/player_blue.png");
+  Texture *redShipTexture = new Texture;
+  redShipTexture->loadFromFile("../common/misc/player_red.png");
+  Texture *greenShipTexture = new Texture;
+  greenShipTexture->loadFromFile("../common/misc/player_green.png");
+  Texture *yellowShipTexture = new Texture;
+  yellowShipTexture->loadFromFile("../common/misc/player_yellow.png");
+
+  _spaceShipsTextures.push_back(blackShipTexture);
+  _spaceShipsTextures.push_back(blueShipTexture);
+  _spaceShipsTextures.push_back(redShipTexture);
+  _spaceShipsTextures.push_back(greenShipTexture);
+  _spaceShipsTextures.push_back(yellowShipTexture);
+
+  
+  this->createPlayers();
 }
 
 void		RoomPanel::newPlayer(std::string &newUsername)
@@ -105,6 +121,7 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
   std::cout << "FIRST USERNAME" << vector.at(0) << std::endl;
   std::cout << "SECOND USERNAME " << vector.at(1) << std::endl;
+
   while (i < (static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size()))
     static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
   
@@ -119,56 +136,92 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 {
+  (void)from;
   RenderWindow *window = RenderWindow::getInstance();
   unsigned int i = 0;
 
-  std::cout << "VAGINITE" << std::endl;
   while (i < vector.size() - 2)
     {
-      Player *player = new Player;
-      Text   *username = new Text();
+      getPlayers().at(i)->setUsername(vector.at(i));
+      _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
+      getLabels().at(i + 2).setString(vector.at(i));
+      //      getLabels().at(i + 2).setColor(Color::WHITE);
+      getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
+      i++;
+    }
+  i--;
+  _players.at(i)->setCurrentClient(true);
 
-      player->setUsername(vector.at(i));
+  std::cout << "i " << i << std::endl;
+  switch (i)
+    {
+    case 0:
+      getLabels().at(i + 2).setColor(Color::BLUE);
+      break;
+    case 1:
+      getLabels().at(i + 2).setColor(Color::RED);
+      break;
+    case 2:
+      getLabels().at(i + 2).setColor(Color::GREEN);
+      break;
+    case 3:
+      getLabels().at(i + 2).setColor(Color::YELLOW);
+      break;
+    default:
+      getLabels().at(i + 2).setColor(Color::WHITE);
+      break;
+    }
+
+  _idRoom = vector.at(vector.size() - 2);
+  _labels.at(6).setString(_idRoom);
+  _labels.at(6).setOrigin(_labels.at(6).getText().getGlobalBounds().width / 2, _labels.at(6).getText().getGlobalBounds().height / 2);
+  _labels.at(6).setPosition(Vector2(0.5 * window->getSize()._x, 0.95 * window->getSize()._y));
+}
+
+void		RoomPanel::createPlayers()
+{
+  RenderWindow *window = RenderWindow::getInstance();
+  unsigned int i = 0;
+  
+  std::string empty = "";
+  
+  while (i < 4)
+    {      
+      Text   *username = new Text();
+      Sprite *blackShip = new Sprite;
+      Player *player = new Player;
+      
+      player->setUsername(empty);
+      player->setCurrentClient(false);
+
+      blackShip->setTexture(*_spaceShipsTextures.at(0));
+      blackShip->setPosition(0.2 * (i + 1) * window->getSize()._x, 0.6 * window->getSize()._y);
+      blackShip->getSprite().setOrigin(_spaceShipsTextures.at(0)->getSize()._x / 2, _spaceShipsTextures.at(0)->getSize()._y / 2);
+      blackShip->scale(0.4);
+
       username->setString(player->getUsername());
       username->setSize(40);
       username->setStyle(1);
-      //      username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
-      username->setPosition(Vector2(0.2 * window->getSize()._x, (0.2 + (0.05 * i)) * window->getSize()._y));
+      username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
+      username->setPosition(Vector2(0.2 * (i + 1) * window->getSize()._x, 0.8 * window->getSize()._y));
+      username->setColor(Color::CYAN);
+      
 
-      switch (i)
-	{
-	case 0:
-	  username->setColor(Color::BLUE);
-	case 1:
-	  username->setColor(Color::RED);
-	case 2:
-	  username->setColor(Color::GREEN);
-	case 3:
-	  username->setColor(Color::YELLOW);
-	default:
-	  username->setColor(Color::BLACK);
-	}
-
+      window->getPanels().top()->getBackgrounds().push_back(*blackShip);
       window->getPanels().top()->getLabels().push_back(*username);
       _players.push_back(player);
       i++;
     }
-  std::cout << "VAGINITE" << std::endl;
-  if (from == 0)
-    _players.at(0)->setCurrentClient(true);
-  else
-    _players.at(vector.size() - 3)->setCurrentClient(true);    
 
     Text		       	*roomID = new Text();
  
-    roomID->setString(vector.at(vector.size() - 2));
+    roomID->setString(_idRoom);
     roomID->setSize(60);
     roomID->setStyle(1);
     roomID->setOrigin(roomID->getText().getGlobalBounds().width / 2, roomID->getText().getGlobalBounds().height / 2);
     roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.95 * window->getSize()._y));
-    roomID->setColor(Color::BLACK);
+    roomID->setColor(Color::WHITE);
     _labels.push_back(*roomID);
-    _idRoom = vector.at(vector.size() - 2);
 }
 
 
