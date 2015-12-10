@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 06:28:33 2015 Serge Heitzler
+// Last update Thu Dec 10 09:40:22 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -45,6 +45,7 @@ void	*readdisp(void *s)
 	  std::cout << e.what() << std::endl;
 	}
     }
+  
   return s;
 }
 
@@ -95,8 +96,9 @@ void	Client::Start()
       while (window->pollEvent(event))
       	{
       	  window->getPanels().top()->getInputManager().methodChecker(event);
-      	}
+      	}   
     }
+  t->exit();
   _network->close();
 }
 
