@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Wed Dec  2 04:54:25 2015 Antoine Garcia
-// Last update Thu Dec 10 03:19:19 2015 Antoine Garcia
+// Last update Thu Dec 10 03:57:06 2015 Antoine Garcia
 //
 
 # include <iostream>
@@ -64,7 +64,7 @@ int		ClientManager::getClientPosition(Client *client)
   int	i = 0;
   for (it = _clients.begin(); it != _clients.end(); ++it)
     {
-      if (*(*it) == client)
+      if (*(*it) == *client)
 	return i;
       i++;
     }
