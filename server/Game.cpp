@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Thu Dec 10 22:49:45 2015 Nicolas Charvoz
+// Last update Fri Dec 11 00:08:45 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -20,7 +20,7 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
 {
   //  srand(time(NULL));
 
-
+  this->_clients = client_;
   this->_network = new Network();
   this->_network->init(port_, ANetwork::UDP_MODE);
   this->_network->bind();
