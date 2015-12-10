@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 10:49:18 2015 Serge Heitzler
+// Last update Thu Dec 10 11:06:44 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -68,12 +68,12 @@ void	Client::Start()
   _network = new Network();
   _UDPnetwork = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  //_network->connect("0");
   
    // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
    // _network->write(sender);
   std::cout << "LA" << std::endl;
-  //_network->connect("10.16.253.14");
+  _network->connect("10.16.252.241");
   _UDPnetwork->init(4254, ANetwork::UDP_MODE);
   //_UDPnetwork->connect("0");
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
