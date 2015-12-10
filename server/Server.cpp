@@ -42,8 +42,9 @@ void Server::run()
   while (1)
     {
       client = new Client(this->_network->select());
+      //std::cout << (char*) client->getSocket()->read(4096) << std::endl;
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-      client, this);
+					   client, this);
     }
 }
 

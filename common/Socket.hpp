@@ -18,10 +18,11 @@
 # include	<stdexcept>
 # include	<string.h>
 # include	<errno.h>
-#include	<netdb.h>
+# include	<netdb.h>
 # include	<ISocket.hpp>
 # include	<arpa/inet.h>
 # include	<iostream>
+# include	<stdlib.h>
 
 class		Socket : public ISocket
 {
