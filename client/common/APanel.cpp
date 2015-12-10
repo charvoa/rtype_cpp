@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 08:44:39 2015 Serge Heitzler
+// Last update Wed Dec  9 09:25:40 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -13,7 +13,10 @@
 #include <APanel.hh>
 #include <RenderWindow.hh>
 
-APanel::APanel(){}
+APanel::APanel()
+{
+  std::cout << "CONSTRUCTOR APANEL" << std::endl;
+}
 
 APanel::~APanel()
 {
