@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Thu Dec 10 04:56:37 2015 Louis Audibert
+// Last update Thu Dec 10 18:42:46 2015 Nicolas Charvoz
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -44,9 +44,10 @@ public:
   static ANetwork::t_frame *create(unsigned char id_, int crc_, int size_,
 				   const std::string &data_, bool ret)
   {
-    ANetwork::t_frame *frame = (ANetwork::t_frame*) malloc(sizeof(ANetwork::t_frame));
-
     (void)ret;
+    ANetwork::t_frame *frame = (ANetwork::t_frame*)
+      malloc(sizeof(ANetwork::t_frame));
+
     frame->keyPintade = KEY_PINTADE;
     frame->idRequest = id_;
     frame->crc = crc_;
