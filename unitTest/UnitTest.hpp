@@ -63,7 +63,8 @@ private:
   void		initTests() {
     /* Describe TEST */
     Test	*hello_world_t = new Test("Hello World", "Send simple Hello World into data", &_testId);
-    hello_world_t->addCommand(CMD_HELLO, "Send coucou")
+    hello_world_t
+      ->addCommand(CMD_HELLO, "Send coucou")
       ->addCommand(CMD_HELLO, "Send coucou");
     this->_testsList.push_back(hello_world_t);
     this->_testsList.push_back(hello_world_t);

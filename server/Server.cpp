@@ -47,10 +47,10 @@ void Server::run()
 	this->_network->unlistenSocket(client->getSocket());
 	continue;
       }
-      std::cout << std::string(((ANetwork::t_frame*) data)->data) << std::endl;
-      client->getSocket()->write((void*) CreateRequest::create(1, 2, 3, "Thank you !", true), sizeof(ANetwork::t_frame));
-      //this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>((client->getSocket()->read(sizeof(ANetwork::t_frame))))),
-      //client, this);
+      //std::cout << std::string(((ANetwork::t_frame*) data)->data) << std::endl;
+      //client->getSocket()->write((void*) CreateRequest::create(1, 2, 3, "Thank you !", true), sizeof(ANetwork::t_frame));
+      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
+					   client, this);
     }
 }
 
