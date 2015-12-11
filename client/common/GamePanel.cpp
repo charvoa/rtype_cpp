@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Fri Dec 11 17:33:27 2015 Nicolas Girardot
+// Last update Fri Dec 11 22:38:27 2015 Nicolas Girardot
 //
 
 #include <GamePanel.hh>
@@ -15,6 +15,7 @@ GamePanel::GamePanel() : APanel()
 {
   for (int i = 0; i != 3; i++)
     _players.push_back(new PlayerIG());
+  //init all sprites with the textures;
 }
 
 GamePanel::~GamePanel() {}
@@ -22,6 +23,20 @@ GamePanel::~GamePanel() {}
 void		GamePanel::render()
 {
 
+}
+
+void		GamePanel::display(std::vector<std::string> &vector)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+  static_cast<GamePanel*>(window->getPanels().top())->getSprites().at(std::atoi(vector.at(0).c_str()))->setPosition(std::atoi(vector.at(1).c_str()), std::atoi(vector.at(2).c_str()));
+  static_cast<GamePanel*>(window->getPanels().top())->getSprites().at(std::atoi(vector.at(0).c_str()))->scale(std::atoi(vector.at(3).c_str()));
+  window->draw(static_cast<GamePanel*>(window->getPanels().top())->getSprites().at(std::atoi(vector.at(0).c_str()))->getSprite());
+}
+
+std::vector<Sprite *> &GamePanel::getSprites()
+{
+  return _sprites;
 }
 
 Text		*GamePanel::getScore()

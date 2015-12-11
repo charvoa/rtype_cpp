@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Fri Dec 11 17:26:18 2015 Nicolas Girardot
+// Last update Fri Dec 11 21:46:08 2015 Nicolas Girardot
 //
 
 
@@ -101,7 +101,9 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Display" << std::endl;
+  GamePanel::display(x);
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
