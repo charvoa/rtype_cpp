@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Thu Dec 10 13:03:29 2015 Serge Heitzler
+// Last update Fri Dec 11 12:02:27 2015 Nicolas Girardot
 //
 
 
@@ -15,6 +15,9 @@
 #include <ProtocoleClient.hh>
 #include <StartPanel.hh>
 #include <RoomPanel.hh>
+#include <Client.hh>
+#include <CRC.hpp>
+#include <CreateRequest.hpp>
 
 std::string	g_a = "JVYO";
 
@@ -50,6 +53,7 @@ ProtocoleClient::~ProtocoleClient()
 
 void		ProtocoleClient::initProtocoleClient()
 {
+  _functions.insert(std::make_pair(S_INIT_UDP, &ProtocoleClient::initUDP));
   _functions.insert(std::make_pair(S_HANDSHAKE, &ProtocoleClient::handshake));
   _functions.insert(std::make_pair(S_DISPLAY, &ProtocoleClient::display));
   _functions.insert(std::make_pair(S_CREATE_ROOM, &ProtocoleClient::createRoom));
@@ -70,7 +74,30 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
 }
 
-void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
+void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
+{
+  std::cout << "Creating UDP" << std::endl;
+  std::vector<std::string> x = split(frame.data, ';');
+  ANetwork *net = Client::getUDPNetwork();
+  if (std::atoi(x.at(1).c_str()) == 0)
+    {
+      std::cout << x.at(0) << " :::::::: " << x.at(1) << std::endl;
+      net->init(std::atoi(x.at(0).c_str()), ANetwork::UDP_MODE);
+      net->connect("10.16.253.14");
+    }
+  else
+    {
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), 0, x.at(1));
+      (void) sender;
+      while (true)
+	{
+	  std::cout << "Hello" << std::endl;
+	  net->write((void *)"Hello", strlen("Hello"));
+	}
+    }
+}
+
+  void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
 {
   (void) frame;
 }

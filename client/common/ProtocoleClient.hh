@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Thu Dec 10 17:06:30 2015 Nicolas Girardot
+// Last update Thu Dec 10 21:53:20 2015 Nicolas Girardot
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -23,6 +23,7 @@ public:
   ~ProtocoleClient();
 
   void			initProtocoleClient();
+  void			initUDP(ANetwork::t_frame &frame);
   void			handshake(ANetwork::t_frame &frame);
   void			display(ANetwork::t_frame &frame);
   void			createRoom(ANetwork::t_frame &frame);
