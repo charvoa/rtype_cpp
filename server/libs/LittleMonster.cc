@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Tue Dec  8 07:24:24 2015 Louis Audibert
+// Last update Fri Dec 11 06:00:13 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -39,7 +39,7 @@ void LittleMonster::update()
   dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(E_POSITION))->update(_x, _y);
 }
 
-extern "C" LittleMonster* create_object(int id)
+extern "C" AEntity* create_object(int id)
 {
   return new LittleMonster(id);
 }
