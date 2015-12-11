@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 11:02:59 2015 Serge Heitzler
+// Last update Thu Dec 10 14:44:20 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -45,12 +45,10 @@ void	        RoomPanel::setUserInterface()
 
 
 
-  std::string fileDefault = "../common/misc/MicroDesignDefault.png";
-  std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
   std::string name = "BACK";
-  ButtonFactory::create(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.95), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.95), name);
   name = "LAUNCH";
-  ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), name);
 
   
   _functions.push_back((APanel::funcs)&RoomPanel::back);
@@ -133,18 +131,31 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
 
+  std::cout << "id to remove " << idToRemove << std::endl;
 
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToRemove + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
-  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 1).setString("");
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 2).setString("");
 
   
   pos = vector.at(1).find("player");
   unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
 
+  std::cout << "id you are " << idToChange << std::endl;
+
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
   
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToChange + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(idToChange + 1));
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setString(vector.at(1));
 
+
+  i = static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() - 1;
+  while (i < 4)
+    {
+      static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString("");
+      i++;
+    }
+  
   switch (idToChange)
     {
     case 0:

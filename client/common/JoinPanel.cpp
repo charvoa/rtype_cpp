@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Thu Dec 10 10:53:52 2015 Serge Heitzler
+// Last update Thu Dec 10 14:59:30 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -29,35 +29,23 @@ void	        JoinPanel::setUserInterface()
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::JOIN_INPUT);
 
-  Texture *backgroundSpaceTexture = new Texture;
-  Texture *earthTexture = new Texture;
-  Texture *cockpitTexture = new Texture;
-  Texture *logoTexture = new Texture;
-  Texture *blackTexture = new Texture;
-
   Sprite *backgroundSpace = new Sprite;
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
   Sprite *logo = new Sprite;
   Sprite *black = new Sprite;
 
-  backgroundSpaceTexture->loadFromFile("../common/misc/background.png");
-  earthTexture->loadFromFile("../common/misc/planet_earth_background.png");
-  cockpitTexture->loadFromFile("../common/misc/cockpit.png");
-  logoTexture->loadFromFile("../common/misc/rtype_logo.png");
-  blackTexture->loadFromFile("../common/misc/black_background.png");
+  earth->setOrigin((RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 2);
+  logo->setOrigin((RenderWindow::getInstance())->_ressources->_logo->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_logo->getSize()._y / 2);
 
-  earth->setOrigin(earthTexture->getSize()._x / 2, earthTexture->getSize()._y / 2);
-  logo->setOrigin(logoTexture->getSize()._x / 2, logoTexture->getSize()._y / 2);
-
-  backgroundSpace->setTexture(*backgroundSpaceTexture);
-  earth->setTexture(*earthTexture);
-  cockpit->setTexture(*cockpitTexture);
-  logo->setTexture(*logoTexture);
-  black->setTexture(*blackTexture);
+  backgroundSpace->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundStartPanel));
+  earth->setTexture(*((RenderWindow::getInstance())->_ressources->_earth));
+  cockpit->setTexture(*((RenderWindow::getInstance())->_ressources->_cockpit));
+  logo->setTexture(*((RenderWindow::getInstance())->_ressources->_logo));
+  black->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundBlack));
 
   backgroundSpace->setPosition(0, 0);
-  earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
+  earth->setPosition(window->getSize()._x + (RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 6, window->getSize()._y + (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 6);
   cockpit->setPosition(0, 0);
   black->setPosition(0, 0);
   logo->setPosition(window->getSize()._x / 2, window->getSize()._y / 6);
@@ -73,12 +61,10 @@ void	        JoinPanel::setUserInterface()
 
   // Button
 
-  std::string fileDefault = "../common/misc/MicroDesignDefault.png";
-  std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
   std::string name = "BACK";
-  ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), name);
   name = "ACCESS";
-  ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), name);
 
   _functions.push_back((APanel::funcs)&JoinPanel::back);
   _functions.push_back((APanel::funcs)&JoinPanel::join);
