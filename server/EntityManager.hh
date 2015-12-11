@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Thu Dec  3 05:15:19 2015 Louis Audibert
+// Last update Tue Dec  8 22:18:40 2015 Nicolas Charvoz
 //
 
 #ifndef _ENTITYMANAGER_HH_
@@ -30,13 +30,13 @@ public:
   EntityManager();
   ~EntityManager();
 
-  bool		createEntity(E_ENTITYTYPE type);
-  bool		createEntity(E_ENTITYTYPE type, const Client &);
-  bool		createEntitiesFromFolder(const std::string &filename, E_ENTITYTYPE type);
+  bool		createEntity(E_EntityType type);
+  bool		createEntity(E_EntityType type, const Client &);
+  bool		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
   void		removeEntity(AEntity &entity);
   void		removeEntityById(int id);
   AEntity	*getEntityById(int id);
-  std::vector<AEntity*> getEntitiesByType(E_ENTITYTYPE type);
+  std::vector<AEntity*> getEntitiesByType(E_EntityType type);
   void		update();
 };
 

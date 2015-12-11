@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 17:46:33 2015 Nicolas Girardot
-// Last update Wed Dec  2 15:12:15 2015 Nicolas Charvoz
+// Last update Mon Dec  7 15:08:29 2015 Nicolas Charvoz
 //
 
 #ifndef _THREADWIN_HPP_
@@ -22,8 +22,8 @@ public:
   unsigned int	getId() {
     return _id;
   };
-  void		attach(void(*function)(), void *data) {
-    _function = (void*)function;
+  void		attach(void *(*function)(void*), void *data) {
+    _function = function;
     _parameters = data;
   };
   int		join() {

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Dec  2 17:01:11 2015 Nicolas Charvoz
-// Last update Wed Dec  2 17:01:13 2015 Nicolas Charvoz
+// Last update Thu Dec 10 09:39:07 2015 Serge Heitzler
 //
 
 #ifndef _THREADUNIX_HPP_
@@ -39,6 +39,10 @@ public:
 
   int		join() {
     return (pthread_join(_thread, NULL));
+  };
+
+  void	        cancel() {
+    pthread_cancel(_thread);
   };
 
   void		exit() {

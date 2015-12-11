@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Sat Dec  5 17:13:44 2015 Nicolas Charvoz
+// Last update Thu Dec 10 18:42:46 2015 Nicolas Charvoz
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -13,9 +13,10 @@
 
 # define KEY_PINTADE 2965
 
+# include <cstring>
 # include <string>
 # include <iostream>
-# include <E_Command.hh>
+# include <ProtocoleEnum.hh>
 # include <ANetwork.hpp>
 
 class CreateRequest {
@@ -34,7 +35,25 @@ public:
     frame.idRequest = id_;
     frame.crc = crc_;
     frame.sizeData = size_;
-    strcpy(frame.data, data_.c_str());
+    memset(frame.data, 0, 49);
+    memcpy(frame.data, data_.c_str(), data_.size());
+
+    return frame;
+  };
+
+  static ANetwork::t_frame *create(unsigned char id_, int crc_, int size_,
+				   const std::string &data_, bool ret)
+  {
+    (void)ret;
+    ANetwork::t_frame *frame = (ANetwork::t_frame*)
+      malloc(sizeof(ANetwork::t_frame));
+
+    frame->keyPintade = KEY_PINTADE;
+    frame->idRequest = id_;
+    frame->crc = crc_;
+    frame->sizeData = size_;
+    memset(frame->data, 0, 49);
+    memcpy(frame->data, data_.c_str(), data_.size());
 
     return frame;
   };

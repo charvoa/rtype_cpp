@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Thu Dec  3 05:29:06 2015 Louis Audibert
+// Last update Wed Dec  9 11:52:40 2015 Antoine Garcia
 //
 
 #ifndef _ROOMMANAGER_HH_
@@ -23,7 +23,7 @@ class	RoomManager
 public:
   RoomManager();
   ~RoomManager();
-  void	createNewRoom(Client&);
+  void	createNewRoom(Client*);
   Room&	getRoombyId(const std::string &id);
   bool	roomExists(const std::string &id);
   void	deleteRoom(const std::string &id);

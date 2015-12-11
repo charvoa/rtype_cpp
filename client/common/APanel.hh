@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Sat Dec  5 05:46:57 2015 Serge Heitzler
+// Last update Wed Dec  9 13:42:15 2015 Nicolas Girardot
 //
 
 #ifndef APANEL_HH
@@ -13,10 +13,11 @@
 
 #include <vector>
 #include <string>
-#include "AMenuElement.hh"
-#include "Texture.hh"
-#include "Sprite.hh"
-#include "InputManager.hh"
+#include <AMenuElement.hh>
+#include <Texture.hh>
+#include <Text.hh>
+#include <Sprite.hh>
+#include <InputManager.hh>
 
 class		APanel
 {
@@ -25,19 +26,35 @@ public:
   APanel();
   ~APanel();
 
+  virtual void		updateOnMove(std::pair<unsigned int, unsigned int> pair);
+  virtual bool		updateOnPress(std::pair<unsigned int, unsigned int> pair);
   virtual void		update();
   virtual void		render();
   virtual void		hide();
-  std::vector<AMenuElement*>		&getElements();
-  std::vector<Sprite>			&getSprites();
+  virtual void	        setUserInterface();
+
+  std::vector<Sprite>			&getBackgrounds();
+  std::vector<AMenuElement*>   		&getUserInterface();
+  std::vector<Text>	  		&getLabels();
+  std::vector<Sprite>			&getInGame();
   InputManager				&getInputManager();
 
-  std::vector<Sprite>	      		_sprites;
-  std::vector<Texture>			_textures;
-private:
+  void					drawBackgrounds();
+  void					drawUserInterface();
+  void					drawLabels();
+  void					drawInGame();
 
-  std::vector<AMenuElement*>		_elements;
+protected:
+
+  std::vector<Sprite>	      		_backgrounds;
+  std::vector<AMenuElement*>		_userInterface;
+  std::vector<Text>			_labels;
+  std::vector<Sprite>	      		_inGame;
   InputManager				_inputManager;
+
+  typedef void(APanel::*funcs)();
+  std::vector<funcs>			_functions;
+
 };
 
 #endif // APANEL_HH

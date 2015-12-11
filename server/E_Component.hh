@@ -5,19 +5,19 @@
 ** Login   <audibel@epitech.net>
 **
 ** Started on  Sat Nov 28 05:06:04 2015 Louis Audibert
-// Last update Mon Nov 30 06:44:02 2015 Louis Audibert
+// Last update Wed Dec  9 06:49:48 2015 Louis Audibert
 */
 
 #ifndef _E_COMPONENT_HH_
 # define _E_COMPONENT_HH_
 
-typedef enum E_COMPONENT
+enum E_Component
   {
     E_POSITION,
     E_HEALTH,
     E_LASER,
     E_RIFLE,
     E_MISSILE
-  }		E_COMPONENT;
+  };
 
 #endif /* _E_COMPONENT_HH_ */

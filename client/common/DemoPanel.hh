@@ -1,7 +1,7 @@
 #ifndef DEMOPANEL_HH
 #define DEMOPANEL_HH
 
-#include "APanel.hh"
+#include <APanel.hh>
 
 class DemoPanel : public APanel
 {

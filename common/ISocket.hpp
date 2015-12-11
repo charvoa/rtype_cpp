@@ -5,21 +5,14 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Sat Dec  5 13:23:48 2015 Joris Bertomeu
+// Last update Sun Dec  6 08:45:28 2015 Antoine Garcia
 //
 
 #ifndef		__ISOCKET_HPP_
 # define	__ISOCKET_HPP_
-
-# include	<sys/types.h>
-# include	<unistd.h>
-# include	<sys/socket.h>
-# include	<netinet/in.h>
-# include	<stdexcept>
-# include	<string.h>
-# include	<errno.h>
-#include	<netdb.h>
-
+# ifdef		_WIN32
+#  include	<winsock2.h>
+# endif
 class		ISocket
 {
 public:
@@ -28,7 +21,13 @@ public:
   virtual void	*read(int) = 0;
   virtual void	close() = 0;
   virtual int	write(void *, int) = 0;
+# ifdef _WIN32
+  virtual SOCKET	getFd() const = 0;
+  virtual void		setForUDP(SOCKADDR_IN *s) = 0;
+# else
   virtual int	getFd() const = 0;
+  virtual void	setForUDP(struct sockaddr_in *s) = 0;
+# endif
 };
 
 #endif

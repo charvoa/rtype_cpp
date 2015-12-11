@@ -1,40 +1,51 @@
 //
-// RoomPanel.hh for RoomPanel in /home/barnea_v/rendu/rtype_cpp/client/common
-//
-// Made by Viveka BARNEAUD
-// Login   <barnea_v@epitech.net>
-//
-// Started on  Mon Nov 30 09:51:46 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 13:26:35 2015 Serge Heitzler
+// RoomPanel.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// 
+// Made by Serge Heitzler
+// Login   <sergeheitzler@epitech.net>
+// 
+// Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
+// Last update Thu Dec 10 15:02:20 2015 Serge Heitzler
 //
 
-#ifndef ROOMPANEL_H
-#define ROOMPANEL_H
+#ifndef ROOMPANEL_HH_
+#define ROOMPANEL_HH_
 
 #include <map>
-#include "Button.hh"
-#include "Settings.hh"
-#include "APanel.hh"
-//#include "Player.hh"
+#include <string>
+#include <Button.hh>
+#include <Settings.hh>
+#include <APanel.hh>
+#include <Player.hh>
 
 class RoomPanel : public APanel
 {
 public:
+  
   RoomPanel();
   ~RoomPanel();
 
-  void    difficulty(Settings::Difficulty);
-  void    start();
-  void    back();
-  void	render();
-
+  void			difficulty(Settings::Difficulty);
+  static void  		playerLeft(std::vector<std::string> &vector);
+  static void  		newPlayer(std::string &newUsername);
+  void			launchGame();
+  void			back();
+  void			update();
+  void			setUserInterface();
+  void			updatePlayers(std::vector<std::string> &vector, int from);
+  void			createPlayers();
+  std::vector<Player*>	&getPlayers();
+  unsigned int		getNbPlayers();
+  void			minusNbPlayers();
+  void			addNbPlayers();
+  std::vector<Texture*> &getTextures();
+  
 private:
-  // Button  _startButton;
-  // Button  _easyButton;
-  // Button  _mediumButton;
-  // Button  _hardButton;
-  // Button  _backButton;
-  //std::map<Player*, Component*> _playersList;
+
+  std::vector<Player*> _players;
+  std::string		_idRoom;
+  std::vector<Texture*>	_spaceShipsTextures;
+  unsigned int		_nbPlayers;
 };
 
-#endif // ROOMPANEL_H
+#endif /* !ROOMPANEL_HH_ */

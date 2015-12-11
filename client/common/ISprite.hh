@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:52 2015 Serge Heitzler
-// Last update Fri Dec  4 03:25:36 2015 Serge Heitzler
+// Last update Sat Dec  5 08:18:42 2015 Serge Heitzler
 //
 
 #ifndef ISPRITE_HH_
@@ -26,6 +26,7 @@ public:
   virtual void		setOrigin(float x, float y) = 0;
   virtual void		move(float x, float y) = 0;
   virtual void		rotate(float angle) = 0;
+  virtual void	       	setTextureRect(float posX, float posY, float width, float height) = 0;
 
 };
 

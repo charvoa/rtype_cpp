@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Sat Dec  5 05:32:16 2015 Serge Heitzler
+// Last update Wed Dec  9 01:01:09 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -114,8 +114,7 @@ void    RenderWindow::addPanel(PanelFactory::PanelType type)
 
 void    RenderWindow::back()
 {
-  //    _panels.pop();
-  //    _panels.top()->render();
+  _panels.pop();
 }
 
 std::stack<APanel*>	&RenderWindow::getPanels()

@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 2.6)
 #SET(CMAKE_CXX_COMPILER	"clang++")
 
 if(CMAKE_COMPILER_IS_GNUCC)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -g3")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic -Wall -Wextra -Woverloaded-virtual -Wfloat-equal")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow -Wredundant-decls -Wdouble-promotion -Winit-self")
@@ -19,9 +19,6 @@ include_directories(. ../common Room ../common/Thread)
 add_executable( server_rtype
   main.cpp
   Server.cpp
-  #ISocket.hpp
-  E_Component.hh
-  AComponent.hpp
   Health.cpp
   Missile.cpp
   Laser.cpp

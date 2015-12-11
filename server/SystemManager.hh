@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:27:31 2015 Louis Audibert
-// Last update Thu Dec  3 05:32:44 2015 Louis Audibert
+// Last update Wed Dec  9 06:47:29 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMMANAGER_HH_
@@ -14,7 +14,7 @@
 # include <iostream>
 # include <vector>
 # include <E_Component.hh>
-# include <ASystem.hh>
+# include <ASystem.hpp>
 # include <SystemPos.hh>
 # include <SystemHealth.hh>
 # include <SystemGun.hh>
@@ -28,8 +28,8 @@ public:
   SystemManager();
   ~SystemManager();
 
-  ASystem *getSystemByComponent(E_COMPONENT type);
-  void	addSystemByType(E_COMPONENT type);
+  ASystem *getSystemByComponent(E_Component type);
+  void	addSystemByType(E_Component type);
 };
 
 #endif /* _SYSTEMMANAGER_HH_ */

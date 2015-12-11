@@ -5,19 +5,19 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:04 2015 Serge Heitzler
-// Last update Thu Dec  3 12:51:41 2015 Serge Heitzler
+// Last update Wed Dec  9 13:49:56 2015 Nicolas Girardot
 //
 
 #ifndef COLOR_HH_
 #define COLOR_HH_
 
 #include <SFML/Graphics.hpp>
-#include "IColor.hh"
+#include <IColor.hh>
 
 class	        Color : public IColor
 {
 public:
-  
+
   typedef enum Tint
     {
       BLACK,
@@ -29,10 +29,10 @@ public:
       MAGENTA,
       CYAN
     }		Tint;
-  
+
   Color();
   ~Color();
-  
+
   static sf::Color	getColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
   static Color::Tint	blackColor();
   static Color::Tint	whiteColor();

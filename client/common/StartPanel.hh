@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 22:48:41 2015 Serge Heitzler
+// Last update Thu Dec 10 13:25:38 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -21,21 +21,16 @@ public:
   ~StartPanel();
   
   void		createRoom();
+  static void	goToRoom(std::vector<std::string> &vector, int from);
   void		joinRoom();
   void		demo();
   void		settings();
   void		exit();
   void	        update();
-
-  Texture	_cockpitTexture;
-  Sprite	_cockpit;
+  void	        setUserInterface();
   
 private:
-  //    Button  _createRoomButton;
-  //    Button  _joinRoomButton;
-  //    Button  _demoButton;
-  //    Button  _settingsButton;
-  //    Button  _exitButton;
+
 };
 
 #endif // STARTPANEL_H

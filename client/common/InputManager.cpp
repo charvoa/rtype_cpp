@@ -1,23 +1,25 @@
 //
-// InputManager.cpp for InputManager in /home/sergeheitzler/rendu/rtype_cpp/client/common
+// InputManager.cpp for rtype in /home/nicolas/rendu/rtype_cpp/client/build
 //
-// Made by Serge Heitzler
-// Login   <sergeheitzler@epitech.net>
+// Made by Nicolas Girardot
+// Login   <girard_s@epitech.net>
 //
-// Started on  Wed Nov 25 05:52:02 2015 Serge Heitzler
-// Last update Sat Dec  5 17:35:22 2015 Nicolas Girardot
+// Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
+// Last update Wed Dec  9 08:21:49 2015 Serge Heitzler
 //
 
 #include <iostream>
-//#include <SFML/Mouse.hpp>
-#include "InputManager.hh"
-#include "RenderWindow.hh"
-#include "Client.hh"
-#include "../../common/CreateRequest.hpp"
-#include "../../common/CRC.hpp"
-#include "../../common/ANetwork.hpp"
+#include <InputManager.hh>
+#include <RenderWindow.hh>
+#include <Client.hh>
+#include <CreateRequest.hpp>
+#include <CRC.hpp>
+#include <ANetwork.hpp>
+#include <JoinPanel.hh>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
+
+extern std::string g_a;
 
 InputManager::InputManager(){}
 
@@ -28,7 +30,7 @@ void			InputManager::setInputType(InputType type)
   _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
   _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
 
-  if (type == InputType::MENU_INPUT)
+  if (type == InputType::MENU_INPUT || type == InputType::JOIN_INPUT)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedInMenuAt));
       _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
@@ -41,6 +43,11 @@ void			InputManager::setInputType(InputType type)
       _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
       //      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::CHOISIRUNNOMDEFONCTION));
     }
+  if (type == InputType::JOIN_INPUT)
+    {
+      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::textEnteredInJoinPanel));
+    }
+  
 }
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
@@ -103,16 +110,23 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Event& event)
 {
-  std::cout << "mouse moved at x " << event.mouseMove.x << " && y " << event.mouseMove.y << std::endl;
+  (RenderWindow::getInstance())->getPanels().top()->updateOnMove(std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y));
+
   return std::make_pair((unsigned int)event.mouseMove.x, (unsigned int)event.mouseMove.y);
 }
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  Network *net = Client::getNetwork();
-  std::cout << "mouse pressed at x " << event.mouseButton.x << " && y " << event.mouseButton.y << std::endl;
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)1, CRC::calcCRC(""), 0, "");
-  net->write(sender);
+  if (event.mouseButton.button == sf::Mouse::Right)
+    {
+      ANetwork *net = Client::getNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("2QNP"), 0, "2QNP");
+      net->write(sender);
+    }
+
+  else if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
+    {
+    }
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
@@ -147,9 +161,19 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::E
   return std::make_pair(0, 0);
 }
 
+std::pair<unsigned int, unsigned int>		InputManager::textEnteredInJoinPanel(sf::Event& event)
+{
+  if ((event.key.code >= sf::Keyboard::A && event.key.code <= sf::Keyboard::Z) || (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) || event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::BackSpace)
+    {
+      RenderWindow *window = RenderWindow::getInstance();
+      static_cast<JoinPanel*>(window->getPanels().top())->updateOnTextEntered(event.key.code);
+    }
+    return std::make_pair(0, 0);
+}
+
 void		InputManager::methodChecker(sf::Event &event)
 {
-  std::cout << "check: " << std::endl;
+  std::cout << "---| New Event |---" << std::endl;
   for (std::map<sf::Event::EventType, funcs>::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == event.type)

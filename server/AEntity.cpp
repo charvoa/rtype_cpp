@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Thu Dec  3 05:06:24 2015 Louis Audibert
+// Last update Wed Dec  9 06:51:57 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -38,19 +38,25 @@ bool	AEntity::update(int health)
   return (true);
 }
 
-void	AEntity::addSystem(E_COMPONENT type)
+// void	AEntity::update()
+// {
+
+// }
+
+void	AEntity::addSystem(E_Component type)
 {
+  std::cout << "before calling the systemManager.addSystemByType(" << type << ")" << std::endl;
   _systemManager.addSystemByType(type);
-  std::cout << "New System added !" << std::endl;
+  std::cout << "after calling addSystemByType" << std::endl;
 }
 
-bool	AEntity::setType(E_ENTITYTYPE type)
+bool	AEntity::setType(E_EntityType type)
 {
   _type = type;
   return (true);
 }
 
-E_ENTITYTYPE	AEntity::getType() const
+E_EntityType	AEntity::getType() const
 {
   return (_type);
 }
@@ -58,4 +64,9 @@ E_ENTITYTYPE	AEntity::getType() const
 int	AEntity::getId() const
 {
   return (_id);
+}
+
+SystemManager	*AEntity::getSystemManager()
+{
+  return (&_systemManager);
 }
