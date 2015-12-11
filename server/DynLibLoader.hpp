@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 14:54:28 2015 Joris Bertomeu
-// Last update Fri Dec 11 15:53:55 2015 Joris Bertomeu
+// Last update Fri Dec 11 18:12:14 2015 Joris Bertomeu
 //
 
 #ifndef			_DYNLIBLOADER_HPP_
@@ -14,6 +14,7 @@
 # include		<stdexcept>
 # include		<string>
 # include		<dlfcn.h>
+
 
 class			DynLibLoader
 {
@@ -28,7 +29,7 @@ public:
   virtual		~DynLibLoader() {};
   void			open(const std::string &path) {
     if (!(this->_handle = dlopen(path.c_str(), RTLD_LAZY)))
-      throw (std::logic_error("DynLibLoader :: Open : Error while openning"));
+      throw (std::logic_error("DynLibLoader :: Open : Error while openning " + path));
   };
 
   void			*getSymbol(const std::string &sym) {
