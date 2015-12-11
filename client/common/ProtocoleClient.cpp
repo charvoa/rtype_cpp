@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Fri Dec 11 00:08:00 2015 Nicolas Girardot
+// Last update Fri Dec 11 12:02:27 2015 Nicolas Girardot
 //
 
 
@@ -149,11 +149,8 @@ void		ProtocoleClient::newPlayerConnected(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::playerLeft(ANetwork::t_frame &frame)
 {
-  std::cout << "JACQUES" << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "JACQUES" << std::endl;
   RoomPanel::playerLeft(x);
-  std::cout << "JACQUES" << std::endl;
 }
 
 void		ProtocoleClient::changeHost(ANetwork::t_frame &frame)
@@ -204,12 +201,9 @@ void		ProtocoleClient::gameNotLaunched(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::methodChecker(ANetwork::t_frame &frame)
 {
-  std::cout << "JACQUES" << std::endl;
   for (PointersOnFuncs::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
-  std::cout << "JACQUES" << std::endl;
       if ((*it).first == frame.idRequest)
 	(*this.*_functions[static_cast<RequestFromServer>(frame.idRequest)])(frame);
     }
-  std::cout << "JACQUES" << std::endl;
 }

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Thu Dec 10 22:10:16 2015 Nicolas Charvoz
+// Last update Thu Dec 10 23:58:52 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -27,7 +27,8 @@
 # endif
 # include <stdexcept>
 # include <queue>
-
+# include <CRC.hpp>
+# include <sstream>
 
 class Game {
 
@@ -38,6 +39,7 @@ private:
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
+  std::vector<Client *> _clients;
 
 public:
 

@@ -5,17 +5,16 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Dec  7 03:02:01 2015 Serge Heitzler
-// Last update Wed Dec  9 08:16:35 2015 Serge Heitzler
+// Last update Thu Dec 10 23:30:52 2015 Serge Heitzler
 //
 
 #include <iostream>
 #include <ButtonFactory.hh>
 
-void			ButtonFactory::create(Vector2 pos, Vector2 size, std::string &title, std::string &normal, std::string &highlight, std::string &select)
+void			ButtonFactory::create(Vector2 pos, std::string &title)
 {
   Button		*button = new Button();
   Text		       	*text = new Text();
-  (void)size;
 
   text->setString(title);
   text->setSize(25);
@@ -25,12 +24,10 @@ void			ButtonFactory::create(Vector2 pos, Vector2 size, std::string &title, std:
   text->setColor(Color::WHITE);
 
   button->setState(Button::StateButton::NORMAL);
-  button->getNormalTexture().loadFromFile(normal);
-  button->getHighlightTexture().loadFromFile(highlight);
-  button->getSelectTexture().loadFromFile(select);
-  button->getSprite().setTexture(button->getNormalTexture());
+
+  button->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
   button->getSprite().scale(0.7);
-  button->getSprite().setOrigin(button->getNormalTexture().getSize()._x / 2, button->getNormalTexture().getSize()._y / 2);
+  button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._y / 2);
   button->getSprite().setPosition(pos._x, pos._y);
 
   (RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);

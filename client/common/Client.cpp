@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Fri Dec 11 11:57:18 2015 Nicolas Girardot
+// Last update Fri Dec 11 12:02:05 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -23,6 +23,7 @@
 #include <SFML/Audio.hpp>
 #include <chrono>
 #include <thread>
+#include <Ressources.hh>
 
 
 ANetwork	*Client::_network = NULL;
@@ -63,19 +64,22 @@ Client::~Client()
 
 void	Client::Start()
 {
-  //Creating Everything;
-  RenderWindow *window = RenderWindow::getInstance();
+  //Creating Everything
 
+  RenderWindow *window = RenderWindow::getInstance();
   _network = new Network();
   _UDPnetwork = new Network();
-  _network->init(4253, ANetwork::TCP_MODE);
   _sound = new Sound();
+
+  //Connecting to server
+
+  _network->init(4253, ANetwork::TCP_MODE);
+  _network->connect("0");
 
   //Sending Handshake
 
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
   _network->write(sender);
-  _network->connect("10.16.253.14");
 
   //Creating SF::window
 
@@ -83,11 +87,34 @@ void	Client::Start()
   window->setFramerateLimit(60);
   window->clear();
 
-  //Panels Queue
+  //Creating Textures for splash screen
 
+  Texture	*splashScreenTexture = new Texture();
+  Sprite	*splashScreen = new Sprite();
+
+  splashScreenTexture->loadFromFile("../common/misc/background.png");
+  splashScreen->setTexture(*splashScreenTexture);
+  splashScreen->setPosition(0, 0);
+  splashScreen->scale(1.1);
+
+  //Display Splash screen and loading Ressources
+
+  window->draw(splashScreen->getSprite());
+  window->display();
+  window->_ressources = new Ressources();
+  //sleep(2);
+  int i = 255;
+  while (i >= 0)
+    {
+      splashScreen->getSprite().setColor(sf::Color(i, i, i, 255));
+      window->draw(splashScreen->getSprite());
+      window->display();
+      i--;
+    }
+  std::cout << "IIL" << std::endl;
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
+  std::cout << "IIL" << std::endl;
   window->getPanels().top()->setUserInterface();
-
 
   //Adding & playing music for Menu
 

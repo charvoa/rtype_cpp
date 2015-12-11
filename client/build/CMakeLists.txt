@@ -54,6 +54,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Texture.cpp
   ../common/Volume.cpp
   ../common/ProtocoleClient.cpp
+  ../common/Ressources.cpp
   ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
