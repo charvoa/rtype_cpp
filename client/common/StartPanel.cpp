@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 16:08:29 2015 Serge Heitzler
+// Last update Fri Dec 11 11:34:51 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -34,6 +34,8 @@ void		StartPanel::setUserInterface()
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
   Sprite *logo = new Sprite;
+  Sprite *panelUp = new Sprite;
+  Sprite *panelDown = new Sprite;
 
 
   earth->setOrigin((RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 2);
@@ -43,8 +45,12 @@ void		StartPanel::setUserInterface()
   earth->setTexture(*((RenderWindow::getInstance())->_ressources->_earth));
   cockpit->setTexture(*((RenderWindow::getInstance())->_ressources->_cockpit));
   logo->setTexture(*((RenderWindow::getInstance())->_ressources->_logo));
+  panelUp->setTexture(*((RenderWindow::getInstance())->_ressources->_panelIntroUp));
+  panelDown->setTexture(*((RenderWindow::getInstance())->_ressources->_panelIntroDown));
 
   backgroundSpace->setPosition(0, 0);
+  panelUp->setPosition(0, 0);
+  panelDown->setPosition(0, 0);
   earth->setPosition(window->getSize()._x + (RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 6, window->getSize()._y + (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 6);
   cockpit->setPosition(0, 0);
   logo->setPosition(window->getSize()._x / 2, window->getSize()._y / 6);
@@ -56,6 +62,8 @@ void		StartPanel::setUserInterface()
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
   _backgrounds.push_back(*logo);
+  _backgrounds.push_back(*panelUp);
+  _backgrounds.push_back(*panelDown);
   
   // Button
 
@@ -128,5 +136,12 @@ void		StartPanel::update()
     _backgrounds.at(0).move(-0.01,-0.01);
   else
     _backgrounds.at(0).move(0.01,0.01);
-  i++;
+
+
+  if (i < 1920)
+    {
+      _backgrounds.at(4).move(0,-1);
+      _backgrounds.at(5).move(0,1);
+    }
+  i++;  
 }
