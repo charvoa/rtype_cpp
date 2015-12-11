@@ -1,10 +1,15 @@
 language: bash
+
 sudo: required
+
 before_script:
-- sudo apt-get update -qq
-- sudo apt-get install -y cmake
-- sudo apt-get install -y make
-notifications: 
-on_success: always
-slack: pintade:pwNqkJawHhR2pEm1vWg4UWjz
+  - sudo apt-get update -qq
+  - sudo apt-get install -y cmake
+  - sudo apt-get install -y make
+
+notifications:
+  on_success: always
+  slack:
+    rooms:
+      - pintade:pwNqkJawHhR2pEm1vWg4UWjz#r-type
 script: bash install.sh
