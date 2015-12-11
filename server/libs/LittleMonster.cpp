@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Fri Dec 11 06:00:13 2015 Louis Audibert
+// Last update Fri Dec 11 06:49:17 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -13,7 +13,9 @@
 
 LittleMonster::LittleMonster(int id) : AEntity(id), _health(50), _x(0), _y(0), _direction(1)
 {
-
+  addSystem(E_HEALTH);
+  addSystem(E_POSITION);
+  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(E_POSITION))->update(_x, _y);
 }
 
 LittleMonster::~LittleMonster()
