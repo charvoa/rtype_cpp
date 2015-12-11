@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Fri Dec 11 00:08:45 2015 Nicolas Charvoz
+// Last update Fri Dec 11 14:46:40 2015 Joris Bertomeu
 //
 
 #include <Game.hh>
@@ -22,7 +22,7 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
 
   this->_clients = client_;
   this->_network = new Network();
-  this->_network->init(port_, ANetwork::UDP_MODE);
+  this->_network->init(port_ + 1, ANetwork::UDP_MODE);
   this->_network->bind();
   this->addClients(client_);
 }

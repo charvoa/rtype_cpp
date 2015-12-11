@@ -5,7 +5,7 @@
 // Login   <garcia_t@epitech.net>
 //
 // Started on  Tue Mar 24 13:36:59 2015 antoine garcia
-// Last update Tue Dec  8 05:23:43 2015 Louis Audibert
+// Last update Fri Dec 11 14:53:56 2015 Joris Bertomeu
 //
 
 #ifndef DLLoader_H_
