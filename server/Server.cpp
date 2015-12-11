@@ -146,7 +146,7 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
 
   t1->attach(&newGameThread, reinterpret_cast<void*>(s));
   t1->run();
-  t1->join();
+  // t1->join();
 
   return true;
 }
