@@ -1,5 +1,8 @@
-language: bash
+language: 
+	  - bash
+install: 
+	 - cmake 
+	 - make
 
-install: cmake make
-
-script: bash configure.sh
+script: 
+	- bash config.sh
