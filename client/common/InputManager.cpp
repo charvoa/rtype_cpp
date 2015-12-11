@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec  9 08:21:49 2015 Serge Heitzler
+// Last update Fri Dec 11 15:01:21 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -173,7 +173,6 @@ std::pair<unsigned int, unsigned int>		InputManager::textEnteredInJoinPanel(sf::
 
 void		InputManager::methodChecker(sf::Event &event)
 {
-  std::cout << "---| New Event |---" << std::endl;
   for (std::map<sf::Event::EventType, funcs>::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == event.type)
