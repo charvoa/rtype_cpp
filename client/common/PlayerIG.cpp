@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Sat Dec 12 02:02:55 2015 Serge Heitzler
+// Last update Sat Dec 12 03:18:06 2015 Serge Heitzler
 //
 
 #include <PlayerIG.hh>
@@ -19,12 +19,12 @@ PlayerIG::PlayerIG()
   Sprite	*heart3 = new Sprite();
 
   _score = new Text();
+  _waveNumber = new Text();
   _spaceShip = new Sprite();
   
   _hearts.push_back(heart1);
   _hearts.push_back(heart2);
   _hearts.push_back(heart3);
-  
 }
 
 PlayerIG::~PlayerIG()
