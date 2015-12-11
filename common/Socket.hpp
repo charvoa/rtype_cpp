@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sun Dec  6 08:45:26 2015 Antoine Garcia
+// Last update Thu Dec 10 22:58:29 2015 Nicolas Charvoz
 //
 
 #ifndef		__SOCKET__HPP_
@@ -31,7 +31,7 @@ class		Socket : public ISocket
   int		_mode;
   struct sockaddr_in _me;
   bool		_init;
-  
+
  public:
   Socket(int domain, int type, int protocol) {
     this->_fd = socket(domain, type, protocol);
@@ -52,7 +52,7 @@ class		Socket : public ISocket
     this->_mode = mode;
     this->_init = false;
   }
-  
+
   virtual	~Socket() {
 
   };
@@ -61,7 +61,7 @@ class		Socket : public ISocket
     this->_init = true;
     this->_me = *s;
   };
-  
+
   void		*read(int size) {
     if (this->_mode == SOCK_STREAM)
       return (this->read_tcp(size));
@@ -101,7 +101,7 @@ private:
   void		*read_udp(int size) {
     void	*data;
     socklen_t	meSize = sizeof(struct sockaddr_in);
-    
+
     data = malloc(size + 1);
     bzero(data, size + 1);
     ::recvfrom(this->_fd, data, size, 0, (struct sockaddr*) &_me, &meSize);

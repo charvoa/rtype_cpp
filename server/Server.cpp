@@ -77,19 +77,54 @@ void *newGameThread(void *data)
   Server *me = s->server;
 
   Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
-  std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data)
-    .getAllPlayers();
+  std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
+
+  std::stringstream ss;
+  int i = 0;
+
 
   if ((me->_gameManager.createGame(p, c, s->frame.data, s->port)))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
-      me->_gameManager.getGameById(s->frame.data).run();
+
+
+
+      //JORIS LA J4ENVOIE LE PORT SUR LE QUEL SE CONNECTER MAIS ENSUITE JE SAIS PAS OU PLACER LENVOI DE L'ID
+
+      for (std::vector<Client *>::iterator it = c.begin();
+	   it != c.end() ; ++it)
+	{
+	  ss << me->_port;
+	  ss << ";";
+	  ss << "0";
+	  std::cout << "DATA SEND : " << ss.str().c_str() << std::endl;
+	  ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_INIT_UDP,
+								CRC::calcCRC(ss.str().c_str()),
+								0,
+								ss.str().c_str());
+	  (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),
+				    sizeof(ANetwork::t_frame));
+	  ss.str("");
+	  ss.clear();
+	}
+
+
+
+
+
+
       me->_roomManager.deleteRoom(s->frame.data);
+      me->_gameManager.getGameById(s->frame.data).run();
+
+
+
+
     }
   else
     {
       sendMessage(c, (unsigned char)S_GAME_NOT_LAUNCHED);
     }
+
   return data;
 }
 
@@ -102,28 +137,9 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
   s->frame = frame;
   s->port = _port++;
 
+
   // TELL CLIENT WHO HE IS FOR UDP
-
-  std::stringstream ss;
-  int i = 0;
-
   std::vector<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
-  for (std::vector<Client *>::iterator it = c.begin();
-       it != c.end() ; ++it)
-    {
-      ss << _port;
-      ss << ";";
-      ss << i;
-      ANetwork::t_frame frame = CreateRequest::create((unsigned char)S_INIT_UDP,
-						      CRC::calcCRC(ss.str().c_str()),
-						      0,
-						      ss.str().c_str());
-      (*it)->getSocket()->write(reinterpret_cast<void*>(&frame),
-				sizeof(ANetwork::t_frame));
-      i++;
-      ss.str("");
-      ss.clear();
-    }
 
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());

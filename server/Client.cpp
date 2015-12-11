@@ -5,14 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:22:49 2015 Nicolas Charvoz
-// Last update Wed Dec  9 06:10:28 2015 Antoine Garcia
+// Last update Thu Dec 10 21:22:56 2015 Nicolas Charvoz
 //
 
 #include <Client.hh>
 
 Client::Client() {}
 
-Client::Client(ISocket *socket):_socket(socket)
+Client::Client(ISocket *socket): _socket(socket)
 {}
 
 Client::~Client() {}

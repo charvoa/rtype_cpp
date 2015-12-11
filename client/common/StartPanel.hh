@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:50:06 2015 Viveka BARNEAUD
-// Last update Tue Dec  8 08:17:11 2015 Serge Heitzler
+// Last update Thu Dec 10 13:25:38 2015 Serge Heitzler
 //
 
 #ifndef STARTPANEL_H
@@ -23,7 +23,6 @@ public:
   void		createRoom();
   static void	goToRoom(std::vector<std::string> &vector, int from);
   void		joinRoom();
-  void	        credits();
   void		demo();
   void		settings();
   void		exit();

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 10:53:17 2015 Serge Heitzler
+// Last update Thu Dec 10 16:08:29 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -30,31 +30,22 @@ void		StartPanel::setUserInterface()
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::MENU_INPUT);
 
-  Texture *backgroundSpaceTexture = new Texture;
-  Texture *earthTexture = new Texture;
-  Texture *cockpitTexture = new Texture;
-  Texture *logoTexture = new Texture;
-
   Sprite *backgroundSpace = new Sprite;
   Sprite *earth = new Sprite;
   Sprite *cockpit = new Sprite;
   Sprite *logo = new Sprite;
 
-  backgroundSpaceTexture->loadFromFile("../common/misc/background.png");
-  earthTexture->loadFromFile("../common/misc/planet_earth_background.png");
-  cockpitTexture->loadFromFile("../common/misc/cockpit.png");
-  logoTexture->loadFromFile("../common/misc/rtype_logo.png");
 
-  earth->setOrigin(earthTexture->getSize()._x / 2, earthTexture->getSize()._y / 2);
-  logo->setOrigin(logoTexture->getSize()._x / 2, logoTexture->getSize()._y / 2);
+  earth->setOrigin((RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 2);
+  logo->setOrigin((RenderWindow::getInstance())->_ressources->_logo->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_logo->getSize()._y / 2);
 
-  backgroundSpace->setTexture(*backgroundSpaceTexture);
-  earth->setTexture(*earthTexture);
-  cockpit->setTexture(*cockpitTexture);
-  logo->setTexture(*logoTexture);
+  backgroundSpace->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundStartPanel));
+  earth->setTexture(*((RenderWindow::getInstance())->_ressources->_earth));
+  cockpit->setTexture(*((RenderWindow::getInstance())->_ressources->_cockpit));
+  logo->setTexture(*((RenderWindow::getInstance())->_ressources->_logo));
 
   backgroundSpace->setPosition(0, 0);
-  earth->setPosition(window->getSize()._x + earthTexture->getSize()._x / 6, window->getSize()._y + earthTexture->getSize()._y / 6);
+  earth->setPosition(window->getSize()._x + (RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 6, window->getSize()._y + (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 6);
   cockpit->setPosition(0, 0);
   logo->setPosition(window->getSize()._x / 2, window->getSize()._y / 6);
   logo->scale(0.5);
@@ -65,28 +56,25 @@ void		StartPanel::setUserInterface()
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
   _backgrounds.push_back(*logo);
-
+  
   // Button
 
-  std::string fileDefault = "../common/misc/MicroDesignDefault.png";
-  std::string fileHighlight = "../common/misc/MicroDesignHighlight.png";
-  std::string name = "CREATE";
-    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.3), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
-    name = "JOIN";
-    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.4), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
+  std::string name = "CREATE ROOM";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.3), name);
+    name = "JOIN ROOM";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.4), name);
+    name = "DEMO";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.5), name);
     name = "SETTINGS";
-    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.5), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
-    name = "CREDITS";
-    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.6), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
-    name = "EXIT";
-    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.7), Vector2(100, 50), name, fileDefault, fileHighlight, fileDefault);
-
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.6), name);
+    name = "EXIT GAME";
+    ButtonFactory::create(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.7), name);
 
 
     _functions.push_back((APanel::funcs)&StartPanel::createRoom);
     _functions.push_back((APanel::funcs)&StartPanel::joinRoom);
+    _functions.push_back((APanel::funcs)&StartPanel::demo);
     _functions.push_back((APanel::funcs)&StartPanel::settings);
-    _functions.push_back((APanel::funcs)&StartPanel::credits);
     _functions.push_back((APanel::funcs)&StartPanel::exit);
 }
 
@@ -100,7 +88,6 @@ void        StartPanel::createRoom()
 void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 {
   RenderWindow *window = RenderWindow::getInstance();
-
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
   window->getPanels().top()->setUserInterface();
   static_cast<RoomPanel*>(window->getPanels().top())->updatePlayers(vector, from);
@@ -116,12 +103,6 @@ void        StartPanel::joinRoom()
 }
 
 void        StartPanel::demo()
-{
-	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
-        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
-}
-
-void        StartPanel::credits()
 {
 	(RenderWindow::getInstance())->addPanel(PanelFactory::DEMO_PANEL);
         (RenderWindow::getInstance())->getPanels().top()->setUserInterface();

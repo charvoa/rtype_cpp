@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Dec  7 03:02:15 2015 Serge Heitzler
-// Last update Wed Dec  9 13:43:29 2015 Nicolas Girardot
+// Last update Thu Dec 10 14:18:53 2015 Serge Heitzler
 //
 
 #ifndef BUTTONFACTORY_HH_
@@ -22,7 +22,7 @@ class	        ButtonFactory
 {
 public:
 
-  static void			create(Vector2 pos, Vector2 size, std::string &title, std::string &normal, std::string &highlight, std::string &select);
+  static void			create(Vector2 pos, std::string &title);
 private:
 
 };

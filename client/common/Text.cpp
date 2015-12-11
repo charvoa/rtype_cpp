@@ -5,18 +5,16 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 00:59:53 2015 Serge Heitzler
-// Last update Tue Dec  8 07:41:35 2015 Serge Heitzler
+// Last update Thu Dec 10 23:22:06 2015 Serge Heitzler
 //
 
 #include <iostream>
-#include "Text.hh"
+#include <Text.hh>
+#include <RenderWindow.hh>
 
 Text::Text()
 {
-  sf::Font *font = new sf::Font;
-
-  font->loadFromFile("../common/misc/fonts/galaxy.ttf");
-  _text.setFont(*font);
+  _text.setFont(((RenderWindow::getInstance())->_ressources->_fontFirst->getFont()));
 }
 
 Text::Text(const std::string &string, SFont &font, unsigned int characterSize)
