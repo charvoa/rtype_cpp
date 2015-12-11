@@ -5,13 +5,17 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Thu Dec 10 14:44:20 2015 Serge Heitzler
+// Last update Sat Dec 12 00:49:18 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
 #include <RoomPanel.hh>
 #include <ButtonFactory.hh>
-#include <Network.hpp>
+#ifdef _WIN32
+# include <NetworkWin.hpp>
+#else
+# include <Network.hpp>
+#endif
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
 #include <Client.hh>
@@ -133,8 +137,11 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
   std::cout << "id to remove " << idToRemove << std::endl;
 
-  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToRemove + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
-  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 2).setString("");
+  if (idToRemove + 1  >= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
+    {
+      static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToRemove + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
+      static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 2).setString("");
+    }
 
   
   pos = vector.at(1).find("player");

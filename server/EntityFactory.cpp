@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Fri Dec 11 17:37:37 2015 Joris Bertomeu
+// Last update Fri Dec 11 17:49:40 2015 Joris Bertomeu
 //
 
 #include <EntityFactory.hh>

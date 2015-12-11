@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Fri Dec 11 03:24:42 2015 Louis Audibert
+// Last update Fri Dec 11 14:24:49 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -74,7 +74,7 @@ void	Client::Start()
   //Connecting to server
 
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  _network->connect("10.16.253.178");
 
   //Sending Handshake
 
@@ -103,17 +103,8 @@ void	Client::Start()
   window->display();
   window->_ressources = new Ressources();
   //sleep(2);
-  int i = 255;
-  while (i >= 0)
-    {
-      splashScreen->getSprite().setColor(sf::Color(i, i, i, 255));
-      window->draw(splashScreen->getSprite());
-      window->display();
-      i--;
-    }
-  std::cout << "IIL" << std::endl;
+
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  std::cout << "IIL" << std::endl;
   window->getPanels().top()->setUserInterface();
 
   //Adding & playing music for Menu

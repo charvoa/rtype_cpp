@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Tue Dec  8 07:37:28 2015 Serge Heitzler
+// Last update Fri Dec 11 15:11:22 2015 Nicolas Girardot
 //
 
 #ifndef TEXT_HH_
@@ -13,11 +13,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "Vector2.hh"
-#include "IText.hh"
-#include "SFont.hh"
-#include "Color.hh"
-#include "AMenuElement.hh"
+#include <Vector2.hh>
+#include <IText.hh>
+#include <SFont.hh>
+#include <Color.hh>
+#include <AMenuElement.hh>
 
 class	        Text : public IText
 {
