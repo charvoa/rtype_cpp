@@ -5,7 +5,8 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:58:05 2015 Nicolas Girardot
+
+// Last update Thu Dec 10 23:00:58 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -26,6 +27,7 @@
 # include <CommandManager.hpp>
 # include <ThreadFactory.hh>
 # include <CreateRequest.hpp>
+# include <sstream>
 
 class Server {
 
@@ -34,6 +36,7 @@ public:
     Server *server;
     Client *client;
     ANetwork::t_frame frame;
+    int port;
   };
 
 public:
@@ -49,6 +52,7 @@ public:
   bool	playerLeftRoom(ANetwork::t_frame frame, void *data);
   RoomManager _roomManager;
   GameManager _gameManager;
+  int _port;
 
 private:
 

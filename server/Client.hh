@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:21:37 2015 Nicolas Charvoz
-// Last update Wed Dec  9 05:59:55 2015 Antoine Garcia
+// Last update Thu Dec 10 21:21:00 2015 Nicolas Charvoz
 //
 
 #ifndef CLIENT_HH_
@@ -18,6 +18,8 @@ class Client {
 private:
 
   ISocket *_socket;
+  ISocket *_socketUDP;
+  int id;
 
 public:
   Client();

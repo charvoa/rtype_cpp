@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 23:25:14 2015 Serge Heitzler
+// Last update Thu Dec 10 23:36:40 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -48,7 +48,7 @@ void	*readdisp(void *s)
 	  std::cout << e.what() << std::endl;
 	}
     }
-  
+
   return s;
 }
 
@@ -70,10 +70,10 @@ void	Client::Start()
   _UDPnetwork = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
   _network->connect("0");
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
 
-  
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
   _network->write(sender);
+  
   //  _network->connect("10.16.252.241");
   _UDPnetwork->init(4254, ANetwork::UDP_MODE);
   //_UDPnetwork->connect("0");
@@ -88,6 +88,7 @@ void	Client::Start()
 
   
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
+  window->setFramerateLimit(60);
   window->clear();
 
   window->draw(splashScreen->getSprite());
@@ -133,7 +134,7 @@ void	Client::Start()
       while (window->pollEvent(event))
       	{
       	  window->getPanels().top()->getInputManager().methodChecker(event);
-      	}   
+      	}
     }
   t->cancel();
   _network->close();
