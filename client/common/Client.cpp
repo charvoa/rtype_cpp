@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Fri Dec 11 12:02:05 2015 Nicolas Girardot
+// Last update Fri Dec 11 14:22:35 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -74,7 +74,7 @@ void	Client::Start()
   //Connecting to server
 
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  _network->connect("10.16.252.249");
 
   //Sending Handshake
 
