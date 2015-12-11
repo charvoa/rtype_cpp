@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 21:18:17 2015 Nicolas Girardot
+// Last update Fri Dec 11 11:57:18 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -27,7 +27,7 @@
 
 ANetwork	*Client::_network = NULL;
 ANetwork	*Client::_UDPnetwork = NULL;
-Sound *Client::_sound = NULL;
+Sound		*Client::_sound = NULL;
 
 void	*readdisp(void *s)
 {
@@ -63,41 +63,47 @@ Client::~Client()
 
 void	Client::Start()
 {
+  //Creating Everything;
   RenderWindow *window = RenderWindow::getInstance();
 
   _network = new Network();
   _UDPnetwork = new Network();
   _network->init(4253, ANetwork::TCP_MODE);
-  //_network->connect("0");
+  _sound = new Sound();
 
-   // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
-   // _network->write(sender);
-  std::cout << "LA" << std::endl;
-  _network->connect("10.16.252.241");
-  _UDPnetwork->init(4254, ANetwork::UDP_MODE);
-  //_UDPnetwork->connect("0");
+  //Sending Handshake
+
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
+  _network->write(sender);
+  _network->connect("10.16.253.14");
+
+  //Creating SF::window
+
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->setFramerateLimit(60);
   window->clear();
-  std::cout << "LA" << std::endl;
+
+  //Panels Queue
 
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
   window->getPanels().top()->setUserInterface();
-  std::cout << "LA" << std::endl;
 
 
-  _sound = new Sound();
+  //Adding & playing music for Menu
+
   _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
   _sound->playMusic("mainMenu");
-  std::unique_ptr<AThread> t(new Thread(1));
-  std::cout << "LA" << std::endl;
 
+  //Threading the Read
+
+  std::unique_ptr<AThread> t(new Thread(1));
   char str1[] = "";
   (void) str1;
   t->attach(&readdisp, (void *)str1);
   t->run();
 
-  std::cout << "LA" << std::endl;
+  //Main Loop
+
   while(window->isOpen())
     {
       window->getPanels().top()->update();
@@ -109,7 +115,10 @@ void	Client::Start()
       	  window->getPanels().top()->getInputManager().methodChecker(event);
       	}
     }
-  //  t->cancel();
+
+  //Closing Thread and Window
+
+  t->cancel();
   _network->close();
 }
 
