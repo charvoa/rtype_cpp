@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Fri Dec 11 11:34:51 2015 Serge Heitzler
+// Last update Fri Dec 11 14:44:39 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -137,11 +137,29 @@ void		StartPanel::update()
   else
     _backgrounds.at(0).move(0.01,0.01);
 
-
-  if (i < 1920)
+  if (i * 1.5 < 255)
     {
-      _backgrounds.at(4).move(0,-1);
-      _backgrounds.at(5).move(0,1);
+      float tint = (i * 1.5);
+  
+      _userInterface.at(0)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
+      _userInterface.at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
+      _userInterface.at(2)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
+      _userInterface.at(3)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
+      _userInterface.at(4)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
+
+      _labels.at(0).getText().setColor(sf::Color(255, 255, 255, tint));
+      _labels.at(1).getText().setColor(sf::Color(255, 255, 255, tint));
+      _labels.at(2).getText().setColor(sf::Color(255, 255, 255, tint));
+      _labels.at(3).getText().setColor(sf::Color(255, 255, 255, tint));
+      _labels.at(4).getText().setColor(sf::Color(255, 255, 255, tint));
+
+      
+    }
+  
+  if (i < 640)
+    {
+      _backgrounds.at(4).move(0,-3);
+      _backgrounds.at(5).move(0,3);
     }
   i++;  
 }
