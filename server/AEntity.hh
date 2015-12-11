@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Wed Dec  9 06:57:53 2015 Louis Audibert
+// Last update Fri Dec 11 17:24:25 2015 Joris Bertomeu
 //
 
 #ifndef _AENTITY_HH_
@@ -30,7 +30,6 @@ public:
 
   bool	update(int, int);
   bool	update(int);
-  // virtual void update();
   void	addSystem(E_Component type);
   bool	setType(E_EntityType type);
   E_EntityType getType() const;
