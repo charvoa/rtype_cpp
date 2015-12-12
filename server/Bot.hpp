@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Sat Dec 12 10:15:20 2015 Louis Audibert
+// Last update Sat Dec 12 13:24:26 2015 Louis Audibert
 //
 
 #ifndef			_BOT_HH_
@@ -20,6 +20,7 @@ private:
   int	_x;
   int	_y;
   int	_health;
+  std::string _sprite;
 
   virtual void		generateY();
 

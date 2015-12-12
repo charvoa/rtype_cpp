@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Sat Dec 12 10:14:48 2015 Louis Audibert
+// Last update Sat Dec 12 13:23:56 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -14,6 +14,7 @@
 Bot::Bot(int id) : AEntity(id), _health(50), _x(0), _y(0), _direction(1)
 {
   std::cout << "Bot :: Bot1 :: Constructor" << std::endl;
+  _sprite = "../../client/common/misc/sprite3.png";
   addSystem(E_HEALTH);
   addSystem(E_POSITION);
   generateY();
