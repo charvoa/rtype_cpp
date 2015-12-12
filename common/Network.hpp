@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Sat Dec 12 00:18:40 2015 Joris Bertomeu
+// Last update Sat Dec 12 01:13:55 2015 Joris Bertomeu
 //
 
 #ifndef				__NETWORK_HPP__
@@ -141,6 +141,7 @@ public:
   virtual void			unlistenSocket(ISocket *socket) {
     FD_CLR(socket->getFd(), &_fdList);
   };
+
   virtual ISocket		*getSocket() {
     return (this->_socket);
   }
