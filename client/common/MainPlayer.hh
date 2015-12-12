@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Sat Dec 12 10:37:25 2015 Serge Heitzler
+// Last update Sat Dec 12 13:14:20 2015 Serge Heitzler
 //
 
 #ifndef MAINPLAYER_HH_
@@ -17,7 +17,7 @@
 class MainPlayer
 {
 public:
-  MainPlayer(int id);
+  MainPlayer(unsigned int id);
   ~MainPlayer();
 
   void		setNbRocket(unsigned int nb);

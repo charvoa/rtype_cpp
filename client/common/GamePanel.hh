@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 12 11:11:51 2015 Serge Heitzler
+// Last update Sat Dec 12 20:14:11 2015 Nicolas Girardot
 //
 
 
@@ -35,7 +35,6 @@ public:
   void		render();
   void		drawOtherPlayer();
 private:
-  
   std::vector<OtherPlayer*> _otherPlayers;
   std::vector<Sprite*> _sprites;
   MainPlayer		*_mainPlayer;
