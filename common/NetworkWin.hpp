@@ -14,7 +14,7 @@
 # include			<ANetwork.hpp>
 # include			<SocketWin.hpp>
 # include			<list>
-# inclue			<ProtocoleEnum>
+# include			<ProtocoleEnum.hh>
 # define			_WINSOCK_DEPRECATED_NO_WARNINGS 1
 
 class				Network : public ANetwork
