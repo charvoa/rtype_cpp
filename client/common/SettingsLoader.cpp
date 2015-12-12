@@ -8,13 +8,13 @@
 // Last update Thu Dec  3 13:19:53 2015 Serge Heitzler
 //
 
-#include <cstdlib>
+#include <iostream>
 #include "SettingsLoader.hh"
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
 	_ifs = new std::ifstream(_filepath.c_str());
-	_ofs = new std::ofstream(_filepath.c_str(), std::ios::out);
+//	_ofs = new std::ofstream(_filepath.c_str());
 	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
 	_stringKeys["1_KEY"] = sf::Keyboard::Num1;
   _stringKeys["2_KEY"] = sf::Keyboard::Num2;
@@ -95,8 +95,8 @@ SettingsLoader::~SettingsLoader()
 {
 	_ifs->close();
 	delete _ifs;
-	_ofs->close();
-	delete _ofs;
+//	_ofs->close();
+//	delete _ofs;
 }
 
 std::string     SettingsLoader::removeSpaces(std::string const& str) const
@@ -195,6 +195,8 @@ Volume      SettingsLoader::getVolume() const
     int     music = 0;
     Volume ret(50, 50, 50);
 
+	std::cout << "GET VOLUME !!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+
     if (_fileExists == false)
         return (ret);
     global = getGlobalVolume();
@@ -203,7 +205,7 @@ Volume      SettingsLoader::getVolume() const
     ret.setEffects(effects);
     ret.setGlobal(global);
     ret.setMusic(music);
-
+	std::cout << "global : " << global << ", music : " << music << ", effects : " << effects << std::endl;
     return (ret);
 }
 
@@ -312,6 +314,7 @@ std::vector<Bind>	SettingsLoader::createDefaultBinds() const
 
 std::vector<Bind>   SettingsLoader::getBinds() const
 {
+	std::cout << "get Binds" << std::endl;
 	Bind    moveUp(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
 	Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
 	Bind    moveLeft(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
@@ -323,31 +326,31 @@ std::vector<Bind>   SettingsLoader::getBinds() const
 	Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
 	std::vector<Bind>   binds;
 
-    if (_fileExists == false)
+	binds.push_back(moveUp);
+	binds.push_back(moveDown);
+	binds.push_back(moveLeft);
+	binds.push_back(moveRight);
+	binds.push_back(shoot);
+	binds.push_back(weapon1);
+	binds.push_back(weapon2);
+	binds.push_back(weapon3);
+	binds.push_back(leaveGame);
+	if (_fileExists == false)
       return (createDefaultBinds());
-
     std::vector<std::string>keys = getKeys();
     std::vector<std::string>joysticks = getJoysticks();
-    std::vector<std::string>::const_iterator itk = keys.begin();
+	std::vector<std::string>::const_iterator itk = keys.begin();
     std::vector<Bind>::iterator itb = binds.begin();
     std::vector<std::string>::const_iterator endk = keys.end();
     std::vector<std::string>::const_iterator itj = joysticks.begin();
 
-    binds.push_back(moveUp);
-    binds.push_back(moveDown);
-    binds.push_back(moveLeft);
-    binds.push_back(moveRight);
-    binds.push_back(shoot);
-    binds.push_back(weapon1);
-    binds.push_back(weapon2);
-    binds.push_back(weapon3);
-    binds.push_back(leaveGame);
     while (itk != endk)
       {
-	(*itb).setKey(stringToKey(*itk));
-	(*itb).setJoystick(stringToJoystick(*itj));
-	itk++;
-	itj++;
+		itb->setKey(stringToKey(*itk));
+		itb->setJoystick(stringToJoystick(*itj));
+		itk++;
+		itj++;
+		itb++;
       }
     return (binds);
 }
@@ -460,7 +463,8 @@ std::string	SettingsLoader::settingsToString(Settings const& settings) const
 
 Settings	*SettingsLoader::parseSettings() const
 {
-  Settings	*ret = new Settings(getVolume(), getBinds(), getDefaultDifficulty());
+	Volume vol = getVolume();
+  Settings	*ret = new Settings(vol, getBinds(), getDefaultDifficulty());
 
   return (ret);
 }

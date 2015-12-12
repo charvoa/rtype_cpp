@@ -9,8 +9,6 @@
 //
 
 #include <iostream>
-#include <Slider.hh>
-#include <KeyButton.hh>
 #include <ButtonFactory.hh>
 
 void			ButtonFactory::create(Vector2 pos, std::string &title)
@@ -38,20 +36,22 @@ void			ButtonFactory::create(Vector2 pos, std::string &title)
 
 }
 
-void			ButtonFactory::createSlider(Vector2 pos)
+Slider			*ButtonFactory::createSlider(Vector2 pos, std::string& title, float xmin, float xmax)
 {
-	Slider		*button = new Slider();
+	Slider		*button = new Slider(title);
 
 	button->setState(Button::StateButton::NORMAL);
 
-	button->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
+	button->setLimit(xmin, xmax);
+	button->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_sliderNormal);
 	button->getSprite().scale(0.7);
-	button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._y / 2);
+	button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_sliderNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_sliderNormal->getSize()._y / 2);
 	button->getSprite().setPosition(pos._x, pos._y);
 
 	(RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
 
 	(RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(Text());
+	return (button);
 }
 
 void			ButtonFactory::createKeyButton(Vector2 pos, std::string &title)

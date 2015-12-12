@@ -30,7 +30,7 @@ public:
   Texture		*_buttonSelect;
 
   Texture		*_sliderNormal;
-  Texture		*_sliderSelect;
+  Texture		*_slide;
 
   Texture		*_keyButtonNormal;
   Texture		*_keyButtonHighlight;

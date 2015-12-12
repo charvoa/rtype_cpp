@@ -7,7 +7,7 @@
 class Slider :	public AMenuElement
 {
 public:
-	Slider();
+	Slider(std::string const&);
 	~Slider();
 
 	std::string	getTitle() const;
@@ -22,8 +22,11 @@ public:
 	void		updateOnMove(std::pair<unsigned int, unsigned int>);
 	float		getPosY();
 	float		getPosX();
+	void		setLimit(float, float);
 
 private:
+	float		_minX;
+	float		_maxX;
 	bool		_locked;
 	Button::StateButton	_state;
 	std::string	_title;

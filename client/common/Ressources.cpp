@@ -15,12 +15,14 @@ Ressources::Ressources()
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();
   _buttonSelect = new Texture();
+  _slide = new Texture();
+  _sliderNormal = new Texture();
 
   _buttonNormal->loadFromFile("../common/misc/button_normal.png");
   _buttonHighlight->loadFromFile("../common/misc/button_highlight.png");
   //  _buttonSelect->loadFromFile("../common/misc/button_normal.png");
-  // _sliderNormal->loadFromFile();
-  // _sliderSelect->loadFromFile();
+  _slide->loadFromFile("../common/misc/slider.png");
+  _sliderNormal->loadFromFile("../common/misc/slideButton.png");
   // _keyButtonNormal->loadFromFile();
   // _keyButtonHighlight->loadFromFile();
 
