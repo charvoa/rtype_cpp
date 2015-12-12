@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Wed Dec  9 18:17:25 2015 Nicolas Charvoz
+// Last update Sat Dec 12 03:12:08 2015 Serge Heitzler
 //
 
 #ifndef				__NETWORK_HPP__
