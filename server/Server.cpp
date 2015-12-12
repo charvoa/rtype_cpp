@@ -80,25 +80,18 @@ void *newGameThread(void *data)
   std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   std::stringstream ss;
-  int i = 0;
-
 
   if ((me->_gameManager.createGame(p, c, s->frame.data, s->port)))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
-
-
-
-      //JORIS LA J4ENVOIE LE PORT SUR LE QUEL SE CONNECTER MAIS ENSUITE JE SAIS PAS OU PLACER LENVOI DE L'ID
-
       for (std::vector<Client *>::iterator it = c.begin();
 	   it != c.end() ; ++it)
 	{
 	  ss << me->_port;
 	  ss << ";";
-	  ss << "0";
-	  std::cout << "DATA SEND : " << ss.str().c_str() << std::endl;
-	  ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_INIT_UDP,
+	  ss << (*it)->getSocket()->getFd();
+	  ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)
+								S_INIT_UDP,
 								CRC::calcCRC(ss.str().c_str()),
 								0,
 								ss.str().c_str());
@@ -107,18 +100,8 @@ void *newGameThread(void *data)
 	  ss.str("");
 	  ss.clear();
 	}
-
-
-
-
-
-
       me->_roomManager.deleteRoom(s->frame.data);
       me->_gameManager.getGameById(s->frame.data).run();
-
-
-
-
     }
   else
     {

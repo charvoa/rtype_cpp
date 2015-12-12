@@ -16,6 +16,7 @@
 #include <ThreadUnix.hpp>
 #endif
 
+#include <memory>
 #include <iostream>
 #include <GamePanel.hh>
 #include <Client.hh>

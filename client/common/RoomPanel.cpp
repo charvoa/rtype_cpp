@@ -78,7 +78,7 @@ void	        RoomPanel::setUserInterface()
   this->createPlayers();
 }
 
-unsigned int	RoomPanel::getNbPlayers()
+unsigned int	RoomPanel::getNbPlayers() const
 {
   return _nbPlayers;
 }

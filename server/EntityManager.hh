@@ -5,7 +5,6 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Fri Dec 11 16:36:45 2015 Joris Bertomeu
 //
 
 #ifndef _ENTITYMANAGER_HH_
