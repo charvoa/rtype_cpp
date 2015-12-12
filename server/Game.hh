@@ -78,7 +78,7 @@ public:
   void handleMove(void*, Client*);
   void handleCommand(void*, Client*);
   void handleShoot(void*, Client*);
-
+  bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
   void updateScore(Player*, Game::scoreDef);
   void updateLife(Player*, bool);

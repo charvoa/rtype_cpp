@@ -96,7 +96,6 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 
 std::pair<int, int> Game::getDirections(const std::string &dir)
 {
-
   std::pair<int, int> final;
 
   if (dir == "1")
@@ -121,6 +120,15 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
   return final;
 }
 
+bool Game::checkMove(int x, int y)
+{
+  if (x < 0 || x > 255)
+    return false;
+  else if (y < 0 || y > 255)
+    return false;
+  return true;
+}
+
 void Game::handleMove(void *data, Client *client)
 {
   std::cout << "Game :: handleMove" << std::endl;
@@ -140,7 +148,8 @@ void Game::handleMove(void *data, Client *client)
 
     std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
     std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
-    player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+    if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
+      player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
     std::cout << "AFTER UPDATE" << std::endl;
 
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
