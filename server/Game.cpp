@@ -72,7 +72,7 @@ Player *Game::getPlayerByClient(Client *client)
        ++it)
     {
       Player *ptmp = reinterpret_cast<Player*>(*it);
-      if (ptmp->getClient().getUDPSocket()->getFd() == client->getSocket()->getFd())
+      if (ptmp->getClient().getUDPSocket()->isEqualTo(client->getSocket()))
 	return (ptmp);
     }
   throw std::logic_error("Cannot find this player by client");
