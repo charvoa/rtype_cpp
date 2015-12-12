@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 18:46:17 2015 Nicolas Charvoz
+// Last update Sat Dec 12 19:07:20 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -59,6 +59,11 @@ public:
   void addCommandToQueue(ANetwork::t_frame);
   Client *getClientBySocket(ISocket*) const;
   Player *getPlayerByClient(Client*);
+  void handleHandshakeUDP(void*, Client*);
+  void handleMove(void*, Client*);
+  void handleCommand(void*, Client*);
+
+
 
   std::vector<Client *> _clients;
   ANetwork *_network;
