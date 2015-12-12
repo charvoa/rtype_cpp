@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Sat Dec 12 13:12:25 2015 Serge Heitzler
+// Last update Sun Dec 13 06:49:35 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -36,12 +36,16 @@ public:
   Texture		*_backgroundRoomPanel;
   Texture		*_backgroundBlack;
   Texture		*_backgroundSettingsPanel;
+  Texture		*_backgroundGame1;
+  Texture		*_backgroundGame2;
+  Texture		*_backgroundGame3;
   Texture		*_earth;
   Texture		*_logo;
   Texture		*_cockpit;
   Texture		*_greyPanel;
   
   Texture		*_hud;
+  Texture		*_header;
   Texture		*_heart;
   Texture		*_riffleHUD;
   Texture		*_rocket;

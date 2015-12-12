@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Sat Dec 12 06:07:52 2015 Serge Heitzler
+// Last update Sun Dec 13 05:20:54 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
@@ -30,7 +30,7 @@ public:
   void			move(float x, float y);
   void			rotate(float angle);
   void			setTextureRect(float posX, float posY, float width, float height);
-  std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>>			getGlobalBounds();
+  std::pair<std::pair<int, int>, std::pair<int, int>>			getGlobalBounds();
   sf::Sprite		&getSprite();
   void		        setIfScale(bool value);
   bool		        isScale();

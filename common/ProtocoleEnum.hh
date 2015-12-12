@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Sat Dec 12 05:38:07 2015 Joris Bertomeu
+// Last update Sat Dec 12 05:50:48 2015 Joris Bertomeu
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -26,7 +26,6 @@ typedef enum E_Command
     C_LOAD_SPRITE_SUCCESS = 11,
     C_LOAD_SPRITE_ERROR = 12,
     C_LOAD_SPRITE_IN_PROGRESS = 13,
-    C_SEND_MD5 = 14
   } E_Command;
 
 typedef enum RequestFromServer
@@ -50,8 +49,6 @@ typedef enum RequestFromServer
     S_NEW_WAVE = 116,
     S_END_GAME = 117,
     S_LOAD_SPRITES = 118,
-    S_CHECK_MD5 = 119,
-    S_FILE_TOTAL_SIZE = 120
   } RequestFromServer;
 
 #endif /* PROTOCOLEENUM_HH_ */

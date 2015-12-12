@@ -64,6 +64,15 @@ void	SettingsPanel::setUserInterface()
 	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7));
 	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7));
 
+	std::vector<Bind>::const_iterator it = _tmp->getBinds().begin();
+	std::vector<Bind>::const_iterator end = _tmp->getBinds().end();
+
+/*	while (it != end)
+	{
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), "getString");
+		++it;
+	}*/
+
 	_functions.push_back((APanel::funcs)&SettingsPanel::back);
 	_functions.push_back((APanel::funcs)&SettingsPanel::save);
 
