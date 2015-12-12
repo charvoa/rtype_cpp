@@ -13,8 +13,8 @@ Player::Player(int id, const Client &c) : AEntity(id)
 {
   _client = c;
   _name = "player" + std::to_string(id);
-  addSystem(E_POSITION);
-  addSystem(E_HEALTH);
+  addSystem(C_POSITION);
+  addSystem(C_HEALTH);
 }
 
 Player::~Player() {}

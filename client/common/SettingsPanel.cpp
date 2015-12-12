@@ -16,7 +16,6 @@
 SettingsPanel::SettingsPanel()
 {
     _tmp = new Settings("../../config/PersonnalConfig.ini");
-	std::cout << "global volume : " << (_tmp->getVolume()).getGlobal() << std::endl;
 }
 
 SettingsPanel::~SettingsPanel()
@@ -62,10 +61,8 @@ void	SettingsPanel::setUserInterface()
 
 	// Button
 
-	std::string name = "BACK";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), name);
-	name = "SAVE";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), name);
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7));
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7));
 
 	_functions.push_back((APanel::funcs)&SettingsPanel::back);
 	_functions.push_back((APanel::funcs)&SettingsPanel::save);

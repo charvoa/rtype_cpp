@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Sat Dec 12 11:59:22 2015 Louis Audibert
+// Last update Sun Dec 13 08:36:10 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -24,13 +24,13 @@ ASystem *SystemManager::getSystemByComponent(E_Component type)
 {
   for (std::vector<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
     {
-      if ((dynamic_cast<SystemGun*>(*it)) && (type == E_MISSILE || type == E_RIFLE || type == E_LASER))
+      if ((dynamic_cast<SystemGun*>(*it)) && (type == C_MISSILE || type == C_RIFLE || type == C_LASER))
 	return (*it);
-      else if ((dynamic_cast<SystemPos*>(*it)) && type == E_POSITION)
+      else if ((dynamic_cast<SystemPos*>(*it)) && type == C_POSITION)
 	return (*it);
-      else if ((dynamic_cast<SystemHealth*>(*it)) && type == E_HEALTH)
+      else if ((dynamic_cast<SystemHealth*>(*it)) && type == C_HEALTH)
 	return (*it);
-      else if ((dynamic_cast<SystemHitbox*>(*it)) && type == E_HITBOX)
+      else if ((dynamic_cast<SystemHitbox*>(*it)) && type == C_HITBOX)
 	return (*it);
     }
   return (NULL);
@@ -42,13 +42,13 @@ void	SystemManager::addSystemByType(E_Component type)
     {
       switch (type)
 	{
-	case E_POSITION:
+	case C_POSITION:
 	  _systems.push_back(new SystemPos());
 	  break;
-	case E_HEALTH:
+	case C_HEALTH:
 	  _systems.push_back(new SystemHealth());
 	  break;
-	case E_HITBOX:
+	case C_HITBOX:
 	  _systems.push_back(new SystemHitbox());
 	default:
 	  _systems.push_back(new SystemGun(type));

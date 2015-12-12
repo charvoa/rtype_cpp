@@ -20,6 +20,9 @@ public:
 	bool		updateOnPress(std::pair<unsigned int, unsigned int>);
 	void		updateOnRelease(std::pair<unsigned int, unsigned int>);
 	void		updateOnMove(std::pair<unsigned int, unsigned int>);
+	float		getPosY();
+	float		getPosX();
+
 private:
 	bool		_locked;
 	Button::StateButton	_state;

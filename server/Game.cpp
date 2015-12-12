@@ -117,7 +117,7 @@ void Game::handleMove(void *data, Client *client)
 
     ComponentPosition *pPlayer =
       reinterpret_cast<ComponentPosition*>(player->getSystemManager()
-				  ->getSystemByComponent(E_POSITION)
+				  ->getSystemByComponent(C_POSITION)
 				  ->getComponent());
     //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
       //	      << std::cout << pPlayer->getY();
@@ -140,7 +140,7 @@ void Game::updateLife(Player *p, bool reset)
 {
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
-				->getSystemByComponent(E_POSITION)
+				->getSystemByComponent(C_POSITION)
 				->getComponent());
   if (!reset)
     p->update(hP->getLife() - 1);
@@ -229,7 +229,7 @@ void Game::initPlayersPosition()
   Random	rand(0,255);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
-      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(x, rand.generate<int>());
     }
 }
@@ -243,7 +243,7 @@ void Game::sendGameData()
     {
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
-	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
 	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))

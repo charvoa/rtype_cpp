@@ -34,6 +34,8 @@ public:
   sf::Sprite		&getSprite();
   void		        setIfScale(bool value);
   bool		        isScale();
+  float			getPosX() const;
+  float			getPosY() const;
   
 private:
 

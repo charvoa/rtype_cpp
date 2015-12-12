@@ -86,3 +86,13 @@ std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigne
 
   return std::make_pair(std::make_pair(posX, posY), std::make_pair(width, height));
 }
+
+float		Sprite::getPosX() const
+{
+	return (_sprite.getPosition().x);
+}
+
+float		Sprite::getPosY() const
+{
+	return (_sprite.getPosition().y);
+}
