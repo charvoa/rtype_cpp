@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 10:58:56 2015 Louis Audibert
-// Last update Sat Dec 12 11:05:46 2015 Louis Audibert
+// Last update Sat Dec 12 11:52:36 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMHITBOX_HH_
@@ -20,6 +20,8 @@ class SystemHitbox : public ASystem
 public:
   SystemHitbox();
   ~SystemHitbox();
+
+  bool	update(std::vector<Case*> hitbox);
 };
 
 #endif /* _SYSTEMHITBOX_HH */
