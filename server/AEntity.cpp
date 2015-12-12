@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 12 11:34:22 2015 Louis Audibert
+// Last update Sat Dec 12 11:51:20 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -40,6 +40,15 @@ bool	AEntity::update(int health)
 {
   if (_systemManager.getSystemByComponent(E_HEALTH))
     dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(E_HEALTH))->update(health);
+  else
+    return (false);
+  return (true);
+}
+
+bool	AEntity::update(std::vector<Case*> hitbox)
+{
+  if (_systemManager.getSystemByComponent(E_HITBOX))
+    dynamic_cast<SystemHitbox*>(_systemManager.getSystemByComponent(E_HITBOX))->update(hitbox);
   else
     return (false);
   return (true);

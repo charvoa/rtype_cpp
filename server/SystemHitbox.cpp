@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 11:06:54 2015 Louis Audibert
-// Last update Sat Dec 12 11:23:51 2015 Louis Audibert
+// Last update Sat Dec 12 11:54:38 2015 Louis Audibert
 //
 
 #include <SystemHitbox.hh>
@@ -18,4 +18,10 @@ SystemHitbox::SystemHitbox()
 SystemHitbox::~SystemHitbox()
 {
   std::cout << "SystemHitbox destroyed" << std::endl;
+}
+
+bool	SystemHitbox::update(std::vector<Case*> hitbox)
+{
+  dynamic_cast<Hitbox*>(_component)->setHitbox(hitbox);
+  return (true);
 }
