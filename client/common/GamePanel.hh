@@ -5,12 +5,12 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 12 02:11:49 2015 Serge Heitzler
+// Last update Sat Dec 12 02:45:37 2015 Serge Heitzler
 //
 
 
-#ifndef GAMEPANEL_H
-#define GAMEPANEL_H
+#ifndef GAMEPANEL_HH_
+#define GAMEPANEL_HH_
 
 #include <APanel.hh>
 #include <PlayerIG.hh>
@@ -23,19 +23,17 @@ public:
   GamePanel();
   ~GamePanel();
 
-  void render();
   std::vector<Sprite *> &getSprites();
   PlayerIG	*getPlayerByName(const std::string &name);
   static void		setLife(const std::string &name, int life);
-  Text			*getTeamScore();
+  Text			&getTeamScore();
   static	void	setTeamScore(int);
   static	void	display(std::vector<std::string> &vector);
-private:
 
-  Text			*_teamScore;
+private:
   
   std::vector<PlayerIG *> _players;
   std::vector<Sprite *> _sprites;
 };
 
-#endif // GAMEPANEL_H
+#endif /* GAMEPANEL_HH_ */

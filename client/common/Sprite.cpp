@@ -5,14 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Mon Dec  7 12:17:43 2015 Serge Heitzler
+// Last update Sat Dec 12 06:08:39 2015 Serge Heitzler
 //
 
 #include "Sprite.hh"
 
 Sprite::Sprite()
 {
-  
+  _isScale = false;
 }
 
 Sprite::~Sprite()
@@ -43,6 +43,7 @@ void			Sprite::setPosition(float x, float y)
 void			Sprite::scale(float ratio)
 {
   _sprite.scale(ratio, ratio);
+  _isScale = true;
 }
 
 void			Sprite::setOrigin(float x, float y)
@@ -59,6 +60,16 @@ void			Sprite::move(float x, float y)
 void			Sprite::rotate(float angle)
 {
   _sprite.rotate(angle);
+}
+
+void			Sprite::setIfScale(bool value)
+{
+  _isScale = value;
+}
+
+bool			Sprite::isScale()
+{
+  return _isScale;
 }
 
 sf::Sprite     		&Sprite::getSprite()

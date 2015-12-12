@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Sat Dec 12 02:05:30 2015 Serge Heitzler
+// Last update Sat Dec 12 03:18:22 2015 Serge Heitzler
 //
 
 #ifndef PLAYERIG_HH_
@@ -28,6 +28,8 @@ private:
   std::string			_username;
 
   Text				*_score;
+
+  Text				*_waveNumber;
 
   Sprite			*_spaceShip;
 
