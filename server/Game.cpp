@@ -1,11 +1,11 @@
-OB//
+//
 // Game.cpp for  in /home/nicolaschr/rendu/rtype_cpp/server
 //
 // Made by Nicolas Charvoz
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 13:21:51 2015 Antoine Garcia
+// Last update Sat Dec 12 13:55:19 2015 Antoine Garcia
 //
 
 #include <Game.hh>
@@ -156,9 +156,9 @@ void *readThread(void *sData)
 
 bool Game::run()
 {
-  bool	launchTimerStage = true;
-  int nbEnemy = 5;
-  Timer	Timer(launchTimerStage);
+  Timer	timer(true);
+  int	speed = 3;
+  int	nbEnemyMax = 5 * _stage * 1 * _eM.getEntitiesByType(E_PLAYER).size();
   std::cout << "Game :: run() " << std::endl;
 
   ThreadFactory *tF = new ThreadFactory;
@@ -173,8 +173,11 @@ bool Game::run()
   t1->run();
   while (true)
     {
-      if (timer.elapsed().count() >= 5)
-	std::cout << "ADD MONSTER" << std::endl;
+      if (timer.elapsed().count() >= (speed/_stage))
+	{
+	  timer.reset();
+	  std::cout << "ADD MONSTER" << std::endl;
+	}
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       // nbEnemy = 5 * stage * nbEnemy;
     }

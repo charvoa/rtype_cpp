@@ -60,6 +60,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
+  ../common/Slider.cpp
   )
 
 

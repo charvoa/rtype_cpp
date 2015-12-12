@@ -24,9 +24,11 @@ add_executable(server_rtype
   Laser.cpp
   Rifle.cpp
   Position.cpp
+  Hitbox.cpp
   SystemHealth.cpp
   SystemPos.cpp
   SystemGun.cpp
+  SystemHitbox.cpp
   SystemManager.cpp
   AEntity.cpp
   EntityManager.cpp

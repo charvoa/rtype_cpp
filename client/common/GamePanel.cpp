@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 11:11:20 2015 Serge Heitzler
+// Last update Sat Dec 12 13:03:37 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -43,13 +43,14 @@ ANetwork::t_frame a;
 	  std::cout << e.what() << std::endl;
 	}
     }
-  return s;  
+  return s;
 }
 
 GamePanel::GamePanel()
 {
   RenderWindow *window = RenderWindow::getInstance();
   //getInputManager().setInputType(InputType::GAME_INPUT);
+
   // std::unique_ptr<AThread> t(new Thread(1));
   // char str1[] = "";
   // (void) str1;
@@ -60,7 +61,6 @@ GamePanel::GamePanel()
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
-  std::cout << "MA BITE"  << std::endl;
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
@@ -73,12 +73,12 @@ GamePanel::GamePanel()
 
   Text	*waveNumber = new Text();
 
-  
+
   waveNumber->setString("0");
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
   waveNumber->setOrigin(waveNumber->getText().getGlobalBounds().width / 2, waveNumber->getText().getGlobalBounds().height / 2);
-  waveNumber->setPosition(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95));
+  waveNumber->setPosition(Vector2(window->getSize()._x * 0.88, window->getSize()._y * 0.92));
   waveNumber->setColor(Color::WHITE);
   _labels.push_back(*waveNumber);
 
@@ -95,6 +95,7 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
   _backgrounds.push_back(*hud);
 
+
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -105,12 +106,17 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
 
 
   // INIT EN DUR POUR TEST
-  
+
   Sprite *flag = new Sprite;
   flag->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
   flag->setPosition(0, 0);
   flag->scale(0.2);
-  _inGame.push_back(*flag);
+  //  _inGame.push_back(*flag);
+
+
+
+  _mainPlayer = new MainPlayer(1);
+  
 }
 
 GamePanel::~GamePanel() {}
@@ -123,7 +129,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   int	posX = std::atoi(vector.at(1).c_str());
   int	posY = std::atoi(vector.at(2).c_str());
   int	scale = std::atoi(vector.at(3).c_str());
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).setPosition(posX, posY);
   if (!static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).isScale())
     static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).scale(scale);
@@ -194,6 +200,7 @@ this->drawLabels();
 this->drawInGame();
 this->_mainPlayer->render();
 this->drawOtherPlayer();
+  std::cout << "MA CBITE"  << std::endl;
 }
 
 void		GamePanel::drawOtherPlayer()

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Wed Dec  9 06:48:09 2015 Louis Audibert
+// Last update Sat Dec 12 11:59:22 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -30,6 +30,8 @@ ASystem *SystemManager::getSystemByComponent(E_Component type)
 	return (*it);
       else if ((dynamic_cast<SystemHealth*>(*it)) && type == E_HEALTH)
 	return (*it);
+      else if ((dynamic_cast<SystemHitbox*>(*it)) && type == E_HITBOX)
+	return (*it);
     }
   return (NULL);
 }
@@ -46,6 +48,8 @@ void	SystemManager::addSystemByType(E_Component type)
 	case E_HEALTH:
 	  _systems.push_back(new SystemHealth());
 	  break;
+	case E_HITBOX:
+	  _systems.push_back(new SystemHitbox());
 	default:
 	  _systems.push_back(new SystemGun(type));
 	  break;
