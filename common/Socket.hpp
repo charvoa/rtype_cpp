@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sat Dec 12 09:44:48 2015 Joris Bertomeu
+// Last update Sat Dec 12 13:11:44 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -142,7 +142,6 @@ private:
     ret = ::sendto(this->_fd, data, size, 0, (struct sockaddr*) &_me, meSize);
     if (ret < 0)
       throw (std::logic_error("Socket :: UDP :: Write :: Error while writing"));
-    printf("-- Sent DATA UDP : %s --\n", ((ANetwork::t_frame*) data)->data);
     return (ret);
   };
 };
