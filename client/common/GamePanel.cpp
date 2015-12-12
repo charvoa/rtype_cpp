@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 13:03:37 2015 Serge Heitzler
+// Last update Sat Dec 12 13:39:33 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -116,7 +116,12 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
 
 
   _mainPlayer = new MainPlayer(1);
-  
+
+  other1 = new OtherPlayer(1, 2);
+  other2 = new OtherPlayer(2, 3);
+
+  _otherPlayers.push_back(other1);
+  _otherPlayers.push_back(other2);
 }
 
 GamePanel::~GamePanel() {}
