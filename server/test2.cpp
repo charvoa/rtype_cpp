@@ -7,8 +7,12 @@ void		my_cb(int p, void *data) {
 }
 
 int	main() {
-  File	file;
+  int	port = 6545, i = 1;
 
-  file.receiveMe("10.16.252.249", 4565, "./recv/", my_cb, NULL);
-  printf("\nFinished !\n");
+  while (1) {
+    File	file;
+
+    file.receiveMe("10.16.252.249", port++, "./recv/", my_cb, NULL);
+    printf("\nSent %d Finished !\n", i++);
+  }
 }
