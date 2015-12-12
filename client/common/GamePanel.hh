@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 12 10:40:46 2015 Serge Heitzler
+// Last update Sat Dec 12 11:11:51 2015 Serge Heitzler
 //
 
 
@@ -28,7 +28,9 @@ public:
   OtherPlayer	*getPlayerByName(const std::string &name);
   static void		setLife(const std::string &name, int life);
   Text			&getTeamScore();
-  static	void	setTeamScore(int);
+  static	void	setTeamScore(unsigned int value);
+  Text			&getCurrentWave();
+  static	void	setCurrentWave(unsigned int value);
   static	void	display(std::vector<std::string> &vector);
   void		render();
   void		drawOtherPlayer();

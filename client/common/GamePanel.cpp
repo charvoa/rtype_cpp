@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 10:47:18 2015 Serge Heitzler
+// Last update Sat Dec 12 11:11:20 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -48,19 +48,19 @@ ANetwork::t_frame a;
 
 GamePanel::GamePanel()
 {
-RenderWindow *window = RenderWindow::getInstance();
-  getInputManager().setInputType(InputType::GAME_INPUT);
-
-  std::unique_ptr<AThread> t(new Thread(1));
-  char str1[] = "";
-  (void) str1;
-  t->attach(&readUDP, (void *)str1);
-  t->run();
+  RenderWindow *window = RenderWindow::getInstance();
+  //getInputManager().setInputType(InputType::GAME_INPUT);
+  // std::unique_ptr<AThread> t(new Thread(1));
+  // char str1[] = "";
+  // (void) str1;
+  // t->attach(&readUDP, (void *)str1);
+  // t->run();
   
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
+  std::cout << "MA BITE"  << std::endl;
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
@@ -104,7 +104,6 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
 
 
 
-
   // INIT EN DUR POUR TEST
   
   Sprite *flag = new Sprite;
@@ -141,11 +140,23 @@ Text		&GamePanel::getTeamScore()
   return _labels.at(0);
 }
 
-void		GamePanel::setTeamScore(int a)
+Text		&GamePanel::getCurrentWave()
+{
+  return _labels.at(1);
+}
+
+void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(a));
+static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
+}
+
+void		GamePanel::setTeamScore(unsigned int value)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(value));
 }
 
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
