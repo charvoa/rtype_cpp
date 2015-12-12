@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Thu Dec 10 23:58:52 2015 Nicolas Charvoz
+// Last update Sat Dec 12 15:03:46 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -40,7 +40,6 @@ private:
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
   std::vector<Client *> _clients;
-
 public:
 
   struct dataThread {
@@ -62,5 +61,7 @@ public:
   ANetwork *_network;
 
 };
+
+void handleCommand(void*, void*);
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 00:05:17 2015 Nicolas Charvoz
+// Last update Sat Dec 12 15:03:08 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -18,7 +18,7 @@ Game::Game()
 Game::Game(const Parameters &params_, std::vector<Client *> &client_,
 	   const std::string &id_, int port_) : _params(params_), _id(id_)
 {
-  //  srand(time(NULL));
+  srand(time(NULL));
 
   this->_clients = client_;
   this->_network = new Network();
@@ -43,10 +43,19 @@ void Game::setParameters(Parameters &p)
   _params = p;
 }
 
-void handleCommand(void *data)
+void handleCommand(void *data, void *sData)
 {
+  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
+
+  ANetwork *n = s->network;
+  Game *me = s->game;
+
   std::cout << "Game :: handleCommand" << std::endl;
-  std::cout << std::string(((ANetwork::t_frame*)data)->data) << std::endl;
+  std::cout << "Key: |" << ((ANetwork::t_frame*)data)->keyPintade << "|" << std::endl;
+  std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest << "|" << std::endl;
+  std::cout << "CRC: |" << ((ANetwork::t_frame*)data)->crc << "|" << std::endl;
+  std::cout << "Size of Data: |" << ((ANetwork::t_frame*)data)->sizeData << "|" << std::endl;
+  std::cout << "Data: |" << std::string(((ANetwork::t_frame*)data)->data) << "|" << std::endl;
 }
 
 void *readThread(void *sData)
@@ -63,18 +72,29 @@ void *readThread(void *sData)
     {
       std::cout << "Je suis bloqué avant le select .." << std::endl;
       Client *client = new Client(n->select());
+      std::cout << "APres le select()" << std::endl;
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
 	{
-	  std::cout << "CA RENTRE DANS LE IF" << std::endl;
 	  n->unlistenSocket(client->getSocket());
 	  continue;
 	}
-      std::cout << "DATA : "<<
-	std::string(((ANetwork::t_frame*)data)->data) << std::endl;
-      handleCommand(data);
-      client->getSocket()->write((void*)CreateRequest::create(1, 2, 3, "Thank You",
-							      true),
-	    sizeof(ANetwork::t_frame));
+
+      handleCommand(data, sData);
+      std::stringstream ss;
+      ss << "0;30;30";
+
+      while (1)
+	{
+	  try {
+	    ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
+	    client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
+	    ss.str("");
+	    ss.clear();
+	  }
+	  catch (const std::exception &e) {
+	    exit(0);
+	  }
+	}
     }
 }
 
@@ -97,6 +117,7 @@ bool Game::run()
   t1->run();
   while (true)
     {
+      //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       nbEnemy = 5 * stage * nbEnemy;
     }
 
