@@ -5,16 +5,26 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Fri Dec 11 17:29:58 2015 Nicolas Girardot
+// Last update Sat Dec 12 02:02:55 2015 Serge Heitzler
 //
 
 #include <PlayerIG.hh>
 
 PlayerIG::PlayerIG()
 {
-  _life = new Text();
   _nbrLife = 3;
-  _name = new Text();
+
+  Sprite	*heart1 = new Sprite();
+  Sprite	*heart2 = new Sprite();
+  Sprite	*heart3 = new Sprite();
+
+  _score = new Text();
+  _spaceShip = new Sprite();
+  
+  _hearts.push_back(heart1);
+  _hearts.push_back(heart2);
+  _hearts.push_back(heart3);
+  
 }
 
 PlayerIG::~PlayerIG()
@@ -27,13 +37,12 @@ void	PlayerIG::setLife(unsigned int i)
   _nbrLife = i;
 }
 
-const std::string &PlayerIG::getName()
+const std::string &PlayerIG::getUsername()
 {
-  return _nameValue;
+  return _username;
 }
 
-void	PlayerIG::setName(const std::string &name)
+void	PlayerIG::setUsername(const std::string &username)
 {
-  _nameValue = name;
-  _name->setString(name);
+  _username = username;
 }
