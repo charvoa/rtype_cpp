@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Sun Dec 13 02:06:58 2015 Antoine Garcia
+// Last update Sat Dec 12 05:11:51 2015 Joris Bertomeu
 //
 
 
@@ -41,7 +41,7 @@ std::string	RoomManager::generateId()
 
 void	RoomManager::createNewRoom(Client *client)
 {
-  Room	room(generateId(), client);
+  Room	room(generateId(), client, this->_botManager);
   _rooms.push_back(room);
   std::string	sendData = "player1;" + room.getId() + ";1";
   ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
@@ -84,4 +84,9 @@ void	RoomManager::deleteRoom(const std::string &id)
 	  return;
 	}
     }
+}
+
+void		RoomManager::setBotManager(BotManager *bm)
+{
+  this->_botManager = bm;
 }

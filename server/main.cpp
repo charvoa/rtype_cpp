@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Sat Dec 12 11:49:09 2015 Louis Audibert
+// Last update Sat Dec 12 04:07:45 2015 Joris Bertomeu
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -24,23 +24,6 @@
 int		main(int ac, char **av)
 {
   Server	*s = new Server();
-  EntityFactory	ef;
-  Bot		*entity;
-  int		id = 41;
-
-# ifdef _WIN32
-  entity = (Bot*) (ef.createEntity("../libs/bot_1.dll", id));
-  entity->update();
-  entity = (Bot*) (ef.createEntity("../libs/bot_2.dll", id));
-  entity->update();
-# else
-  entity = (Bot*)(ef.createEntity("../libs/bot_1.so", id));
-  entity->update();
-  entity = (Bot*)(ef.createEntity("../libs/bot_2.so", id));
-  entity->update();
-#endif
-
-  entity->addSystem(E_HITBOX);
 
   (void)ac;
 

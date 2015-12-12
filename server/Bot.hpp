@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Sun Dec 13 02:17:47 2015 Louis Audibert
+// Last update Sat Dec 12 04:37:41 2015 Joris Bertomeu
 //
 
 #ifndef			_BOT_HH_
@@ -16,12 +16,14 @@
 
 class			Bot : public AEntity
 {
+public:
+  std::string _sprite;
+
 private:
   int	_direction;
   int	_x;
   int	_y;
   int	_health;
-  std::string _sprite;
 
   virtual void		generateY();
 
