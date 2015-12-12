@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Sat Dec 12 10:33:52 2015 Nicolas Charvoz
-// Last update Sat Dec 12 15:14:30 2015 Nicolas Charvoz
+// Last update Sat Dec 12 16:31:36 2015 Nicolas Charvoz
 //
 
 #include <Client.hh>
@@ -19,6 +19,10 @@ Client::~Client() {}
 
 ISocket *Client::getSocket() const {
   return _socket;
+}
+
+ISocket *Client::getUDPSocket() const {
+  return _socketUDP;
 }
 
 bool Client::operator==(const Client &other) const

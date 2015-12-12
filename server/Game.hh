@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 15:03:46 2015 Nicolas Charvoz
+// Last update Sat Dec 12 17:47:44 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -39,7 +39,7 @@ private:
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
-  std::vector<Client *> _clients;
+
 public:
 
   struct dataThread {
@@ -56,12 +56,11 @@ public:
   const Client &getClient() const;
   bool run();
   void addCommandToQueue(ANetwork::t_frame);
+  Client *getClientBySocket(ISocket*) const;
 
-
+  std::vector<Client *> _clients;
   ANetwork *_network;
 
 };
-
-void handleCommand(void*, void*);
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 15:03:08 2015 Nicolas Charvoz
+// Last update Sat Dec 12 17:54:32 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -43,7 +43,46 @@ void Game::setParameters(Parameters &p)
   _params = p;
 }
 
-void handleCommand(void *data, void *sData)
+Client *Game::getClientBySocket(ISocket *socket) const
+{
+  for (std::vector<Client*>::const_iterator it = _clients.begin();
+       it != _clients.end(); ++it)
+    {
+      if ((*it)->getUDPSocket() == socket)
+	{
+	  return (*it);
+	}
+    }
+  throw std::logic_error("Cannot find this client by socket");
+}
+
+void handleHandshakeUDP(void *data, void *sData, Client *client)
+{
+  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
+
+  ANetwork *n = s->network;
+  Game *me = s->game;
+
+  std::cout << "Data: |" << std::string(((ANetwork::t_frame*)data)->data)
+	    << "|"
+	    << std::endl;
+
+  for (std::vector<Client*>::iterator it = me->_clients.begin();
+       it != me->_clients.end() ; ++it)
+    {
+      if ((*it)->getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
+	{
+	  (*it)->setUDPSocket(client->getUDPSocket());
+	}
+    }
+}
+
+void handleMove(void *data, void *sData, Client *client)
+{
+  std::cout << "handleMove" << std::endl;
+}
+
+void handleCommand(void *data, void *sData, Client *client)
 {
   Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
 
@@ -51,11 +90,17 @@ void handleCommand(void *data, void *sData)
   Game *me = s->game;
 
   std::cout << "Game :: handleCommand" << std::endl;
-  std::cout << "Key: |" << ((ANetwork::t_frame*)data)->keyPintade << "|" << std::endl;
-  std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest << "|" << std::endl;
-  std::cout << "CRC: |" << ((ANetwork::t_frame*)data)->crc << "|" << std::endl;
-  std::cout << "Size of Data: |" << ((ANetwork::t_frame*)data)->sizeData << "|" << std::endl;
-  std::cout << "Data: |" << std::string(((ANetwork::t_frame*)data)->data) << "|" << std::endl;
+  std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest
+	    << "|" << std::endl;
+  if (((ANetwork::t_frame*)data)->idRequest == C_HANDSHAKE_UDP)
+    {
+      handleHandshakeUDP(data, sData, client);
+    }
+  else if (((ANetwork::t_frame*)data)->idRequest == C_MOVE)
+    {
+      std::cout << "he wants to move" << std::endl;
+      handleMove(data, sData, client);
+    }
 }
 
 void *readThread(void *sData)
@@ -78,11 +123,9 @@ void *readThread(void *sData)
 	  n->unlistenSocket(client->getSocket());
 	  continue;
 	}
-
-      handleCommand(data, sData);
+      handleCommand(data, sData, client);
       std::stringstream ss;
       ss << "0;30;30";
-
       while (1)
 	{
 	  try {
