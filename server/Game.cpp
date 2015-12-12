@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 18:48:13 2015 Nicolas Charvoz
+// Last update Sat Dec 12 19:06:30 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -73,18 +73,10 @@ Player *Game::getPlayerByClient(Client *client)
   throw std::logic_error("Cannot find this player by client");
 }
 
-void handleHandshakeUDP(void *data, void *sData, Client *client)
+void Game::handleHandshakeUDP(void *data, Client *client)
 {
-  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
-
-  Game *me = s->game;
-
-  std::cout << "Data: |" << std::string(((ANetwork::t_frame*)data)->data)
-	    << "|"
-	    << std::endl;
-
-  for (std::vector<Client*>::iterator it = me->_clients.begin();
-       it != me->_clients.end() ; ++it)
+  for (std::vector<Client*>::iterator it = this->_clients.begin();
+       it != this->_clients.end() ; ++it)
     {
       if ((*it)->getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
@@ -93,36 +85,46 @@ void handleHandshakeUDP(void *data, void *sData, Client *client)
     }
 }
 
-void handleMove(void *data, void *sData, Client *client)
+void Game::handleMove(void *data, Client *client)
 {
+  // Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
 
-  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
+  // Game *me = s->game;
 
-  Game *me = s->game;
-
-  std::cout << "handleMove" << std::endl;
+  std::cout << "Game :: handleMove" << std::endl;
   try {
-    Player *player = me->getPlayerByClient(client);
+    Player *player = this->getPlayerByClient(client);
+
+    std::stringstream ss;
+
+    Position *pPlayer =
+      reinterpret_cast<Position*>(player->getSystemManager()
+				  ->getSystemByComponent(E_POSITION)
+				  ->getComponent());
+    std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
+	      << std::cout << pPlayer->getY();
+    //    player->update(1, 1);
+
+    ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
+    client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
   } catch (const std::exception &e) {
     std::cout << "Cannot move" << std::endl;
   }
 
 }
 
-void handleCommand(void *data, void *sData, Client *client)
+void Game::handleCommand(void *data, Client *client)
 {
-  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
-
   std::cout << "Game :: handleCommand" << std::endl;
   std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest
 	    << "|" << std::endl;
   if (((ANetwork::t_frame*)data)->idRequest == C_HANDSHAKE_UDP)
     {
-      handleHandshakeUDP(data, sData, client);
+      this->handleHandshakeUDP(data, client);
     }
   else if (((ANetwork::t_frame*)data)->idRequest == C_MOVE)
     {
-      handleMove(data, sData, client);
+      this->handleMove(data, client);
     }
 }
 
@@ -146,21 +148,7 @@ void *readThread(void *sData)
 	  n->unlistenSocket(client->getSocket());
 	  continue;
 	}
-      handleCommand(data, sData, client);
-      std::stringstream ss;
-      ss << "0;30;30";
-      while (1)
-	{
-	  try {
-	    ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
-	    client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
-	    ss.str("");
-	    ss.clear();
-	  }
-	  catch (const std::exception &e) {
-	    exit(0);
-	  }
-	}
+      me->handleCommand(data, client);
     }
 }
 

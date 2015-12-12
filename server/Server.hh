@@ -6,7 +6,7 @@
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
 
-// Last update Thu Dec 10 23:00:58 2015 Nicolas Charvoz
+// Last update Sat Dec 12 19:07:11 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -50,6 +50,7 @@ public:
   bool createRoom(ANetwork::t_frame frame, void *data);
   bool joinRoom(ANetwork::t_frame frame, void *data);
   bool	playerLeftRoom(ANetwork::t_frame frame, void *data);
+
   RoomManager _roomManager;
   GameManager _gameManager;
   int _port;
