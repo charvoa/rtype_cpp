@@ -36,7 +36,8 @@ add_executable(${EXECUTABLE_NAME}
   ../common/SoundManager.cpp
   ../common/Button.cpp
   ../common/ButtonFactory.cpp
-  ../common/PlayerIG.cpp
+  ../common/MainPlayer.cpp
+  ../common/OtherPlayer.cpp
   ../common/Color.cpp
   ../common/DemoPanel.cpp
   ../common/SFont.cpp
@@ -59,6 +60,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/SettingsLoader.cpp
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
+  ../common/Slider.cpp
   )
 
 

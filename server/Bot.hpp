@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Fri Dec 11 17:32:02 2015 Joris Bertomeu
+// Last update Sat Dec 12 10:15:20 2015 Louis Audibert
 //
 
 #ifndef			_BOT_HH_
@@ -15,6 +15,14 @@
 
 class			Bot : public AEntity
 {
+private:
+  int	_direction;
+  int	_x;
+  int	_y;
+  int	_health;
+
+  virtual void		generateY();
+
 public:
   explicit		Bot(int id);
   virtual		~Bot();

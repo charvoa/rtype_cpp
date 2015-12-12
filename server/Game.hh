@@ -5,13 +5,14 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 15:03:46 2015 Nicolas Charvoz
+// Last update Sat Dec 12 19:07:20 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
 # define _GAME_HH_
 
 # include <ProtocoleEnum.hh>
+# include <Player.hh>
 # include <Parameters.hh>
 # include <EntityManager.hh>
 # include <Client.hh>
@@ -39,7 +40,7 @@ private:
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
-  std::vector<Client *> _clients;
+
 public:
 
   struct dataThread {
@@ -56,12 +57,17 @@ public:
   const Client &getClient() const;
   bool run();
   void addCommandToQueue(ANetwork::t_frame);
+  Client *getClientBySocket(ISocket*) const;
+  Player *getPlayerByClient(Client*);
+  void handleHandshakeUDP(void*, Client*);
+  void handleMove(void*, Client*);
+  void handleCommand(void*, Client*);
 
 
+
+  std::vector<Client *> _clients;
   ANetwork *_network;
 
 };
-
-void handleCommand(void*, void*);
 
 #endif

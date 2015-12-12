@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 13:42:15 2015 Nicolas Girardot
+// Last update Sat Dec 12 08:36:29 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -39,10 +39,10 @@ public:
   std::vector<Sprite>			&getInGame();
   InputManager				&getInputManager();
 
-  void					drawBackgrounds();
-  void					drawUserInterface();
-  void					drawLabels();
-  void					drawInGame();
+  virtual void					drawBackgrounds();
+  virtual void					drawUserInterface();
+  virtual void					drawLabels();
+  virtual void					drawInGame();
 
 protected:
 

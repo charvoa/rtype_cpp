@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 12 04:58:34 2015 Serge Heitzler
+// Last update Sat Dec 12 20:17:49 2015 Nicolas Girardot
 //
 
 
@@ -96,8 +96,6 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   RenderWindow *window = RenderWindow::getInstance();
 
   window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
-
-  
 }
 
   void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
@@ -191,7 +189,9 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "newWave" << std::endl;
+  GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
@@ -206,7 +206,7 @@ void		ProtocoleClient::loadSprites(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::gameNotLaunched(ANetwork::t_frame &frame)
 {
-  std::cout << "GAME IS NOT LAUCNEHD" << std::endl;
+  std::cout << "GAME IS NOT LAUNCHED" << std::endl;
   (void) frame;
 }
 

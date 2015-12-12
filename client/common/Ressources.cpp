@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Fri Dec 11 11:29:39 2015 Serge Heitzler
+// Last update Sat Dec 12 13:12:10 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -15,7 +15,6 @@ Ressources::Ressources()
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();
   _buttonSelect = new Texture();
-
 
   _buttonNormal->loadFromFile("../common/misc/button_normal.png");
   _buttonHighlight->loadFromFile("../common/misc/button_highlight.png");
@@ -30,7 +29,8 @@ Ressources::Ressources()
   _earth = new Texture();
   _logo = new Texture();
   _cockpit = new Texture();
-
+  _greyPanel = new Texture();
+  
   _backgroundStartPanel->loadFromFile("../common/misc/background.png");
   _backgroundRoomPanel->loadFromFile("../common/misc/room_background.png");
   _backgroundSettingsPanel->loadFromFile("../common/misc/settings_background.png");
@@ -40,7 +40,54 @@ Ressources::Ressources()
   _earth->loadFromFile("../common/misc/planet_earth_background.png");
   _logo->loadFromFile("../common/misc/rtype_logo.png");
   _cockpit->loadFromFile("../common/misc/cockpit.png");
+  _greyPanel->loadFromFile("../common/misc/grey_panel.png");
 
+  _hud = new Texture();
+  _heart = new Texture();
+  _riffleHUD = new Texture();
+  _rocket = new Texture();
+  _rocketBlack = new Texture();
+  _laserBlackLittle = new Texture();
+  _laserBlueLittle = new Texture();
+  _laserBlueBig = new Texture();
+  _laserRedLittle = new Texture();
+  _laserRedBig = new Texture();
+  _laserGreenLittle = new Texture();
+  _laserGreenBig = new Texture();
+  _laserYellowLittle = new Texture();
+  _laserYellowBig = new Texture();
+
+  _hud->loadFromFile("../common/misc/hud.png");
+  _heart->loadFromFile("../common/misc/heart.png");
+  _riffleHUD->loadFromFile("../common/misc/riffle_infinite.png");
+  _rocket->loadFromFile("../common/misc/rocket.png");
+  _rocketBlack->loadFromFile("../common/misc/rocket_black.png");
+
+  _laserBlackLittle->loadFromFile("../common/misc/laser_black_little.png");
+  _laserBlueLittle->loadFromFile("../common/misc/laser_blue_little.png");
+  _laserBlueBig->loadFromFile("../common/misc/laser_blue_big.png");
+  _laserRedLittle->loadFromFile("../common/misc/laser_red_little.png");
+  _laserRedBig->loadFromFile("../common/misc/laser_red_big.png");
+  _laserGreenLittle->loadFromFile("../common/misc/laser_green_little.png");
+  _laserGreenBig->loadFromFile("../common/misc/laser_green_big.png");
+  _laserYellowLittle->loadFromFile("../common/misc/laser_yellow_little.png");
+  _laserYellowBig->loadFromFile("../common/misc/laser_yellow_big.png");
+
+  _planetEarth = new Texture();
+  _planetExodus = new Texture();
+  _planetJupiter = new Texture();
+  _planetMars = new Texture();
+  _planetMoon = new Texture();
+  _planetNeptune = new Texture();
+  _planetSaturne = new Texture();
+
+  _planetEarth->loadFromFile("../common/misc/planet_earth.png");
+  _planetExodus->loadFromFile("../common/misc/planet_exodus.png");
+  _planetJupiter->loadFromFile("../common/misc/planet_jupiter.png");
+  _planetMars->loadFromFile("../common/misc/planet_mars.png");
+  _planetMoon->loadFromFile("../common/misc/planet_moon.png");
+  _planetNeptune->loadFromFile("../common/misc/planet_neptune.png");
+  _planetSaturne->loadFromFile("../common/misc/planet_saturn.png");
 
   _blackShip = new Texture();
   _blueShip = new Texture();

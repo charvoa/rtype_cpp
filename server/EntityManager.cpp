@@ -5,14 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Fri Dec 11 17:36:58 2015 Joris Bertomeu
 //
 
 #include <EntityManager.hh>
 
 EntityManager::EntityManager()
 {
-  _id = 0;
+  _id = 1;
 }
 
 EntityManager::~EntityManager()

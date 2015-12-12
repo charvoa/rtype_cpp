@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:21:37 2015 Nicolas Charvoz
-// Last update Sat Dec 12 15:14:23 2015 Nicolas Charvoz
+// Last update Sat Dec 12 16:31:06 2015 Nicolas Charvoz
 //
 
 #ifndef CLIENT_HH_
@@ -25,6 +25,7 @@ public:
   Client(ISocket *);
   ~Client();
   ISocket *getSocket() const;
+  ISocket *getUDPSocket() const;
   void setUDPSocket(ISocket*);
   bool operator==(const Client&) const;
   bool operator !=(const Client &) const;

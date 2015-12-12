@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Wed Dec  9 06:51:57 2015 Louis Audibert
+// Last update Sat Dec 12 11:51:20 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -13,6 +13,13 @@
 AEntity::AEntity(int id) : _id(id)
 {
   std::cout << "new AEntity created !" << std::endl;
+}
+
+AEntity::AEntity(int id, AEntity *parent)
+{
+  _id = id;
+  _parent = parent;
+  std::cout << "new AEntity with a parent created !" << std::endl;
 }
 
 AEntity::~AEntity()
@@ -38,10 +45,14 @@ bool	AEntity::update(int health)
   return (true);
 }
 
-// void	AEntity::update()
-// {
-
-// }
+bool	AEntity::update(std::vector<Case*> hitbox)
+{
+  if (_systemManager.getSystemByComponent(E_HITBOX))
+    dynamic_cast<SystemHitbox*>(_systemManager.getSystemByComponent(E_HITBOX))->update(hitbox);
+  else
+    return (false);
+  return (true);
+}
 
 void	AEntity::addSystem(E_Component type)
 {
@@ -69,4 +80,9 @@ int	AEntity::getId() const
 SystemManager	*AEntity::getSystemManager()
 {
   return (&_systemManager);
+}
+
+bool		AEntity::checkColision(AEntity *entity)
+{
+  return (true);
 }
