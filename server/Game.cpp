@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 13:55:19 2015 Antoine Garcia
+// Last update Sat Dec 12 14:05:03 2015 Antoine Garcia
 //
 
 #include <Game.hh>
@@ -159,6 +159,7 @@ bool Game::run()
   Timer	timer(true);
   int	speed = 3;
   int	nbEnemyMax = 5 * _stage * 1 * _eM.getEntitiesByType(E_PLAYER).size();
+  std::cout << "PARAMS " << _params.getDifficulty() << std::endl;
   std::cout << "Game :: run() " << std::endl;
 
   ThreadFactory *tF = new ThreadFactory;
