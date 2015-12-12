@@ -13,6 +13,7 @@
 
 SettingsLoader::SettingsLoader()
 {
+	_ifs = NULL;
 	_stringKeys["0"] = sf::Keyboard::Num0;
 	_stringKeys["1"] = sf::Keyboard::Num1;
 	_stringKeys["2"] = sf::Keyboard::Num2;
@@ -164,6 +165,8 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
 
 SettingsLoader::~SettingsLoader()
 {
+	if (_ifs == NULL)
+		return;
 	_ifs->close();
 	delete _ifs;
 //	_ofs->close();

@@ -12,6 +12,7 @@ public:
 	KeyButton();
 	~KeyButton();
 
+	void		setBind(sf::Event);
 	bool		updateOnPress(std::pair<unsigned int, unsigned int>);
 	void		setState(Button::StateButton);
 	void		setTitle(std::string const&);

@@ -103,8 +103,8 @@ void	SettingsPanel::setUserInterface()
 		name = loader->keyToString((*it)->getKey());
 		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.2 + layout), name);
 		name = loader->joystickToString((*it)->getJoystick());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + 340, window->getSize()._y * 0.2 + layout), name);
-		layout += 70;
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + (window)->_ressources->_buttonNormal->getSize()._x / 2, window->getSize()._y * 0.2 + layout), name);
+		layout += (window)->_ressources->_buttonNormal->getSize()._y / 2;
 		++it;
 	}
 
