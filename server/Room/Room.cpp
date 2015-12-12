@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Thu Dec 10 06:04:44 2015 Antoine Garcia
+// Last update Sat Dec 12 14:10:55 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -108,7 +108,7 @@ std::vector<Client *>&	Room::getAllPlayers()
 
 void	Room::setParameters(Parameters &params)
 {
-  params = _parameter;
+  _parameter = params;
 }
 
 const Parameters&	Room::getParameters() const
