@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 11:11:20 2015 Serge Heitzler
+// Last update Sat Dec 12 11:22:07 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -50,17 +50,17 @@ GamePanel::GamePanel()
 {
   RenderWindow *window = RenderWindow::getInstance();
   //getInputManager().setInputType(InputType::GAME_INPUT);
-  // std::unique_ptr<AThread> t(new Thread(1));
-  // char str1[] = "";
-  // (void) str1;
-  // t->attach(&readUDP, (void *)str1);
-  // t->run();
+
+  std::unique_ptr<AThread> t(new Thread(1));
+  char str1[] = "";
+  (void) str1;
+  t->attach(&readUDP, (void *)str1);
+  t->run();
   
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
-  std::cout << "MA BITE"  << std::endl;
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
@@ -95,6 +95,7 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
   _backgrounds.push_back(*hud);
 
+
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -111,6 +112,9 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   flag->setPosition(0, 0);
   flag->scale(0.2);
   _inGame.push_back(*flag);
+
+  std::cout << "MA CBITE"  << std::endl;
+
 }
 
 GamePanel::~GamePanel() {}
