@@ -5,13 +5,14 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Sat Dec 12 10:40:04 2015 Serge Heitzler
+// Last update Sat Dec 12 13:19:37 2015 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>
 
-OtherPlayer::OtherPlayer()
+OtherPlayer::OtherPlayer(unsigned int id)
 {
+  (void)id;
   _nbrLife = 3;
 
   Sprite	*heart1 = new Sprite();
@@ -24,6 +25,9 @@ OtherPlayer::OtherPlayer()
   _hearts.push_back(heart1);
   _hearts.push_back(heart2);
   _hearts.push_back(heart3);
+
+
+  
 }
 
 OtherPlayer::~OtherPlayer()

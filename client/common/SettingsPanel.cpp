@@ -24,30 +24,27 @@ SettingsPanel::~SettingsPanel()
 
 void    SettingsPanel::setGlobalVolume(int global)
 {
-  (void)global;
-    //   Volume vol = _tmp->getVolume();
+    Volume vol = _tmp->getVolume();
 
-    // vol.setGlobal(global);
-    // _tmp->setVolume(vol);
+    vol.setGlobal(global);
+    _tmp->setVolume(vol);
 }
 
 void    SettingsPanel::setEffectsVolume(int effects)
 {
-  (void)effects;
-    //   Volume vol = _tmp->getVolume();
+   Volume vol = _tmp->getVolume();
 
-    // vol.setEffects(effects);
-    // _tmp->setVolume(vol);
+    vol.setEffects(effects);
+   _tmp->setVolume(vol);
 }
 
 void    SettingsPanel::setMusicVolume(int music)
 {
-  (void)music;
-    //   Volume vol = _tmp->getVolume();
+    Volume vol = _tmp->getVolume();
 
-    // vol.setMusic(music);
-    // _tmp->setVolume(vol);
-}   // 
+    vol.setMusic(music);
+    _tmp->setVolume(vol);
+}  
 
 void    SettingsPanel::setBind(Bind bind)
 {

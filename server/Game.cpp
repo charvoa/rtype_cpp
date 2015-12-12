@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 19:06:30 2015 Nicolas Charvoz
+// Last update Sat Dec 12 11:33:12 2015 Serge Heitzler
 //
 
 #include <Game.hh>
@@ -102,7 +102,7 @@ void Game::handleMove(void *data, Client *client)
 				  ->getSystemByComponent(E_POSITION)
 				  ->getComponent());
     std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
-	      << std::cout << pPlayer->getY();
+	      << pPlayer->getY();
     //    player->update(1, 1);
 
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Sat Dec 12 10:07:00 2015 Serge Heitzler
+// Last update Sat Dec 12 13:12:25 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -39,15 +39,23 @@ public:
   Texture		*_earth;
   Texture		*_logo;
   Texture		*_cockpit;
-
+  Texture		*_greyPanel;
   
   Texture		*_hud;
   Texture		*_heart;
-  Texture		*_riffle;
+  Texture		*_riffleHUD;
   Texture		*_rocket;
   Texture		*_rocketBlack;
-  Texture		*_laser;
-  Texture		*_laserBlack;
+
+  Texture		*_laserBlackLittle;
+  Texture		*_laserBlueLittle;
+  Texture		*_laserBlueBig;
+  Texture		*_laserRedLittle;
+  Texture		*_laserRedBig;
+  Texture		*_laserGreenLittle;
+  Texture		*_laserGreenBig;
+  Texture		*_laserYellowLittle;
+  Texture		*_laserYellowBig;
 
   
   Texture		*_planetEarth;
