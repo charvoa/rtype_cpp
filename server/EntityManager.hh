@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Fri Dec 11 16:36:45 2015 Joris Bertomeu
+// Last update Sat Dec 12 17:48:11 2015 Nicolas Charvoz
 //
 
 #ifndef _ENTITYMANAGER_HH_
@@ -38,6 +38,7 @@ public:
   void		removeEntityById(int id);
   AEntity	*getEntityById(int id);
   std::vector<AEntity*> getEntitiesByType(E_EntityType type);
+  AEntity *getPlayerByClient(Client *);
   void		update();
 };
 
