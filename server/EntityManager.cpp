@@ -11,7 +11,7 @@
 
 EntityManager::EntityManager()
 {
-  _id = 0;
+  _id = 1;
 }
 
 EntityManager::~EntityManager()
