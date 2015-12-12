@@ -65,63 +65,16 @@ Client *Game::getClientBySocket(ISocket *socket) const
 
 Player *Game::getPlayerByClient(Client *client)
 {
-  std::cout << "getEntity>>" << std::endl;
   std::vector<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
 
-  std::cout << "for>>" << std::endl;
   for (std::vector<AEntity*>::iterator it = _players.begin();
        it != _players.end();
        ++it)
     {
-      std::cout << "<<during>>" << std::endl;
-
       Player *ptmp = reinterpret_cast<Player*>(*it);
-      if (ptmp != nullptr)
-	{
-	  std::cout << "PLAYER EXISTS " << std::endl;
-	  Client *ctmp = &(ptmp->getClient());
-	  if (ctmp != nullptr)
-          {
-	    std::cout << "CLIENT EXISTS" << std::endl;
-	    ISocket *stmp = ctmp->getUDPSocket();
-	    if (stmp != nullptr)
-	      {
-		std::cout << "Socket exists" << std::endl;
-		int fdtmp = stmp->getFd();
-		std::cout << "This is the fd I want to write on : " << fdtmp << std::endl;
-		Client *c2 = client;
-		if (client != nullptr)
-		  {
-		    std::cout << "My client in param is not null" << std::endl;
-		    ISocket *s2 = client->getUDPSocket();
-		    if (s2 != nullptr)
-		      {
-			std::cout << "The socket in the client I got is not null"
-				  << std::endl;
-			//			int fd2 = s2->getFd();
-
-			//   std::cout << "This is the FD I should write on : "
-			//<< fd2 << std::endl;
-
-			return ptmp;
-		      }
-		  }
-	      } else {
-	      std::cout << "SOCKET DOES NOT EXIST" << std::endl;
-	    }
-	  }
-	  // if (ctmp->getUDPSocket()->getFd() == client->getUDPSocket()->getFd())
-	  //   return ptmp;
-	}
-
-      // if ((reinterpret_cast<Player*>(*it))->getClient().getUDPSocket()->getFd()
-      // 	   == client->getUDPSocket()->getFd())
-      // 	{
-      // 	  std::cout << "if>>" << std::endl;
-      // 	  return reinterpret_cast<Player*>(*it);
-      // 	}
+      if (ptmp->getClient().getUDPSocket()->getFd() == client->getSocket()->getFd())
+	return (ptmp);
     }
-  std::cout << "<<endFor" << std::endl;
   throw std::logic_error("Cannot find this player by client");
 }
 
@@ -182,9 +135,6 @@ void Game::handleMove(void *data, Client *client)
 				  ->getSystemByComponent(C_POSITION)
 				  ->getComponent());
 
-    if (pPlayer == NULL)
-      std::cout << "GROSSE BITE TOUTE DURE" << std::endl;
-
     auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
     std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
@@ -195,7 +145,7 @@ void Game::handleMove(void *data, Client *client)
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
     client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
   } catch (const std::exception &e) {
-    std::cout << "Cannot move" << std::endl;
+    std::cout << "Cannot move : " << e.what() << std::endl;
   }
 
 }
