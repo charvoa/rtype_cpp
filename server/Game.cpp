@@ -87,6 +87,7 @@ void Game::handleHandshakeUDP(void *data, Client *client)
     {
       if (dynamic_cast<Player*>((*it))->getClient().getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
+	  printf("Entre dans le if dans HandShake UDP\n");
 	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
 	}
     }
