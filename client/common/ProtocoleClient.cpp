@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 12 19:52:04 2015 Nicolas Girardot
+// Last update Sat Dec 12 20:17:49 2015 Nicolas Girardot
 //
 
 
@@ -191,7 +191,7 @@ void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "newWave" << std::endl;
-  (void) frame;
+  GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
