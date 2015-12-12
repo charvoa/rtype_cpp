@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Thu Dec 10 20:58:16 2015 Nicolas Charvoz
+// Last update Sat Dec 12 05:38:07 2015 Joris Bertomeu
 //
 
 #ifndef PROTOCOLEENUM_HH_
