@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Fri Dec 11 21:46:08 2015 Nicolas Girardot
+// Last update Sat Dec 12 10:30:54 2015 Nicolas Charvoz
 //
 
 
@@ -84,7 +84,7 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   try
     {
       net->init(std::atoi(x.at(0).c_str()), ANetwork::UDP_MODE);
-      net->connect("10.16.252.249");
+      net->connect("0");
     }
   catch (const std::exception &e)
     {
