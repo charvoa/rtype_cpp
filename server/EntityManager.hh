@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Tue Dec  8 22:18:40 2015 Nicolas Charvoz
+// Last update Fri Dec 11 16:36:45 2015 Joris Bertomeu
 //
 
 #ifndef _ENTITYMANAGER_HH_
@@ -17,6 +17,7 @@
 # include <AEntity.hh>
 # include <E_EntityType.hh>
 # include <PlayerFactory.hh>
+# include <Bot.hpp>
 
 class EntityManager
 {

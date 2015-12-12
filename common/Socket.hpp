@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Thu Dec 10 22:58:29 2015 Nicolas Charvoz
+// Last update Sat Dec 12 04:48:18 2015 Serge Heitzler
 //
 
 #ifndef		__SOCKET__HPP_
@@ -107,6 +107,7 @@ private:
     ::recvfrom(this->_fd, data, size, 0, (struct sockaddr*) &_me, &meSize);
     if (&(this->_me) != NULL)
       this->_init = true;
+    std::cout << "data read udp is " << data << std::endl;
     return (data);
   };
 

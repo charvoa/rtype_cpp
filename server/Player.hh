@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Wed Dec  9 01:05:19 2015 Louis Audibert
+// Last update Fri Dec 11 17:01:59 2015 Joris Bertomeu
 //
 
 #ifndef PLAYER_HH_
@@ -20,15 +20,13 @@
 class Player : public AEntity
 {
 
-  private:
-
+private:
   std::string _username;
   bool _isOwner;
   int _score;
   Client _client;
 
-  public:
-
+public:
   Player(int id, const Client &);
   ~Player();
   const Client &getClient() const;

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sat Dec 12 00:49:18 2015 Serge Heitzler
+// Last update Sat Dec 12 04:58:24 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -290,7 +290,8 @@ void		RoomPanel::launchGame()
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_LAUNCH_GAME, CRC::calcCRC(_idRoom), 0, _idRoom);
   net->write(sender);
-  //  (RenderWindow::getInstance())->addPanel(PanelFactory::GAME_PANEL);
+
+
 }
 
 void		RoomPanel::back()
