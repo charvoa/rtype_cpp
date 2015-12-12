@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 12 10:30:54 2015 Nicolas Charvoz
+// Last update Sat Dec 12 02:12:32 2015 Serge Heitzler
 //
 
 
@@ -90,7 +90,7 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
     {
       std::cout << e.what() << std::endl;
     }
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), 0, x.at(1));
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), x.at(1).size(), x.at(1));
   std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
 }
 
@@ -180,7 +180,7 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Score" << std::endl;
-  GamePanel::setScore(std::atoi(x.at(1).c_str()));
+  GamePanel::setTeamScore(std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)

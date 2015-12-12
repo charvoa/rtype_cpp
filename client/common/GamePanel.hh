@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Fri Dec 11 22:36:43 2015 Nicolas Girardot
+// Last update Sat Dec 12 02:11:49 2015 Serge Heitzler
 //
 
 
@@ -26,12 +26,14 @@ public:
   void render();
   std::vector<Sprite *> &getSprites();
   PlayerIG	*getPlayerByName(const std::string &name);
-  Text	*getScore();
   static void		setLife(const std::string &name, int life);
-  static	void	setScore(int);
+  Text			*getTeamScore();
+  static	void	setTeamScore(int);
   static	void	display(std::vector<std::string> &vector);
 private:
-  Text	*_score;
+
+  Text			*_teamScore;
+  
   std::vector<PlayerIG *> _players;
   std::vector<Sprite *> _sprites;
 };
