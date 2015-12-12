@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sat Dec 12 09:36:24 2015 Joris Bertomeu
+// Last update Sat Dec 12 11:28:14 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -92,8 +92,8 @@ class		Socket : public ISocket
   };
 
   bool		isEqualTo(Socket *s) {
-    if (this->_me.sin_addr == s->_me.sin_addr &&
-	this->_me.sin_port == s->_me.sin_port)
+   if (!memcmp(&(this->_me.sin_addr), &(dynamic_cast<Socket*>(s)->_me.sin_addr), sizeof(this->_me.sin_addr)) &&
+	this->_me.sin_port == dynamic_cast<Socket*>(s)->_me.sin_port)
       return (true);
     return (false);
   };
