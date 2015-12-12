@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 09:25:21 2015 Serge Heitzler
+// Last update Sun Dec 13 14:39:48 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -28,6 +28,7 @@ void	*readUDP(void *s)
 {
   ANetwork::t_frame a;
   ProtocoleClient x;
+  
   while (true)
     {
       std::cout << "Thread UDP" << std::endl;
@@ -51,18 +52,20 @@ GamePanel::GamePanel()
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::GAME_INPUT);
 
+  window->setActive(false);
+
   std::unique_ptr<AThread> t(new Thread(1));
   char str1[] = "";
   (void) str1;
   t->attach(&readUDP, (void *)str1);
   t->run();
-  
+
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
   window->setMouseCursorVisible(false);
-  
+
   Sound *s = Client::getSound();
   s->stopMusic("mainMenu");
   s->playMusic("gameIntro", 0);
@@ -94,14 +97,14 @@ GamePanel::GamePanel()
 backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
   backgroundSpace1->setPosition(0, 0);
   _backgrounds.push_back(*backgroundSpace1);
-  
+
 
   Sprite *backgroundSpace2 = new Sprite;
 
 backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
   backgroundSpace2->setPosition(backgroundSpace2->getGlobalBounds().second.first, 0);
   _backgrounds.push_back(*backgroundSpace2);
-  
+
 
   Sprite *hud = new Sprite;
 
@@ -121,25 +124,43 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 
   // INIT EN DUR POUR TEST
 
-  Sprite	*newSprite = new Sprite();
-  newSprite->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
-  newSprite->setPosition(200, 200);
-    newSprite->scale(0.2);
-    _inGame.push_back(*newSprite);
+  int i = 1;
+  while (i <=4)
+    {
+      Sprite	*ship = new Sprite();
+      switch (i)
+	{
+	case 1:
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
+	  break;
+	case 2:
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_redShip));
+	  break;
+	case 3:
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_greenShip));
+	  break;
+	case 4:
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_yellowShip));
+	  break;
+	default:
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_blackShip));
+	  break;
+	}
+      std::cout << "TOOT" << std::endl;
+      ship->setPosition(100, 240);
+      ship->scale(0.2);
+      _dicoSprites.insert(std::make_pair(i, ship));
+      i++;
+    }
 
-  _dictionary.insert(std::make_pair("player1", ((RenderWindow::getInstance())->_ressources->_blueShip)));
-  _dictionary.insert(std::make_pair("player2", ((RenderWindow::getInstance())->_ressources->_redShip)));
-  _dictionary.insert(std::make_pair("player3", ((RenderWindow::getInstance())->_ressources->_greenShip)));
-  _dictionary.insert(std::make_pair("player4", ((RenderWindow::getInstance())->_ressources->_yellowShip)));
 
 
 
 
-  
   /* USER INTERFACE HUD */
-  
+
   _mainPlayer = new MainPlayer(1);
-  
+
   OtherPlayer	*other1 = new OtherPlayer(1, 2);
   OtherPlayer	*other2 = new OtherPlayer(2, 3);
   OtherPlayer	*other3 = new OtherPlayer(3, 4);
@@ -153,38 +174,76 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 
 GamePanel::~GamePanel() {}
 
-void		GamePanel::display(std::vector<std::string> &vector)
+void		GamePanel::newEnemy(std::vector<std::string> &vector)
 {
-  (void)vector;
-  RenderWindow *window = RenderWindow::getInstance();
-  std::string  	id;
-  int	posX = std::atoi(vector.at(1).c_str());
-  int	posY = std::atoi(vector.at(2).c_str());
-  //   int	scale = std::atoi(vector.at(3).c_str());
-  Sprite	*newSprite = new Sprite();
-
-  id = vector.at(0).c_str();
-
-  //  newSprite->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
-  ((static_cast<GamePanel*>(window->getPanels().top())->getDictionary())[id]);
-  newSprite->setPosition(posX + 200, posY);
-
-  if (id.find("player") == !std::string::npos)
-    newSprite->scale(0.2);
-  // else
-  //   newSprite->scale(scale);
- 
-  std::cout << "4" << std::endl;
-
-  //    window->draw((static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite()));
-  
-  static_cast<GamePanel*>(window->getPanels().top())->getInGame().push_back(*newSprite);
-   window->draw(newSprite->getSprite());
+  (void) vector;
 }
 
-std::map<std::string, Texture*>		&GamePanel::getDictionary()
+void		GamePanel::die()
 {
-  return _dictionary;
+
+}
+
+void		GamePanel::display(std::vector<std::string> &vector)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+  int  	id;
+
+
+  
+  float	posX = (std::atoi(vector.at(1).c_str()));
+  float	posY = (std::atoi(vector.at(2).c_str()));
+
+  float realPosX = (posX / 255) * 1920;
+  float realPosY = (posY / 255) * 1080;
+
+
+  //   int	scale = std::atoi(vector.at(3).c_str());
+
+
+  id = std::atoi(vector.at(0).c_str());
+
+
+  std::cout << "vector.size() " << vector.size() << std::endl;
+  std::cout << "pos X " << posX << std::endl;
+  std::cout << "realPos X " << realPosX << std::endl;
+  std::cout << "pos Y " << posY << std::endl;
+  std::cout << "realPos Y " << realPosY << std::endl;
+
+  // static int i = 0;
+
+  // if (i == 0)
+  //   {
+  //     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+  //   }
+
+  // i++;
+
+
+    
+
+  // float moveX = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->getPosX() - realPosX;
+
+  // float moveY = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->getPosY() - realPosY;
+
+   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+  // ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->move(moveX, moveY);
+  
+  // std::cout << "realPos X " << moveX << std::endl;
+  // std::cout << "realPos Y " << moveY << std::endl;
+
+  // std::cout << "COUSCOUS" << std::endl;
+  
+}
+
+std::map<int, Sprite*>		&GamePanel::getDicoSprites()
+{
+  return _dicoSprites;
+}
+
+std::map<std::string, Texture*>		&GamePanel::getDicoTextures()
+{
+  return _dicoTextures;
 }
 
 std::vector<Sprite *> &GamePanel::getSprites()
@@ -284,9 +343,17 @@ void		GamePanel::render()
   this->drawBackgrounds();
   this->drawUserInterface();
   this->drawLabels();
-  //  this->drawInGame();
+  this->drawInGame();
   this->_mainPlayer->render();
   this->drawOtherPlayer();
+
+
+  RenderWindow *window = RenderWindow::getInstance();
+  for (std::map<int, Sprite*>::iterator it = _dicoSprites.begin(); it != _dicoSprites.end(); ++it)
+    {
+      window->draw((*it).second->getSprite());
+    }
+
 }
 
 void		GamePanel::drawOtherPlayer()
@@ -305,9 +372,6 @@ void		GamePanel::update()
 {
   static unsigned int i = 0;
 
-
-  // if (_inGame.size() > 0)
-  //   _inGame.clear();
   if (i > 492)
     {
       _backgrounds.at(0).move(-1, 0);
@@ -322,4 +386,5 @@ void		GamePanel::update()
       _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
     }
   i++;
+
 }

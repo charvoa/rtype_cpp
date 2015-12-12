@@ -5,12 +5,13 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sun Dec 13 04:16:25 2015 Serge Heitzler
+// Last update Sun Dec 13 13:08:59 2015 Serge Heitzler
 //
 
 #include <iostream>
 #include <InputManager.hh>
 #include <RenderWindow.hh>
+#include <SFML/Config.hpp>
 #include <Client.hh>
 #include <CreateRequest.hpp>
 #include <CRC.hpp>
@@ -54,7 +55,7 @@ void			InputManager::setInputType(InputType type)
     {
       _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::textEnteredInJoinPanel));
     }
-  
+
 }
 
 
@@ -62,7 +63,31 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Eve
 {
   (void)event;
   std::cout << "KEY " << event.key.code << std::endl;
-  
+  if (event.key.code == sf::Keyboard::Left)
+    {
+      ANetwork *net = Client::getUDPNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("7"), 0, "7");
+      net->write(sender);
+    }
+  if (event.key.code == sf::Keyboard::Right)
+    {
+      ANetwork *net = Client::getUDPNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("3"), 0, "3");
+      net->write(sender);
+    }
+  if (event.key.code == sf::Keyboard::Down)
+    {
+      ANetwork *net = Client::getUDPNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("5"), 0, "5");
+      net->write(sender);
+    }
+  if (event.key.code == sf::Keyboard::Up)
+    {
+      ANetwork *net = Client::getUDPNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("1"), 0, "1");
+      net->write(sender);
+    }
+
 
   return std::make_pair(0, 0);
 }
@@ -72,12 +97,13 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event
   (void)event;
 
   std::cout << "joy key " << event.joystickButton.button << std::endl;
-  
+
   return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
 {
+  
   (void)event;
   // 8 directions
   return std::make_pair(0, 0);

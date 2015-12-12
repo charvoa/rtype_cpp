@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Sat Dec 12 06:25:10 2015 Joris Bertomeu
+// Last update Sat Dec 12 08:39:55 2015 Joris Bertomeu
 //
 
 #include <iostream>
@@ -36,17 +36,6 @@ void	Bot::generateY()
 
 void Bot::update()
 {
-  // if (_y == 255)
-  //   _direction = -1;
-  // else if (_y == -255)
-  //   _direction = 1;
-
-  // if (_direction == 1)
-  //   _y++;
-  // else if (_direction == -1)
-  //   _y--;
-
-  // _x += 1;
   std::cout << "Bot :: Bot2 :: Update" << std::endl;
   //dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(C_HEALTH))->update(_health++);
   // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);

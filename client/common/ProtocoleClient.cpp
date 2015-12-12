@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 13 09:22:48 2015 Serge Heitzler
+// Last update Sun Dec 13 13:00:48 2015 Serge Heitzler
 //
 
 
@@ -71,6 +71,15 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_END_GAME, &ProtocoleClient::endGame));
   _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
+  _functions.insert(std::make_pair(S_FILE_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
+  _functions.insert(std::make_pair(S_NEW_ENEMY, &ProtocoleClient::newEnemy));
+}
+
+void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Is Passing in Total Size" << std::endl;
+  RoomPanel::receiveFiles(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
@@ -96,22 +105,17 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   window->getPanels().push(static_cast<GamePanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
 }
 
-  void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
+void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
 {
   (void) frame;
 }
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
 {
-  unsigned int i = 0;
-  
-
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Display" << std::endl;
-  
+
   GamePanel::display(x);
-  std::cout << i << std::endl;
-  i++;
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
@@ -119,6 +123,13 @@ void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Create room" << std::endl;
   StartPanel::goToRoom(x, 0);
+}
+
+void		ProtocoleClient::newEnemy(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Create room" << std::endl;
+  GamePanel::newEnemy(x);
 }
 
 void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
@@ -169,7 +180,7 @@ void		ProtocoleClient::die(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "die" << std::endl;
-  (void) x;
+  GamePanel::die();
 }
 
 void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)

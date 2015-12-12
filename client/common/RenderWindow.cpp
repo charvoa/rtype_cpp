@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Wed Dec  9 01:01:09 2015 Serge Heitzler
+// Last update Sun Dec 13 11:08:09 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -101,6 +101,11 @@ void	RenderWindow::draw(const sf::Drawable &drawable, const sf::RenderStates &st
 void	RenderWindow::clear(const sf::Color &color)
 {
   _window->clear(color);
+}
+
+void	RenderWindow::setActive(bool value)
+{
+  _window->setActive(value);
 }
 
 void    RenderWindow::addPanel(PanelFactory::PanelType type)
