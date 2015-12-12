@@ -74,7 +74,7 @@ void	Client::Start()
   //Connecting to server
 
   _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  _network->connect("10.16.253.178");
 
   //Sending Handshake
 

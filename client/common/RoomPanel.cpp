@@ -11,7 +11,11 @@
 #include <RenderWindow.hh>
 #include <RoomPanel.hh>
 #include <ButtonFactory.hh>
-#include <Network.hpp>
+#ifdef _WIN32
+# include <NetworkWin.hpp>
+#else
+# include <Network.hpp>
+#endif
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
 #include <Client.hh>

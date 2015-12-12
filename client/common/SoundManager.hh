@@ -21,8 +21,8 @@ class	Sound
   std::map<std::string, sf::Music *> _music;
 
 public:
-  Sound(){};
-  ~Sound(){};
+  Sound();
+  ~Sound();
   void		initialize();
   void		registerSound(const std::string &filename, const std::string &title);
   void		registerMusic(const std::string &filename, const std::string &title);
