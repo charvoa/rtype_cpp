@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 10:47:18 2015 Serge Heitzler
+// Last update Sat Dec 12 20:16:51 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -43,24 +43,24 @@ ANetwork::t_frame a;
 	  std::cout << e.what() << std::endl;
 	}
     }
-  return s;  
+  return s;
 }
 
 GamePanel::GamePanel()
 {
-RenderWindow *window = RenderWindow::getInstance();
-  getInputManager().setInputType(InputType::GAME_INPUT);
+  RenderWindow *window = RenderWindow::getInstance();
+  //getInputManager().setInputType(InputType::GAME_INPUT);
+  // std::unique_ptr<AThread> t(new Thread(1));
+  // char str1[] = "";
+  // (void) str1;
+  // t->attach(&readUDP, (void *)str1);
+  // t->run();
 
-  std::unique_ptr<AThread> t(new Thread(1));
-  char str1[] = "";
-  (void) str1;
-  t->attach(&readUDP, (void *)str1);
-  t->run();
-  
-  //  for (int i = 0; i != 3; i++)
+//  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
+  std::cout << "MA BITE"  << std::endl;
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
@@ -73,7 +73,7 @@ RenderWindow *window = RenderWindow::getInstance();
 
   Text	*waveNumber = new Text();
 
-  
+
   waveNumber->setString("0");
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
@@ -104,9 +104,8 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
 
 
 
-
   // INIT EN DUR POUR TEST
-  
+
   Sprite *flag = new Sprite;
   flag->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
   flag->setPosition(0, 0);
@@ -124,7 +123,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   int	posX = std::atoi(vector.at(1).c_str());
   int	posY = std::atoi(vector.at(2).c_str());
   int	scale = std::atoi(vector.at(3).c_str());
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).setPosition(posX, posY);
   if (!static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).isScale())
     static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).scale(scale);
@@ -141,11 +140,23 @@ Text		&GamePanel::getTeamScore()
   return _labels.at(0);
 }
 
-void		GamePanel::setTeamScore(int a)
+Text		&GamePanel::getCurrentWave()
+{
+  return _labels.at(1);
+}
+
+void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(a));
+static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
+}
+
+void		GamePanel::setTeamScore(unsigned int value)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(value));
 }
 
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)

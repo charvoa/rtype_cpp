@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:27:31 2015 Louis Audibert
-// Last update Wed Dec  9 06:47:29 2015 Louis Audibert
+// Last update Sat Dec 12 11:57:10 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMMANAGER_HH_
@@ -18,6 +18,7 @@
 # include <SystemPos.hh>
 # include <SystemHealth.hh>
 # include <SystemGun.hh>
+# include <SystemHitbox.hh>
 
 class SystemManager
 {

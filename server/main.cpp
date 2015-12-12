@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Fri Dec 11 18:49:53 2015 Joris Bertomeu
+// Last update Sat Dec 12 11:49:09 2015 Louis Audibert
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -32,6 +32,8 @@ int		main(int ac, char **av)
   entity->update();
   entity = (Bot*) (ef.createEntity("../libs/bot_2.so", id));
   entity->update();
+
+  entity->addSystem(E_HITBOX);
 
   (void)ac;
 
