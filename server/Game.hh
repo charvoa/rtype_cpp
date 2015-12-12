@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 17:47:44 2015 Nicolas Charvoz
+// Last update Sat Dec 12 18:18:49 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -57,6 +57,7 @@ public:
   bool run();
   void addCommandToQueue(ANetwork::t_frame);
   Client *getClientBySocket(ISocket*) const;
+  Player *getPlayerByClient(Client*);
 
   std::vector<Client *> _clients;
   ANetwork *_network;

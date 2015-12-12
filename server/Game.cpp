@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 17:54:32 2015 Nicolas Charvoz
+// Last update Sat Dec 12 18:25:24 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -54,6 +54,22 @@ Client *Game::getClientBySocket(ISocket *socket) const
 	}
     }
   throw std::logic_error("Cannot find this client by socket");
+}
+
+Player *Game::getPlayerByClient(Client *client)
+{
+  std::vector<AEntity*> _players = _eM->getEntitiesByType(E_PLAYER);
+
+  for (std::vector<AEntity*>::iterator it = _players.begin();
+       _players.end();
+       ++it)
+    {
+      if ((reinterpret_cast<Player*>(*it))->getClient().getUDPSocket()->getFd()
+	   == client->getUDPSocket()->getFd())
+	{
+
+	}
+    }
 }
 
 void handleHandshakeUDP(void *data, void *sData, Client *client)

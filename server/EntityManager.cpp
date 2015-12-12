@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Sat Dec 12 17:47:59 2015 Nicolas Charvoz
+// Last update Sat Dec 12 18:16:41 2015 Nicolas Charvoz
 //
 
 #include <EntityManager.hh>
@@ -95,20 +95,6 @@ std::vector<AEntity*> EntityManager::getEntitiesByType(E_EntityType type)
 	entitiesByType.push_back(*it);
     }
   return (entitiesByType);
-}
-
-AEntity *EntityManager::getPlayerByClient(Client *c)
-{
-  std::vector<AEntity*> players = this->getEntitiesByType(E_PLAYER);
-
-  for (std::vector<AEntity*>::iterator it = players.begin();
-       it != players.end() ; ++it)
-    {
-      if ((reinterpret_cast<Player*>(*it))->getClient().getUDPSocket()->getFd()
-	  == c->getUDPSocket()->getFd())
-	return (*it);
-    }
-  throw std::logic_error("Cannot find player by this client");
 }
 
 void	EntityManager::update()
