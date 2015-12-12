@@ -5,7 +5,6 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:14:04 2015 Louis Audibert
-// Last update Sat Dec 12 18:16:41 2015 Nicolas Charvoz
 //
 
 #include <EntityManager.hh>

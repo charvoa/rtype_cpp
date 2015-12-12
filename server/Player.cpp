@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:29:32 2015 Nicolas Charvoz
-// Last update Wed Dec  9 01:05:25 2015 Louis Audibert
+// Last update Sat Dec 12 09:08:08 2015 Louis Audibert
 //
 
 #include <Player.hh>
@@ -13,6 +13,7 @@
 Player::Player(int id, const Client &c) : AEntity(id)
 {
   _client = c;
+  addSystem(E_POSITION);
 }
 
 Player::~Player() {}
