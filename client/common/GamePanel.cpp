@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 06:10:00 2015 Serge Heitzler
+// Last update Sat Dec 12 19:52:03 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -42,7 +42,7 @@ void	*readUDP(void *s)
 	  std::cout << e.what() << std::endl;
 	}
     }
-  return s;  
+  return s;
 }
 
 GamePanel::GamePanel()
@@ -55,7 +55,7 @@ GamePanel::GamePanel()
   t->attach(&readUDP, (void *)str1);
   t->run();
 
-  
+
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new PlayerIG());
   //init all sprites with the textures;
@@ -80,14 +80,14 @@ GamePanel::GamePanel()
   backgroundSpace->setPosition(0, 0);
   _backgrounds.push_back(*backgroundSpace);
 
-  
+
   Sprite *flag = new Sprite;
   flag->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
   flag->setPosition(0, 0);
   flag->scale(0.2);
   _inGame.push_back(*flag);
 
-  
+
 }
 
 GamePanel::~GamePanel() {}
@@ -100,7 +100,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   int	posX = std::atoi(vector.at(1).c_str());
   int	posY = std::atoi(vector.at(2).c_str());
   int	scale = std::atoi(vector.at(3).c_str());
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).setPosition(posX, posY);
   if (!static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).isScale())
     static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).scale(scale);
@@ -115,6 +115,11 @@ std::vector<Sprite *> &GamePanel::getSprites()
 Text		&GamePanel::getTeamScore()
 {
   return _labels.at(0);
+}
+
+void		GamePanel::changeWave(int i)
+{
+
 }
 
 void		GamePanel::setTeamScore(int a)
