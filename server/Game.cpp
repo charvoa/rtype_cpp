@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 14:05:03 2015 Antoine Garcia
+// Last update Sat Dec 12 14:37:10 2015 Antoine Garcia
 //
 
 #include <Game.hh>
@@ -27,6 +27,7 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
   this->_network->bind();
   this->addClients(client_);
   _stage = 1;
+  _nbDisplay = 0;
 }
 
 Game::~Game() {}
@@ -154,14 +155,30 @@ void *readThread(void *sData)
     }
 }
 
+int Game::getNumberEnemyMax()
+{
+  int	nbEnemy = 5 * _stage * _params.getDifficulty() * _eM.getEntitiesByType(E_PLAYER).size();
+  return nbEnemy;
+}
+
+void Game::addMonster()
+{
+  if (_nbDisplay < getNumberEnemyMax())
+    {
+      std::cout << "Add Monster" << std::endl;;
+      _nbDisplay++;
+    }
+  else
+    std::cout << "Monster Full for this Stage" << std::endl;;
+}
+
 bool Game::run()
 {
   Timer	timer(true);
   int	speed = 3;
-  int	nbEnemyMax = 5 * _stage * 1 * _eM.getEntitiesByType(E_PLAYER).size();
-  std::cout << "PARAMS " << _params.getDifficulty() << std::endl;
+  int	nbEnemyMax = getNumberEnemyMax();
   std::cout << "Game :: run() " << std::endl;
-
+  std::cout << "NUMBER ENEMY MAX" << nbEnemyMax << std::endl;
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -177,7 +194,7 @@ bool Game::run()
       if (timer.elapsed().count() >= (speed/_stage))
 	{
 	  timer.reset();
-	  std::cout << "ADD MONSTER" << std::endl;
+	  addMonster();
 	}
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       // nbEnemy = 5 * stage * nbEnemy;

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 12:51:04 2015 Antoine Garcia
+// Last update Sat Dec 12 14:20:28 2015 Antoine Garcia
 //
 
 #ifndef _GAME_HH_
@@ -41,6 +41,7 @@ private:
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
   int	_stage;
+  int	_nbDisplay;
 public:
 
   struct dataThread {
@@ -62,8 +63,8 @@ public:
   void handleHandshakeUDP(void*, Client*);
   void handleMove(void*, Client*);
   void handleCommand(void*, Client*);
-
-
+  int  getNumberEnemyMax();
+  void addMonster();
 
   std::vector<Client *> _clients;
   ANetwork *_network;
