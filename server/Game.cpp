@@ -5,10 +5,11 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 11:33:12 2015 Serge Heitzler
+// Last update Sat Dec 12 13:55:19 2015 Antoine Garcia
 //
 
 #include <Game.hh>
+#include <Timer.hpp>
 
 Game::Game()
 {
@@ -25,6 +26,7 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
   this->_network->init(port_ + 1, ANetwork::UDP_MODE);
   this->_network->bind();
   this->addClients(client_);
+  _stage = 1;
 }
 
 Game::~Game() {}
@@ -101,8 +103,8 @@ void Game::handleMove(void *data, Client *client)
       reinterpret_cast<Position*>(player->getSystemManager()
 				  ->getSystemByComponent(E_POSITION)
 				  ->getComponent());
-    std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
-	      << pPlayer->getY();
+    //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
+      //	      << std::cout << pPlayer->getY();
     //    player->update(1, 1);
 
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
@@ -154,9 +156,9 @@ void *readThread(void *sData)
 
 bool Game::run()
 {
-  int nbEnemy = 5;
-  int stage = 1;
-
+  Timer	timer(true);
+  int	speed = 3;
+  int	nbEnemyMax = 5 * _stage * 1 * _eM.getEntitiesByType(E_PLAYER).size();
   std::cout << "Game :: run() " << std::endl;
 
   ThreadFactory *tF = new ThreadFactory;
@@ -171,8 +173,13 @@ bool Game::run()
   t1->run();
   while (true)
     {
+      if (timer.elapsed().count() >= (speed/_stage))
+	{
+	  timer.reset();
+	  std::cout << "ADD MONSTER" << std::endl;
+	}
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
-      nbEnemy = 5 * stage * nbEnemy;
+      // nbEnemy = 5 * stage * nbEnemy;
     }
 
 

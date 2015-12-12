@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 19:07:20 2015 Nicolas Charvoz
+// Last update Sat Dec 12 12:51:04 2015 Antoine Garcia
 //
 
 #ifndef _GAME_HH_
@@ -40,7 +40,7 @@ private:
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
-
+  int	_stage;
 public:
 
   struct dataThread {

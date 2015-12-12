@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sat Dec 12 04:48:18 2015 Serge Heitzler
+// Last update Fri Dec 11 22:49:58 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -63,10 +63,19 @@ class		Socket : public ISocket
   };
 
   void		*read(int size) {
+    int		toto;
+
     if (this->_mode == SOCK_STREAM)
-      return (this->read_tcp(size));
+      return (this->read_tcp(size, &toto));
     else
-      return (this->read_udp(size));
+      return (this->read_udp(size, &toto));
+  };
+
+  void		*read(int size, int *fill) {
+    if (this->_mode == SOCK_STREAM)
+      return (this->read_tcp(size, fill));
+    else
+      return (this->read_udp(size, fill));
   };
 
   int		write(void *data, int size) {
@@ -86,28 +95,27 @@ class		Socket : public ISocket
   };
 
 private:
-  void		*read_tcp(int size) {
+  void		*read_tcp(int size, int *fill) {
     void	*data;
 
     data = malloc(size + 1);
     bzero(data, size + 1);
-    if (::read(this->_fd, data, size) <= 0) {
+    if ((*fill = ::read(this->_fd, data, size)) <= 0) {
       this->close();
       return (NULL);
     }
     return (data);
   };
 
-  void		*read_udp(int size) {
+  void		*read_udp(int size, int *fill) {
     void	*data;
     socklen_t	meSize = sizeof(struct sockaddr_in);
 
     data = malloc(size + 1);
     bzero(data, size + 1);
-    ::recvfrom(this->_fd, data, size, 0, (struct sockaddr*) &_me, &meSize);
+    *fill = ::recvfrom(this->_fd, data, size, 0, (struct sockaddr*) &_me, &meSize);
     if (&(this->_me) != NULL)
       this->_init = true;
-    std::cout << "data read udp is " << data << std::endl;
     return (data);
   };
 
