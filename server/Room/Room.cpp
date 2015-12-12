@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Sat Dec 12 05:49:38 2015 Joris Bertomeu
+// Last update Sat Dec 12 06:43:15 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
@@ -13,18 +13,26 @@
 
 Room::Room() {}
 
-Room::Room(const std::string &id, Client *client, BotManager *botManager):_id(id)
+std::string		IntToString(int a)
 {
-  std::list<Bot*>	botList;
+  std::ostringstream	temp;
+  temp << a;
+  return (temp.str());
+}
+
+Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(id)
+{
   std::ostringstream	tmp;
+  int			port = 6575;
 
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
-  _botManager = botManager;
   tmp << botList.size();
-  client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string("8765;" + tmp.str())), std::string("8765;" + tmp.str()).size(), std::string("8765;" + tmp.str()), true), sizeof(ANetwork::t_frame));
+  client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string(IntToString(port)  + ";" + tmp.str())), std::string(IntToString(port) + ";" + tmp.str()).size(), std::string(IntToString(port)  + ";" + tmp.str()), true), sizeof(ANetwork::t_frame));
   for (std::list<Bot*>::iterator it = botList.begin(); it != botList.end(); ++it) {
-    File		file((*it)->_sprite);
+    std::cout << ">> " << (*it)->_sprite << std::endl;
+    File		file(std::string("../libs/" + (*it)->_sprite));
+    file.sendMe(port++);
   }
   //_owner = client;
 }

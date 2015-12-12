@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Sun Dec 13 09:32:30 2015 Serge Heitzler
+// Last update Sat Dec 12 05:52:11 2015 Joris Bertomeu
 //
 
 #ifndef			_FILE_HPP_
@@ -91,7 +91,7 @@ public:
 		       pathname.end());
   }
 
-  void			sendMe(int port, void (*clb)(int, void *data), void *data) {
+  void			sendMe(int port) {
     Network		net;
     Socket		*s;
     ANetwork::t_frame	*frame;
@@ -115,7 +115,6 @@ public:
       i += local;
       s->write(buff, local);
       size = (_size - i > D_BUF) ? D_BUF : _size - i;
-      clb(i * 100 / _size, data);
     }
     net.close();
     fclose(file);
