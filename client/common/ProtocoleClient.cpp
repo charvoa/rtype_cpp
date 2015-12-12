@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Fri Dec 11 21:46:08 2015 Nicolas Girardot
+// Last update Sat Dec 12 04:58:34 2015 Serge Heitzler
 //
 
 
@@ -84,14 +84,20 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   try
     {
       net->init(std::atoi(x.at(0).c_str()), ANetwork::UDP_MODE);
-      net->connect("10.16.252.249");
+      net->connect(IP_ADRESS);
     }
   catch (const std::exception &e)
     {
       std::cout << e.what() << std::endl;
     }
-  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), 0, x.at(1));
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), x.at(1).size(), x.at(1));
   std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
+
+  RenderWindow *window = RenderWindow::getInstance();
+
+  window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
+
+  
 }
 
   void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
@@ -180,7 +186,7 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Score" << std::endl;
-  GamePanel::setScore(std::atoi(x.at(1).c_str()));
+  GamePanel::setTeamScore(std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)

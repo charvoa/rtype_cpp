@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Fri Dec 11 14:24:49 2015 Serge Heitzler
+// Last update Sat Dec 12 06:24:48 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -40,7 +40,7 @@ void	*readdisp(void *s)
       try
 	{
 	  a = Client::getNetwork()->read();
-	  std::cout << "Data Is " << a.data << std::endl;
+	  std::cout << "Data TCP is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
@@ -73,8 +73,8 @@ void	Client::Start()
 
   //Connecting to server
 
-  _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  _network->init(PORT, ANetwork::TCP_MODE);
+  _network->connect(IP_ADRESS);
 
   //Sending Handshake
 

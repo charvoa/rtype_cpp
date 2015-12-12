@@ -42,7 +42,7 @@ void		RenderWindow::setSettings(Settings *settings)
   _settings = new Settings(*settings);
 }
 
-Settings	*RenderWindow::getSettings()
+Settings	*RenderWindow::getSettings() const
 {
   return _settings;
 }

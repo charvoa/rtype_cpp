@@ -5,13 +5,17 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sat Dec 12 00:49:18 2015 Serge Heitzler
+// Last update Sat Dec 12 04:58:24 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
 #include <RoomPanel.hh>
 #include <ButtonFactory.hh>
-#include <Network.hpp>
+#ifdef _WIN32
+# include <NetworkWin.hpp>
+#else
+# include <Network.hpp>
+#endif
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
 #include <Client.hh>
@@ -74,7 +78,7 @@ void	        RoomPanel::setUserInterface()
   this->createPlayers();
 }
 
-unsigned int	RoomPanel::getNbPlayers()
+unsigned int	RoomPanel::getNbPlayers() const
 {
   return _nbPlayers;
 }
@@ -286,7 +290,8 @@ void		RoomPanel::launchGame()
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_LAUNCH_GAME, CRC::calcCRC(_idRoom), 0, _idRoom);
   net->write(sender);
-  //  (RenderWindow::getInstance())->addPanel(PanelFactory::GAME_PANEL);
+
+
 }
 
 void		RoomPanel::back()

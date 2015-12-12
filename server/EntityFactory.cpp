@@ -5,12 +5,10 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Fri Dec 11 06:47:57 2015 Louis Audibert
+// Last update Fri Dec 11 17:49:40 2015 Joris Bertomeu
 //
 
 #include <EntityFactory.hh>
-#include <dlfcn.h>
-#include "libs/LittleMonster.hh"
 
 EntityFactory::EntityFactory()
 {
@@ -31,9 +29,18 @@ AEntity	*EntityFactory::createEntity(int &id)
 
 AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
 {
- //temporary
   (void)filename;
+  DynLibLoader	loader;
+  AEntity	*(*my_entity)(int);
 
+  try {
+    loader.open(filename);
+    my_entity = reinterpret_cast<AEntity*(*)(int)>(loader.getSymbol("create_object"));
+  } catch (const std::exception &e) {
+    throw (std::logic_error(e.what()));
+  }
+  id += 1;
+  return (my_entity(id));
   // LittleMonster* (*create)(int);
 
   // void* handle = dlopen("./libs/littlemonster.so", RTLD_LAZY);

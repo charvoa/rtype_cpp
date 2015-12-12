@@ -31,7 +31,7 @@ public:
   virtual void		update();
   virtual void		render();
   virtual void		hide();
-  virtual void	        setUserInterface();
+  virtual void	    setUserInterface();
 
   std::vector<Sprite>			&getBackgrounds();
   std::vector<AMenuElement*>   		&getUserInterface();

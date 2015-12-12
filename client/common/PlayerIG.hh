@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Fri Dec 11 17:30:03 2015 Nicolas Girardot
+// Last update Sat Dec 12 03:18:22 2015 Serge Heitzler
 //
 
 #ifndef PLAYERIG_HH_
@@ -20,16 +20,22 @@ public:
   PlayerIG();
   ~PlayerIG();
   void	setLife(unsigned int);
-  void	setName(const std::string &);
-  const std::string &getName();
-
+  void	setUsername(const std::string &);
+  const std::string &getUsername();
+  
 private:
-  Text	*_life;
-  Text	*_name;
-  std::string _nameValue;
-  int	_nbrLife;
-  Sprite	*vessel;
-  Sprite	*heart;
+
+  std::string			_username;
+
+  Text				*_score;
+
+  Text				*_waveNumber;
+
+  Sprite			*_spaceShip;
+
+  int				_nbrLife;
+
+  std::vector<Sprite*>		_hearts;
 };
 
 #endif

@@ -35,7 +35,7 @@ public:
   void			updatePlayers(std::vector<std::string> &vector, int from);
   void			createPlayers();
   std::vector<Player*>	&getPlayers();
-  unsigned int		getNbPlayers();
+  unsigned int		getNbPlayers() const;
   void			minusNbPlayers();
   void			addNbPlayers();
   std::vector<Texture*> &getTextures();
