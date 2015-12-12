@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Fri Dec 11 17:39:18 2015 Joris Bertomeu
+// Last update Sat Dec 12 08:51:42 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -14,12 +14,16 @@
 Bot::Bot(int id) : AEntity(id)
 {
   std::cout << "Bot :: Bot2 :: Constructor" << std::endl;
+  addSystem(E_HEALTH);
+  addSystem(E_POSITION);
+  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(E_POSITION))->update(_x, _y);
 }
 
 Bot::~Bot()
 {
 
 }
+
 
 void Bot::update()
 {

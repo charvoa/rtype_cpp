@@ -5,14 +5,18 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:27 2015 Louis Audibert
-// Last update Fri Dec 11 17:04:30 2015 Joris Bertomeu
+// Last update Fri Dec 11 18:51:04 2015 Joris Bertomeu
 //
 
 #ifndef _ENTITYFACTORY_HH_
 # define _ENTITYFACTORY_HH_
 
 # include <AEntity.hh>
-# include <DynLibLoader.hpp>
+# ifdef _WIN32
+#  include <DynLibLoaderWin.hpp>
+# else
+#  include <DynLibLoader.hpp>
+# endif
 
 class EntityFactory
 {
