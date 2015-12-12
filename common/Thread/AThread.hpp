@@ -20,14 +20,12 @@ protected:
 public:
   AThread() {};
   virtual	~AThread(){};
-  virtual unsigned int	getId() { return (_id); };
-  virtual void		attach(void *(*fn)(void*), void *);
-  virtual int		join() { return (0); };
-  virtual void		exit() {};
-  virtual void	    cancel() {};
-  virtual int		run() {
-	  return (0);
-  };
+  virtual unsigned int	getId() = 0;
+  virtual void		attach(void *(*fn)(void*), void *) = 0;
+  virtual int		join() = 0;
+  virtual void		exit() = 0;
+  virtual void	        cancel() = 0;
+  virtual int		run() = 0;
 };
 
 #endif
