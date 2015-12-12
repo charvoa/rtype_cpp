@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 23:36:40 2015 Serge Heitzler
+// Last update Fri Dec 11 14:24:49 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -28,7 +28,7 @@
 
 ANetwork	*Client::_network = NULL;
 ANetwork	*Client::_UDPnetwork = NULL;
-Sound *Client::_sound = NULL;
+Sound		*Client::_sound = NULL;
 
 void	*readdisp(void *s)
 {
@@ -64,67 +64,64 @@ Client::~Client()
 
 void	Client::Start()
 {
-  RenderWindow *window = RenderWindow::getInstance();
+  //Creating Everything
 
+  RenderWindow *window = RenderWindow::getInstance();
   _network = new Network();
   _UDPnetwork = new Network();
+  _sound = new Sound();
+
+  //Connecting to server
+
   _network->init(4253, ANetwork::TCP_MODE);
   _network->connect("0");
 
+  //Sending Handshake
+
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
   _network->write(sender);
-  
-  //  _network->connect("10.16.252.241");
-  _UDPnetwork->init(4254, ANetwork::UDP_MODE);
-  //_UDPnetwork->connect("0");
 
-  Texture	*splashScreenTexture = new Texture();
-  Sprite	*splashScreen = new Sprite();
+  //Creating SF::window
 
-  splashScreenTexture->loadFromFile("../common/misc/background.png");
-  splashScreen->setTexture(*splashScreenTexture);
-  splashScreen->setPosition(0, 0);
-  splashScreen->scale(1.1);
-
-  
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->setFramerateLimit(60);
   window->clear();
 
+  //Creating Textures for splash screen
+
+  Texture	*splashScreenTexture = new Texture();
+  Sprite	*splashScreen = new Sprite();
+
+  splashScreenTexture->loadFromFile("../common/misc/splash_screen.png");
+  splashScreen->setTexture(*splashScreenTexture);
+  splashScreen->setPosition(0, 0);
+  //splashScreen->scale(1.1);
+
+  //Display Splash screen and loading Ressources
+
   window->draw(splashScreen->getSprite());
   window->display();
-
   window->_ressources = new Ressources();
-
-
   //sleep(2);
-  int i = 255;
-  while (i >= 0)
-    {
-      splashScreen->getSprite().setColor(sf::Color(i, i, i, 255));
-      window->draw(splashScreen->getSprite());
-      window->display();
-      i--;
-    }
 
-  std::cout << "IIL" << std::endl;
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  std::cout << "IIL" << std::endl;
   window->getPanels().top()->setUserInterface();
-  
 
-  _sound = new Sound();
+  //Adding & playing music for Menu
+
   _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
   _sound->playMusic("mainMenu");
+
+  //Threading the Read
+
   std::unique_ptr<AThread> t(new Thread(1));
   char str1[] = "";
   (void) str1;
   t->attach(&readdisp, (void *)str1);
   t->run();
 
+  //Main Loop
 
-
-  
   while(window->isOpen())
     {
       window->getPanels().top()->update();
@@ -136,6 +133,9 @@ void	Client::Start()
       	  window->getPanels().top()->getInputManager().methodChecker(event);
       	}
     }
+
+  //Closing Thread and Window
+
   t->cancel();
   _network->close();
 }

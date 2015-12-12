@@ -5,7 +5,7 @@
 // Login   <antgar@epitech.net>
 //
 // Started on  Wed May 13 03:58:34 2015 Antoine Garcia
-// Last update Mon Dec  7 15:12:06 2015 Nicolas Girardot
+// Last update Fri Dec 11 15:02:51 2015 Nicolas Girardot
 //
 
 #ifndef SOUNDMANAGER_HH_

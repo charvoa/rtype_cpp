@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Thu Dec 10 13:03:29 2015 Serge Heitzler
+// Last update Fri Dec 11 21:46:08 2015 Nicolas Girardot
 //
 
 
@@ -15,6 +15,10 @@
 #include <ProtocoleClient.hh>
 #include <StartPanel.hh>
 #include <RoomPanel.hh>
+#include <GamePanel.hh>
+#include <Client.hh>
+#include <CRC.hpp>
+#include <CreateRequest.hpp>
 
 std::string	g_a = "JVYO";
 
@@ -50,6 +54,7 @@ ProtocoleClient::~ProtocoleClient()
 
 void		ProtocoleClient::initProtocoleClient()
 {
+  _functions.insert(std::make_pair(S_INIT_UDP, &ProtocoleClient::initUDP));
   _functions.insert(std::make_pair(S_HANDSHAKE, &ProtocoleClient::handshake));
   _functions.insert(std::make_pair(S_DISPLAY, &ProtocoleClient::display));
   _functions.insert(std::make_pair(S_CREATE_ROOM, &ProtocoleClient::createRoom));
@@ -70,14 +75,35 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
 }
 
-void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
+void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
+{
+  std::cout << "Creating UDP" << std::endl;
+  std::vector<std::string> x = split(frame.data, ';');
+  ANetwork *net = Client::getUDPNetwork();
+  std::cout << x.at(0) << " :::::::: " << x.at(1) << std::endl;
+  try
+    {
+      net->init(std::atoi(x.at(0).c_str()), ANetwork::UDP_MODE);
+      net->connect("10.16.252.249");
+    }
+  catch (const std::exception &e)
+    {
+      std::cout << e.what() << std::endl;
+    }
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), 0, x.at(1));
+  std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
+}
+
+  void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
 {
   (void) frame;
 }
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Display" << std::endl;
+  GamePanel::display(x);
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
@@ -87,25 +113,24 @@ void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
   StartPanel::goToRoom(x, 0);
 }
 
-void		ProtocoleClient::createRoomSuccess(ANetwork::t_frame &frame)
-{
-  (void) frame;
-}
-
 void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Create room Error" << std::endl;
+  (void) x;
 }
 
 void		ProtocoleClient::joinSuccess(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Join Success" << std::endl;
   StartPanel::goToRoom(x, 1);
 }
 
 void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Join Error" << std::endl;
 }
 
 void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
@@ -117,6 +142,7 @@ void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
 void		ProtocoleClient::newPlayerConnected(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "New Player Connected" << std::endl;
   RoomPanel::newPlayer(x.at(0));
 }
 
@@ -133,7 +159,9 @@ void		ProtocoleClient::changeHost(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::die(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "die" << std::endl;
+  (void) x;
 }
 
 void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)
@@ -143,12 +171,16 @@ void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::life(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "life" << std::endl;
+  GamePanel::setLife(x.at(0), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::score(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Score" << std::endl;
+  GamePanel::setScore(std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)

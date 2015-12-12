@@ -1,0 +1,1 @@
+g++ -fPIC -shared -I../../common -I../Room -I.. -I../../common/Thread -I. $1 -o $2

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Fri Dec 11 00:08:45 2015 Nicolas Charvoz
+// Last update Sat Dec 12 00:05:17 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -22,7 +22,7 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
 
   this->_clients = client_;
   this->_network = new Network();
-  this->_network->init(port_, ANetwork::UDP_MODE);
+  this->_network->init(port_ + 1, ANetwork::UDP_MODE);
   this->_network->bind();
   this->addClients(client_);
 }
@@ -61,7 +61,7 @@ void *readThread(void *sData)
 
   while (1)
     {
-      std::cout << "BOUCLE " << std::endl;
+      std::cout << "Je suis bloqué avant le select .." << std::endl;
       Client *client = new Client(n->select());
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
 	{
@@ -95,7 +95,6 @@ bool Game::run()
   t1->attach(&readThread, reinterpret_cast<void*>(dT));
 
   t1->run();
-  t1->join();
   while (true)
     {
       nbEnemy = 5 * stage * nbEnemy;

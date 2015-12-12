@@ -5,11 +5,21 @@
 // Login   <antgar@epitech.net>
 //
 // Started on  Wed May 13 03:57:20 2015 Antoine Garcia
-// Last update Mon Dec  7 15:10:44 2015 Nicolas Girardot
+// Last update Fri Dec 11 15:02:22 2015 Nicolas Girardot
 //
 
 #include <iostream>
 #include "SoundManager.hh"
+
+Sound::Sound()
+{
+
+}
+
+Sound::~Sound()
+{
+
+}
 
 void	Sound::initialize()
 {
