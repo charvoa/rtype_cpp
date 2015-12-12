@@ -24,9 +24,8 @@
 #include <PanelFactory.hh>
 #include <SoundManager.hh>
 
-#define IP_ADRESS "0"
-//#define IP_ADRESS "10.16.252.249"
-#define PORT 4253
+#define IP_ADRESS "10.16.252.249"
+#define PORT 4254
 
 class	Client
 {
