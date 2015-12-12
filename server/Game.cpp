@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 18:25:24 2015 Nicolas Charvoz
+// Last update Sat Dec 12 18:48:13 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -58,25 +58,25 @@ Client *Game::getClientBySocket(ISocket *socket) const
 
 Player *Game::getPlayerByClient(Client *client)
 {
-  std::vector<AEntity*> _players = _eM->getEntitiesByType(E_PLAYER);
+  std::vector<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
 
   for (std::vector<AEntity*>::iterator it = _players.begin();
-       _players.end();
+       it != _players.end();
        ++it)
     {
       if ((reinterpret_cast<Player*>(*it))->getClient().getUDPSocket()->getFd()
 	   == client->getUDPSocket()->getFd())
 	{
-
+	  return reinterpret_cast<Player*>(*it);
 	}
     }
+  throw std::logic_error("Cannot find this player by client");
 }
 
 void handleHandshakeUDP(void *data, void *sData, Client *client)
 {
   Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
 
-  ANetwork *n = s->network;
   Game *me = s->game;
 
   std::cout << "Data: |" << std::string(((ANetwork::t_frame*)data)->data)
@@ -95,15 +95,23 @@ void handleHandshakeUDP(void *data, void *sData, Client *client)
 
 void handleMove(void *data, void *sData, Client *client)
 {
+
+  Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
+
+  Game *me = s->game;
+
   std::cout << "handleMove" << std::endl;
+  try {
+    Player *player = me->getPlayerByClient(client);
+  } catch (const std::exception &e) {
+    std::cout << "Cannot move" << std::endl;
+  }
+
 }
 
 void handleCommand(void *data, void *sData, Client *client)
 {
   Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
-
-  ANetwork *n = s->network;
-  Game *me = s->game;
 
   std::cout << "Game :: handleCommand" << std::endl;
   std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest
@@ -114,7 +122,6 @@ void handleCommand(void *data, void *sData, Client *client)
     }
   else if (((ANetwork::t_frame*)data)->idRequest == C_MOVE)
     {
-      std::cout << "he wants to move" << std::endl;
       handleMove(data, sData, client);
     }
 }
