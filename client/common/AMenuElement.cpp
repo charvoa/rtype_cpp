@@ -37,6 +37,11 @@ bool			AMenuElement::updateOnPress(std::pair<unsigned int, unsigned int> pair)
   return true;
 }
 
+void			AMenuElement::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
+{
+	(void)pair;
+}
+
 Sprite			&AMenuElement::getSprite()
 {
   return *_sprite;

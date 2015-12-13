@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:27 2015 Louis Audibert
-// Last update Fri Dec 11 19:02:19 2015 Joris Bertomeu
+// Last update Sat Dec 12 05:14:13 2015 Joris Bertomeu
 //
 
 #ifndef _ENTITYFACTORY_HH_
@@ -25,7 +25,7 @@ public:
   ~EntityFactory();
 
   AEntity *createEntity(int &id);
-  AEntity *createEntity(const std::string &filename, int &id);
+  AEntity *createEntity(const std::string &filename, int id);
 };
 
 #endif /* _ENTITYFACTORY_HH_ */

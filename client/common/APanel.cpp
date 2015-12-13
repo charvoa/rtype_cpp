@@ -56,7 +56,12 @@ bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 
 void		APanel::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
-	(void)pair;
+	unsigned int		i = 0;
+	while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+	{
+		this->_userInterface.at(i)->updateOnRelease(pair);
+		i++;
+	}
 }
 
 void		APanel::render()

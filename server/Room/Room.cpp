@@ -5,17 +5,18 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Sat Dec 12 14:10:55 2015 Antoine Garcia
+// Last update Sat Dec 12 05:10:21 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
 
 Room::Room() {}
 
-Room::Room(const std::string &id, Client *client):_id(id)
+Room::Room(const std::string &id, Client *client, BotManager *botManager):_id(id)
 {
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
+  _botManager = botManager;
   //_owner = client;
 }
 
@@ -44,7 +45,7 @@ void	Room::sendRoomPlayerJoin(Client *client)
   std::vector<Client *>::iterator	it;
   std::vector<Client *> clients = getAllPlayers();
   int	clientPos = _clientManager->getClientPosition(client) + 1;
-  for (it = clients.begin() ; it != clients.end() ; ++it)
+  for (it = clients.begin(); it != clients.end(); ++it)
     {
       std::string sendData = "player" + std::to_string(clientPos);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_PLAYER_CONNECTED, CRC::calcCRC(sendData), 0, sendData);

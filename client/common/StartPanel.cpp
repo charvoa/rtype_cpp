@@ -21,6 +21,7 @@
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
 #include <JoinPanel.hh>
+#include <SettingsPanel.hh>
 
 StartPanel::StartPanel(){}
 
@@ -124,8 +125,10 @@ void        StartPanel::exit()
 
 void        StartPanel::settings()
 {
-	(RenderWindow::getInstance())->addPanel(PanelFactory::SETTINGS_PANEL);
-        (RenderWindow::getInstance())->getPanels().top()->setUserInterface();
+	RenderWindow *window = RenderWindow::getInstance();
+
+	window->getPanels().push(static_cast<SettingsPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::SETTINGS_PANEL)));
+	window->getPanels().top()->setUserInterface();
 }
 
 void		StartPanel::update()

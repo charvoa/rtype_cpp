@@ -6,7 +6,7 @@
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
 
-// Last update Sat Dec 12 19:07:11 2015 Nicolas Charvoz
+// Last update Sat Dec 12 04:07:57 2015 Joris Bertomeu
 //
 
 #ifndef SERVER_HH_
@@ -28,6 +28,7 @@
 # include <ThreadFactory.hh>
 # include <CreateRequest.hpp>
 # include <sstream>
+# include <BotManager.hpp>
 
 class Server {
 
@@ -60,7 +61,7 @@ private:
   ANetwork *_network;
   //ClientManager _clientManager;
   CommandManager _commandManager;
-
+  BotManager	*_botManager;
 };
 
 void sendMessage(std::vector<Client>&, unsigned char);

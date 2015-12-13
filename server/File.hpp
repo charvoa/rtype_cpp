@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Sun Dec 13 06:53:47 2015 Serge Heitzler
+// Last update Sun Dec 13 09:32:30 2015 Serge Heitzler
 //
 
 #ifndef			_FILE_HPP_
@@ -86,9 +86,9 @@ public:
 
   std::string		basename( std::string const& pathname )
   {
-    return std::string(std::find_if( pathname.rbegin(), pathname.rend(),
-				     MatchPathSeparator() ).base(),
-		       pathname.end() );
+    return std::string(std::find_if(pathname.rbegin(), pathname.rend(),
+				    MatchPathSeparator()).base(),
+		       pathname.end());
   }
 
   void			sendMe(int port, void (*clb)(int, void *data), void *data) {
@@ -145,6 +145,14 @@ public:
     } catch (const std::exception &e) {
       std::cout << e.what() << std::endl;
     }
+  };
+
+  std::string		getFullPath() const {
+    return (this->_fullpath);
+  }
+
+  std::string		getExtension() const {
+    return (this->_fullpath.substr(this->_fullpath.find_last_of(".") + 1));
   };
 };
 

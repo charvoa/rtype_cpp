@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Sun Dec 13 02:19:42 2015 Louis Audibert
+// Last update Sat Dec 12 05:14:26 2015 Joris Bertomeu
 //
 
 #include <EntityFactory.hh>
@@ -27,7 +27,7 @@ AEntity	*EntityFactory::createEntity(int &id)
   return (new AEntity(id));
 }
 
-AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
+AEntity *EntityFactory::createEntity(const std::string &filename, int id)
 {
   (void)filename;
   DynLibLoader	loader;
@@ -39,6 +39,5 @@ AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
   } catch (const std::exception &e) {
     throw (std::logic_error(e.what()));
   }
-  id += 1;
   return (my_entity(id));
 }
