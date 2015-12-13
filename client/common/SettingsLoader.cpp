@@ -432,7 +432,7 @@ std::string		SettingsLoader::keyToString(sf::Keyboard::Key key) const
 			return (it->first);
 		++it;
 	}
-	return ("NO_Bind");
+	return ("NO_BIND");
 }
 
 std::string     SettingsLoader::bindToString(Bind bind) const
