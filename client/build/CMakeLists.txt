@@ -62,6 +62,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/SettingsPanel.cpp
   ../common/Sprite.cpp
   ../common/Slider.cpp
+  ../common/KeyButton.cpp
   )
 
 
