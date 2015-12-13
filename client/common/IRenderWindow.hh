@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Fri Dec  4 20:23:30 2015 Nicolas Girardot
+// Last update Sun Dec 13 11:09:05 2015 Serge Heitzler
 //
 
 #ifndef IRENDERWINDOW_HH_
@@ -36,6 +36,7 @@ public:
   virtual void		setKeyRepeatEnabled(bool value) = 0;
   virtual void		display() = 0;
   virtual void		draw(const sf::Drawable &drawable, const sf::RenderStates &states) = 0;
+  virtual void		setActive(bool value) = 0;
 };
 
 #endif /* !IRENDERWINDOW_HH_ */
