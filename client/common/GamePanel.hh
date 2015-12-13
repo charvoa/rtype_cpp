@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 12 20:14:11 2015 Nicolas Girardot
+// Last update Sun Dec 13 07:19:49 2015 Serge Heitzler
 //
 
 
@@ -33,11 +33,17 @@ public:
   static	void	setCurrentWave(unsigned int value);
   static	void	display(std::vector<std::string> &vector);
   void		render();
+  void		update();
   void		drawOtherPlayer();
+  std::map<std::string, Texture*>	&getDictionary();
+
+  
 private:
   std::vector<OtherPlayer*> _otherPlayers;
   std::vector<Sprite*> _sprites;
   MainPlayer		*_mainPlayer;
+
+  std::map<std::string, Texture*>	_dictionary;
 };
 
 #endif /* GAMEPANEL_HH_ */

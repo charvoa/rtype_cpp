@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Fri Dec 11 15:01:21 2015 Serge Heitzler
+// Last update Sun Dec 13 04:16:25 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -41,13 +41,32 @@ void			InputManager::setInputType(InputType type)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedAt));
       _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
-      //      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::CHOISIRUNNOMDEFONCTION));
+      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::keyPressedInGame));
     }
   if (type == InputType::JOIN_INPUT)
     {
       _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::textEnteredInJoinPanel));
     }
   
+}
+
+
+std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Event &event)
+{
+  (void)event;
+  std::cout << "KEY " << event.key.code << std::endl;
+  
+
+  return std::make_pair(0, 0);
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event& event)
+{
+  (void)event;
+
+  std::cout << "joy key " << event.joystickButton.button << std::endl;
+  
+  return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
@@ -128,12 +147,6 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
     {
     }
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
-}
-
-std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event& event)
-{
-  (void)event;
-  return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
 std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf::Event& event)
