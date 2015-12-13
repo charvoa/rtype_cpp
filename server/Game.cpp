@@ -10,6 +10,7 @@
 #include <Game.hh>
 #include <Timer.hpp>
 #include <Random.hpp>
+
 Game::Game()
 {
   _mutex = new Mutex();
@@ -128,8 +129,8 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 
 void Game::updateLife(Player *p, bool reset)
 {
-  Health *hP =
-    reinterpret_cast<Health*>(p->getSystemManager()
+  ComponentHealth *hP =
+    reinterpret_cast<ComponentHealth*>(p->getSystemManager()
 				->getSystemByComponent(E_POSITION)
 				->getComponent());
   if (!reset)
@@ -233,7 +234,7 @@ void Game::sendGameData()
     {
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
-	  Position *pPlayer = reinterpret_cast<Position *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
 	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
 	  reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
