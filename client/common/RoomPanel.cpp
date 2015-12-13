@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 13 18:55:58 2015 Nicolas Girardot
+// Last update Sun Dec 13 19:53:38 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -83,16 +83,19 @@ void	        RoomPanel::setUserInterface()
 
 void		setFileProgression(int p, void *data)
 {
+  //  std::cout << p << std::endl;
   (void)p;
   (void)data;
 }
 
-void		RoomPanel::receiveFiles(int i, int j)
+void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  for (int a = 0; a != j - 1; a++)
+  std::cout << "In In In nbr of files is : " << nbrFiles << std::endl;
+  for (int a = 0; a < nbrFiles; a++)
     {
+      std::cout << "Passing Thourhg" << port << std::endl;
       File	file;
-      file.receiveMe(IP_ADRESS, i, "./recv/", setFileProgression, NULL);
+      file.receiveMe(IP_ADRESS, port++, "./recv/", setFileProgression, NULL);
     }
 }
 

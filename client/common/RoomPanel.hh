@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
-// Last update Sun Dec 13 18:57:20 2015 Nicolas Girardot
+// Last update Sun Dec 13 19:02:24 2015 Nicolas Girardot
 //
 
 #ifndef ROOMPANEL_HH_
@@ -39,7 +39,7 @@ public:
   void			minusNbPlayers();
   void			addNbPlayers();
   std::vector<Texture*> &getTextures();
-  void			receiveFiles(int i, int j);
+  static void			receiveFiles(int i, int j);
 
 private:
 

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 18:34:52 2015 Nicolas Girardot
+// Last update Sun Dec 13 21:27:24 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -152,6 +152,11 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 }
 
 GamePanel::~GamePanel() {}
+
+void		GamePanel::newEnemy(std::vector<std::string> &vector)
+{
+  (void) vector;
+}
 
 void		GamePanel::die()
 {
