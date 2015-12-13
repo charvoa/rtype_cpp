@@ -34,7 +34,8 @@ public:
   void						methodChecker(sf::Event &event);
   void						setInputType(InputType inputType);
   std::pair<unsigned int, unsigned int>	        textEnteredInJoinPanel(sf::Event& event);
-
+  std::pair<unsigned int, unsigned int>			keyEntered(sf::Event& event);
+  std::pair<unsigned int, unsigned int>			dropSlider(sf::Event& event);
 private:
 
   typedef std::pair<unsigned int, unsigned int>(InputManager::*funcs)(sf::Event &event);

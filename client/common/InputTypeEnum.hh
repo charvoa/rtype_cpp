@@ -15,7 +15,8 @@ typedef enum					InputType
   {
     MENU_INPUT,
     JOIN_INPUT,
-    GAME_INPUT
+    GAME_INPUT,
+	SETTINGS_INPUT
   }						InputType;
 
 #endif							/* INPUTTYPEENUM_HH_ */
