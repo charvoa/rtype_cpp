@@ -5,8 +5,8 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sat Dec 12 14:20:28 2015 Antoine Garcia
 //
+
 
 #ifndef _GAME_HH_
 # define _GAME_HH_
@@ -30,8 +30,14 @@
 # include <queue>
 # include <CRC.hpp>
 # include <sstream>
+# include <map>
 
 class Game {
+
+
+  typedef void(Game::*Func)(void*, Client*);
+  std::map<E_Command, Func> _funcMap;
+
 
 private:
 

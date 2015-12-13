@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sat Dec 12 14:37:10 2015 Antoine Garcia
+// Last update Sun Dec 13 10:54:47 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
