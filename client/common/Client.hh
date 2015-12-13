@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Sun Dec 13 07:34:56 2015 Serge Heitzler
+// Last update Sun Dec 13 09:19:00 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -24,8 +24,8 @@
 #include <PanelFactory.hh>
 #include <SoundManager.hh>
 
-#define IP_ADRESS "0"
-#define PORT 4242
+#define IP_ADRESS "10.16.253.178"
+#define PORT 4253
 
 class	Client
 {

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 07:55:33 2015 Serge Heitzler
+// Last update Sun Dec 13 09:25:21 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -121,14 +121,11 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 
   // INIT EN DUR POUR TEST
 
-  Sprite *flag = new Sprite;
-  flag->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
-  flag->setPosition(0, 0);
-  flag->scale(0.2);
-  //  _inGame.push_back(*flag);
-
-
-
+  Sprite	*newSprite = new Sprite();
+  newSprite->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
+  newSprite->setPosition(200, 200);
+    newSprite->scale(0.2);
+    _inGame.push_back(*newSprite);
 
   _dictionary.insert(std::make_pair("player1", ((RenderWindow::getInstance())->_ressources->_blueShip)));
   _dictionary.insert(std::make_pair("player2", ((RenderWindow::getInstance())->_ressources->_redShip)));
@@ -158,26 +155,31 @@ GamePanel::~GamePanel() {}
 
 void		GamePanel::display(std::vector<std::string> &vector)
 {
+  (void)vector;
   RenderWindow *window = RenderWindow::getInstance();
   std::string  	id;
   int	posX = std::atoi(vector.at(1).c_str());
   int	posY = std::atoi(vector.at(2).c_str());
-  int	scale = std::atoi(vector.at(3).c_str());
+  //   int	scale = std::atoi(vector.at(3).c_str());
   Sprite	*newSprite = new Sprite();
 
   id = vector.at(0).c_str();
 
+  //  newSprite->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
+  ((static_cast<GamePanel*>(window->getPanels().top())->getDictionary())[id]);
+  newSprite->setPosition(posX + 200, posY);
+
   if (id.find("player") == !std::string::npos)
     newSprite->scale(0.2);
-  else
-    newSprite->scale(scale);
-  
-  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDictionary())[id]));
-  
-  newSprite->setPosition(posX, posY);
+  // else
+  //   newSprite->scale(scale);
+ 
+  std::cout << "4" << std::endl;
 
-  //  static_cast<GamePanel*>(window->getPanels().top())->getInGame().push_back(*newSprite);
-  window->draw(newSprite->getSprite());
+  //    window->draw((static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite()));
+  
+  static_cast<GamePanel*>(window->getPanels().top())->getInGame().push_back(*newSprite);
+   window->draw(newSprite->getSprite());
 }
 
 std::map<std::string, Texture*>		&GamePanel::getDictionary()
@@ -282,7 +284,7 @@ void		GamePanel::render()
   this->drawBackgrounds();
   this->drawUserInterface();
   this->drawLabels();
-  this->drawInGame();
+  //  this->drawInGame();
   this->_mainPlayer->render();
   this->drawOtherPlayer();
 }
