@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Sat Dec 12 15:17:08 2015 Serge Heitzler
+// Last update Sun Dec 13 01:51:44 2015 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>
@@ -73,16 +73,25 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
   
   _spaceShip->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1), window->getSize()._y * 0.95);
   
-  //  heart1->setPosition(padding + margin * (pos - 1), window->getSize()._y * 0.9);
-  //  heart2->setPosition(padding + margin * (pos - 1) + 5, window->getSize()._y * 0.9);
-  //  heart3->setPosition(padding + margin * (pos - 1) + 10, window->getSize()._y * 0.9);
-
+   heart1->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 20, window->getSize()._y * 0.9);
+   heart2->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 60, window->getSize()._y * 0.9);
+   heart3->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 100, window->getSize()._y * 0.9);
 
 
   _hearts.push_back(heart1);
   _hearts.push_back(heart2);
   _hearts.push_back(heart3);
 
+
+
+  _score->setString("0");
+  _score->setSize(30);
+  _score->setStyle(1);
+  _score->setOrigin(_score->getText().getGlobalBounds().width / 2, _score->getText().getGlobalBounds().height / 2);
+  _score->setPosition(Vector2(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 60, window->getSize()._y * 0.94));
+  _score->setColor(Color::WHITE);
+
+  
 }
 
 OtherPlayer::~OtherPlayer()

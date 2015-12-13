@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 12 20:17:49 2015 Nicolas Girardot
+// Last update Sun Dec 13 02:13:21 2015 Serge Heitzler
 //
 
 
@@ -19,8 +19,6 @@
 #include <Client.hh>
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
-
-std::string	g_a = "JVYO";
 
 /////Function to split data
 
@@ -93,9 +91,9 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), x.at(1).size(), x.at(1));
   std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
 
-  RenderWindow *window = RenderWindow::getInstance();
 
-  window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
+  RenderWindow *window = RenderWindow::getInstance();
+  window->getPanels().push(static_cast<GamePanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
 }
 
   void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
