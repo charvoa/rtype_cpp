@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sun Dec 13 04:19:09 2015 Louis Audibert
+// Last update Sun Dec 13 08:40:31 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -29,8 +29,8 @@ AEntity::~AEntity()
 
 bool	AEntity::update(int x, int y)
 {
-  if (_systemManager.getSystemByComponent(E_POSITION))
-    dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(E_POSITION))->update(x, y);
+  if (_systemManager.getSystemByComponent(C_POSITION))
+    dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(x, y);
   else
     return (false);
   return (true);
@@ -38,8 +38,8 @@ bool	AEntity::update(int x, int y)
 
 bool	AEntity::update(int health)
 {
-  if (_systemManager.getSystemByComponent(E_HEALTH))
-    dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(E_HEALTH))->update(health);
+  if (_systemManager.getSystemByComponent(C_HEALTH))
+    dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(C_HEALTH))->update(health);
   else
     return (false);
   return (true);
@@ -47,8 +47,8 @@ bool	AEntity::update(int health)
 
 bool	AEntity::update(std::vector<Case*> hitbox)
 {
-  if (_systemManager.getSystemByComponent(E_HITBOX))
-    dynamic_cast<SystemHitbox*>(_systemManager.getSystemByComponent(E_HITBOX))->update(hitbox);
+  if (_systemManager.getSystemByComponent(C_HITBOX))
+    dynamic_cast<SystemHitbox*>(_systemManager.getSystemByComponent(C_HITBOX))->update(hitbox);
   else
     return (false);
   return (true);
@@ -88,4 +88,10 @@ bool		AEntity::checkColision(AEntity *entity)
 const	std::string &AEntity::getName() const
 {
   return (_name);
+}
+
+bool	AEntity::setParent(AEntity *parent)
+{
+  _parent = parent;
+  return (true);
 }

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:23:44 2015 Louis Audibert
-// Last update Sun Dec 13 04:53:29 2015 Louis Audibert
+// Last update Sun Dec 13 08:38:19 2015 Louis Audibert
 //
 
 #include <SystemGun.hh>
@@ -14,13 +14,13 @@ SystemGun::SystemGun(E_Component type)
 {
   switch (type)
     {
-    case E_LASER:
+    case C_LASER:
       _component = new ComponentLaser();
       break;
-    case E_RIFLE:
+    case C_RIFLE:
       _component = new ComponentRiffle();
       break;
-    case E_MISSILE:
+    case C_MISSILE:
       _component = new ComponentMissile();
       break;
     default:

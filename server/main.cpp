@@ -4,7 +4,7 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Sat Dec 12 11:49:09 2015 Louis Audibert
+// Last update Sun Dec 13 08:36:31 2015 Louis Audibert
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
@@ -40,7 +40,6 @@ int		main(int ac, char **av)
   entity->update();
 #endif
 
-  entity->addSystem(E_HITBOX);
 
   (void)ac;
 

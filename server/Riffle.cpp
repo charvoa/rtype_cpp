@@ -5,12 +5,12 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 04:55:06 2015 Louis Audibert
-// Last update Sun Dec 13 04:58:11 2015 Louis Audibert
+// Last update Sun Dec 13 08:36:52 2015 Louis Audibert
 //
 
 #include <Riffle.hh>
 
-Riffle::Riffle(int id, AEntity *parent) : AEntity(id, parent)
+Riffle::Riffle(int id) : AEntity(id)
 {
   _name = "Riffle";
 }
