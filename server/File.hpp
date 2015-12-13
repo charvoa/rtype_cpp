@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Sat Dec 12 04:05:37 2015 Joris Bertomeu
+// Last update Sun Dec 13 09:32:30 2015 Serge Heitzler
 //
 
 #ifndef			_FILE_HPP_
@@ -107,6 +107,7 @@ public:
     net.listen(2);
     s = (Socket*) net.select();
     frame = (ANetwork::t_frame*) s->read(sizeof(Network::t_frame));
+    (void)frame;
     s->write(CreateRequest::create(1, 2, 3, IntToString(_size), true), sizeof(ANetwork::t_frame));
     s->write(CreateRequest::create(1, 2, 3, basename(this->_fullpath), true), sizeof(ANetwork::t_frame));
     while (i < this->_size) {

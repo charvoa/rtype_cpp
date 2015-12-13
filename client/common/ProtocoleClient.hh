@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Thu Dec 10 21:53:20 2015 Nicolas Girardot
+// Last update Sun Dec 13 18:56:40 2015 Nicolas Girardot
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -44,6 +44,7 @@ public:
   void			createRoomSuccess(ANetwork::t_frame &frame);
   void			createRoomError(ANetwork::t_frame &frame);
   void			gameNotLaunched(ANetwork::t_frame &frame);
+  void			fileTotalSize(ANetwork::t_frame &frame);
 
 private:
 

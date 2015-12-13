@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Sun Dec 13 15:33:06 2015 Nicolas Girardot
+// Last update Sun Dec 13 07:27:01 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -57,15 +57,11 @@ MainPlayer::MainPlayer(unsigned int id)
       break;
     }
 
-
-
-
-
-      riffle->setTexture(*((RenderWindow::getInstance())->_ressources->_riffleHUD));
-      rocket->setTexture(*((RenderWindow::getInstance())->_ressources->_rocket));
-      heart1->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
-      heart2->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
-      heart3->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
+  riffle->setTexture(*((RenderWindow::getInstance())->_ressources->_riffleHUD));
+  rocket->setTexture(*((RenderWindow::getInstance())->_ressources->_rocket));
+  heart1->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
+  heart2->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
+  heart3->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
 
 
   _spaceShip->setPosition(window->getSize()._x * 0.03, window->getSize()._y * 0.89);
@@ -77,9 +73,7 @@ MainPlayer::MainPlayer(unsigned int id)
   heart3->setPosition(window->getSize()._x * 0.21, window->getSize()._y * 0.88);
 
   _spaceShip->scale(0.2);
-  // riffle->scale(0.5);
-  // rocket->scale(0.5);
-  // laser->scale(0.5);
+
   heart1->scale(1.5);
   heart2->scale(1.5);
   heart3->scale(1.5);

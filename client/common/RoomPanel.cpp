@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 13 18:27:10 2015 Nicolas Girardot
+// Last update Sun Dec 13 18:55:58 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -21,6 +21,7 @@
 #include <Client.hh>
 #include <iostream>
 #include <GamePanel.hh>
+#include <File.hpp>
 
 RoomPanel::RoomPanel()
 {
@@ -77,6 +78,22 @@ void	        RoomPanel::setUserInterface()
   _spaceShipsTextures.push_back(yellowShipTexture);
 
   this->createPlayers();
+
+}
+
+void		setFileProgression(int p, void *data)
+{
+  (void)p;
+  (void)data;
+}
+
+void		RoomPanel::receiveFiles(int i, int j)
+{
+  for (int a = 0; a != j - 1; a++)
+    {
+      File	file;
+      file.receiveMe(IP_ADRESS, i, "./recv/", setFileProgression, NULL);
+    }
 }
 
 unsigned int	RoomPanel::getNbPlayers() const
@@ -98,7 +115,6 @@ std::vector<Texture*>	&RoomPanel::getTextures()
 {
   return _spaceShipsTextures;
 }
-
 
 void		RoomPanel::newPlayer(std::string &newUsername)
 {

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Sat Dec 12 13:12:10 2015 Serge Heitzler
+// Last update Sun Dec 13 06:50:27 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -24,6 +24,9 @@ Ressources::Ressources()
   _backgroundRoomPanel = new Texture();
   _backgroundSettingsPanel = new Texture();
   _backgroundBlack = new Texture();
+  _backgroundGame1 = new Texture();
+  _backgroundGame2 = new Texture();
+  _backgroundGame3 = new Texture();
   _panelIntroUp = new Texture();
   _panelIntroDown = new Texture();
   _earth = new Texture();
@@ -34,6 +37,9 @@ Ressources::Ressources()
   _backgroundStartPanel->loadFromFile("../common/misc/background.png");
   _backgroundRoomPanel->loadFromFile("../common/misc/room_background.png");
   _backgroundSettingsPanel->loadFromFile("../common/misc/settings_background.png");
+  _backgroundGame1->loadFromFile("../common/misc/background_in_game.png");
+  _backgroundGame2->loadFromFile("../common/misc/background_in_game_2.png");
+  _backgroundGame3->loadFromFile("../common/misc/background_in_game_3.png");
   _backgroundBlack->loadFromFile("../common/misc/black_background.png");
   _panelIntroUp->loadFromFile("../common/misc/panel_up.png");
   _panelIntroDown->loadFromFile("../common/misc/panel_down.png");
@@ -43,6 +49,7 @@ Ressources::Ressources()
   _greyPanel->loadFromFile("../common/misc/grey_panel.png");
 
   _hud = new Texture();
+  _header = new Texture();
   _heart = new Texture();
   _riffleHUD = new Texture();
   _rocket = new Texture();
@@ -58,6 +65,7 @@ Ressources::Ressources()
   _laserYellowBig = new Texture();
 
   _hud->loadFromFile("../common/misc/hud.png");
+  _header->loadFromFile("../common/misc/header.png");
   _heart->loadFromFile("../common/misc/heart.png");
   _riffleHUD->loadFromFile("../common/misc/riffle_infinite.png");
   _rocket->loadFromFile("../common/misc/rocket.png");

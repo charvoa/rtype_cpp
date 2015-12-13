@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 13 18:09:20 2015 Nicolas Girardot
+// Last update Sun Dec 13 18:58:15 2015 Nicolas Girardot
 //
 
 
@@ -71,6 +71,13 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_END_GAME, &ProtocoleClient::endGame));
   _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
+  _functions.insert(std::make_pair(S_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
+}
+
+void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  RoomPanel::receiveFiles(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
@@ -103,9 +110,15 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
 {
+  unsigned int i = 0;
+
+
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Display" << std::endl;
+
   GamePanel::display(x);
+  std::cout << i << std::endl;
+  i++;
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
@@ -163,7 +176,7 @@ void		ProtocoleClient::die(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "die" << std::endl;
-  GamePanel::die()
+  GamePanel::die();
 }
 
 void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)
