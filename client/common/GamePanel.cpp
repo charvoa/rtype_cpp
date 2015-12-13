@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 12 20:16:51 2015 Nicolas Girardot
+// Last update Sat Dec 12 14:56:22 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -50,17 +50,17 @@ GamePanel::GamePanel()
 {
   RenderWindow *window = RenderWindow::getInstance();
   //getInputManager().setInputType(InputType::GAME_INPUT);
+
   // std::unique_ptr<AThread> t(new Thread(1));
   // char str1[] = "";
   // (void) str1;
   // t->attach(&readUDP, (void *)str1);
   // t->run();
-
-//  for (int i = 0; i != 3; i++)
+  
+  //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
-  std::cout << "MA BITE"  << std::endl;
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
@@ -78,7 +78,7 @@ GamePanel::GamePanel()
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
   waveNumber->setOrigin(waveNumber->getText().getGlobalBounds().width / 2, waveNumber->getText().getGlobalBounds().height / 2);
-  waveNumber->setPosition(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95));
+  waveNumber->setPosition(Vector2(window->getSize()._x * 0.88, window->getSize()._y * 0.92));
   waveNumber->setColor(Color::WHITE);
   _labels.push_back(*waveNumber);
 
@@ -95,6 +95,7 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
   _backgrounds.push_back(*hud);
 
+
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -110,7 +111,19 @@ hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   flag->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
   flag->setPosition(0, 0);
   flag->scale(0.2);
-  _inGame.push_back(*flag);
+  //  _inGame.push_back(*flag);
+
+
+
+  _mainPlayer = new MainPlayer(1);
+
+  OtherPlayer	*other1 = new OtherPlayer(1, 2);
+  OtherPlayer	*other2 = new OtherPlayer(2, 3);
+  OtherPlayer	*other3 = new OtherPlayer(3, 4);
+
+  _otherPlayers.push_back(other1);
+  _otherPlayers.push_back(other2);
+  _otherPlayers.push_back(other3);
 }
 
 GamePanel::~GamePanel() {}

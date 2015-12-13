@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Sat Dec 12 10:39:44 2015 Serge Heitzler
+// Last update Sat Dec 12 13:39:23 2015 Serge Heitzler
 //
 
 #ifndef OTHERPLAYER_HH_
@@ -18,7 +18,7 @@
 class OtherPlayer
 {
 public:
-  OtherPlayer();
+  OtherPlayer(unsigned int pos, unsigned int id);
   ~OtherPlayer();
   
   void			setLife(unsigned int);
@@ -31,6 +31,7 @@ private:
 
   std::string			_username;
   Sprite			*_spaceShip;
+  Sprite			*_greyBack;
   Text				*_score;
   int				_nbrLife;
   std::vector<Sprite*>		_hearts;

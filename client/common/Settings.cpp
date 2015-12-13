@@ -39,6 +39,11 @@ Volume  Settings::getVolume() const
     return _volume;
 }
 
+void	Settings::setVolume(Volume const& vol)
+{
+	_volume = vol;
+}
+
 std::vector<Bind>   Settings::getBinds() const
 {
     return _binds;

@@ -5,13 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Sat Dec 12 10:48:47 2015 Serge Heitzler
+// Last update Sat Dec 12 15:17:19 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
 #include <MainPlayer.hh>
 
-MainPlayer::MainPlayer(int id)
+MainPlayer::MainPlayer(unsigned int id)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
@@ -33,48 +33,56 @@ MainPlayer::MainPlayer(int id)
     {
     case 0:
       _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_blackShip));
+      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laserBlackLittle));
       break;
     case 1:
       _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
+      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laserBlueLittle));
       break;
     case 2:
       _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_redShip));
+      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laserRedLittle));
       break;
     case 3:
       _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_greenShip));
+      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laserGreenLittle));
       break;
     case 4:
       _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_yellowShip));
+      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laserYellowLittle));
       break;
     default:
       _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_blackShip));
+      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laserBlackLittle));
       break;
     }
 
 
-      riffle->setTexture(*((RenderWindow::getInstance())->_ressources->_riffle));
+
+
+
+      riffle->setTexture(*((RenderWindow::getInstance())->_ressources->_riffleHUD));
       rocket->setTexture(*((RenderWindow::getInstance())->_ressources->_rocket));
-      laser->setTexture(*((RenderWindow::getInstance())->_ressources->_laser));
       heart1->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
       heart2->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
       heart3->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
 
 
-  _spaceShip->setPosition(window->getSize()._x * 0.05, window->getSize()._y * 0.95);
-  riffle->setPosition(window->getSize()._x * 0.15, window->getSize()._y * 0.92);
-  rocket->setPosition(window->getSize()._x * 0.15, window->getSize()._y * 0.95);
-  laser->setPosition(window->getSize()._x * 0.15, window->getSize()._y * 0.98);
-  heart1->setPosition(window->getSize()._x * 0.1, window->getSize()._y * 0.95);
-  heart2->setPosition(window->getSize()._x * 0.11, window->getSize()._y * 0.95);
-  heart3->setPosition(window->getSize()._x * 0.12, window->getSize()._y * 0.95);
+  _spaceShip->setPosition(window->getSize()._x * 0.03, window->getSize()._y * 0.89);
+  riffle->setPosition(window->getSize()._x * 0.25, window->getSize()._y * 0.88);
+  rocket->setPosition(window->getSize()._x * 0.25, window->getSize()._y * 0.92);
+  laser->setPosition(window->getSize()._x * 0.25, window->getSize()._y * 0.95);
+  heart1->setPosition(window->getSize()._x * 0.15, window->getSize()._y * 0.88);
+  heart2->setPosition(window->getSize()._x * 0.18, window->getSize()._y * 0.88);
+  heart3->setPosition(window->getSize()._x * 0.21, window->getSize()._y * 0.88);
 
-  _spaceShip->scale(0.5);
-  riffle->scale(0.5);
-  rocket->scale(0.5);
-  laser->scale(0.5);
-  heart1->scale(0.5);
-  heart2->scale(0.5);
-  heart3->scale(0.5);
+  _spaceShip->scale(0.2);
+  // riffle->scale(0.5);
+  // rocket->scale(0.5);
+  // laser->scale(0.5);
+  heart1->scale(1.5);
+  heart2->scale(1.5);
+  heart3->scale(1.5);
 
   _hearts.push_back(heart1);
   _hearts.push_back(heart2);
@@ -85,11 +93,18 @@ MainPlayer::MainPlayer(int id)
   _ammos.push_back(laser);  
 
   _score->setString("0");
-  _score->setSize(30);
+  _score->setSize(50);
   _score->setStyle(1);
   _score->setOrigin(_score->getText().getGlobalBounds().width / 2, _score->getText().getGlobalBounds().height / 2);
-  _score->setPosition(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.9));
+  _score->setPosition(Vector2(window->getSize()._x * 0.19, window->getSize()._y * 0.95));
   _score->setColor(Color::WHITE);
+
+  _nbrRocketText->setString("0");
+  _nbrRocketText->setSize(30);
+  _nbrRocketText->setStyle(1);
+  _nbrRocketText->setOrigin(_nbrRocketText->getText().getGlobalBounds().width / 2, _nbrRocketText->getText().getGlobalBounds().height / 2);
+  _nbrRocketText->setPosition(Vector2(window->getSize()._x * 0.29, window->getSize()._y * 0.92));
+  _nbrRocketText->setColor(Color::WHITE);
 
 }
 

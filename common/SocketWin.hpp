@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sun Dec  6 08:45:26 2015 Antoine Garcia
+// Last update Fri Dec 11 22:49:42 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -56,10 +56,19 @@ class		Socket : public ISocket
   };
 
   void		*read(int size) {
+    int		foo;
+
 	  if (this->_mode == SOCK_STREAM)
-		  return (this->read_tcp(size));
+	    return (this->read_tcp(size, &foo));
 	  else
-		  return (this->read_udp(size));
+	    return (this->read_udp(size, &foo));
+  };
+
+  void		*read(int size, int *fill) {
+    if (this->_mode == SOCK_STREAM)
+      return (this->read_tcp(size, fill));
+    else
+      return (this->read_udp(size, fill));
   };
 
   int		write(void *data, int size) {
@@ -83,24 +92,24 @@ class		Socket : public ISocket
   };
 
 private:
-	void		*read_tcp(int size) {
+  void		*read_tcp(int size, int *fill) {
 		void	*data;
 
 		data = malloc(size + 1);
 		memset(data, 0, size + 1);
-		::recv(this->_fd, (char*)data, size, 0);
+		*fill = ::recv(this->_fd, (char*)data, size, 0);
 		if (!data)
 			throw (std::logic_error("Socket :: Read :: Null ptr returned"));
 		return (data);
 	};
 
-	void		*read_udp(int size) {
+  void		*read_udp(int size, int *fill) {
 		void	*data;
 		int		meSize = sizeof(SOCKADDR_IN);
 
 		data = malloc(size + 1);
 		memset(data, 0, size + 1);
-		::recvfrom(this->_fd, (char*) data, size, 0, (SOCKADDR*) &_me, &meSize);
+		*fill = ::recvfrom(this->_fd, (char*) data, size, 0, (SOCKADDR*) &_me, &meSize);
 		if (&(this->_me) != NULL)
 			this->_init = true;
 		return (data);

@@ -36,7 +36,7 @@ public:
     Settings::Difficulty getCurrentDifficulty() const;
 
     void update(Settings const&);
-    void setVolume(Volume);
+    void setVolume(Volume const&);
     void setBind(Bind &);
     void setDefaultDifficulty(Settings::Difficulty);
     void setDifficulty(Settings::Difficulty);
