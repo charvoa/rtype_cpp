@@ -13,6 +13,7 @@
 
 # include		<stdexcept>
 # include		<string>
+# define		_WINSOCKAPI_
 # include		<windows.h>
 
 class			DynLibLoader
