@@ -121,6 +121,29 @@ void Game::handleMove(void *data, Client *client)
 
 }
 
+void Game::updateScore(Player *p, Game::scoreDef score)
+{
+  p->setScore(p->getScore() + score);
+}
+
+void Game::updateLife(Player *p, bool reset)
+{
+  Health *hP =
+    reinterpret_cast<Health*>(p->getSystemManager()
+				->getSystemByComponent(E_POSITION)
+				->getComponent());
+  if (!reset)
+    p->update(hP->getLife() - 1);
+  else
+    p->update(3);
+}
+
+void Game::handleShoot(void *data, Client *client)
+{
+  char *weaponType =
+    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+}
+
 void Game::handleCommand(void *data, Client *client)
 {
   std::cout << "Game :: handleCommand" << std::endl;
@@ -138,9 +161,13 @@ void Game::handleCommand(void *data, Client *client)
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
 
-  Func fp = _funcMap[commandType];
+  try {
+    Func fp = _funcMap[commandType];
+    (this->*fp)(data, client);
+  } catch (const std::exception &e) {
+    std::cout << "Cannot achieve this action" << std::endl;
+  }
 
-  (this->*fp)(data, client);
 }
 
 void *readThread(void *sData)

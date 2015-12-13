@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:29:32 2015 Nicolas Charvoz
-// Last update Sat Dec 12 10:03:41 2015 Louis Audibert
+// Last update Sun Dec 13 14:03:33 2015 Nicolas Charvoz
 //
 
 #include <Player.hh>
@@ -37,4 +37,9 @@ bool Player::isOwner() const
 int Player::getScore() const
 {
   return _score;
+}
+
+void Player::setScore(int s)
+{
+  _score = s;
 }

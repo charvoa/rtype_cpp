@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Fri Dec 11 17:01:59 2015 Joris Bertomeu
+// Last update Sun Dec 13 14:03:48 2015 Nicolas Charvoz
 //
 
 #ifndef PLAYER_HH_
@@ -33,6 +33,7 @@ public:
   const std::string &getUsername() const;
   bool isOwner() const;
   int getScore() const;
+  void setScore(int);
 };
 
 #endif
