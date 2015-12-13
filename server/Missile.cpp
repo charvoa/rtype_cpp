@@ -4,23 +4,18 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Thu Dec  3 05:19:41 2015 Louis Audibert
+// Started on  Sun Dec 13 05:02:38 2015 Louis Audibert
+// Last update Sun Dec 13 05:03:55 2015 Louis Audibert
 //
 
 #include <Missile.hh>
 
-Missile::Missile()
+Missile::Missile(int id, AEntity *parent) : AEntity(id, parent)
 {
-  _dmg = 50;
+  _name = "Missile";
 }
 
 Missile::~Missile()
 {
-  std::cout << "Missile Component Destroyed" << std::endl;
-}
 
-int	Missile::getDamages() const
-{
-  return (_dmg);
 }

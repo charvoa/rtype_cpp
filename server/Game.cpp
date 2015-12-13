@@ -105,8 +105,8 @@ void Game::handleMove(void *data, Client *client)
 
     std::stringstream ss;
 
-    Position *pPlayer =
-      reinterpret_cast<Position*>(player->getSystemManager()
+    ComponentPosition *pPlayer =
+      reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 				  ->getSystemByComponent(E_POSITION)
 				  ->getComponent());
     //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
@@ -192,7 +192,7 @@ void Game::initPlayersPosition()
   Random	rand(0,255);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
-      Position *p = reinterpret_cast<Position *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
       (*it)->update(x, rand.generate<int>());
       std::cout << " X POS " << p->getX() << "Y POS " << p->getY() << std::endl;
     }

@@ -5,13 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 11:06:54 2015 Louis Audibert
-// Last update Sat Dec 12 11:54:38 2015 Louis Audibert
+// Last update Sun Dec 13 05:28:50 2015 Louis Audibert
 //
 
 #include <SystemHitbox.hh>
 
 SystemHitbox::SystemHitbox()
 {
+  _component = new ComponentHitbox();
   std::cout << "new SystemHitbox created" << std::endl;
 }
 
@@ -22,6 +23,6 @@ SystemHitbox::~SystemHitbox()
 
 bool	SystemHitbox::update(std::vector<Case*> hitbox)
 {
-  dynamic_cast<Hitbox*>(_component)->setHitbox(hitbox);
+  dynamic_cast<ComponentHitbox*>(_component)->setHitbox(hitbox);
   return (true);
 }

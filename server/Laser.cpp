@@ -4,23 +4,18 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Thu Dec  3 05:18:09 2015 Louis Audibert
+// Started on  Sun Dec 13 05:07:55 2015 Louis Audibert
+// Last update Sun Dec 13 05:27:01 2015 Louis Audibert
 //
 
 #include <Laser.hh>
 
-Laser::Laser()
+Laser::Laser(int id, AEntity *parent) : AEntity(id, parent)
 {
-  _dmg = 100;
+  _name = "Laser:" + parent->getName();
 }
 
 Laser::~Laser()
 {
-  std::cout << "Laser Component Destroyed" << std::endl;
-}
 
-int	Laser::getDamages() const
-{
-  return (_dmg);
 }
