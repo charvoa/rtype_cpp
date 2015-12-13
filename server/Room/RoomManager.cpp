@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Thu Dec 10 20:57:08 2015 Nicolas Charvoz
+// Last update Sun Dec 13 02:06:58 2015 Antoine Garcia
 //
 
 
@@ -18,6 +18,7 @@
 # include <algorithm>
 # include <random>
 # include <RoomManager.hh>
+# include <Random.hpp>
 
 RoomManager::RoomManager() : _rooms(0)
 {}
@@ -29,13 +30,11 @@ std::string	RoomManager::generateId()
 {
   std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   std::string id;
-  std::random_device rd;
-  std::mt19937 mt(rd());
-  std::uniform_int_distribution<int> dist(0, str.size() - 1);
+  Random	random(str);
   for (int i = 0; i < 4; i++)
     {
-      int	random_variable = dist(mt);
-      id += str[random_variable];
+
+      id += random.generate<char>();
     }
   return id;
 }
