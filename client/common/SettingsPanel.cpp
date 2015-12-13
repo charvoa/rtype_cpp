@@ -12,7 +12,7 @@
 #include "PanelFactory.hh"
 #include "SettingsPanel.hh"
 
-SettingsPanel::SettingsPanel() : APanel()
+SettingsPanel::SettingsPanel()
 {
     _tmp = new Settings(*(RenderWindow::getInstance())->getSettings());
 }
@@ -20,6 +20,13 @@ SettingsPanel::SettingsPanel() : APanel()
 SettingsPanel::~SettingsPanel()
 {
     delete _tmp;
+}
+
+void	SettingsPanel::setUserInterface()
+{
+	RenderWindow *window = RenderWindow::getInstance();
+	getInputManager().setInputType(InputType::SETTINGS_INPUT);
+
 }
 
 void    SettingsPanel::setGlobalVolume(int global)
@@ -64,9 +71,4 @@ void    SettingsPanel::back()
 void    SettingsPanel::save()
 {
 	(RenderWindow::getInstance())->setSettings(_tmp);
-}
-
-void	SettingsPanel::render()
-{
-
 }
