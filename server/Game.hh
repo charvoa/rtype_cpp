@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sun Dec 13 03:06:17 2015 Antoine Garcia
 //
 
 #ifndef _GAME_HH_
@@ -46,7 +45,15 @@ private:
   AMutex *_mutex;
   int	_stage;
   int	_nbDisplay;
+
 public:
+
+  enum scoreDef {
+    HIT = 10,
+    BOSS_HIT = 25,
+    KILLED = 50,
+    BOSS_KILLED = 75
+  };
 
   struct dataThread {
     Game *game;
@@ -64,9 +71,15 @@ public:
   void addCommandToQueue(ANetwork::t_frame);
   Client *getClientBySocket(ISocket*) const;
   Player *getPlayerByClient(Client*);
+
   void handleHandshakeUDP(void*, Client*);
   void handleMove(void*, Client*);
   void handleCommand(void*, Client*);
+  void handleShoot(void*, Client*);
+
+
+  void updateScore(Player*, Game::scoreDef);
+  void updateLife(Player*, bool);
   int  getNumberEnemyMax();
   void addMonster();
   void initPlayersPosition();
