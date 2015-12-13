@@ -24,6 +24,7 @@ public:
 
   static void			create(Vector2 pos, std::string &title);
   static void			createSlider(Vector2 pos);
+  static void			createKeyButton(Vector2 pos, std::string &title);
 private:
 
 };
