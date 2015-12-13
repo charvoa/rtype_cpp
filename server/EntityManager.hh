@@ -35,8 +35,8 @@ public:
   bool		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
   void		removeEntity(AEntity &entity);
   void		removeEntityById(int id);
-  AEntity	*getEntityById(int id);
-  std::vector<AEntity*> getEntitiesByType(E_EntityType type);
+  AEntity	*getEntityById(int id) const;
+  std::vector<AEntity*> const getEntitiesByType(E_EntityType type) const;
   void		update();
 };
 
