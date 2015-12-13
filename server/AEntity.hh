@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Sat Dec 12 11:55:55 2015 Louis Audibert
+// Last update Sun Dec 13 03:28:57 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -26,6 +26,7 @@ protected:
   SystemManager	_systemManager;
   char		_color;
   AEntity	*_parent;
+  std::string	_name;
 
 public:
   AEntity(int id);
@@ -41,6 +42,7 @@ public:
   int	getId() const;
   SystemManager *getSystemManager();
   bool	checkColision(AEntity *entity);
+  const std::string &getName() const;
 };
 
 #endif /* _AENTITY_HH_ */

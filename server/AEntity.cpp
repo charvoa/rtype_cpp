@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sun Dec 13 02:21:51 2015 Louis Audibert
+// Last update Sun Dec 13 04:19:09 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -83,4 +83,9 @@ SystemManager	*AEntity::getSystemManager()
 bool		AEntity::checkColision(AEntity *entity)
 {
   return (true);
+}
+
+const	std::string &AEntity::getName() const
+{
+  return (_name);
 }
