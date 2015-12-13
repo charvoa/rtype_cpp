@@ -5,18 +5,27 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Sat Dec 12 05:10:21 2015 Joris Bertomeu
+// Last update Sat Dec 12 05:49:38 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
+#include <sstream>
 
 Room::Room() {}
 
 Room::Room(const std::string &id, Client *client, BotManager *botManager):_id(id)
 {
+  std::list<Bot*>	botList;
+  std::ostringstream	tmp;
+
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
   _botManager = botManager;
+  tmp << botList.size();
+  client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string("8765;" + tmp.str())), std::string("8765;" + tmp.str()).size(), std::string("8765;" + tmp.str()), true), sizeof(ANetwork::t_frame));
+  for (std::list<Bot*>::iterator it = botList.begin(); it != botList.end(); ++it) {
+    File		file((*it)->_sprite);
+  }
   //_owner = client;
 }
 

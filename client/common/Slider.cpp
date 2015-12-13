@@ -60,7 +60,10 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
 	{
 		if (_locked == false)
+		{
+			// TODO délimiter l'espace dans lequel on peut déplacer le bouton et calculer sa valeur en fonction de sa position dans cet espace : _value =...
 			this->getSprite().setPosition(pair.first, getPosY());
+		}
 		this->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonHighlight);
 	}
 	else
