@@ -195,7 +195,8 @@ std::pair<unsigned int, unsigned int>		InputManager::dropSlider(sf::Event& event
 
 std::pair<unsigned int, unsigned int>		InputManager::keyEntered(sf::Event& event)
 {
-
+	(void)event;
+	return std::make_pair(0, 0);
 }
 
 /* ACTION ON EVENT
