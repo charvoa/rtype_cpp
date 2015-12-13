@@ -5,7 +5,7 @@
 // Login   <antgar@epitech.net>
 //
 // Started on  Wed May 13 03:58:34 2015 Antoine Garcia
-// Last update Fri Dec 11 15:02:51 2015 Nicolas Girardot
+// Last update Sun Dec 13 12:22:25 2015 Nicolas Girardot
 //
 
 #ifndef SOUNDMANAGER_HH_
@@ -24,6 +24,7 @@ public:
   Sound();
   ~Sound();
   void		initialize();
+  bool		isPlaying(const std::string &title);
   void		registerSound(const std::string &filename, const std::string &title);
   void		registerMusic(const std::string &filename, const std::string &title);
   void		playMusic(const std::string &title, int repeat = 0);

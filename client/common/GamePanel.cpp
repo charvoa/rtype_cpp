@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 02:08:50 2015 Serge Heitzler
+// Last update Sun Dec 13 12:25:58 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -26,7 +26,7 @@
 
 void	*readUDP(void *s)
 {
-ANetwork::t_frame a;
+  ANetwork::t_frame a;
   ProtocoleClient x;
   while (true)
     {
@@ -56,10 +56,14 @@ GamePanel::GamePanel()
   // (void) str1;
   // t->attach(&readUDP, (void *)str1);
   // t->run();
-  
+
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
+
+  Sound *s = Client::getSound();
+  s->stopMusic("mainMenu");
+  s->playMusic("gameIntro", 0);
 
   Text	*teamScore = new Text();
 
@@ -85,13 +89,13 @@ GamePanel::GamePanel()
 
   Sprite *backgroundSpace = new Sprite;
 
-backgroundSpace->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundBlack));
+  backgroundSpace->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundBlack));
   backgroundSpace->setPosition(0, 0);
   _backgrounds.push_back(*backgroundSpace);
 
   Sprite *hud = new Sprite;
 
-hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
+  hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
   _backgrounds.push_back(*hud);
 
@@ -201,12 +205,16 @@ void		GamePanel::setLife(const std::string &name, int life)
 
 void		GamePanel::render()
 {
-this->drawBackgrounds();
-this->drawUserInterface();
-this->drawLabels();
-this->drawInGame();
-this->_mainPlayer->render();
-this->drawOtherPlayer();
+  Sound *s = Client::getSound();
+  if (s->isPlaying("gameIntro") || s->isPlaying("gameLoop"));
+  else
+    s->playMusic("gameLoop", 1);
+  this->drawBackgrounds();
+  this->drawUserInterface();
+  this->drawLabels();
+  this->drawInGame();
+  this->_mainPlayer->render();
+  this->drawOtherPlayer();
 }
 
 void		GamePanel::drawOtherPlayer()

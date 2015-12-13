@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Sat Dec 12 15:17:18 2015 Serge Heitzler
+// Last update Sun Dec 13 10:46:03 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -14,6 +14,7 @@
 #include <RenderWindow.hh>
 #include <Button.hh>
 #include <ButtonFactory.hh>
+#include <SoundManager.hh>
 #include <RoomPanel.hh>
 #include <ANetwork.hpp>
 #include <Client.hh>
@@ -64,7 +65,7 @@ void		StartPanel::setUserInterface()
   _backgrounds.push_back(*logo);
   _backgrounds.push_back(*panelUp);
   _backgrounds.push_back(*panelDown);
-  
+
   // Button
 
   std::string name = "CREATE ROOM";
@@ -130,6 +131,11 @@ void        StartPanel::settings()
 void		StartPanel::update()
 {
   static int i = 0;
+  if (i == 0)
+    {
+      Sound *Sound = Client::getSound();
+      Sound->playSound("door");
+    }
 
   _backgrounds.at(1).rotate(0.0009);
   if (i % 10000 < 5000)
@@ -140,7 +146,7 @@ void		StartPanel::update()
   if (i * 1.5 < 255)
     {
       float tint = (i * 1.5);
-  
+
       _userInterface.at(0)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
       _userInterface.at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
       _userInterface.at(2)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, tint));
@@ -153,13 +159,13 @@ void		StartPanel::update()
       _labels.at(3).getText().setColor(sf::Color(255, 255, 255, tint));
       _labels.at(4).getText().setColor(sf::Color(255, 255, 255, tint));
 
-      
+
     }
-  
+
   if (i < 640)
     {
       _backgrounds.at(4).move(0,-3);
       _backgrounds.at(5).move(0,3);
     }
-  i++;  
+  i++;
 }
