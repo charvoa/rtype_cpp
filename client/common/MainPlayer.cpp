@@ -1,11 +1,11 @@
 //
 // MainPlayer.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Sun Dec 13 01:54:42 2015 Serge Heitzler
+// Last update Sun Dec 13 15:33:06 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -90,7 +90,7 @@ MainPlayer::MainPlayer(unsigned int id)
 
   _ammos.push_back(riffle);
   _ammos.push_back(rocket);
-  _ammos.push_back(laser);  
+  _ammos.push_back(laser);
 
   _score->setString("0");
   _score->setSize(50);
@@ -109,6 +109,11 @@ MainPlayer::MainPlayer(unsigned int id)
 }
 
 MainPlayer::~MainPlayer(){}
+
+const std::string	&MainPlayer::getUsername() const
+{
+  return _username;
+}
 
 void		MainPlayer::setNbRocket(unsigned int nb)
 {

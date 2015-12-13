@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Sat Dec 12 13:14:20 2015 Serge Heitzler
+// Last update Sun Dec 13 15:22:28 2015 Nicolas Girardot
 //
 
 #ifndef MAINPLAYER_HH_
@@ -20,15 +20,16 @@ public:
   MainPlayer(unsigned int id);
   ~MainPlayer();
 
+  const std::string	&getUsername() const;
   void		setNbRocket(unsigned int nb);
   void		setNbLife(unsigned int nb);
   void	        setScore(unsigned int score);
   void		render();
-  
+
 private:
 
   std::string			_username;
-  
+
   Sprite			*_spaceShip;
   Text				*_score;
   Text				*_nbrRocketText;
