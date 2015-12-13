@@ -9,6 +9,7 @@
 
 #include <Game.hh>
 #include <Timer.hpp>
+#include <Random.hpp>
 
 Game::Game()
 {
@@ -27,6 +28,10 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
   this->addClients(client_);
   _stage = 1;
   _nbDisplay = 0;
+
+  _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
+  _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
+
 }
 
 Game::~Game() {}
@@ -77,7 +82,6 @@ Player *Game::getPlayerByClient(Client *client)
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
-
   std::cout << "Game :: handleHandshakeUDP " << std::endl;
 
   for (std::vector<Client*>::iterator it = this->_clients.begin();
@@ -102,8 +106,8 @@ void Game::handleMove(void *data, Client *client)
 
     std::stringstream ss;
 
-    Position *pPlayer =
-      reinterpret_cast<Position*>(player->getSystemManager()
+    ComponentPosition *pPlayer =
+      reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 				  ->getSystemByComponent(E_POSITION)
 				  ->getComponent());
     //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
@@ -116,6 +120,29 @@ void Game::handleMove(void *data, Client *client)
     std::cout << "Cannot move" << std::endl;
   }
 
+}
+
+void Game::updateScore(Player *p, Game::scoreDef score)
+{
+  p->setScore(p->getScore() + score);
+}
+
+void Game::updateLife(Player *p, bool reset)
+{
+  ComponentHealth *hP =
+    reinterpret_cast<ComponentHealth*>(p->getSystemManager()
+				->getSystemByComponent(E_POSITION)
+				->getComponent());
+  if (!reset)
+    p->update(hP->getLife() - 1);
+  else
+    p->update(3);
+}
+
+void Game::handleShoot(void *data, Client *client)
+{
+  char *weaponType =
+    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 }
 
 void Game::handleCommand(void *data, Client *client)
@@ -132,7 +159,16 @@ void Game::handleCommand(void *data, Client *client)
   //     this->handleMove(data, client);
   //   }
 
-  //  Func
+  E_Command commandType =
+    static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
+
+  try {
+    Func fp = _funcMap[commandType];
+    (this->*fp)(data, client);
+  } catch (const std::exception &e) {
+    std::cout << "Cannot achieve this action" << std::endl;
+  }
+
 }
 
 void *readThread(void *sData)
@@ -178,23 +214,38 @@ void Game::addMonster()
 
 void Game::initPlayersPosition()
 {
-  // int	x = 10;
-  // std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  // std::vector<AEntity *>::iterator it;
+  int	x = 10;
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::vector<AEntity *>::iterator it;
+  Random	rand(0,255);
+  for (it = _players.begin(); it != _players.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+      (*it)->update(x, rand.generate<int>());
+    }
+}
 
-  // for (it = _players.begin(); it != _players.end(); ++it)
-  //   {
+void Game::sendGameData()
+{
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::vector<AEntity *> _entities = _eM.getEntities();
 
-  //   }
+  for (std::vector<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
+	{
+	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
+	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
+	  reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
+	}
+    }
 }
 
 bool Game::run()
 {
   Timer	timer(true);
   int	speed = 3;
-  int	nbEnemyMax = getNumberEnemyMax();
-  std::cout << "Game :: run() " << std::endl;
-  std::cout << "NUMBER ENEMY MAX" << nbEnemyMax << std::endl;
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -205,6 +256,7 @@ bool Game::run()
   t1->attach(&readThread, reinterpret_cast<void*>(dT));
 
   t1->run();
+  initPlayersPosition();
   while (true)
     {
       if (timer.elapsed().count() >= (speed/_stage))
@@ -212,6 +264,7 @@ bool Game::run()
 	  timer.reset();
 	  addMonster();
 	}
+      sendGameData();
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       // nbEnemy = 5 * stage * nbEnemy;
     }

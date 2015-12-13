@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 13 02:13:21 2015 Serge Heitzler
+// Last update Sun Dec 13 16:07:13 2015 Nicolas Girardot
 //
 
 
@@ -182,7 +182,7 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Score" << std::endl;
-  GamePanel::setTeamScore(std::atoi(x.at(1).c_str()));
+  GamePanel::setScore(x.at(0), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:49 2015 Serge Heitzler
-// Last update Thu Dec 10 14:24:20 2015 Serge Heitzler
+// Last update Sun Dec 13 13:36:09 2015 Nicolas Girardot
 //
 
 #ifndef BUTTON_HH_
@@ -41,6 +41,7 @@ public:
 private:
 
   StateButton	       	_state;
+  bool			_hover;
 
   Texture		*_normal;
   Texture		*_highlight;

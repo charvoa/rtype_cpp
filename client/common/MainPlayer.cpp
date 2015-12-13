@@ -1,11 +1,11 @@
 //
 // MainPlayer.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Sun Dec 13 02:21:55 2015 Serge Heitzler
+// Last update Sun Dec 13 07:27:01 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -57,15 +57,11 @@ MainPlayer::MainPlayer(unsigned int id)
       break;
     }
 
-
-
-
-
-      riffle->setTexture(*((RenderWindow::getInstance())->_ressources->_riffleHUD));
-      rocket->setTexture(*((RenderWindow::getInstance())->_ressources->_rocket));
-      heart1->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
-      heart2->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
-      heart3->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
+  riffle->setTexture(*((RenderWindow::getInstance())->_ressources->_riffleHUD));
+  rocket->setTexture(*((RenderWindow::getInstance())->_ressources->_rocket));
+  heart1->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
+  heart2->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
+  heart3->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
 
 
   _spaceShip->setPosition(window->getSize()._x * 0.03, window->getSize()._y * 0.89);
@@ -88,7 +84,7 @@ MainPlayer::MainPlayer(unsigned int id)
 
   _ammos.push_back(riffle);
   _ammos.push_back(rocket);
-  _ammos.push_back(laser);  
+  _ammos.push_back(laser);
 
   _score->setString("0");
   _score->setSize(50);
@@ -107,6 +103,11 @@ MainPlayer::MainPlayer(unsigned int id)
 }
 
 MainPlayer::~MainPlayer(){}
+
+const std::string	&MainPlayer::getUsername() const
+{
+  return _username;
+}
 
 void		MainPlayer::setNbRocket(unsigned int nb)
 {

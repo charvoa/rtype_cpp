@@ -5,27 +5,27 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 11:06:08 2015 Louis Audibert
-// Last update Sat Dec 12 11:23:26 2015 Louis Audibert
+// Last update Sun Dec 13 05:22:51 2015 Louis Audibert
 //
 
-#include "Hitbox.hh"
+#include <ComponentHitbox.hh>
 
-Hitbox::Hitbox()
+ComponentHitbox::ComponentHitbox()
 {
   std::cout << "new Hitbox Component created" << std::endl;
 }
 
-Hitbox::~Hitbox()
+ComponentHitbox::~ComponentHitbox()
 {
   std::cout << "Hitbox Component destroyed" << std::endl;
 }
 
-std::vector<Case*>	Hitbox::getHitbox()
+std::vector<Case*>	ComponentHitbox::getHitbox()
 {
   return (_hitbox);
 }
 
-void			Hitbox::setHitbox(std::vector<Case*> cases)
+void			ComponentHitbox::setHitbox(std::vector<Case*> cases)
 {
   _hitbox = cases;
 }

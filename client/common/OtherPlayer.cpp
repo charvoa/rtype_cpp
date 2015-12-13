@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Sun Dec 13 01:51:44 2015 Serge Heitzler
+// Last update Sun Dec 13 15:49:53 2015 Nicolas Girardot
 //
 
 #include <OtherPlayer.hh>
@@ -25,7 +25,7 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
   _score = new Text();
   _spaceShip = new Sprite();
   _greyBack = new Sprite();
-  
+
 
   switch (id)
     {
@@ -49,7 +49,7 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
       break;
     }
 
-  
+
   heart1->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
   heart2->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
   heart3->setTexture(*((RenderWindow::getInstance())->_ressources->_heart));
@@ -59,20 +59,20 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
   heart2->setOrigin((RenderWindow::getInstance())->_ressources->_heart->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_heart->getSize()._y / 2);
   heart3->setOrigin((RenderWindow::getInstance())->_ressources->_heart->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_heart->getSize()._y / 2);
   _greyBack->setOrigin((RenderWindow::getInstance())->_ressources->_greyPanel->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_greyPanel->getSize()._y / 2);
-  
+
   _spaceShip->setOrigin((RenderWindow::getInstance())->_ressources->_blackShip->getSize()._x, (RenderWindow::getInstance())->_ressources->_blackShip->getSize()._y);
-  
+
   _spaceShip->scale(0.15);
 
   unsigned int margin = window->getSize()._x * 0.01;
   unsigned int sizeBack = (RenderWindow::getInstance())->_ressources->_greyPanel->getSize()._x;
 
-  
+
   _greyBack->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1), window->getSize()._y * 0.925);
 
-  
+
   _spaceShip->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1), window->getSize()._y * 0.95);
-  
+
    heart1->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 20, window->getSize()._y * 0.9);
    heart2->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 60, window->getSize()._y * 0.9);
    heart3->setPosition(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 100, window->getSize()._y * 0.9);
@@ -91,7 +91,7 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
   _score->setPosition(Vector2(padding + margin * (pos - 1) + (sizeBack) * (pos - 1) + 60, window->getSize()._y * 0.94));
   _score->setColor(Color::WHITE);
 
-  
+
 }
 
 OtherPlayer::~OtherPlayer()
@@ -112,6 +112,11 @@ const std::string &OtherPlayer::getUsername()
 void	OtherPlayer::setUsername(const std::string &username)
 {
   _username = username;
+}
+
+void	OtherPlayer::setScore(int a)
+{
+  _score->setString(std::to_string(a));
 }
 
 void		OtherPlayer::render()

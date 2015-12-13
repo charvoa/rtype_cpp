@@ -32,6 +32,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
   ../common/APanel.cpp
+  ../common/JoystickEvent.hpp
   ../common/Bind.cpp
   ../common/SoundManager.cpp
   ../common/Button.cpp

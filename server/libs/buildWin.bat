@@ -1,0 +1,1 @@
+"C:\MinGW\bin\mingw32-c++.exe" -DBUILD_DLL -I../ -I../../common -shared -static-libgcc -static-libstdc++ -std=c++0x %1 ..\AEntity.cpp ..\System*.cpp ..\Position.cpp ..\Laser.cpp ..\Rifle.cpp ..\Missile.cpp ..\Hitbox.cpp ..\Health.cpp -o %2

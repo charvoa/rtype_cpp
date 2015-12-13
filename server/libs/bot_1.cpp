@@ -5,16 +5,17 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Sat Dec 12 13:29:39 2015 Louis Audibert
+// Last update Sun Dec 13 04:20:59 2015 Louis Audibert
 //
 
 #include <iostream>
 #include "Bot.hpp"
 
-Bot::Bot(int id) : AEntity(id), _health(50), _x(0), _y(0), _direction(1)
+Bot::Bot(int id) : AEntity(id), _health(50), _x(275), _y(0), _direction(1)
 {
   std::cout << "Bot :: Bot1 :: Constructor" << std::endl;
   _sprite = "sprite3.png";
+  _name = _sprite;
   addSystem(E_HEALTH);
   addSystem(E_POSITION);
   generateY();
@@ -28,7 +29,9 @@ Bot::~Bot()
 
 void	Bot::generateY()
 {
+  Random rand(0, 255);
 
+  _y = rand.generate<int>();
 }
 
 void	Bot::update()

@@ -54,6 +54,11 @@ bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
   return false;
 }
 
+void		APanel::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
+{
+	(void)pair;
+}
+
 void		APanel::render()
 {
   this->drawBackgrounds();

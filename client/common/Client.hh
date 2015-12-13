@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Sun Dec 13 02:37:22 2015 Serge Heitzler
+// Last update Sun Dec 13 07:25:21 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -45,4 +45,5 @@ private:
   static Sound		*_sound;
 };
 
-#endif
+#endif /* !CLIENT_HH_ */
+

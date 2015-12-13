@@ -19,12 +19,15 @@ include_directories(. ../common Room ../common/Thread)
 add_executable(server_rtype
   main.cpp
   Server.cpp
-  Health.cpp
+  ComponentHealth.cpp
+  ComponentMissile.cpp
+  ComponentLaser.cpp
+  ComponentRiffle.cpp
+  ComponentPosition.cpp
+  ComponentHitbox.cpp
   Missile.cpp
+  Riffle.cpp
   Laser.cpp
-  Rifle.cpp
-  Position.cpp
-  Hitbox.cpp
   SystemHealth.cpp
   SystemPos.cpp
   SystemGun.cpp

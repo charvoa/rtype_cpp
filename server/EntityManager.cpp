@@ -11,7 +11,7 @@
 
 EntityManager::EntityManager()
 {
-  _id = 1;
+  _id = 0;
 }
 
 EntityManager::~EntityManager()
@@ -41,7 +41,6 @@ bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_Enti
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  //_entities.push_back(_entityFactory.createEntity(filename, _id));
   return (true);
 }
 
@@ -73,6 +72,11 @@ void	EntityManager::removeEntityById(int id)
 	}
       i++;
     }
+}
+
+std::vector<AEntity*> const EntityManager::getEntities() const
+{
+  return (_entities);
 }
 
 AEntity	*EntityManager::getEntityById(int id) const

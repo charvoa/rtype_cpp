@@ -23,6 +23,7 @@ public:
   SettingsPanel();
   ~SettingsPanel();
 
+  void	  setUserInterface();
   void    setGlobalVolume(int);
   void    setEffectsVolume(int);
   void    setMusicVolume(int);
@@ -30,7 +31,6 @@ public:
   void    defaultSettings();
   void    back();
   void    save();
-  void	render();
 
 private:
     Settings    *_tmp;

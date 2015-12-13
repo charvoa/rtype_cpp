@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Sun Dec 13 02:24:19 2015 Serge Heitzler
+// Last update Sun Dec 13 07:26:35 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -35,6 +35,8 @@ public:
   void						setInputType(InputType inputType);
   std::pair<unsigned int, unsigned int>	        textEnteredInJoinPanel(sf::Event& event);
   std::pair<unsigned int, unsigned int>	        keyPressedInGame(sf::Event& event);
+  std::pair<unsigned int, unsigned int>			keyEntered(sf::Event& event);
+  std::pair<unsigned int, unsigned int>			dropSlider(sf::Event& event);
 
 private:
 

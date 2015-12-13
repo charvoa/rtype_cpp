@@ -37,6 +37,9 @@ public:
 				_parameters, 0, NULL));
 
   };
+  void	    cancel() {
+	  TerminateThread(_thread, (DWORD)0);
+  };
 };
 
 #endif

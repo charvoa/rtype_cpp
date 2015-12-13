@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 11:10:26 2015 Louis Audibert
-// Last update Sat Dec 12 11:19:58 2015 Louis Audibert
+// Last update Sun Dec 13 05:22:21 2015 Louis Audibert
 //
 
 #ifndef _HITBOX_HH_
@@ -17,14 +17,14 @@
 # include <AComponent.hpp>
 # include <Case.hh>
 
-class	Hitbox : public AComponent
+class	ComponentHitbox : public AComponent
 {
 private:
   std::vector<Case*> _hitbox;
 
 public:
-  Hitbox();
-  ~Hitbox();
+  ComponentHitbox();
+  ~ComponentHitbox();
 
   std::vector<Case*>	getHitbox();
   void			setHitbox(std::vector<Case*>);

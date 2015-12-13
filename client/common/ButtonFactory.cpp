@@ -9,6 +9,7 @@
 //
 
 #include <iostream>
+#include <Slider.hh>
 #include <ButtonFactory.hh>
 
 void			ButtonFactory::create(Vector2 pos, std::string &title)
@@ -34,4 +35,20 @@ void			ButtonFactory::create(Vector2 pos, std::string &title)
 
   (RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(*text);
 
+}
+
+void			ButtonFactory::createSlider(Vector2 pos)
+{
+	Slider		*button = new Slider();
+
+	button->setState(Button::StateButton::NORMAL);
+
+	button->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
+	button->getSprite().scale(0.7);
+	button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._y / 2);
+	button->getSprite().setPosition(pos._x, pos._y);
+
+	(RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
+
+	(RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(Text());
 }

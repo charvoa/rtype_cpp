@@ -5,26 +5,26 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:15:28 2015 Louis Audibert
-// Last update Thu Dec  3 05:27:35 2015 Louis Audibert
+// Last update Sun Dec 13 05:20:30 2015 Louis Audibert
 //
 
-#ifndef _POSITION_HH_
-# define _POSITION_HH_
+#ifndef _COMPONENTPOSITION_HH_
+# define _COMPONENTPOSITION_HH_
 
 # include <string>
 # include <iostream>
 # include <AComponent.hpp>
 
-class Position : public AComponent
+class ComponentPosition : public AComponent
 {
 private:
   int	_x;
   int	_y;
 
 public:
-  Position();
-  Position(int x, int y);
-  ~Position();
+  ComponentPosition();
+  ComponentPosition(int x, int y);
+  ~ComponentPosition();
 
   int	getX() const;
   int	getY() const;
