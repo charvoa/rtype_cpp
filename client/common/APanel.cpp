@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Sat Dec 12 10:48:47 2015 Serge Heitzler
+// Last update Sun Dec 13 04:22:36 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -16,6 +16,8 @@
 APanel::APanel()
 {
   std::cout << "CONSTRUCTOR APANEL" << std::endl;
+  RenderWindow *window = RenderWindow::getInstance();
+  window->setMouseCursorVisible(true);
 }
 
 APanel::~APanel()
@@ -54,7 +56,12 @@ bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 
 void		APanel::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
-	(void)pair;
+	unsigned int		i = 0;
+	while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+	{
+		this->_userInterface.at(i)->updateOnRelease(pair);
+		i++;
+	}
 }
 
 void		APanel::render()

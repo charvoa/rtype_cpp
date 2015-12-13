@@ -36,6 +36,15 @@ bool	EntityManager::createEntity(E_EntityType type, const Client &client)
   return (true);
 }
 
+bool	EntityManager::createEntity(E_EntityType type, AEntity *parent)
+{
+  AEntity *newEntity = _entityFactory.createEntity(_id);
+  newEntity->setType(type);
+  newEntity->setParent(parent);
+  _entities.push_back(newEntity);
+  return (true);
+}
+
 bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);

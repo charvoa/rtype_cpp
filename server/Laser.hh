@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 05:05:58 2015 Louis Audibert
-// Last update Sun Dec 13 05:07:52 2015 Louis Audibert
+// Last update Sun Dec 13 08:37:59 2015 Louis Audibert
 //
 
 #ifndef _LASER_HH_
@@ -16,7 +16,7 @@
 class Laser : public AEntity
 {
 public:
-  Laser(int id, AEntity *parent);
+  Laser(int id);
   ~Laser();
 };
 

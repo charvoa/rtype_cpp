@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Sun Dec 13 12:12:17 2015 Nicolas Girardot
+// Last update Sun Dec 13 09:19:00 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -24,7 +24,7 @@
 #include <PanelFactory.hh>
 #include <SoundManager.hh>
 
-#define IP_ADRESS "0"
+#define IP_ADRESS "10.16.253.178"
 #define PORT 4253
 
 class	Client
@@ -45,4 +45,5 @@ private:
   static Sound		*_sound;
 };
 
-#endif
+#endif /* !CLIENT_HH_ */
+

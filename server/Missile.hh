@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 05:00:00 2015 Louis Audibert
-// Last update Sun Dec 13 05:02:20 2015 Louis Audibert
+// Last update Sun Dec 13 08:37:42 2015 Louis Audibert
 //
 
 #ifndef _MISSILE_HH_
@@ -16,7 +16,7 @@
 class Missile : public AEntity
 {
 public:
-  Missile(int id, AEntity *parent);
+  Missile(int id);
   ~Missile();
 };
 

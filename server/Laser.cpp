@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 05:07:55 2015 Louis Audibert
-// Last update Sun Dec 13 05:27:01 2015 Louis Audibert
+// Last update Sun Dec 13 08:37:11 2015 Louis Audibert
 //
 
 #include <Laser.hh>
 
-Laser::Laser(int id, AEntity *parent) : AEntity(id, parent)
+Laser::Laser(int id) : AEntity(id)
 {
-  _name = "Laser:" + parent->getName();
+  _name = "Laser:" + _parent->getName();
 }
 
 Laser::~Laser()

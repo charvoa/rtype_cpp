@@ -91,7 +91,13 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
   _fileExists = true;
 }
 
-SettingsLoader::~SettingsLoader() {}
+SettingsLoader::~SettingsLoader()
+{
+	_ifs->close();
+	delete _ifs;
+	_ofs->close();
+	delete _ofs;
+}
 
 std::string     SettingsLoader::removeSpaces(std::string const& str) const
 {

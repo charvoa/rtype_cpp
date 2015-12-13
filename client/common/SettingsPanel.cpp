@@ -15,7 +15,7 @@
 
 SettingsPanel::SettingsPanel()
 {
-    _tmp = new Settings(*(RenderWindow::getInstance())->getSettings());
+    _tmp = new Settings("../../config/PersonnalConfig.ini");
 }
 
 SettingsPanel::~SettingsPanel()
@@ -27,6 +27,7 @@ void	SettingsPanel::setUserInterface()
 {
 	RenderWindow *window = RenderWindow::getInstance();
 	getInputManager().setInputType(InputType::SETTINGS_INPUT);
+
 
 	Sprite *backgroundSpace = new Sprite;
 	Sprite *earth = new Sprite;
@@ -60,10 +61,11 @@ void	SettingsPanel::setUserInterface()
 
 	// Button
 
-	std::string name = "BACK";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), name);
-	name = "ACCESS";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), name);
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7));
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7));
+
+	_functions.push_back((APanel::funcs)&SettingsPanel::back);
+	_functions.push_back((APanel::funcs)&SettingsPanel::save);
 
 
 	Text		       	*id = new Text();
@@ -123,10 +125,10 @@ void    SettingsPanel::defaultSettings()
 
 void    SettingsPanel::back()
 {
-	(RenderWindow::getInstance())->back();
+	RenderWindow::getInstance()->back();
 }
 
 void    SettingsPanel::save()
 {
-	(RenderWindow::getInstance())->setSettings(_tmp);
+	RenderWindow::getInstance()->setSettings(_tmp);
 }
