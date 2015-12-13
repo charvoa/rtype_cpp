@@ -93,22 +93,10 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 	  std::cout << dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->getFd() << std::endl;
 	}
     }
-  // for (std::vector<Client*>::iterator it = this->_clients.begin();
-  //      it != this->_clients.end() ; ++it)
-  //   {
-  //     if ((*it)->getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
-  // 	{
-  // 	  (*it)->setUDPSocket(client->getUDPSocket());
-  // 	}
-  //   }
 }
 
 void Game::handleMove(void *data, Client *client)
 {
-  // Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
-
-  // Game *me = s->game;
-
   std::cout << "Game :: handleMove" << std::endl;
   try {
     Player *player = this->getPlayerByClient(client);
@@ -119,8 +107,6 @@ void Game::handleMove(void *data, Client *client)
       reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 				  ->getSystemByComponent(E_POSITION)
 				  ->getComponent());
-    //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
-      //	      << std::cout << pPlayer->getY();
     player->update(1, 1);
 
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
@@ -241,7 +227,7 @@ void Game::sendGameData()
 	{
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
 	  //	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
-	  std::string sendData = (*it2)->getId() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
+	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
 	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))
 	    std::cout << "NULL UDP" << std::endl;
@@ -276,28 +262,11 @@ bool Game::run()
 	  timer.reset();
 	  addMonster();
 	}
-      sendGameData();
+      if (timer.elapsed().count() % 32 == 0)
+	sendGameData();
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       // nbEnemy = 5 * stage * nbEnemy;
     }
-
-
-  //CREATE NB OF BASE ENEMY
-
-  // CREATE ENEMY
-
-  // WHILE !GAME_OVER
-  //---WHILE ENEMY > 0
-  // POP RANDOM TYPE ENEMY
-
-  // CHECK ENEMY
-  // MOVE ENEMY
-  // CHECK IF ENEMY HAS GONE THROUGH MAP = DEAD
-  // ENEMY = 5 * STAGE * DIFF
-  // CHECK IF STAGE % 5 -> POP BOSS (LIFE *= DIFFICULTY)
-  // RANDOM BONUS POP
-  // --- IF DESTROYED BONUS GOT
-
   return true;
 }
 
