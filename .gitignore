@@ -9,3 +9,9 @@ install_manifest.txt
 R-Type.dir
 server_rtype
 client_rtype
+CPackConfig.cmake
+CPackSourceConfig.cmake
+r-type_client
+test_rtype
+server_rtype
+unitTest/build/
