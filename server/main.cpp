@@ -28,10 +28,17 @@ int		main(int ac, char **av)
   Bot		*entity;
   int		id = 41;
 
-  entity = (Bot*) (ef.createEntity("../libs/bot_1.so", id));
+# ifdef _WIN32
+  entity = (Bot*) (ef.createEntity("../libs/bot_1.dll", id));
   entity->update();
-  entity = (Bot*) (ef.createEntity("../libs/bot_2.so", id));
+  entity = (Bot*) (ef.createEntity("../libs/bot_2.dll", id));
   entity->update();
+# else
+  entity = (Bot*)(ef.createEntity("../libs/bot_1.so", id));
+  entity->update();
+  entity = (Bot*)(ef.createEntity("../libs/bot_2.so", id));
+  entity->update();
+#endif
 
   entity->addSystem(E_HITBOX);
 

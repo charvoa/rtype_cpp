@@ -24,7 +24,7 @@ public:
   virtual void		attach(void *(*fn)(void*), void *) = 0;
   virtual int		join() = 0;
   virtual void		exit() = 0;
-  virtual void	        cancel() = 0;
+  virtual void	    cancel() = 0;
   virtual int		run() = 0;
 };
 

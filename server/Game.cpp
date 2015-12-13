@@ -105,8 +105,8 @@ void Game::handleMove(void *data, Client *client)
 
     std::stringstream ss;
 
-    Position *pPlayer =
-      reinterpret_cast<Position*>(player->getSystemManager()
+    ComponentPosition *pPlayer =
+      reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 				  ->getSystemByComponent(E_POSITION)
 				  ->getComponent());
     //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
@@ -219,9 +219,25 @@ void Game::initPlayersPosition()
   Random	rand(0,255);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
-      Position *p = reinterpret_cast<Position *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
       (*it)->update(x, rand.generate<int>());
-      std::cout << " X POS " << p->getX() << "Y POS " << p->getY() << std::endl;
+    }
+}
+
+void Game::sendGameData()
+{
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::vector<AEntity *> _entities = _eM.getEntities();
+
+  for (std::vector<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
+	{
+	  Position *pPlayer = reinterpret_cast<Position *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
+	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
+	  reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
+	}
     }
 }
 
@@ -229,9 +245,6 @@ bool Game::run()
 {
   Timer	timer(true);
   int	speed = 3;
-  int	nbEnemyMax = getNumberEnemyMax();
-  std::cout << "Game :: run() " << std::endl;
-  std::cout << "NUMBER ENEMY MAX" << nbEnemyMax << std::endl;
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -250,6 +263,7 @@ bool Game::run()
 	  timer.reset();
 	  addMonster();
 	}
+      sendGameData();
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       // nbEnemy = 5 * stage * nbEnemy;
     }

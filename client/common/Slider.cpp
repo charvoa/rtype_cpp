@@ -74,6 +74,7 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 
 void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
+	(void)pair;
 	// set value en fonction de la position
 	_locked = true;
 }

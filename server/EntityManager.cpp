@@ -11,7 +11,7 @@
 
 EntityManager::EntityManager()
 {
-  _id = 1;
+  _id = 0;
 }
 
 EntityManager::~EntityManager()
@@ -72,6 +72,11 @@ void	EntityManager::removeEntityById(int id)
 	}
       i++;
     }
+}
+
+std::vector<AEntity*> const EntityManager::getEntities() const
+{
+  return (_entities);
 }
 
 AEntity	*EntityManager::getEntityById(int id) const

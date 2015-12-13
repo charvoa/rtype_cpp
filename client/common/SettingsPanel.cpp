@@ -26,7 +26,7 @@ void	SettingsPanel::setUserInterface()
 {
 	RenderWindow *window = RenderWindow::getInstance();
 	getInputManager().setInputType(InputType::SETTINGS_INPUT);
-
+	(void)window;
 }
 
 void    SettingsPanel::setGlobalVolume(int global)

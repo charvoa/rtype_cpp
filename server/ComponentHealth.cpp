@@ -5,27 +5,27 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:33:26 2015 Louis Audibert
-// Last update Thu Dec  3 05:17:48 2015 Louis Audibert
+// Last update Sun Dec 13 05:25:00 2015 Louis Audibert
 //
 
-#include <Health.hh>
+#include <ComponentHealth.hh>
 
-Health::Health()
+ComponentHealth::ComponentHealth()
 {
-  _nbLife = 100;
+  _nbLife = 3;
 }
 
-Health::~Health()
+ComponentHealth::~ComponentHealth()
 {
   std::cout << "Health component Destroyed" << std::endl;
 }
 
-unsigned int Health::getLife() const
+unsigned int ComponentHealth::getLife() const
 {
   return (_nbLife);
 }
 
-void	Health::setLife(int life)
+void	ComponentHealth::setLife(int life)
 {
   _nbLife = life;
 }

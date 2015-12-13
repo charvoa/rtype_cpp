@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:36:09 2015 Nicolas Charvoz
-// Last update Sun Dec 13 14:30:34 2015 Nicolas Charvoz
 //
 
 #ifndef _GAME_HH_
@@ -84,6 +83,7 @@ public:
   int  getNumberEnemyMax();
   void addMonster();
   void initPlayersPosition();
+  void sendGameData();
   std::vector<Client *> _clients;
   ANetwork *_network;
 

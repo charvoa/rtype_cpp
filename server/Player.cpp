@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:29:32 2015 Nicolas Charvoz
-// Last update Sun Dec 13 14:03:33 2015 Nicolas Charvoz
 //
 
 #include <Player.hh>
@@ -13,6 +12,7 @@
 Player::Player(int id, const Client &c) : AEntity(id)
 {
   _client = c;
+  _name = "player" + std::to_string(id);
   addSystem(E_POSITION);
   addSystem(E_HEALTH);
 }

@@ -13,6 +13,7 @@
 
 # include		<stdexcept>
 # include		<string>
+# define		_WINSOCKAPI_
 # include		<windows.h>
 
 class			DynLibLoader
@@ -44,7 +45,7 @@ public:
   void			close() {
     if (!this->_handle)
       throw (std::logic_error("DynLibLoader :: getSymbol : You must call \"open\" method first !"));
-    dlclose(this->_handle);
+    FreeLibrary(this->_handle);
   }
 };
 
