@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sun Dec 13 11:14:33 2015 Nicolas Charvoz
 //
 
 #include <Game.hh>
@@ -175,6 +174,18 @@ void Game::addMonster()
     }
   else
     std::cout << "Monster Full for this Stage" << std::endl;;
+}
+
+void Game::initPlayersPosition()
+{
+  // int	x = 10;
+  // std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  // std::vector<AEntity *>::iterator it;
+
+  // for (it = _players.begin(); it != _players.end(); ++it)
+  //   {
+
+  //   }
 }
 
 bool Game::run()

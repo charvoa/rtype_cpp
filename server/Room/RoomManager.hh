@@ -5,12 +5,13 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Wed Dec  9 11:52:40 2015 Antoine Garcia
+// Last update Sun Dec 13 02:06:06 2015 Antoine Garcia
 //
 
 #ifndef _ROOMMANAGER_HH_
 # define _ROOMMANAGER_HH_
 
+# include <Random.hpp>
 # include <string>
 # include <vector>
 # include <Room.hh>
