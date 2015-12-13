@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sun Dec 13 07:29:38 2015 Serge Heitzler
+// Last update Sun Dec 13 21:28:31 2015 Nicolas Girardot
 //
 
 
@@ -29,6 +29,8 @@ public:
   static void				setTeamScore(unsigned int value);
   static void				setCurrentWave(unsigned int value);
   static void				display(std::vector<std::string> &vector);
+  static void				die();
+  static void				newEnemy(std::vector<std::string> &vector);
   std::vector<Sprite *>			&getSprites();
   OtherPlayer				*getPlayerByName(const std::string &name);
   Text					&getTeamScore();
@@ -39,7 +41,7 @@ public:
   void		       			drawOtherPlayer();
   std::map<std::string, Texture*>	&getDictionary();
 
-  
+
 private:
   std::vector<Sprite*>			_sprites;
   MainPlayer				*_mainPlayer;

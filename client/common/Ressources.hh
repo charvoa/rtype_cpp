@@ -29,6 +29,12 @@ public:
   Texture		*_buttonHighlight;
   Texture		*_buttonSelect;
 
+  Texture		*_sliderNormal;
+  Texture		*_sliderSelect;
+
+  Texture		*_keyButtonNormal;
+  Texture		*_keyButtonHighlight;
+
   Texture		*_panelIntroUp;
   Texture		*_panelIntroDown;
   

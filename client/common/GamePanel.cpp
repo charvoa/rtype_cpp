@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 09:25:21 2015 Serge Heitzler
+// Last update Sun Dec 13 21:27:24 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -56,13 +56,13 @@ GamePanel::GamePanel()
   (void) str1;
   t->attach(&readUDP, (void *)str1);
   t->run();
-  
+
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
   //init all sprites with the textures;
 
   window->setMouseCursorVisible(false);
-  
+
   Sound *s = Client::getSound();
   s->stopMusic("mainMenu");
   s->playMusic("gameIntro", 0);
@@ -94,14 +94,14 @@ GamePanel::GamePanel()
 backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
   backgroundSpace1->setPosition(0, 0);
   _backgrounds.push_back(*backgroundSpace1);
-  
+
 
   Sprite *backgroundSpace2 = new Sprite;
 
 backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
   backgroundSpace2->setPosition(backgroundSpace2->getGlobalBounds().second.first, 0);
   _backgrounds.push_back(*backgroundSpace2);
-  
+
 
   Sprite *hud = new Sprite;
 
@@ -135,11 +135,11 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 
 
 
-  
+
   /* USER INTERFACE HUD */
-  
+
   _mainPlayer = new MainPlayer(1);
-  
+
   OtherPlayer	*other1 = new OtherPlayer(1, 2);
   OtherPlayer	*other2 = new OtherPlayer(2, 3);
   OtherPlayer	*other3 = new OtherPlayer(3, 4);
@@ -152,6 +152,16 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 }
 
 GamePanel::~GamePanel() {}
+
+void		GamePanel::newEnemy(std::vector<std::string> &vector)
+{
+  (void) vector;
+}
+
+void		GamePanel::die()
+{
+
+}
 
 void		GamePanel::display(std::vector<std::string> &vector)
 {
@@ -173,11 +183,11 @@ void		GamePanel::display(std::vector<std::string> &vector)
     newSprite->scale(0.2);
   // else
   //   newSprite->scale(scale);
- 
+
   std::cout << "4" << std::endl;
 
   //    window->draw((static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite()));
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().push_back(*newSprite);
    window->draw(newSprite->getSprite());
 }
