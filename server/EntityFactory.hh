@@ -13,7 +13,7 @@
 
 # include <AEntity.hh>
 # ifdef _WIN32
-#  incolude <DynLibLoaderWin.hpp>
+#  include <DynLibLoaderWin.hpp>
 # else
 #  include <DynLibLoader.hpp>
 # endif
