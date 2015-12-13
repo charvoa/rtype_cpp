@@ -1,11 +1,11 @@
 //
 // RoomPanel.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
-// Last update Sun Dec 13 06:54:43 2015 Serge Heitzler
+// Last update Sun Dec 13 19:02:24 2015 Nicolas Girardot
 //
 
 #ifndef ROOMPANEL_HH_
@@ -21,7 +21,7 @@
 class RoomPanel : public APanel
 {
 public:
-  
+
   RoomPanel();
   ~RoomPanel();
 
@@ -39,8 +39,8 @@ public:
   void			minusNbPlayers();
   void			addNbPlayers();
   std::vector<Texture*> &getTextures();
-  void			receiveFiles();
-  
+  static void			receiveFiles(int i, int j);
+
 private:
 
   std::vector<Player*> _players;
