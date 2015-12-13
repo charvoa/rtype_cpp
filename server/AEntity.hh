@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Sun Dec 13 08:32:19 2015 Louis Audibert
+// Last update Sun Dec 13 08:46:07 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -31,7 +31,7 @@ protected:
 public:
   AEntity(int id);
   AEntity(int id, AEntity *parent);
-  ~AEntity();
+  virtual ~AEntity(){};
 
   bool	update(int, int);
   bool	update(int);

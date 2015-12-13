@@ -83,15 +83,24 @@ Player *Game::getPlayerByClient(Client *client)
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
   std::cout << "Game :: handleHandshakeUDP " << std::endl;
-
-  for (std::vector<Client*>::iterator it = this->_clients.begin();
-       it != this->_clients.end() ; ++it)
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
-      if ((*it)->getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
+      if (dynamic_cast<Player*>((*it))->getClient().getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
-	  (*it)->setUDPSocket(client->getUDPSocket());
+	  std::cout << "JE RENTRE" << std::endl;
+	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
+	  std::cout << dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->getFd() << std::endl;
 	}
     }
+  // for (std::vector<Client*>::iterator it = this->_clients.begin();
+  //      it != this->_clients.end() ; ++it)
+  //   {
+  //     if ((*it)->getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
+  // 	{
+  // 	  (*it)->setUDPSocket(client->getUDPSocket());
+  // 	}
+  //   }
 }
 
 void Game::handleMove(void *data, Client *client)
@@ -237,7 +246,13 @@ void Game::sendGameData()
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
-	  reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
+	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))
+	    std::cout << "NULL UDP" << std::endl;
+	    else
+	      {
+		std::cout << "JE SEND" << std::endl;
+		reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
+	      }
 	}
     }
 }

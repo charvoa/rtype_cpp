@@ -19,7 +19,7 @@ Player::Player(int id, const Client &c) : AEntity(id)
 
 Player::~Player() {}
 
-const Client &Player::getClient() const
+Client &Player::getClient()
 {
   return _client;
 }
