@@ -9,7 +9,7 @@
 
 #include <Game.hh>
 #include <Timer.hpp>
-
+#include <Random.hpp>
 Game::Game()
 {
   _mutex = new Mutex();
@@ -27,6 +27,10 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
   this->addClients(client_);
   _stage = 1;
   _nbDisplay = 0;
+
+  _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
+  _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
+
 }
 
 Game::~Game() {}
@@ -77,7 +81,6 @@ Player *Game::getPlayerByClient(Client *client)
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
-
   std::cout << "Game :: handleHandshakeUDP " << std::endl;
 
   for (std::vector<Client*>::iterator it = this->_clients.begin();
@@ -132,7 +135,12 @@ void Game::handleCommand(void *data, Client *client)
   //     this->handleMove(data, client);
   //   }
 
-  //  Func
+  E_Command commandType =
+    static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
+
+  Func fp = _funcMap[commandType];
+
+  (this->*fp)(data, client);
 }
 
 void *readThread(void *sData)
@@ -178,14 +186,16 @@ void Game::addMonster()
 
 void Game::initPlayersPosition()
 {
-  // int	x = 10;
-  // std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  // std::vector<AEntity *>::iterator it;
-
-  // for (it = _players.begin(); it != _players.end(); ++it)
-  //   {
-
-  //   }
+  int	x = 10;
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::vector<AEntity *>::iterator it;
+  Random	rand(0,255);
+  for (it = _players.begin(); it != _players.end(); ++it)
+    {
+      Position *p = reinterpret_cast<Position *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+      (*it)->update(x, rand.generate<int>());
+      std::cout << " X POS " << p->getX() << "Y POS " << p->getY() << std::endl;
+    }
 }
 
 bool Game::run()
@@ -205,6 +215,7 @@ bool Game::run()
   t1->attach(&readThread, reinterpret_cast<void*>(dT));
 
   t1->run();
+  initPlayersPosition();
   while (true)
     {
       if (timer.elapsed().count() >= (speed/_stage))

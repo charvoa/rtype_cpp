@@ -30,6 +30,13 @@ void			InputManager::setInputType(InputType type)
   _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
   _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
 
+  if (type == InputType::SETTINGS_INPUT)
+  {
+	  _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
+	  _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
+	  _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::keyEntered));
+	  _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
+  }
   if (type == InputType::MENU_INPUT || type == InputType::JOIN_INPUT)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedInMenuAt));
@@ -178,6 +185,18 @@ void		InputManager::methodChecker(sf::Event &event)
       if ((*it).first == event.type)
 	(*this.*_functions[event.type])(event);
     }
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::dropSlider(sf::Event& event)
+{
+	(RenderWindow::getInstance())->getPanels().top()->updateOnRelease(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y));
+	return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::keyEntered(sf::Event& event)
+{
+	(void)event;
+	return std::make_pair(0, 0);
 }
 
 /* ACTION ON EVENT
