@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sun Dec 13 04:19:09 2015 Louis Audibert
+// Last update Sun Dec 13 07:26:17 2015 Antoine Garcia
 //
 
 #include <AEntity.hh>
@@ -20,11 +20,6 @@ AEntity::AEntity(int id, AEntity *parent)
   _id = id;
   _parent = parent;
   std::cout << "new AEntity with a parent created !" << std::endl;
-}
-
-AEntity::~AEntity()
-{
-  std::cout << "AEntity Destroyed" << std::endl;
 }
 
 bool	AEntity::update(int x, int y)
