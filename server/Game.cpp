@@ -132,7 +132,7 @@ void Game::handleCommand(void *data, Client *client)
   //     this->handleMove(data, client);
   //   }
 
-  Func
+  //  Func
 }
 
 void *readThread(void *sData)
