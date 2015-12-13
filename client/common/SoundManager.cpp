@@ -5,7 +5,7 @@
 // Login   <antgar@epitech.net>
 //
 // Started on  Wed May 13 03:57:20 2015 Antoine Garcia
-// Last update Fri Dec 11 15:02:22 2015 Nicolas Girardot
+// Last update Sun Dec 13 12:23:10 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -53,6 +53,14 @@ void	Sound::playSound(const std::string &title)
   sound->setBuffer(_sounds[title]);
 
   sound->play();
+}
+
+bool	Sound::isPlaying(const std::string &title)
+{
+  if (_music[title]->getStatus() == sf::SoundSource::Status::Playing)
+    return true;
+  else
+    return false;
 }
 
 void	Sound::pauseMusic(const std::string &title)
