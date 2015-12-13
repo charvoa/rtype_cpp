@@ -75,9 +75,9 @@ void	EntityManager::removeEntityById(int id)
     }
 }
 
-AEntity	*EntityManager::getEntityById(int id)
+AEntity	*EntityManager::getEntityById(int id) const
 {
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if (id == (*it)->getId())
 	return (*it);
@@ -85,10 +85,10 @@ AEntity	*EntityManager::getEntityById(int id)
   return (NULL);
 }
 
-std::vector<AEntity*> EntityManager::getEntitiesByType(E_EntityType type)
+std::vector<AEntity*> const EntityManager::getEntitiesByType(E_EntityType type) const
 {
   std::vector<AEntity*> entitiesByType;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if ((*it)->getType() == type)
 	entitiesByType.push_back(*it);
