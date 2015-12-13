@@ -12,6 +12,7 @@
 #define BIND_HH
 
 #include <SFML/Graphics.hpp>
+#include <JoystickEvent.hpp>
 
 class Bind
 {
@@ -29,21 +30,21 @@ public:
         WEAPON_3
     } BindType;
 
-  Bind(Bind::BindType, sf::Keyboard::Key, sf::Joystick::Axis);
+  Bind(Bind::BindType, sf::Keyboard::Key, JoystickEvent);
   ~Bind();
 
   Bind::BindType getType() const;
   sf::Keyboard::Key getKey() const;
-  sf::Joystick::Axis getJoystick() const;
+  JoystickEvent getJoystick() const;
 
   void setType(Bind::BindType);
   void setKey(sf::Keyboard::Key);
-  void setJoystick(sf::Joystick::Axis);
+  void setJoystick(JoystickEvent);
 
 private:
   Bind::BindType _type;
   sf::Keyboard::Key _key;
-  sf::Joystick::Axis _joystick;
+  JoystickEvent _joystick;
 };
 
 #endif // BIND_HH
