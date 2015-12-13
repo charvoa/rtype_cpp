@@ -10,7 +10,7 @@
 
 #include <Bind.hh>
 
-Bind::Bind(Bind::BindType type, sf::Keyboard::Key key, sf::Joystick::Axis joystick)
+Bind::Bind(Bind::BindType type, sf::Keyboard::Key key, JoystickEvent joystick)
 {
     _type = type;
     _key = key;
@@ -29,7 +29,7 @@ sf::Keyboard::Key Bind::getKey() const
     return _key;
 }
 
-sf::Joystick::Axis Bind::getJoystick() const
+JoystickEvent Bind::getJoystick() const
 {
     return _joystick;
 }
@@ -44,7 +44,7 @@ void    Bind::setKey(sf::Keyboard::Key key)
     _key = key;
 }
 
-void    Bind::setJoystick(sf::Joystick::Axis joystick)
+void    Bind::setJoystick(JoystickEvent joystick)
 {
     _joystick = joystick;
 }

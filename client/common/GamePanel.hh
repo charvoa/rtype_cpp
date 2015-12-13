@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 12 20:14:11 2015 Nicolas Girardot
+// Last update Sun Dec 13 15:44:04 2015 Nicolas Girardot
 //
 
 
@@ -26,8 +26,10 @@ public:
 
   std::vector<Sprite *> &getSprites();
   OtherPlayer	*getPlayerByName(const std::string &name);
+  static void		setScore(const std::string &name, int life);
   static void		setLife(const std::string &name, int life);
   Text			&getTeamScore();
+  MainPlayer		*getMainPlayer();
   static	void	setTeamScore(unsigned int value);
   Text			&getCurrentWave();
   static	void	setCurrentWave(unsigned int value);

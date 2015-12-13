@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 12:25:58 2015 Nicolas Girardot
+// Last update Sun Dec 13 15:52:43 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -166,42 +166,74 @@ void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
+  static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 }
 
 void		GamePanel::setTeamScore(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(value));
+  static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(value));
 }
 
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
 {
-(void)name;
-  // for (std::vector<PlayerIG *>::iterator it = _players.begin(); it != _players.end(); it++)
-  //   {
-  //     if ((*it)->getUsername() == name)
-  // 	return (*it);
-  //   }
-return NULL;
+  for (std::vector<OtherPlayer *>::iterator it = _otherPlayers.begin(); it != _otherPlayers.end(); it++)
+    {
+      if ((*it)->getUsername() == name)
+	return (*it);
+    }
+  return NULL;
+}
+
+MainPlayer		*GamePanel::getMainPlayer()
+{
+  return _mainPlayer;
+}
+
+void		GamePanel::setScore(const std::string &name, int score)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+  if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() == name)
+    {
+      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->setScore(score);
+    }
+  else
+    {
+      OtherPlayer *player;
+      player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
+      if (player == NULL)
+	{
+	  std::cout << "Player does not exist" << std::endl;
+	  return ;
+	}
+      player->setScore(score);
+    }
 }
 
 void		GamePanel::setLife(const std::string &name, int life)
 {
-(void)name;
-(void)life;
-// RenderWindow *window = RenderWindow::getInstance();
+  RenderWindow *window = RenderWindow::getInstance();
 
-// PlayerIG *player;
-// player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
-// if (player == NULL)
-  //   {
-  //     std::cout << "Player does not exist" << std::endl;
-  //     return ;
-  //   }
-  // player->setLife(life);
+  if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() == name)
+    {
+      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->setNbLife(life);
+    }
+  else
+    {
+      OtherPlayer *player;
+      player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
+      if (player == NULL)
+	{
+	  std::cout << "Player does not exist" << std::endl;
+	  return ;
+	}
+      player->setLife(life);
+    }
 }
+
+
 
 void		GamePanel::render()
 {
