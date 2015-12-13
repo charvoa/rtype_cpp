@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Sat Dec 12 12:52:59 2015 Antoine Garcia
-// Last update Sat Dec 12 13:26:31 2015 Antoine Garcia
+// Last update Sun Dec 13 19:42:07 2015 Nicolas Charvoz
 //
 
 #ifndef _TIMER_HPP_
@@ -17,6 +17,7 @@
 class Timer {
   typedef std::chrono::high_resolution_clock high_resolution_clock;
   typedef std::chrono::seconds	    seconds;
+typedef std::chrono::milliseconds	    milliseconds;
 public:
   explicit Timer(bool run = false)
   {
