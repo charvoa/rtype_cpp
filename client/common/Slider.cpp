@@ -48,13 +48,13 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
 
 	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
+	{
+		if (_locked == false)
+			this->getSprite().setPosition(pair.first, pair.second);
 		this->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonHighlight);
+	}
 	else
 		this->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
-	if (_locked == false)
-	{
-		this->getSprite().setPosition(pair.first, rect.second.first / 2);
-	}
 }
 
 bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
@@ -74,7 +74,8 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 
 void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
+	std::cout << "RELEASE RELEASE RELEASE!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+	_locked = true;
 	(void)pair;
 	// set value en fonction de la position
-	_locked = true;
 }
