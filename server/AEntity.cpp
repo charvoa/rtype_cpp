@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 12 11:51:20 2015 Louis Audibert
+// Last update Sun Dec 13 02:21:51 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -56,9 +56,7 @@ bool	AEntity::update(std::vector<Case*> hitbox)
 
 void	AEntity::addSystem(E_Component type)
 {
-  std::cout << "before calling the systemManager.addSystemByType(" << type << ")" << std::endl;
   _systemManager.addSystemByType(type);
-  std::cout << "after calling addSystemByType" << std::endl;
 }
 
 bool	AEntity::setType(E_EntityType type)

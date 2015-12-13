@@ -5,13 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Sun Dec 13 02:06:16 2015 Louis Audibert
+// Last update Sun Dec 13 02:26:03 2015 Louis Audibert
 //
 
 #include <iostream>
 #include "Bot.hpp"
 
-Bot::Bot(int id) : AEntity(id), _health(100), _x(255), _y(0), _direction(0)
+Bot::Bot(int id) : AEntity(id), _health(100), _x(275), _y(0), _direction(0)
 {
   std::cout << "Bot :: Bot2 :: Constructor" << std::endl;
   _sprite = "sprite6.png";
