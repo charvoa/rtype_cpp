@@ -49,8 +49,6 @@ void Server::run()
 	this->_network->unlistenSocket(client->getSocket());
 	continue;
       }
-      //std::cout << std::string(((ANetwork::t_frame*) data)->data) << std::endl;
-      //client->getSocket()->write((void*) CreateRequest::create(1, 2, 3, "Thank you !", true), sizeof(ANetwork::t_frame));
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
 					   client, this);
     }
@@ -97,6 +95,8 @@ void *newGameThread(void *data)
 								ss.str().c_str());
 	  (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),
 				    sizeof(ANetwork::t_frame));
+	  std::cout << "Writing on socket : "
+		    << ((ANetwork::t_frame*)&frameToSend)->data << std::endl;
 	  ss.str("");
 	  ss.clear();
 	}

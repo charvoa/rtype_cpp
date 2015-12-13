@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:45:38 2015 Nicolas Charvoz
-// Last update Sun Dec 13 02:09:36 2015 Antoine Garcia
 //
 
 #include <Game.hh>
@@ -78,6 +77,9 @@ Player *Game::getPlayerByClient(Client *client)
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
+
+  std::cout << "Game :: handleHandshakeUDP " << std::endl;
+
   for (std::vector<Client*>::iterator it = this->_clients.begin();
        it != this->_clients.end() ; ++it)
     {
@@ -121,14 +123,16 @@ void Game::handleCommand(void *data, Client *client)
   std::cout << "Game :: handleCommand" << std::endl;
   std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest
 	    << "|" << std::endl;
-  if (((ANetwork::t_frame*)data)->idRequest == C_HANDSHAKE_UDP)
-    {
-      this->handleHandshakeUDP(data, client);
-    }
-  else if (((ANetwork::t_frame*)data)->idRequest == C_MOVE)
-    {
-      this->handleMove(data, client);
-    }
+  // if (((ANetwork::t_frame*)data)->idRequest == C_HANDSHAKE_UDP)
+  //   {
+  //     this->handleHandshakeUDP(data, client);
+  //   }
+  // else if (((ANetwork::t_frame*)data)->idRequest == C_MOVE)
+  //   {
+  //     this->handleMove(data, client);
+  //   }
+
+  Func
 }
 
 void *readThread(void *sData)
