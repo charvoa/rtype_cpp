@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 15:52:43 2015 Nicolas Girardot
+// Last update Sun Dec 13 18:17:06 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -131,6 +131,11 @@ GamePanel::GamePanel()
 }
 
 GamePanel::~GamePanel() {}
+
+void		GamePanel::die()
+{
+
+}
 
 void		GamePanel::display(std::vector<std::string> &vector)
 {

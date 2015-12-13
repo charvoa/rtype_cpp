@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 13 02:13:10 2015 Serge Heitzler
+// Last update Sun Dec 13 18:27:10 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -55,7 +55,7 @@ void	        RoomPanel::setUserInterface()
   name = "LAUNCH";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), name);
 
-  
+
   _functions.push_back((APanel::funcs)&RoomPanel::back);
   _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
 
@@ -105,9 +105,9 @@ void		RoomPanel::newPlayer(std::string &newUsername)
   RenderWindow *window = RenderWindow::getInstance();
   unsigned int i = static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers();
 
-  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString(newUsername);    
+  static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString(newUsername);
   static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setOrigin(static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).getText().getGlobalBounds().width / 2, static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).getText().getGlobalBounds().height / 2);
-  
+
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(i + 1));
 
   static_cast<RoomPanel*>(window->getPanels().top())->addNbPlayers();
@@ -132,7 +132,7 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setColor(Color::WHITE);
       i++;
     }
-  
+
   std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
 
@@ -144,14 +144,14 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToRemove + 2).setString("");
     }
 
-  
+
   pos = vector.at(1).find("player");
   unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
 
   std::cout << "id you are " << idToChange << std::endl;
 
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
-  
+
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToChange + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(idToChange + 1));
   static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setString(vector.at(1));
 
@@ -163,7 +163,7 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(i + 2).setString("");
       i++;
     }
-  
+
   switch (idToChange)
     {
     case 0:
@@ -182,11 +182,11 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::WHITE);
       break;
     }
-  
+
 
   static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
 
-  
+
 }
 
 void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
@@ -237,15 +237,15 @@ void		RoomPanel::createPlayers()
 {
   RenderWindow *window = RenderWindow::getInstance();
   unsigned int i = 0;
-  
+
   std::string empty = "";
-  
+
   while (i < 4)
-    {      
+    {
       Text   *username = new Text();
       Sprite *blackShip = new Sprite;
       Player *player = new Player;
-      
+
       player->setUsername(empty);
       player->setCurrentClient(false);
 
@@ -260,7 +260,7 @@ void		RoomPanel::createPlayers()
       username->setOrigin(username->getText().getGlobalBounds().width / 2, username->getText().getGlobalBounds().height / 2);
       username->setPosition(Vector2(0.2 * (i + 1) * window->getSize()._x, 0.8 * window->getSize()._y));
       username->setColor(Color::WHITE);
-      
+
 
       window->getPanels().top()->getBackgrounds().push_back(*blackShip);
       window->getPanels().top()->getLabels().push_back(*username);
@@ -269,7 +269,7 @@ void		RoomPanel::createPlayers()
     }
 
     Text		       	*roomID = new Text();
- 
+
     roomID->setString(_idRoom);
     roomID->setSize(60);
     roomID->setStyle(1);
@@ -304,4 +304,3 @@ void		RoomPanel::back()
 void	RoomPanel::update()
 {
 }
-

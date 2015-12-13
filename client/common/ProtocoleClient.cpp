@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 13 16:07:13 2015 Nicolas Girardot
+// Last update Sun Dec 13 18:09:20 2015 Nicolas Girardot
 //
 
 
@@ -163,7 +163,7 @@ void		ProtocoleClient::die(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "die" << std::endl;
-  (void) x;
+  GamePanel::die()
 }
 
 void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)
