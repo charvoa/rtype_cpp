@@ -17,8 +17,11 @@ public:
 	void		setValue(int);
 	void		render();
 	void		setState(Button::StateButton state);
-
+	bool		updateOnPress(std::pair<unsigned int, unsigned int>);
+	void		updateOnRelease(std::pair<unsigned int, unsigned int>);
+	void		updateOnMove(std::pair<unsigned int, unsigned int>);
 private:
+	bool		_locked;
 	Button::StateButton	_state;
 	std::string	_title;
 	int			_value;

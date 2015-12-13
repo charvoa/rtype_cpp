@@ -9,7 +9,7 @@
 
 #include <Game.hh>
 #include <Timer.hpp>
-
+#include <Random.hpp>
 Game::Game()
 {
   _mutex = new Mutex();
@@ -186,14 +186,16 @@ void Game::addMonster()
 
 void Game::initPlayersPosition()
 {
-  // int	x = 10;
-  // std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  // std::vector<AEntity *>::iterator it;
-
-  // for (it = _players.begin(); it != _players.end(); ++it)
-  //   {
-
-  //   }
+  int	x = 10;
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::vector<AEntity *>::iterator it;
+  Random	rand(0,255);
+  for (it = _players.begin(); it != _players.end(); ++it)
+    {
+      Position *p = reinterpret_cast<Position *>((*it)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
+      (*it)->update(x, rand.generate<int>());
+      std::cout << " X POS " << p->getX() << "Y POS " << p->getY() << std::endl;
+    }
 }
 
 bool Game::run()
@@ -213,6 +215,7 @@ bool Game::run()
   t1->attach(&readThread, reinterpret_cast<void*>(dT));
 
   t1->run();
+  initPlayersPosition();
   while (true)
     {
       if (timer.elapsed().count() >= (speed/_stage))

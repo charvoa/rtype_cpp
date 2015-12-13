@@ -41,7 +41,6 @@ bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_Enti
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  //_entities.push_back(_entityFactory.createEntity(filename, _id));
   return (true);
 }
 
