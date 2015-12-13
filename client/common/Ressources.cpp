@@ -19,7 +19,11 @@ Ressources::Ressources()
   _buttonNormal->loadFromFile("../common/misc/button_normal.png");
   _buttonHighlight->loadFromFile("../common/misc/button_highlight.png");
   //  _buttonSelect->loadFromFile("../common/misc/button_normal.png");
-  
+  // _sliderNormal->loadFromFile();
+  // _sliderSelect->loadFromFile();
+  // _keyButtonNormal->loadFromFile();
+  // _keyButtonHighlight->loadFromFile();
+
   _backgroundStartPanel = new Texture();
   _backgroundRoomPanel = new Texture();
   _backgroundSettingsPanel = new Texture();

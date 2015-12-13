@@ -61,8 +61,9 @@ void	SettingsPanel::setUserInterface()
 
 	// Button
 
-	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7));
-	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7));
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.25));
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.35));
+	ButtonFactory::createSlider(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.45));
 
 	std::vector<Bind>::const_iterator it = _tmp->getBinds().begin();
 	std::vector<Bind>::const_iterator end = _tmp->getBinds().end();
@@ -77,25 +78,16 @@ void	SettingsPanel::setUserInterface()
 	_functions.push_back((APanel::funcs)&SettingsPanel::save);
 
 
-	Text		       	*id = new Text();
 
-	id->setString("");
-	id->setSize(50);
-	id->setStyle(1);
-	id->setOrigin(id->getText().getGlobalBounds().width / 2, id->getText().getGlobalBounds().height / 2);
-	id->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
-	id->setColor(Color::WHITE);
-	_labels.push_back(*id);
+	Text		       	*title = new Text();
 
-	Text		       	*text = new Text();
-
-	text->setString("ENTER ROOM ID TO JOIN :");
-	text->setSize(80);
-	text->setStyle(1);
-	text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
-	text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.3));
-	text->setColor(Color::WHITE);
-	_labels.push_back(*text);
+	title->setString("SETTINGS");
+	title->setSize(80);
+	title->setStyle(1);
+	title->setOrigin(title->getText().getGlobalBounds().width / 2, title->getText().getGlobalBounds().height / 2);
+	title->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.05));
+	title->setColor(Color::WHITE);
+	_labels.push_back(*title);
 }
 
 void    SettingsPanel::setGlobalVolume(int global)
