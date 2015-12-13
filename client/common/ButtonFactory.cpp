@@ -40,7 +40,6 @@ void			ButtonFactory::create(Vector2 pos, std::string &title)
 void			ButtonFactory::createSlider(Vector2 pos)
 {
 	Slider		*button = new Slider();
-	Text		       	*text = new Text();
 
 	button->setState(Button::StateButton::NORMAL);
 
