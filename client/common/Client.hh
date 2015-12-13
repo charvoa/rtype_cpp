@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Sun Dec 13 07:25:21 2015 Serge Heitzler
+// Last update Sun Dec 13 07:34:56 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -25,7 +25,7 @@
 #include <SoundManager.hh>
 
 #define IP_ADRESS "0"
-#define PORT 4253
+#define PORT 4242
 
 class	Client
 {

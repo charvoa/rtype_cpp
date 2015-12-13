@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 07:26:17 2015 Serge Heitzler
+// Last update Sun Dec 13 07:55:33 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -176,18 +176,8 @@ void		GamePanel::display(std::vector<std::string> &vector)
   
   newSprite->setPosition(posX, posY);
 
-  static_cast<GamePanel*>(window->getPanels().top())->getInGame().push_back(*newSprite);
-  
-
-  
-
-  // static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).setPosition(posX, posY);
-  
-  // if (!static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).isScale())
-  
-  //   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).scale(scale);
-  
-  // window->draw(static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(id).getSprite());
+  //  static_cast<GamePanel*>(window->getPanels().top())->getInGame().push_back(*newSprite);
+  window->draw(newSprite->getSprite());
 }
 
 std::map<std::string, Texture*>		&GamePanel::getDictionary()
@@ -314,6 +304,8 @@ void		GamePanel::update()
   static unsigned int i = 0;
 
 
+  // if (_inGame.size() > 0)
+  //   _inGame.clear();
   if (i > 492)
     {
       _backgrounds.at(0).move(-1, 0);
