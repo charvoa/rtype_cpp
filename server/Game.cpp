@@ -121,7 +121,7 @@ void Game::handleMove(void *data, Client *client)
 				  ->getComponent());
     //std::cout << "Player X : " << pPlayer->getX() << " " << "Player Y : "
       //	      << std::cout << pPlayer->getY();
-    //    player->update(1, 1);
+    player->update(1, 1);
 
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
     client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
@@ -152,6 +152,10 @@ void Game::handleShoot(void *data, Client *client)
 {
   char *weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+
+
+  Player *p = this->getPlayerByClient(client);
+  //_eM.createEntity();
 }
 
 void Game::handleCommand(void *data, Client *client)
@@ -159,14 +163,6 @@ void Game::handleCommand(void *data, Client *client)
   std::cout << "Game :: handleCommand" << std::endl;
   std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest
 	    << "|" << std::endl;
-  // if (((ANetwork::t_frame*)data)->idRequest == C_HANDSHAKE_UDP)
-  //   {
-  //     this->handleHandshakeUDP(data, client);
-  //   }
-  // else if (((ANetwork::t_frame*)data)->idRequest == C_MOVE)
-  //   {
-  //     this->handleMove(data, client);
-  //   }
 
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
@@ -214,11 +210,11 @@ void Game::addMonster()
 {
   if (_nbDisplay < getNumberEnemyMax())
     {
-      std::cout << "Add Monster" << std::endl;;
+      std::cout << "Add Monster" << std::endl;
       _nbDisplay++;
     }
   else
-    std::cout << "Monster Full for this Stage" << std::endl;;
+    std::cout << "Monster Full for this Stage" << std::endl;
 }
 
 void Game::initPlayersPosition()
@@ -244,7 +240,8 @@ void Game::sendGameData()
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(E_POSITION)->getComponent());
-	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
+	  //	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
+	  std::string sendData = (*it2)->getId() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
 	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))
 	    std::cout << "NULL UDP" << std::endl;
