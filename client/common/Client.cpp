@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec 14 06:14:54 2015 Serge Heitzler
+// Last update Mon Dec 14 16:50:16 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -110,7 +110,7 @@ void	Client::Start()
 
   _sound->registerSound("../common/misc/mouseHover.ogg", "hover");
   _sound->registerSound("../common/misc/metalDoorOpen.ogg", "door");
-  _sound->registerSound("../common/misc/laserSound.ogg", "laser");
+  _sound->registerMusic("../common/misc/laserSound.ogg", "laser");
   _sound->registerSound("../common/misc/rocketSound.ogg", "missile");
   _sound->registerMusic("../common/misc/menuMusic1.ogg", "mainMenu");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
