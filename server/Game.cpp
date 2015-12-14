@@ -100,19 +100,19 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
 
   if (dir == "1")
     final = std::make_pair(0, -1);
-  else if (dir == "2")
-    final = std::make_pair(1, -1);
   else if (dir == "3")
+    final = std::make_pair(1, -1);
+  else if (dir == "2")
     final = std::make_pair(1, 0);
-  else if (dir == "4")
-    final = std::make_pair(1, 1);
-  else if (dir == "5")
-    final = std::make_pair(0, 1);
   else if (dir == "6")
+    final = std::make_pair(1, 1);
+  else if (dir == "4")
+    final = std::make_pair(0, 1);
+  else if (dir == "12")
     final = std::make_pair(-1, 1);
-  else if (dir == "7")
-    final = std::make_pair(-1, 0);
   else if (dir == "8")
+    final = std::make_pair(-1, 0);
+  else if (dir == "9")
     final = std::make_pair(-1, -1);
   else
     final = std::make_pair(0, 0);
@@ -150,10 +150,7 @@ void Game::handleMove(void *data, Client *client)
     std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-    std::cout << "AFTER UPDATE" << std::endl;
 
-    ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
-    client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
@@ -164,11 +161,11 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 {
   std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
+  ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
-      std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
-      ANetwork::t_frame frame = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), sendData.size(), sendData);
-      dynamic_cast<Player*>((*it))->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
 }
 
@@ -176,17 +173,29 @@ void Game::updateLife(Player *p, bool reset)
 {
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
-				->getSystemByComponent(C_POSITION)
-				->getComponent());
+				       ->getSystemByComponent(C_HEALTH)
+				       ->getComponent());
   if (!reset)
     p->update(hP->getLife() - 1);
   else
     p->update(3);
+
+  std::stringstream health;
+
+  health << p->getName() << ";" << hP->getLife();
+  ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
+
+  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+    }
+
 }
 
 void Game::handleShoot(void *data, Client *client)
 {
-  char *weaponType =
+  std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
 
