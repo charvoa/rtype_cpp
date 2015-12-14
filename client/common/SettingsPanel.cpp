@@ -85,13 +85,6 @@ void	SettingsPanel::setUserInterface()
 	_functions.push_back((APanel::funcs)&SettingsPanel::defaultSettings);
 	_functions.push_back((APanel::funcs)&SettingsPanel::back);
 
-	name = "global";
-	_global = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
-	name = "effects";
-	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
-	name = "music";
-	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
-
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
@@ -108,6 +101,13 @@ void	SettingsPanel::setUserInterface()
 		layout += (window)->_ressources->_buttonNormal->getSize()._y / 2;
 		++it;
 	}
+
+	name = "global";
+	_global = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	name = "effects";
+	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	name = "music";
+	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
 
 	Text		       	*title = new Text();
 
@@ -152,14 +152,28 @@ void    SettingsPanel::setBind(Bind bind)
 void    SettingsPanel::defaultSettings()
 {
 	RenderWindow	*window = RenderWindow::getInstance();
+	std::vector<Bind*> binds = _tmp->getBinds();
+	std::vector<Bind*>::const_iterator it = binds.begin();
+	std::vector<Bind*>::const_iterator end = binds.end();
+	SettingsLoader *loader = new SettingsLoader();
+	int id = 3;
 
+	while (it != end)
+	{
+		(window->getPanels().top()->getLabels().at(id)).setString(loader->keyToString((*it)->getKey()));
+		id++;
+		(window->getPanels().top()->getLabels().at(id)).setString(loader->joystickToString((*it)->getJoystick()));
+		id++;
+		it++;
+	}
+
+	_tmp->resetDefault();
 	_global->getSprite().setPosition(window->getSize()._x * 0.05 + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25);
 	_effects->getSprite().setPosition(window->getSize()._x * 0.05 + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35);
 	_music->getSprite().setPosition(window->getSize()._x * 0.05 + _tmp->getVolume().getMusic() * 7, window->getSize()._y * 0.45);
 	_global->setValue(_tmp->getVolume().getGlobal());
 	_effects->setValue(_tmp->getVolume().getEffects());
 	_music->setValue(_tmp->getVolume().getMusic());
-	_tmp->resetDefault();
 }
 
 void    SettingsPanel::back()
