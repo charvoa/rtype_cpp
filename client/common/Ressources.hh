@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Sun Dec 13 06:49:35 2015 Serge Heitzler
+// Last update Mon Dec 14 05:11:46 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -75,6 +75,7 @@ public:
   Texture		*_planetMoon;
   Texture		*_planetNeptune;
   Texture		*_planetSaturne;
+  Texture		*_deathStar;
 
   
   Texture		*_blackShip;

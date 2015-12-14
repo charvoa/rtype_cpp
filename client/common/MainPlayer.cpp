@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Sun Dec 13 07:27:01 2015 Serge Heitzler
+// Last update Mon Dec 14 02:36:41 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -65,12 +65,12 @@ MainPlayer::MainPlayer(unsigned int id)
 
 
   _spaceShip->setPosition(window->getSize()._x * 0.03, window->getSize()._y * 0.89);
-  riffle->setPosition(window->getSize()._x * 0.25, window->getSize()._y * 0.88);
-  rocket->setPosition(window->getSize()._x * 0.25, window->getSize()._y * 0.92);
-  laser->setPosition(window->getSize()._x * 0.25, window->getSize()._y * 0.95);
-  heart1->setPosition(window->getSize()._x * 0.15, window->getSize()._y * 0.88);
-  heart2->setPosition(window->getSize()._x * 0.18, window->getSize()._y * 0.88);
-  heart3->setPosition(window->getSize()._x * 0.21, window->getSize()._y * 0.88);
+  riffle->setPosition(window->getSize()._x * 0.27, window->getSize()._y * 0.88);
+  rocket->setPosition(window->getSize()._x * 0.27, window->getSize()._y * 0.92);
+  laser->setPosition(window->getSize()._x * 0.27, window->getSize()._y * 0.95);
+  heart1->setPosition(window->getSize()._x * 0.13, window->getSize()._y * 0.88);
+  heart2->setPosition(window->getSize()._x * 0.16, window->getSize()._y * 0.88);
+  heart3->setPosition(window->getSize()._x * 0.19, window->getSize()._y * 0.88);
 
   _spaceShip->scale(0.2);
 
@@ -90,14 +90,14 @@ MainPlayer::MainPlayer(unsigned int id)
   _score->setSize(50);
   _score->setStyle(1);
   _score->setOrigin(_score->getText().getGlobalBounds().width / 2, _score->getText().getGlobalBounds().height / 2);
-  _score->setPosition(Vector2(window->getSize()._x * 0.19, window->getSize()._y * 0.95));
+  _score->setPosition(Vector2(window->getSize()._x * 0.17, window->getSize()._y * 0.95));
   _score->setColor(Color::WHITE);
 
   _nbrRocketText->setString("0");
   _nbrRocketText->setSize(30);
   _nbrRocketText->setStyle(1);
   _nbrRocketText->setOrigin(_nbrRocketText->getText().getGlobalBounds().width / 2, _nbrRocketText->getText().getGlobalBounds().height / 2);
-  _nbrRocketText->setPosition(Vector2(window->getSize()._x * 0.29, window->getSize()._y * 0.92));
+  _nbrRocketText->setPosition(Vector2(window->getSize()._x * 0.31, window->getSize()._y * 0.92));
   _nbrRocketText->setColor(Color::WHITE);
 
 }

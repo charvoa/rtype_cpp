@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Sun Dec 13 06:50:27 2015 Serge Heitzler
+// Last update Mon Dec 14 05:08:38 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -92,6 +92,7 @@ Ressources::Ressources()
   _planetMoon = new Texture();
   _planetNeptune = new Texture();
   _planetSaturne = new Texture();
+  _deathStar = new Texture();
 
   _planetEarth->loadFromFile("../common/misc/planet_earth.png");
   _planetExodus->loadFromFile("../common/misc/planet_exodus.png");
@@ -100,6 +101,7 @@ Ressources::Ressources()
   _planetMoon->loadFromFile("../common/misc/planet_moon.png");
   _planetNeptune->loadFromFile("../common/misc/planet_neptune.png");
   _planetSaturne->loadFromFile("../common/misc/planet_saturn.png");
+  _deathStar->loadFromFile("../common/misc/death_star.png");
 
   _blackShip = new Texture();
   _blueShip = new Texture();
