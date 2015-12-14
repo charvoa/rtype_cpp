@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec 14 12:10:36 2015 Nicolas Girardot
+// Last update Mon Dec 14 06:14:54 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -95,7 +95,6 @@ void	Client::Start()
   splashScreenTexture->loadFromFile("../common/misc/splash_screen.png");
   splashScreen->setTexture(*splashScreenTexture);
   splashScreen->setPosition(0, 0);
-  //splashScreen->scale(1.1);
 
   //Display Splash screen and loading Ressources
 

@@ -92,25 +92,19 @@ void	SettingsPanel::setUserInterface()
 	name = "music";
 	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
 
-	std::vector<Bind*>::const_iterator it = _tmp->getBinds().begin();
-	std::vector<Bind*>::const_iterator end = _tmp->getBinds().end();
+	std::vector<Bind*> binds = _tmp->getBinds();
+	std::vector<Bind*>::const_iterator it = binds.begin();
+	std::vector<Bind*>::const_iterator end = binds.end();
 	SettingsLoader *loader = new SettingsLoader();
-	
-	std::cout << "dans SETTINGS PANEL : " << std::endl;
-	std::cout << "dumpBinds : " << std::endl;
-	_tmp->dumpBinds();
+	int	layout = 0;
 
 	while (it != end)
 	{
-		std::cout << loader->bindTypeToString((*it)->getType()) << " : " << loader->keyToString((*it)->getKey()) << ", " << loader->joystickToString((*it)->getJoystick()) << std::endl;
-		++it;
-	}
-
-	while (it != end)
-	{
-		std::cout << "CREATE KEY BUTTON : " << loader->keyToString((*it)->getKey()) << std::endl;
-//		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), loader->keyToString(it->getKey()));
-//		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25 + 300, window->getSize()._y * 0.7), loader->joystickToString(it->getJoystick()));
+		name = loader->keyToString((*it)->getKey());
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.2 + layout), name);
+		name = loader->joystickToString((*it)->getJoystick());
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + 340, window->getSize()._y * 0.2 + layout), name);
+		layout += 70;
 		++it;
 	}
 

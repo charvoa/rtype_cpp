@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 13 19:53:38 2015 Nicolas Girardot
+// Last update Mon Dec 14 04:48:08 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -34,21 +34,14 @@ RoomPanel::~RoomPanel(){}
 void	        RoomPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
-  Texture *backgroundSpaceTexture = new Texture;
-  Sprite *backgroundSpace = new Sprite;
+  Sprite *background = new Sprite;
 
   getInputManager().setInputType(InputType::MENU_INPUT);
 
-  backgroundSpaceTexture->loadFromFile("../common/misc/room_background.png");
-
-  backgroundSpace->setTexture(*backgroundSpaceTexture);
-
-  backgroundSpace->setPosition(0, 0);
-
-  backgroundSpace->scale(1.1);
-
-  _backgrounds.push_back(*backgroundSpace);
-
+  background->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundRoomPanel));
+  background->setPosition(0, 0);
+  background->scale(1);
+  _backgrounds.push_back(*background);
 
 
   std::string name = "BACK";
@@ -293,7 +286,7 @@ void		RoomPanel::createPlayers()
     roomID->setSize(60);
     roomID->setStyle(1);
     roomID->setOrigin(roomID->getText().getGlobalBounds().width / 2, roomID->getText().getGlobalBounds().height / 2);
-    roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.95 * window->getSize()._y));
+    roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.03 * window->getSize()._y));
     roomID->setColor(Color::WHITE);
     _labels.push_back(*roomID);
     _nbPlayers = 0;
