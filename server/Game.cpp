@@ -159,7 +159,14 @@ void Game::handleMove(void *data, Client *client)
 
 void Game::updateScore(Player *p, Game::scoreDef score)
 {
+  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+    {
+      std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
+      ANetwork::t_frame frame = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), sendData.size(), sendData);
+      dynamic_cast<Player*>((*it))->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
 }
 
 void Game::updateLife(Player *p, bool reset)

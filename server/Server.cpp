@@ -160,8 +160,8 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
    }catch(const std::exception &e)
      {
        std::string sendData = e.what();
-       ANetwork::t_frame frame = CreateRequest::create(S_JOIN_ERROR, CRC::calcCRC(sendData), 0, sendData);
-       client->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
+       ANetwork::t_frame frameToSend = CreateRequest::create(S_JOIN_ERROR, CRC::calcCRC(sendData), 0, sendData);
+       client->getSocket()->write(reinterpret_cast<void *>(&frameToSend), sizeof(ANetwork::t_frame));
        std::cout << e.what() << std::endl;
      }
    return true;
