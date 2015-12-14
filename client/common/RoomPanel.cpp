@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 08:00:52 2015 Serge Heitzler
+// Last update Mon Dec 14 09:14:16 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -90,6 +90,12 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
       File	file;
       file.receiveMe(IP_ADRESS, port++, "./recv/", setFileProgression, NULL);
     }
+
+
+  // create texture here
+  // Use FileManager
+  // Get all png files from ./recv/
+  // Build Texture
 }
 
 unsigned int	RoomPanel::getNbPlayers() const

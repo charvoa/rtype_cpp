@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 08:10:46 2015 Serge Heitzler
+// Last update Mon Dec 14 09:21:53 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -190,7 +190,11 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 	}
       i++;
     }
-
+  
+  Sprite	*wp = new Sprite();
+  wp->setTexture(*((RenderWindow::getInstance())->_ressources->_riffle));
+  _dicoSprites.insert(std::make_pair(5, wp));
+  
 }
 
 

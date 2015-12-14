@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Mon Dec 14 08:07:32 2015 Serge Heitzler
+// Last update Mon Dec 14 09:22:05 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -57,6 +57,7 @@ Ressources::Ressources()
   _hud = new Texture();
   _header = new Texture();
   _heart = new Texture();
+  _riffle = new Texture();
   _riffleHUD = new Texture();
   _rocket = new Texture();
   _rocketBlack = new Texture();
@@ -74,6 +75,7 @@ Ressources::Ressources()
   _header->loadFromFile("../common/misc/header.png");
   _heart->loadFromFile("../common/misc/heart.png");
   _riffleHUD->loadFromFile("../common/misc/riffle_infinite.png");
+  _riffleHUD->loadFromFile("../common/misc/riffle_ammo.png");
   _rocket->loadFromFile("../common/misc/rocket.png");
   _rocketBlack->loadFromFile("../common/misc/rocket_black.png");
 
