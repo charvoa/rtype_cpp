@@ -25,13 +25,22 @@ void		KeyButton::setState(Button::StateButton state)
 	_state = state;
 }
 
+void		KeyButton::setId(unsigned int id)
+{
+	_id = id;
+}
+
 void		KeyButton::setBind(sf::Event event)
 {
+	if (_waiting == false)
+		return;
 	SettingsLoader	*loader = new SettingsLoader();
+	RenderWindow	*window = RenderWindow::getInstance();
+	std::string		newTitle = loader->keyToString(event.key.code);
 
-	//event joystick ou key ?
-	setTitle(loader->keyToString(event.key.code));
-	std::cout << "SET TITLE : " << loader->keyToString(event.key.code) << std::endl;
+	//event joystick ou key ?*
+	(window->getPanels().top()->getLabels().at(_id)).setString(newTitle);
+	setTitle(newTitle);
 	_waiting = false;
 	getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
 	delete loader;
