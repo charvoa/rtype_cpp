@@ -86,7 +86,6 @@ SettingsLoader::SettingsLoader()
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
 	_ifs = new std::ifstream(_filepath.c_str());
-//	_ofs = new std::ofstream(_filepath.c_str());
 	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
 	_stringKeys["1_KEY"] = sf::Keyboard::Num1;
   _stringKeys["2_KEY"] = sf::Keyboard::Num2;
@@ -521,15 +520,32 @@ std::string     SettingsLoader::bindToString(Bind bind) const
 
 void        SettingsLoader::saveSettings(Settings *settings) const
 {
-    std::string settingsString(settingsToString(*settings));
+	std::ofstream  ofs("../common/client/config/PersonnalConfig.ini", std::ios::out);
+	std::cout << "global volume dans saveSettings : " << settings->getVolume().getGlobal() << std::endl;
+	std::string str(settingsToString(*settings));
+//	std::cout << "[" << str << "]" << std::endl;
+    std::string settingsString(str);
 
-    *_ofs << settingsString;
+    ofs << settingsString;
 }
 
 std::string	SettingsLoader::settingsToString(Settings const& settings) const
 {
-	(void)settings;
-	return ("TODO");
+	std::string ret(";PersonnalConfig.ini\n[BINDS]\n");
+	std::vector<Bind*> binds = settings.getBinds();
+	std::vector<Bind*>::const_iterator it = binds.begin();
+	std::vector<Bind*>::const_iterator end = binds.end();
+
+	while (it != end)
+	{
+		ret += bindToString(**it);
+		++it;
+	}
+	ret += "[VOLUME]\n";
+	ret += "global=" + settings.getVolume().getGlobal();
+	//wtf
+	std::cout << "returning [" << ret << "]" << std::endl;
+	return (ret);
 }
 
 Settings	*SettingsLoader::parseSettings() const
@@ -537,19 +553,6 @@ Settings	*SettingsLoader::parseSettings() const
 	Volume vol = getVolume();
 	std::vector<Bind*> binds = getBinds();
   Settings	*ret = new Settings(vol, binds, getDefaultDifficulty());
-/*  std::cout << "DANS SETTINGS LOADER::PARSE SETTINGS" << std::endl;
-  std::cout << "dump de binds : " << std::endl;
-  std::vector<Bind*>::const_iterator it = binds.begin();
-  std::vector<Bind*>::const_iterator end = binds.end();
 
-  while (it != end)
-  {
-	  std::cout << (*it)->getType() << " : " << keyToString((*it)->getKey()) << ", " << joystickToString((*it)->getJoystick()) << std::endl;
-	  ++it;
-  }
-  std::cout << std::endl;
-  std::cout << "dump de ret->getBinds : " << std::endl;
-  ret->dumpBinds();
-*/
   return (ret);
 }

@@ -64,7 +64,6 @@ private:
   std::map<std::string, sf::Keyboard::Key> _stringKeys;
   std::map<std::string, JoystickEvent> _stringAxis;
   std::ifstream   *_ifs;
-  std::ofstream   *_ofs;
 };
 
 #endif // SETTINGSLOADER_HH

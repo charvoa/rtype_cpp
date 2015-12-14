@@ -34,6 +34,9 @@ public:
   virtual void		render();
   virtual void		hide();
   virtual void	    setUserInterface();
+  virtual void		setGlobalVolume(int);
+  virtual void		setEffectsVolume(int);
+  virtual void		setMusicVolume(int);
 
   std::vector<Sprite>			&getBackgrounds();
   std::vector<AMenuElement*>   		&getUserInterface();

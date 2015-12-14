@@ -155,3 +155,18 @@ InputManager	&APanel::getInputManager()
 {
   return _inputManager;
 }
+
+void			APanel::setEffectsVolume(int vol)
+{
+	(void)vol;
+}
+
+void			APanel::setGlobalVolume(int vol)
+{
+	(void)vol;
+}
+
+void			APanel::setMusicVolume(int vol)
+{
+	(void)vol;
+}
