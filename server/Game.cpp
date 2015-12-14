@@ -283,6 +283,7 @@ void Game::sendGameData()
 
 bool Game::run()
 {
+  bool past = true;
   Timer	timer(true);
   int	speed = 3;
   ThreadFactory *tF = new ThreadFactory;
@@ -313,7 +314,11 @@ bool Game::run()
       auto end_time = start_time + frame_duration(4);
       if (duration.count() % 16 == 0)
       	{
-      	  std::this_thread::sleep_until(end_time);
+	  if (past == true)
+	    {
+	      std::this_thread::sleep_until(end_time);
+	      past = false;
+	    }
       	  sendGameData();
       	}
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
