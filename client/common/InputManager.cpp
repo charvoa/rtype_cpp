@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Mon Dec 14 14:37:48 2015 Nicolas Girardot
+// Last update Mon Dec 14 16:25:03 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -230,6 +230,7 @@ std::pair<unsigned int, unsigned int>		InputManager::keyEntered(sf::Event& event
 	RenderWindow *window = RenderWindow::getInstance();
 	(RenderWindow::getInstance())->getPanels().top()->setKeyButton(event);
 	return std::make_pair(0, 0);
+	(void) window;
 }
 
 /* ACTION ON EVENT
