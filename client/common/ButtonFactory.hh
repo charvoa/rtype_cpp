@@ -26,7 +26,7 @@ public:
 
   static void			create(Vector2 pos, std::string &title);
   static Slider			*createSlider(Vector2 pos, std::string& title, float xmin, float xmax);
-  static void			createKeyButton(Vector2 pos, std::string &title);
+  static void			createKeyButton(Vector2 pos, std::string &title, unsigned int id);
 private:
 
 };

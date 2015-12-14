@@ -8,6 +8,7 @@ private:
 	Button::StateButton	_state;
 	std::string	_title;
 	bool	_waiting;
+	unsigned int _id;
 public:
 	KeyButton();
 	~KeyButton();
@@ -17,4 +18,5 @@ public:
 	void		setState(Button::StateButton);
 	void		setTitle(std::string const&);
 	void		render();
+	void		setId(unsigned int);
 };
