@@ -234,7 +234,8 @@ std::pair<unsigned int, unsigned int>		InputManager::dropSlider(sf::Event& event
 
 std::pair<unsigned int, unsigned int>		InputManager::keyEntered(sf::Event& event)
 {
-	(void)event;
+	RenderWindow *window = RenderWindow::getInstance();
+	(RenderWindow::getInstance())->getPanels().top()->setKeyButton(event);
 	return std::make_pair(0, 0);
 }
 
