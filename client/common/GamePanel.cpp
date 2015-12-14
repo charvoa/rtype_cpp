@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 14:28:36 2015 Nicolas Girardot
+// Last update Mon Dec 14 15:18:12 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -52,6 +52,9 @@ GamePanel::GamePanel()
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::GAME_INPUT);
 
+  _randPosY = new Random(250, 600);
+  _randPlanet = new Random(0, 7);
+
   window->setActive(false);
 
   std::unique_ptr<AThread> t(new Thread(1));
@@ -73,10 +76,10 @@ GamePanel::GamePanel()
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
-  teamScore->setSize(60);
+  teamScore->setSize(40);
   teamScore->setStyle(1);
   teamScore->setOrigin(teamScore->getText().getGlobalBounds().width / 2, teamScore->getText().getGlobalBounds().height / 2);
-  teamScore->setPosition(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.05));
+  teamScore->setPosition(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.025));
   teamScore->setColor(Color::WHITE);
   _labels.push_back(*teamScore);
 
@@ -106,7 +109,23 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
   _backgrounds.push_back(*backgroundSpace2);
 
 
-  Sprite *hud = new Sprite;
+  Sprite *planet = new Sprite;
+
+planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
+ planet->setPosition(2500, _randPosY->generate<int>());
+ planet->scale(0.6);
+  _backgrounds.push_back(*planet);
+
+
+  Sprite *header = new Sprite;
+
+  header->setTexture(*((RenderWindow::getInstance())->_ressources->_header));
+  header->setPosition(window->getSize()._x / 2, 0);
+  header->setOrigin((RenderWindow::getInstance())->_ressources->_header->getSize()._x / 2, 0);
+  header->scale(1.5);
+  _backgrounds.push_back(*header);
+
+    Sprite *hud = new Sprite;
 
   hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
@@ -146,16 +165,10 @@ backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_back
 	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_blackShip));
 	  break;
 	}
-      std::cout << "TOOT" << std::endl;
-      ship->setPosition(100, 240);
       ship->scale(0.2);
       _dicoSprites.insert(std::make_pair(i, ship));
       i++;
     }
-
-
-
-
 
   /* USER INTERFACE HUD */
 
@@ -369,6 +382,41 @@ this->_otherPlayers.at(i)->render();
     }
 }
 
+void					GamePanel::setPlanetTexture(int i)
+{
+  switch (i)
+    {
+    case 0:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetEarth));
+      break;
+    case 1:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetExodus));
+      break;
+    case 2:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetJupiter));
+      break;
+    case 3:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetMars));
+      break;
+    case 4:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetMoon));
+      break;
+    case 5:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetNeptune));
+      break;
+    case 6:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetSaturne));
+      break;
+    case 7:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
+      break;
+    default:
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
+      break;
+    }
+}
+
+
 void		GamePanel::update()
 {
   static unsigned int i = 0;
@@ -377,6 +425,7 @@ void		GamePanel::update()
     {
       _backgrounds.at(0).move(-1, 0);
       _backgrounds.at(1).move(-1, 0);
+      _backgrounds.at(2).move(-2, 0);
     }
   if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
     {
@@ -386,6 +435,11 @@ void		GamePanel::update()
     {
       _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
     }
-  i++;
+  if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
+    {
+      _backgrounds.at(2).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
 
+      //      this->setPlanetTexture(_randPlanet->generate<int>());
+    }
+  i++;
 }
