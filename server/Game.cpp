@@ -161,11 +161,11 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 {
   std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
+  ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
-      std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
-      ANetwork::t_frame frame = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), sendData.size(), sendData);
-      dynamic_cast<Player*>((*it))->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
 }
 
@@ -173,8 +173,8 @@ void Game::updateLife(Player *p, bool reset)
 {
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
-				->getSystemByComponent(C_POSITION)
-				->getComponent());
+				       ->getSystemByComponent(C_HEALTH)
+				       ->getComponent());
   if (!reset)
     p->update(hP->getLife() - 1);
   else
@@ -182,19 +182,20 @@ void Game::updateLife(Player *p, bool reset)
 
   std::stringstream health;
 
-  ComponentHealth *hP =
-    reinterpret_cast<ComponentHealth*>(p->getSystemManager()
-				       ->getSystemByComponent(C_HEALTH)
-				       ->getComponent());
-
   health << p->getName() << ";" << hP->getLife();
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
+
+  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+    }
 
 }
 
 void Game::handleShoot(void *data, Client *client)
 {
-  char *weaponType =
+  std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
 
