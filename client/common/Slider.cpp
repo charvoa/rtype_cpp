@@ -91,7 +91,14 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 
 void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
+	RenderWindow	*window = RenderWindow::getInstance();
+
 	this->setValue((pair.first - _minX) / 7);
-	std::cout << "VOLUME SET : " << _value << std::endl;
+	if (_title == "global")
+		window->getPanels().top()->setGlobalVolume(_value);
+	else if (_title == "effects")
+		window->getPanels().top()->setEffectsVolume(_value);
+	else if (_title == "music")
+		window->getPanels().top()->setMusicVolume(_value);
 	_locked = true;
 }
