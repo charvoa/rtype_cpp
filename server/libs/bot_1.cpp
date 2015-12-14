@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Sat Dec 12 08:38:59 2015 Joris Bertomeu
+// Last update Mon Dec 14 08:07:39 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -46,7 +46,7 @@ void	Bot::update()
   else if (_direction == -1)
     _y--;
 
-  _x += 1;
+  _x--;
   std::cout << "Bot :: Bot1 :: Update" << std::endl;
   //dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(E_HEALTH))->update(_health++);
   dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);

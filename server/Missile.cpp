@@ -5,13 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 05:02:38 2015 Louis Audibert
-// Last update Sun Dec 13 08:37:26 2015 Louis Audibert
+// Last update Mon Dec 14 08:10:38 2015 Louis Audibert
 //
 
 #include <Missile.hh>
 
 Missile::Missile(int id) : AEntity(id)
 {
+  addSystem(C_POSITION);
   _name = "Missile";
 }
 
