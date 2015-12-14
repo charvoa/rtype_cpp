@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Mon Dec 14 14:37:48 2015 Nicolas Girardot
+// Last update Mon Dec 14 07:31:25 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -228,7 +228,7 @@ std::pair<unsigned int, unsigned int>		InputManager::dropSlider(sf::Event& event
 std::pair<unsigned int, unsigned int>		InputManager::keyEntered(sf::Event& event)
 {
 	RenderWindow *window = RenderWindow::getInstance();
-	(RenderWindow::getInstance())->getPanels().top()->setKeyButton(event);
+	window->getPanels().top()->setKeyButton(event);
 	return std::make_pair(0, 0);
 }
 
