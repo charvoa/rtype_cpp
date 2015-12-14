@@ -19,4 +19,5 @@ public:
 	void		setTitle(std::string const&);
 	void		render();
 	void		setId(unsigned int);
+	void		reset(std::string const&);
 };

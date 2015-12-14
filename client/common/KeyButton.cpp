@@ -30,6 +30,17 @@ void		KeyButton::setId(unsigned int id)
 	_id = id;
 }
 
+void		KeyButton::reset(std::string const& title)
+{
+	SettingsLoader	*loader = new SettingsLoader();
+	RenderWindow	*window = RenderWindow::getInstance();
+
+	(window->getPanels().top()->getLabels().at(_id)).setString(title);
+	setTitle(title);
+	getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
+	delete loader;
+}
+
 void		KeyButton::setBind(sf::Event event)
 {
 	if (_waiting == false)
