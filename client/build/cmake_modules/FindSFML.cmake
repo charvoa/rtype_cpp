@@ -67,7 +67,6 @@ set(FIND_SFML_PATHS
     ~/Library/Frameworks
     /Library/Frameworks
     /usr/local
-~/Desktop/SFML-2.3.2
     /usr
     /sw
     /opt/local
