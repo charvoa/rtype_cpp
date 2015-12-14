@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Mon Dec 14 16:53:23 2015 Nicolas Girardot
+// Last update Tue Dec 15 12:22:40 2015 Nicolas Girardot
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -47,6 +47,7 @@ public:
   void			gameNotLaunched(ANetwork::t_frame &frame);
   void			fileTotalSize(ANetwork::t_frame &frame);
   void			shoot(ANetwork::t_frame &frame);
+  void			newEntity(ANetwork::t_frame &frame);
 
 private:
 

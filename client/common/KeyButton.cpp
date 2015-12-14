@@ -1,6 +1,7 @@
 #include "SettingsLoader.hh"
 #include "KeyButton.hh"
 #include "RenderWindow.hh"
+#include "SettingsPanel.hh"
 
 
 
@@ -52,6 +53,43 @@ void		KeyButton::setBind(sf::Event event)
 	//event joystick ou key ?*
 	(window->getPanels().top()->getLabels().at(_id)).setString(newTitle);
 	setTitle(newTitle);
+	std::cout << "id : " << _id << std::endl;
+	JoystickEvent eventJoystick(0);
+	switch (_id)
+	{
+	case 3:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::MOVE_UP_BIND, event.key.code));
+	case 4:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::MOVE_UP_BIND, eventJoystick));
+	case 5:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::MOVE_DOWN_BIND, event.key.code));
+	case 6:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::MOVE_DOWN_BIND, eventJoystick));
+	case 7:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::MOVE_LEFT_BIND, event.key.code));
+	case 8:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::MOVE_LEFT_BIND, eventJoystick));
+	case 9:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::MOVE_RIGHT_BIND, event.key.code));
+	case 10:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::MOVE_RIGHT_BIND, eventJoystick));
+	case 11:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::LEAVE_GAME_BIND, event.key.code));
+	case 12:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::LEAVE_GAME_BIND, eventJoystick));
+	case 13:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::WEAPON_1, event.key.code));
+	case 14:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::WEAPON_1, eventJoystick));
+	case 15:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::WEAPON_2, event.key.code));
+	case 16:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::WEAPON_2, eventJoystick));
+	case 17:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setKey(Bind::WEAPON_3, event.key.code));
+	case 18:
+		(dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->setJoystick(Bind::WEAPON_3, eventJoystick));
+	}
 	_waiting = false;
 	getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
 	delete loader;

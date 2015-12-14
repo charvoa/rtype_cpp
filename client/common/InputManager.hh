@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Sun Dec 13 07:26:35 2015 Serge Heitzler
+// Last update Tue Dec 15 04:41:08 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -22,7 +22,7 @@ public:
   ~InputManager();
 
   std::pair<unsigned int, unsigned int>        	joystickPressedAt(sf::Event &event);
-  std::pair<unsigned int, unsigned int>        	joystickMovedInDirection(sf::Event &event);
+  std::pair<unsigned int, unsigned int>        	joystickMovedInDirection();
   bool						isMouseInWindow(Vector2 posMouse);
   int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement);
   int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement);
@@ -34,7 +34,7 @@ public:
   void						methodChecker(sf::Event &event);
   void						setInputType(InputType inputType);
   std::pair<unsigned int, unsigned int>	        textEnteredInJoinPanel(sf::Event& event);
-  std::pair<unsigned int, unsigned int>	        keyPressedInGame(sf::Event& event);
+  std::pair<unsigned int, unsigned int>	        keyPressedInGame();
   std::pair<unsigned int, unsigned int>			keyEntered(sf::Event& event);
   std::pair<unsigned int, unsigned int>			dropSlider(sf::Event& event);
 

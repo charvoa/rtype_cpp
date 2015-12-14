@@ -28,18 +28,25 @@ public:
 
     Settings(std::string const& filepath);
     Settings(Volume, std::vector<Bind*>, Settings::Difficulty);
+	Settings(Volume, std::vector<Bind*>, Settings::Difficulty, std::string const&, int);
     ~Settings();
 
     Volume getVolume() const;
     std::vector<Bind*> getBinds() const;
     Settings::Difficulty getDefaultDifficulty() const;
     Settings::Difficulty getCurrentDifficulty() const;
+	std::string		getIP() const;
+	int			getPort() const;
 
     void update(Settings const&);
     void setVolume(Volume const&);
     void setBind(Bind*);
+	void setKey(Bind::BindType, sf::Keyboard::Key);
+	void setJoystick(Bind::BindType, JoystickEvent&);
     void setDefaultDifficulty(Settings::Difficulty);
     void setDifficulty(Settings::Difficulty);
+	void setIP(std::string const&);
+	void setPort(int);
 
 	void dumpBinds() const;
     void loadSettings();
@@ -51,6 +58,8 @@ private:
     Volume  _volume;
     Settings::Difficulty _defaultDifficulty;
     Settings::Difficulty _difficulty;
+	std::string	_ip;
+	int			_port;
 };
 
 #endif // SETTINGS_H

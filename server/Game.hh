@@ -74,6 +74,7 @@ public:
   Client *getClientBySocket(ISocket*) const;
   Player *getPlayerByClient(Client*);
 
+  void checkWall(Player*);
   void handleHandshakeUDP(void*, Client*);
   void handleMove(void*, Client*);
   void handleCommand(void*, Client*);
@@ -88,7 +89,9 @@ public:
   void sendGameData();
   std::vector<Client *> _clients;
   ANetwork *_network;
-
+private:
+  void sendNewEntity(int type, int id);
+  void updateAmmo();
 };
 
 #endif

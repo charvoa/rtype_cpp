@@ -32,6 +32,7 @@ public:
   void    defaultSettings();
   void    back();
   void    save();
+  Settings	*getTemporarySettings() const;
 
 private:
     Settings    *_tmp;

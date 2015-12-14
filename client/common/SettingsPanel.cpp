@@ -188,3 +188,8 @@ void    SettingsPanel::save()
 	loader->saveSettings(_tmp);
 	RenderWindow::getInstance()->setSettings(_tmp);
 }
+
+Settings	*SettingsPanel::getTemporarySettings() const
+{
+	return _tmp;
+}
