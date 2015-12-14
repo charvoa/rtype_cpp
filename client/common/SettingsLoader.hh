@@ -21,7 +21,7 @@ class SettingsLoader : public IParser
 public:
 	SettingsLoader();
   SettingsLoader(const std::string & filepath);
-  ~SettingsLoader();
+  virtual ~SettingsLoader();
 
   std::string getValueOf(const std::string &) const;
   std::string getValueOfKey(const std::string &) const;
