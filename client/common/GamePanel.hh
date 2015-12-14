@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sun Dec 13 13:01:09 2015 Serge Heitzler
+// Last update Mon Dec 14 05:37:42 2015 Serge Heitzler
 //
 
 
@@ -17,6 +17,7 @@
 #include				<RenderWindow.hh>
 #include				<Sprite.hh>
 #include				<MainPlayer.hh>
+#include				<Random.hpp>
 
 class					GamePanel : public APanel
 {
@@ -41,6 +42,7 @@ public:
   void		       			drawOtherPlayer();
   std::map<int, Sprite*>		&getDicoSprites();
   std::map<std::string, Texture*>      	&getDicoTextures();
+  void					setPlanetTexture(int i);
 
 
 private:
@@ -49,6 +51,8 @@ private:
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;
   std::map<std::string, Texture*>	_dicoTextures;
+  Random				*_randPosY;
+  Random				*_randPlanet;
 };
 
 #endif /* GAMEPANEL_HH_ */

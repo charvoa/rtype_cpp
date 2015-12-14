@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec  3 13:22:09 2015 Serge Heitzler
-// Last update Sun Dec 13 13:37:34 2015 Nicolas Girardot
+// Last update Mon Dec 14 02:24:07 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -17,6 +17,7 @@
 Button::Button()
 {
   _sprite->setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
+  _hover = false;
 }
 
 Button::~Button()

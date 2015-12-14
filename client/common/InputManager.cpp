@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sun Dec 13 13:08:59 2015 Serge Heitzler
+// Last update Mon Dec 14 14:37:48 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -33,10 +33,10 @@ void			InputManager::setInputType(InputType type)
 
   if (type == InputType::SETTINGS_INPUT)
   {
-	  _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
-	  _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
-	  _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::keyEntered));
-	  _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
+    _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
+    _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
+    _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::keyEntered));
+    _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
   }
   if (type == InputType::MENU_INPUT || type == InputType::JOIN_INPUT)
     {
@@ -61,34 +61,27 @@ void			InputManager::setInputType(InputType type)
 
 std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Event &event)
 {
-  (void)event;
+  int i = 0;
   std::cout << "KEY " << event.key.code << std::endl;
-  if (event.key.code == sf::Keyboard::Left)
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("7"), 0, "7");
-      net->write(sender);
+      i += 8;
     }
-  if (event.key.code == sf::Keyboard::Right)
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("3"), 0, "3");
-      net->write(sender);
+      i += 2;
     }
-  if (event.key.code == sf::Keyboard::Down)
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("5"), 0, "5");
-      net->write(sender);
+      i += 4;
     }
-  if (event.key.code == sf::Keyboard::Up)
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("1"), 0, "1");
-      net->write(sender);
+      i += 1;
     }
-
-
+  ANetwork *net = Client::getUDPNetwork();
+  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
+  net->write(sender);
   return std::make_pair(0, 0);
 }
 
@@ -103,7 +96,7 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
 {
-  
+
   (void)event;
   // 8 directions
   return std::make_pair(0, 0);

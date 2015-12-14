@@ -23,8 +23,10 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
 
   this->_clients = client_;
   this->_network = new Network();
-  this->_network->init(port_ + 1, ANetwork::UDP_MODE);
+  //  this->_network->init(port_ + 1, ANetwork::UDP_MODE);
+  this->_network->init(port_ + 1, ANetwork::TCP_MODE);
   this->_network->bind();
+  this->_network->listen(5);
   this->addClients(client_);
   _stage = 1;
   _nbDisplay = 0;
