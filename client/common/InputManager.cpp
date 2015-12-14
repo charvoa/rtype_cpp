@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sun Dec 13 21:56:01 2015 Nicolas Girardot
+// Last update Sun Dec 13 13:08:59 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -63,22 +63,6 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Eve
 {
   (void)event;
   std::cout << "KEY " << event.key.code << std::endl;
-
-
-  return std::make_pair(0, 0);
-}
-
-std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event& event)
-{
-  (void)event;
-
-  std::cout << "joy key " << event.joystickButton.button << std::endl;
-
-  return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
-}
-
-std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
-{
   if (event.key.code == sf::Keyboard::Left)
     {
       ANetwork *net = Client::getUDPNetwork();
@@ -103,6 +87,24 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC("1"), 0, "1");
       net->write(sender);
     }
+
+
+  return std::make_pair(0, 0);
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event& event)
+{
+  (void)event;
+
+  std::cout << "joy key " << event.joystickButton.button << std::endl;
+
+  return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
+}
+
+std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection(sf::Event &event)
+{
+  
+  (void)event;
   // 8 directions
   return std::make_pair(0, 0);
 }
