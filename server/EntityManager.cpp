@@ -43,12 +43,16 @@ bool	EntityManager::createEntity(E_EntityType type, AEntity *parent)
     {
     case E_RIFLE:
       newEntity = new Riffle(_id);
-    case E_Missile:
+      break;
+    case E_MISSILE:
       newEntity = new Missile(_id);
-    case E_Laser
+      break;
+    case E_LASER:
       newEntity = new Laser(_id);
-    default
+      break;
+    default:
       newEntity = new AEntity(_id);
+      break;
     }
   newEntity->setType(type);
   newEntity->setParent(parent);

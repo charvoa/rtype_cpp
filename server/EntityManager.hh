@@ -15,6 +15,9 @@
 # include <EntityFactory.hh>
 # include <AEntity.hh>
 # include <E_EntityType.hh>
+# include <Riffle.hh>
+# include <Missile.hh>
+# include <Laser.hh>
 # include <PlayerFactory.hh>
 # include <Bot.hpp>
 
