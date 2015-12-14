@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Mon Dec 14 09:15:32 2015 Louis Audibert
+// Last update Mon Dec 14 09:19:38 2015 Louis Audibert
 //
 
 #include <EntityFactory.hh>
@@ -56,13 +56,13 @@ AEntity *EntityFactory::createEntity(int &id, E_EntityType type)
   switch (type)
     {
     case E_RIFLE:
-      newEntity = new Riffle(id);
+      newEntity = new Riffle(5);
       break;
     case E_MISSILE:
-      newEntity = new Missile(id);
+      newEntity = new Missile(6);
       break;
     case E_LASER:
-      newEntity = new Laser(id);
+      newEntity = new Laser(7);
       break;
     default:
       newEntity = new AEntity(id);
