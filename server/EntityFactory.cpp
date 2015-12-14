@@ -5,14 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Mon Dec 14 09:19:38 2015 Louis Audibert
 //
 
 #include <EntityFactory.hh>
 
 EntityFactory::EntityFactory()
 {
-
+  :
 }
 
 EntityFactory::~EntityFactory()
