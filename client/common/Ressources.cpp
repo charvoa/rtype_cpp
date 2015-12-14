@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Mon Dec 14 05:08:38 2015 Serge Heitzler
+// Last update Mon Dec 14 08:07:32 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -110,12 +110,22 @@ Ressources::Ressources()
   _redShip = new Texture();
   _greenShip = new Texture();
   _yellowShip = new Texture();
-  
+
+  _blueShipGame = new Texture();
+  _redShipGame = new Texture();
+  _greenShipGame = new Texture();
+  _yellowShipGame = new Texture();
+
   _blackShip->loadFromFile("../common/misc/player_black.png");
   _blueShip->loadFromFile("../common/misc/player_blue.png");
   _redShip->loadFromFile("../common/misc/player_red.png");
   _greenShip->loadFromFile("../common/misc/player_green.png");
   _yellowShip->loadFromFile("../common/misc/player_yellow.png");
+
+  _blueShipGame->loadFromFile("../common/misc/player_blue_game.png");
+  _redShipGame->loadFromFile("../common/misc/player_red_game.png");
+  _greenShipGame->loadFromFile("../common/misc/player_green_game.png");
+  _yellowShipGame->loadFromFile("../common/misc/player_yellow_game.png");
 
   _fontFirst = new SFont();
   _fontSecond = new SFont();

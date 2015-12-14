@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Mon Dec 14 05:37:42 2015 Serge Heitzler
+// Last update Mon Dec 14 07:59:08 2015 Serge Heitzler
 //
 
 
@@ -43,6 +43,7 @@ public:
   std::map<int, Sprite*>		&getDicoSprites();
   std::map<std::string, Texture*>      	&getDicoTextures();
   void					setPlanetTexture(int i);
+  void					setPlayers(int nbPlayer, int currentPlayer);
 
 
 private:

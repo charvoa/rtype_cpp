@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Mon Dec 14 05:11:46 2015 Serge Heitzler
+// Last update Mon Dec 14 08:05:19 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -83,6 +83,11 @@ public:
   Texture		*_redShip;
   Texture		*_greenShip;
   Texture		*_yellowShip;
+  
+  Texture		*_blueShipGame;
+  Texture		*_redShipGame;
+  Texture		*_greenShipGame;
+  Texture		*_yellowShipGame;
   
   SFont			*_fontFirst;
   SFont			*_fontSecond;
