@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Mon Dec 14 15:17:22 2015 Nicolas Girardot
+// Last update Mon Dec 14 17:04:48 2015 Nicolas Girardot
 //
 
 
@@ -73,6 +73,7 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
   _functions.insert(std::make_pair(S_FILE_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
   _functions.insert(std::make_pair(S_NEW_ENEMY, &ProtocoleClient::newEnemy));
+  _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::shoot));
 }
 
 void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)
@@ -116,6 +117,15 @@ void		ProtocoleClient::display(ANetwork::t_frame &frame)
   std::cout << "Display" << std::endl;
 
   GamePanel::display(x);
+}
+
+void		ProtocoleClient::shoot(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "shoot" << std::endl;
+
+  Sound *s = Client::getSound();
+  s->playMusic("laser");
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)

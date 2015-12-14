@@ -37,19 +37,7 @@ bool	EntityManager::createEntity(E_EntityType type, const Client &client)
 
 bool	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 {
-  AEntity *newEntity;
-
-  switch (type)
-    {
-    case E_RIFLE:
-      newEntity = new Riffle(_id);
-    case E_Missile:
-      newEntity = new Missile(_id);
-    case E_Laser
-      newEntity = new Laser(_id);
-    default
-      newEntity = new AEntity(_id);
-    }
+  AEntity *newEntity = _entityFactory.createEntity(_id, type);
   newEntity->setType(type);
   newEntity->setParent(parent);
   _entities.push_back(newEntity);

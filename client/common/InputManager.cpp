@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Mon Dec 14 07:31:25 2015 Louis Audibert
+// Last update Mon Dec 14 17:11:35 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -78,6 +78,13 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Eve
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
       i += 1;
+    }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+      ANetwork *net = Client::getUDPNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
+      net->write(sender);
+      return std::make_pair(0, 0);
     }
   ANetwork *net = Client::getUDPNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
@@ -230,6 +237,7 @@ std::pair<unsigned int, unsigned int>		InputManager::keyEntered(sf::Event& event
 	RenderWindow *window = RenderWindow::getInstance();
 	window->getPanels().top()->setKeyButton(event);
 	return std::make_pair(0, 0);
+	(void) window;
 }
 
 /* ACTION ON EVENT

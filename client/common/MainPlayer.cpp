@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Mon Dec 14 08:11:29 2015 Serge Heitzler
+// Last update Mon Dec 14 17:37:12 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -147,7 +147,7 @@ void		MainPlayer::render()
 {
     unsigned int		i = 0;
 
-    (RenderWindow::getInstance())->draw(_spaceShip->getSprite());
+  (RenderWindow::getInstance())->draw(_spaceShip->getSprite());
   while (i < this->_hearts.size() && this->_hearts.size() > 0)
     {
       (RenderWindow::getInstance())->draw(this->_hearts.at(i)->getSprite());
