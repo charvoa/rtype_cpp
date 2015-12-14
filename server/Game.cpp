@@ -195,13 +195,14 @@ void Game::updateLife(Player *p, bool reset)
 
 void Game::handleShoot(void *data, Client *client)
 {
+  std::cout << "Game :: handleShoot" << std::endl;
   std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
 
   Player *p = this->getPlayerByClient(client);
 
-  E_EntityType type;
+  E_EntityType type = E_INVALID;
 
   if (weaponType == "E_RIFLE")
     type = E_RIFLE;
@@ -209,8 +210,12 @@ void Game::handleShoot(void *data, Client *client)
     type = E_MISSILE;
   else if (weaponType == "E_LASER")
     type = E_LASER;
-  _eM.createEntity(type, p);
 
+  std::cout << "Type of weapon : " << type << "|" << std::endl;
+  if (type != E_INVALID)
+    _eM.createEntity(type, p);
+
+  std::cout << "After create entity " << std::endl;
 
   std::stringstream ss;
 
@@ -300,10 +305,14 @@ void Game::sendGameData()
     {
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
+	  std::cout << "SS in data : " << (*it2)->getName()  << std::endl;
+
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
+	  std::cout << "SS in data : " << ss.str().c_str() << std::endl;
+
 
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 
@@ -357,8 +366,6 @@ bool Game::run()
 	    }
       	  sendGameData();
       	}
-      //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
-      // nbEnemy = 5 * stage * nbEnemy;
     }
   return true;
 }
