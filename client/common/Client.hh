@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Mon Dec 14 06:44:50 2015 Serge Heitzler
+// Last update Mon Dec 14 07:28:13 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_

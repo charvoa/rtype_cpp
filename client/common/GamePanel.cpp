@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 15:18:12 2015 Nicolas Girardot
+// Last update Mon Dec 14 08:10:46 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -55,7 +55,6 @@ GamePanel::GamePanel()
   _randPosY = new Random(250, 600);
   _randPlanet = new Random(0, 7);
 
-  window->setActive(false);
 
   std::unique_ptr<AThread> t(new Thread(1));
   char str1[] = "";
@@ -132,34 +131,38 @@ planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
   _backgrounds.push_back(*hud);
 
 
+  
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
 //   planet->setPosition(0, 0);
 //   _backgrounds.push_back(*planet);
 
+  this->setPlayers(static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers(), static_cast<RoomPanel*>(window->getPanels().top())->getCurrentPlayer());
+}
 
+GamePanel::~GamePanel() {}
 
-
-  // INIT EN DUR POUR TEST
+void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
+{
 
   int i = 1;
-  while (i <=4)
+  while (i <= nbPlayer)
     {
       Sprite	*ship = new Sprite();
       switch (i)
 	{
 	case 1:
-	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShip));
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_blueShipGame));
 	  break;
 	case 2:
-	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_redShip));
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_redShipGame));
 	  break;
 	case 3:
-	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_greenShip));
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_greenShipGame));
 	  break;
 	case 4:
-	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_yellowShip));
+	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_yellowShipGame));
 	  break;
 	default:
 	  ship->setTexture(*((RenderWindow::getInstance())->_ressources->_blackShip));
@@ -171,21 +174,25 @@ planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
     }
 
   /* USER INTERFACE HUD */
-
-  _mainPlayer = new MainPlayer(1);
-
-  OtherPlayer	*other1 = new OtherPlayer(1, 2);
-  OtherPlayer	*other2 = new OtherPlayer(2, 3);
-  OtherPlayer	*other3 = new OtherPlayer(3, 4);
-
-  _otherPlayers.push_back(other1);
-  _otherPlayers.push_back(other2);
-  _otherPlayers.push_back(other3);
-
+  
+  _mainPlayer = new MainPlayer(currentPlayer);
+  i = 1;
+  int j = 1;
+  while (i <= nbPlayer)
+    {
+      if (i == currentPlayer)
+	;
+      else
+	{
+	  OtherPlayer	*other = new OtherPlayer(j, i);
+	  _otherPlayers.push_back(other);
+	  j++;
+	}
+      i++;
+    }
 
 }
 
-GamePanel::~GamePanel() {}
 
 void		GamePanel::newEnemy(std::vector<std::string> &vector)
 {
