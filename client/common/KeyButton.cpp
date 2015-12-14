@@ -33,6 +33,7 @@ void		KeyButton::setBind(sf::Event event)
 	setTitle(loader->keyToString(event.key.code));
 	std::cout << "SET TITLE : " << loader->keyToString(event.key.code) << std::endl;
 	_waiting = false;
+	getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
 	delete loader;
 }
 
