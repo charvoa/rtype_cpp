@@ -89,10 +89,10 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 	{
 	  printf("Entre dans le if dans HandShake UDP\n");
 	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
+	  printf("Apres le setUDPSocket\n");
 	}
     }
 }
-
 
 std::pair<int, int> Game::getDirections(const std::string &dir)
 {
@@ -100,19 +100,19 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
 
   if (dir == "1")
     final = std::make_pair(0, -1);
-  else if (dir == "2")
-    final = std::make_pair(1, -1);
   else if (dir == "3")
+    final = std::make_pair(1, -1);
+  else if (dir == "2")
     final = std::make_pair(1, 0);
-  else if (dir == "4")
-    final = std::make_pair(1, 1);
-  else if (dir == "5")
-    final = std::make_pair(0, 1);
   else if (dir == "6")
+    final = std::make_pair(1, 1);
+  else if (dir == "4")
+    final = std::make_pair(0, 1);
+  else if (dir == "12")
     final = std::make_pair(-1, 1);
-  else if (dir == "7")
-    final = std::make_pair(-1, 0);
   else if (dir == "8")
+    final = std::make_pair(-1, 0);
+  else if (dir == "9")
     final = std::make_pair(-1, -1);
   else
     final = std::make_pair(0, 0);
@@ -122,9 +122,9 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
 
 bool Game::checkMove(int x, int y)
 {
-  if (x < 0 || x > 255)
+  if (x < 0 || x > 110)
     return false;
-  else if (y < 0 || y > 255)
+  else if (y < 0 || y > 50)
     return false;
   return true;
 }
@@ -150,10 +150,7 @@ void Game::handleMove(void *data, Client *client)
     std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-    std::cout << "AFTER UPDATE" << std::endl;
 
-    ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
-    client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
@@ -162,31 +159,53 @@ void Game::handleMove(void *data, Client *client)
 
 void Game::updateScore(Player *p, Game::scoreDef score)
 {
+  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
+  ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
+  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
 }
 
 void Game::updateLife(Player *p, bool reset)
 {
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
-				->getSystemByComponent(C_POSITION)
-				->getComponent());
+				       ->getSystemByComponent(C_HEALTH)
+				       ->getComponent());
   if (!reset)
     p->update(hP->getLife() - 1);
   else
     p->update(3);
+
+  std::stringstream health;
+
+  health << p->getName() << ";" << hP->getLife();
+  ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
+
+  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+    }
+
 }
 
 void Game::handleShoot(void *data, Client *client)
 {
-  (void)data;
-  (void)client;
-  // char *weaponType =
-  //   ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+  std::string weaponType =
+    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
 
-  //  Player *p = this->getPlayerByClient(client);
-  //_eM.createEntity();
+  Player *p = this->getPlayerByClient(client);
+  if (weaponType == "E_RIFFLE")
+    _eM.createEntity(E_RIFLE, p);
+  else if (weaponType == "E_MISSILE")
+    _eM.createEntity(E_MISSILE, p);
+  else if (weaponType == "E_LASER")
+    _eM.createEntity(E_LASER, p);
 }
 
 void Game::handleCommand(void *data, Client *client)
@@ -248,7 +267,7 @@ void Game::initPlayersPosition()
   int	x = 10;
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::vector<AEntity *>::iterator it;
-  Random	rand(0,255);
+  Random	rand(0, 50);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());

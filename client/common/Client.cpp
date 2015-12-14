@@ -36,11 +36,11 @@ void	*readdisp(void *s)
   ProtocoleClient x;
   while (true)
     {
-      std::cout << "Thread" << std::endl;
+//      std::cout << "Thread" << std::endl;
       try
 	{
 	  a = Client::getNetwork()->read();
-	  std::cout << "Data TCP is " << a.data << std::endl;
+//	  std::cout << "Data TCP is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)

@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Sat Dec 12 05:52:11 2015 Joris Bertomeu
+// Last update Sat Dec 12 12:14:43 2015 Joris Bertomeu
 //
 
 #ifndef			_FILE_HPP_
@@ -25,7 +25,7 @@
 
 # define SSTR(x)	dynamic_cast<std::ostringstream&>(std::ostringstream() << std::dec << x)).str()
 
-# define	D_BUF	2048
+# define	D_BUF	4096
 
 class			File
 {
@@ -116,6 +116,8 @@ public:
       s->write(buff, local);
       size = (_size - i > D_BUF) ? D_BUF : _size - i;
     }
+    std::cout << "Sending finished into FILE" << std::endl;
+    s->close();
     net.close();
     fclose(file);
   };
@@ -127,6 +129,7 @@ public:
     int			received;
     int			i = 0, odoSize;
     ANetwork::t_frame	frame;
+    bool		reading = true;
 
     try {
       net.init(port, ANetwork::TCP_MODE);
@@ -136,7 +139,10 @@ public:
       odoSize = atoi(frame.data);
       frame = net.read();
       file = fopen(std::string(dir + frame.data).c_str(), "wb");
-      while ((buff = (char*) net.getSocket()->read(D_BUF, &received))) {
+      while (reading) {
+	buff = (char*) net.getSocket()->read(D_BUF, &received);
+	if (received <= 0)
+	  break;
 	i += fwrite(buff, 1, received, file);
 	cb(i * 100 / odoSize, data);
       }
