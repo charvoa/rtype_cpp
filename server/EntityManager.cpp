@@ -54,6 +54,10 @@ bool	EntityManager::createEntity(E_EntityType type, AEntity *parent)
       newEntity = new AEntity(_id);
       break;
     }
+
+  std::cout << "Avant pos" << std::endl;
+  ComponentPosition *pos = reinterpret_cast<ComponentPosition*>(parent->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+  std::cout << "Apres pos" << std::endl;
   newEntity->setType(type);
   newEntity->setParent(parent);
   _entities.push_back(newEntity);

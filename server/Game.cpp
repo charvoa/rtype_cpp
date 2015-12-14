@@ -211,7 +211,7 @@ void Game::handleShoot(void *data, Client *client)
   else if (weaponType == "E_LASER")
     type = E_LASER;
 
-  std::cout << "Type of weapon : " << type << "|" << std::endl;
+  std::cout << "Type of weapon : |" << type << "|" << std::endl;
   if (type != E_INVALID)
     _eM.createEntity(type, p);
 
