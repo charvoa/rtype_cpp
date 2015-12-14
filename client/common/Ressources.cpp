@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Mon Dec 14 09:22:05 2015 Serge Heitzler
+// Last update Mon Dec 14 09:41:20 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -74,8 +74,8 @@ Ressources::Ressources()
   _hud->loadFromFile("../common/misc/hud.png");
   _header->loadFromFile("../common/misc/header.png");
   _heart->loadFromFile("../common/misc/heart.png");
+  _riffle->loadFromFile("../common/misc/riffle_ammo.png");
   _riffleHUD->loadFromFile("../common/misc/riffle_infinite.png");
-  _riffleHUD->loadFromFile("../common/misc/riffle_ammo.png");
   _rocket->loadFromFile("../common/misc/rocket.png");
   _rocketBlack->loadFromFile("../common/misc/rocket_black.png");
 

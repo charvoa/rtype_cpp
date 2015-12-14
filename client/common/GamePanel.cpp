@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 09:21:53 2015 Serge Heitzler
+// Last update Mon Dec 14 09:41:51 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -193,6 +193,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
   
   Sprite	*wp = new Sprite();
   wp->setTexture(*((RenderWindow::getInstance())->_ressources->_riffle));
+  wp->scale(2);
   _dicoSprites.insert(std::make_pair(5, wp));
   
 }
