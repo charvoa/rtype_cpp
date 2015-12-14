@@ -35,7 +35,7 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_LAUNCH_GAME, &Server::createGame);
   this->_commandManager.addFunction(C_PLAYER_LEFT, &Server::playerLeftRoom);
   this->_botManager = new BotManager("../libs/");
-  this->_roomManager.setBotManager(this->_botManager);
+  this->_roomManager.setBotManager(this->_botManager->getBotList());
   std::list<Bot*> toto = this->_botManager->getBotList();
   for (std::list<Bot*>::iterator it = toto.begin();
        it != toto.end(); ++it) {

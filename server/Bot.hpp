@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Sat Dec 12 04:37:41 2015 Joris Bertomeu
+// Last update Sat Dec 12 06:22:42 2015 Joris Bertomeu
 //
 
 #ifndef			_BOT_HH_
@@ -13,6 +13,7 @@
 
 # include		<AEntity.hh>
 # include		<Random.hpp>
+# include		<E_Component.hh>
 
 class			Bot : public AEntity
 {

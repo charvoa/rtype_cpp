@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:51:49 2015 Antoine Garcia
-// Last update Sat Dec 12 05:08:26 2015 Joris Bertomeu
+// Last update Sat Dec 12 06:14:31 2015 Joris Bertomeu
 //
 
 #ifndef _ROOMMANAGER_HH_
@@ -22,7 +22,7 @@ class	RoomManager
 {
   std::vector<Room>	_rooms;
   std::string	generateId();
-  BotManager	*_botManager;
+  std::list<Bot*>	_botManager;
 
 public:
   RoomManager();
@@ -31,7 +31,7 @@ public:
   Room&	getRoombyId(const std::string &id);
   bool	roomExists(const std::string &id);
   void	deleteRoom(const std::string &id);
-  void	setBotManager(BotManager *);
+  void	setBotManager(std::list<Bot*>);
 };
 
 #endif
