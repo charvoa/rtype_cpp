@@ -11,6 +11,7 @@
 #ifndef SETTINGSPANEL_H
 #define SETTINGSPANEL_H
 
+#include "Slider.hh"
 #include "Volume.hh"
 #include "Settings.hh"
 #include "APanel.hh"
@@ -34,6 +35,9 @@ public:
 
 private:
     Settings    *_tmp;
+	Slider		*_global;
+	Slider		*_effects;
+	Slider		*_music;
 };
 
 #endif // SETTINGSPANEL_H

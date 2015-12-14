@@ -8,6 +8,7 @@
 // Last update Wed Dec  9 13:42:40 2015 Nicolas Girardot
 //
 
+#include <iostream>
 #include <Bind.hh>
 
 Bind::Bind(Bind::BindType type, sf::Keyboard::Key key, JoystickEvent joystick)
@@ -41,6 +42,7 @@ void    Bind::setType(Bind::BindType type)
 
 void    Bind::setKey(sf::Keyboard::Key key)
 {
+	std::cout << "set key" << std::endl;
     _key = key;
 }
 
