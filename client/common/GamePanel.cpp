@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sun Dec 13 14:39:48 2015 Serge Heitzler
+// Last update Mon Dec 14 12:09:20 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -28,7 +28,7 @@ void	*readUDP(void *s)
 {
   ANetwork::t_frame a;
   ProtocoleClient x;
-  
+
   while (true)
     {
       std::cout << "Thread UDP" << std::endl;
@@ -190,12 +190,12 @@ void		GamePanel::display(std::vector<std::string> &vector)
   int  	id;
 
 
-  
+
   float	posX = (std::atoi(vector.at(1).c_str()));
   float	posY = (std::atoi(vector.at(2).c_str()));
 
-  float realPosX = (posX / 255) * 1920;
-  float realPosY = (posY / 255) * 1080;
+  float realPosX = (posX * 16);
+  float realPosY = (posY * 16);
 
 
   //   int	scale = std::atoi(vector.at(3).c_str());
@@ -220,7 +220,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   // i++;
 
 
-    
+
 
   // float moveX = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->getPosX() - realPosX;
 
@@ -228,12 +228,12 @@ void		GamePanel::display(std::vector<std::string> &vector)
 
    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
   // ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->move(moveX, moveY);
-  
+
   // std::cout << "realPos X " << moveX << std::endl;
   // std::cout << "realPos Y " << moveY << std::endl;
 
   // std::cout << "COUSCOUS" << std::endl;
-  
+
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()

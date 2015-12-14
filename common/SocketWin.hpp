@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Fri Dec 11 22:49:42 2015 Joris Bertomeu
+// Last update Sat Dec 12 09:36:24 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -91,6 +91,12 @@ class		Socket : public ISocket
 	  this->_init = true;
   };
 
+  bool		isEqualTo(Socket *s) {
+    if (this->_me.sin_addr == s->_me.sin_addr &&
+	this->_me.sin_port == s->_me.sin_port)
+      return (true);
+    return (false);
+  };
 private:
   void		*read_tcp(int size, int *fill) {
 		void	*data;

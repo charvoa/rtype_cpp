@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Sun Dec 13 23:40:50 2015 Nicolas Charvoz
+// Last update Sat Dec 12 09:44:48 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -23,6 +23,7 @@
 # include	<arpa/inet.h>
 # include	<iostream>
 # include	<stdlib.h>
+# include	<ANetwork.hpp>
 
 class		Socket : public ISocket
 {
@@ -79,6 +80,8 @@ class		Socket : public ISocket
   };
 
   int		write(void *data, int size) {
+    if (!data)
+      return (0);
     if (this->_mode == SOCK_STREAM)
       return (this->write_tcp(data, size));
     else
@@ -92,6 +95,13 @@ class		Socket : public ISocket
 
   int		getFd() const {
     return (this->_fd);
+  };
+
+  bool		isEqualTo(ISocket *s) {
+    if (!memcmp(&(this->_me.sin_addr), &(dynamic_cast<Socket*>(s)->_me.sin_addr), sizeof(this->_me.sin_addr)) &&
+	this->_me.sin_port == dynamic_cast<Socket*>(s)->_me.sin_port)
+      return (true);
+    return (false);
   };
 
 private:
@@ -132,6 +142,7 @@ private:
     ret = ::sendto(this->_fd, data, size, 0, (struct sockaddr*) &_me, meSize);
     if (ret < 0)
       throw (std::logic_error("Socket :: UDP :: Write :: Error while writing"));
+    printf("-- Sent DATA UDP : %s --\n", ((ANetwork::t_frame*) data)->data);
     return (ret);
   };
 };
