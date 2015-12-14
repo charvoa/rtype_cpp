@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Mon Dec 14 15:17:40 2015 Nicolas Girardot
+// Last update Mon Dec 14 16:56:55 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -147,7 +147,6 @@ void		MainPlayer::render()
 {
     unsigned int		i = 0;
 
-    std::cout << "LIfe is " << _nbrLife << std::endl;
   (RenderWindow::getInstance())->draw(_spaceShip->getSprite());
   while (i < this->_hearts.size() && this->_hearts.size() > 0)
     {

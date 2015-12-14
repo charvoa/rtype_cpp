@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Mon Dec 14 16:51:31 2015 Nicolas Girardot
+// Last update Mon Dec 14 17:04:48 2015 Nicolas Girardot
 //
 
 
@@ -122,7 +122,7 @@ void		ProtocoleClient::display(ANetwork::t_frame &frame)
 void		ProtocoleClient::shoot(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Display" << std::endl;
+  std::cout << "shoot" << std::endl;
 
   Sound *s = Client::getSound();
   s->playMusic("laser");

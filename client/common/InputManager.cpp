@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Mon Dec 14 16:52:50 2015 Nicolas Girardot
+// Last update Mon Dec 14 17:11:35 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -84,6 +84,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Eve
       ANetwork *net = Client::getUDPNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
       net->write(sender);
+      return std::make_pair(0, 0);
     }
   ANetwork *net = Client::getUDPNetwork();
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
