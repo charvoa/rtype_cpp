@@ -29,6 +29,7 @@ public:
   virtual void		updateOnMove(std::pair<unsigned int, unsigned int> pair);
   virtual bool		updateOnPress(std::pair<unsigned int, unsigned int> pair);
   virtual void		updateOnRelease(std::pair<unsigned int, unsigned int> pair);
+  virtual void		setKeyButton(sf::Event);
   virtual void		update();
   virtual void		render();
   virtual void		hide();

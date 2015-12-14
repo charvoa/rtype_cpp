@@ -54,12 +54,13 @@ Slider			*ButtonFactory::createSlider(Vector2 pos, std::string& title, float xmi
 	return (button);
 }
 
-void			ButtonFactory::createKeyButton(Vector2 pos, std::string &title)
+void			ButtonFactory::createKeyButton(Vector2 pos, std::string &title, unsigned int id)
 {
 	KeyButton		*button = new KeyButton();
 	Text		       	*text = new Text();
 
 	text->setString(title);
+	button->setId(id);
 	text->setSize(25);
 	text->setStyle(1);
 	text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
@@ -72,7 +73,6 @@ void			ButtonFactory::createKeyButton(Vector2 pos, std::string &title)
 	button->getSprite().scale(0.7);
 	button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_buttonNormal->getSize()._y / 2);
 	button->getSprite().setPosition(pos._x, pos._y);
-
 	(RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
 
 	(RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(*text);

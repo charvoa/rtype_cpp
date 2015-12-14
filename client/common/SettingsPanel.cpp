@@ -97,14 +97,15 @@ void	SettingsPanel::setUserInterface()
 	std::vector<Bind*>::const_iterator end = binds.end();
 	SettingsLoader *loader = new SettingsLoader();
 	int	layout = 0;
+	int id = window->getPanels().top()->getLabels().size();
 
 	while (it != end)
 	{
 		name = loader->keyToString((*it)->getKey());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.2 + layout), name);
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.2 + layout), name, id++);
 		name = loader->joystickToString((*it)->getJoystick());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + 340, window->getSize()._y * 0.2 + layout), name);
-		layout += 70;
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + (window)->_ressources->_buttonNormal->getSize()._x / 2, window->getSize()._y * 0.2 + layout), name, id++);
+		layout += (window)->_ressources->_buttonNormal->getSize()._y / 2;
 		++it;
 	}
 

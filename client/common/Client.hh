@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Mon Dec 14 07:28:13 2015 Serge Heitzler
+// Last update Mon Dec 14 08:19:05 2015 Serge Heitzler
 //
 
 #ifndef CLIENT_HH_
@@ -24,7 +24,8 @@
 #include <PanelFactory.hh>
 #include <SoundManager.hh>
 
-#define IP_ADRESS "0"
+//#define IP_ADRESS "0"
+#define IP_ADRESS "10.16.253.150"
 //#define IP_ADRESS "51.254.139.53"
 //#define IP_ADRESS "10.16.253.178"
 //#define IP_ADRESS "10.16.252.249"
