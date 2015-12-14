@@ -24,10 +24,10 @@ SettingsLoader::SettingsLoader()
 	_stringKeys["8"] = sf::Keyboard::Num8;
 	_stringKeys["9"] = sf::Keyboard::Num9;
 	_stringKeys["0"] = sf::Keyboard::Num0;
-	_stringKeys["ARROW_UP"] = sf::Keyboard::Up;
-	_stringKeys["ARROW_DOWN"] = sf::Keyboard::Down;
-	_stringKeys["ARROW_LEFT"] = sf::Keyboard::Left;
-	_stringKeys["ARROW_RIGHT"] = sf::Keyboard::Right;
+	_stringKeys["UP"] = sf::Keyboard::Up;
+	_stringKeys["DOWN"] = sf::Keyboard::Down;
+	_stringKeys["LEFT"] = sf::Keyboard::Left;
+	_stringKeys["RIGHT"] = sf::Keyboard::Right;
 	_stringKeys["SPACE"] = sf::Keyboard::Space;
 	_stringKeys["ESCAPE"] = sf::Keyboard::Escape;
 	_stringKeys["RETURN"] = sf::Keyboard::Return;
