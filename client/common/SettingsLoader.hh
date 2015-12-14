@@ -19,6 +19,7 @@
 class SettingsLoader : public IParser
 {
 public:
+	SettingsLoader();
   SettingsLoader(const std::string & filepath);
   ~SettingsLoader();
 
@@ -35,10 +36,10 @@ public:
   int         getMusicVolume() const;
   std::vector<std::string>	getKeys() const;
   std::vector<std::string>	getJoysticks() const;
-  std::vector<Bind>   getBinds() const;
+  std::vector<Bind*>   getBinds() const;
 
   Settings::Difficulty    getDefaultDifficulty() const;
-  std::vector<Bind>		createDefaultBinds() const;
+  std::vector<Bind*>		createDefaultBinds() const;
 
   void    saveSettings(Settings *) const;
 

@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Sat Dec 12 05:24:34 2015 Joris Bertomeu
+// Last update Sat Dec 12 12:35:07 2015 Joris Bertomeu
 //
 
 #ifndef _ROOM_HH_
@@ -22,7 +22,7 @@
 
 class	Room
 {
-  BotManager	*_botManager;
+  std::list<Bot*> _botList;
   std::string	_id;
   ClientManager	*_clientManager;
   Parameters	_parameter;
@@ -33,7 +33,7 @@ class	Room
   void		sendPlayerLeft(int playerID);
 public:
   Room();
-  Room(const std::string &id, Client *, BotManager*$);
+  Room(const std::string &id, Client *, std::list<Bot*>);
   ~Room();
   const std::string&	getId() const;
   void	addPlayer(Client *);
@@ -41,6 +41,7 @@ public:
   std::vector<Client*>&	getAllPlayers();
   void			setParameters(Parameters &);
   const Parameters&	getParameters() const;
+  void			sendFileToClient(Client *client, std::list<Bot*> list);
 };
 
 

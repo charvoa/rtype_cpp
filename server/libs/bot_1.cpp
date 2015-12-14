@@ -5,11 +5,11 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Sun Dec 13 10:11:09 2015 Louis Audibert
+// Last update Sat Dec 12 08:38:59 2015 Joris Bertomeu
 //
 
 #include <iostream>
-#include "Bot.hpp"
+#include <Bot.hpp>
 
 Bot::Bot(int id) : AEntity(id), _health(50), _x(275), _y(0), _direction(1)
 {

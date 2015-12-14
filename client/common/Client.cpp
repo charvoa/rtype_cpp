@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec 14 02:33:10 2015 Serge Heitzler
+// Last update Mon Dec 14 06:14:54 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -36,11 +36,11 @@ void	*readdisp(void *s)
   ProtocoleClient x;
   while (true)
     {
-      std::cout << "Thread" << std::endl;
+//      std::cout << "Thread" << std::endl;
       try
 	{
 	  a = Client::getNetwork()->read();
-	  std::cout << "Data TCP is " << a.data << std::endl;
+//	  std::cout << "Data TCP is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)

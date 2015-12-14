@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Sat Dec 12 05:11:51 2015 Joris Bertomeu
+// Last update Sat Dec 12 06:14:14 2015 Joris Bertomeu
 //
 
 
@@ -86,7 +86,7 @@ void	RoomManager::deleteRoom(const std::string &id)
     }
 }
 
-void		RoomManager::setBotManager(BotManager *bm)
+void		RoomManager::setBotManager(std::list<Bot*> bots)
 {
-  this->_botManager = bm;
+  this->_botManager = bots;
 }

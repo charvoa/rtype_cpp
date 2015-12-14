@@ -2,10 +2,10 @@
 #include "Ressources.hh"
 
 
-Slider::Slider()
+Slider::Slider(std::string const& title)
 {
+	_title = title;
 	_locked = true;
-	_sprite->setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
 }
 
 
@@ -43,6 +43,12 @@ void			Slider::render()
 
 }
 
+void			Slider::setLimit(float xmin, float xmax)
+{
+	_minX = xmin;
+	_maxX = xmax;
+}
+
 float			Slider::getPosX()
 {
 	return _sprite->getPosX();
@@ -61,13 +67,10 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 	{
 		if (_locked == false)
 		{
-			// TODO délimiter l'espace dans lequel on peut déplacer le bouton et calculer sa valeur en fonction de sa position dans cet espace : _value =...
-			this->getSprite().setPosition(pair.first, getPosY());
+			if (pair.first <= _maxX && pair.first >= _minX)
+				this->getSprite().setPosition(pair.first, getPosY());
 		}
-		this->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonHighlight);
 	}
-	else
-		this->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_buttonNormal);
 }
 
 bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
@@ -78,16 +81,17 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 	{
 		_locked = false;
 	}
-	else
+	else if (pair.first <= _maxX && pair.first >= _minX && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
 	{
-		// déplacer sur la ligne à l'endroit du clic
+		this->setValue((pair.first - _minX) * 3);
+		this->getSprite().setPosition(pair.first, getPosY());
 	}
 	return false;
 }
 
 void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
+	this->setValue((pair.first - _minX) / 7);
+	std::cout << "VOLUME SET : " << _value << std::endl;
 	_locked = true;
-	(void)pair;
-	// set value en fonction de la position
 }
