@@ -72,7 +72,7 @@ Player *Game::getPlayerByClient(Client *client)
        ++it)
     {
       Player *ptmp = reinterpret_cast<Player*>(*it);
-      if (ptmp->getClient().getUDPSocket()->getFd() == client->getSocket()->getFd())
+      if (ptmp->getClient().getUDPSocket()->isEqualTo(client->getSocket()))
 	return (ptmp);
     }
   throw std::logic_error("Cannot find this player by client");
@@ -87,6 +87,7 @@ void Game::handleHandshakeUDP(void *data, Client *client)
     {
       if (dynamic_cast<Player*>((*it))->getClient().getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
+	  printf("Entre dans le if dans HandShake UDP\n");
 	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
 	}
     }
