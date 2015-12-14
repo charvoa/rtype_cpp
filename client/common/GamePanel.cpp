@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 08:10:46 2015 Serge Heitzler
+// Last update Mon Dec 14 18:22:27 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -131,7 +131,7 @@ planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
   _backgrounds.push_back(*hud);
 
 
-  
+
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -174,7 +174,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
     }
 
   /* USER INTERFACE HUD */
-  
+
   _mainPlayer = new MainPlayer(currentPlayer);
   i = 1;
   int j = 1;
@@ -374,7 +374,7 @@ void		GamePanel::render()
     {
       window->draw((*it).second->getSprite());
     }
-
+  _inputManager.keyPressedInGame();
 }
 
 void		GamePanel::drawOtherPlayer()
