@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 07:25:12 2015 Serge Heitzler
+// Last update Mon Dec 14 08:23:30 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -140,7 +140,7 @@ void		StartPanel::update()
       Sound->playSound("door");
     }
 
-  _backgrounds.at(1).rotate(0.001);
+  _backgrounds.at(1).rotate(0.002);
   if (i % 10000 < 5000)
     _backgrounds.at(0).move(-0.01,-0.01);
   else
