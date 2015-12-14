@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 04:48:08 2015 Serge Heitzler
+// Last update Mon Dec 14 06:43:55 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -287,6 +287,7 @@ void		RoomPanel::createPlayers()
     roomID->setStyle(1);
     roomID->setOrigin(roomID->getText().getGlobalBounds().width / 2, roomID->getText().getGlobalBounds().height / 2);
     roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.03 * window->getSize()._y));
+    roomID->setFont(*((RenderWindow::getInstance())->_ressources->_fontSecond));
     roomID->setColor(Color::WHITE);
     _labels.push_back(*roomID);
     _nbPlayers = 0;
