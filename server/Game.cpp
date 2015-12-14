@@ -93,7 +93,6 @@ void Game::handleHandshakeUDP(void *data, Client *client)
     }
 }
 
-
 std::pair<int, int> Game::getDirections(const std::string &dir)
 {
   std::pair<int, int> final;
@@ -122,9 +121,9 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
 
 bool Game::checkMove(int x, int y)
 {
-  if (x < 0 || x > 255)
+  if (x < 0 || x > 110)
     return false;
-  else if (y < 0 || y > 255)
+  else if (y < 0 || y > 50)
     return false;
   return true;
 }
@@ -179,14 +178,17 @@ void Game::updateLife(Player *p, bool reset)
 
 void Game::handleShoot(void *data, Client *client)
 {
-  (void)data;
-  (void)client;
-  // char *weaponType =
-  //   ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+  char *weaponType =
+    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
 
-  //  Player *p = this->getPlayerByClient(client);
-  //_eM.createEntity();
+  Player *p = this->getPlayerByClient(client);
+  if (weaponType == "E_RIFFLE")
+    _eM.createEntity(E_RIFLE, p);
+  else if (weaponType == "E_MISSILE")
+    _eM.createEntity(E_MISSILE, p);
+  else if (weaponType == "E_LASER")
+    _eM.createEntity(E_LASER, p);
 }
 
 void Game::handleCommand(void *data, Client *client)
@@ -248,7 +250,7 @@ void Game::initPlayersPosition()
   int	x = 10;
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::vector<AEntity *>::iterator it;
-  Random	rand(0,255);
+  Random	rand(0, 50);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
