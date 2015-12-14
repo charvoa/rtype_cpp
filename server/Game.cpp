@@ -65,34 +65,106 @@ Client *Game::getClientBySocket(ISocket *socket) const
 
 Player *Game::getPlayerByClient(Client *client)
 {
+  std::cout << "getEntity>>" << std::endl;
   std::vector<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
 
+  std::cout << "for>>" << std::endl;
   for (std::vector<AEntity*>::iterator it = _players.begin();
        it != _players.end();
        ++it)
     {
-      if ((reinterpret_cast<Player*>(*it))->getClient().getUDPSocket()->getFd()
-	   == client->getUDPSocket()->getFd())
+      std::cout << "<<during>>" << std::endl;
+
+      Player *ptmp = reinterpret_cast<Player*>(*it);
+      if (ptmp != nullptr)
 	{
-	  return reinterpret_cast<Player*>(*it);
+	  std::cout << "PLAYER EXISTS " << std::endl;
+	  Client *ctmp = &(ptmp->getClient());
+	  if (ctmp != nullptr)
+          {
+	    std::cout << "CLIENT EXISTS" << std::endl;
+	    ISocket *stmp = ctmp->getUDPSocket();
+	    if (stmp != nullptr)
+	      {
+		std::cout << "Socket exists" << std::endl;
+		int fdtmp = stmp->getFd();
+		std::cout << "This is the fd I want to write on : " << fdtmp << std::endl;
+		Client *c2 = client;
+		if (client != nullptr)
+		  {
+		    std::cout << "My client in param is not null" << std::endl;
+		    ISocket *s2 = client->getUDPSocket();
+		    if (s2 != nullptr)
+		      {
+			std::cout << "The socket in the client I got is not null"
+				  << std::endl;
+			//			int fd2 = s2->getFd();
+
+			//   std::cout << "This is the FD I should write on : "
+			//<< fd2 << std::endl;
+
+			return ptmp;
+		      }
+		  }
+	      } else {
+	      std::cout << "SOCKET DOES NOT EXIST" << std::endl;
+	    }
+	  }
+	  // if (ctmp->getUDPSocket()->getFd() == client->getUDPSocket()->getFd())
+	  //   return ptmp;
 	}
+
+      // if ((reinterpret_cast<Player*>(*it))->getClient().getUDPSocket()->getFd()
+      // 	   == client->getUDPSocket()->getFd())
+      // 	{
+      // 	  std::cout << "if>>" << std::endl;
+      // 	  return reinterpret_cast<Player*>(*it);
+      // 	}
     }
+  std::cout << "<<endFor" << std::endl;
   throw std::logic_error("Cannot find this player by client");
 }
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
   std::cout << "Game :: handleHandshakeUDP " << std::endl;
+
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
       if (dynamic_cast<Player*>((*it))->getClient().getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
-	  std::cout << "JE RENTRE" << std::endl;
 	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
-	  std::cout << dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->getFd() << std::endl;
 	}
     }
+}
+
+
+std::pair<int, int> Game::getDirections(const std::string &dir)
+{
+
+  std::pair<int, int> final;
+
+  if (dir == "1")
+    final = std::make_pair(0, -1);
+  else if (dir == "2")
+    final = std::make_pair(1, -1);
+  else if (dir == "3")
+    final = std::make_pair(1, 0);
+  else if (dir == "4")
+    final = std::make_pair(1, 1);
+  else if (dir == "5")
+    final = std::make_pair(0, 1);
+  else if (dir == "6")
+    final = std::make_pair(-1, 1);
+  else if (dir == "7")
+    final = std::make_pair(-1, 0);
+  else if (dir == "8")
+    final = std::make_pair(-1, -1);
+  else
+    final = std::make_pair(0, 0);
+
+  return final;
 }
 
 void Game::handleMove(void *data, Client *client)
@@ -103,11 +175,22 @@ void Game::handleMove(void *data, Client *client)
 
     std::stringstream ss;
 
+    std::cout << "APRES PLAYERBYCLIENT" << std::endl;
+
     ComponentPosition *pPlayer =
       reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 				  ->getSystemByComponent(C_POSITION)
 				  ->getComponent());
-    player->update(1, 1);
+
+    if (pPlayer == NULL)
+      std::cout << "GROSSE BITE TOUTE DURE" << std::endl;
+
+    auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+
+    std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
+    std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
+    player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+    std::cout << "AFTER UPDATE" << std::endl;
 
     ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_DISPLAY, CRC::calcCRC(ss.str().c_str()), 0, ss.str().c_str());
     client->getSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
@@ -136,22 +219,23 @@ void Game::updateLife(Player *p, bool reset)
 
 void Game::handleShoot(void *data, Client *client)
 {
-  char *weaponType =
-    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+  (void)data;
+  (void)client;
+  // char *weaponType =
+  //   ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
 
-  Player *p = this->getPlayerByClient(client);
+  //  Player *p = this->getPlayerByClient(client);
   //_eM.createEntity();
 }
 
 void Game::handleCommand(void *data, Client *client)
 {
-  std::cout << "Game :: handleCommand" << std::endl;
-  std::cout << "ID Request: |" << ((ANetwork::t_frame*)data)->idRequest
-	    << "|" << std::endl;
 
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
+
+  std::cout << "CommandType : " << commandType << std::endl;
 
   try {
     Func fp = _funcMap[commandType];
@@ -168,16 +252,12 @@ void *readThread(void *sData)
 
   ANetwork *n = s->network;
   Game *me = s->game;
-
-  std::cout << "Game :: readThread" << std::endl;
   void *data;
 
   while (1)
     {
-      std::cout << "Je suis bloqué avant le select .." << std::endl;
-      Client *client = new Client(n->select());
-      std::cout << "APres le select()" << std::endl;
-      if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
+       Client *client = new Client(n->select());
+       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
 	{
 	  n->unlistenSocket(client->getSocket());
 	  continue;
@@ -221,20 +301,23 @@ void Game::sendGameData()
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::vector<AEntity *> _entities = _eM.getEntities();
 
-  for (std::vector<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
+   for (std::vector<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
     {
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-	  std::string sendData = (*it2)->getName() + ";" + std::to_string(pPlayer->getX()) + ";" + std::to_string(pPlayer->getY());
-	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(sendData), 0, sendData);
+
+	  std::stringstream ss;
+	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
+
+	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+
 	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))
 	    std::cout << "NULL UDP" << std::endl;
-	    else
-	      {
-		std::cout << "JE SEND" << std::endl;
-		reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
-	      }
+	  else
+	    {
+	      reinterpret_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameToSend), sizeof(ANetwork::t_frame));
+	    }
 	}
     }
 }
@@ -254,15 +337,26 @@ bool Game::run()
 
   t1->run();
   initPlayersPosition();
+
+  auto start = std::chrono::system_clock::now();
+
   while (true)
     {
-      if (timer.elapsed().count() >= (speed/_stage))
+      if (timer.elapsed().count()>= (speed/_stage))
 	{
 	  timer.reset();
 	  addMonster();
 	}
-      if (timer.elapsed().count() % 32 == 0)
-	sendGameData();
+      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+	(std::chrono::system_clock::now() - start);
+
+      auto start_time = std::chrono::steady_clock::now();
+      auto end_time = start_time + frame_duration(4);
+      if (duration.count() % 16 == 0)
+      	{
+      	  std::this_thread::sleep_until(end_time);
+      	  sendGameData();
+      	}
       //      std::cout << "nb of enemy = " << nbEnemy << std::endl;
       // nbEnemy = 5 * stage * nbEnemy;
     }

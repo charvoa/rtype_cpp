@@ -30,9 +30,11 @@
 # include <CRC.hpp>
 # include <sstream>
 # include <map>
+# include <thread>
 
 class Game {
 
+typedef std::chrono::duration<int, std::ratio<1, 60>> frame_duration;
   typedef void(Game::*Func)(void*, Client*);
   std::map<E_Command, Func> _funcMap;
 
@@ -77,7 +79,7 @@ public:
   void handleCommand(void*, Client*);
   void handleShoot(void*, Client*);
 
-
+  std::pair<int, int> getDirections(const std::string &);
   void updateScore(Player*, Game::scoreDef);
   void updateLife(Player*, bool);
   int  getNumberEnemyMax();
