@@ -91,7 +91,7 @@ class		Socket : public ISocket
 	  this->_init = true;
   };
 
-  bool		isEqualTo(Socket *s) {
+virtual  bool		isEqualTo(ISocket *s) {
    if (!memcmp(&(this->_me.sin_addr), &(dynamic_cast<Socket*>(s)->_me.sin_addr), sizeof(this->_me.sin_addr)) &&
 	this->_me.sin_port == dynamic_cast<Socket*>(s)->_me.sin_port)
       return (true);

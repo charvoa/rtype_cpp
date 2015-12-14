@@ -19,6 +19,7 @@
 class SettingsLoader : public IParser
 {
 public:
+	SettingsLoader();
   SettingsLoader(const std::string & filepath);
   ~SettingsLoader();
 
