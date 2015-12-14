@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:21 2015 Louis Audibert
-// Last update Mon Dec 14 07:54:32 2015 Louis Audibert
+// Last update Mon Dec 14 09:15:32 2015 Louis Audibert
 //
 
 #include <EntityFactory.hh>
@@ -23,11 +23,13 @@ EntityFactory::~EntityFactory()
 AEntity	*EntityFactory::createEntity(int &id)
 {
   std::cout << "new AEntity created !" << std::endl;
-  id += 1;
+  if (id == 4)
+    id = 11;
+  id++;
   return (new AEntity(id));
 }
 
-AEntity *EntityFactory::createEntity(const std::string &filename, int id)
+AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
 {
   DynLibLoader	loader;
   AEntity	*(*my_entity)(int);
@@ -38,5 +40,33 @@ AEntity *EntityFactory::createEntity(const std::string &filename, int id)
   } catch (const std::exception &e) {
     throw (std::logic_error(e.what()));
   }
+  if (id == 4)
+    id = 11;
+  id++;
   return (my_entity(id));
+}
+
+AEntity *EntityFactory::createEntity(int &id, E_EntityType type)
+{
+  AEntity *newEntity;
+
+  if (id == 4)
+    id = 11;
+  id++;
+  switch (type)
+    {
+    case E_RIFLE:
+      newEntity = new Riffle(id);
+      break;
+    case E_MISSILE:
+      newEntity = new Missile(id);
+      break;
+    case E_LASER:
+      newEntity = new Laser(id);
+      break;
+    default:
+      newEntity = new AEntity(id);
+      break;
+    }
+  return (newEntity);
 }
