@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Mon Dec 14 15:17:40 2015 Nicolas Girardot
+// Last update Mon Dec 14 08:11:29 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -15,7 +15,7 @@ MainPlayer::MainPlayer(unsigned int id)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-  _username = "player1";
+  _username = "player" + std::to_string(id);
   _spaceShip = new Sprite();
   _nbrLife = 3;
   _nbrRocket = 0;
@@ -147,8 +147,7 @@ void		MainPlayer::render()
 {
     unsigned int		i = 0;
 
-    std::cout << "LIfe is " << _nbrLife << std::endl;
-  (RenderWindow::getInstance())->draw(_spaceShip->getSprite());
+    (RenderWindow::getInstance())->draw(_spaceShip->getSprite());
   while (i < this->_hearts.size() && this->_hearts.size() > 0)
     {
       (RenderWindow::getInstance())->draw(this->_hearts.at(i)->getSprite());

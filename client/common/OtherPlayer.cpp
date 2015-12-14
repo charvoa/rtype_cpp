@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Sun Dec 13 15:49:53 2015 Nicolas Girardot
+// Last update Mon Dec 14 07:03:19 2015 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>
@@ -14,6 +14,7 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
+  _username = "player" + std::to_string(id);
   _nbrLife = 3;
 
   Sprite	*heart1 = new Sprite();
@@ -25,7 +26,6 @@ OtherPlayer::OtherPlayer(unsigned int pos, unsigned int id)
   _score = new Text();
   _spaceShip = new Sprite();
   _greyBack = new Sprite();
-
 
   switch (id)
     {
