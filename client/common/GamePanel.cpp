@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 12:09:20 2015 Nicolas Girardot
+// Last update Mon Dec 14 14:28:36 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -315,6 +315,7 @@ void		GamePanel::setLife(const std::string &name, int life)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
+  std::cout << "Player Name is " << static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() << std::endl;
   if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() == name)
     {
       static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->setNbLife(life);
