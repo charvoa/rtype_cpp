@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Mon Dec 14 08:05:19 2015 Serge Heitzler
+// Last update Mon Dec 14 09:22:36 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -53,6 +53,7 @@ public:
   Texture		*_hud;
   Texture		*_header;
   Texture		*_heart;
+  Texture		*_riffle;
   Texture		*_riffleHUD;
   Texture		*_rocket;
   Texture		*_rocketBlack;
