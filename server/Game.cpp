@@ -137,8 +137,6 @@ void Game::handleMove(void *data, Client *client)
 
     std::stringstream ss;
 
-    std::cout << "APRES PLAYERBYCLIENT" << std::endl;
-
     ComponentPosition *pPlayer =
       reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 				  ->getSystemByComponent(C_POSITION)
@@ -146,8 +144,8 @@ void Game::handleMove(void *data, Client *client)
 
     auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-    std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
-    std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
+    // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
+    // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
 
@@ -211,7 +209,7 @@ void Game::handleShoot(void *data, Client *client)
   else if (weaponType == "E_LASER")
     type = E_LASER;
 
-  std::cout << "Type of weapon : |" << type << "|" << std::endl;
+  //std::cout << "Type of weapon : |" << type << "|" << std::endl;
   if (type != E_INVALID)
     _eM.createEntity(type, p);
 
@@ -235,7 +233,7 @@ void Game::handleCommand(void *data, Client *client)
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
 
-  std::cout << "CommandType : " << commandType << std::endl;
+  //std::cout << "CommandType : " << commandType << std::endl;
 
   try {
     Func fp = _funcMap[commandType];
@@ -305,13 +303,13 @@ void Game::sendGameData()
     {
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
-	  std::cout << "SS in data : " << (*it2)->getName()  << std::endl;
+	  //std::cout << "SS in data : " << (*it2)->getName()  << std::endl;
 
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
-	  std::cout << "SS in data : " << ss.str().c_str() << std::endl;
+	  //std::cout << "SS in data : " << ss.str().c_str() << std::endl;
 
 
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
