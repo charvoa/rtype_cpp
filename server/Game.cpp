@@ -89,6 +89,7 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 	{
 	  printf("Entre dans le if dans HandShake UDP\n");
 	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
+	  printf("Apres le setUDPSocket\n");
 	}
     }
 }

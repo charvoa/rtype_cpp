@@ -11,6 +11,77 @@
 #include <iostream>
 #include "SettingsLoader.hh"
 
+SettingsLoader::SettingsLoader()
+{
+	_stringKeys["0"] = sf::Keyboard::Num0;
+	_stringKeys["1"] = sf::Keyboard::Num1;
+	_stringKeys["2"] = sf::Keyboard::Num2;
+	_stringKeys["3"] = sf::Keyboard::Num3;
+	_stringKeys["4"] = sf::Keyboard::Num4;
+	_stringKeys["5"] = sf::Keyboard::Num5;
+	_stringKeys["6"] = sf::Keyboard::Num6;
+	_stringKeys["7"] = sf::Keyboard::Num7;
+	_stringKeys["8"] = sf::Keyboard::Num8;
+	_stringKeys["9"] = sf::Keyboard::Num9;
+	_stringKeys["0"] = sf::Keyboard::Num0;
+	_stringKeys["ARROW_UP"] = sf::Keyboard::Up;
+	_stringKeys["ARROW_DOWN"] = sf::Keyboard::Down;
+	_stringKeys["ARROW_LEFT"] = sf::Keyboard::Left;
+	_stringKeys["ARROW_RIGHT"] = sf::Keyboard::Right;
+	_stringKeys["SPACE"] = sf::Keyboard::Space;
+	_stringKeys["ESCAPE"] = sf::Keyboard::Escape;
+	_stringKeys["RETURN"] = sf::Keyboard::Return;
+	_stringKeys["A"] = sf::Keyboard::A;
+	_stringKeys["Z"] = sf::Keyboard::Z;
+	_stringKeys["E"] = sf::Keyboard::E;
+	_stringKeys["R"] = sf::Keyboard::R;
+	_stringKeys["T"] = sf::Keyboard::T;
+	_stringKeys["Y"] = sf::Keyboard::Y;
+	_stringKeys["U"] = sf::Keyboard::U;
+	_stringKeys["I"] = sf::Keyboard::I;
+	_stringKeys["O"] = sf::Keyboard::O;
+	_stringKeys["P"] = sf::Keyboard::P;
+	_stringKeys["Q"] = sf::Keyboard::Q;
+	_stringKeys["S"] = sf::Keyboard::S;
+	_stringKeys["D"] = sf::Keyboard::D;
+	_stringKeys["F"] = sf::Keyboard::F;
+	_stringKeys["G"] = sf::Keyboard::G;
+	_stringKeys["H"] = sf::Keyboard::H;
+	_stringKeys["J"] = sf::Keyboard::J;
+	_stringKeys["K"] = sf::Keyboard::K;
+	_stringKeys["L"] = sf::Keyboard::L;
+	_stringKeys["M"] = sf::Keyboard::M;
+	_stringKeys["W"] = sf::Keyboard::W;
+	_stringKeys["X"] = sf::Keyboard::X;
+	_stringKeys["C"] = sf::Keyboard::C;
+	_stringKeys["V"] = sf::Keyboard::V;
+	_stringKeys["B"] = sf::Keyboard::B;
+	_stringKeys["N"] = sf::Keyboard::N;
+	_stringKeys["NUMPAD 0"] = sf::Keyboard::Numpad0;
+	_stringKeys["NUMPAD 1"] = sf::Keyboard::Numpad1;
+	_stringKeys["NUMPAD 2"] = sf::Keyboard::Numpad2;
+	_stringKeys["NUMPAD 3"] = sf::Keyboard::Numpad3;
+	_stringKeys["NUMPAD 4"] = sf::Keyboard::Numpad4;
+	_stringKeys["NUMPAD 5"] = sf::Keyboard::Numpad5;
+	_stringKeys["NUMPAD 6"] = sf::Keyboard::Numpad6;
+	_stringKeys["NUMPAD 7"] = sf::Keyboard::Numpad7;
+	_stringKeys["NUMPAD 8"] = sf::Keyboard::Numpad8;
+	_stringKeys["NUMPAD 9"] = sf::Keyboard::Numpad9;
+
+	_stringAxis["UP"] = JoystickEvent(sf::Joystick::X);
+	_stringAxis["DOWN"] = JoystickEvent(sf::Joystick::X);
+	_stringAxis["LEFT"] = JoystickEvent(sf::Joystick::Y);
+	_stringAxis["RIGHT"] = JoystickEvent(sf::Joystick::Y);
+	_stringAxis["X"] = JoystickEvent(0);
+	_stringAxis["Y"] = JoystickEvent(2);
+	_stringAxis["A"] = JoystickEvent(1);
+	_stringAxis["B"] = JoystickEvent(3);
+	_stringAxis["L1"] = JoystickEvent(sf::Joystick::Z);
+	_stringAxis["L2"] = JoystickEvent(sf::Joystick::Z);
+	_stringAxis["R1"] = JoystickEvent(sf::Joystick::R);
+	_stringAxis["R2"] = JoystickEvent(sf::Joystick::R);
+}
+
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
 	_ifs = new std::ifstream(_filepath.c_str());

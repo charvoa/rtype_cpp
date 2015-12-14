@@ -8,6 +8,7 @@
 // Last update Thu Dec  3 14:01:46 2015 Serge Heitzler
 //
 
+#include "SettingsLoader.hh"
 #include "RenderWindow.hh"
 #include "PanelFactory.hh"
 #include "SettingsPanel.hh"
@@ -85,14 +86,16 @@ void	SettingsPanel::setUserInterface()
 	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), std::string("effects"), (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
 	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), std::string("music"), (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
 
-/*	std::vector<Bind>::const_iterator it = _tmp->getBinds().begin();
-	std::vector<Bind>::const_iterator end = _tmp->getBinds().end();*/
+	std::vector<Bind>::const_iterator it = _tmp->getBinds().begin();
+	std::vector<Bind>::const_iterator end = _tmp->getBinds().end();
+	SettingsLoader *loader = new SettingsLoader();
 
-/*	while (it != end)
+	while (it != end)
 	{
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), "getString");
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), loader->keyToString(it->getKey()));
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25 + 300, window->getSize()._y * 0.7), loader->joystickToString(it->getJoystick()));
 		++it;
-	}*/
+	}
 
 
 	Text		       	*title = new Text();
