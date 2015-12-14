@@ -8,6 +8,7 @@
 // Last update Thu Dec  3 17:41:52 2015 Nicolas Girardot
 //
 
+#include <iostream>
 #include "Settings.hh"
 #include "SettingsLoader.hh"
 
@@ -18,11 +19,11 @@ Settings::Settings(std::string const& filepath)
     this->update(*loader.parseSettings());
 }
 
-Settings::Settings(Volume vol, std::vector<Bind> binds, Settings::Difficulty difficulty)
+Settings::Settings(Volume vol, std::vector<Bind*> binds, Settings::Difficulty difficulty)
 {
     _volume = vol;
     _binds = binds;
-    _defaultDifficulty = difficulty;
+	_defaultDifficulty = difficulty;
 }
 
 Settings::~Settings(){}
@@ -44,9 +45,9 @@ void	Settings::setVolume(Volume const& vol)
 	_volume = vol;
 }
 
-std::vector<Bind>   Settings::getBinds() const
+std::vector<Bind*>   Settings::getBinds() const
 {
-    return _binds;
+	return _binds;
 }
 
 Settings::Difficulty    Settings::getDefaultDifficulty() const
@@ -59,14 +60,27 @@ Settings::Difficulty    Settings::getCurrentDifficulty() const
     return _difficulty;
 }
 
-void    Settings::setBind(Bind &bind)
+void	Settings::dumpBinds() const
 {
-    std::vector<Bind>::iterator it = _binds.begin();
-    std::vector<Bind>::iterator end = _binds.end();
+	std::vector<Bind*>::const_iterator it = _binds.begin();
+	std::vector<Bind*>::const_iterator end = _binds.end();
+	SettingsLoader *loader = new SettingsLoader();
+
+	while (it != end)
+	{
+		std::cout << loader->bindTypeToString((*it)->getType()) << " : " << loader->keyToString((*it)->getKey()) << ", " << loader->joystickToString((*it)->getJoystick()) << std::endl;
+		++it;
+	}
+}
+
+void    Settings::setBind(Bind *bind)
+{
+    std::vector<Bind*>::iterator it = _binds.begin();
+    std::vector<Bind*>::iterator end = _binds.end();
 
     while (it != end)
     {
-      if (bind.getType() == (*it).getType())
+      if (bind->getType() == (*it)->getType())
         {
 	  *it = bind;
 	  return;

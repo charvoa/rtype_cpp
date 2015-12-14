@@ -266,7 +266,6 @@ Volume      SettingsLoader::getVolume() const
     int     music = 0;
     Volume ret(50, 50, 50);
 
-	std::cout << "GET VOLUME !!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 
     if (_fileExists == false)
         return (ret);
@@ -276,7 +275,6 @@ Volume      SettingsLoader::getVolume() const
     ret.setEffects(effects);
     ret.setGlobal(global);
     ret.setMusic(music);
-	std::cout << "global : " << global << ", music : " << music << ", effects : " << effects << std::endl;
     return (ret);
 }
 
@@ -358,18 +356,18 @@ std::vector<std::string>	SettingsLoader::getJoysticks() const
   return (ret);
 }
 
-std::vector<Bind>	SettingsLoader::createDefaultBinds() const
+std::vector<Bind*>	SettingsLoader::createDefaultBinds() const
 {
-	Bind    moveUp(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
-    Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
-    Bind    moveLeft(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
-    Bind    moveRight(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, JoystickEvent(sf::Joystick::Y));
-    Bind    shoot(Bind::ATTACK_BIND, sf::Keyboard::Space, JoystickEvent(sf::Joystick::R));
-    Bind    weapon1(Bind::WEAPON_1, sf::Keyboard::Num1, JoystickEvent(1));
-    Bind    weapon2(Bind::WEAPON_2, sf::Keyboard::Num2, JoystickEvent(2));
-    Bind    weapon3(Bind::WEAPON_3, sf::Keyboard::Num3, JoystickEvent(3));
-    Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
-    std::vector<Bind>   defaultBinds;
+	Bind    *moveUp = new Bind(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
+    Bind    *moveDown = new Bind(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
+    Bind    *moveLeft = new Bind(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
+    Bind    *moveRight = new Bind(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, JoystickEvent(sf::Joystick::Y));
+    Bind    *shoot = new Bind(Bind::ATTACK_BIND, sf::Keyboard::Space, JoystickEvent(sf::Joystick::R));
+    Bind    *weapon1 = new Bind(Bind::WEAPON_1, sf::Keyboard::Num1, JoystickEvent(1));
+    Bind    *weapon2 = new Bind(Bind::WEAPON_2, sf::Keyboard::Num2, JoystickEvent(2));
+    Bind    *weapon3 = new Bind(Bind::WEAPON_3, sf::Keyboard::Num3, JoystickEvent(3));
+    Bind    *leaveGame = new Bind(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
+    std::vector<Bind*>   defaultBinds;
 
     defaultBinds.push_back(moveUp);
     defaultBinds.push_back(moveDown);
@@ -383,19 +381,18 @@ std::vector<Bind>	SettingsLoader::createDefaultBinds() const
     return (defaultBinds);
 }
 
-std::vector<Bind>   SettingsLoader::getBinds() const
+std::vector<Bind*>   SettingsLoader::getBinds() const
 {
-	std::cout << "get Binds" << std::endl;
-	Bind    moveUp(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
-	Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
-	Bind    moveLeft(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
-	Bind    moveRight(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, JoystickEvent(sf::Joystick::Y));
-	Bind    shoot(Bind::ATTACK_BIND, sf::Keyboard::Space, JoystickEvent(sf::Joystick::R));
-	Bind    weapon1(Bind::WEAPON_1, sf::Keyboard::Num1, JoystickEvent(1));
-	Bind    weapon2(Bind::WEAPON_2, sf::Keyboard::Num2, JoystickEvent(2));
-	Bind    weapon3(Bind::WEAPON_3, sf::Keyboard::Num3, JoystickEvent(3));
-	Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
-	std::vector<Bind>   binds;
+	Bind    *moveUp= new Bind(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
+	Bind    *moveDown= new Bind(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
+	Bind    *moveLeft = new Bind(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
+	Bind    *moveRight = new Bind(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, JoystickEvent(sf::Joystick::Y));
+	Bind    *shoot = new Bind(Bind::ATTACK_BIND, sf::Keyboard::Space, JoystickEvent(sf::Joystick::R));
+	Bind    *weapon1 = new Bind(Bind::WEAPON_1, sf::Keyboard::Num1, JoystickEvent(1));
+	Bind    *weapon2 = new Bind(Bind::WEAPON_2, sf::Keyboard::Num2, JoystickEvent(2));
+	Bind    *weapon3 = new Bind(Bind::WEAPON_3, sf::Keyboard::Num3, JoystickEvent(3));
+	Bind    *leaveGame = new Bind(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
+	std::vector<Bind*>   binds;
 
 	binds.push_back(moveUp);
 	binds.push_back(moveDown);
@@ -411,14 +408,14 @@ std::vector<Bind>   SettingsLoader::getBinds() const
     std::vector<std::string>keys = getKeys();
     std::vector<std::string>joysticks = getJoysticks();
 	std::vector<std::string>::const_iterator itk = keys.begin();
-    std::vector<Bind>::iterator itb = binds.begin();
+    std::vector<Bind*>::iterator itb = binds.begin();
     std::vector<std::string>::const_iterator endk = keys.end();
     std::vector<std::string>::const_iterator itj = joysticks.begin();
 
     while (itk != endk)
       {
-		itb->setKey(stringToKey(*itk));
-		itb->setJoystick(stringToJoystick(*itj));
+		(*itb)->setKey(stringToKey(*itk));
+		(*itb)->setJoystick(stringToJoystick(*itj));
 		itk++;
 		itj++;
 		itb++;
@@ -535,7 +532,21 @@ std::string	SettingsLoader::settingsToString(Settings const& settings) const
 Settings	*SettingsLoader::parseSettings() const
 {
 	Volume vol = getVolume();
-  Settings	*ret = new Settings(vol, getBinds(), getDefaultDifficulty());
+	std::vector<Bind*> binds = getBinds();
+  Settings	*ret = new Settings(vol, binds, getDefaultDifficulty());
+/*  std::cout << "DANS SETTINGS LOADER::PARSE SETTINGS" << std::endl;
+  std::cout << "dump de binds : " << std::endl;
+  std::vector<Bind*>::const_iterator it = binds.begin();
+  std::vector<Bind*>::const_iterator end = binds.end();
 
+  while (it != end)
+  {
+	  std::cout << (*it)->getType() << " : " << keyToString((*it)->getKey()) << ", " << joystickToString((*it)->getJoystick()) << std::endl;
+	  ++it;
+  }
+  std::cout << std::endl;
+  std::cout << "dump de ret->getBinds : " << std::endl;
+  ret->dumpBinds();
+*/
   return (ret);
 }

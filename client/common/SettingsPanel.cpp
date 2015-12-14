@@ -74,29 +74,45 @@ void	SettingsPanel::setUserInterface()
 
 	// Button
 
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.8), std::string("SAVE"));
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.8), std::string("DEFAULT"));
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.8), std::string("BACK"));
+	std::string name = "SAVE";
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.8), name);
+	name = "DEFAULT";
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.8), name);
+	name = "BACK";
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.8), name);
 
 	_functions.push_back((APanel::funcs)&SettingsPanel::save);
 	_functions.push_back((APanel::funcs)&SettingsPanel::defaultSettings);
 	_functions.push_back((APanel::funcs)&SettingsPanel::back);
 
-	_global = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25), std::string("global"), (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
-	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), std::string("effects"), (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
-	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), std::string("music"), (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	name = "global";
+	_global = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	name = "effects";
+	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	name = "music";
+	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
 
-	std::vector<Bind>::const_iterator it = _tmp->getBinds().begin();
-	std::vector<Bind>::const_iterator end = _tmp->getBinds().end();
+	std::vector<Bind*>::const_iterator it = _tmp->getBinds().begin();
+	std::vector<Bind*>::const_iterator end = _tmp->getBinds().end();
 	SettingsLoader *loader = new SettingsLoader();
+	
+	std::cout << "dans SETTINGS PANEL : " << std::endl;
+	std::cout << "dumpBinds : " << std::endl;
+	_tmp->dumpBinds();
 
 	while (it != end)
 	{
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), loader->keyToString(it->getKey()));
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25 + 300, window->getSize()._y * 0.7), loader->joystickToString(it->getJoystick()));
+		std::cout << loader->bindTypeToString((*it)->getType()) << " : " << loader->keyToString((*it)->getKey()) << ", " << loader->joystickToString((*it)->getJoystick()) << std::endl;
 		++it;
 	}
 
+	while (it != end)
+	{
+		std::cout << "CREATE KEY BUTTON : " << loader->keyToString((*it)->getKey()) << std::endl;
+//		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), loader->keyToString(it->getKey()));
+//		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.25 + 300, window->getSize()._y * 0.7), loader->joystickToString(it->getJoystick()));
+		++it;
+	}
 
 	Text		       	*title = new Text();
 
@@ -135,13 +151,13 @@ void    SettingsPanel::setMusicVolume(int music)
 
 void    SettingsPanel::setBind(Bind bind)
 {
-    _tmp->setBind(bind);
+    _tmp->setBind(&bind);
 }
 
 void    SettingsPanel::defaultSettings()
 {
 	RenderWindow	*window = RenderWindow::getInstance();
-	std::cout << "RESET SETTINGS TO DEFAULT" << std::endl;
+
 	_global->getSprite().setPosition(window->getSize()._x * 0.05 + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25);
 	_effects->getSprite().setPosition(window->getSize()._x * 0.05 + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35);
 	_music->getSprite().setPosition(window->getSize()._x * 0.05 + _tmp->getVolume().getMusic() * 7, window->getSize()._y * 0.45);
