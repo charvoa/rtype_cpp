@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 08:23:30 2015 Serge Heitzler
+// Last update Tue Dec 15 14:34:25 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -107,6 +107,7 @@ void        StartPanel::goToRoom(std::vector<std::string> &vector, int from)
 void        StartPanel::joinRoom()
 {
   RenderWindow *window = RenderWindow::getInstance();
+
 
   window->getPanels().push(static_cast<JoinPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::JOIN_PANEL)));
   window->getPanels().top()->setUserInterface();

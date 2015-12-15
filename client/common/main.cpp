@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  1 11:41:24 2015 Nicolas Girardot
-// Last update Tue Dec 15 11:19:24 2015 Nicolas Girardot
+// Last update Tue Dec 15 14:44:13 2015 Nicolas Girardot
 //
 
 #include <SFML/Audio.hpp>
@@ -14,15 +14,15 @@
 #else
 #include <X11/Xlib.h>
 #endif
-int main(int ac, char **av)
+int main()
 {
-  if (ac == 1)
-    return 0;
+  //  if (ac == 1)
+  // return 0;
 #ifdef _WIN32
 #else
   XInitThreads();
 #endif
-  Client *cli = new Client(std::atoi(av[1]));
+  Client *cli = new Client(3);
   cli->Start();
 }
 
