@@ -52,20 +52,9 @@ int	EntityManager::createEntitiesFromFolder( std::string &filename, E_EntityType
   return (_id);
 }
 
-void	EntityManager::removeEntity(AEntity entity)
+void	EntityManager::removeEntity(AEntity *entity)
 {
-  // int	i = 0;
-  // this->_entities.remove(entity);
-  // for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
-  //   {
-  //     if (entity.getId() == (*it)->getId())
-  // 	{
-  // 	  _entities.(_entities.begin() + i);
-  // 	  std::cout << "Entity removed" << std::endl;
-  // 	  break;
-  // 	}
-  //     i++;
-  //   }
+  this->_entities.remove(entity);
 }
 
 void	EntityManager::removeEntityById(int id)

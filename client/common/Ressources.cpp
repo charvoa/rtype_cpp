@@ -15,6 +15,8 @@ Ressources::Ressources()
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();
   _buttonSelect = new Texture();
+  _keyButtonNormal = new Texture();
+  _keyButtonHighlight = new Texture();
   _slide = new Texture();
   _sliderNormal = new Texture();
 
@@ -23,8 +25,8 @@ Ressources::Ressources()
   //  _buttonSelect->loadFromFile("../common/misc/button_normal.png");
   _slide->loadFromFile("../common/misc/slider.png");
   _sliderNormal->loadFromFile("../common/misc/slideButton.png");
-  // _keyButtonNormal->loadFromFile();
-  // _keyButtonHighlight->loadFromFile();
+  _keyButtonNormal->loadFromFile("../common/misc/keyButton_normal.png");
+  _keyButtonHighlight->loadFromFile("../common/misc/keyButton_selected.png");
 
   _backgroundStartPanel = new Texture();
   _backgroundRoomPanel = new Texture();
