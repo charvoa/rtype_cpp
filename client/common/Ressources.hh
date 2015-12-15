@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Tue Dec 15 04:38:24 2015 Serge Heitzler
+// Last update Tue Dec 15 07:37:24 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -55,6 +55,7 @@ public:
   Texture		*_topGame;
   Texture		*_bottomGame;
   Texture		*_heart;
+  Texture		*_reactor;
   Texture		*_riffle;
   Texture		*_riffleHUD;
   Texture		*_rocket;

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Tue Dec 15 04:39:25 2015 Serge Heitzler
+// Last update Tue Dec 15 07:38:25 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -15,6 +15,8 @@ Ressources::Ressources()
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();
   _buttonSelect = new Texture();
+  _keyButtonNormal = new Texture();
+  _keyButtonHighlight = new Texture();
   _slide = new Texture();
   _sliderNormal = new Texture();
 
@@ -23,8 +25,8 @@ Ressources::Ressources()
   //  _buttonSelect->loadFromFile("../common/misc/button_normal.png");
   _slide->loadFromFile("../common/misc/slider.png");
   _sliderNormal->loadFromFile("../common/misc/slideButton.png");
-  // _keyButtonNormal->loadFromFile();
-  // _keyButtonHighlight->loadFromFile();
+  _keyButtonNormal->loadFromFile("../common/misc/keyButton_normal.png");
+  _keyButtonHighlight->loadFromFile("../common/misc/keyButton_selected.png");
 
   _backgroundStartPanel = new Texture();
   _backgroundRoomPanel = new Texture();
@@ -59,6 +61,7 @@ Ressources::Ressources()
   _bottomGame = new Texture();
   _topGame = new Texture();
   _heart = new Texture();
+  _reactor = new Texture();
   _riffle = new Texture();
   _riffleHUD = new Texture();
   _rocket = new Texture();
@@ -78,6 +81,7 @@ Ressources::Ressources()
   _bottomGame->loadFromFile("../common/misc/bottomGame.png");
   _topGame->loadFromFile("../common/misc/topGame.png");
   _heart->loadFromFile("../common/misc/heart.png");
+  _reactor->loadFromFile("../common/misc/reactor.png");
   _riffle->loadFromFile("../common/misc/riffle_ammo.png");
   _riffleHUD->loadFromFile("../common/misc/riffle_infinite.png");
   _rocket->loadFromFile("../common/misc/rocket.png");

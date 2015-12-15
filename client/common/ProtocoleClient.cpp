@@ -5,9 +5,8 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 15 19:24:50 2015 Nicolas Girardot
+// Last update Tue Dec 15 19:27:51 2015 Nicolas Girardot
 //
-
 
 #include <string>
 #include <sstream>
@@ -19,6 +18,7 @@
 #include <Client.hh>
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
+#include <JoinPanel.hh>
 
 /////Function to split data
 
@@ -89,7 +89,7 @@ void		ProtocoleClient::deleteEntity(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Delete Entity" << std::endl;
-  GamePanel::delteEntity(x);
+  GamePanel::deleteEntity(x);
 }
 
 void		ProtocoleClient::downloadComplete(ANetwork::t_frame &frame)
@@ -177,6 +177,7 @@ void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Join Error" << std::endl;
+  JoinPanel::setError(x.at(0));
 }
 
 void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
