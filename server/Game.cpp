@@ -39,7 +39,7 @@ Game::~Game() {}
 void Game::addClients(std::vector<Client *> &p)
 {
   int	i = 1;
-  E_PLAYER	player;
+  E_EntityType	player;
   for (std::vector<Client *>::iterator it = p.begin();
        it != p.end() ; ++it)
     {
