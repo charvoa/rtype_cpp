@@ -12,7 +12,7 @@
 # define _SYSTEMMANAGER_HH_
 
 # include <iostream>
-# include <vector>
+# include <list>
 # include <E_Component.hh>
 # include <ASystem.hpp>
 # include <SystemPos.hh>
@@ -23,7 +23,7 @@
 class SystemManager
 {
 private:
-  std::vector<ASystem*> _systems;
+  std::list<ASystem*> _systems;
 
 public:
   SystemManager();

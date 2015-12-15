@@ -52,44 +52,45 @@ int	EntityManager::createEntitiesFromFolder( std::string &filename, E_EntityType
   return (_id);
 }
 
-void	EntityManager::removeEntity(AEntity &entity)
+void	EntityManager::removeEntity(AEntity entity)
 {
-  int	i = 0;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
-    {
-      if (entity.getId() == (*it)->getId())
-	{
-	  _entities.erase(_entities.begin()+i);
-	  std::cout << "Entity removed" << std::endl;
-	  break;
-	}
-      i++;
-    }
+  // int	i = 0;
+  // this->_entities.remove(entity);
+  // for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  //   {
+  //     if (entity.getId() == (*it)->getId())
+  // 	{
+  // 	  _entities.(_entities.begin() + i);
+  // 	  std::cout << "Entity removed" << std::endl;
+  // 	  break;
+  // 	}
+  //     i++;
+  //   }
 }
 
 void	EntityManager::removeEntityById(int id)
 {
-  int	i = 0;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
-    {
-      if (id == (*it)->getId())
-	{
-	  _entities.erase(_entities.begin()+i);
-	  std::cout << "Entity removed" << std::endl;
-	  break;
-	}
-      i++;
-    }
+  // int	i = 0;
+  // for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  //   {
+  //     if (id == (*it)->getId())
+  // 	{
+  // 	  _entities.erase(_entities.begin()+i);
+  // 	  std::cout << "Entity removed" << std::endl;
+  // 	  break;
+  // 	}
+  //     i++;
+  //   }
 }
 
-std::vector<AEntity*>  EntityManager::getEntities()
+std::list<AEntity*>  EntityManager::getEntities()
 {
   return (_entities);
 }
 
 AEntity	*EntityManager::getEntityById(int id)
 {
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if (id == (*it)->getId())
 	return (*it);
@@ -97,10 +98,10 @@ AEntity	*EntityManager::getEntityById(int id)
   return (NULL);
 }
 
-std::vector<AEntity*>  EntityManager::getEntitiesByType(E_EntityType type)
+std::list<AEntity*>  EntityManager::getEntitiesByType(E_EntityType type)
 {
-  std::vector<AEntity*> entitiesByType;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  std::list<AEntity*> entitiesByType;
+  for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if ((*it)->getType() == type)
 	entitiesByType.push_back(*it);
@@ -108,13 +109,13 @@ std::vector<AEntity*>  EntityManager::getEntitiesByType(E_EntityType type)
   return (entitiesByType);
 }
 
-std::vector<AEntity*>  EntityManager::getAmmoEntities()
+std::list<AEntity*>  EntityManager::getAmmoEntities()
 {
-  std::vector<AEntity*> Ammos;
+  std::list<AEntity*> Ammos;
   E_EntityType type;
 
   type = E_INVALID;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       type = (*it)->getType();
       if (type == E_RIFLE || type == E_MISSILE || type == E_LASER)

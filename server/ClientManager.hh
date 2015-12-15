@@ -11,18 +11,18 @@
 #ifndef CLIENTMANAGER_HH_
 # define CLIENTMANAGER_HH_
 
-# include <vector>
+# include <list>
 # include <Client.hh>
 
 class ClientManager {
-  std::vector<Client *>	_clients;
+  std::list<Client *>	_clients;
 public:
   ClientManager();
   ~ClientManager();
   bool	clientExists(Client *);
   void	addClients(Client *);
   void	deleteClient(Client *);
-  std::vector<Client *>&	getAllClients();
+  std::list<Client *>&	getAllClients();
   Client	*getClientByFd(int fd);
   int		getClientPosition(Client *);
 };

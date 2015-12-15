@@ -21,7 +21,7 @@ public:
   SystemHitbox();
   ~SystemHitbox();
 
-  bool	update(std::vector<Case*> hitbox);
+  bool	update(std::list<Case*> hitbox);
 };
 
 #endif /* _SYSTEMHITBOX_HH */

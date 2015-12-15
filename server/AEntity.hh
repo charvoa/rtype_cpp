@@ -12,7 +12,7 @@
 # define _AENTITY_HH_
 
 # include <iostream>
-# include <vector>
+# include <list>
 # include <E_EntityType.hh>
 # include <E_Component.hh>
 # include <SystemManager.hh>
@@ -35,7 +35,7 @@ public:
 
   bool	update(int, int);
   bool	update(int);
-  bool	update(std::vector<Case*>);
+  bool	update(std::list<Case*>);
   void	addSystem(E_Component type);
   bool	setType(E_EntityType type);
   E_EntityType getType() const;

@@ -15,7 +15,7 @@ Game::Game()
 {
 }
 
-Game::Game(const Parameters &params_, std::vector<Client *> &client_,
+Game::Game(const Parameters &params_, std::list<Client *> &client_,
 	   const std::string &id_, int port_) : _params(params_), _id(id_)
 {
   srand(time(NULL));
@@ -36,9 +36,9 @@ Game::Game(const Parameters &params_, std::vector<Client *> &client_,
 
 Game::~Game() {}
 
-void Game::addClients(std::vector<Client *> &p)
+void Game::addClients(std::list<Client *> &p)
 {
-  for (std::vector<Client *>::iterator it = p.begin();
+  for (std::list<Client *>::iterator it = p.begin();
        it != p.end() ; ++it)
     {
       _eM.createEntity(E_PLAYER, *(*it));
@@ -53,7 +53,7 @@ void Game::setParameters(Parameters &p)
 
 Client *Game::getClientBySocket(ISocket *socket) const
 {
-  for (std::vector<Client*>::const_iterator it = _clients.begin();
+  for (std::list<Client*>::const_iterator it = _clients.begin();
        it != _clients.end(); ++it)
     {
       if ((*it)->getUDPSocket() == socket)
@@ -66,10 +66,9 @@ Client *Game::getClientBySocket(ISocket *socket) const
 
 Player *Game::getPlayerByClient(Client *client)
 {
+  std::list<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
 
-  std::vector<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
-
-  for (std::vector<AEntity*>::iterator it = _players.begin();
+  for (std::list<AEntity*>::iterator it = _players.begin();
        it != _players.end();
        ++it)
     {
@@ -86,9 +85,8 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 {
   std::cout << "Game :: handleHandshakeUDP " << std::endl;
 
-
-  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end(); ++it)
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
       if (dynamic_cast<Player*>((*it))->getClient().getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
@@ -184,12 +182,11 @@ void Game::handleMove(void *data, Client *client)
 
 void Game::updateScore(Player *p, Game::scoreDef score)
 {
-
-  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
   std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
   ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
-  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
@@ -216,8 +213,8 @@ void Game::updateLife(Player *p, int reset)
   health << p->getName() << ";" << hP->getLife();
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
 
-  std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
     }
@@ -226,13 +223,12 @@ void Game::updateLife(Player *p, int reset)
 
 void Game::sendNewEntity(int type, int id)
 {
-
-  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   ANetwork::t_frame	frame;
   std::string	sendData = std::to_string(type) + ";" + std::to_string(id);
 
   frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
-  for (std::vector<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
@@ -276,8 +272,8 @@ void Game::handleShoot(void *data, Client *client)
       ss << type;
 
       ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-      std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-      for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
 	{
 	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
 	}
@@ -342,8 +338,8 @@ void Game::initPlayersPosition()
 {
 
   int	x = 10;
-  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  std::vector<AEntity *>::iterator it;
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::list<AEntity *>::iterator it;
   Random	rand(2, 48);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
@@ -354,11 +350,11 @@ void Game::initPlayersPosition()
 
 void Game::updateAmmo()
 {
-  std::vector<AEntity*> _vec = _eM.getAmmoEntities();
+  std::list<AEntity*> _vec = _eM.getAmmoEntities();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-  for (std::vector<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
+  for (std::list<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
     {
       if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
 	{
@@ -380,13 +376,12 @@ void Game::updateAmmo()
 
 void Game::sendGameData()
 {
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  std::list<AEntity *> _entities = _eM.getEntities();
 
-  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  std::vector<AEntity *> _entities = _eM.getEntities();
-
-  for (std::vector<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
+  for (std::list<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
     {
-      for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
+      for (std::list<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
 	  //std::cout << "SS in data : " << (*it2)->getName()  << std::endl;
 

@@ -10,7 +10,7 @@
 #ifndef _ENTITYMANAGER_HH_
 # define _ENTITYMANAGER_HH_
 
-# include <vector>
+# include <list>
 # include <iostream>
 # include <EntityFactory.hh>
 # include <AEntity.hh>
@@ -24,7 +24,7 @@ private:
   int		_id;
   EntityFactory _entityFactory;
   PlayerFactory _playerFactory;
-  std::vector<AEntity*> _entities;
+  std::list<AEntity*> _entities;
 
 public:
   EntityManager();
@@ -34,12 +34,12 @@ public:
   int		createEntity(E_EntityType type,  Client &);
   int		createEntity(E_EntityType type, AEntity *);
   int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
-  void		removeEntity(AEntity &entity);
+  void		removeEntity(AEntity entity);
   void		removeEntityById(int id);
-  std::vector<AEntity*>  getEntities() ;
+  std::list<AEntity*>  getEntities() ;
   AEntity	*getEntityById(int id) ;
-  std::vector<AEntity*>  getEntitiesByType(E_EntityType type) ;
-  std::vector<AEntity*>  getAmmoEntities() ;
+  std::list<AEntity*>  getEntitiesByType(E_EntityType type) ;
+  std::list<AEntity*>  getAmmoEntities() ;
 };
 
 #endif /* _ENTITYMANAGER_HH_ */

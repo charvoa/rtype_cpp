@@ -38,7 +38,7 @@ public:
   const std::string&	getId() const;
   void	addPlayer(Client *);
   void	deletePlayer(Client *);
-  std::vector<Client*>&	getAllPlayers();
+  std::list<Client*>&	getAllPlayers();
   void			setParameters(Parameters &);
   const Parameters&	getParameters() const;
   void			sendFileToClient(Client *client, std::list<Bot*> list);
