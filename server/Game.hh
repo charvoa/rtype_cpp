@@ -88,7 +88,8 @@ public:
   void sendGameData();
   std::vector<Client *> _clients;
   ANetwork *_network;
-
+private:
+  void sendNewEntity(int type, int id);
 };
 
 #endif
