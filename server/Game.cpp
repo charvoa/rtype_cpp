@@ -348,6 +348,19 @@ void Game::initPlayersPosition()
 
 }
 
+void Game::deleteEntity(AEntity *entity)
+{
+  std::string	sendData = std::to_string(entity->getId());
+
+  ANetwork::t_frame frame = CreateRequest::create(S_DELETE_ENTITY, CRC::calcCRC(sendData), sendData.size(), sendData);
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+  _eM.removeEntity(entity);
+}
+
 void Game::updateAmmo()
 {
   std::list<AEntity*> _vec = _eM.getAmmoEntities();
@@ -360,6 +373,10 @@ void Game::updateAmmo()
 	{
 	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 	  rifle->update(p->getX() + 2, p->getY());
+	  if (p->getX() >= 121){
+	    std::cout << "DELETE ENTITY" << std::endl;
+	    deleteEntity(rifle);
+	  }
 	  // TIME RIFLE UPDATE
 	}
       else if (Missile *missile = dynamic_cast<Missile *>(*it))

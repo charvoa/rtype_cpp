@@ -93,6 +93,7 @@ public:
 private:
   void sendNewEntity(int type, int id);
   void updateAmmo();
+  void deleteEntity(AEntity *);
 };
 
 #endif
