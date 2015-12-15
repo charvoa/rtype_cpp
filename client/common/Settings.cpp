@@ -42,6 +42,8 @@ void	Settings::update(Settings const& copy)
     _volume = copy._volume;
     _binds = copy._binds;
     _defaultDifficulty = copy._defaultDifficulty;
+	_ip = copy._ip;
+	_port = copy._port;
 }
 
 Volume  Settings::getVolume() const
