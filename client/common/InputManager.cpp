@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec 15 04:40:34 2015 Serge Heitzler
+// Last update Tue Dec 15 17:33:33 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -73,18 +73,18 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
     {
       i += 1;
     }
+  if (i != 0)
+    {
+      ANetwork *net = Client::getUDPNetwork();
+      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
+      net->write(sender);
+    }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
       ANetwork *net = Client::getUDPNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
       net->write(sender);
       return std::make_pair(0, 0);
-    }
-  if (i != 0)
-    {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
-      net->write(sender);
     }
   return std::make_pair(0, 0);
 }
@@ -102,7 +102,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
 {
   float posX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
   float posY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-  
+
   int i = 0;
 
   /* X POSITION JOYSTICK */
@@ -122,7 +122,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
   if (posY < -25)
     i += 1;
 
-  
+
   if (sf::Joystick::isButtonPressed(0, 0))
   {
     ANetwork *net = Client::getUDPNetwork();
@@ -137,7 +137,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
       net->write(sender);
     }
-  
+
   return std::make_pair(0, 0);
 }
 

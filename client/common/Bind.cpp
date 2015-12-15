@@ -42,7 +42,6 @@ void    Bind::setType(Bind::BindType type)
 
 void    Bind::setKey(sf::Keyboard::Key key)
 {
-	std::cout << "set key" << std::endl;
     _key = key;
 }
 

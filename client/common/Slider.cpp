@@ -76,6 +76,7 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 
 bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 {
+	RenderWindow	*window = RenderWindow::getInstance();
 	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
 
 	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
@@ -84,8 +85,14 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 	}
 	else if (pair.first <= _maxX && pair.first >= _minX && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
 	{
-		this->setValue((pair.first - _minX) * 3);
+		this->setValue((pair.first - _minX) / 7);
 		this->getSprite().setPosition(pair.first, getPosY());
+		if (_title == "global")
+			dynamic_cast<SettingsPanel*>(window->getPanels().top())->setGlobalVolume(_value);
+		else if (_title == "effects")
+			dynamic_cast<SettingsPanel*>(window->getPanels().top())->setEffectsVolume(_value);
+		else if (_title == "music")
+			dynamic_cast<SettingsPanel*>(window->getPanels().top())->setMusicVolume(_value);
 	}
 	return false;
 }
@@ -93,7 +100,9 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
 	RenderWindow	*window = RenderWindow::getInstance();
-
+	
+	if (_locked == true)
+		return;
 	this->setValue((pair.first - _minX) / 7);
 	if (_title == "global")
 		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setGlobalVolume(_value);
