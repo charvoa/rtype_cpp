@@ -75,11 +75,11 @@ void	SettingsPanel::setUserInterface()
 	// Button
 
 	std::string name = "SAVE";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.8), name);
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.9), name);
 	name = "DEFAULT";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.8), name);
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.9), name);
 	name = "BACK";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.8), name);
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.9), name);
 
 	_functions.push_back((APanel::funcs)&SettingsPanel::save);
 	_functions.push_back((APanel::funcs)&SettingsPanel::defaultSettings);
@@ -95,10 +95,10 @@ void	SettingsPanel::setUserInterface()
 	while (it != end)
 	{
 		name = loader->keyToString((*it)->getKey());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.2 + layout), name, id++);
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.25 + layout), name, id++);
 		name = loader->joystickToString((*it)->getJoystick());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + (window)->_ressources->_buttonNormal->getSize()._x / 2, window->getSize()._y * 0.2 + layout), name, id++);
-		layout += (window)->_ressources->_buttonNormal->getSize()._y / 2;
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + 130, window->getSize()._y * 0.25 + layout), name, id++);
+		layout += 70;
 		++it;
 	}
 

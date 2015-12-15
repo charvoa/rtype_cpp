@@ -32,7 +32,7 @@ SettingsLoader::SettingsLoader(bool write)
 		_stringKeys["LEFT"] = sf::Keyboard::Left;
 		_stringKeys["RIGHT"] = sf::Keyboard::Right;
 		_stringKeys["SPACE"] = sf::Keyboard::Space;
-		_stringKeys["ESCAPE"] = sf::Keyboard::Escape;
+		_stringKeys["ESC"] = sf::Keyboard::Escape;
 		_stringKeys["RETURN"] = sf::Keyboard::Return;
 		_stringKeys["A"] = sf::Keyboard::A;
 		_stringKeys["Z"] = sf::Keyboard::Z;
@@ -60,16 +60,16 @@ SettingsLoader::SettingsLoader(bool write)
 		_stringKeys["V"] = sf::Keyboard::V;
 		_stringKeys["B"] = sf::Keyboard::B;
 		_stringKeys["N"] = sf::Keyboard::N;
-		_stringKeys["NUMPAD 0"] = sf::Keyboard::Numpad0;
-		_stringKeys["NUMPAD 1"] = sf::Keyboard::Numpad1;
-		_stringKeys["NUMPAD 2"] = sf::Keyboard::Numpad2;
-		_stringKeys["NUMPAD 3"] = sf::Keyboard::Numpad3;
-		_stringKeys["NUMPAD 4"] = sf::Keyboard::Numpad4;
-		_stringKeys["NUMPAD 5"] = sf::Keyboard::Numpad5;
-		_stringKeys["NUMPAD 6"] = sf::Keyboard::Numpad6;
-		_stringKeys["NUMPAD 7"] = sf::Keyboard::Numpad7;
-		_stringKeys["NUMPAD 8"] = sf::Keyboard::Numpad8;
-		_stringKeys["NUMPAD 9"] = sf::Keyboard::Numpad9;
+		_stringKeys["PAD 0"] = sf::Keyboard::Numpad0;
+		_stringKeys["PAD 1"] = sf::Keyboard::Numpad1;
+		_stringKeys["PAD 2"] = sf::Keyboard::Numpad2;
+		_stringKeys["PAD 3"] = sf::Keyboard::Numpad3;
+		_stringKeys["PAD 4"] = sf::Keyboard::Numpad4;
+		_stringKeys["PAD 5"] = sf::Keyboard::Numpad5;
+		_stringKeys["PAD 6"] = sf::Keyboard::Numpad6;
+		_stringKeys["PAD 7"] = sf::Keyboard::Numpad7;
+		_stringKeys["PAD 8"] = sf::Keyboard::Numpad8;
+		_stringKeys["PAD 9"] = sf::Keyboard::Numpad9;
 
 		_stringAxis["UP"] = JoystickEvent(sf::Joystick::X);
 		_stringAxis["DOWN"] = JoystickEvent(sf::Joystick::X);
