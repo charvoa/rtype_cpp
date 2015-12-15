@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 15 04:41:14 2015 Serge Heitzler
+// Last update Tue Dec 15 13:44:55 2015 Nicolas Girardot
 //
 
 
@@ -72,8 +72,8 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
   _functions.insert(std::make_pair(S_FILE_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
-  _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::newEnemy));
-  _functions.insert(std::make_pair(S_NEW_ENTITY, &ProtocoleClient::newEnemy));
+  _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::shoot));
+  _functions.insert(std::make_pair(S_NEW_ENTITY, &ProtocoleClient::newEntity));
 }
 
 void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
@@ -140,13 +140,6 @@ void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Create room" << std::endl;
   StartPanel::goToRoom(x, 0);
-}
-
-void		ProtocoleClient::newEnemy(ANetwork::t_frame &frame)
-{
-  std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Create room" << std::endl;
-  GamePanel::newEnemy(x);
 }
 
 void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
