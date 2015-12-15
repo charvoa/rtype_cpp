@@ -5,13 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:41:34 2015 Louis Audibert
-// Last update Tue Dec 15 05:46:14 2015 Louis Audibert
+// Last update Tue Dec 15 06:09:30 2015 Louis Audibert
 //
 
 #include <iostream>
 #include <Bot.hpp>
 
-Bot::Bot(int id) : AEntity(id), _health(500), _x(275), _y(0), _direction(1)
+Bot::Bot(int id) : AEntity(id), _health(500), _x(180), _y(0), _direction(1)
 {
   std::cout << "Boss :: Boss1 :: Constructor" << std::endl;
   _sprite = "sprite4.png";
@@ -29,7 +29,7 @@ Bot::~Bot()
 
 void	Bot::generateY()
 {
-  Random rand(0, 255);
+  Random rand(0, 50);
 
   _y = rand.generate<int>();
 }
