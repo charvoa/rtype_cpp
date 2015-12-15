@@ -29,6 +29,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   this->addClients(client_);
   _stage = 1;
   _nbDisplay = 0;
+  _isRunning = true;
 
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
@@ -101,21 +102,21 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
   std::pair<int, int> final;
 
   if (dir == "1")
-    final = std::make_pair(0, -1);
+    final = std::make_pair(0, -16);
   else if (dir == "3")
-    final = std::make_pair(1, -1);
+    final = std::make_pair(16, -16);
   else if (dir == "2")
-    final = std::make_pair(1, 0);
+    final = std::make_pair(16, 0);
   else if (dir == "6")
-    final = std::make_pair(1, 1);
+    final = std::make_pair(16, 16);
   else if (dir == "4")
-    final = std::make_pair(0, 1);
+    final = std::make_pair(0, 16);
   else if (dir == "12")
-    final = std::make_pair(-1, 1);
+    final = std::make_pair(-16, 16);
   else if (dir == "8")
-    final = std::make_pair(-1, 0);
+    final = std::make_pair(-16, 0);
   else if (dir == "9")
-    final = std::make_pair(-1, -1);
+    final = std::make_pair(-16, -16);
   else
     final = std::make_pair(0, 0);
   return final;
@@ -123,9 +124,9 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
 
 bool Game::checkMove(int x, int y)
 {
-  if (x < 0 || x > 110)
+  if (x < sizeInGame::LENGHT_MIN || x > sizeInGame::LENGHT_MAX)
     return false;
-  else if (y < 0 || y > 49)
+  else if (y < sizeInGame::HEIGHT_MIN || y > sizeInGame::HEIGHT_MAX)
     return false;
   return true;
 }
@@ -138,7 +139,8 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
+  if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN||
+      pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
       this->updateLife(player, 2);
     }
@@ -161,8 +163,8 @@ void Game::handleMove(void *data, Client *client)
     //
     auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-    // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
-    // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
+    std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
+    std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       {
 	this->checkWall(player);
@@ -330,6 +332,7 @@ void *readThread(void *sData)
 	}
       me->handleCommand(data, client);
     }
+  return NULL;
 }
 
 int Game::getNumberEnemyMax()
@@ -375,7 +378,7 @@ void Game::initPlayersPosition()
   int	x = 10;
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity *>::iterator it;
-  Random	rand(2, 48);
+  Random	rand(40, 850);
 
   for (it = _players.begin(); it != _players.end(); ++it)
     {
@@ -431,18 +434,28 @@ void Game::updateRiffle()
   for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      (*it)->update(p->getX() + 1, p->getY());
-      if (p->getX() >= 121)
+      (*it)->update(p->getX() + 24, p->getY());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*it);
+    }
+}
+
+void Game::updateMissile()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_MISSILE);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*it)->update(p->getX() + 8, p->getY());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
 }
 
 bool Game::run()
 {
-  bool past = true;
-  Timer	timerMonster(true);
-  Timer timerRiffle(true);
   int	speed = 3;
+  Timer timerMonster(true);
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -457,34 +470,22 @@ bool Game::run()
 
   _start = std::chrono::system_clock::now();
 
-  while (true)
+  int i = 0;
+  while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+  while (_isRunning)
     {
+      auto startTime = std::chrono::high_resolution_clock::now();
       if (timerMonster.elapsed().count()>= (speed/_stage))
-	{
-	  timerMonster.reset();
-	  this->addMonster();
-	  this->updateMonster();
-	}
-      if (timerRiffle.elapsedMilli().count() >= 0.5 )
-      {
-	  this->updateRiffle();
-	  timerRiffle.reset();
-      }
-      auto currentTime = std::chrono::system_clock::now();
-      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-	(currentTime - _start);
-      _start = currentTime;
-      auto start_time = std::chrono::steady_clock::now();
-      auto end_time = start_time + frame_duration(4);
-      if (duration.count() % 16 == 0)
-	{
-	  if (past == true)
-	    {
-	      std::this_thread::sleep_until(end_time);
-	      past = false;
-	    }
-	  this->sendGameData();
-	}
+      	{
+      	  timerMonster.reset();
+      	  this->addMonster();
+      	}
+      this->updateMonster();
+      this->updateRiffle();
+      this->updateMissile();
+      this->sendGameData();
+      while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
+      i++;
     }
   return true;
 }
@@ -493,4 +494,13 @@ bool Game::run()
 const std::string &Game::getId() const
 {
   return _id;
+}
+
+void Game::deletePlayer()
+{
+  _nbLeft++;
+  if (_nbLeft >= static_cast<int>(_clients.size()))
+    {
+      _isRunning = false;
+    }
 }

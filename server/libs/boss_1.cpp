@@ -5,13 +5,13 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:41:34 2015 Louis Audibert
-// Last update Sat Dec 19 05:21:38 2015 Louis Audibert
+// Last update Sat Dec 19 08:42:00 2015 Louis Audibert
 //
 
 #include <iostream>
 #include <Bot.hpp>
 
-Bot::Bot(int id) : AEntity(id), _health(500), _x(WIDTH + 2), _y(0), _direction(1)
+Bot::Bot(int id) : AEntity(id), _health(500), _x(WIDTH + 100), _y(0), _direction(1)
 {
   _sprite = "sprite4.png";
   _name = _sprite;
@@ -28,14 +28,14 @@ Bot::~Bot()
 
 void	Bot::generateY()
 {
-  Random rand(0, HEIGHT + 1);
+  Random rand(35, HEIGHT + 1);
 
   _y = rand.generate<int>();
 }
 
 void	Bot::update()
 {
-  if (_x >= 200)
+  if (_x >= 1700)
     _direction = -1;
   if (_direction == -1)
     _x--;

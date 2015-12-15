@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Wed Dec 16 18:06:18 2015 Nicolas Girardot
+// Last update Sat Dec 19 15:18:39 2015 Nicolas Girardot
 //
 
 #include <string>
@@ -76,6 +76,7 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_NEW_ENTITY, &ProtocoleClient::newEntity));
   _functions.insert(std::make_pair(S_DELETE_ENTITY, &ProtocoleClient::deleteEntity));
   _functions.insert(std::make_pair(S_DOWNLOAD_COMPLETE, &ProtocoleClient::downloadComplete));
+  _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
 }
 
 void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
@@ -83,6 +84,12 @@ void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "New Entity" << std::endl;
   GamePanel::newEntity(x);
+}
+
+void		ProtocoleClient::playerLeftIG(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  GamePanel::playerLeft(x.at(0));
 }
 
 void		ProtocoleClient::deleteEntity(ANetwork::t_frame &frame)

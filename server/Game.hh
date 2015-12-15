@@ -48,6 +48,13 @@ public:
     BOSS_KILLED = 75
   };
 
+  enum sizeInGame {
+    LENGHT_MIN = 0,
+    HEIGHT_MIN = 35,
+    HEIGHT_MAX = 855,
+    LENGHT_MAX = 1920
+  };
+
   struct dataThread {
     Game *game;
     ANetwork *network;
@@ -62,7 +69,7 @@ public:
   const Client &getClient() const;
   const std::string &getId() const;
   void handleCommand(void*, Client*);
-
+  void deletePlayer();
   // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;
@@ -79,6 +86,8 @@ private:
   int	_nbDisplay;
   std::chrono::time_point<std::chrono::system_clock> _start;
   std::list<Bot*> _botList;
+  bool _isRunning;
+  int _nbLeft;
 
   // METHODS
   Player *getPlayerByClient(Client*);
@@ -88,6 +97,7 @@ private:
   void sendNewEntity(int type, int id);
   void deleteEntity(AEntity *);
   void updateRiffle();
+  void updateMissile();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
   void checkWall(Player*);

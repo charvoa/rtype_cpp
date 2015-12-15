@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:26:52 2015 Nicolas Charvoz
-// Last update Wed Dec 16 11:11:04 2015 Nicolas Charvoz
+// Last update Sat Dec 19 17:53:42 2015 Nicolas Charvoz
 //
 
 #include <GameManager.hh>
@@ -49,7 +49,11 @@ Game &GameManager::getGameByClient(const Client &c)
   //     }
   //   }
   // throw std::logic_error("Game with this ID not found");
-  (void)c;
+
+
+  (void) c;
   Game *g = new Game();
+
   return *g;
+
 }
