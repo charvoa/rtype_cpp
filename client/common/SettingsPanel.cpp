@@ -118,6 +118,150 @@ void	SettingsPanel::setUserInterface()
 	title->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.05));
 	title->setColor(Color::WHITE);
 	_labels.push_back(*title);
+
+	Text			*volume = new Text();
+	volume->setString("VOLUME");
+	volume->setSize(40);
+	volume->setStyle(1);
+	volume->setOrigin(volume->getText().getGlobalBounds().width / 2, volume->getText().getGlobalBounds().height / 2);
+	volume->setPosition(Vector2(window->getSize()._x * 0.2, window->getSize()._y * 0.15));
+	volume->setColor(Color::WHITE);
+	_labels.push_back(*volume);
+
+	Text			*global = new Text();
+	global->setString("GLOBAL");
+	global->setSize(15);
+	global->setStyle(1);
+	global->setOrigin(global->getText().getGlobalBounds().width / 2, global->getText().getGlobalBounds().height / 2);
+	global->setPosition(Vector2(window->getSize()._x * 0.45, window->getSize()._y * 0.25));
+	global->setColor(Color::WHITE);
+	_labels.push_back(*global);
+
+	Text			*effects = new Text();
+	effects->setString("EFFECTS");
+	effects->setSize(15);
+	effects->setStyle(1);
+	effects->setOrigin(effects->getText().getGlobalBounds().width / 2, effects->getText().getGlobalBounds().height / 2);
+	effects->setPosition(Vector2(window->getSize()._x * 0.45, window->getSize()._y * 0.35));
+	effects->setColor(Color::WHITE);
+	_labels.push_back(*effects);
+
+	Text			*music = new Text();
+	music->setString("MUSIC");
+	music->setSize(15);
+	music->setStyle(1);
+	music->setOrigin(music->getText().getGlobalBounds().width / 2, music->getText().getGlobalBounds().height / 2);
+	music->setPosition(Vector2(window->getSize()._x * 0.45, window->getSize()._y * 0.45));
+	music->setColor(Color::WHITE);
+	_labels.push_back(*music);
+
+	Text			*keyboard = new Text();
+	keyboard->setString("KEYBOARD");
+	keyboard->setSize(20);
+	keyboard->setStyle(1);
+	keyboard->setOrigin(keyboard->getText().getGlobalBounds().width / 2, keyboard->getText().getGlobalBounds().height / 2);
+	keyboard->setPosition(Vector2(window->getSize()._x * 0.68, window->getSize()._y * 0.15));
+	keyboard->setColor(Color::WHITE);
+	_labels.push_back(*keyboard);
+
+	Text			*joystick = new Text();
+	joystick->setString("JOYSTICK");
+	joystick->setSize(20);
+	joystick->setStyle(1);
+	joystick->setOrigin(joystick->getText().getGlobalBounds().width / 2, joystick->getText().getGlobalBounds().height / 2);
+	joystick->setPosition(Vector2(window->getSize()._x * 0.77, window->getSize()._y * 0.15));
+	joystick->setColor(Color::WHITE);
+	_labels.push_back(*joystick);
+
+	Text			*moveUp = new Text();
+	moveUp->setString("MOVE UP");
+	moveUp->setSize(15);
+	moveUp->setStyle(1);
+	moveUp->setOrigin(moveUp->getText().getGlobalBounds().width / 2, moveUp->getText().getGlobalBounds().height / 2);
+	moveUp->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.25));
+	moveUp->setColor(Color::WHITE);
+	_labels.push_back(*moveUp);
+
+	Text			*moveDown = new Text();
+	moveDown->setString("MOVE DOWN");
+	moveDown->setSize(15);
+	moveDown->setStyle(1);
+	moveDown->setOrigin(moveDown->getText().getGlobalBounds().width / 2, moveDown->getText().getGlobalBounds().height / 2);
+	moveDown->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.31));
+	moveDown->setColor(Color::WHITE);
+	_labels.push_back(*moveDown);
+
+	Text			*moveLeft = new Text();
+	moveLeft->setString("MOVE LEFT");
+	moveLeft->setSize(15);
+	moveLeft->setStyle(1);
+	moveLeft->setOrigin(moveLeft->getText().getGlobalBounds().width / 2, moveLeft->getText().getGlobalBounds().height / 2);
+	moveLeft->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.38));
+	moveLeft->setColor(Color::WHITE);
+	_labels.push_back(*moveLeft);
+
+	Text			*moveRight = new Text();
+	moveRight->setString("MOVE RIGHT");
+	moveRight->setSize(15);
+	moveRight->setStyle(1);
+	moveRight->setOrigin(moveRight->getText().getGlobalBounds().width / 2, moveRight->getText().getGlobalBounds().height / 2);
+	moveRight->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.45));
+	moveRight->setColor(Color::WHITE);
+	_labels.push_back(*moveRight);
+
+	Text			*shoot = new Text();
+	shoot->setString("SHOOT");
+	shoot->setSize(15);
+	shoot->setStyle(1);
+	shoot->setOrigin(shoot->getText().getGlobalBounds().width / 2, shoot->getText().getGlobalBounds().height / 2);
+	shoot->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.51));
+	shoot->setColor(Color::WHITE);
+	_labels.push_back(*shoot);
+
+	Text			*weapon1 = new Text();
+	weapon1->setString("WEAPON 1");
+	weapon1->setSize(15);
+	weapon1->setStyle(1);
+	weapon1->setOrigin(weapon1->getText().getGlobalBounds().width / 2, weapon1->getText().getGlobalBounds().height / 2);
+	weapon1->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.57));
+	weapon1->setColor(Color::WHITE);
+	_labels.push_back(*weapon1);
+
+	Text			*weapon2 = new Text();
+	weapon2->setString("WEAPON 2");
+	weapon2->setSize(15);
+	weapon2->setStyle(1);
+	weapon2->setOrigin(weapon2->getText().getGlobalBounds().width / 2, weapon2->getText().getGlobalBounds().height / 2);
+	weapon2->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.63));
+	weapon2->setColor(Color::WHITE);
+	_labels.push_back(*weapon2);
+
+	Text			*weapon3 = new Text();
+	weapon3->setString("WEAPON 3");
+	weapon3->setSize(15);
+	weapon3->setStyle(1);
+	weapon3->setOrigin(weapon3->getText().getGlobalBounds().width / 2, weapon3->getText().getGlobalBounds().height / 2);
+	weapon3->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.7));
+	weapon3->setColor(Color::WHITE);
+	_labels.push_back(*weapon3);
+
+	Text			*leaveGame = new Text();
+	leaveGame->setString("LEAVE GAME");
+	leaveGame->setSize(15);
+	leaveGame->setStyle(1);
+	leaveGame->setOrigin(leaveGame->getText().getGlobalBounds().width / 2, leaveGame->getText().getGlobalBounds().height / 2);
+	leaveGame->setPosition(Vector2(window->getSize()._x * 0.64, window->getSize()._y * 0.76));
+	leaveGame->setColor(Color::WHITE);
+	_labels.push_back(*leaveGame);
+
+/*	Text			*diff = new Text();
+	diff->setString("DEFAULT DIFFICULTY");
+	diff->setSize(80);
+	diff->setStyle(1);
+	diff->setOrigin(diff->getText().getGlobalBounds().width / 2, diff->getText().getGlobalBounds().height / 2);
+	diff->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.05));
+	diff->setColor(Color::WHITE);
+	_labels.push_back(*diff);*/
 }
 
 void    SettingsPanel::setGlobalVolume(int global)

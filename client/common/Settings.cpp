@@ -126,6 +126,7 @@ void    Settings::resetDefault()
 	SettingsLoader  loader(true);
 	Volume			vol(50, 50, 50);
 
+	// plutôt créer un loader avec default config et parser default config puis update()...
 	_binds = loader.createDefaultBinds();
 	_volume = vol;
 	_defaultDifficulty = MEDIUM_MODE;
