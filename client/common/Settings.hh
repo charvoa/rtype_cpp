@@ -28,7 +28,7 @@ public:
 
     Settings(std::string const& filepath);
     Settings(Volume, std::vector<Bind*>, Settings::Difficulty);
-	Settings(Volume, std::vector<Bind*>, Settings::Difficulty, std::string const&, short int);
+	Settings(Volume, std::vector<Bind*>, Settings::Difficulty, std::string const&, int);
     ~Settings();
 
     Volume getVolume() const;
@@ -36,7 +36,7 @@ public:
     Settings::Difficulty getDefaultDifficulty() const;
     Settings::Difficulty getCurrentDifficulty() const;
 	std::string		getIP() const;
-	short int			getPort() const;
+	int			getPort() const;
 
     void update(Settings const&);
     void setVolume(Volume const&);
@@ -46,7 +46,7 @@ public:
     void setDefaultDifficulty(Settings::Difficulty);
     void setDifficulty(Settings::Difficulty);
 	void setIP(std::string const&);
-	void setPort(short int);
+	void setPort(int);
 
 	void dumpBinds() const;
     void loadSettings();
@@ -59,7 +59,7 @@ private:
     Settings::Difficulty _defaultDifficulty;
     Settings::Difficulty _difficulty;
 	std::string	_ip;
-	short int _port;
+	int			_port;
 };
 
 #endif // SETTINGS_H
