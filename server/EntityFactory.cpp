@@ -11,7 +11,6 @@
 
 EntityFactory::EntityFactory()
 {
-  :
 }
 
 EntityFactory::~EntityFactory()

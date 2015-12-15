@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 09:14:16 2015 Serge Heitzler
+// Last update Tue Dec 15 11:18:29 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -231,7 +231,7 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
   i--;
   _players.at(i)->setCurrentClient(true);
   _currentPlayer = i + 1;
-  
+
   switch (i)
     {
     case 0:
