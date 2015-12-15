@@ -107,7 +107,7 @@ void *newGameThread(void *data)
 	  ss.str("");
 	  ss.clear();
 	}
-      me->_roomManager.deleteRoom(s->frame.data);
+      //me->_roomManager.deleteRoom(s->frame.data);
       me->_gameManager.getGameById(s->frame.data).run();
     }
   else
