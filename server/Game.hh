@@ -74,6 +74,7 @@ public:
   Client *getClientBySocket(ISocket*) const;
   Player *getPlayerByClient(Client*);
 
+  void checkWall(Player*);
   void handleHandshakeUDP(void*, Client*);
   void handleMove(void*, Client*);
   void handleCommand(void*, Client*);

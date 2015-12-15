@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 17:34:58 2015 Joris Bertomeu
+// Last update Tue Dec 15 11:38:13 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>

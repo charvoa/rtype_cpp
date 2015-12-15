@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Tue Dec 15 02:42:10 2015 Antoine Garcia
+// Last update Tue Dec 15 03:17:21 2015 Antoine Garcia
 //
 
 #ifndef CLIENT_HH_
@@ -29,16 +29,25 @@
 #define IP_ADRESS "0"
 //#define IP_ADRESS "10.16.253.150"
 //#define IP_ADRESS "51.254.139.53"
+//#define IP_ADRESS "0"
 //#define IP_ADRESS "10.16.253.178"
 //#define IP_ADRESS "10.16.253.178"
 //#define IP_ADRESS "10.16.252.249"
+
 #define PORT 4253
+
+//#define IP_ADRESS "10.16.253.178"
+//#define IP_ADRESS "10.16.252.249"
+//#define PORT 4253
+//#define PORT 4242
+//#define IP_ADRESS "10.16.252.249"
+
 
 class	Client
 {
 
 public:
-  Client();
+  Client(int port);
   ~Client();
   void	Start();
   static ANetwork	*getNetwork();
@@ -46,7 +55,7 @@ public:
   static Sound		*getSound();
 
 private:
-
+  int	 _port;
   static ANetwork	*_network;
   static ANetwork	*_UDPnetwork;
   static Sound		*_sound;

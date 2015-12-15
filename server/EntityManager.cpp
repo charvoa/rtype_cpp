@@ -19,37 +19,37 @@ EntityManager::~EntityManager()
   std::cout << "EntityManager Destroyed" << std::endl;
 }
 
-bool	EntityManager::createEntity(E_EntityType type)
+int	EntityManager::createEntity(E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(_id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
-bool	EntityManager::createEntity(E_EntityType type, const Client &client)
+int	EntityManager::createEntity(E_EntityType type, const Client &client)
 {
   AEntity *newEntity = _playerFactory.createPlayer(_id, client);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
-bool	EntityManager::createEntity(E_EntityType type, AEntity *parent)
+int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 {
   AEntity *newEntity = _entityFactory.createEntity(_id, type);
   newEntity->setType(type);
   newEntity->setParent(parent);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
-bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
+int	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
 void	EntityManager::removeEntity(AEntity &entity)
