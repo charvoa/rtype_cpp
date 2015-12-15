@@ -160,10 +160,11 @@ void Game::handleMove(void *data, Client *client)
 
     // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
     // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
-    this->checkWall(player);
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
-      player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-
+      {
+	//	 this->checkWall(player);
+	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+      }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
@@ -206,6 +207,19 @@ void Game::updateLife(Player *p, bool reset)
 
 }
 
+void Game::sendNewEntity(int type, int id)
+{
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  ANetwork::t_frame	frame;
+  std::string	sendData = std::to_string(type) + ";" + std::to_string(id);
+
+  frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
+  for (std::vector<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+}
+
 void Game::handleShoot(void *data, Client *client)
 {
   std::cout << "Game :: handleShoot" << std::endl;
@@ -214,8 +228,8 @@ void Game::handleShoot(void *data, Client *client)
 
 
   Player *p = this->getPlayerByClient(client);
-
   E_EntityType type = E_INVALID;
+  int	id;
 
   if (weaponType == "E_RIFLE")
     type = E_RIFLE;
@@ -226,8 +240,11 @@ void Game::handleShoot(void *data, Client *client)
 
   //  std::cout << "Type of weapon : |" << type << "|" << std::endl;
   if (type != E_INVALID)
-    _eM.createEntity(type, p);
+     id = _eM.createEntity(type, p);
 
+
+  std::cout << "After create entity " << std::endl;
+  sendNewEntity(type, id);
 
   std::stringstream ss;
 
@@ -337,6 +354,7 @@ void Game::sendGameData()
 	}
     }
 }
+
 
 bool Game::run()
 {
