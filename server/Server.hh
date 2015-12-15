@@ -6,7 +6,7 @@
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
 
-// Last update Wed Dec 16 11:18:33 2015 Nicolas Charvoz
+// Last update Tue Dec 15 05:33:24 2015 Joris Bertomeu
 //
 
 #ifndef SERVER_HH_
@@ -29,6 +29,7 @@
 # include <CreateRequest.hpp>
 # include <sstream>
 # include <BotManager.hpp>
+# include <Monitoring.hpp>
 
 class Server {
 
@@ -58,7 +59,7 @@ public:
   BotManager	*_botManager;
 
 private:
-
+  Monitoring	_monitoring;
   ANetwork *_network;
   //ClientManager _clientManager;
   CommandManager _commandManager;
