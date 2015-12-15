@@ -123,9 +123,10 @@ void	SettingsPanel::setUserInterface()
 void    SettingsPanel::setGlobalVolume(int global)
 {
     Volume vol = _tmp->getVolume();
-
+	std::cout << "volume avant : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
     vol.setGlobal(global);
     _tmp->setVolume(vol);
+	std::cout << "volume après : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
 }
 
 void    SettingsPanel::setEffectsVolume(int effects)
@@ -183,7 +184,6 @@ void    SettingsPanel::back()
 
 void    SettingsPanel::save()
 {
-	std::cout << "SETTINGS PANEL SAVE" << std::endl;
 	SettingsLoader *loader = new SettingsLoader();
 	loader->saveSettings(_tmp);
 	RenderWindow::getInstance()->setSettings(_tmp);
