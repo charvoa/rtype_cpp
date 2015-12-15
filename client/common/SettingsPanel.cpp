@@ -88,7 +88,7 @@ void	SettingsPanel::setUserInterface()
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 	int	layout = 0;
 	int id = window->getPanels().top()->getLabels().size();
 
@@ -156,7 +156,7 @@ void    SettingsPanel::defaultSettings()
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 	int id = 3;
 
 	while (it != end)
@@ -184,7 +184,7 @@ void    SettingsPanel::back()
 
 void    SettingsPanel::save()
 {
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(true);
 	loader->saveSettings(_tmp);
 	RenderWindow::getInstance()->setSettings(_tmp);
 }

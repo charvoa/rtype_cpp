@@ -75,7 +75,7 @@ void	Settings::dumpBinds() const
 {
 	std::vector<Bind*>::const_iterator it = _binds.begin();
 	std::vector<Bind*>::const_iterator end = _binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 
 	while (it != end)
 	{

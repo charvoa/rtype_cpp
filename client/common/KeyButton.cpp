@@ -33,7 +33,7 @@ void		KeyButton::setId(unsigned int id)
 
 void		KeyButton::reset(std::string const& title)
 {
-	SettingsLoader	*loader = new SettingsLoader();
+	SettingsLoader	*loader = new SettingsLoader(false);
 	RenderWindow	*window = RenderWindow::getInstance();
 
 	(window->getPanels().top()->getLabels().at(_id)).setString(title);
@@ -46,7 +46,7 @@ void		KeyButton::setBind(sf::Event event)
 {
 	if (_waiting == false)
 		return;
-	SettingsLoader	*loader = new SettingsLoader();
+	SettingsLoader	*loader = new SettingsLoader(false);
 	RenderWindow	*window = RenderWindow::getInstance();
 	std::string		newTitle = loader->keyToString(event.key.code);
 
