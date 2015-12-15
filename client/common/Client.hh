@@ -25,14 +25,14 @@
 
 //#define IP_ADRESS "10.16.253.178"
 // #define PORT 4242
-//#define IP_ADRESS "0"
+#define IP_ADRESS "0"
 //#define IP_ADRESS "10.16.253.150"
 //#define IP_ADRESS "51.254.139.53"
 //#define IP_ADRESS "10.16.253.178"
 //#define IP_ADRESS "10.16.253.178"
 //#define IP_ADRESS "10.16.253.178"
-#define IP_ADRESS "10.16.252.249"
-#define PORT 4254
+//#define IP_ADRESS "10.16.252.249"
+#define PORT 4253
 //#define PORT 4242
 
 class	Client
