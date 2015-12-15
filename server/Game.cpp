@@ -38,10 +38,28 @@ Game::~Game() {}
 
 void Game::addClients(std::vector<Client *> &p)
 {
+  int	i = 1;
+  E_PLAYER	player;
   for (std::vector<Client *>::iterator it = p.begin();
        it != p.end() ; ++it)
     {
-      _eM.createEntity(E_PLAYER, *(*it));
+      switch (i)
+	{
+	case 1:
+	  player = E_PLAYER1;
+	  break;
+	case 2:
+	  player = E_PLAYER2;
+	  break;
+	case 3:
+	  player = E_PLAYER3;
+	  break;
+	case 4:
+	  player = E_PLAYER4;
+	  break;
+	}
+      _eM.createEntity(player, *(*it));
+      i++;
     }
 }
 
