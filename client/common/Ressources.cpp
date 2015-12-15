@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Tue Dec 15 07:38:25 2015 Serge Heitzler
+// Last update Tue Dec 15 11:36:42 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -41,6 +41,8 @@ Ressources::Ressources()
   _logo = new Texture();
   _cockpit = new Texture();
   _greyPanel = new Texture();
+  _keyboard = new Texture();
+  _controller = new Texture();
   
   _backgroundStartPanel->loadFromFile("../common/misc/background.png");
   _backgroundRoomPanel->loadFromFile("../common/misc/room_background.png");
@@ -55,6 +57,8 @@ Ressources::Ressources()
   _logo->loadFromFile("../common/misc/rtype_logo.png");
   _cockpit->loadFromFile("../common/misc/cockpit.png");
   _greyPanel->loadFromFile("../common/misc/grey_panel.png");
+  _keyboard->loadFromFile("../common/misc/keyboard.png");
+  _controller->loadFromFile("../common/misc/controller.png");
 
   _hud = new Texture();
   _header = new Texture();

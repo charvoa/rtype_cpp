@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 09:44:16 2015 Serge Heitzler
+// Last update Tue Dec 15 11:58:16 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -38,6 +38,8 @@ void		StartPanel::setUserInterface()
   Sprite *logo = new Sprite;
   Sprite *panelUp = new Sprite;
   Sprite *panelDown = new Sprite;
+  Sprite *keyboard = new Sprite;
+  Sprite *controller = new Sprite;
 
 
   earth->setOrigin((RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 2);
@@ -49,6 +51,8 @@ void		StartPanel::setUserInterface()
   logo->setTexture(*((RenderWindow::getInstance())->_ressources->_logo));
   panelUp->setTexture(*((RenderWindow::getInstance())->_ressources->_panelIntroUp));
   panelDown->setTexture(*((RenderWindow::getInstance())->_ressources->_panelIntroDown));
+  controller->setTexture(*((RenderWindow::getInstance())->_ressources->_controller));
+  keyboard->setTexture(*((RenderWindow::getInstance())->_ressources->_keyboard));
 
   backgroundSpace->setPosition(0, 0);
   panelUp->setPosition(0, 0);
@@ -56,6 +60,14 @@ void		StartPanel::setUserInterface()
   earth->setPosition(window->getSize()._x + (RenderWindow::getInstance())->_ressources->_earth->getSize()._x / 6, window->getSize()._y + (RenderWindow::getInstance())->_ressources->_earth->getSize()._y / 6);
   cockpit->setPosition(0, 0);
   logo->setPosition(window->getSize()._x / 2, window->getSize()._y / 6);
+
+  
+  controller->setOrigin((RenderWindow::getInstance())->_ressources->_controller->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_controller->getSize()._y / 2);
+  keyboard->setOrigin((RenderWindow::getInstance())->_ressources->_keyboard->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_keyboard->getSize()._y / 2);
+  controller->setPosition(window->getSize()._x * 0.27, window->getSize()._y * 0.93);
+  keyboard->setPosition(window->getSize()._x * 0.27, window->getSize()._y * 0.93);
+  controller->getSprite().setColor(sf::Color(255, 255, 255, 0));
+  
   logo->scale(0.5);
 
   backgroundSpace->scale(1.1);
@@ -63,6 +75,8 @@ void		StartPanel::setUserInterface()
   _backgrounds.push_back(*backgroundSpace);
   _backgrounds.push_back(*earth);
   _backgrounds.push_back(*cockpit);
+  _backgrounds.push_back(*keyboard);  
+  _backgrounds.push_back(*controller);  
   _backgrounds.push_back(*logo);
   _backgrounds.push_back(*panelUp);
   _backgrounds.push_back(*panelDown);
@@ -166,10 +180,26 @@ void		StartPanel::update()
 
     }
 
+
+  if (sf::Joystick::isConnected(0))
+    {
+      _backgrounds.at(3).getSprite().setColor(sf::Color(255, 255, 255, 0));
+      _backgrounds.at(4).getSprite().setColor(sf::Color(255, 255, 255, 255));
+    }
+  else
+    {
+      _backgrounds.at(3).getSprite().setColor(sf::Color(255, 255, 255, 255));
+      _backgrounds.at(4).getSprite().setColor(sf::Color(255, 255, 255, 0));
+    }
+
+
+
+
+  
   if (i < 640)
     {
-      _backgrounds.at(4).move(0,-3);
-      _backgrounds.at(5).move(0,3);
+      _backgrounds.at(6).move(0,-3);
+      _backgrounds.at(7).move(0,3);
     }
   i++;
 }
