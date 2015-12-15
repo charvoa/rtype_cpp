@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 11:38:13 2015 Nicolas Girardot
+// Last update Tue Dec 15 15:04:53 2015 Nicolas Girardot
 //
 
 #include <thread>
@@ -85,13 +85,13 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-//	usleep(500000);
-//	std::this_thread::sleep_for(4s);
+  usleep(1000000);
+//  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
       std::cout << "Passing Thourhg" << port << std::endl;
       File	file;
-      file.receiveMe(IP_ADRESS, port++, "./recv/", setFileProgression, NULL);
+      file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
 
 
