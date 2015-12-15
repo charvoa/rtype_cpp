@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 15 13:44:55 2015 Nicolas Girardot
+// Last update Tue Dec 15 06:39:16 2015 Serge Heitzler
 //
 
 
@@ -19,6 +19,7 @@
 #include <Client.hh>
 #include <CRC.hpp>
 #include <CreateRequest.hpp>
+#include <JoinPanel.hh>
 
 /////Function to split data
 
@@ -160,6 +161,7 @@ void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Join Error" << std::endl;
+  JoinPanel::setError(x.at(0));
 }
 
 void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
