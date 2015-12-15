@@ -37,7 +37,7 @@ void Server::init(int port)
 
   this->_botManager = new BotManager("../libs/");
   this->_roomManager.setBotManager(this->_botManager->getBotList());
-  this->_monitoring.start();
+  this->_monitoring.start(this);
   // std::list<Bot*> toto = this->_botManager->getBotList();
   // for (std::list<Bot*>::iterator it = toto.begin();
   //      it != toto.end(); ++it) {
