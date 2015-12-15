@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Tue Dec 15 11:36:53 2015 Nicolas Girardot
+// Last update Tue Dec 15 11:46:22 2015 Nicolas Girardot
 //
 
 #ifndef CLIENT_HH_
@@ -30,8 +30,10 @@
 //#define IP_ADRESS "10.16.253.150"
 //#define IP_ADRESS "51.254.139.53"
 //#define IP_ADRESS "0"
-#define IP_ADRESS "10.16.252.249"
-
+#define IP_ADRESS "0"
+//#define IP_ADRESS "10.16.253.178"
+//#define IP_ADRESS "10.16.253.178"
+//#define IP_ADRESS "10.16.252.249"
 
 class	Client
 {

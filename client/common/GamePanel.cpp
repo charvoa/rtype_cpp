@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 10:02:36 2015 Nicolas Girardot
+// Last update Tue Dec 15 12:11:19 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -31,12 +31,15 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      std::cout << "Thread UDP" << std::endl;
-      std::cout << "MICH MICH !" << std::endl;
       try
 	{
-	  a = Client::getUDPNetwork()->read();
-	  std::cout << "Data UDP is " << a.data << std::endl;
+
+	  a = Client::getNetwork()->read();
+	  // if (a == NULL)
+	  // {
+	  //   std::cout << "Connection Lost with server" << std::endl;
+	  //   exit (0);
+	  // }
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
