@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 12:19:15 2015 Nicolas Girardot
+// Last update Tue Dec 15 12:26:34 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -40,6 +40,7 @@ void	*readUDP(void *s)
 	  //   std::cout << "Connection Lost with server" << std::endl;
 	  //   exit (0);
 	  // }
+	  std::cout << "UDP data is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
