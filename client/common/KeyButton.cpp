@@ -51,10 +51,10 @@ void		KeyButton::setBind(sf::Event event)
 	std::string		newTitle = loader->keyToString(event.key.code);
 
 	//event joystick ou key ?*
-	std::cout << "setBind de " << std::to_string(_id) << std::endl;
 	(window->getPanels().top()->getLabels().at(_id)).setString(newTitle);
+	(window->getPanels().top()->getLabels().at(_id)).setOrigin((window->getPanels().top()->getLabels().at(_id)).getText().getGlobalBounds().width / 2, (window->getPanels().top()->getLabels().at(_id)).getText().getGlobalBounds().height / 2);
+
 	setTitle(newTitle);
-	std::cout << "id : " << _id << std::endl;
 	JoystickEvent eventJoystick(0);
 	switch (_id)
 	{
