@@ -91,6 +91,7 @@ public:
   ANetwork *_network;
 private:
   void sendNewEntity(int type, int id);
+  void updateAmmo();
 };
 
 #endif
