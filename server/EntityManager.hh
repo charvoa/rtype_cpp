@@ -31,15 +31,15 @@ public:
   ~EntityManager();
 
   int		createEntity(E_EntityType type);
-  int		createEntity(E_EntityType type, const Client &);
+  int		createEntity(E_EntityType type,  Client &);
   int		createEntity(E_EntityType type, AEntity *);
-  int		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
+  int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
   void		removeEntity(AEntity &entity);
   void		removeEntityById(int id);
-  std::vector<AEntity*> const getEntities() const;
-  AEntity	*getEntityById(int id) const;
-  std::vector<AEntity*> const getEntitiesByType(E_EntityType type) const;
-  std::vector<AEntity*> const getAmmoEntities() const;
+  std::vector<AEntity*>  getEntities() ;
+  AEntity	*getEntityById(int id) ;
+  std::vector<AEntity*>  getEntitiesByType(E_EntityType type) ;
+  std::vector<AEntity*>  getAmmoEntities() ;
 };
 
 #endif /* _ENTITYMANAGER_HH_ */

@@ -75,7 +75,7 @@ void	Settings::dumpBinds() const
 {
 	std::vector<Bind*>::const_iterator it = _binds.begin();
 	std::vector<Bind*>::const_iterator end = _binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 
 	while (it != end)
 	{
@@ -133,6 +133,7 @@ void	Settings::setKey(Bind::BindType type, sf::Keyboard::Key key)
 	std::vector<Bind*>::iterator it = _binds.begin();
 	std::vector<Bind*>::iterator end = _binds.end();
 
+	std::cout << "SETTINGS::SETKEY ?????" << std::endl;
 	while (it != end)
 	{
 		if (type == (*it)->getType())

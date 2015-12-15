@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Tue Dec 15 04:41:54 2015 Serge Heitzler
+// Last update Mon Dec 14 19:43:05 2015 Joris Bertomeu
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -51,7 +51,8 @@ typedef enum RequestFromServer
     S_LOAD_SPRITES = 118,
     S_FILE_TOTAL_SIZE = 119,
     S_NEW_ENTITY = 120,
-    S_SHOOT = 121
+    S_SHOOT = 121,
+    S_DOWNLOAD_COMPLETE = 122
   } RequestFromServer;
 
 #endif /* PROTOCOLEENUM_HH_ */

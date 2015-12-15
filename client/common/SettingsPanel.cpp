@@ -88,7 +88,7 @@ void	SettingsPanel::setUserInterface()
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 	int	layout = 0;
 	int id = window->getPanels().top()->getLabels().size();
 
@@ -123,9 +123,10 @@ void	SettingsPanel::setUserInterface()
 void    SettingsPanel::setGlobalVolume(int global)
 {
     Volume vol = _tmp->getVolume();
-
+	std::cout << "volume avant : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
     vol.setGlobal(global);
     _tmp->setVolume(vol);
+	std::cout << "volume après : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
 }
 
 void    SettingsPanel::setEffectsVolume(int effects)
@@ -155,7 +156,7 @@ void    SettingsPanel::defaultSettings()
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 	int id = 3;
 
 	while (it != end)
@@ -183,8 +184,7 @@ void    SettingsPanel::back()
 
 void    SettingsPanel::save()
 {
-	std::cout << "SETTINGS PANEL SAVE" << std::endl;
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(true);
 	loader->saveSettings(_tmp);
 	RenderWindow::getInstance()->setSettings(_tmp);
 }
