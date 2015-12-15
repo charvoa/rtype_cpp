@@ -107,3 +107,18 @@ std::vector<AEntity*> const EntityManager::getEntitiesByType(E_EntityType type) 
     }
   return (entitiesByType);
 }
+
+std::vector<AEntity*> const EntityManager::getAmmoEntities() const
+{
+  std::vector<AEntity*> Ammos;
+  E_EntityType type;
+
+  type = E_INVALID;
+  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
+    {
+      type = (*it)->getType();
+      if (type == E_RIFLE || type == E_MISSILE || type == E_LASER)
+	Ammos.push_back(*it);
+    }
+  return (Ammos);
+}

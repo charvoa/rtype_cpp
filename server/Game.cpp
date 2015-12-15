@@ -233,31 +233,25 @@ void Game::handleShoot(void *data, Client *client)
   std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-
   Player *p = this->getPlayerByClient(client);
   E_EntityType type = E_INVALID;
   int	id;
-
   if (weaponType == "E_RIFLE")
     type = E_RIFLE;
   else if (weaponType == "E_MISSILE")
     type = E_MISSILE;
   else if (weaponType == "E_LASER")
     type = E_LASER;
-
-  //  std::cout << "Type of weapon : |" << type << "|" << std::endl;
   if (type != E_INVALID)
      id = _eM.createEntity(type, p);
-
-
   std::cout << "After create entity " << std::endl;
-  sendNewEntity(type, id);
-
+  sendNewEntity(type, id); // Send  Bullet created
+  AEntity *bullet = _eM.getEntityById(id);
+  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
   std::stringstream ss;
-
   ss << type;
   ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-
   std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
