@@ -107,8 +107,3 @@ std::vector<AEntity*> const EntityManager::getEntitiesByType(E_EntityType type) 
     }
   return (entitiesByType);
 }
-
-void	EntityManager::update()
-{
-
-}
