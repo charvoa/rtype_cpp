@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 09:54:27 2015 Serge Heitzler
+// Last update Tue Dec 15 12:13:56 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -57,7 +57,7 @@ GamePanel::GamePanel()
 
   _randPosY = new Random(250, 600);
   _randPlanet = new Random(0, 7);
-
+  _randBackground = new Random(0, 2);
 
   std::unique_ptr<AThread> t(new Thread(1));
   char str1[] = "";
@@ -96,17 +96,29 @@ GamePanel::GamePanel()
   _labels.push_back(*waveNumber);
 
   Sprite *backgroundSpace1 = new Sprite;
-
-  backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
-  backgroundSpace1->setPosition(0, 0);
-  _backgrounds.push_back(*backgroundSpace1);
-
   Sprite *backgroundSpace2 = new Sprite;
 
-  backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
+  switch (_randBackground->generate<int>())
+    {
+    case 0:
+      backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame1));
+      backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame1));
+      break;
+    case 1:
+      backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
+      backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
+      break;
+    case 2:
+      backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame3));
+      backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame3));
+      break;
+    }
+      backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame3));
+  backgroundSpace1->setPosition(0, 0);
   backgroundSpace2->setPosition(backgroundSpace2->getGlobalBounds().second.first, 0);
-  _backgrounds.push_back(*backgroundSpace2);
 
+  _backgrounds.push_back(*backgroundSpace1);
+  _backgrounds.push_back(*backgroundSpace2);
 
   Sprite *topGame1 = new Sprite;
 
