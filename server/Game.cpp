@@ -33,7 +33,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
 
-  _bM = new BotManager("../libs");
+  // _bM = new BotManager("../libs");
 }
 
 Game::~Game() {}
