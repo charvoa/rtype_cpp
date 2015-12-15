@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Dec  2 18:06:33 2015 Nicolas Charvoz
-// Last update Wed Dec  2 21:17:21 2015 Nicolas Charvoz
+// Last update Tue Dec 15 16:34:49 2015 Nicolas Charvoz
 //
 
 #ifndef AMUTEX_HH_
@@ -23,6 +23,7 @@ public:
   };
 
   virtual void lock() = 0;
+  virtual bool try_lock() = 0;
   virtual void unlock() = 0;
 };
 

@@ -38,13 +38,12 @@ Game::~Game() {}
 
 void Game::addClients(std::list<Client *> &p)
 {
-  _mutex->lock();
   for (std::list<Client *>::iterator it = p.begin();
        it != p.end() ; ++it)
     {
       _eM.createEntity(E_PLAYER, *(*it));
     }
-  _mutex->unlock();
+
 }
 
 void Game::setParameters(Parameters &p)
@@ -54,7 +53,6 @@ void Game::setParameters(Parameters &p)
 
 Client *Game::getClientBySocket(ISocket *socket) const
 {
-  _mutex->lock();
   for (std::list<Client*>::const_iterator it = _clients.begin();
        it != _clients.end(); ++it)
     {
@@ -63,13 +61,11 @@ Client *Game::getClientBySocket(ISocket *socket) const
 	  return (*it);
 	}
     }
-  _mutex->unlock();
   throw std::logic_error("Cannot find this client by socket");
 }
 
 Player *Game::getPlayerByClient(Client *client)
 {
-  _mutex->lock();
   std::list<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
 
   for (std::list<AEntity*>::iterator it = _players.begin();
@@ -80,7 +76,7 @@ Player *Game::getPlayerByClient(Client *client)
       if (ptmp->getClient().getUDPSocket()->isEqualTo(client->getSocket()))
 	return (ptmp);
     }
-  _mutex->unlock();
+
   throw std::logic_error("Cannot find this player by client");
 
 }
@@ -89,7 +85,6 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 {
   std::cout << "Game :: handleHandshakeUDP " << std::endl;
 
-  _mutex->lock();
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
@@ -100,7 +95,7 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 	  printf("Apres le setUDPSocket\n");
 	}
     }
-  _mutex->unlock();
+
 }
 
 std::pair<int, int> Game::getDirections(const std::string &dir)
@@ -139,33 +134,35 @@ bool Game::checkMove(int x, int y)
 
 void Game::checkWall(Player *player)
 {
-  _mutex->lock();
-  ComponentPosition *pPlayer =
+  ComponentPosition *pPlayer;
+
+
+  pPlayer =
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  _mutex->unlock();
+
   if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
     {
       this->updateLife(player, 2);
     }
 }
 
-
 void Game::handleMove(void *data, Client *client)
 {
-  //  std::cout << "Game :: handleMove" << std::endl;
+  std::cout << "Game :: handleMove" << std::endl;
+  ComponentPosition *pPlayer;
   try {
     Player *player = this->getPlayerByClient(client);
 
     std::stringstream ss;
 
-    _mutex->lock();
-    ComponentPosition *pPlayer =
+    //if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
+    pPlayer =
       reinterpret_cast<ComponentPosition*>(player->getSystemManager()
-				  ->getSystemByComponent(C_POSITION)
-				  ->getComponent());
-    _mutex->unlock();
+					   ->getSystemByComponent(C_POSITION)
+					   ->getComponent());
+    //
     auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
     // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
@@ -173,9 +170,9 @@ void Game::handleMove(void *data, Client *client)
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       {
 	this->checkWall(player);
-	_mutex->lock();
+	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-      	_mutex->unlock();
+	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
       }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
@@ -185,7 +182,6 @@ void Game::handleMove(void *data, Client *client)
 
 void Game::updateScore(Player *p, Game::scoreDef score)
 {
-  _mutex->lock();
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
   std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
@@ -194,12 +190,12 @@ void Game::updateScore(Player *p, Game::scoreDef score)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
-  _mutex->unlock();
+
 }
 
 void Game::updateLife(Player *p, int reset)
 {
-  _mutex->lock();
+
   std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
@@ -222,12 +218,11 @@ void Game::updateLife(Player *p, int reset)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
     }
-  _mutex->unlock();
+
 }
 
 void Game::sendNewEntity(int type, int id)
 {
-  _mutex->lock();
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   ANetwork::t_frame	frame;
   std::string	sendData = std::to_string(type) + ";" + std::to_string(id);
@@ -237,41 +232,53 @@ void Game::sendNewEntity(int type, int id)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
-  _mutex->unlock();
+
 }
 
 void Game::handleShoot(void *data, Client *client)
 {
-  _mutex->lock();
- std::cout << "Game :: handleShoot" << std::endl;
-  std::string weaponType =
-    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+    (std::chrono::system_clock::now() - _start);
 
-  Player *p = this->getPlayerByClient(client);
-  E_EntityType type = E_INVALID;
-  int	id;
-  if (weaponType == "E_RIFLE")
-    type = E_RIFLE;
-  else if (weaponType == "E_MISSILE")
-    type = E_MISSILE;
-  else if (weaponType == "E_LASER")
-    type = E_LASER;
-  if (type != E_INVALID)
-     id = _eM.createEntity(type, p);
-  std::cout << "After create entity " << std::endl;
-  sendNewEntity(type, id); // Send  Bullet created
-  AEntity *bullet = _eM.getEntityById(id);
-  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-  std::stringstream ss;
-  ss << type;
-  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+  if (duration.count() % 8 == 0)
     {
-      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+
+      std::cout << "Game :: handleShoot" << std::endl;
+      std::string weaponType =
+	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+
+      Player *p = this->getPlayerByClient(client);
+      E_EntityType type = E_INVALID;
+      int	id;
+
+      if (weaponType == "E_RIFLE")
+	type = E_RIFLE;
+      else if (weaponType == "E_MISSILE")
+	type = E_MISSILE;
+      else if (weaponType == "E_LASER")
+	type = E_LASER;
+
+      if (type != E_INVALID)
+	id = _eM.createEntity(type, p);
+
+      std::cout << "After create entity " << std::endl;
+      sendNewEntity(type, id); // Send  Bullet created
+
+      AEntity *bullet = _eM.getEntityById(id);
+      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+
+      std::stringstream ss;
+      ss << type;
+
+      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	{
+	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	}
+
     }
-  _mutex->unlock();
 }
 
 void Game::handleCommand(void *data, Client *client)
@@ -300,8 +307,8 @@ void *readThread(void *sData)
 
   while (1)
     {
-       Client *client = new Client(n->select());
-       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
+      Client *client = new Client(n->select());
+      if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame))))
 	{
 	  n->unlistenSocket(client->getSocket());
 	  continue;
@@ -329,7 +336,7 @@ void Game::addMonster()
 
 void Game::initPlayersPosition()
 {
-  _mutex->lock();
+
   int	x = 10;
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity *>::iterator it;
@@ -338,14 +345,12 @@ void Game::initPlayersPosition()
     {
       (*it)->update(x, rand.generate<int>());
     }
-  _mutex->unlock();
+
 }
 
 void Game::updateAmmo()
 {
-  _mutex->lock();
   std::list<AEntity*> _vec = _eM.getAmmoEntities();
-
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
@@ -366,16 +371,15 @@ void Game::updateAmmo()
 	  //TIME LASER UPDATE
 	}
     }
-  _mutex->unlock();
+
 }
 
 void Game::sendGameData()
 {
-  _mutex->lock();
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity *> _entities = _eM.getEntities();
 
-   for (std::list<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
+  for (std::list<AEntity *>::const_iterator it = _players.begin(); it != _players.end(); ++it)
     {
       for (std::list<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
@@ -397,7 +401,7 @@ void Game::sendGameData()
 	    }
 	}
     }
-  _mutex->unlock();
+
 }
 
 
@@ -433,24 +437,23 @@ bool Game::run()
       auto start_time = std::chrono::steady_clock::now();
       auto end_time = start_time + frame_duration(4);
       if (duration.count() % 16 == 0)
-      	{
+	{
 	  if (past == true)
 	    {
 	      std::this_thread::sleep_until(end_time);
 	      past = false;
 	    }
 	  this->updateAmmo();
-      	  this->sendGameData();
-      	}
+	  this->sendGameData();
+	}
     }
   return true;
 }
 
 void Game::addCommandToQueue(ANetwork::t_frame frame)
 {
-  _mutex->lock();
   _commandQueue.push(frame);
-  _mutex->unlock();
+
 }
 
 const std::string &Game::getId() const
