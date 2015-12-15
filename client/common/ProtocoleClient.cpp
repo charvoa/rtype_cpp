@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 15 00:05:32 2015 Serge Heitzler
+// Last update Tue Dec 15 04:41:14 2015 Serge Heitzler
 //
 
 
@@ -72,8 +72,15 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
   _functions.insert(std::make_pair(S_FILE_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
-  _functions.insert(std::make_pair(S_NEW_ENEMY, &ProtocoleClient::newEnemy));
-  _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::shoot));
+  _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::newEnemy));
+  _functions.insert(std::make_pair(S_NEW_ENTITY, &ProtocoleClient::newEnemy));
+}
+
+void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "New Entity" << std::endl;
+  GamePanel::newEntity(x);
 }
 
 void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)

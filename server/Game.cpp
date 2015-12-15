@@ -129,15 +129,27 @@ bool Game::checkMove(int x, int y)
   return true;
 }
 
+void Game::checkWall(Player *player)
+{
+  ComponentPosition *pPlayer =
+    reinterpret_cast<ComponentPosition*>(player->getSystemManager()
+					 ->getSystemByComponent(C_POSITION)
+					 ->getComponent());
+  if (pPlayer->getY() == 0 || pPlayer->getY() == 50)
+    {
+      this->updateLife(player, false);
+      std::cout << "J'ai touché la chatte à la voisine" << std::endl;
+    }
+}
+
+
 void Game::handleMove(void *data, Client *client)
 {
-  std::cout << "Game :: handleMove" << std::endl;
+  //  std::cout << "Game :: handleMove" << std::endl;
   try {
     Player *player = this->getPlayerByClient(client);
 
     std::stringstream ss;
-
-    std::cout << "APRES PLAYERBYCLIENT" << std::endl;
 
     ComponentPosition *pPlayer =
       reinterpret_cast<ComponentPosition*>(player->getSystemManager()
@@ -146,11 +158,13 @@ void Game::handleMove(void *data, Client *client)
 
     auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-    std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
-    std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
+    // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
+    // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
-      player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-
+      {
+	//	 this->checkWall(player);
+	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+      }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
@@ -193,6 +207,19 @@ void Game::updateLife(Player *p, bool reset)
 
 }
 
+void Game::sendNewEntity(int type, int id)
+{
+  std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  ANetwork::t_frame	frame;
+  std::string	sendData = std::to_string(type) + ";" + std::to_string(id);
+
+  frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
+  for (std::vector<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+}
+
 void Game::handleShoot(void *data, Client *client)
 {
   std::cout << "Game :: handleShoot" << std::endl;
@@ -201,8 +228,8 @@ void Game::handleShoot(void *data, Client *client)
 
 
   Player *p = this->getPlayerByClient(client);
-
   E_EntityType type = E_INVALID;
+  int	id;
 
   if (weaponType == "E_RIFLE")
     type = E_RIFLE;
@@ -211,11 +238,13 @@ void Game::handleShoot(void *data, Client *client)
   else if (weaponType == "E_LASER")
     type = E_LASER;
 
-  std::cout << "Type of weapon : |" << type << "|" << std::endl;
+  //  std::cout << "Type of weapon : |" << type << "|" << std::endl;
   if (type != E_INVALID)
-    _eM.createEntity(type, p);
+     id = _eM.createEntity(type, p);
+
 
   std::cout << "After create entity " << std::endl;
+  sendNewEntity(type, id);
 
   std::stringstream ss;
 
@@ -305,13 +334,13 @@ void Game::sendGameData()
     {
       for (std::vector<AEntity *>::iterator it2 = _entities.begin(); it2 != _entities.end(); ++it2)
 	{
-	  std::cout << "SS in data : " << (*it2)->getName()  << std::endl;
+	  //std::cout << "SS in data : " << (*it2)->getName()  << std::endl;
 
 	  ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((*it2)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
-	  std::cout << "SS in data : " << ss.str().c_str() << std::endl;
+	  //	  std::cout << "SS in data : " << ss.str().c_str() << std::endl;
 
 
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
@@ -325,6 +354,7 @@ void Game::sendGameData()
 	}
     }
 }
+
 
 bool Game::run()
 {

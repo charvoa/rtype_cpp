@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Dec 14 09:14:16 2015 Serge Heitzler
+// Last update Tue Dec 15 11:38:13 2015 Nicolas Girardot
 //
 
 #include <RenderWindow.hh>
@@ -83,7 +83,7 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  std::cout << "In In In nbr of files is : " << nbrFiles << std::endl;
+  usleep(500000);
   for (int a = 0; a < nbrFiles; a++)
     {
       std::cout << "Passing Thourhg" << port << std::endl;
@@ -231,7 +231,7 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
   i--;
   _players.at(i)->setCurrentClient(true);
   _currentPlayer = i + 1;
-  
+
   switch (i)
     {
     case 0:

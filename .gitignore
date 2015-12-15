@@ -15,3 +15,4 @@ r-type_client
 test_rtype
 server_rtype
 unitTest/build/
+client/build/recv/

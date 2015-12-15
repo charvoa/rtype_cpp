@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 04:31:15 2015 Serge Heitzler
+// Last update Tue Dec 15 04:37:52 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -33,8 +33,14 @@ void	*readUDP(void *s)
     {
       try
 	{
+
 	  a = Client::getUDPNetwork()->read();
-	  //	  std::cout << "Data UDP is " << a.data << std::endl;
+	  // if (a == NULL)
+	  // {
+	  //   std::cout << "Connection Lost with server" << std::endl;
+	  //   exit (0);
+	  // }
+	  std::cout << "UDP data is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
@@ -129,7 +135,7 @@ planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
   _backgrounds.push_back(*hud);
 
 
-  
+
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -173,7 +179,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
     }
 
   /* USER INTERFACE HUD */
-  
+
   _mainPlayer = new MainPlayer(currentPlayer);
   i = 1;
   int j = 1;
@@ -189,16 +195,15 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 	}
       i++;
     }
-  
 
   _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(6, ((RenderWindow::getInstance())->_ressources->_rocket)));
+  _dicoTextures.insert(std::make_pair(7, ((RenderWindow::getInstance())->_ressources->_laserBlueBig)));
+  _dicoTextures.insert(std::make_pair(8, ((RenderWindow::getInstance())->_ressources->_laserRedBig)));
+  _dicoTextures.insert(std::make_pair(9, ((RenderWindow::getInstance())->_ressources->_laserGreenBig)));
+  _dicoTextures.insert(std::make_pair(10, ((RenderWindow::getInstance())->_ressources->_laserYellowBig)));
+  //  _dicoTextures.insert(std::make_pair(11, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  //  _dicoTextures.insert(std::make_pair(12, ((RenderWindow::getInstance())->_ressources->_riffle)));
   
 }
 
@@ -405,7 +410,7 @@ void		GamePanel::render()
     {
       window->draw((*it).second->getSprite());
     }
-
+  _inputManager.keyPressedInGame();
 }
 
 void		GamePanel::drawOtherPlayer()
