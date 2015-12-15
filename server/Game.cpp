@@ -326,6 +326,26 @@ void Game::initPlayersPosition()
     }
 }
 
+void Game::updateAmmo()
+{
+  std::vector<AEntity*> _vec = _eM.getAmmoEntities();
+  for (std::vector<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
+    {
+      if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
+	{
+	  // TIME RIFLE UPDATE
+	}
+      else if (Missile *missile = dynamic_cast<Missile *>(*it))
+	{
+	  //TIME MISSILE UPDATE
+	}
+      else if (Laser *laser = dynamic_cast<Laser *>(*it))
+	{
+	  //TIME LASER UPDATE
+	}
+    }
+}
+
 void Game::sendGameData()
 {
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);

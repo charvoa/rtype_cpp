@@ -26,7 +26,7 @@ Settings::Settings(Volume vol, std::vector<Bind*> binds, Settings::Difficulty di
 	_defaultDifficulty = difficulty;
 }
 
-Settings::Settings(Volume vol, std::vector<Bind*> binds, Settings::Difficulty difficulty, std::string const& ip, short int port)
+Settings::Settings(Volume vol, std::vector<Bind*> binds, Settings::Difficulty difficulty, std::string const& ip, int port)
 {
 	_volume = vol;
 	_binds = binds;
@@ -163,7 +163,7 @@ void	Settings::setIP(std::string const& ip)
 	_ip = ip;
 }
 
-void	Settings::setPort(short int port)
+void	Settings::setPort(int port)
 {
 	_port = port;
 }
@@ -173,7 +173,7 @@ std::string		Settings::getIP() const
 	return _ip;
 }
 
-short int			Settings::getPort() const
+int			Settings::getPort() const
 {
 	return _port;
 }
