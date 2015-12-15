@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Tue Dec 15 06:49:51 2015 Serge Heitzler
+// Last update Tue Dec 15 07:26:43 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -142,6 +142,8 @@ void    JoinPanel::updateOnTextEntered(int key)
 
 void	JoinPanel::setError(const std::string &error)
 {
+
+  Sound *s = Client::getSound();
   RenderWindow *window = RenderWindow::getInstance();
   static_cast<JoinPanel*>(window->getPanels().top())->setAlpha(255);
   static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).setString(error);
@@ -151,7 +153,8 @@ void	JoinPanel::setError(const std::string &error)
 
   
   static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).getText().setColor(sf::Color(255, 0, 0, static_cast<JoinPanel*>(window->getPanels().top())->getAlpha()));
-  
+
+  s->playSound("denied");  
 }
 
 void	        JoinPanel::update()

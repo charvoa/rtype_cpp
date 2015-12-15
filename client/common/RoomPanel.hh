@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
-// Last update Mon Dec 14 08:01:27 2015 Serge Heitzler
+// Last update Tue Dec 15 07:34:59 2015 Serge Heitzler
 //
 
 #ifndef ROOMPANEL_HH_
@@ -28,6 +28,7 @@ public:
   void			difficulty(Settings::Difficulty);
   static void  		playerLeft(std::vector<std::string> &vector);
   static void  		newPlayer(std::string &newUsername);
+  static void  	        downloadComplete(std::string &usernameComplete);
   void			launchGame();
   void			back();
   void			update();

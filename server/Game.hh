@@ -47,6 +47,7 @@ private:
   AMutex *_mutex;
   int	_stage;
   int	_nbDisplay;
+  std::chrono::time_point<std::chrono::system_clock> _start;
 
 public:
 
@@ -82,7 +83,7 @@ public:
   bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
   void updateScore(Player*, Game::scoreDef);
-  void updateLife(Player*, bool);
+  void updateLife(Player*, int);
   int  getNumberEnemyMax();
   void addMonster();
   void initPlayersPosition();
@@ -91,6 +92,7 @@ public:
   ANetwork *_network;
 private:
   void sendNewEntity(int type, int id);
+  void updateAmmo();
 };
 
 #endif

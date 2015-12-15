@@ -1,11 +1,11 @@
 //
 // GamePanel.cpp for RTypoe in /home/nicolas/rendu/rtype_cpp/client/common
 //
-// Made by Nicolas Girardot
+// Made @OCby Nicolas Girardot
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 06:50:05 2015 Serge Heitzler
+// Last update Tue Dec 15 09:43:37 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -22,7 +22,6 @@
 #include <Client.hh>
 #include <ProtocoleClient.hh>
 #include <AThread.hpp>
-
 
 void	*readUDP(void *s)
 {
@@ -88,7 +87,6 @@ GamePanel::GamePanel()
 
   Text	*waveNumber = new Text();
 
-
   waveNumber->setString("0");
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
@@ -97,13 +95,11 @@ GamePanel::GamePanel()
   waveNumber->setColor(Color::WHITE);
   _labels.push_back(*waveNumber);
 
-
   Sprite *backgroundSpace1 = new Sprite;
 
   backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame2));
   backgroundSpace1->setPosition(0, 0);
   _backgrounds.push_back(*backgroundSpace1);
-
 
   Sprite *backgroundSpace2 = new Sprite;
 
@@ -171,6 +167,8 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
 //   _backgrounds.push_back(*planet);
 
   this->setPlayers(static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers(), static_cast<RoomPanel*>(window->getPanels().top())->getCurrentPlayer());
+
+  //  static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
 }
 
 GamePanel::~GamePanel() {}
@@ -202,6 +200,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 	}
       ship->scale(0.2);
       ship->setPosition(-500, 500);
+      ship->setOrigin((RenderWindow::getInstance())->_ressources->_blackShip->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_blackShip->getSize()._y / 2);
       _dicoSprites.insert(std::make_pair(i, ship));
       i++;
     }
@@ -257,6 +256,13 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
+}
+
+void		GamePanel::deleteEntity(std::vector<std::string> &vector)
+{
+  int	id = std::atoi(vector.at(0).c_str());
+  std::map<int, Sprite*>::iterator it;
+  it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(id);
 }
 
 void		GamePanel::die()

@@ -135,10 +135,12 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  if (pPlayer->getY() == 0 || pPlayer->getY() == 50)
+
+  std::cout << "Position of player (" << pPlayer->getX() << ","
+	    << pPlayer->getY() << ")" << std::endl;
+  if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
     {
-      this->updateLife(player, false);
-      std::cout << "J'ai touché la chatte à la voisine" << std::endl;
+      this->updateLife(player, 2);
     }
 }
 
@@ -162,7 +164,7 @@ void Game::handleMove(void *data, Client *client)
     // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       {
-	//	 this->checkWall(player);
+	this->checkWall(player);
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
       }
   } catch (const std::exception &e) {
@@ -183,16 +185,19 @@ void Game::updateScore(Player *p, Game::scoreDef score)
     }
 }
 
-void Game::updateLife(Player *p, bool reset)
+void Game::updateLife(Player *p, int reset)
 {
+  std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
 				       ->getSystemByComponent(C_HEALTH)
 				       ->getComponent());
-  if (!reset)
+  if (reset == 0)
     p->update(hP->getLife() - 1);
-  else
+  else if (reset == 1)
     p->update(3);
+  else if (reset == 2)
+    p->update(0);
 
   std::stringstream health;
 
@@ -226,31 +231,25 @@ void Game::handleShoot(void *data, Client *client)
   std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-
   Player *p = this->getPlayerByClient(client);
   E_EntityType type = E_INVALID;
   int	id;
-
   if (weaponType == "E_RIFLE")
     type = E_RIFLE;
   else if (weaponType == "E_MISSILE")
     type = E_MISSILE;
   else if (weaponType == "E_LASER")
     type = E_LASER;
-
-  //  std::cout << "Type of weapon : |" << type << "|" << std::endl;
   if (type != E_INVALID)
      id = _eM.createEntity(type, p);
-
-
   std::cout << "After create entity " << std::endl;
-  sendNewEntity(type, id);
-
+  sendNewEntity(type, id); // Send  Bullet created
+  AEntity *bullet = _eM.getEntityById(id);
+  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
   std::stringstream ss;
-
   ss << type;
   ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-
   std::vector <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   for (std::vector<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
@@ -264,7 +263,7 @@ void Game::handleCommand(void *data, Client *client)
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
 
-  std::cout << "CommandType : " << commandType << std::endl;
+  //  std::cout << "CommandType : " << commandType << std::endl;
 
   try {
     Func fp = _funcMap[commandType];
@@ -317,11 +316,36 @@ void Game::initPlayersPosition()
   int	x = 10;
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::vector<AEntity *>::iterator it;
-  Random	rand(0, 50);
+  Random	rand(2, 48);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
-      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(x, rand.generate<int>());
+    }
+}
+
+void Game::updateAmmo()
+{
+  std::vector<AEntity*> _vec = _eM.getAmmoEntities();
+
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+    (std::chrono::system_clock::now() - _start);
+
+  for (std::vector<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
+    {
+      if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
+	{
+	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+	  rifle->update(p->getX() + 2, p->getY());
+	  // TIME RIFLE UPDATE
+	}
+      else if (Missile *missile = dynamic_cast<Missile *>(*it))
+	{
+	  //TIME MISSILE UPDATE
+	}
+      else if (Laser *laser = dynamic_cast<Laser *>(*it))
+	{
+	  //TIME LASER UPDATE
+	}
     }
 }
 
@@ -340,8 +364,7 @@ void Game::sendGameData()
 
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
-	  //	  std::cout << "SS in data : " << ss.str().c_str() << std::endl;
-
+	  //std::cout << "SS in data : " << ss.str().c_str() << std::endl;
 
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 
@@ -373,7 +396,7 @@ bool Game::run()
   t1->run();
   initPlayersPosition();
 
-  auto start = std::chrono::system_clock::now();
+  _start = std::chrono::system_clock::now();
 
   while (true)
     {
@@ -383,7 +406,7 @@ bool Game::run()
 	  addMonster();
 	}
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-	(std::chrono::system_clock::now() - start);
+	(std::chrono::system_clock::now() - _start);
 
       auto start_time = std::chrono::steady_clock::now();
       auto end_time = start_time + frame_duration(4);
@@ -394,7 +417,8 @@ bool Game::run()
 	      std::this_thread::sleep_until(end_time);
 	      past = false;
 	    }
-      	  sendGameData();
+	  this->updateAmmo();
+      	  this->sendGameData();
       	}
     }
   return true;

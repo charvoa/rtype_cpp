@@ -5,9 +5,8 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 15 06:39:16 2015 Serge Heitzler
+// Last update Tue Dec 15 06:52:23 2015 Serge Heitzler
 //
-
 
 #include <string>
 #include <sstream>
@@ -100,7 +99,7 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   try
     {
       net->init(std::atoi(x.at(0).c_str()), ANetwork::UDP_MODE);
-      net->connect(IP_ADRESS);
+      net->connect(RenderWindow::getInstance()->getSettings()->getIP());
     }
   catch (const std::exception &e)
     {

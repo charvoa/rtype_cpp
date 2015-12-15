@@ -13,6 +13,8 @@
 RenderWindow *RenderWindow::_renderWindow = NULL;
 RenderWindow::RenderWindow()
 {
+	_settings = new Settings("../config/PersonnalConfig.ini");
+	std::cout << "ip : " << _settings->getIP() << " et port : " << _settings->getPort() << std::endl;
 }
 
 RenderWindow	*RenderWindow::getInstance()

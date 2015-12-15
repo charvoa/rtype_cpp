@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Tue Dec 15 04:22:15 2015 Serge Heitzler
+// Last update Tue Dec 15 09:37:36 2015 Serge Heitzler
 //
 
 
@@ -31,6 +31,7 @@ public:
   static void				setCurrentWave(unsigned int value);
   static void				display(std::vector<std::string> &vector);
   static void			        newEntity(std::vector<std::string> &vector);
+  static void			        deleteEntity(std::vector<std::string> &vector);
   static void				die();
   std::vector<Sprite *>			&getSprites();
   OtherPlayer				*getPlayerByName(const std::string &name);
@@ -51,7 +52,7 @@ private:
   MainPlayer				*_mainPlayer;
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;
-  std::map<int, Texture*>	_dicoTextures;
+  std::map<int, Texture*>		_dicoTextures;
   Random				*_randPosY;
   Random				*_randPlanet;
 };

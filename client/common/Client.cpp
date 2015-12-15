@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec 15 12:11:02 2015 Nicolas Girardot
+// Last update Tue Dec 15 07:08:49 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -76,8 +76,9 @@ void	Client::Start()
 
   //Connecting to server
 
-  _network->init(_port, ANetwork::TCP_MODE);
-  _network->connect(IP_ADRESS);
+  _network->init(window->getSettings()->getPort(), ANetwork::TCP_MODE);
+  std::cout << "I p IS : " << window->getSettings()->getIP() << " And port is " << window->getSettings()->getPort() << std::endl;
+  _network->connect(window->getSettings()->getIP());
 
   //Sending Handshake
 
@@ -112,6 +113,7 @@ void	Client::Start()
   //Adding & playing music for Menu
 
   _sound->registerSound("../common/misc/mouseHover.ogg", "hover");
+  _sound->registerSound("../common/misc/accessDenied.ogg", "denied");
   _sound->registerSound("../common/misc/metalDoorOpen.ogg", "door");
   _sound->registerMusic("../common/misc/laserSound.ogg", "laser");
   _sound->registerSound("../common/misc/rocketSound.ogg", "missile");

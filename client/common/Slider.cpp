@@ -1,4 +1,5 @@
 #include "Slider.hh"
+#include "SettingsPanel.hh"
 #include "Ressources.hh"
 
 
@@ -95,10 +96,10 @@ void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 
 	this->setValue((pair.first - _minX) / 7);
 	if (_title == "global")
-		window->getPanels().top()->setGlobalVolume(_value);
+		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setGlobalVolume(_value);
 	else if (_title == "effects")
-		window->getPanels().top()->setEffectsVolume(_value);
+		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setEffectsVolume(_value);
 	else if (_title == "music")
-		window->getPanels().top()->setMusicVolume(_value);
+		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setMusicVolume(_value);
 	_locked = true;
 }

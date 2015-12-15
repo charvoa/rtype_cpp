@@ -39,6 +39,7 @@ public:
   std::vector<AEntity*> const getEntities() const;
   AEntity	*getEntityById(int id) const;
   std::vector<AEntity*> const getEntitiesByType(E_EntityType type) const;
+  std::vector<AEntity*> const getAmmoEntities() const;
 };
 
 #endif /* _ENTITYMANAGER_HH_ */

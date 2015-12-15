@@ -5,9 +5,11 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 06:50:05 2015 Serge Heitzler
+// Last update Tue Dec 15 09:32:56 2015 Serge Heitzler
 //
 
+#include <thread>
+#include <chrono>
 #include <RenderWindow.hh>
 #include <RoomPanel.hh>
 #include <ButtonFactory.hh>
@@ -40,7 +42,6 @@ void	        RoomPanel::setUserInterface()
 
   background->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundRoomPanel));
   background->setPosition(0, 0);
-  background->scale(1);
   _backgrounds.push_back(*background);
 
 
@@ -53,25 +54,15 @@ void	        RoomPanel::setUserInterface()
   _functions.push_back((APanel::funcs)&RoomPanel::back);
   _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
 
-  Texture *blackShipTexture = new Texture;
-  blackShipTexture->loadFromFile("../common/misc/player_black.png");
-  Texture *blueShipTexture = new Texture;
-  blueShipTexture->loadFromFile("../common/misc/player_blue.png");
-  Texture *redShipTexture = new Texture;
-  redShipTexture->loadFromFile("../common/misc/player_red.png");
-  Texture *greenShipTexture = new Texture;
-  greenShipTexture->loadFromFile("../common/misc/player_green.png");
-  Texture *yellowShipTexture = new Texture;
-  yellowShipTexture->loadFromFile("../common/misc/player_yellow.png");
 
-  _spaceShipsTextures.push_back(blackShipTexture);
-  _spaceShipsTextures.push_back(blueShipTexture);
-  _spaceShipsTextures.push_back(redShipTexture);
-  _spaceShipsTextures.push_back(greenShipTexture);
-  _spaceShipsTextures.push_back(yellowShipTexture);
+
+  _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_blackShip));
+  _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_blueShip));
+  _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_redShip));
+  _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_greenShip));
+  _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_yellowShip));
 
   this->createPlayers();
-
 }
 
 void		setFileProgression(int p, void *data)
@@ -83,12 +74,13 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  usleep(500000);
+  usleep(1000000);
+//  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
       std::cout << "Passing Thourhg" << port << std::endl;
       File	file;
-      file.receiveMe(IP_ADRESS, port++, "./recv/", setFileProgression, NULL);
+      file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
 
 
@@ -141,9 +133,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   unsigned int i = 0;
 
-  std::cout << "FIRST USERNAME" << vector.at(0) << std::endl;
-  std::cout << "SECOND USERNAME " << vector.at(1) << std::endl;
-
   while (i < (static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().size()))
     {
       static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(i)->setCurrentClient(false);
@@ -165,8 +154,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
   pos = vector.at(1).find("player");
   unsigned int idToChange = std::stoi(vector.at(1).substr(pos + 6)) - 1;
-
-  std::cout << "id you are " << idToChange << std::endl;
 
   static_cast<RoomPanel*>(window->getPanels().top())->getPlayers().at(idToChange)->setCurrentClient(true);
 
@@ -207,6 +194,21 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
 }
 
+
+//
+
+void		RoomPanel::downloadComplete(std::string &usernameComplete)
+{
+  (void)usernameComplete;
+  
+  std::size_t pos = username.find("player");
+  unsigned int i = std::stoi(usernameComplete.substr(pos + 6));
+    
+  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 6)->getSprite()->setColor(sf::Color(255, 255, 255, 255));
+  i++;
+}
+
+
 int		RoomPanel::getCurrentPlayer()
 {
   return _currentPlayer;
@@ -223,6 +225,8 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       std::cout << vector.at(i) << std::endl;
       getPlayers().at(i)->setUsername(vector.at(i));
       _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
+
+      
       getLabels().at(i + 2).setString(vector.at(i));
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
       _nbPlayers++;
@@ -292,17 +296,36 @@ void		RoomPanel::createPlayers()
       i++;
     }
 
-    Text		       	*roomID = new Text();
+  Text		       	*roomID = new Text();
+  
+  roomID->setString(_idRoom);
+  roomID->setSize(60);
+  roomID->setStyle(1);
+  roomID->setOrigin(roomID->getText().getGlobalBounds().width / 2, roomID->getText().getGlobalBounds().height / 2);
+  roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.03 * window->getSize()._y));
+  roomID->setFont(*((RenderWindow::getInstance())->_ressources->_fontSecond));
+  roomID->setColor(Color::WHITE);
+  _labels.push_back(*roomID);
+  _nbPlayers = 0;
 
-    roomID->setString(_idRoom);
-    roomID->setSize(60);
-    roomID->setStyle(1);
-    roomID->setOrigin(roomID->getText().getGlobalBounds().width / 2, roomID->getText().getGlobalBounds().height / 2);
-    roomID->setPosition(Vector2(0.5 * window->getSize()._x, 0.03 * window->getSize()._y));
-    roomID->setFont(*((RenderWindow::getInstance())->_ressources->_fontSecond));
-    roomID->setColor(Color::WHITE);
-    _labels.push_back(*roomID);
-    _nbPlayers = 0;
+  
+  i = 0;
+  
+  while (i < 4)
+    {
+      Sprite *fireShip = new Sprite;
+      
+      fireShip->setTexture(*((RenderWindow::getInstance())->_ressources->_reactor));
+      fireShip->setPosition(220 + 0.2 * (i + 1) * window->getSize()._x, 0.765 * window->getSize()._y);
+      fireShip->getSprite().setOrigin(_spaceShipsTextures.at(0)->getSize()._x / 2, _spaceShipsTextures.at(0)->getSize()._y / 2);
+      fireShip->getSprite().setColor(sf::Color(255, 255, 255, 0))
+      
+      window->getPanels().top()->getBackgrounds().push_back(*fireShip);
+      i++;
+    }
+
+  
+
 }
 
 
@@ -328,4 +351,5 @@ void		RoomPanel::back()
 
 void	RoomPanel::update()
 {
+  
 }

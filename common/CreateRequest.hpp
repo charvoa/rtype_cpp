@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Thu Dec 10 18:42:46 2015 Nicolas Charvoz
+// Last update Mon Dec 14 17:51:08 2015 Joris Bertomeu
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -48,6 +48,7 @@ public:
     ANetwork::t_frame *frame = (ANetwork::t_frame*)
       malloc(sizeof(ANetwork::t_frame));
 
+    memset(frame, 0, sizeof(ANetwork::t_frame));
     frame->keyPintade = KEY_PINTADE;
     frame->idRequest = id_;
     frame->crc = crc_;
