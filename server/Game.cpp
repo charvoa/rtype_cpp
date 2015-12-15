@@ -136,15 +136,11 @@ void Game::checkWall(Player *player)
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
 
-  std::cout << "Position of player (" << pPlayer->getX() << "," << pPlayer->getY() << ")" << std::endl;
+  std::cout << "Position of player (" << pPlayer->getX() << ","
+	    << pPlayer->getY() << ")" << std::endl;
   if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
     {
-      this->updateLife(player, false);
-      if (pPlayer->getY() >= 49)
-	player->update(pPlayer->getX() + 1, pPlayer->getY() - 3);
-      else
-	player->update(pPlayer->getX() + 1, pPlayer->getY() + 3);
-      std::cout << "J'ai touché la chatte à la voisine Y : " << pPlayer->getY() << std::endl;
+      this->updateLife(player, 2);
     }
 }
 
@@ -189,17 +185,19 @@ void Game::updateScore(Player *p, Game::scoreDef score)
     }
 }
 
-void Game::updateLife(Player *p, bool reset)
+void Game::updateLife(Player *p, int reset)
 {
   std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
 				       ->getSystemByComponent(C_HEALTH)
 				       ->getComponent());
-  if (!reset)
+  if (reset == 0)
     p->update(hP->getLife() - 1);
-  else
+  else if (reset == 1)
     p->update(3);
+  else if (reset == 2)
+    p->update(0);
 
   std::stringstream health;
 
@@ -361,8 +359,7 @@ void Game::sendGameData()
 
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
-	  //	  std::cout << "SS in data : " << ss.str().c_str() << std::endl;
-
+	  //std::cout << "SS in data : " << ss.str().c_str() << std::endl;
 
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 
