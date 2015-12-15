@@ -59,6 +59,7 @@ void Game::addClients(std::vector<Client *> &p)
 	  break;
 	}
       _eM.createEntity(player, *(*it));
+      i++;
     }
 }
 
