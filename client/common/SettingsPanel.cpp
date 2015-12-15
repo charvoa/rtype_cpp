@@ -18,7 +18,7 @@
 SettingsPanel::SettingsPanel()
 {
 	_type = PanelFactory::SETTINGS_PANEL;
-	_tmp = new Settings(std::string("../config/PersonnalConfig.ini"));
+	_tmp = new Settings(std::string("../config/PersonalConfig.ini"));
 }
 
 SettingsPanel::~SettingsPanel()

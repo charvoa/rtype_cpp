@@ -46,7 +46,7 @@ void Player::setScore(int s)
 
 void Player::addSystem(E_Component type)
 {
-  _systemManager.addSystemByType(type);
+  _systemManager->addSystemByType(type);
   if (type == C_MISSILE)
     _missiles = 5;
   else if (type == C_LASER)

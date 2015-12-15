@@ -44,7 +44,6 @@ void Game::addClients(std::list<Client *> &p)
     {
       _eM.createEntity(E_PLAYER, *(*it));
     }
-
 }
 
 void Game::setParameters(Parameters &p)
@@ -79,7 +78,6 @@ Player *Game::getPlayerByClient(Client *client)
     }
 
   throw std::logic_error("Cannot find this player by client");
-
 }
 
 void Game::handleHandshakeUDP(void *data, Client *client)
@@ -96,7 +94,6 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 	  printf("Apres le setUDPSocket\n");
 	}
     }
-
 }
 
 std::pair<int, int> Game::getDirections(const std::string &dir)
@@ -128,7 +125,7 @@ bool Game::checkMove(int x, int y)
 {
   if (x < 0 || x > 110)
     return false;
-  else if (y < 0 || y > 50)
+  else if (y < 0 || y > 49)
     return false;
   return true;
 }
@@ -136,7 +133,6 @@ bool Game::checkMove(int x, int y)
 void Game::checkWall(Player *player)
 {
   ComponentPosition *pPlayer;
-
 
   pPlayer =
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
@@ -172,12 +168,12 @@ void Game::handleMove(void *data, Client *client)
 	this->checkWall(player);
 	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+	player->update(player->refreshHitbox());
 	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
       }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
-
 }
 
 void Game::updateScore(Player *p, Game::scoreDef score)
@@ -190,12 +186,10 @@ void Game::updateScore(Player *p, Game::scoreDef score)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
-
 }
 
 void Game::updateLife(Player *p, int reset)
 {
-
   std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
@@ -214,7 +208,7 @@ void Game::updateLife(Player *p, int reset)
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
   ANetwork::t_frame frameDie;
   if (hP->getLife() == 0){
-    std::string sendData = std::to_string(p->getId());
+    std::string sendData = std::to_string(p->getId()) + ";" + std::to_string(p->getId());
     frameDie = CreateRequest::create(S_DIE, CRC::calcCRC(sendData), sendData.size(), sendData);
   }
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
@@ -224,10 +218,9 @@ void Game::updateLife(Player *p, int reset)
 	dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameDie), sizeof(ANetwork::t_frame));
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
     }
-
 }
 
-void Game::sendNewEntity(std::string &str, int id)
+void Game::sendNewEntity(const std::string &str, int id)
 {
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   ANetwork::t_frame	frame;
@@ -251,7 +244,6 @@ void Game::sendNewEntity(int type, int id)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
-
 }
 
 void Game::handleShoot(void *data, Client *client)
@@ -318,7 +310,6 @@ void Game::handleCommand(void *data, Client *client)
   } catch (const std::exception &e) {
     std::cout << "Cannot achieve this action" << std::endl;
   }
-
 }
 
 void *readThread(void *sData)
@@ -350,10 +341,12 @@ int Game::getNumberEnemyMax()
 void Game::updateMonster()
 {
   std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+
+  std::cout << "bots.size = " << bots.size() << std::endl;
   for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      std::cout << "Position of bot >> " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
+      std::cout << "Position of bot >> " << (*it)->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
       reinterpret_cast<Bot*>(*it)->update();
     }
 }
@@ -365,11 +358,11 @@ void Game::addMonster()
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
-      Random r(0, _botList.size() - 1);
+      Random r(0, _botList.size());
 
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
-      std::cout << "ID DU BOT :" << id << std::endl;
-      this->sendNewEntity(E_BOT, _eM.getEntityById(id));
+
+      this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
   else
@@ -383,11 +376,11 @@ void Game::initPlayersPosition()
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity *>::iterator it;
   Random	rand(2, 48);
+
   for (it = _players.begin(); it != _players.end(); ++it)
     {
       (*it)->update(x, rand.generate<int>());
     }
-
 }
 
 void Game::deleteEntity(AEntity *entity)
@@ -439,6 +432,8 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 1, p->getY());
+      if (p->getX() >= 121)
+	deleteEntity(*it);
     }
 }
 
@@ -467,8 +462,8 @@ bool Game::run()
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
 	  timerMonster.reset();
-	  // this->addMonster();
-	  // this->updateMonster();
+	  this->addMonster();
+	  this->updateMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {

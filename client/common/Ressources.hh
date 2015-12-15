@@ -1,11 +1,11 @@
 //
 // Ressources.hh for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Tue Dec 15 11:36:22 2015 Serge Heitzler
+// Last update Sat Dec 19 14:01:22 2015 Nicolas Girardot
 //
 
 #ifndef RESSOURCES_HH_
@@ -21,9 +21,16 @@
 class Ressources : public APanel
 {
 public:
-  
+
   Ressources();
   ~Ressources();
+
+  Texture		*_explosion_blue;
+  Texture		*_explosion_green;
+  Texture		*_explosion_red;
+  Texture		*_explosion_yellow;
+
+  Texture		*_asteroid;
 
   Texture		*_buttonNormal;
   Texture		*_buttonHighlight;
@@ -37,7 +44,7 @@ public:
 
   Texture		*_panelIntroUp;
   Texture		*_panelIntroDown;
-  
+
   Texture		*_backgroundStartPanel;
   Texture		*_backgroundRoomPanel;
   Texture		*_backgroundBlack;
@@ -51,7 +58,7 @@ public:
   Texture		*_greyPanel;
   Texture		*_keyboard;
   Texture		*_controller;
-  
+
   Texture		*_hud;
   Texture		*_header;
   Texture		*_topGame;
@@ -73,7 +80,7 @@ public:
   Texture		*_laserYellowLittle;
   Texture		*_laserYellowBig;
 
-  
+
   Texture		*_planetEarth;
   Texture		*_planetExodus;
   Texture		*_planetJupiter;
@@ -83,22 +90,22 @@ public:
   Texture		*_planetSaturne;
   Texture		*_deathStar;
 
-  
+
   Texture		*_blackShip;
   Texture		*_blueShip;
   Texture		*_redShip;
   Texture		*_greenShip;
   Texture		*_yellowShip;
-  
+
   Texture		*_blueShipGame;
   Texture		*_redShipGame;
   Texture		*_greenShipGame;
   Texture		*_yellowShipGame;
-  
+
   SFont			*_fontFirst;
   SFont			*_fontSecond;
   SFont			*_fontThird;
-  
+
 private:
 
 };

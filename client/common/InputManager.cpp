@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec 16 14:01:15 2015 Nicolas Girardot
+// Last update Sat Dec 19 06:29:19 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -17,6 +17,7 @@
 #include <CRC.hpp>
 #include <ANetwork.hpp>
 #include <JoinPanel.hh>
+#include <GamePanel.hh>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -28,6 +29,7 @@ InputManager::~InputManager(){}
 
 void			InputManager::setInputType(InputType type)
 {
+
   _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
   _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
 
@@ -49,37 +51,58 @@ void			InputManager::setInputType(InputType type)
     {
       _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::textEnteredInJoinPanel));
     }
+  if (type == InputType::GAME_INPUT)
+    {
+      _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
+      _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
+    }
 
 }
 
 
 std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 {
+  RenderWindow *window = RenderWindow::getInstance();
   int i = 0;
   //std::cout << "KEY " << event.key.code << std::endl;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && !static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
+    static_cast<GamePanel*>(window->getPanels().top())->setEscapeMenu(true);
+  if (!static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
     {
-      // ESCAPE KEY
-    }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    i += 8;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    i += 2;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    i += 4;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    i += 1;
-  if (i != 0)
-    {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
-      net->write(sender);
-    }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-      ANetwork *net = Client::getUDPNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
-      net->write(sender);
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	i += 8;
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	i += 2;
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	i += 4;
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	i += 1;
+      if (i != 0)
+	{
+	  ANetwork *net = Client::getUDPNetwork();
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_MOVE, CRC::calcCRC(std::to_string(i)), 0, std::to_string(i));
+	  net->write(sender);
+	}
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+	  ANetwork *net = Client::getUDPNetwork();
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
+	  net->write(sender);
+	}
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+	  std::cout << "Shooting A" << std::endl;
+	  // ANetwork *net = Client::getUDPNetwork();
+	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
+	  // net->write(sender);
+	}
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+	  std::cout << "Shooting E" << std::endl;
+	  // ANetwork *net = Client::getUDPNetwork();
+	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
+	  // net->write(sender);
+	}
     }
   return std::make_pair(0, 0);
 }
@@ -176,6 +199,7 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
 
   // TODO
   // ratio avec la vélocité du déplacement à voir (si j'appuie fort ou doucement sur le joystic de déplacement)
+
   if (this->isMouseInWindow(Vector2(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)))
     {
       if (event.joystickMove.axis == sf::Joystick::X)
@@ -183,6 +207,8 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
       if (event.joystickMove.axis == sf::Joystick::Y)
 	newPosY = this->moveYAxis(event, newPosY, ratioYMovement);
     }
+
+
   sf::Mouse::setPosition(sf::Vector2i(newPosX, newPosY));
   return std::make_pair((unsigned int)newPosX, (unsigned int)newPosY);
 }
@@ -196,18 +222,21 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Even
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Event& event)
 {
-  if (event.mouseButton.button == sf::Mouse::Right)
-    {
-      ANetwork *net = Client::getNetwork();
-      ANetwork::t_frame sender = CreateRequest::create((unsigned char)3, CRC::calcCRC("2QNP"), 0, "2QNP");
-      net->write(sender);
-    }
 
-  else if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
+  if ((RenderWindow::getInstance())->getPanels().top()->updateOnPress(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
     {
     }
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
+
+// std::pair<unsigned int, unsigned int>		InputManager::mouseInGamePressedAt(sf::Event& event)
+// {
+
+//   if ((RenderWindow::getInstance())->getPanels().top()->updateOnPressInGame(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
+//     {
+//     }
+//   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
+// }
 
 std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf::Event& event)
 {

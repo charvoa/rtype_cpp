@@ -20,4 +20,6 @@ public:
 	void		render();
 	void		setId(unsigned int);
 	void		reset(std::string const&);
+	bool		isKeyUsed(sf::Keyboard::Key) const;
+	bool		isJoystickUsed(JoystickEvent&) const;
 };

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec 15 19:27:30 2015 Nicolas Girardot
+// Last update Sat Dec 19 14:56:51 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -32,26 +32,16 @@ Sound		*Client::_sound = NULL;
 
 void	*readdisp(void *s)
 {
-  ANetwork::t_frame a;
   ProtocoleClient x;
+  void	*data;
   while (true)
     {
-      try
-	{
-	  a = Client::getNetwork()->read();
-	  if (&a == NULL)
-	    {
-	      std::cout << "Connection Lost with server" << std::endl;
-	      exit (0);
-	    }
-	  x.methodChecker(a);
-	}
-      catch (const std::exception &e)
-	{
-	  std::cout << e.what() << std::endl;
-	}
+      if (!(data = Client::getNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
+	std::cout << "Server Connection Lost" << std::endl;
+      }
+      else
+	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
-
   return s;
 }
 
@@ -118,6 +108,7 @@ void	Client::Start()
   _sound->registerMusic("../common/misc/laserSound.ogg", "laser");
   _sound->registerSound("../common/misc/rocketSound.ogg", "missile");
   _sound->registerMusic("../common/misc/menuMusic1.ogg", "mainMenu");
+  _sound->registerSound("../common/misc/explosion1.ogg", "explosion1");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
   _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
   _sound->playMusic("mainMenu");

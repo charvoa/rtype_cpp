@@ -29,6 +29,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(EXECUTABLE_NAME "r-type_client")
 add_executable(${EXECUTABLE_NAME}
   ../common/main.cpp
+  ../common/Explosion.cpp
   ../common/RenderWindow.cpp
   ../common/Vector2.cpp
   ../common/APanel.cpp
@@ -54,6 +55,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Client.cpp
   ../common/Settings.cpp
   ../common/Text.cpp
+  ../common/Asteroid.cpp
   ../common/Texture.cpp
   ../common/Volume.cpp
   ../common/ProtocoleClient.cpp

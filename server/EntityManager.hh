@@ -17,6 +17,7 @@
 # include <E_EntityType.hh>
 # include <PlayerFactory.hh>
 # include <Bot.hpp>
+# include <Random.hpp>
 
 class EntityManager
 {
@@ -34,7 +35,6 @@ public:
   int		createEntity(E_EntityType type,  Client &);
   int		createEntity(E_EntityType type, AEntity *);
   //int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
-  int		createEntitiesFromFolder(std::list<AEntity*> bots, int iterator);
   int		createEntitiesFromFolder(std::list<Bot*> bots, int iterator);
   void		removeEntity(AEntity *entity);
   void		removeEntityById(int id);

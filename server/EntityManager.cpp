@@ -8,6 +8,8 @@
 //
 
 #include <EntityManager.hh>
+#include <string.h>
+#include <cstring>
 
 EntityManager::EntityManager()
 {
@@ -37,6 +39,8 @@ int	EntityManager::createEntity(E_EntityType type,  Client &client)
 
 int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 {
+  if (_id < 4)
+    _id = 4;
   AEntity *newEntity = _entityFactory.createEntity(_id, type);
   newEntity->setType(type);
   newEntity->setParent(parent);
@@ -44,38 +48,30 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
   return (_id);
 }
 
-int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterator)
-{
-  AEntity *newEntity;
-  int		i = 0;
-
-  if (iterator > (int)bots.size())
-    return (-1);
-  for (std::list<AEntity*>::iterator it = bots.begin(); it != bots.end(); ++it)
-    {
-      if (i == iterator)
-	newEntity = (*it);
-      i++;
-    }
-  newEntity->setType(E_BOT);
-  _entities.push_back(newEntity);
-  return (_id);
-}
-
 int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 {
-  Bot *newEntity;
+  Bot *newEntity = (Bot*)std::malloc(sizeof(Bot));
   int		i = 0;
+  int		x, y = 0;
+  Random	rand(0, 51);
 
   if (iterator > (int)bots.size())
     return (-1);
+  if (_id < 4)
+    _id = 4;
   for (std::list<Bot*>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       if (i == iterator)
-	newEntity = (*it);
+	std::memcpy(newEntity, (*it), sizeof(Bot));
       i++;
     }
+  newEntity->refreshSystemManager();
   newEntity->setType(E_BOT);
+  _id++;
+  newEntity->setId(_id);
+  x = 140;
+  y = rand.generate<int>();
+  dynamic_cast<SystemPos*>(newEntity->getSystemManager()->getSystemByComponent(C_POSITION))->update(x, y);
   _entities.push_back(newEntity);
   return (_id);
 }

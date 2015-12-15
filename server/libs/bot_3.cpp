@@ -5,21 +5,20 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:23:35 2015 Louis Audibert
-// Last update Wed Dec 16 01:52:42 2015 Louis Audibert
+// Last update Sat Dec 19 05:17:20 2015 Louis Audibert
 //
 
 #include <iostream>
 #include <Bot.hpp>
 
-Bot::Bot(int id) : AEntity(id), _health(50), _x(WIDTH + 20), _y(0)
+Bot::Bot(int id) : AEntity(id), _health(50), _x(WIDTH + 2), _y(0)
 {
-  std::cout << "Bot :: Bot3 :: Constructor" << std::endl;
   _sprite = "sprite1.png";
   _name = _sprite;
   addSystem(C_HEALTH);
   addSystem(C_POSITION);
   generateY();
-  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 
 Bot::~Bot()
@@ -37,8 +36,7 @@ void	Bot::generateY()
 void	Bot::update()
 {
   _x -= 5;
-  std::cout << "Bot :: Bot3 :: Update" << std::endl;
-  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 
 extern "C" AEntity* create_object(int id)

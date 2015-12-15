@@ -51,6 +51,8 @@ void		KeyButton::setBind(sf::Event event)
 	std::string		newTitle = loader->keyToString(event.key.code);
 
 	//event joystick ou key ?*
+	if (isKeyUsed(event.key.code))
+		return;
 	(window->getPanels().top()->getLabels().at(_id)).setString(newTitle);
 	(window->getPanels().top()->getLabels().at(_id)).setOrigin((window->getPanels().top()->getLabels().at(_id)).getText().getGlobalBounds().width / 2, (window->getPanels().top()->getLabels().at(_id)).getText().getGlobalBounds().height / 2);
 
@@ -132,4 +134,27 @@ bool		KeyButton::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 void		KeyButton::render()
 {
 
+}
+
+bool		KeyButton::isKeyUsed(sf::Keyboard::Key key) const
+{
+	//TODO
+	RenderWindow	*window = RenderWindow::getInstance();
+	std::vector<Bind*>	binds = dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->getBinds();
+	std::vector<Bind*>::const_iterator it = binds.begin();
+	std::vector<Bind*>::const_iterator end = binds.end();
+
+	while (it != end)
+	{
+		if ((*it)->getKey() == key)
+			return (true);
+		++it;
+	}
+	return (false);
+}
+
+bool		KeyButton::isJoystickUsed(JoystickEvent& joystick) const
+{
+	(void)joystick;
+	return (false);
 }

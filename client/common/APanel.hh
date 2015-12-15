@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 11:32:09 2015 Serge Heitzler
+// Last update Wed Dec 16 05:26:49 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -28,6 +28,7 @@ public:
 
   virtual void		updateOnMove(std::pair<unsigned int, unsigned int> pair);
   virtual bool		updateOnPress(std::pair<unsigned int, unsigned int> pair);
+  //  virtual bool		updateOnPressInGame(std::pair<unsigned int, unsigned int> pair);
   virtual void		updateOnRelease(std::pair<unsigned int, unsigned int> pair);
   virtual void		setKeyButton(sf::Event);
   virtual void		update();
