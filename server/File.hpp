@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Tue Dec 15 01:25:14 2015 Joris Bertomeu
+// Last update Tue Dec 15 01:29:51 2015 Joris Bertomeu
 //
 
 #ifndef			_FILE_HPP_
@@ -95,7 +95,7 @@ public:
   {
     return std::string(std::find_if((this->_fullpath).rbegin(), (this->_fullpath).rend(),
 				    MatchPathSeparator()).base(),
-		       pathname.end());
+		       (this->_fullpath).end());
   }
 
   void			sendMe(int port) {
