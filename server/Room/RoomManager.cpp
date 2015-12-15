@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Wed Dec 16 15:18:38 2015 Antoine Garcia
+// Last update Sun Dec 20 06:29:01 2015 Antoine Garcia
 //
 
 
@@ -55,6 +55,24 @@ Room&	RoomManager::getRoombyId(const std::string &id)
 	return (*it);
     }
   throw std::logic_error("No room with this id found");
+}
+
+Room&	RoomManager::getRoomByClient(Client *c)
+{
+  for (std::list<Room>::iterator it = _rooms.begin();
+       it != _rooms.end();
+       ++it)
+    {
+      std::list<Client*> myList = (*it).getAllPlayers();
+      for (std::list<Client*>::iterator it2 = myList.begin();
+	   it2 != myList.end();
+	   it2++)
+	{
+	  if ((*it2)->getSocket()->getFd() == c->getSocket()->getFd())
+	    return (*it);
+	}
+    }
+  throw std::logic_error("Room with this client not found");
 }
 
 bool	RoomManager::roomExists(const std::string &id)

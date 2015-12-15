@@ -5,7 +5,6 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 12:09:15 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -13,14 +12,12 @@
 AEntity::AEntity(int id) : _id(id)
 {
   _systemManager = new SystemManager();
-  std::cout << "new AEntity created !" << std::endl;
 }
 
 AEntity::AEntity(int id, AEntity *parent)
 {
   _id = id;
   _parent = parent;
-  std::cout << "new AEntity with a parent created !" << std::endl;
 }
 
 bool	AEntity::update(int x, int y)
@@ -45,6 +42,15 @@ bool	AEntity::update(std::list<Case*> hitbox)
 {
   if (_systemManager->getSystemByComponent(C_HITBOX))
     dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(hitbox);
+  else
+    return (false);
+  return (true);
+}
+
+bool	AEntity::update(bool shield)
+{
+  if (_systemManager->getSystemByComponent(C_SHIELD))
+    dynamic_cast<SystemShield*>(_systemManager->getSystemByComponent(C_SHIELD))->update(shield);
   else
     return (false);
   return (true);
@@ -98,9 +104,14 @@ bool		AEntity::checkColision(AEntity *entity)
   return (true);
 }
 
-const	std::string &AEntity::getName() const
+const std::string &AEntity::getName() const
 {
   return (_name);
+}
+
+void	AEntity::setName(std::string name)
+{
+  _name = name;
 }
 
 bool	AEntity::setParent(AEntity *parent)
@@ -109,27 +120,76 @@ bool	AEntity::setParent(AEntity *parent)
   return (true);
 }
 
+AEntity	*AEntity::getParent()
+{
+  return _parent;
+}
+
 std::list<Case*>	AEntity::refreshHitbox()
 {
   std::list<Case*> hitbox;
   Case	*myCase;
   int	i = 0;
+  int	height = 0;
 
-  myCase = (Case*)std::malloc(sizeof(Case));
-  while (i < 10)
+  if (_name == "sprite1.png")
+    height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
+  else if (_name == "sprite3.png")
+    height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
+  if (_name == "sprite3.png")
+    height = 74;
+  else if (_name == "sprite6.png")
+    height = 82;
+  else
+    height = 10;
+
+  switch (_type)
     {
-      myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
-      myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() + i;
-      hitbox.push_back(myCase);
-      i++;
+    case E_LASER:
+      height = 17;
+      break;
+    case E_PLAYER:
+      height = 44;
+      break;
+    default:
+      height = 10;
+      break;
+    //  // case E_MISSILE:
+    // //   height = 5;
+    // //   break;
+    // // case E_RIFLE:
+    // //   height = 5;
+    // //   break;
     }
-  i = 1;
-  while (i < 10)
+
+  while (i < height)
     {
+      myCase = new Case;
       myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
       myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
       hitbox.push_back(myCase);
       i++;
     }
+  //  i = 0;
+  // while (i < height)
+  //   {
+  //     myCase = new Case;
+  //     myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+  //     myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
+  //     hitbox.push_back(myCase);
+  //     i++;
+  //   }
+  // std::cout << "HITBOX IN AENTtity.CPP" << std::endl;
+
+  // for (std::list<Case*>::iterator it = hitbox.begin();
+  //      it != hitbox.end();
+  //      ++it)
+  //   {
+  //     std::cout << "X = " << (*it)->x << " Y = " << (*it)->y << std::endl;
+  //   }
   return (hitbox);
 }

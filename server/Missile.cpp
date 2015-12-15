@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 05:02:38 2015 Louis Audibert
-// Last update Mon Dec 14 08:10:38 2015 Louis Audibert
+// Last update Sun Dec 20 16:38:22 2015 Nicolas Charvoz
 //
 
 #include <Missile.hh>
@@ -13,7 +13,8 @@
 Missile::Missile(int id) : AEntity(id)
 {
   addSystem(C_POSITION);
-  _name = "Missile";
+  addSystem(C_HITBOX);
+  _name = "6";
 }
 
 Missile::~Missile()

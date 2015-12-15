@@ -32,6 +32,7 @@
 # include <map>
 # include <thread>
 # include <BotManager.hpp>
+# include <Timer.hpp>
 
 class Game {
 
@@ -66,10 +67,12 @@ public:
        int port, std::list<Bot*>);
   ~Game();
   bool run();
+  std::list<Client*> &getClients();
   const Client &getClient() const;
   const std::string &getId() const;
   void handleCommand(void*, Client*);
-  void deletePlayer();
+  void deletePlayer(Client*);
+
   // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;
@@ -88,16 +91,20 @@ private:
   std::chrono::time_point<std::chrono::system_clock> _start;
   std::list<Bot*> _botList;
   bool _isRunning;
+  bool _canAddMonster;
   int _nbLeft;
-
+  int _nbInGame;
+  Timer *_timerWave;
   // METHODS
   Player *getPlayerByClient(Client*);
+  Player *getPlayerByClientTCP(Client*);
   Client *getClientBySocket(ISocket*) const;
   int  getNumberEnemyMax();
   void sendNewEntity(const std::string &, int id);
   void sendNewEntity(int type, int id);
   void deleteEntity(AEntity *);
   void updateRiffle();
+  void updateLaser();
   void updateMissile();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
@@ -111,6 +118,8 @@ private:
   void updateMonster();
   void initPlayersPosition();
   void sendGameData();
+  void checkNewStage();
+  void checkHitBox();
   bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
 

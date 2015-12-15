@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Sat Dec 19 15:15:22 2015 Nicolas Girardot
+// Last update Mon Dec 21 03:06:09 2015 Serge Heitzler
 //
 
 #ifndef PROTOCOLECLIENT_HH_

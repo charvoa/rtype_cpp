@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sun Dec 13 05:07:55 2015 Louis Audibert
-// Last update Mon Dec 14 09:23:57 2015 Louis Audibert
+// Last update Sun Dec 20 16:37:58 2015 Nicolas Charvoz
 //
 
 #include <Laser.hh>
@@ -13,10 +13,15 @@
 Laser::Laser(int id) : AEntity(id)
 {
   addSystem(C_POSITION);
-  _name = "7" + _parent->getName();
+  addSystem(C_HITBOX);
+  _launchTime = std::chrono::system_clock::now();
 }
 
 Laser::~Laser()
 {
 
+}
+
+std::chrono::time_point<std::chrono::system_clock> Laser::getLaunchTime() const {
+  return _launchTime;
 }

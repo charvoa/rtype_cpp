@@ -56,7 +56,18 @@ void Server::run()
       client = new Client(this->_network->select());
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
 	this->_network->unlistenSocket(client->getSocket());
-	//	_gameManager.getGameByClient(client).deletePlayer();
+	try {
+	  _gameManager.getGameByClient(client)->deletePlayer(client);
+	} catch (const std::exception &e)
+	  {
+	    std::cout << e.what() << std::endl;
+	    try{
+	      _roomManager.getRoomByClient(client).deletePlayer(client);
+	    }
+	    catch(const std::exception &ee){
+	      std::cout << ee.what() << std::endl;
+	    }
+	  }
 	continue;
       }
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
@@ -111,7 +122,7 @@ void *newGameThread(void *data)
 	  ss.str("");
 	  ss.clear();
 	}
-      //me->_roomManager.deleteRoom(s->frame.data);
+      me->_roomManager.deleteRoom(s->frame.data);
       me->_gameManager.getGameById(s->frame.data).run();
     }
   else

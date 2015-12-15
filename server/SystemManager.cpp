@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Sat Dec 19 03:24:43 2015 Louis Audibert
+// Last update Mon Dec 21 05:30:11 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -24,15 +24,17 @@ SystemManager::SystemManager(SystemManager *copy)
       if (!(*it))
 	break;
       ASystem *tmp = (ASystem*)std::malloc(sizeof(ASystem));
+      AComponent *comp = (AComponent*)std::malloc(sizeof(AComponent));
       std::memset(tmp, 0, sizeof(ASystem));
       std::memcpy(tmp, (*it), sizeof(ASystem));
+      comp = tmp->getComponent();
+      std::memcpy(comp, (*it)->getComponent(), sizeof(AComponent));
       _systems.push_back(tmp);
     }
 }
 
 SystemManager::~SystemManager()
 {
-  std::cout << "SystemManager Destroyed." << std::endl;
 }
 
 ASystem *SystemManager::getSystemByComponent(E_Component type)
@@ -46,6 +48,8 @@ ASystem *SystemManager::getSystemByComponent(E_Component type)
       else if ((dynamic_cast<SystemHealth*>(*it)) && type == C_HEALTH)
 	return (*it);
       else if ((dynamic_cast<SystemHitbox*>(*it)) && type == C_HITBOX)
+	return (*it);
+      else if ((dynamic_cast<SystemShield*>(*it)) && type == C_SHIELD)
 	return (*it);
     }
   return (NULL);
@@ -65,6 +69,10 @@ void	SystemManager::addSystemByType(E_Component type)
 	  break;
 	case C_HITBOX:
 	  _systems.push_back(new SystemHitbox());
+	  break;
+	case C_SHIELD:
+	  _systems.push_back(new SystemShield());
+	  break;
 	default:
 	  _systems.push_back(new SystemGun(type));
 	  break;

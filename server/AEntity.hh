@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Sat Dec 19 03:12:09 2015 Louis Audibert
+// Last update Mon Dec 21 02:28:59 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -13,6 +13,7 @@
 
 # include <iostream>
 # include <list>
+# include <chrono>
 # include <E_EntityType.hh>
 # include <E_Component.hh>
 # include <SystemManager.hh>
@@ -20,6 +21,7 @@
 
 class AEntity
 {
+
 protected:
   int		_id;
   E_EntityType	_type;
@@ -36,6 +38,7 @@ public:
   bool	update(int, int);
   bool	update(int);
   bool	update(std::list<Case*>);
+  bool	update(bool);
   virtual void	addSystem(E_Component type);
   void	removeSystem(E_Component type);
   bool	setType(E_EntityType type);
@@ -46,8 +49,10 @@ public:
   void	refreshSystemManager();
   bool	checkColision(AEntity *entity);
   const std::string &getName() const;
+  void setName(std::string);
   bool	setParent(AEntity *);
-  std::list<Case*> refreshHitbox();
+  AEntity *getParent();
+  virtual std::list<Case*> refreshHitbox();
 };
 
 #endif /* _AENTITY_HH_ */

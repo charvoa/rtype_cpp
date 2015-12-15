@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sat Dec 19 18:10:56 2015 Nicolas Girardot
+// Last update Mon Dec 21 10:34:20 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -24,7 +24,7 @@
 #include <chrono>
 #include <thread>
 #include <Ressources.hh>
-
+#include <GamePanel.hh>
 
 ANetwork	*Client::_network = NULL;
 ANetwork	*Client::_UDPnetwork = NULL;
@@ -32,12 +32,16 @@ Sound		*Client::_sound = NULL;
 
 void	*readdisp(void *s)
 {
+  RenderWindow *window = RenderWindow::getInstance();
   ProtocoleClient x;
   void	*data;
   while (true)
     {
       if (!(data = Client::getNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
 	{
+	  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color::Red);
+	  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString("Connection lost !");
+	  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
 	  try
 	    {
 	      Client::getNetwork()->connect(RenderWindow::getInstance()->getSettings()->getIP());
@@ -114,8 +118,9 @@ void	Client::Start()
   _sound->registerSound("../common/misc/mouseHover.ogg", "hover");
   _sound->registerSound("../common/misc/accessDenied.ogg", "denied");
   _sound->registerSound("../common/misc/metalDoorOpen.ogg", "door");
-  _sound->registerMusic("../common/misc/laserSound.ogg", "laser");
+  _sound->registerMusic("../common/misc/laserSound.ogg", "riffle");
   _sound->registerSound("../common/misc/rocketSound.ogg", "missile");
+  _sound->registerSound("../common/misc/megaLaser1.ogg", "laser");
   _sound->registerMusic("../common/misc/menuMusic1.ogg", "mainMenu");
   _sound->registerSound("../common/misc/explosion1.ogg", "explosion1");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");

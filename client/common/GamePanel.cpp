@@ -25,9 +25,8 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
-	std::cout << "Server Connection Lost" << std::endl;
-      }
+      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame))))
+	{}
       else
 	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
@@ -71,7 +70,7 @@ GamePanel::GamePanel()
 
   Text	*waveNumber = new Text();
 
-  waveNumber->setString("0");
+  waveNumber->setString("1");
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
   waveNumber->setOrigin(waveNumber->getText().getGlobalBounds().width / 2, waveNumber->getText().getGlobalBounds().height / 2);
@@ -165,7 +164,7 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
 
   Text	*sentence = new Text();
 
-  sentence->setString("Are you sure to exit the game ?");
+  sentence->setString("Wave 1");
   sentence->setSize(80);
   sentence->setStyle(1);
   sentence->setOrigin(sentence->getText().getGlobalBounds().width / 2, sentence->getText().getGlobalBounds().height / 2);
@@ -187,6 +186,8 @@ void			GamePanel::playerLeft(const std::string &playerName)
 
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString(playerName + " has left the game");
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
+
 }
 
 void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
@@ -258,20 +259,35 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 void		GamePanel::newEntity(std::vector<std::string> &vector)
 {
   RenderWindow *window = RenderWindow::getInstance();
-
-  std::string  	type = vector.at(0);
   int	  	id = std::atoi(vector.at(1).c_str());
-
-  if (type.find(":") == !std::string::npos)
-    std::cout << "LASERRRR" << std::endl;
-
-
-  std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
-
   Sprite	*newSprite = new Sprite();
-  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
-  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
-  newSprite->setPosition(-500, 500);
+  std::string  	type = vector.at(0);
+ 
+  std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
+  std::size_t found = type.find(":");
+  if (found != std::string::npos)
+    {
+      int parent = 0;
+      
+      std::size_t pos = vector.at(0).find("player");
+      parent = std::stoi(vector.at(0).substr(pos + 6)) - 1;
+
+      std::string idString = vector.at(0).erase(1, 8);
+      
+      type = std::to_string(std::stoi(idString) + parent);
+
+      newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+      newSprite->setOrigin(0, (static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]->getSize()._y / 2);
+    }
+  else
+    {
+      newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+      newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
+    }
+
+
+
+  newSprite->setPosition(-2000, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
@@ -329,14 +345,14 @@ void		GamePanel::display(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int  	id;
 
-  float	posX = (std::atoi(vector.at(1).c_str()));
+  float	posX = (std::atoi(vector.at(1).c_str())) + 70;
   float	posY = (std::atoi(vector.at(2).c_str()));
 
   id = std::atoi(vector.at(0).c_str());
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(posX, posY);
-  //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
+  //  std::cout << "Displaying with id : " << id << "; posX : " << posX << "; posY : " << posY << std::endl;
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
@@ -368,6 +384,12 @@ void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
+  
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setString("Wave " + std::to_string(value));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
+  
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 }
 
@@ -595,7 +617,11 @@ void		GamePanel::update()
       _inGame.at(4).move(-5, 0);
 
       _backgrounds.at(2).move(-2, 0);
+
     }
+  if (i == 492)
+    _labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+
 
 
   if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))

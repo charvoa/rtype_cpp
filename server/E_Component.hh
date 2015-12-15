@@ -5,7 +5,7 @@
 ** Login   <audibel@epitech.net>
 **
 ** Started on  Sat Nov 28 05:06:04 2015 Louis Audibert
-// Last update Wed Dec 16 14:26:26 2015 Nicolas Charvoz
+// Last update Mon Dec 21 02:30:24 2015 Louis Audibert
 */
 
 #ifndef _E_COMPONENT_HH_
@@ -19,6 +19,7 @@ enum E_Component
     C_RIFLE,
     C_MISSILE,
     C_HITBOX,
+    C_SHIELD,
     C_INVALID
   };
 

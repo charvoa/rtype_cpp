@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Dec  9 13:32:20 2015 Nicolas Charvoz
-// Last update Sat Dec 19 14:08:29 2015 Nicolas Charvoz
+// Last update Mon Dec 21 01:06:02 2015 Louis Audibert
 //
 
 #ifndef BONUSIG_HPP_
@@ -30,7 +30,7 @@ public:
   }
   ~BonusIG() {}
   void addSystem(E_Component type) {
-    _systemManager->addSystemByTupe(type);
+    _systemManager->addSystemByType(type);
   }
   void setInnerEntity()
   {

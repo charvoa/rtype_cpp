@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 19 15:18:39 2015 Nicolas Girardot
+// Last update Mon Dec 21 07:16:54 2015 Serge Heitzler
 //
 
 #include <string>
@@ -79,16 +79,25 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
 }
 
+void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "New Wave : " <<  x.at(0) << std::endl;
+  GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
+}
+
 void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "New Entity" << std::endl;
+  
   GamePanel::newEntity(x);
 }
 
 void		ProtocoleClient::playerLeftIG(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Player Left IG" << std::endl;
   GamePanel::playerLeft(x.at(0));
 }
 
@@ -104,7 +113,7 @@ void		ProtocoleClient::downloadComplete(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Download Complete" << std::endl;
   std::cout << "Player name is " << x.at(0) << std::endl;
-  //  RoomPanel::downloadComplete(x.at(0));
+  RoomPanel::downloadComplete(x.at(0));
 }
 
 void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)
@@ -156,7 +165,14 @@ void		ProtocoleClient::shoot(ANetwork::t_frame &frame)
   std::cout << "shoot" << std::endl;
 
   Sound *s = Client::getSound();
-  s->playMusic("laser");
+  int	type = std::atoi(x.at(0).c_str());
+  std::cout << "bistrouketteeeee" << std::endl;
+  if (type == 5)
+    s->playMusic("riffle");
+  else if (type == 6)
+    s->playSound("missile");
+  else
+    s->playSound("laser");
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
@@ -235,13 +251,6 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Score" << std::endl;
   GamePanel::setScore(x.at(0), std::atoi(x.at(1).c_str()));
-}
-
-void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
-{
-  std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "newWave" << std::endl;
-  GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)

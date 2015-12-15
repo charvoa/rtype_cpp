@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:20:29 2015 Louis Audibert
-// Last update Sun Dec 13 05:20:54 2015 Louis Audibert
+// Last update Mon Dec 21 01:26:02 2015 Louis Audibert
 //
 
 #include <ComponentPosition.hh>
@@ -22,7 +22,6 @@ ComponentPosition::ComponentPosition(int x, int y) : _x(x), _y(y)
 
 ComponentPosition::~ComponentPosition()
 {
-  std::cout << "Position Component Destroyed." << std::endl;
 }
 
 int	ComponentPosition::getX() const

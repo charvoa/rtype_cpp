@@ -8,7 +8,6 @@
 //
 
 #include <Game.hh>
-#include <Timer.hpp>
 #include <Random.hpp>
 
 Game::Game()
@@ -20,7 +19,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   : _params(params_), _id(id_), _botList(botList_)
 {
   srand(time(NULL));
-
+  _canAddMonster = true;
   _mutex = new Mutex();
   this->_clients = client_;
   this->_network = new Network();
@@ -30,10 +29,13 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _stage = 1;
   _nbDisplay = 0;
   _isRunning = true;
+  _nbLeft = 0;
+  _nbInGame = client_.size();;
   this->_timestamp = time(NULL);
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
+  _timerWave = new Timer(true);
 }
 
 Game::~Game() {}
@@ -80,6 +82,22 @@ Player *Game::getPlayerByClient(Client *client)
 
   throw std::logic_error("Cannot find this player by client");
 }
+
+Player *Game::getPlayerByClientTCP(Client *client)
+{
+  std::list<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
+
+  for (std::list<AEntity*>::iterator it = _players.begin();
+       it != _players.end();
+       ++it)
+    {
+      Player *ptmp = reinterpret_cast<Player*>(*it);
+      if (ptmp->getClient().getSocket()->getFd() == client->getSocket()->getFd())
+	return (ptmp);
+    }
+  throw std::logic_error("Cannot find this player by TCP client");
+}
+
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
@@ -148,7 +166,7 @@ void Game::checkWall(Player *player)
 
 void Game::handleMove(void *data, Client *client)
 {
-  std::cout << "Game :: handleMove" << std::endl;
+  //  std::cout << "Game :: handleMove" << std::endl;
   ComponentPosition *pPlayer;
   try {
     Player *player = this->getPlayerByClient(client);
@@ -182,6 +200,7 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 {
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  std::cout << "Player current score : " << p->getScore()  << "; score added : " << score << std::endl;
   std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
   ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -192,13 +211,16 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 
 void Game::updateLife(Player *p, int reset)
 {
-  std::cout << "UPDATE LIFE " << std::endl;
+  //  std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
 				       ->getSystemByComponent(C_HEALTH)
 				       ->getComponent());
   if (reset == 0)
-    p->update(hP->getLife() - 1);
+    {
+      int newlife = hP->getLife() - 1;
+      p->update(newlife);
+    }
   else if (reset == 1)
     p->update(3);
   else if (reset == 2)
@@ -253,55 +275,57 @@ void Game::handleShoot(void *data, Client *client)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-  std::cout << "Game :: handleShoot" << std::endl;
-  std::string weaponType =
-    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
-
-  std::cout << weaponType << std::endl;
-
   Player *p = this->getPlayerByClient(client);
-  E_EntityType type = E_INVALID;
-  E_Component component = C_INVALID;
-  int	id;
-
-  if (weaponType == "E_RIFLE")
+  if (p->getLastShoot()->elapsedMilli().count() >= 100)
     {
-      type = E_RIFLE;
-      component = C_RIFLE;
-    }
-  else if (weaponType == "E_MISSILE")
-    {
-      type = E_MISSILE;
-      component = C_MISSILE;
-      std::cout << "type received: E_MISSILE" << std::endl;
-    }
-  else if (weaponType == "E_LASER")
-    {
-      type = E_LASER;
-      component = C_LASER;
-    }
+      //      std::cout << "Game :: handleShoot" << std::endl;
+      std::string weaponType =
+	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-  std::cout << "Before create entity" << std::endl;
-  if (type != E_INVALID)
-    id = _eM.createEntity(type, p);
+      E_EntityType type = E_INVALID;
+      //      E_Component component = C_INVALID;
+      int	id;
 
-  std::cout << "After create entity " << std::endl;
+      if (weaponType == "E_RIFLE")
+	{
+	  type = E_RIFLE;
+	  // component = C_RIFLE;
+	}
+      else if (weaponType == "E_MISSILE")
+	{
+	  type = E_MISSILE;
+	  //component = C_MISSILE;
+	}
+      else if (weaponType == "E_LASER")
+	{
+	  type = E_LASER;
+	  //component = C_LASER;
+	}
 
-  sendNewEntity(type, id); // Send  Bullet created
+      AEntity *bullet;
 
-  std::cout << "Id I want to get in game : " << id << std::endl;
-  AEntity *bullet = _eM.getEntityById(id);
-  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+      if (type != E_INVALID)
+	{
+	  id = _eM.createEntity(type, p);
+	  bullet = _eM.getEntityById(id);
+	  sendNewEntity(bullet->getName(), id); // Send  Bullet created
 
-  std::stringstream ss;
-  ss << type;
+	  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+	  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
 
-  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
-    {
-      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	  std::stringstream ss;
+	  ss << bullet->getName();
+
+	  //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
+
+	  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+	  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+	  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	    {
+	      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	    }
+	  p->getLastShoot()->reset();
+	}
     }
 }
 
@@ -310,13 +334,11 @@ void Game::handleCommand(void *data, Client *client)
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
 
-  //  std::cout << "CommandType : " << commandType << std::endl;
-
   try {
     Func fp = _funcMap[commandType];
     (this->*fp)(data, client);
   } catch (const std::exception &e) {
-    std::cout << "Cannot achieve this action" << std::endl;
+    std::cout << e.what() << std::endl;
   }
 }
 
@@ -355,6 +377,12 @@ void Game::updateMonster()
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
+      (*it)->update((*it)->refreshHitbox());
+      if (pos->getX() < -10)
+	{
+	  deleteEntity(*it);
+	  // _nbDisplay--;
+	}
     }
 }
 
@@ -362,9 +390,9 @@ void Game::addMonster()
 {
   std::stringstream ss;
 
-  if (_nbDisplay < getNumberEnemyMax())
+  if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
     {
-      std::cout << "Add Monster" << std::endl;
+      //      std::cout << "Add Monster" << std::endl;
       Random r(0, _botList.size());
 
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
@@ -372,8 +400,10 @@ void Game::addMonster()
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
-  else
-    std::cout << "Monster Full for this Stage" << std::endl;
+  else{
+    _canAddMonster = false;
+    //    std::cout << "Monster Full for this Stage" << std::endl;
+  }
 }
 
 void Game::initPlayersPosition()
@@ -439,7 +469,28 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 24, p->getY());
+      (*it)->update((*it)->refreshHitbox());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*it);
+    }
+}
+
+void Game::updateLaser()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_LASER);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      Player *player = reinterpret_cast<Player*>((*it)->getParent());
+      ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+
+      (*it)->update(pPlayer->getX(), pPlayer->getY());
+      (*it)->update((*it)->refreshHitbox());
+
+      auto startedAt = reinterpret_cast<Laser*>((*it))->getLaunchTime();
+      auto now = std::chrono::system_clock::now();
+      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - startedAt);
+      if (duration.count() >= 1000)
 	deleteEntity(*it);
     }
 }
@@ -451,9 +502,92 @@ void Game::updateMissile()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 8, p->getY());
+      (*it)->update((*it)->refreshHitbox());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
+}
+
+std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
+{
+  int saveMax = 0;
+  int saveMin;
+
+  std::pair<int, int> final;
+
+  for (std::list<Case*>::iterator it = listCase.begin();
+       it != listCase.end();
+       ++it)
+    {
+      saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
+      saveMin = saveMax;
+      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
+    }
+  final = std::make_pair(saveMin, saveMax);
+  return final;
+}
+
+void Game::checkHitBox()
+{
+  std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
+  std::list<AEntity*> ammos = _eM.getAmmoEntities();
+
+  bool isBreak = false;
+  for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
+       ammosIT != ammos.end();
+       ++ammosIT)
+    {
+      for (std::list<AEntity*>::iterator monsterIT = monsterList.begin();
+	   monsterIT != monsterList.end();
+	   ++monsterIT)
+	{
+	  std::list<Case*> caseMonster = reinterpret_cast<ComponentHitbox*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
+	  std::list<Case*> caseAmmo = reinterpret_cast<ComponentHitbox*>((*ammosIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
+	  for (std::list<Case*>::iterator case1 = caseAmmo.begin();
+	       case1 != caseAmmo.end();
+	       ++case1)
+	    {
+	      if (isBreak == true)
+		break;
+	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
+		   case2 != caseMonster.end();
+		   ++case2)
+		{
+		  std::pair<int, int> limitY = getMaxAndMinOfList(caseMonster);
+		  //std::cout <<  " BOT : (" << (*case2)->x << " , " << (*case2)->y << ") | MISSILE : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
+ 		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= limitY.first) && ((*case1)->y <= limitY.second)))
+		    {
+		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
+		      Player *p;
+		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
+			  != nullptr)
+			{
+			  this->updateScore(p, scoreDef::KILLED);
+			  deleteEntity(*ammosIT);
+			  //			  isBreakable = true;
+			  std::stringstream ss;
+
+			  ss << p->getId();
+			  ss << ";";
+			  ss << (*monsterIT)->getId();
+			  ANetwork::t_frame frame = CreateRequest::create(S_DIE, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+			  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+			  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+			    {
+			      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+			    }
+			  deleteEntity(*monsterIT);
+
+			  isBreak = true;
+			  break;
+			}
+		      //_nbDisplay--;
+		    }
+		}
+	    }
+	}
+    }
+
 }
 
 bool Game::run()
@@ -474,37 +608,86 @@ bool Game::run()
 
   _start = std::chrono::system_clock::now();
 
-  int i = 0;
-  while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+  //int i = 0;
+  // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+
+  std::this_thread::sleep_for(std::chrono::seconds(2));
   while (_isRunning)
     {
       auto startTime = std::chrono::high_resolution_clock::now();
-      if (timerMonster.elapsed().count()>= (speed/_stage))
+      if (!_canAddMonster)
+	this->checkNewStage();
+      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2) && startTime - _start > std::chrono::milliseconds(8000))
       	{
       	  timerMonster.reset();
-      	  this->addMonster();
-      	}
-      this->updateMonster();
+	  this->addMonster();
+	}
       this->updateRiffle();
       this->updateMissile();
+      this->updateLaser();
+      this->updateMonster();
+      this->checkHitBox();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
-      i++;
     }
   return true;
 }
-
 
 const std::string &Game::getId() const
 {
   return _id;
 }
 
-void Game::deletePlayer()
+std::list<Client*> &Game::getClients()
+{
+  return _clients;
+}
+
+void Game::deletePlayer(Client *c)
 {
   _nbLeft++;
-  if (_nbLeft >= static_cast<int>(_clients.size()))
+  Player *p;
+
+  try {
+    p = this->getPlayerByClientTCP(c);
+  } catch (const std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::string sendData = p->getName();
+
+  std::cout << p->getName() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
+
+  ANetwork::t_frame frame = CreateRequest::create(S_PLAYER_LEFT_IG, CRC::calcCRC(sendData), sendData.size(), sendData);
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+  if (_nbLeft == _nbInGame || (_nbInGame - _nbLeft) < 0)
+    {
+      std::cout << " I will quit" << std::endl;
       _isRunning = false;
+    }
+}
+
+void Game::checkNewStage()
+{
+  std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+
+  if (bots.size() == 0)
+    {
+      _canAddMonster = true;
+      _nbDisplay = 0;
+      _stage++;
+      _timerWave->reset();
+      std::cout << "I SEND NEW WAVE" << _stage << std::endl;
+      std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
+      std::string sendData = std::to_string(_stage);
+      ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
+      for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
+	{
+	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+	}
     }
 }
