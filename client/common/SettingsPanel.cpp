@@ -183,7 +183,13 @@ void    SettingsPanel::back()
 
 void    SettingsPanel::save()
 {
+	std::cout << "SETTINGS PANEL SAVE" << std::endl;
 	SettingsLoader *loader = new SettingsLoader();
 	loader->saveSettings(_tmp);
 	RenderWindow::getInstance()->setSettings(_tmp);
+}
+
+Settings	*SettingsPanel::getTemporarySettings() const
+{
+	return _tmp;
 }
