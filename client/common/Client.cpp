@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec 15 14:41:51 2015 Nicolas Girardot
+// Last update Tue Dec 15 17:22:28 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -39,11 +39,11 @@ void	*readdisp(void *s)
       try
 	{
 	  a = Client::getNetwork()->read();
-	  // if (a == NULL)
-	  // {
-	  //   std::cout << "Connection Lost with server" << std::endl;
-	  //   exit (0);
-	  // }
+	  if (&a == NULL)
+	    {
+	      std::cout << "Connection Lost with server" << std::endl;
+	      exit (0);
+	    }
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)

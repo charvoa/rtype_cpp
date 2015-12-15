@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 15:04:53 2015 Nicolas Girardot
+// Last update Tue Dec 15 16:42:07 2015 Nicolas Girardot
 //
 
 #include <thread>
@@ -94,11 +94,26 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
       file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
 
+  // FileManager Toto("./recv/");
+  // RenderWindow *window = RenderWindow::getInstance();
+
+  // std::list<File *> list = Toto.getFileListByExtension("png");
+  // for (std::list<File*>::iterator it = list.begin(); it != list.end(); ++it) {
+  //   Texture *text = new Texture();
+  //   (*it)->getFullPath();
+  //   text->loadFromFile((*it)->getFullPath());
+  //   static_cast<RoomPanel*>(window->getPanels().top())->getReceived().insert(std::make_pair((*it)->getFullPath(),text));
+  // }
 
   // create texture here
   // Use FileManager
   // Get all png files from ./recv/
   // Build Texture
+}
+
+std::map<std::string, Texture*> &RoomPanel::getReceived()
+{
+  return _received;
 }
 
 unsigned int	RoomPanel::getNbPlayers() const
