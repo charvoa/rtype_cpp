@@ -417,7 +417,8 @@ bool Game::run()
 	      std::this_thread::sleep_until(end_time);
 	      past = false;
 	    }
-      	  sendGameData();
+	  this->updateAmmo();
+      	  this->sendGameData();
       	}
     }
   return true;
