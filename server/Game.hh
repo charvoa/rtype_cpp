@@ -47,6 +47,7 @@ private:
   AMutex *_mutex;
   int	_stage;
   int	_nbDisplay;
+  std::chrono::time_point<std::chrono::system_clock> _start;
 
 public:
 

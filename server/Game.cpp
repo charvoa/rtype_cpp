@@ -319,7 +319,6 @@ void Game::initPlayersPosition()
   Random	rand(0, 50);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
-      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(x, rand.generate<int>());
     }
 }
@@ -327,10 +326,16 @@ void Game::initPlayersPosition()
 void Game::updateAmmo()
 {
   std::vector<AEntity*> _vec = _eM.getAmmoEntities();
+
   for (std::vector<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
     {
       if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
 	{
+	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+	  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+	    (std::chrono::system_clock::now() - _start);
+	  if (duration.count() % 30 == 0)
+	    rifle->update(p->getX() + 1, p->getY());
 	  // TIME RIFLE UPDATE
 	}
       else if (Missile *missile = dynamic_cast<Missile *>(*it))
@@ -391,7 +396,7 @@ bool Game::run()
   t1->run();
   initPlayersPosition();
 
-  auto start = std::chrono::system_clock::now();
+  _start = std::chrono::system_clock::now();
 
   while (true)
     {
@@ -401,7 +406,7 @@ bool Game::run()
 	  addMonster();
 	}
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-	(std::chrono::system_clock::now() - start);
+	(std::chrono::system_clock::now() - _start);
 
       auto start_time = std::chrono::steady_clock::now();
       auto end_time = start_time + frame_duration(4);
