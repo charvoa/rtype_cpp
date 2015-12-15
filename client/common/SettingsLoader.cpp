@@ -571,6 +571,5 @@ Settings	*SettingsLoader::parseSettings() const
 	std::vector<Bind*> binds = getBinds();
   Settings	*ret = new Settings(vol, binds, getDefaultDifficulty(), getValueOf("ip"), std::stoi(getValueOf("port")));
 
-  std::cout << "ip : " << ret->getIP() << " et port : " << ret->getPort() << std::endl;
   return (ret);
 }

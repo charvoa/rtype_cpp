@@ -8,6 +8,8 @@
 // Last update Tue Dec 15 11:38:13 2015 Nicolas Girardot
 //
 
+#include <thread>
+#include <chrono>
 #include <RenderWindow.hh>
 #include <RoomPanel.hh>
 #include <ButtonFactory.hh>
@@ -83,7 +85,8 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  usleep(500000);
+//	usleep(500000);
+//	std::this_thread::sleep_for(4s);
   for (int a = 0; a < nbrFiles; a++)
     {
       std::cout << "Passing Thourhg" << port << std::endl;
