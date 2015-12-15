@@ -21,8 +21,6 @@ EntityFactory::~EntityFactory()
 AEntity	*EntityFactory::createEntity(int &id)
 {
   std::cout << "new AEntity created !" << std::endl;
-  if (id == 4)
-    id = 11;
   id++;
   return (new AEntity(id));
 }
@@ -38,8 +36,6 @@ AEntity *EntityFactory::createEntity(const std::string &filename, int &id)
   } catch (const std::exception &e) {
     throw (std::logic_error(e.what()));
   }
-  if (id == 4)
-    id = 11;
   id++;
   return (my_entity(id));
 }
@@ -48,19 +44,17 @@ AEntity *EntityFactory::createEntity(int &id, E_EntityType type)
 {
   AEntity *newEntity;
 
-  if (id == 4)
-    id = 11;
   id++;
   switch (type)
     {
     case E_RIFLE:
-      newEntity = new Riffle(5);
+      newEntity = new Riffle(id);
       break;
     case E_MISSILE:
-      newEntity = new Missile(6);
+      newEntity = new Missile(id);
       break;
     case E_LASER:
-      newEntity = new Laser(7);
+      newEntity = new Laser(id);
       break;
     default:
       newEntity = new AEntity(id);
