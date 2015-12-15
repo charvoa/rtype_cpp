@@ -82,7 +82,7 @@ public:
   bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
   void updateScore(Player*, Game::scoreDef);
-  void updateLife(Player*, bool);
+  void updateLife(Player*, int);
   int  getNumberEnemyMax();
   void addMonster();
   void initPlayersPosition();
