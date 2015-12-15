@@ -160,10 +160,11 @@ void Game::handleMove(void *data, Client *client)
 
     // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
     // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
-    this->checkWall(player);
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
-      player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-
+      {
+	//	 this->checkWall(player);
+	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+      }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
