@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Dec 15 05:35:57 2015 Joris Bertomeu
-// Last update Tue Dec 15 05:56:45 2015 Joris Bertomeu
+// Last update Tue Dec 15 06:01:53 2015 Joris Bertomeu
 //
 
 #include		<Monitoring.hpp>
@@ -32,8 +32,9 @@ void			*_handleThread(void *ptr) {
 	me->_network.unlistenSocket(client->getSocket());
 	continue;
       }
-      int	nbGames = server->_roomManager.getNbGames();
-      client->write();
+      // int	nbGames = 0;
+      // client->getSocket()->write(std::string("Nombre de games :" + std::to_string(nbGames)).c_str(),
+      // 				 std::string("Nombre de games :" + std::to_string(nbGames)).size());
     }
   return (NULL);
 }
