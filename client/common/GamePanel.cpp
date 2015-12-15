@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 09:43:37 2015 Serge Heitzler
+// Last update Tue Dec 15 09:54:27 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -260,9 +260,11 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
 void		GamePanel::deleteEntity(std::vector<std::string> &vector)
 {
+  RenderWindow *window = RenderWindow::getInstance();
   int	id = std::atoi(vector.at(0).c_str());
   std::map<int, Sprite*>::iterator it;
-  it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(id);
+  it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
 }
 
 void		GamePanel::die()

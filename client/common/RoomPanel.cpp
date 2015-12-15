@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 09:32:56 2015 Serge Heitzler
+// Last update Tue Dec 15 09:52:28 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -199,12 +199,11 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
 void		RoomPanel::downloadComplete(std::string &usernameComplete)
 {
-  (void)usernameComplete;
-  
-  std::size_t pos = username.find("player");
+  RenderWindow *window = RenderWindow::getInstance();  
+  std::size_t pos = usernameComplete.find("player");
   unsigned int i = std::stoi(usernameComplete.substr(pos + 6));
     
-  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 6)->getSprite()->setColor(sf::Color(255, 255, 255, 255));
+  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 6).getSprite().setColor(sf::Color(255, 255, 255, 255));
   i++;
 }
 
@@ -318,7 +317,7 @@ void		RoomPanel::createPlayers()
       fireShip->setTexture(*((RenderWindow::getInstance())->_ressources->_reactor));
       fireShip->setPosition(220 + 0.2 * (i + 1) * window->getSize()._x, 0.765 * window->getSize()._y);
       fireShip->getSprite().setOrigin(_spaceShipsTextures.at(0)->getSize()._x / 2, _spaceShipsTextures.at(0)->getSize()._y / 2);
-      fireShip->getSprite().setColor(sf::Color(255, 255, 255, 0))
+      fireShip->getSprite().setColor(sf::Color(255, 255, 255, 0));
       
       window->getPanels().top()->getBackgrounds().push_back(*fireShip);
       i++;
