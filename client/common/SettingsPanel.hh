@@ -33,6 +33,7 @@ public:
   void    back();
   void    save();
   Settings	*getTemporarySettings() const;
+  int		getType();
 
 private:
     Settings    *_tmp;

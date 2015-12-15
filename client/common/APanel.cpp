@@ -176,3 +176,8 @@ std::vector<funcs>	&APanel::getFunctions()
 {
   return _functions;
 }
+
+int	APanel::getType()
+{
+	return _type;
+}

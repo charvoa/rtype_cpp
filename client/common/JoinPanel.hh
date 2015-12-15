@@ -29,7 +29,8 @@ public:
   void		        update();
   void			back();
   void			updateOnTextEntered(int);
-  
+  int		getType();
+
 private:
 
   std::string		_room;

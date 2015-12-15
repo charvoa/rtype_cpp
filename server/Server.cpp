@@ -34,6 +34,7 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_JOIN_ROOM, &Server::joinRoom);
   this->_commandManager.addFunction(C_LAUNCH_GAME, &Server::createGame);
   this->_commandManager.addFunction(C_PLAYER_LEFT, &Server::playerLeftRoom);
+
   this->_botManager = new BotManager("../libs/");
   this->_roomManager.setBotManager(this->_botManager->getBotList());
   std::list<Bot*> toto = this->_botManager->getBotList();
@@ -86,7 +87,8 @@ void *newGameThread(void *data)
 
   std::stringstream ss;
 
-  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port)))
+  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port,
+				   me->_botManager->getBotList())))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
       for (std::list<Client *>::iterator it = c.begin();
@@ -98,7 +100,7 @@ void *newGameThread(void *data)
 	  ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)
 								S_INIT_UDP,
 								CRC::calcCRC(ss.str().c_str()),
-								0,
+								ss.str().size(),
 								ss.str().c_str());
 	  (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),
 				    sizeof(ANetwork::t_frame));

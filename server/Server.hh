@@ -6,7 +6,7 @@
 //
 // Started on  Wed Nov 25 16:32:18 2015 Nicolas Charvoz
 
-// Last update Wed Dec 16 12:30:36 2015 Antoine Garcia
+// Last update Wed Dec 16 11:18:33 2015 Nicolas Charvoz
 //
 
 #ifndef SERVER_HH_
@@ -55,13 +55,13 @@ public:
   RoomManager _roomManager;
   GameManager _gameManager;
   int _port;
+  BotManager	*_botManager;
 
 private:
 
   ANetwork *_network;
   //ClientManager _clientManager;
   CommandManager _commandManager;
-  BotManager	*_botManager;
 };
 
 void sendMessage(std::list<Client>&, unsigned char);
