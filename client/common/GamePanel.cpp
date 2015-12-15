@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 09:41:51 2015 Serge Heitzler
+// Last update Tue Dec 15 12:11:19 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -31,12 +31,15 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      std::cout << "Thread UDP" << std::endl;
-      std::cout << "MICH MICH !" << std::endl;
       try
 	{
-	  a = Client::getUDPNetwork()->read();
-	  std::cout << "Data UDP is " << a.data << std::endl;
+
+	  a = Client::getNetwork()->read();
+	  // if (a == NULL)
+	  // {
+	  //   std::cout << "Connection Lost with server" << std::endl;
+	  //   exit (0);
+	  // }
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
@@ -131,7 +134,7 @@ planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
   _backgrounds.push_back(*hud);
 
 
-  
+
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -174,7 +177,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
     }
 
   /* USER INTERFACE HUD */
-  
+
   _mainPlayer = new MainPlayer(currentPlayer);
   i = 1;
   int j = 1;
@@ -190,12 +193,12 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 	}
       i++;
     }
-  
+
   Sprite	*wp = new Sprite();
   wp->setTexture(*((RenderWindow::getInstance())->_ressources->_riffle));
   wp->scale(2);
   _dicoSprites.insert(std::make_pair(5, wp));
-  
+
 }
 
 
@@ -379,7 +382,7 @@ void		GamePanel::render()
     {
       window->draw((*it).second->getSprite());
     }
-
+  _inputManager.keyPressedInGame();
 }
 
 void		GamePanel::drawOtherPlayer()

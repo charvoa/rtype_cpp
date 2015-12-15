@@ -26,6 +26,15 @@ Settings::Settings(Volume vol, std::vector<Bind*> binds, Settings::Difficulty di
 	_defaultDifficulty = difficulty;
 }
 
+Settings::Settings(Volume vol, std::vector<Bind*> binds, Settings::Difficulty difficulty, std::string const& ip, short int port)
+{
+	_volume = vol;
+	_binds = binds;
+	_defaultDifficulty = difficulty;
+	_ip = ip;
+	_port = port;
+}
+
 Settings::~Settings(){}
 
 void	Settings::update(Settings const& copy)
@@ -115,4 +124,56 @@ void    Settings::resetDefault()
     SettingsLoader  loader("DefaultConfig.ini");
 
     this->update(*loader.parseSettings());
+}
+
+void	Settings::setKey(Bind::BindType type, sf::Keyboard::Key key)
+{
+	std::vector<Bind*>::iterator it = _binds.begin();
+	std::vector<Bind*>::iterator end = _binds.end();
+
+	while (it != end)
+	{
+		if (type == (*it)->getType())
+		{
+			(*it)->setKey(key);
+			return;
+		}
+		it++;
+	}
+}
+
+void	Settings::setJoystick(Bind::BindType type, JoystickEvent& joystick)
+{
+	std::vector<Bind*>::iterator it = _binds.begin();
+	std::vector<Bind*>::iterator end = _binds.end();
+
+	while (it != end)
+	{
+		if (type == (*it)->getType())
+		{
+			(*it)->setJoystick(joystick);
+			return;
+		}
+		it++;
+	}
+}
+
+void	Settings::setIP(std::string const& ip)
+{
+	_ip = ip;
+}
+
+void	Settings::setPort(short int port)
+{
+	_port = port;
+}
+
+std::string		Settings::getIP() const
+{
+	return _ip;
+}
+
+short int			Settings::getPort() const
+{
+	return _port;
 }

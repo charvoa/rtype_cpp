@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Mon Dec 14 17:11:35 2015 Nicolas Girardot
+// Last update Mon Dec 14 18:22:53 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -49,7 +49,7 @@ void			InputManager::setInputType(InputType type)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedAt));
       _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInDirection));
-      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::keyPressedInGame));
+      //      _functions.insert(std::make_pair(sf::Event::KeyPressed, &InputManager::keyPressedInGame));
     }
   if (type == InputType::JOIN_INPUT)
     {
@@ -59,10 +59,10 @@ void			InputManager::setInputType(InputType type)
 }
 
 
-std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame(sf::Event &event)
+std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 {
   int i = 0;
-  std::cout << "KEY " << event.key.code << std::endl;
+  //std::cout << "KEY " << event.key.code << std::endl;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
       i += 8;

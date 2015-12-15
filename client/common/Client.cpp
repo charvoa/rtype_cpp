@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec 14 16:50:16 2015 Nicolas Girardot
+// Last update Tue Dec 15 12:11:02 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -36,11 +36,14 @@ void	*readdisp(void *s)
   ProtocoleClient x;
   while (true)
     {
-//      std::cout << "Thread" << std::endl;
       try
 	{
 	  a = Client::getNetwork()->read();
-//	  std::cout << "Data TCP is " << a.data << std::endl;
+	  // if (a == NULL)
+	  // {
+	  //   std::cout << "Connection Lost with server" << std::endl;
+	  //   exit (0);
+	  // }
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
@@ -52,7 +55,7 @@ void	*readdisp(void *s)
   return s;
 }
 
-Client::Client()
+Client::Client(int port) : _port(port)
 {
 
 }
@@ -73,7 +76,7 @@ void	Client::Start()
 
   //Connecting to server
 
-  _network->init(PORT, ANetwork::TCP_MODE);
+  _network->init(_port, ANetwork::TCP_MODE);
   _network->connect(IP_ADRESS);
 
   //Sending Handshake
