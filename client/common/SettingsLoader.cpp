@@ -438,6 +438,20 @@ Settings::Difficulty    SettingsLoader::getDefaultDifficulty() const
     return (Settings::MEDIUM_MODE);
 }
 
+std::string		SettingsLoader::difficultyToString(Settings::Difficulty diff) const
+{
+	switch (diff)
+	{
+	case Settings::EASY_MODE:
+		return ("EASY_MODE");
+	case Settings::MEDIUM_MODE:
+		return ("MEDIUM_MODE");
+	case Settings::HARD_MODE:
+		return ("HARD_MODE");
+	}
+	return ("MEDIUM_MODE");
+}
+
 std::string     SettingsLoader::bindTypeToString(Bind::BindType type) const
 {
     switch (type)
@@ -520,13 +534,11 @@ std::string     SettingsLoader::bindToString(Bind bind) const
 
 void        SettingsLoader::saveSettings(Settings *settings) const
 {
-	std::ofstream  ofs("../common/client/config/PersonnalConfig.ini", std::ios::out);
-	std::cout << "global volume dans saveSettings : " << settings->getVolume().getGlobal() << std::endl;
+	std::ofstream  ofs("../config/PersonnalConfig.ini", std::ios::out | std::ios::trunc);
 	std::string str(settingsToString(*settings));
-//	std::cout << "[" << str << "]" << std::endl;
-    std::string settingsString(str);
+	std::cout << "[" << str << "]" << std::endl;
 
-    ofs << settingsString;
+    ofs << str;
 }
 
 std::string	SettingsLoader::settingsToString(Settings const& settings) const
@@ -542,9 +554,14 @@ std::string	SettingsLoader::settingsToString(Settings const& settings) const
 		++it;
 	}
 	ret += "[VOLUME]\n";
-	ret += "global=" + settings.getVolume().getGlobal();
-	//wtf
-	std::cout << "returning [" << ret << "]" << std::endl;
+	ret += "global=" + std::to_string(settings.getVolume().getGlobal()) += "\n";
+	ret += "effects=" + std::to_string(settings.getVolume().getEffects()) += "\n";
+	ret += "music=" + std::to_string(settings.getVolume().getMusic()) += "\n";
+	ret += "[DIFFICULTY]\n";
+	ret += "default=" + difficultyToString(settings.getDefaultDifficulty()) += "\n";
+	ret += "[NETWORK]\n";
+	ret += "ip=" + settings.getIP() += "\n";
+	ret += "port=" + std::to_string(settings.getPort()) += "\n";
 	return (ret);
 }
 
@@ -552,7 +569,8 @@ Settings	*SettingsLoader::parseSettings() const
 {
 	Volume vol = getVolume();
 	std::vector<Bind*> binds = getBinds();
-  Settings	*ret = new Settings(vol, binds, getDefaultDifficulty());
+  Settings	*ret = new Settings(vol, binds, getDefaultDifficulty(), getValueOf("ip"), std::stoi(getValueOf("port")));
 
+  std::cout << "ip : " << ret->getIP() << " et port : " << ret->getPort() << std::endl;
   return (ret);
 }

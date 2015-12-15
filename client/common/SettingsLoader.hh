@@ -56,7 +56,7 @@ public:
   std::string bindTypeToString(Bind::BindType) const;
   std::string bindToString(Bind) const;
   std::string settingsToString(Settings const&) const;
-
+  std::string difficultyToString(Settings::Difficulty) const;
 
 private:
   const std::string _filepath;
