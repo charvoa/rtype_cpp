@@ -19,37 +19,37 @@ EntityManager::~EntityManager()
   std::cout << "EntityManager Destroyed" << std::endl;
 }
 
-bool	EntityManager::createEntity(E_EntityType type)
+int	EntityManager::createEntity(E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(_id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
-bool	EntityManager::createEntity(E_EntityType type, const Client &client)
+int	EntityManager::createEntity(E_EntityType type, const Client &client)
 {
   AEntity *newEntity = _playerFactory.createPlayer(_id, client);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
-bool	EntityManager::createEntity(E_EntityType type, AEntity *parent)
+int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 {
   AEntity *newEntity = _entityFactory.createEntity(_id, type);
   newEntity->setType(type);
   newEntity->setParent(parent);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
-bool	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
+int	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);
   newEntity->setType(type);
   _entities.push_back(newEntity);
-  return (true);
+  return (_id);
 }
 
 void	EntityManager::removeEntity(AEntity &entity)
@@ -106,4 +106,19 @@ std::vector<AEntity*> const EntityManager::getEntitiesByType(E_EntityType type) 
 	entitiesByType.push_back(*it);
     }
   return (entitiesByType);
+}
+
+std::vector<AEntity*> const EntityManager::getAmmoEntities() const
+{
+  std::vector<AEntity*> Ammos;
+  E_EntityType type;
+
+  type = E_INVALID;
+  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
+    {
+      type = (*it)->getType();
+      if (type == E_RIFLE || type == E_MISSILE || type == E_LASER)
+	Ammos.push_back(*it);
+    }
+  return (Ammos);
 }
