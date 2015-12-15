@@ -327,15 +327,15 @@ void Game::updateAmmo()
 {
   std::vector<AEntity*> _vec = _eM.getAmmoEntities();
 
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+    (std::chrono::system_clock::now() - _start);
+
   for (std::vector<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
     {
       if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
 	{
 	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-	  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-	    (std::chrono::system_clock::now() - _start);
-	  if (duration.count() % 30 == 0)
-	    rifle->update(p->getX() + 1, p->getY());
+	  rifle->update(p->getX() + 2, p->getY());
 	  // TIME RIFLE UPDATE
 	}
       else if (Missile *missile = dynamic_cast<Missile *>(*it))
