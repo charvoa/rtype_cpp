@@ -318,7 +318,7 @@ void Game::initPlayersPosition()
   int	x = 10;
   std::vector<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::vector<AEntity *>::iterator it;
-  Random	rand(0, 50);
+  Random	rand(2, 48);
   for (it = _players.begin(); it != _players.end(); ++it)
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
