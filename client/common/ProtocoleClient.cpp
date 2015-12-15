@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Mon Dec 14 17:04:48 2015 Nicolas Girardot
+// Last update Tue Dec 15 00:05:32 2015 Serge Heitzler
 //
 
 
@@ -114,7 +114,7 @@ void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Display" << std::endl;
+  //  std::cout << "Display" << std::endl;
 
   GamePanel::display(x);
 }

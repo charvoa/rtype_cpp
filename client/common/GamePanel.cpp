@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Mon Dec 14 09:41:51 2015 Serge Heitzler
+// Last update Tue Dec 15 04:31:15 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -31,12 +31,10 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      std::cout << "Thread UDP" << std::endl;
-      std::cout << "MICH MICH !" << std::endl;
       try
 	{
 	  a = Client::getUDPNetwork()->read();
-	  std::cout << "Data UDP is " << a.data << std::endl;
+	  //	  std::cout << "Data UDP is " << a.data << std::endl;
 	  x.methodChecker(a);
 	}
       catch (const std::exception &e)
@@ -169,6 +167,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 	  break;
 	}
       ship->scale(0.2);
+      ship->setPosition(-500, 500);
       _dicoSprites.insert(std::make_pair(i, ship));
       i++;
     }
@@ -191,17 +190,40 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
       i++;
     }
   
-  Sprite	*wp = new Sprite();
-  wp->setTexture(*((RenderWindow::getInstance())->_ressources->_riffle));
-  wp->scale(2);
-  _dicoSprites.insert(std::make_pair(5, wp));
+
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
   
 }
 
 
-void		GamePanel::newEnemy(std::vector<std::string> &vector)
+void		GamePanel::newEntity(std::vector<std::string> &vector)
 {
-  (void) vector;
+  RenderWindow *window = RenderWindow::getInstance();
+  Sprite	*newSprite = new Sprite();
+
+  std::string  	typeString = vector.at(0);
+  int	  	id = std::atoi(vector.at(1).c_str());
+  int		type;
+
+  if (typeString.find(":") == !std::string::npos)
+    type = 7;
+  else
+    type = std::atoi(vector.at(0).c_str());
+
+  
+  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+  //  newSprite->scale();
+  newSprite->setPosition(-500, 500);
+  
+  ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
+
 }
 
 void		GamePanel::die()
@@ -229,11 +251,11 @@ void		GamePanel::display(std::vector<std::string> &vector)
   id = std::atoi(vector.at(0).c_str());
 
 
-  std::cout << "vector.size() " << vector.size() << std::endl;
-  std::cout << "pos X " << posX << std::endl;
-  std::cout << "realPos X " << realPosX << std::endl;
-  std::cout << "pos Y " << posY << std::endl;
-  std::cout << "realPos Y " << realPosY << std::endl;
+  // std::cout << "vector.size() " << vector.size() << std::endl;
+  // std::cout << "pos X " << posX << std::endl;
+  // std::cout << "realPos X " << realPosX << std::endl;
+  // std::cout << "pos Y " << posY << std::endl;
+  // std::cout << "realPos Y " << realPosY << std::endl;
 
   // static int i = 0;
 
@@ -252,6 +274,9 @@ void		GamePanel::display(std::vector<std::string> &vector)
   // float moveY = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->getPosY() - realPosY;
 
    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+
+
+   
   // ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->move(moveX, moveY);
 
   // std::cout << "realPos X " << moveX << std::endl;
@@ -266,7 +291,7 @@ std::map<int, Sprite*>		&GamePanel::getDicoSprites()
   return _dicoSprites;
 }
 
-std::map<std::string, Texture*>		&GamePanel::getDicoTextures()
+std::map<int, Texture*>		&GamePanel::getDicoTextures()
 {
   return _dicoTextures;
 }
@@ -373,7 +398,8 @@ void		GamePanel::render()
   this->_mainPlayer->render();
   this->drawOtherPlayer();
 
-
+  _inputManager.joystickMovedInDirection();
+  
   RenderWindow *window = RenderWindow::getInstance();
   for (std::map<int, Sprite*>::iterator it = _dicoSprites.begin(); it != _dicoSprites.end(); ++it)
     {
