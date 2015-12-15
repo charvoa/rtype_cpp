@@ -135,10 +135,16 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  if (pPlayer->getY() == 0 || pPlayer->getY() == 50)
+
+  std::cout << "Position of player (" << pPlayer->getX() << "," << pPlayer->getY() << ")" << std::endl;
+  if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
     {
       this->updateLife(player, false);
-      std::cout << "J'ai touché la chatte à la voisine" << std::endl;
+      if (pPlayer->getY() >= 49)
+	player->update(pPlayer->getX() + 1, pPlayer->getY() - 3);
+      else
+	player->update(pPlayer->getX() + 1, pPlayer->getY() + 3);
+      std::cout << "J'ai touché la chatte à la voisine Y : " << pPlayer->getY() << std::endl;
     }
 }
 
@@ -162,7 +168,7 @@ void Game::handleMove(void *data, Client *client)
     // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       {
-	//	 this->checkWall(player);
+	this->checkWall(player);
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
       }
   } catch (const std::exception &e) {
@@ -185,6 +191,7 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 
 void Game::updateLife(Player *p, bool reset)
 {
+  std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
 				       ->getSystemByComponent(C_HEALTH)
@@ -258,7 +265,7 @@ void Game::handleCommand(void *data, Client *client)
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
 
-  std::cout << "CommandType : " << commandType << std::endl;
+  //  std::cout << "CommandType : " << commandType << std::endl;
 
   try {
     Func fp = _funcMap[commandType];

@@ -13,6 +13,7 @@
 RenderWindow *RenderWindow::_renderWindow = NULL;
 RenderWindow::RenderWindow()
 {
+	_settings = new Settings("../config/PersonnalConfig.ini");
 }
 
 RenderWindow	*RenderWindow::getInstance()
