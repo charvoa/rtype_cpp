@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:19 2015 Nicolas Girardot
-// Last update Mon Dec 14 09:28:54 2015 Serge Heitzler
+// Last update Tue Dec 15 11:40:00 2015 Nicolas Charvoz
 //
 
 #ifndef CLIENT_HH_
@@ -29,10 +29,11 @@
 //#define IP_ADRESS "0"
 //#define IP_ADRESS "10.16.253.150"
 //#define IP_ADRESS "51.254.139.53"
-#define IP_ADRESS "10.16.253.178"
 //#define IP_ADRESS "10.16.253.178"
-//#define IP_ADRESS "10.16.252.249"
-#define PORT 4242
+//#define IP_ADRESS "10.16.253.178"
+#define IP_ADRESS "10.16.252.249"
+#define PORT 4254
+//#define PORT 4242
 
 class	Client
 {
