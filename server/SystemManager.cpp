@@ -22,7 +22,7 @@ SystemManager::~SystemManager()
 
 ASystem *SystemManager::getSystemByComponent(E_Component type)
 {
-  for (std::vector<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
+  for (std::list<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
     {
       if ((dynamic_cast<SystemGun*>(*it)) && (type == C_MISSILE || type == C_RIFLE || type == C_LASER))
 	return (*it);

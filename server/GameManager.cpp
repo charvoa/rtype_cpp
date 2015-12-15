@@ -14,7 +14,7 @@ GameManager::GameManager() {}
 
 GameManager::~GameManager() {}
 
-bool GameManager::createGame(const Parameters &p_, std::vector<Client *> &clients_,
+bool GameManager::createGame(const Parameters &p_, std::list<Client *> &clients_,
 			     const std::string &id_, int port_)
 {
   try {
@@ -28,7 +28,7 @@ bool GameManager::createGame(const Parameters &p_, std::vector<Client *> &client
 
 Game &GameManager::getGameById(const std::string &s)
 {
-  for (std::vector<Game>::iterator it = _games.begin();
+  for (std::list<Game>::iterator it = _games.begin();
        it != _games.end() ; ++it)
     {
       if ((*it).getId() == s) {
@@ -40,7 +40,7 @@ Game &GameManager::getGameById(const std::string &s)
 
 Game &GameManager::getGameByClient(const Client &c)
 {
-  // for (std::vector<Game>::iterator it = _games.begin();
+  // for (std::list<Game>::iterator it = _games.begin();
   //      it != _games.end() ; ++it)
   //   {
   //     if ((*it).getClient().getSocket()->getFd() == c.getSocket()->getFd()) {

@@ -27,7 +27,7 @@ int	EntityManager::createEntity(E_EntityType type)
   return (_id);
 }
 
-int	EntityManager::createEntity(E_EntityType type, const Client &client)
+int	EntityManager::createEntity(E_EntityType type,  Client &client)
 {
   AEntity *newEntity = _playerFactory.createPlayer(_id, client);
   newEntity->setType(type);
@@ -44,7 +44,7 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
   return (_id);
 }
 
-int	EntityManager::createEntitiesFromFolder(const std::string &filename, E_EntityType type)
+int	EntityManager::createEntitiesFromFolder( std::string &filename, E_EntityType type)
 {
   AEntity *newEntity = _entityFactory.createEntity(filename, _id);
   newEntity->setType(type);
@@ -52,44 +52,34 @@ int	EntityManager::createEntitiesFromFolder(const std::string &filename, E_Entit
   return (_id);
 }
 
-void	EntityManager::removeEntity(AEntity &entity)
+void	EntityManager::removeEntity(AEntity *entity)
 {
-  int	i = 0;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
-    {
-      if (entity.getId() == (*it)->getId())
-	{
-	  _entities.erase(_entities.begin()+i);
-	  std::cout << "Entity removed" << std::endl;
-	  break;
-	}
-      i++;
-    }
+  this->_entities.remove(entity);
 }
 
 void	EntityManager::removeEntityById(int id)
 {
-  int	i = 0;
-  for (std::vector<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
-    {
-      if (id == (*it)->getId())
-	{
-	  _entities.erase(_entities.begin()+i);
-	  std::cout << "Entity removed" << std::endl;
-	  break;
-	}
-      i++;
-    }
+  // int	i = 0;
+  // for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
+  //   {
+  //     if (id == (*it)->getId())
+  // 	{
+  // 	  _entities.erase(_entities.begin()+i);
+  // 	  std::cout << "Entity removed" << std::endl;
+  // 	  break;
+  // 	}
+  //     i++;
+  //   }
 }
 
-std::vector<AEntity*> const EntityManager::getEntities() const
+std::list<AEntity*>  EntityManager::getEntities()
 {
   return (_entities);
 }
 
-AEntity	*EntityManager::getEntityById(int id) const
+AEntity	*EntityManager::getEntityById(int id)
 {
-  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
+  for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if (id == (*it)->getId())
 	return (*it);
@@ -97,10 +87,10 @@ AEntity	*EntityManager::getEntityById(int id) const
   return (NULL);
 }
 
-std::vector<AEntity*> const EntityManager::getEntitiesByType(E_EntityType type) const
+std::list<AEntity*>  EntityManager::getEntitiesByType(E_EntityType type)
 {
-  std::vector<AEntity*> entitiesByType;
-  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
+  std::list<AEntity*> entitiesByType;
+  for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if ((*it)->getType() == type)
 	entitiesByType.push_back(*it);
@@ -108,13 +98,13 @@ std::vector<AEntity*> const EntityManager::getEntitiesByType(E_EntityType type) 
   return (entitiesByType);
 }
 
-std::vector<AEntity*> const EntityManager::getAmmoEntities() const
+std::list<AEntity*>  EntityManager::getAmmoEntities()
 {
-  std::vector<AEntity*> Ammos;
+  std::list<AEntity*> Ammos;
   E_EntityType type;
 
   type = E_INVALID;
-  for (std::vector<AEntity*>::const_iterator it = _entities.begin(); it != _entities.end(); ++it)
+  for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       type = (*it)->getType();
       if (type == E_RIFLE || type == E_MISSILE || type == E_LASER)

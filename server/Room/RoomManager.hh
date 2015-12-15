@@ -13,14 +13,14 @@
 
 # include <Random.hpp>
 # include <string>
-# include <vector>
+# include <list>
 # include <Room.hh>
 # include <Client.hh>
 # include <BotManager.hpp>
 
 class	RoomManager
 {
-  std::vector<Room>	_rooms;
+  std::list<Room>	_rooms;
   std::string	generateId();
   std::list<Bot*>	_botManager;
 

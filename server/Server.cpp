@@ -61,9 +61,9 @@ void Server::run()
     }
 }
 
-void sendMessage(std::vector<Client *> &c ,unsigned char type)
+void sendMessage(std::list<Client *> &c ,unsigned char type)
 {
-   for (std::vector<Client *>::iterator it = c.begin();
+   for (std::list<Client *>::iterator it = c.begin();
 	 it != c.end() ; ++it)
       {
 	ANetwork::t_frame frame = CreateRequest::create(type,
@@ -82,14 +82,14 @@ void *newGameThread(void *data)
   Server *me = s->server;
 
   Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
-  std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
+  std::list<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   std::stringstream ss;
 
   if ((me->_gameManager.createGame(p, c, s->frame.data, s->port)))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
-      for (std::vector<Client *>::iterator it = c.begin();
+      for (std::list<Client *>::iterator it = c.begin();
 	   it != c.end() ; ++it)
 	{
 	  ss << me->_port;
@@ -107,7 +107,7 @@ void *newGameThread(void *data)
 	  ss.str("");
 	  ss.clear();
 	}
-      me->_roomManager.deleteRoom(s->frame.data);
+      //me->_roomManager.deleteRoom(s->frame.data);
       me->_gameManager.getGameById(s->frame.data).run();
     }
   else
@@ -129,7 +129,7 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
 
 
   // TELL CLIENT WHO HE IS FOR UDP
-  std::vector<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
+  std::list<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());

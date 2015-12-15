@@ -75,11 +75,11 @@ void	SettingsPanel::setUserInterface()
 	// Button
 
 	std::string name = "SAVE";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.8), name);
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.9), name);
 	name = "DEFAULT";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.8), name);
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.9), name);
 	name = "BACK";
-	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.8), name);
+	ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.9), name);
 
 	_functions.push_back((APanel::funcs)&SettingsPanel::save);
 	_functions.push_back((APanel::funcs)&SettingsPanel::defaultSettings);
@@ -88,17 +88,17 @@ void	SettingsPanel::setUserInterface()
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 	int	layout = 0;
 	int id = window->getPanels().top()->getLabels().size();
 
 	while (it != end)
 	{
 		name = loader->keyToString((*it)->getKey());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.2 + layout), name, id++);
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7, window->getSize()._y * 0.25 + layout), name, id++);
 		name = loader->joystickToString((*it)->getJoystick());
-		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + (window)->_ressources->_buttonNormal->getSize()._x / 2, window->getSize()._y * 0.2 + layout), name, id++);
-		layout += (window)->_ressources->_buttonNormal->getSize()._y / 2;
+		ButtonFactory::createKeyButton(Vector2(window->getSize()._x * 0.7 + 130, window->getSize()._y * 0.25 + layout), name, id++);
+		layout += 70;
 		++it;
 	}
 
@@ -123,9 +123,10 @@ void	SettingsPanel::setUserInterface()
 void    SettingsPanel::setGlobalVolume(int global)
 {
     Volume vol = _tmp->getVolume();
-
+	std::cout << "volume avant : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
     vol.setGlobal(global);
     _tmp->setVolume(vol);
+	std::cout << "volume après : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
 }
 
 void    SettingsPanel::setEffectsVolume(int effects)
@@ -155,7 +156,7 @@ void    SettingsPanel::defaultSettings()
 	std::vector<Bind*> binds = _tmp->getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(false);
 	int id = 3;
 
 	while (it != end)
@@ -183,8 +184,7 @@ void    SettingsPanel::back()
 
 void    SettingsPanel::save()
 {
-	std::cout << "SETTINGS PANEL SAVE" << std::endl;
-	SettingsLoader *loader = new SettingsLoader();
+	SettingsLoader *loader = new SettingsLoader(true);
 	loader->saveSettings(_tmp);
 	RenderWindow::getInstance()->setSettings(_tmp);
 }

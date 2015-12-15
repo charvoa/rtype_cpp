@@ -74,7 +74,7 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  usleep(1000000);
+//  usleep(1000000);
 //  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {

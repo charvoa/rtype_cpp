@@ -20,12 +20,12 @@ ComponentHitbox::~ComponentHitbox()
   std::cout << "Hitbox Component destroyed" << std::endl;
 }
 
-std::vector<Case*>	ComponentHitbox::getHitbox()
+std::list<Case*>	ComponentHitbox::getHitbox()
 {
   return (_hitbox);
 }
 
-void			ComponentHitbox::setHitbox(std::vector<Case*> cases)
+void			ComponentHitbox::setHitbox(std::list<Case*> cases)
 {
   _hitbox = cases;
 }

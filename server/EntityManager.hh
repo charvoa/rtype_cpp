@@ -10,7 +10,7 @@
 #ifndef _ENTITYMANAGER_HH_
 # define _ENTITYMANAGER_HH_
 
-# include <vector>
+# include <list>
 # include <iostream>
 # include <EntityFactory.hh>
 # include <AEntity.hh>
@@ -24,22 +24,22 @@ private:
   int		_id;
   EntityFactory _entityFactory;
   PlayerFactory _playerFactory;
-  std::vector<AEntity*> _entities;
+  std::list<AEntity*> _entities;
 
 public:
   EntityManager();
   ~EntityManager();
 
   int		createEntity(E_EntityType type);
-  int		createEntity(E_EntityType type, const Client &);
+  int		createEntity(E_EntityType type,  Client &);
   int		createEntity(E_EntityType type, AEntity *);
-  int		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
-  void		removeEntity(AEntity &entity);
+  int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
+  void		removeEntity(AEntity *entity);
   void		removeEntityById(int id);
-  std::vector<AEntity*> const getEntities() const;
-  AEntity	*getEntityById(int id) const;
-  std::vector<AEntity*> const getEntitiesByType(E_EntityType type) const;
-  std::vector<AEntity*> const getAmmoEntities() const;
+  std::list<AEntity*>  getEntities() ;
+  AEntity	*getEntityById(int id) ;
+  std::list<AEntity*>  getEntitiesByType(E_EntityType type) ;
+  std::list<AEntity*>  getAmmoEntities() ;
 };
 
 #endif /* _ENTITYMANAGER_HH_ */
