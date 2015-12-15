@@ -454,7 +454,7 @@ bool Game::run()
       if (timer.elapsed().count()>= (speed/_stage))
 	{
 	  timer.reset();
-	  addMonster();
+	  //addMonster();
 	}
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
 	(std::chrono::system_clock::now() - _start);
