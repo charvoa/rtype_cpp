@@ -30,10 +30,10 @@ public:
   EntityManager();
   ~EntityManager();
 
-  bool		createEntity(E_EntityType type);
-  bool		createEntity(E_EntityType type, const Client &);
-  bool		createEntity(E_EntityType type, AEntity *);
-  bool		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
+  int		createEntity(E_EntityType type);
+  int		createEntity(E_EntityType type, const Client &);
+  int		createEntity(E_EntityType type, AEntity *);
+  int		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
   void		removeEntity(AEntity &entity);
   void		removeEntityById(int id);
   std::vector<AEntity*> const getEntities() const;
