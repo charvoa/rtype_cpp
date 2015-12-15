@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
-// Last update Tue Dec 15 07:34:59 2015 Serge Heitzler
+// Last update Tue Dec 15 19:26:13 2015 Nicolas Girardot
 //
 
 #ifndef ROOMPANEL_HH_
@@ -17,6 +17,7 @@
 #include <Settings.hh>
 #include <APanel.hh>
 #include <Player.hh>
+#include <FileManager.hpp>
 
 class RoomPanel : public APanel
 {
@@ -41,6 +42,7 @@ public:
   void			addNbPlayers();
   std::vector<Texture*> &getTextures();
   static void	       	receiveFiles(int i, int j);
+  std::map<std::string, Texture *> &getReceived();
   int	  		getCurrentPlayer();
 
 private:

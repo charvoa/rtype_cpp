@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 11:31:19 2015 Serge Heitzler
+// Last update Tue Dec 15 11:33:14 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -87,11 +87,33 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
       file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
 
+  FileManager Toto("./recv/");
+  RenderWindow *window = RenderWindow::getInstance();
+
+  std::cout << "Is  working 1" << std::endl;
+  std::list<File *> list = Toto.getFileListByExtension("png");
+  std::cout << "Is  working 2" << std::endl;
+  for (std::list<File*>::iterator it = list.begin(); it != list.end(); ++it) {
+    std::cout << "Is  working 3" << std::endl;
+    Texture *text = new Texture();
+    std::cout << "Is  working 4" << std::endl;
+    (*it)->getFullPath();
+    std::cout << "Is  working 5" << std::endl;
+    text->loadFromFile((*it)->getFullPath());
+    std::cout << "Is  working 6" << std::endl;
+    static_cast<RoomPanel*>(window->getPanels().top())->getReceived().insert(std::make_pair((*it)->getFullPath(),text));
+    std::cout << "Is  working 7" << std::endl;
+  }
 
   // create texture here
   // Use FileManager
   // Get all png files from ./recv/
   // Build Texture
+}
+
+std::map<std::string, Texture*> &RoomPanel::getReceived()
+{
+  return _received;
 }
 
 unsigned int	RoomPanel::getNbPlayers() const
@@ -208,10 +230,10 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
 void		RoomPanel::downloadComplete(std::string &usernameComplete)
 {
-  RenderWindow *window = RenderWindow::getInstance();  
+  RenderWindow *window = RenderWindow::getInstance();
   std::size_t pos = usernameComplete.find("player");
   unsigned int i = std::stoi(usernameComplete.substr(pos + 6));
-    
+
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 6).getSprite().setColor(sf::Color(255, 255, 255, 255));
   i++;
 }
@@ -234,7 +256,7 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       getPlayers().at(i)->setUsername(vector.at(i));
       _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
 
-      
+
       getLabels().at(i + 2).setString(vector.at(i));
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
       _nbPlayers++;
@@ -313,7 +335,7 @@ void		RoomPanel::createPlayers()
     }
 
   Text		       	*roomID = new Text();
-  
+
   roomID->setString(_idRoom);
   roomID->setSize(60);
   roomID->setStyle(1);
@@ -324,23 +346,23 @@ void		RoomPanel::createPlayers()
   _labels.push_back(*roomID);
   _nbPlayers = 0;
 
-  
+
   i = 0;
-  
+
   while (i < 4)
     {
       Sprite *fireShip = new Sprite;
-      
+
       fireShip->setTexture(*((RenderWindow::getInstance())->_ressources->_reactor));
       fireShip->setPosition(220 + 0.2 * (i + 1) * window->getSize()._x, 0.765 * window->getSize()._y);
       fireShip->getSprite().setOrigin(_spaceShipsTextures.at(0)->getSize()._x / 2, _spaceShipsTextures.at(0)->getSize()._y / 2);
       fireShip->getSprite().setColor(sf::Color(255, 255, 255, 0));
-      
+
       window->getPanels().top()->getBackgrounds().push_back(*fireShip);
       i++;
     }
 
-  
+
 
 }
 
@@ -367,5 +389,5 @@ void		RoomPanel::back()
 
 void	RoomPanel::update()
 {
-  
+
 }

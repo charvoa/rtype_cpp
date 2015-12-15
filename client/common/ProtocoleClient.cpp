@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 15 06:52:23 2015 Serge Heitzler
+// Last update Tue Dec 15 19:27:51 2015 Nicolas Girardot
 //
 
 #include <string>
@@ -74,6 +74,8 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_FILE_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
   _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::shoot));
   _functions.insert(std::make_pair(S_NEW_ENTITY, &ProtocoleClient::newEntity));
+  _functions.insert(std::make_pair(S_DELETE_ENTITY, &ProtocoleClient::deleteEntity));
+  _functions.insert(std::make_pair(S_DOWNLOAD_COMPLETE, &ProtocoleClient::downloadComplete));
 }
 
 void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
@@ -81,6 +83,21 @@ void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "New Entity" << std::endl;
   GamePanel::newEntity(x);
+}
+
+void		ProtocoleClient::deleteEntity(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Delete Entity" << std::endl;
+  GamePanel::deleteEntity(x);
+}
+
+void		ProtocoleClient::downloadComplete(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Download Complete" << std::endl;
+  std::cout << "Player name is " << x.at(0) << std::endl;
+  //  RoomPanel::downloadComplete(x.at(0));
 }
 
 void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)
