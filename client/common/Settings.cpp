@@ -116,16 +116,21 @@ void    Settings::setDifficulty(Settings::Difficulty diff)
 
 void    Settings::loadSettings()
 {
-    SettingsLoader  loader("PersonnalConfig.ini");
+    SettingsLoader  loader("../config/PersonnalConfig.ini");
 
-    this->update(*loader.parseSettings());
+    this->update(*(loader.parseSettings()));
 }
 
 void    Settings::resetDefault()
 {
-    SettingsLoader  loader("DefaultConfig.ini");
+	SettingsLoader  loader(true);
+	Volume			vol(50, 50, 50);
 
-    this->update(*loader.parseSettings());
+	_binds = loader.createDefaultBinds();
+	_volume = vol;
+	_defaultDifficulty = MEDIUM_MODE;
+	_ip = "10.16.253.178";
+	_port = 4242;
 }
 
 void	Settings::setKey(Bind::BindType type, sf::Keyboard::Key key)
@@ -133,7 +138,6 @@ void	Settings::setKey(Bind::BindType type, sf::Keyboard::Key key)
 	std::vector<Bind*>::iterator it = _binds.begin();
 	std::vector<Bind*>::iterator end = _binds.end();
 
-	std::cout << "SETTINGS::SETKEY ?????" << std::endl;
 	while (it != end)
 	{
 		if (type == (*it)->getType())
