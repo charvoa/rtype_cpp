@@ -32,6 +32,8 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
+
+  // _bM = new BotManager("../libs");
 }
 
 Game::~Game() {}
@@ -212,10 +214,16 @@ void Game::updateLife(Player *p, int reset)
 
   health << p->getName() << ";" << hP->getLife();
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
-
+  ANetwork::t_frame frameDie;
+  if (hP->getLife() == 0){
+    std::string sendData = std::to_string(p->getId());
+    frameDie = CreateRequest::create(S_DIE, CRC::calcCRC(sendData), sendData.size(), sendData);
+  }
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
+      if (hP->getLife() == 0)
+	dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameDie), sizeof(ANetwork::t_frame));
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
     }
 
@@ -325,9 +333,16 @@ int Game::getNumberEnemyMax()
 
 void Game::addMonster()
 {
+  std::list<Bot*> botList = _bM->getBotList();
+
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
+      for (std::list<Bot*>::iterator it = botList.begin();
+	   it != botList.end(); ++it)
+	{
+	  this->sendNewEntity(E_BOT, _eM.createEntity(E_BOT, (*it)));
+	}
       _nbDisplay++;
     }
   else
@@ -348,6 +363,19 @@ void Game::initPlayersPosition()
 
 }
 
+void Game::deleteEntity(AEntity *entity)
+{
+  std::string	sendData = std::to_string(entity->getId());
+
+  ANetwork::t_frame frame = CreateRequest::create(S_DELETE_ENTITY, CRC::calcCRC(sendData), sendData.size(), sendData);
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+  _eM.removeEntity(entity);
+}
+
 void Game::updateAmmo()
 {
   std::list<AEntity*> _vec = _eM.getAmmoEntities();
@@ -359,7 +387,12 @@ void Game::updateAmmo()
       if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
 	{
 	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-	  rifle->update(p->getX() + 2, p->getY());
+	  if (duration.count() % 30 == 0)
+	    rifle->update(p->getX() + 2, p->getY());
+	  if (p->getX() >= 121){
+	    std::cout << "DELETE ENTITY" << std::endl;
+	    deleteEntity(rifle);
+	  }
 	  // TIME RIFLE UPDATE
 	}
       else if (Missile *missile = dynamic_cast<Missile *>(*it))
@@ -404,7 +437,6 @@ void Game::sendGameData()
 
 }
 
-
 bool Game::run()
 {
   bool past = true;
@@ -429,7 +461,7 @@ bool Game::run()
       if (timer.elapsed().count()>= (speed/_stage))
 	{
 	  timer.reset();
-	  addMonster();
+	  //addMonster();
 	}
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
 	(std::chrono::system_clock::now() - _start);

@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Mon Dec 14 20:14:46 2015 Joris Bertomeu
+// Last update Tue Dec 15 10:05:11 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -25,7 +25,7 @@ Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(i
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
   this->_botList = botList;
-  sendFileToClient(client, botList);
+  // sendFileToClient(client, botList);
   //_owner = client;
 }
 
@@ -105,7 +105,7 @@ void	Room::addPlayer(Client *client)
       _clientManager->addClients(client);
       sendPlayerJoin(client);
       sendRoomPlayerJoin(client);
-      sendFileToClient(client, this->_botList);
+      //sendFileToClient(client, this->_botList);
     }
   else
     sendError(client);

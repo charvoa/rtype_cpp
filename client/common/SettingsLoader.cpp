@@ -156,6 +156,7 @@ SettingsLoader::SettingsLoader(bool write)
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
+	std::cout << "construction d'un LOADER" << std::endl;
 	_ifs = new std::ifstream(_filepath.c_str());
 	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
 	_stringKeys["1_KEY"] = sf::Keyboard::Num1;
@@ -225,8 +226,10 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
   _stringAxis["JOYSTICK_R1"] = JoystickEvent(sf::Joystick::R);
   _stringAxis["JOYSTICK_R2"] = JoystickEvent(sf::Joystick::R);
 
+  std::cout << "CONSTRUCT SETTINGS LOADER READER" << std::endl;
 	if (!_ifs->good())
     {
+		std::cout << "file not found" << std::endl;
       _fileExists = false;
       return;
     }
@@ -239,8 +242,6 @@ SettingsLoader::~SettingsLoader()
 		return;
 	_ifs->close();
 	delete _ifs;
-//	_ofs->close();
-//	delete _ofs;
 }
 
 std::string     SettingsLoader::removeSpaces(std::string const& str) const

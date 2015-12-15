@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:19:25 2015 Joris Bertomeu
-// Last update Sat Dec 12 04:16:48 2015 Joris Bertomeu
+// Last update Tue Dec 15 15:28:17 2015 Nicolas Girardot
 //
 
 #ifndef			_FILEMANAGER_HPP_
