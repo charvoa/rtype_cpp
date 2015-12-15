@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Sun Dec 13 04:22:36 2015 Serge Heitzler
+// Last update Tue Dec 15 11:07:03 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -169,4 +169,10 @@ void			APanel::setGlobalVolume(int vol)
 void			APanel::setMusicVolume(int vol)
 {
 	(void)vol;
+}
+
+typedef void(APanel::*funcs)();
+std::vector<funcs>	&APanel::getFunctions()
+{
+  return _functions;
 }
