@@ -11,7 +11,7 @@
 #ifndef _HITBOX_HH_
 # define _HITBOX_HH_
 
-# include <vector>
+# include <list>
 # include <string>
 # include <iostream>
 # include <AComponent.hpp>
@@ -20,14 +20,14 @@
 class	ComponentHitbox : public AComponent
 {
 private:
-  std::vector<Case*> _hitbox;
+  std::list<Case*> _hitbox;
 
 public:
   ComponentHitbox();
   ~ComponentHitbox();
 
-  std::vector<Case*>	getHitbox();
-  void			setHitbox(std::vector<Case*>);
+  std::list<Case*>	getHitbox();
+  void			setHitbox(std::list<Case*>);
 };
 
 #endif /* _HITBOX_HH_ */

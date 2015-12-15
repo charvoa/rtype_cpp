@@ -55,7 +55,7 @@ void	RoomManager::createNewRoom(Client *client)
 Room&	RoomManager::getRoombyId(const std::string &id)
 {
   // return _rooms.front();
-  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+  for (std::list<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
 	return (*it);
@@ -65,7 +65,7 @@ Room&	RoomManager::getRoombyId(const std::string &id)
 
 bool	RoomManager::roomExists(const std::string &id)
 {
-  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+  for (std::list<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
 	return (true);
@@ -75,7 +75,7 @@ bool	RoomManager::roomExists(const std::string &id)
 
 void	RoomManager::deleteRoom(const std::string &id)
 {
-  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+  for (std::list<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
 	{

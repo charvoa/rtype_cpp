@@ -33,7 +33,7 @@ void	ClientManager::addClients(Client *client)
 
 void	ClientManager::deleteClient(Client *client)
 {
-  for (std::vector<Client *>::iterator it = _clients.begin(); it != _clients.end(); ++it)
+  for (std::list<Client *>::iterator it = _clients.begin(); it != _clients.end(); ++it)
     {
       if (*(*it) == *client)
 	{
@@ -43,14 +43,14 @@ void	ClientManager::deleteClient(Client *client)
     }
 }
 
-std::vector<Client*>&	ClientManager::getAllClients()
+std::list<Client*>&	ClientManager::getAllClients()
 {
   return (_clients);
 }
 
 Client*		ClientManager::getClientByFd(int fd)
 {
-  for(std::vector<Client*>::iterator it = _clients.begin(); it != _clients.end();++it)
+  for(std::list<Client*>::iterator it = _clients.begin(); it != _clients.end();++it)
     {
       if ((*it)->getSocket()->getFd() == fd)
 	return (*it);
@@ -60,7 +60,7 @@ throw std::logic_error("No client with this fd found");
 
 int		ClientManager::getClientPosition(Client *client)
 {
-  std::vector<Client *>::iterator	it;
+  std::list<Client *>::iterator	it;
   int	i = 0;
   for (it = _clients.begin(); it != _clients.end(); ++it)
     {

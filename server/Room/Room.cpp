@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Mon Dec 14 19:49:24 2015 Joris Bertomeu
+// Last update Mon Dec 14 20:14:46 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
@@ -33,7 +33,7 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
   std::ostringstream	tmp;
   int			port = Random(6000, 7000).generate<int>();
   int			first = true;
-  std::vector<Client*>	clientList;
+  std::list<Client*>	clientList;
 
   tmp << list.size();
   for (std::list<Bot*>::iterator it = list.begin(); it != list.end(); ++it) {
@@ -46,8 +46,8 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
     }
     file.sendMe(port++);
     clientList = this->getAllPlayers();
-    for (std::vector<Client*>::iterator it = clientList.begin(); it != clientList.end(); ++it) {
-      (*it)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("PLAYER" + (this->_clientManager->getClientPosition(client) + 1)), true), sizeof(ANetwork::t_frame));
+    for (std::list<Client*>::iterator it = clientList.begin(); it != clientList.end(); ++it) {
+      (*it)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("player" + IntToString(this->_clientManager->getClientPosition(client) + 1)), true), sizeof(ANetwork::t_frame));
     }
   }
 
@@ -75,8 +75,8 @@ void	Room::sendPlayerJoin(Client *client)
 
 void	Room::sendRoomPlayerJoin(Client *client)
 {
-  std::vector<Client *>::iterator	it;
-  std::vector<Client *> clients = getAllPlayers();
+  std::list<Client *>::iterator	it;
+  std::list<Client *> clients = getAllPlayers();
   int	clientPos = _clientManager->getClientPosition(client) + 1;
   for (it = clients.begin(); it != clients.end(); ++it)
     {
@@ -109,7 +109,7 @@ void	Room::addPlayer(Client *client)
     }
   else
     sendError(client);
-  for (std::vector<Client *>::const_iterator it = getAllPlayers().begin(); it != getAllPlayers().end(); ++it)
+  for (std::list<Client *>::const_iterator it = getAllPlayers().begin(); it != getAllPlayers().end(); ++it)
     {
       std::cout << (*it)->getSocket()->getFd() << std::endl;
     }
@@ -117,8 +117,8 @@ void	Room::addPlayer(Client *client)
 
 void	Room::sendPlayerLeft(int playerID)
 {
-  std::vector<Client *>::iterator	it;
-  std::vector<Client *>	clients = getAllPlayers();
+  std::list<Client *>::iterator	it;
+  std::list<Client *>	clients = getAllPlayers();
 
   for (it = clients.begin(); it != clients.end(); ++it)
     {
@@ -136,7 +136,7 @@ void	Room::deletePlayer(Client *client)
    sendPlayerLeft(playerID);
 }
 
-std::vector<Client *>&	Room::getAllPlayers()
+std::list<Client *>&	Room::getAllPlayers()
 {
   return _clientManager->getAllClients();
 }

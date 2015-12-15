@@ -17,13 +17,13 @@ class GameManager {
 
 private:
 
-  std::vector<Game> _games;
+  std::list<Game> _games;
 
   public:
 
   GameManager();
   ~GameManager();
-  bool createGame(const Parameters&, std::vector<Client *>&,
+  bool createGame(const Parameters&, std::list<Client *>&,
 		  const std::string&, int);
   Game &getGameById(const std::string&);
   Game &getGameByClient(const Client &);

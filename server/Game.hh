@@ -64,9 +64,9 @@ public:
   };
 
   Game();
-  Game(const Parameters&, std::vector<Client *>&, const std::string&, int port);
+  Game(const Parameters&, std::list<Client *>&, const std::string&, int port);
   ~Game();
-  void addClients(std::vector<Client *> &);
+  void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
   const std::string &getId() const;
   const Client &getClient() const;
@@ -88,7 +88,7 @@ public:
   void addMonster();
   void initPlayersPosition();
   void sendGameData();
-  std::vector<Client *> _clients;
+  std::list<Client *> _clients;
   ANetwork *_network;
 private:
   void sendNewEntity(int type, int id);

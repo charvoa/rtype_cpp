@@ -64,7 +64,7 @@ private:
   BotManager	*_botManager;
 };
 
-void sendMessage(std::vector<Client>&, unsigned char);
+void sendMessage(std::list<Client>&, unsigned char);
 void *newGameThread(void*);
 
 #endif

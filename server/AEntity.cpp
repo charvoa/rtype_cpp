@@ -40,7 +40,7 @@ bool	AEntity::update(int health)
   return (true);
 }
 
-bool	AEntity::update(std::vector<Case*> hitbox)
+bool	AEntity::update(std::list<Case*> hitbox)
 {
   if (_systemManager.getSystemByComponent(C_HITBOX))
     dynamic_cast<SystemHitbox*>(_systemManager.getSystemByComponent(C_HITBOX))->update(hitbox);

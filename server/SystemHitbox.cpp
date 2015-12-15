@@ -21,7 +21,7 @@ SystemHitbox::~SystemHitbox()
   std::cout << "SystemHitbox destroyed" << std::endl;
 }
 
-bool	SystemHitbox::update(std::vector<Case*> hitbox)
+bool	SystemHitbox::update(std::list<Case*> hitbox)
 {
   dynamic_cast<ComponentHitbox*>(_component)->setHitbox(hitbox);
   return (true);
