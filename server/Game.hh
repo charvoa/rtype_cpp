@@ -31,6 +31,7 @@
 # include <sstream>
 # include <map>
 # include <thread>
+# include <BotManager.hpp>
 
 class Game {
 
@@ -43,6 +44,7 @@ private:
   Parameters _params;
   std::string _id;
   EntityManager _eM;
+  BotManager *_bM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
   int	_stage;
