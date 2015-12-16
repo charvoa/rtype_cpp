@@ -246,54 +246,49 @@ void Game::handleShoot(void *data, Client *client)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-  if (duration.count() % 8 == 0)
+  std::cout << "Game :: handleShoot" << std::endl;
+  std::string weaponType =
+    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+
+  Player *p = this->getPlayerByClient(client);
+  E_EntityType type = E_INVALID;
+  E_Component component = C_INVALID;
+  int	id;
+
+  if (weaponType == "E_RIFLE")
     {
+      type = E_RIFLE;
+      component = C_RIFLE;
+    }
+  else if (weaponType == "E_MISSILE")
+    {
+      type = E_MISSILE;
+      component = C_MISSILE;
+    }
+  else if (weaponType == "E_LASER")
+    {
+      type = E_LASER;
+      component = C_LASER;
+    }
 
-      std::cout << "Game :: handleShoot" << std::endl;
-      std::string weaponType =
-	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+  if (type != E_INVALID)
+    id = _eM.createEntity(type, p);
 
-      Player *p = this->getPlayerByClient(client);
-      E_EntityType type = E_INVALID;
-      E_Component component;
-      int	id;
+  std::cout << "After create entity " << std::endl;
+  sendNewEntity(type, id); // Send  Bullet created
 
-      if (weaponType == "E_RIFLE")
-	{
-	  type = E_RIFLE;
-	  component = C_RIFLE;
-	}
-      else if (weaponType == "E_MISSILE")
-	{
-	  type = E_MISSILE;
-	  component = C_MISSILE;
-	}
-      else if (weaponType == "E_LASER")
-	{
-	  type = E_LASER;
-	  component = C_LASER;
-	}
+  AEntity *bullet = _eM.getEntityById(id);
+  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
 
-      if (type != E_INVALID)
-	id = _eM.createEntity(type, p);
+  std::stringstream ss;
+  ss << type;
 
-      std::cout << "After create entity " << std::endl;
-      sendNewEntity(type, id); // Send  Bullet created
-
-      AEntity *bullet = _eM.getEntityById(id);
-      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
-      std::stringstream ss;
-      ss << type;
-
-      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
-	{
-	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
-	}
-
+  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
     }
 }
 
@@ -387,39 +382,6 @@ void Game::deleteEntity(AEntity *entity)
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
   _eM.removeEntity(entity);
-}
-
-void Game::updateAmmo()
-{
-  std::list<AEntity*> _vec = _eM.getAmmoEntities();
-  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-    (std::chrono::system_clock::now() - _start);
-
-  for (std::list<AEntity *>::iterator it = _vec.begin(); it != _vec.end() ; ++it)
-    {
-      if (Riffle *rifle = dynamic_cast<Riffle*>(*it))
-	{
-	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-	  if (duration.count() % 30 == 0)
-	    {
-	      rifle->update(p->getX() + 1, p->getY());
-	    }
-	  if (p->getX() >= 119){
-	    std::cout << "DELETE ENTITY" << std::endl;
-	    deleteEntity(rifle);
-	  }
-	  // TIME RIFLE UPDATE
-	}
-      else if (Missile *missile = dynamic_cast<Missile *>(*it))
-	{
-	  //TIME MISSILE UPDATE
-	}
-      else if (Laser *laser = dynamic_cast<Laser *>(*it))
-	{
-	  //TIME LASER UPDATE
-	}
-    }
-
 }
 
 void Game::sendGameData()

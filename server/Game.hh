@@ -41,6 +41,7 @@ typedef std::chrono::duration<int, std::ratio<1, 60>> frame_duration;
 
 private:
 
+  // ATTRIBUTES
   Parameters _params;
   std::string _id;
   EntityManager _eM;
@@ -51,10 +52,30 @@ private:
   std::chrono::time_point<std::chrono::system_clock> _start;
   std::list<Bot*> _botList;
 
+  // METHODS
+  Player *getPlayerByClient(Client*);
+  Client *getClientBySocket(ISocket*) const;
+  const Client &getClient() const;
+  const std::string &getId() const;
+  int  getNumberEnemyMax();
   void sendNewEntity(int type, int id);
-  void updateAmmo();
   void deleteEntity(AEntity *);
   void updateRiffle();
+  void addClients(std::list<Client *> &);
+  void setParameters(Parameters &);
+  void checkWall(Player*);
+  void handleHandshakeUDP(void*, Client*);
+  void handleMove(void*, Client*);
+  void handleCommand(void*, Client*);
+  void handleShoot(void*, Client*);
+  void updateScore(Player*, Game::scoreDef);
+  void updateLife(Player*, int);
+  void addMonster();
+  void initPlayersPosition();
+  void sendGameData();
+  bool checkMove(int, int);
+  std::pair<int, int> getDirections(const std::string &);
+
 public:
 
   enum scoreDef {
@@ -69,34 +90,14 @@ public:
     ANetwork *network;
   };
 
+  // METHODS
   Game();
   Game(const Parameters&, std::list<Client *>&, const std::string&,
        int port, std::list<Bot*>);
   ~Game();
-
-  Player *getPlayerByClient(Client*);
-  Client *getClientBySocket(ISocket*) const;
-  const Client &getClient() const;
-  const std::string &getId() const;
-  int  getNumberEnemyMax();
-
-  void addClients(std::list<Client *> &);
-  void setParameters(Parameters &);
-  void checkWall(Player*);
-  void handleHandshakeUDP(void*, Client*);
-  void handleMove(void*, Client*);
-  void handleCommand(void*, Client*);
-  void handleShoot(void*, Client*);
-  void updateScore(Player*, Game::scoreDef);
-  void updateLife(Player*, int);
-  void addMonster();
-  void initPlayersPosition();
-  void sendGameData();
-  bool checkMove(int, int);
   bool run();
-  std::pair<int, int> getDirections(const std::string &);
 
-  /* ATTRIBUTES */
+  // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;
 };
