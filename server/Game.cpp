@@ -128,7 +128,7 @@ bool Game::checkMove(int x, int y)
 {
   if (x < 0 || x > 110)
     return false;
-  else if (y < 0 || y > 50)
+  else if (y < 0 || y > 49)
     return false;
   return true;
 }
