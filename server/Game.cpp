@@ -255,14 +255,24 @@ void Game::handleShoot(void *data, Client *client)
 
       Player *p = this->getPlayerByClient(client);
       E_EntityType type = E_INVALID;
+      E_Component component;
       int	id;
 
       if (weaponType == "E_RIFLE")
-	type = E_RIFLE;
+	{
+	  type = E_RIFLE;
+	  component = C_RIFLE;
+	}
       else if (weaponType == "E_MISSILE")
-	type = E_MISSILE;
+	{
+	  type = E_MISSILE;
+	  component = C_MISSILE;
+	}
       else if (weaponType == "E_LASER")
-	type = E_LASER;
+	{
+	  type = E_LASER;
+	  component = C_LASER;
+	}
 
       if (type != E_INVALID)
 	id = _eM.createEntity(type, p);
