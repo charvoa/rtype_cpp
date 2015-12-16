@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Wed Dec 16 08:27:04 2015 Louis Audibert
+// Last update Wed Dec 16 17:37:08 2015 Nicolas Charvoz
 //
 
 #include <iostream>
@@ -36,8 +36,12 @@ void	Bot::generateY()
 
 void Bot::update()
 {
-  _x--;
-  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  // _x--;
+  // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+
+  ComponentPosition *pos = reinterpret_cast<ComponentPosition*>(this->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+  std::cout << "Position of bot2 >> " << this->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
+
   // if (_y >= (HEIGHT / 2))
   //   {
   //     if (_y == (HEIGHT / 2))
