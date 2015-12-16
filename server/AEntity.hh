@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Wed Dec 16 05:35:16 2015 Louis Audibert
+// Last update Wed Dec 16 06:40:52 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -41,6 +41,7 @@ public:
   bool	setType(E_EntityType type);
   E_EntityType getType() const;
   int	getId() const;
+  void	setId(int id);
   SystemManager *getSystemManager();
   bool	checkColision(AEntity *entity);
   const std::string &getName() const;

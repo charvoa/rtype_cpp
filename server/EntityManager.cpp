@@ -58,6 +58,8 @@ int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterat
       i++;
     }
   newEntity->setType(E_BOT);
+  _id++;
+  newEntity->setId(_id);
   _entities.push_back(newEntity);
   return (_id);
 }
