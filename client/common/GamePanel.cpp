@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 01:56:06 2015 Serge Heitzler
+// Last update Wed Dec 16 07:40:05 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -22,6 +22,7 @@
 #include <Client.hh>
 #include <ProtocoleClient.hh>
 #include <AThread.hpp>
+#include <ButtonFactory.hh>
 
 void	*readUDP(void *s)
 {
@@ -54,6 +55,7 @@ GamePanel::GamePanel()
 {
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::GAME_INPUT);
+  _escapeKey = false;
 
   _randPosY = new Random(250, 600);
   _randPlanet = new Random(0, 7);
@@ -163,14 +165,21 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
   header->scale(1.5);
   _backgrounds.push_back(*header);
 
-    Sprite *hud = new Sprite;
+  Sprite *hud = new Sprite;
 
   hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
   _backgrounds.push_back(*hud);
 
 
+  Sprite *black = new Sprite;
 
+  black->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundBlack));
+  black->setPosition(0, 0);
+  black->getSprite().setColor(sf::Color(255, 255, 255, 0));
+  _inGame.push_back(*black);
+
+  
 //   Sprite *planet = new Sprite;
 
 // planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
@@ -179,13 +188,26 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
 
   this->setPlayers(static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers(), static_cast<RoomPanel*>(window->getPanels().top())->getCurrentPlayer());
 
-  //  static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
+
+  Text	*sentence = new Text();
+
+  sentence->setString("Are you sure to exit the game ?");
+  sentence->setSize(80);
+  sentence->setStyle(1);
+  sentence->setOrigin(sentence->getText().getGlobalBounds().width / 2, sentence->getText().getGlobalBounds().height / 2);
+  sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+  sentence->getText().setColor(sf::Color(255, 255, 255, 0));
+  _labels.push_back(*sentence);
+
+  
 }
 
 GamePanel::~GamePanel() {}
 
+
 void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 {
+  RenderWindow *window = RenderWindow::getInstance();
 
   int i = 1;
   while (i <= nbPlayer)
@@ -234,15 +256,19 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
       i++;
     }
 
-  _dicoTextures.insert(std::make_pair(5, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  _dicoTextures.insert(std::make_pair(6, ((RenderWindow::getInstance())->_ressources->_rocket)));
-  _dicoTextures.insert(std::make_pair(7, ((RenderWindow::getInstance())->_ressources->_laserBlueBig)));
-  _dicoTextures.insert(std::make_pair(8, ((RenderWindow::getInstance())->_ressources->_laserRedBig)));
-  _dicoTextures.insert(std::make_pair(9, ((RenderWindow::getInstance())->_ressources->_laserGreenBig)));
-  _dicoTextures.insert(std::make_pair(10, ((RenderWindow::getInstance())->_ressources->_laserYellowBig)));
-  //  _dicoTextures.insert(std::make_pair(11, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  //  _dicoTextures.insert(std::make_pair(12, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  
+  _dicoTextures.insert(std::make_pair("5", ((RenderWindow::getInstance())->_ressources->_riffle)));
+  _dicoTextures.insert(std::make_pair("6", ((RenderWindow::getInstance())->_ressources->_rocket)));
+  _dicoTextures.insert(std::make_pair("7", ((RenderWindow::getInstance())->_ressources->_laserBlueBig)));
+  _dicoTextures.insert(std::make_pair("8", ((RenderWindow::getInstance())->_ressources->_laserRedBig)));
+  _dicoTextures.insert(std::make_pair("9", ((RenderWindow::getInstance())->_ressources->_laserGreenBig)));
+  _dicoTextures.insert(std::make_pair("10", ((RenderWindow::getInstance())->_ressources->_laserYellowBig)));
+
+  //static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
+
+  for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived().begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived().end(); ++it)
+    {
+      _dicoTextures.insert(std::make_pair((*it).first, (*it).second));
+    }
 }
 
 
@@ -252,13 +278,11 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   Sprite	*newSprite = new Sprite();
 
   std::string  	typeString = vector.at(0);
+  std::string  	type = vector.at(0);
   int	  	id = std::atoi(vector.at(1).c_str());
-  int		type;
 
-  if (typeString.find(":") == !std::string::npos)
-    type = 7;
-  else
-    type = std::atoi(vector.at(0).c_str());
+  if (type.find(":") == !std::string::npos)
+    std::cout << "LASERRRR" << std::endl;
 
   
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
@@ -280,7 +304,7 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
 
 void		GamePanel::die()
 {
-
+  
 }
 
 void		GamePanel::display(std::vector<std::string> &vector)
@@ -288,26 +312,20 @@ void		GamePanel::display(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int  	id;
 
-
-
   float	posX = (std::atoi(vector.at(1).c_str()));
   float	posY = (std::atoi(vector.at(2).c_str()));
 
-  float realPosX = (posX * 16) + 50;
+  float realPosX = (posX * 16) + 20;
   float realPosY = (posY * 16) + 50;
-
+  
   id = std::atoi(vector.at(0).c_str());
 
+  // std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+  // if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+  //   {
+  ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+  //   }
 
-  std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
-  if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
-    {
-      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
-    }
-
-
-
-   
   // ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->move(moveX, moveY);
 
   // std::cout << "realPos X " << moveX << std::endl;
@@ -322,7 +340,7 @@ std::map<int, Sprite*>		&GamePanel::getDicoSprites()
   return _dicoSprites;
 }
 
-std::map<int, Texture*>		&GamePanel::getDicoTextures()
+std::map<std::string, Texture*>		&GamePanel::getDicoTextures()
 {
   return _dicoTextures;
 }
@@ -345,7 +363,7 @@ Text		&GamePanel::getCurrentWave()
 void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
-
+  
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 }
 
@@ -414,7 +432,55 @@ void		GamePanel::setLife(const std::string &name, int life)
     }
 }
 
+void		GamePanel::setEscapeMenu(bool value)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+  
+  _escapeKey = value;
+  std::string name = "RESUME";
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), name);
+  name = "EXIT";
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), name);
+  static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::resume);
+  static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::exit);
+  static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite().setColor(sf::Color(255, 255, 255, 255));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+  window->setMouseCursorVisible(true);
+}
 
+
+bool		GamePanel::getEscapeMenu()
+{
+  return _escapeKey;
+}
+
+void		GamePanel::resume()
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+  _labels.erase(_labels.begin() + 3);
+  _labels.erase(_labels.begin() + 3);
+
+  _userInterface.erase(_userInterface.begin());
+  _userInterface.erase(_userInterface.begin());
+  
+  _inGame.at(0).getSprite().setColor(sf::Color(255, 255, 255, 0));
+
+  _labels.at(2).getText().setColor(sf::Color(255, 255, 255, 0));
+  
+  _escapeKey = false;  
+
+  window->setMouseCursorVisible(false);
+}
+
+
+void		GamePanel::exit()
+{
+  // close UDP read && exit thread
+  std::cout << "EXIT" << std::endl;
+  RenderWindow::getInstance()->back();
+  RenderWindow::getInstance()->back();
+}
 
 void		GamePanel::render()
 {
@@ -423,9 +489,6 @@ void		GamePanel::render()
   else
     s->playMusic("gameLoop", 1);
   this->drawBackgrounds();
-  this->drawUserInterface();
-  this->drawLabels();
-  this->drawInGame();
   this->_mainPlayer->render();
   this->drawOtherPlayer();
 
@@ -437,6 +500,11 @@ void		GamePanel::render()
     {
       window->draw((*it).second->getSprite());
     }
+
+  this->drawInGame();
+  this->drawUserInterface();
+  this->drawLabels();
+
 }
 
 void		GamePanel::drawOtherPlayer()
@@ -540,5 +608,7 @@ void		GamePanel::update()
 
       //      this->setPlanetTexture(_randPlanet->generate<int>());
     }
+
+  
   i++;
 }

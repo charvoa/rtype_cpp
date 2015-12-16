@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 11:33:14 2015 Serge Heitzler
+// Last update Wed Dec 16 06:36:43 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -90,19 +90,12 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
   FileManager Toto("./recv/");
   RenderWindow *window = RenderWindow::getInstance();
 
-  std::cout << "Is  working 1" << std::endl;
   std::list<File *> list = Toto.getFileListByExtension("png");
-  std::cout << "Is  working 2" << std::endl;
   for (std::list<File*>::iterator it = list.begin(); it != list.end(); ++it) {
-    std::cout << "Is  working 3" << std::endl;
     Texture *text = new Texture();
-    std::cout << "Is  working 4" << std::endl;
     (*it)->getFullPath();
-    std::cout << "Is  working 5" << std::endl;
     text->loadFromFile((*it)->getFullPath());
-    std::cout << "Is  working 6" << std::endl;
-    static_cast<RoomPanel*>(window->getPanels().top())->getReceived().insert(std::make_pair((*it)->getFullPath(),text));
-    std::cout << "Is  working 7" << std::endl;
+    static_cast<RoomPanel*>(window->getPanels().top())->getReceived().insert(std::make_pair((*it)->getBasename(), text));
   }
 
   // create texture here

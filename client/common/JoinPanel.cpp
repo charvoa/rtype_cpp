@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Tue Dec 15 07:26:43 2015 Serge Heitzler
+// Last update Wed Dec 16 06:22:09 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>

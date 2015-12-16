@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Tue Dec 15 12:05:32 2015 Serge Heitzler
+// Last update Wed Dec 16 06:49:04 2015 Serge Heitzler
 //
 
 
@@ -42,20 +42,25 @@ public:
   void					update();
   void		       			drawOtherPlayer();
   std::map<int, Sprite*>		&getDicoSprites();
-  std::map<int, Texture*>	      	&getDicoTextures();
+  std::map<std::string, Texture*>      	&getDicoTextures();
   void					setPlanetTexture(int i);
   void					setPlayers(int nbPlayer, int currentPlayer);
-
+  void					setEscapeMenu(bool value);
+  bool					getEscapeMenu();
+  void					resume();
+  void					exit();
 
 private:
+
   std::vector<Sprite*>			_sprites;
   MainPlayer				*_mainPlayer;
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;
-  std::map<int, Texture*>		_dicoTextures;
+  std::map<std::string, Texture*>      	_dicoTextures;
   Random				*_randPosY;
   Random				*_randPlanet;
   Random				*_randBackground;
+  bool					_escapeKey;
 };
 
 #endif /* GAMEPANEL_HH_ */

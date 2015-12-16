@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 11:07:03 2015 Serge Heitzler
+// Last update Wed Dec 16 05:26:45 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -53,6 +53,21 @@ bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
     }
   return false;
 }
+
+// bool		APanel::updateOnPressInGame(std::pair<unsigned int, unsigned int> pair)
+// {
+//   unsigned int		i = 0;
+//   while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+//     {
+//       if (this->_userInterface.at(i)->updateOnPress(pair))
+// 	{
+// 	  (*this.*_functions.at(i))();
+// 	  return true;
+// 	}
+//       i++;
+//     }
+//   return false;
+// }
 
 void		APanel::setKeyButton(sf::Event event)
 {
