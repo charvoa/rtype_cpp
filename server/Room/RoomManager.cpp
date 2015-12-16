@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Sat Dec 12 06:14:14 2015 Joris Bertomeu
+// Last update Wed Dec 16 15:18:38 2015 Antoine Garcia
 //
 
 
@@ -43,12 +43,6 @@ void	RoomManager::createNewRoom(Client *client)
 {
   Room	room(generateId(), client, this->_botManager);
   _rooms.push_back(room);
-  std::string	sendData = "player1;" + room.getId() + ";1";
-  ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
-						  CRC::calcCRC(sendData),
-						  0, sendData);
-  client->getSocket()->write(reinterpret_cast<void *>(&frame),
-			     sizeof(ANetwork::t_frame));
   std::cout << "Create Room With Id" << room.getId() << std::endl;
 }
 

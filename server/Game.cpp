@@ -16,7 +16,8 @@ Game::Game()
 }
 
 Game::Game(const Parameters &params_, std::list<Client *> &client_,
-	   const std::string &id_, int port_) : _params(params_), _id(id_)
+	   const std::string &id_, int port_, std::list<Bot*> botList_)
+  : _params(params_), _id(id_), _botList(botList_)
 {
   srand(time(NULL));
 
@@ -141,7 +142,6 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-
   if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
     {
       this->updateLife(player, 2);
@@ -331,11 +331,22 @@ int Game::getNumberEnemyMax()
 
 void Game::addMonster()
 {
-  std::list<Bot*> botList = _bM->getBotList();
+  std::stringstream ss;
 
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
+      for (std::list<Bot*>::iterator it = _botList.begin();
+	   it != _botList.end();
+	   ++it)
+	{
+	  std::cout << "Je add un monstre" << std::endl;
+
+	  ss << (*it)->getId();
+	  ANetwork::t_frame frameHealth = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+	  ss.str("");
+	  ss.clear();
+	}
       _nbDisplay++;
     }
   else
@@ -381,8 +392,10 @@ void Game::updateAmmo()
 	{
 	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 	  if (duration.count() % 30 == 0)
-	    rifle->update(p->getX() + 2, p->getY());
-	  if (p->getX() >= 121){
+	    {
+	      rifle->update(p->getX() + 1, p->getY());
+	    }
+	  if (p->getX() >= 119){
 	    std::cout << "DELETE ENTITY" << std::endl;
 	    deleteEntity(rifle);
 	  }
@@ -430,10 +443,21 @@ void Game::sendGameData()
 
 }
 
+void Game::updateRiffle()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_RIFLE);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*it)->update(p->getX() + 1, p->getY());
+    }
+}
+
 bool Game::run()
 {
   bool past = true;
-  Timer	timer(true);
+  Timer	timerMonster(true);
+  Timer timerRiffle(true);
   int	speed = 3;
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
@@ -451,11 +475,17 @@ bool Game::run()
 
   while (true)
     {
-      if (timer.elapsed().count()>= (speed/_stage))
+      if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
-	  timer.reset();
-	  //addMonster();
+	  //this->updateAmmo();
+	  timerMonster.reset();
+	  addMonster();
 	}
+      if (timerRiffle.elapsedMilli().count() >= 0.5 )
+      {
+	  this->updateRiffle();
+	  timerRiffle.reset();
+      }
       auto currentTime = std::chrono::system_clock::now();
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
 	(currentTime - _start);
@@ -469,18 +499,12 @@ bool Game::run()
 	      std::this_thread::sleep_until(end_time);
 	      past = false;
 	    }
-	  this->updateAmmo();
 	  this->sendGameData();
 	}
     }
   return true;
 }
 
-void Game::addCommandToQueue(ANetwork::t_frame frame)
-{
-  _commandQueue.push(frame);
-
-}
 
 const std::string &Game::getId() const
 {
