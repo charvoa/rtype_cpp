@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec 16 14:35:10 2015 Nicolas Girardot
-// Last update Wed Dec 16 16:27:16 2015 Nicolas Girardot
+// Last update Wed Dec 16 09:39:29 2015 Serge Heitzler
 //
 
 #include <Explosion.hh>
@@ -37,7 +37,7 @@ bool	Explosion::getState()
 void	Explosion::setTexture(Texture &texture)
 {
   _sprite.setTexture(texture.getTexture());
-  _sprite.setColor(sf::Color::Green);
+  _sprite.setOrigin(_spriteWidth / 2, _spriteHeight / 2);
   int	posX = (_nbrSprite % 8) * _spriteWidth;
   int	posY = (_nbrSprite / 8) * _spriteHeight;
   this->setTextureRect(posX, posY, _spriteWidth, _spriteHeight);
