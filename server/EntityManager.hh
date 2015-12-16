@@ -17,6 +17,7 @@
 # include <E_EntityType.hh>
 # include <PlayerFactory.hh>
 # include <Bot.hpp>
+# include <Random.hpp>
 
 class EntityManager
 {
