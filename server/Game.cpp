@@ -353,7 +353,7 @@ void Game::updateMonster()
   for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      std::cout << "Position of bot >> " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
+      std::cout << "Position of bot >> " << (*it)->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
       reinterpret_cast<Bot*>(*it)->update();
     }
 }
@@ -370,8 +370,7 @@ void Game::addMonster()
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
       std::cout << "ID DU BOT :" << id << std::endl;
 
-      this->sendNewEntity(_eM.getEntityById(id)->getName(),
-			  _eM.createEntitiesFromFolder(_botList, r.generate<int>()));
+      this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
   else
