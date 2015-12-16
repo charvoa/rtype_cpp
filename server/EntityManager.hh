@@ -33,7 +33,8 @@ public:
   int		createEntity(E_EntityType type);
   int		createEntity(E_EntityType type,  Client &);
   int		createEntity(E_EntityType type, AEntity *);
-  int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
+  //int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
+  int		createEntitiesFromFolder(std::list<AEntity*> bots, int iterator);
   void		removeEntity(AEntity *entity);
   void		removeEntityById(int id);
   std::list<AEntity*>  getEntities() ;

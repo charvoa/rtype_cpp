@@ -5,17 +5,21 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec 12 02:10:01 2015 Joris Bertomeu
-// Last update Sat Dec 12 04:54:45 2015 Joris Bertomeu
+// Last update Wed Dec 16 02:36:26 2015 Louis Audibert
 //
 
 #ifndef			_BOTMANAGER_HPP_
 # define		_BOTMANAGER_HPP_
 
-# include		<FileManager.hpp>
+#ifdef _WIN32
+# include		<FileManagerWin.hpp>
+#else
+# include      		<FileManager.hpp>
 # include		<string>
 # include		<list>
 # include		<Bot.hpp>
 # include		<EntityFactory.hh>
+#endif
 
 class			BotManager
 {

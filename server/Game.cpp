@@ -16,7 +16,8 @@ Game::Game()
 }
 
 Game::Game(const Parameters &params_, std::list<Client *> &client_,
-	   const std::string &id_, int port_) : _params(params_), _id(id_)
+	   const std::string &id_, int port_, std::list<Bot*> botList_)
+  : _params(params_), _id(id_), _botList(botList_)
 {
   srand(time(NULL));
 
@@ -141,7 +142,6 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-
   if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
     {
       this->updateLife(player, 2);
@@ -331,11 +331,15 @@ int Game::getNumberEnemyMax()
 
 void Game::addMonster()
 {
-  std::list<Bot*> botList = _bM->getBotList();
-
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
+      for (std::list<Bot*>::iterator it = _botList.begin();
+	   it != _botList.end();
+	   ++it)
+	{
+	  std::cout << "Je add un monstre" << std::endl;
+	}
       _nbDisplay++;
     }
   else
