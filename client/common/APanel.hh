@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Sat Dec 12 08:36:29 2015 Serge Heitzler
+// Last update Tue Dec 15 11:32:09 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -33,7 +33,7 @@ public:
   virtual void		update();
   virtual void		render();
   virtual void		hide();
-  virtual void	    setUserInterface();
+  virtual void		    setUserInterface();
   virtual void		setGlobalVolume(int);
   virtual void		setEffectsVolume(int);
   virtual void		setMusicVolume(int);
@@ -48,7 +48,10 @@ public:
   virtual void					drawUserInterface();
   virtual void					drawLabels();
   virtual void					drawInGame();
-
+  
+  typedef void(APanel::*funcs)();
+  virtual std::vector<funcs>   			&getFunctions();
+  
 protected:
 
   std::vector<Sprite>	      		_backgrounds;
@@ -57,7 +60,6 @@ protected:
   std::vector<Sprite>	      		_inGame;
   InputManager				_inputManager;
 
-  typedef void(APanel::*funcs)();
   std::vector<funcs>			_functions;
 
 };

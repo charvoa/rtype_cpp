@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 15 19:26:29 2015 Nicolas Girardot
+// Last update Tue Dec 15 11:33:14 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -47,9 +47,13 @@ void	        RoomPanel::setUserInterface()
 
   std::string name = "BACK";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.95), name);
+
   name = "LAUNCH";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), name);
 
+
+  // _userInterface.at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 0));
+  // _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));
 
   _functions.push_back((APanel::funcs)&RoomPanel::back);
   _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
@@ -195,6 +199,13 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
     {
     case 0:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::BLUE);
+      // static_cast<RoomPanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&RoomPanel::launchGame);
+      
+      // static_cast<RoomPanel*>(window->getPanels().top())->getUserInterface().at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
+      
+      // static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(1).getText().setColor(sf::Color(255, 255, 255, 255));
+
+      
       break;
     case 1:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::RED);
@@ -210,9 +221,7 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
       break;
     }
 
-
   static_cast<RoomPanel*>(window->getPanels().top())->minusNbPlayers();
-
 
 }
 
@@ -251,6 +260,14 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       getLabels().at(i + 2).setString(vector.at(i));
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
       _nbPlayers++;
+
+      // if (i == 0)
+      // 	{
+      // 	  _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
+      // 	  _userInterface.at(2)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
+      // 	  _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));	  
+      // 	}
+      
       i++;
     }
   i--;
