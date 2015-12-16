@@ -103,7 +103,11 @@ void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 	
 	if (_locked == true)
 		return;
-	this->setValue((pair.first - _minX) / 7);
+	if (pair.first > _maxX)
+		this->setValue(100);
+	else
+		this->setValue((pair.first - _minX) / 7);
+	std::cout << "valeur : " << std::to_string(_value) << std::endl;
 	if (_title == "global")
 		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setGlobalVolume(_value);
 	else if (_title == "effects")
