@@ -468,9 +468,9 @@ bool Game::run()
     {
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
-	  timerMonster.reset();
-	  this->addMonster();
-	  this->updateMonster();
+	  // timerMonster.reset();
+	  // this->addMonster();
+	  // this->updateMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {
