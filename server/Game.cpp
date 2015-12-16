@@ -456,9 +456,10 @@ bool Game::run()
 	  timer.reset();
 	  //addMonster();
 	}
+      auto currentTime = std::chrono::system_clock::now();
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-	(std::chrono::system_clock::now() - _start);
-
+	(currentTime - _start);
+      _start = currentTime;
       auto start_time = std::chrono::steady_clock::now();
       auto end_time = start_time + frame_duration(4);
       if (duration.count() % 16 == 0)
