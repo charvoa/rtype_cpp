@@ -348,7 +348,7 @@ void Game::addMonster()
       int N = r.generate<int>();
 
       std::list<Bot*>::iterator it = _botList.begin();
-      if (_botList.size() > N)
+      if (static_cast<int>(_botList.size()) > N)
 	it = std::next(_botList.begin(), N);
       this->sendNewEntity(E_BOT, (*it)->getId());
       _nbDisplay++;
