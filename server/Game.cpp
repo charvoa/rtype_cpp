@@ -350,6 +350,8 @@ int Game::getNumberEnemyMax()
 void Game::updateMonster()
 {
   std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+
+  std::cout << "bots.size = " << bots.size() << std::endl;
   for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
@@ -368,7 +370,6 @@ void Game::addMonster()
       Random r(0, _botList.size() - 1);
 
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
-      std::cout << "ID DU BOT :" << id << std::endl;
 
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;

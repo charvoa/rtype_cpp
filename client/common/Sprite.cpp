@@ -5,10 +5,10 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Sun Dec 13 05:20:43 2015 Serge Heitzler
+// Last update Wed Dec 16 14:35:27 2015 Nicolas Girardot
 //
 
-#include "Sprite.hh"
+#include <Sprite.hh>
 
 Sprite::Sprite()
 {

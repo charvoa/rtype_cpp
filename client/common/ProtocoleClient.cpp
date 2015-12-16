@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Wed Dec 16 11:53:01 2015 Nicolas Girardot
+// Last update Wed Dec 16 18:06:18 2015 Nicolas Girardot
 //
 
 #include <string>
@@ -208,7 +208,7 @@ void		ProtocoleClient::die(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "die" << std::endl;
-  GamePanel::die(std::atoi(x.at(0).c_str()));
+  GamePanel::die(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)

@@ -1,17 +1,27 @@
 //
 // Ressources.cpp for rtype in /home/sergeheitzler/rendu/rtype_cpp/client/common
-// 
+//
 // Made by Serge Heitzler
 // Login   <sergeheitzler@epitech.net>
-// 
+//
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Tue Dec 15 11:36:42 2015 Serge Heitzler
+// Last update Wed Dec 16 18:06:55 2015 Nicolas Girardot
 //
 
 #include "Ressources.hh"
 
 Ressources::Ressources()
 {
+  _explosion_blue = new Texture();
+  _explosion_red = new Texture();
+  _explosion_green = new Texture();
+  _explosion_yellow = new Texture();
+
+  _explosion_blue->loadFromFile("../common/misc/explosion_blue.png");
+  _explosion_red->loadFromFile("../common/misc/explosion_red.png");
+  _explosion_green->loadFromFile("../common/misc/explosion_green.png");
+  _explosion_yellow->loadFromFile("../common/misc/explosion_yellow.png");
+
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();
   _buttonSelect = new Texture();
@@ -43,7 +53,7 @@ Ressources::Ressources()
   _greyPanel = new Texture();
   _keyboard = new Texture();
   _controller = new Texture();
-  
+
   _backgroundStartPanel->loadFromFile("../common/misc/background.png");
   _backgroundRoomPanel->loadFromFile("../common/misc/room_background.png");
   _backgroundSettingsPanel->loadFromFile("../common/misc/settings_background.png");
@@ -154,4 +164,3 @@ Ressources::~Ressources()
 {
 
 }
-
