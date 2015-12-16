@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Wed Dec 16 14:02:34 2015 Nicolas Girardot
+// Last update Wed Dec 16 15:22:47 2015 Nicolas Girardot
 //
 
 
@@ -16,6 +16,7 @@
 #include				<OtherPlayer.hh>
 #include				<RenderWindow.hh>
 #include				<Sprite.hh>
+#include				<Explosion.hh>
 #include				<MainPlayer.hh>
 #include				<Random.hpp>
 
@@ -45,10 +46,11 @@ public:
   std::map<int, Texture*>	      	&getDicoTextures();
   void					setPlanetTexture(int i);
   void					setPlayers(int nbPlayer, int currentPlayer);
-
+  void					addExplosion();
 
 private:
   std::vector<Sprite*>			_sprites;
+  std::vector<Explosion *>		_explosion;
   MainPlayer				*_mainPlayer;
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;

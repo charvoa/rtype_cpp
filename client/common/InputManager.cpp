@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec 16 14:01:15 2015 Nicolas Girardot
+// Last update Wed Dec 16 15:31:06 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -17,6 +17,7 @@
 #include <CRC.hpp>
 #include <ANetwork.hpp>
 #include <JoinPanel.hh>
+#include <GamePanel.hh>
 
 /* SFML X AXIS AND Y AXIS REVERSED */
 
@@ -80,6 +81,11 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
       ANetwork *net = Client::getUDPNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
       net->write(sender);
+    }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+    {
+      RenderWindow *window = RenderWindow::getInstance();
+      static_cast<GamePanel*>(window->getPanels().top())->addExplosion();
     }
   return std::make_pair(0, 0);
 }

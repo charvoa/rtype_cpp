@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 14:02:57 2015 Nicolas Girardot
+// Last update Wed Dec 16 16:02:54 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -285,6 +285,13 @@ void		GamePanel::die(int id)
   (void) id;
 }
 
+void		GamePanel::addExplosion()
+{
+  Explosion *t = new Explosion();
+  t->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion));
+  _explosion.push_back(t);
+}
+
 void		GamePanel::display(std::vector<std::string> &vector)
 {
   RenderWindow *window = RenderWindow::getInstance();
@@ -299,8 +306,6 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
-
-  std::cout << "Displaying with id = " << id << std::endl;
 
 
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
@@ -440,6 +445,16 @@ void		GamePanel::render()
     {
       window->draw((*it).second->getSprite());
     }
+  for (std::vector<Explosion *>::iterator it = _explosion.begin(); it != _explosion.end(); )
+    {
+      window->draw((*it)->getSprite());
+      (*it)->update();
+      if ((*it)->getState() == true)
+	it = _explosion.erase(it);
+      else
+	it++;
+    }
+
 }
 
 void		GamePanel::drawOtherPlayer()
