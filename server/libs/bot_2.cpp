@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Tue Dec 15 06:06:04 2015 Louis Audibert
+// Last update Wed Dec 16 00:41:39 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -29,7 +29,7 @@ Bot::~Bot()
 
 void	Bot::generateY()
 {
-  Random rand(0, 50);
+  Random rand(0, 51);
 
   _y = rand.generate<int>();
 }
