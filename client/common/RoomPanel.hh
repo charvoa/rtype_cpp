@@ -17,7 +17,11 @@
 #include <Settings.hh>
 #include <APanel.hh>
 #include <Player.hh>
+#ifdef _WIN32
+#include <FileManagerWin.hpp>
+#else
 #include <FileManager.hpp>
+#endif
 
 class RoomPanel : public APanel
 {
