@@ -227,7 +227,7 @@ void Game::updateLife(Player *p, int reset)
 
 }
 
-void Game::sendNewEntity(std::string &str, int id)
+void Game::sendNewEntity(const std::string &str, int id)
 {
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   ANetwork::t_frame	frame;
@@ -369,7 +369,9 @@ void Game::addMonster()
 
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
       std::cout << "ID DU BOT :" << id << std::endl;
-      this->sendNewEntity(E_BOT, _eM.getEntityById(id));
+
+      this->sendNewEntity(_eM.getEntityById(id)->getName(),
+			  _eM.createEntitiesFromFolder(_botList, r.generate<int>()));
       _nbDisplay++;
     }
   else
@@ -467,8 +469,8 @@ bool Game::run()
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
 	  timerMonster.reset();
-	  // this->addMonster();
-	  // this->updateMonster();
+	  this->addMonster();
+	  this->updateMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {
