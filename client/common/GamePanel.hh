@@ -45,7 +45,7 @@ public:
   std::map<int, Texture*>	      	&getDicoTextures();
   void					setPlanetTexture(int i);
   void					setPlayers(int nbPlayer, int currentPlayer);
-
+  int	getType();
 
 private:
   std::vector<Sprite*>			_sprites;

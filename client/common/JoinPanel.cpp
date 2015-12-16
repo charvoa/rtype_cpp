@@ -27,9 +27,8 @@ JoinPanel::~JoinPanel() {}
 void	        JoinPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
-  std::cout << "BINDS in JOIN PANEL" << std::endl;
+  _type = PanelFactory::JOIN_PANEL;
   window->getSettings()->dumpBinds();
-  std::cout << "___________________" << std::endl;
   getInputManager().setInputType(InputType::JOIN_INPUT);
 
   Sprite *backgroundSpace = new Sprite;
@@ -108,6 +107,11 @@ void	        JoinPanel::setUserInterface()
 
 
   _alpha = 0;
+}
+
+int		JoinPanel::getType()
+{
+	return (PanelFactory::PanelType)_type;
 }
 
 void    JoinPanel::join()

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Sun Dec 13 08:36:10 2015 Louis Audibert
+// Last update Wed Dec 16 06:03:59 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -54,5 +54,14 @@ void	SystemManager::addSystemByType(E_Component type)
 	  _systems.push_back(new SystemGun(type));
 	  break;
 	}
+    }
+}
+
+void	SystemManager::removeSystemByType(E_Component type)
+{
+  for (std::list<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
+    {
+      if (dynamic_cast<SystemGun*>(*it)->getType() == type)
+	_systems.erase(it);
     }
 }
