@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 08:47:51 2015 Serge Heitzler
+// Last update Wed Dec 16 18:09:14 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -309,15 +309,37 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
 }
 
-void		GamePanel::die(int id)
+void		GamePanel::die(int id, int idDied)
 {
-  (void) id;
+  RenderWindow *window = RenderWindow::getInstance();
+  Explosion *e = new Explosion();
+  switch (id) {
+  case 1:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_blue));
+  case 2:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_red));
+  case 3:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
+  case 4:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_yellow));
+  }
+
+  int PosX  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosX();
+  int PosY  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosY();
+  e->setPosition(PosX, PosY);
+  static_cast<GamePanel*>(window->getPanels().top())->getExplosions().push_back(e);
+
+}
+
+std::vector<Explosion *>	&GamePanel::getExplosions()
+{
+  return _explosion;
 }
 
 void		GamePanel::addExplosion()
 {
   Explosion *t = new Explosion();
-  t->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion));
+  t->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
   _explosion.push_back(t);
 }
 

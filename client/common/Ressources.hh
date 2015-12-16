@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Wed Dec 16 15:07:15 2015 Nicolas Girardot
+// Last update Wed Dec 16 17:54:10 2015 Nicolas Girardot
 //
 
 #ifndef RESSOURCES_HH_
@@ -25,7 +25,10 @@ public:
   Ressources();
   ~Ressources();
 
-  Texture		*_explosion;
+  Texture		*_explosion_blue;
+  Texture		*_explosion_green;
+  Texture		*_explosion_red;
+  Texture		*_explosion_yellow;
 
   Texture		*_buttonNormal;
   Texture		*_buttonHighlight;
