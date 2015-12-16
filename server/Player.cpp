@@ -43,3 +43,28 @@ void Player::setScore(int s)
 {
   _score = s;
 }
+
+void Player::addSystem(E_Component type)
+{
+  _systemManager.addSystemByType(type);
+  if (type == C_MISSILE)
+    _missiles = 5;
+  else if (type == C_LASER)
+    _laser = 1;
+}
+
+void Player::shoot(E_Component type)
+{
+  if (type == C_MISSILE)
+    {
+      _missiles--;
+      if (_missiles == 0)
+	removeSystem(C_MISSILE);
+    }
+  else if (type == C_LASER)
+    {
+      _laser--;
+      if (_laser == 0)
+	removeSystem(C_LASER);
+    }
+}

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Sun Dec 13 22:43:19 2015 Nicolas Charvoz
+// Last update Wed Dec 16 06:07:49 2015 Louis Audibert
 //
 
 #ifndef PLAYER_HH_
@@ -25,6 +25,8 @@ private:
   bool _isOwner;
   int _score;
   Client _client;
+  int _missiles;
+  int _laser;
 
 public:
   Player(int id, const Client &);
@@ -34,6 +36,8 @@ public:
   bool isOwner() const;
   int getScore() const;
   void setScore(int);
+  void addSystem(E_Component);
+  void shoot(E_Component);
 };
 
 #endif
