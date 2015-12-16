@@ -96,6 +96,7 @@ private:
   void updateScore(Player*, Game::scoreDef);
   void updateLife(Player*, int);
   void addMonster();
+  void updateMonster();
   void initPlayersPosition();
   void sendGameData();
   bool checkMove(int, int);

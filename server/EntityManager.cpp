@@ -49,9 +49,27 @@ int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterat
   AEntity *newEntity;
   int		i = 0;
 
-  if (iterator > bots.size())
+  if (iterator > (int)bots.size())
     return (-1);
   for (std::list<AEntity*>::iterator it = bots.begin(); it != bots.end(); ++it)
+    {
+      if (i == iterator)
+	newEntity = (*it);
+      i++;
+    }
+  newEntity->setType(E_BOT);
+  _entities.push_back(newEntity);
+  return (_id);
+}
+
+int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
+{
+  Bot *newEntity;
+  int		i = 0;
+
+  if (iterator > (int)bots.size())
+    return (-1);
+  for (std::list<Bot*>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       if (i == iterator)
 	newEntity = (*it);
@@ -69,6 +87,7 @@ void	EntityManager::removeEntity(AEntity *entity)
 
 void	EntityManager::removeEntityById(int id)
 {
+  (void)id;
   // int	i = 0;
   // for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
   //   {

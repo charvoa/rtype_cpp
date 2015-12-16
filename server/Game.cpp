@@ -334,6 +334,17 @@ int Game::getNumberEnemyMax()
   return nbEnemy;
 }
 
+void Game::updateMonster()
+{
+  std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+  for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
+    {
+      ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      std::cout << "Position of bot >> " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
+      reinterpret_cast<Bot*>(*it)->update();
+    }
+}
+
 void Game::addMonster()
 {
   std::stringstream ss;
@@ -341,16 +352,11 @@ void Game::addMonster()
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
-
-      std::cout << "Je add un monstre" << std::endl;
-
       Random r(0, _botList.size() - 1);
-      int N = r.generate<int>();
 
-      std::list<Bot*>::iterator it = _botList.begin();
-      if (static_cast<int>(_botList.size()) > N)
-	it = std::next(_botList.begin(), N);
-      this->sendNewEntity(E_BOT, (*it)->getId());
+      int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
+      std::cout << "ID DU BOT :" << id << std::endl;
+      this->sendNewEntity(E_BOT, id);
       _nbDisplay++;
     }
   else
@@ -411,7 +417,6 @@ void Game::sendGameData()
 	    }
 	}
     }
-
 }
 
 void Game::updateRiffle()
@@ -448,9 +453,9 @@ bool Game::run()
     {
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
-	  //this->updateAmmo();
 	  timerMonster.reset();
-	  addMonster();
+	  // this->addMonster();
+	  // this->updateMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {
