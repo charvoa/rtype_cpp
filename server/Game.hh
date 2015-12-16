@@ -39,18 +39,6 @@ typedef std::chrono::duration<int, std::ratio<1, 60>> frame_duration;
   typedef void(Game::*Func)(void*, Client*);
   std::map<E_Command, Func> _funcMap;
 
-private:
-
-  Parameters _params;
-  std::string _id;
-  EntityManager _eM;
-  BotManager *_bM;
-  std::queue<ANetwork::t_frame> _commandQueue;
-  AMutex *_mutex;
-  int	_stage;
-  int	_nbDisplay;
-  std::chrono::time_point<std::chrono::system_clock> _start;
-
 public:
 
   enum scoreDef {
@@ -65,37 +53,56 @@ public:
     ANetwork *network;
   };
 
+  // METHODS
   Game();
-  Game(const Parameters&, std::list<Client *>&, const std::string&, int port);
+  Game(const Parameters&, std::list<Client *>&, const std::string&,
+       int port, std::list<Bot*>);
   ~Game();
+  bool run();
+  const Client &getClient() const;
+  const std::string &getId() const;
+  void handleCommand(void*, Client*);
+
+  // ATTRIBUTES
+  std::list<Client *> _clients;
+  ANetwork *_network;
+
+private:
+
+  // ATTRIBUTES
+  Parameters _params;
+  std::string _id;
+  EntityManager _eM;
+  std::queue<ANetwork::t_frame> _commandQueue;
+  AMutex *_mutex;
+  int	_stage;
+  int	_nbDisplay;
+  std::chrono::time_point<std::chrono::system_clock> _start;
+  std::list<Bot*> _botList;
+
+  // METHODS
+  Player *getPlayerByClient(Client*);
+  Client *getClientBySocket(ISocket*) const;
+  int  getNumberEnemyMax();
+  void sendNewEntity(const std::string &, int id);
+  void sendNewEntity(int type, int id);
+  void deleteEntity(AEntity *);
+  void updateRiffle();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
-  const std::string &getId() const;
-  const Client &getClient() const;
-  bool run();
-  void addCommandToQueue(ANetwork::t_frame);
-  Client *getClientBySocket(ISocket*) const;
-  Player *getPlayerByClient(Client*);
-
   void checkWall(Player*);
   void handleHandshakeUDP(void*, Client*);
   void handleMove(void*, Client*);
-  void handleCommand(void*, Client*);
   void handleShoot(void*, Client*);
-  bool checkMove(int, int);
-  std::pair<int, int> getDirections(const std::string &);
   void updateScore(Player*, Game::scoreDef);
   void updateLife(Player*, int);
-  int  getNumberEnemyMax();
   void addMonster();
+  void updateMonster();
   void initPlayersPosition();
   void sendGameData();
-  std::list<Client *> _clients;
-  ANetwork *_network;
-private:
-  void sendNewEntity(int type, int id);
-  void updateAmmo();
-  void deleteEntity(AEntity *);
+  bool checkMove(int, int);
+  std::pair<int, int> getDirections(const std::string &);
+
 };
 
 #endif

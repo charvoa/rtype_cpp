@@ -5,15 +5,15 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Sun Dec 13 05:20:54 2015 Serge Heitzler
+// Last update Wed Dec 16 12:54:59 2015 Nicolas Girardot
 //
 
 #ifndef SPRITE_HH_
 #define SPRITE_HH_
 
 #include <map>
-#include "ISprite.hh"
-#include "Color.hh"
+#include <ISprite.hh>
+#include <Color.hh>
 
 class		      Sprite : public ISprite
 {
@@ -36,7 +36,7 @@ public:
   bool		        isScale();
   float			getPosX() const;
   float			getPosY() const;
-  
+
 private:
 
   sf::Sprite		_sprite;

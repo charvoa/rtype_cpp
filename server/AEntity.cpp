@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sun Dec 13 08:46:23 2015 Louis Audibert
+// Last update Wed Dec 16 06:40:44 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -54,6 +54,11 @@ void	AEntity::addSystem(E_Component type)
   _systemManager.addSystemByType(type);
 }
 
+void	AEntity::removeSystem(E_Component type)
+{
+  _systemManager.removeSystemByType(type);
+}
+
 bool	AEntity::setType(E_EntityType type)
 {
   _type = type;
@@ -68,6 +73,11 @@ E_EntityType	AEntity::getType() const
 int	AEntity::getId() const
 {
   return (_id);
+}
+
+void	AEntity::setId(int id)
+{
+  _id = id;
 }
 
 SystemManager	*AEntity::getSystemManager()

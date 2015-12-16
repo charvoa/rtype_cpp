@@ -49,6 +49,7 @@ public:
   virtual void					drawUserInterface();
   virtual void					drawLabels();
   virtual void					drawInGame();
+  virtual int	getType();
   
   typedef void(APanel::*funcs)();
   virtual std::vector<funcs>   			&getFunctions();
@@ -60,7 +61,7 @@ protected:
   std::vector<Text>			_labels;
   std::vector<Sprite>	      		_inGame;
   InputManager				_inputManager;
-
+  int		_type;
   std::vector<funcs>			_functions;
 
 };

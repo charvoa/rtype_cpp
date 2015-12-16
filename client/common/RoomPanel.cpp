@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec 16 06:36:43 2015 Serge Heitzler
+// Last update Wed Dec 16 07:48:49 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -27,7 +27,9 @@
 
 RoomPanel::RoomPanel()
 {
+	_type = PanelFactory::ROOM_PANEL;
   _idRoom = "";
+  _received = new std::map<std::string, Texture *>;
 }
 
 RoomPanel::~RoomPanel(){}
@@ -93,9 +95,11 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
   std::list<File *> list = Toto.getFileListByExtension("png");
   for (std::list<File*>::iterator it = list.begin(); it != list.end(); ++it) {
     Texture *text = new Texture();
-    (*it)->getFullPath();
     text->loadFromFile((*it)->getFullPath());
-    static_cast<RoomPanel*>(window->getPanels().top())->getReceived().insert(std::make_pair((*it)->getBasename(), text));
+    std::map<std::string, Texture *> *bigList = static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
+    std::string name = (*it)->getFullPath();
+    bigList->insert(std::pair<std::string, Texture *>(name, text));
+    static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getBasename(),text));
   }
 
   // create texture here
@@ -104,9 +108,9 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
   // Build Texture
 }
 
-std::map<std::string, Texture*> &RoomPanel::getReceived()
+std::map<std::string, Texture*> *RoomPanel::getReceived()
 {
-  return _received;
+  return this->_received;
 }
 
 unsigned int	RoomPanel::getNbPlayers() const
@@ -193,12 +197,12 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
     case 0:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::BLUE);
       // static_cast<RoomPanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&RoomPanel::launchGame);
-      
+
       // static_cast<RoomPanel*>(window->getPanels().top())->getUserInterface().at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-      
+
       // static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(1).getText().setColor(sf::Color(255, 255, 255, 255));
 
-      
+
       break;
     case 1:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::RED);
@@ -258,9 +262,9 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       // 	{
       // 	  _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
       // 	  _userInterface.at(2)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-      // 	  _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));	  
+      // 	  _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));
       // 	}
-      
+
       i++;
     }
   i--;
@@ -383,4 +387,9 @@ void		RoomPanel::back()
 void	RoomPanel::update()
 {
 
+}
+
+int	RoomPanel::getType()
+{
+	return _type;
 }

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:41:04 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:07:20 2015 Nicolas Charvoz
+// Last update Wed Dec 16 11:10:39 2015 Nicolas Charvoz
 //
 
 #ifndef GAMEMANAGER_HH_
@@ -24,7 +24,7 @@ private:
   GameManager();
   ~GameManager();
   bool createGame(const Parameters&, std::list<Client *>&,
-		  const std::string&, int);
+		  const std::string&, int, std::list<Bot*>);
   Game &getGameById(const std::string&);
   Game &getGameByClient(const Client &);
 };

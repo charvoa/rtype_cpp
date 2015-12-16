@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec 16 06:19:45 2015 Serge Heitzler
+// Last update Wed Dec 16 07:51:28 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -29,6 +29,7 @@ InputManager::~InputManager(){}
 
 void			InputManager::setInputType(InputType type)
 {
+  
   _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
   _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
 

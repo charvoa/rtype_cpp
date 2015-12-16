@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:23:35 2015 Louis Audibert
-// Last update Wed Dec 16 01:52:42 2015 Louis Audibert
+// Last update Wed Dec 16 16:15:46 2015 Nicolas Charvoz
 //
 
 #include <iostream>
@@ -36,9 +36,9 @@ void	Bot::generateY()
 
 void	Bot::update()
 {
-  _x -= 5;
-  std::cout << "Bot :: Bot3 :: Update" << std::endl;
-  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  // _x -= 5;
+  // std::cout << "Bot :: Bot3 :: Update" << std::endl;
+  // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 
 extern "C" AEntity* create_object(int id)

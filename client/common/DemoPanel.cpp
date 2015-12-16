@@ -12,7 +12,7 @@
 
 DemoPanel::DemoPanel() : APanel()
 {
-
+	_type = PanelFactory::DEMO_PANEL;
 }
 
 DemoPanel::~DemoPanel() {}
@@ -20,4 +20,9 @@ DemoPanel::~DemoPanel() {}
 void		DemoPanel::render()
 {
 
+}
+
+int	DemoPanel::getType()
+{
+	return _type;
 }
