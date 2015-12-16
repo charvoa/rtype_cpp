@@ -128,7 +128,7 @@ bool Game::checkMove(int x, int y)
 {
   if (x < 0 || x > 110)
     return false;
-  else if (y < 0 || y > 50)
+  else if (y < 0 || y > 49)
     return false;
   return true;
 }
@@ -214,7 +214,7 @@ void Game::updateLife(Player *p, int reset)
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
   ANetwork::t_frame frameDie;
   if (hP->getLife() == 0){
-    std::string sendData = std::to_string(p->getId());
+    std::string sendData = std::to_string(p->getId()) + ";" + std::to_string(p->getId());
     frameDie = CreateRequest::create(S_DIE, CRC::calcCRC(sendData), sendData.size(), sendData);
   }
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
@@ -441,6 +441,8 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 1, p->getY());
+      if (p->getX() >= 110)
+	deleteEntity(*it);
     }
 }
 
@@ -468,9 +470,9 @@ bool Game::run()
     {
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
-	  // timerMonster.reset();
-	  // this->addMonster();
-	  // this->updateMonster();
+	  timerMonster.reset();
+	  this->addMonster();
+	  this->updateMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {
