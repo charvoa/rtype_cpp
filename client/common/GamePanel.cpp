@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 17:17:32 2015 Nicolas Girardot
+// Last update Wed Dec 16 08:47:51 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -271,6 +271,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 
   for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->end(); ++it)
     {
+      std::cout << "filename A : " << (*it).first << std::endl;
       _dicoTextures.insert(std::make_pair((*it).first, (*it).second));
     }
 }
@@ -341,7 +342,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
 
-  std::cout << "Displaying with id = " << id << std::endl;
+  //  std::cout << "Displaying with id = " << id << std::endl;
 
 
 }
