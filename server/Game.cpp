@@ -336,17 +336,16 @@ void Game::addMonster()
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
-      for (std::list<Bot*>::iterator it = _botList.begin();
-	   it != _botList.end();
-	   ++it)
-	{
-	  std::cout << "Je add un monstre" << std::endl;
 
-	  ss << (*it)->getId();
-	  ANetwork::t_frame frameHealth = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-	  ss.str("");
-	  ss.clear();
-	}
+      std::cout << "Je add un monstre" << std::endl;
+
+      Random r(0, _botList.size() - 1);
+      int N = r.generate<int>();
+
+      std::list<Bot*>::iterator it = _botList.begin();
+      if (_botList.size() > N)
+	it = std::next(_botList.begin(), N);
+      this->sendNewEntity(E_BOT, (*it)->getId());
       _nbDisplay++;
     }
   else
