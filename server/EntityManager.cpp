@@ -8,6 +8,8 @@
 //
 
 #include <EntityManager.hh>
+#include <string.h>
+#include <cstring>
 
 EntityManager::EntityManager()
 {
@@ -70,8 +72,10 @@ int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterat
 
 int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 {
-  Bot *newEntity;
+  Bot *newEntity = (Bot*)std::malloc(sizeof(Bot));
   int		i = 0;
+  int		x, y = 0;
+  Random	rand(0, 51);
 
   if (iterator > (int)bots.size())
     return (-1);
@@ -80,12 +84,15 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
   for (std::list<Bot*>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       if (i == iterator)
-	newEntity = (*it);
+	std::memcpy(newEntity, (*it), sizeof(Bot));
       i++;
     }
   newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);
+  x = 140;
+  y = rand.generate<int>();
+  dynamic_cast<SystemPos*>(newEntity->getSystemManager()->getSystemByComponent(C_POSITION))->update(x, y);
   std::cout << "id = " << _id << std::endl;
   _entities.push_back(newEntity);
   return (_id);
