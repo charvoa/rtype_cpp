@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec 16 12:16:09 2015 Antoine Garcia
+// Last update Wed Dec 16 15:18:34 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -25,6 +25,12 @@ Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(i
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
   this->_botList = botList;
+  std::string	sendData = "player1;" + id + ";1";
+  ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
+						  CRC::calcCRC(sendData),
+						  0, sendData);
+  client->getSocket()->write(reinterpret_cast<void *>(&frame),
+			     sizeof(ANetwork::t_frame));
    sendFileToClient(client, botList);
   //_owner = client;
 }
