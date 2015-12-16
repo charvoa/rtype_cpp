@@ -5,16 +5,22 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Wed Dec 16 17:11:08 2015 Nicolas Girardot
+// Last update Wed Dec 16 18:06:55 2015 Nicolas Girardot
 //
 
 #include "Ressources.hh"
 
 Ressources::Ressources()
 {
-  _explosion = new Texture();
+  _explosion_blue = new Texture();
+  _explosion_red = new Texture();
+  _explosion_green = new Texture();
+  _explosion_yellow = new Texture();
 
-  _explosion->loadFromFile("../common/misc/explosion1.png");
+  _explosion_blue->loadFromFile("../common/misc/explosion_blue.png");
+  _explosion_red->loadFromFile("../common/misc/explosion_red.png");
+  _explosion_green->loadFromFile("../common/misc/explosion_green.png");
+  _explosion_yellow->loadFromFile("../common/misc/explosion_yellow.png");
 
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();
