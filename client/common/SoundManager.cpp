@@ -9,6 +9,7 @@
 //
 
 #include <iostream>
+#include "RenderWindow.hh"
 #include "SoundManager.hh"
 
 Sound::Sound()
@@ -42,16 +43,25 @@ void	Sound::registerMusic(const std::string &filename, const std::string&title)
 
 void	Sound::playMusic(const std::string &title, int repeat)
 {
-  if (repeat == 1)
+	RenderWindow *window = RenderWindow::getInstance();
+	int			global = window->getSettings()->getVolume().getGlobal();
+	int			music = window->getSettings()->getVolume().getMusic();
+
+	if (repeat == 1)
     _music[title]->setLoop(true);
+  _music[title]->setVolume((global * music) / 100);
   _music[title]->play();
 }
 
 void	Sound::playSound(const std::string &title)
 {
+	RenderWindow *window = RenderWindow::getInstance();
+	int			global = window->getSettings()->getVolume().getGlobal();
+	int			effects = window->getSettings()->getVolume().getEffects();
+
   sf::Sound *sound = new sf::Sound();
   sound->setBuffer(_sounds[title]);
-
+  sound->setVolume((global * effects) / 100);
   sound->play();
 }
 
@@ -71,4 +81,21 @@ void	Sound::pauseMusic(const std::string &title)
 void	Sound::stopMusic(const std::string &title)
 {
   _music[title]->stop();
+}
+
+void	Sound::setEffectsVolume(int vol)
+{
+	(void)vol;
+}
+
+void	Sound::setMusicVolume(int vol)
+{
+	std::map< std::string, sf::Music *>::iterator it = _music.begin();
+	std::map< std::string, sf::Music *>::iterator end = _music.end();
+
+	while (it != end)
+	{
+		it->second->setVolume(vol);
+		++it;
+	}
 }
