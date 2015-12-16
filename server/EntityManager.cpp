@@ -44,10 +44,20 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
   return (_id);
 }
 
-int	EntityManager::createEntitiesFromFolder( std::string &filename, E_EntityType type)
+int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterator)
 {
-  AEntity *newEntity = _entityFactory.createEntity(filename, _id);
-  newEntity->setType(type);
+  AEntity *newEntity;
+  int		i = 0;
+
+  if (iterator > bots.size())
+    return (-1);
+  for (std::list<AEntity*>::iterator it = bots.begin(); it != bots.end(); ++it)
+    {
+      if (i == iterator)
+	newEntity = (*it);
+      i++;
+    }
+  newEntity->setType(E_BOT);
   _entities.push_back(newEntity);
   return (_id);
 }
