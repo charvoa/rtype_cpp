@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Tue Dec 15 07:26:43 2015 Serge Heitzler
+// Last update Wed Dec 16 06:22:09 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -27,9 +27,8 @@ JoinPanel::~JoinPanel() {}
 void	        JoinPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
-  std::cout << "BINDS in JOIN PANEL" << std::endl;
+  _type = PanelFactory::JOIN_PANEL;
   window->getSettings()->dumpBinds();
-  std::cout << "___________________" << std::endl;
   getInputManager().setInputType(InputType::JOIN_INPUT);
 
   Sprite *backgroundSpace = new Sprite;
@@ -108,6 +107,11 @@ void	        JoinPanel::setUserInterface()
 
 
   _alpha = 0;
+}
+
+int		JoinPanel::getType()
+{
+	return (PanelFactory::PanelType)_type;
 }
 
 void    JoinPanel::join()

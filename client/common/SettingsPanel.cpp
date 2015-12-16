@@ -8,6 +8,7 @@
 // Last update Thu Dec  3 14:01:46 2015 Serge Heitzler
 //
 
+#include "Client.hh"
 #include "SettingsLoader.hh"
 #include "RenderWindow.hh"
 #include "PanelFactory.hh"
@@ -16,6 +17,7 @@
 
 SettingsPanel::SettingsPanel()
 {
+	_type = PanelFactory::SETTINGS_PANEL;
 	_tmp = new Settings(std::string("../config/PersonnalConfig.ini"));
 }
 
@@ -267,10 +269,8 @@ void	SettingsPanel::setUserInterface()
 void    SettingsPanel::setGlobalVolume(int global)
 {
     Volume vol = _tmp->getVolume();
-	std::cout << "volume avant : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
     vol.setGlobal(global);
     _tmp->setVolume(vol);
-	std::cout << "volume après : " << std::to_string(_tmp->getVolume().getGlobal()) << std::endl;
 }
 
 void    SettingsPanel::setEffectsVolume(int effects)
@@ -323,7 +323,19 @@ void    SettingsPanel::defaultSettings()
 
 void    SettingsPanel::back()
 {
-	RenderWindow::getInstance()->back();
+	RenderWindow	*window = RenderWindow::getInstance();
+	int				global = window->getSettings()->getVolume().getGlobal();
+	int				effects = window->getSettings()->getVolume().getEffects();
+	int				music = window->getSettings()->getVolume().getMusic();
+
+	Client::getSound()->setEffectsVolume((global * effects) / 100);
+	Client::getSound()->setEffectsVolume((global * music) / 100);
+	window->back();
+}
+
+int		SettingsPanel::getType()
+{
+	return _type;
 }
 
 void    SettingsPanel::save()

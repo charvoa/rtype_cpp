@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Wed Dec 16 16:22:54 2015 Nicolas Girardot
+// Last update Wed Dec 16 17:11:08 2015 Nicolas Girardot
 //
 
 #include "Ressources.hh"

@@ -1,20 +1,22 @@
-#include	<File.hpp>
+#include	<Microphone.hpp>
 
-void		my_cb(int percentage, void *data) {
-  printf("\rSending ... %d%%  ", percentage);
-  fflush(stdout);
-}
+int		main(int ac, char **av)
+{
+  Microphone	micro;
 
-int		main() {
-  int		port = 6545, i = 1;
+  try {
+    micro.init();
+    micro.start(44100);
+    sleep(30);
+    micro.stop();
+    // sf::Sound	    sound;
 
-  while (1) {
-    try {
-      File		file("menuMusic.ogg");
-      file.sendMe(port++);
-    } catch (const std::exception &e) {
-      std::cout << e.what() << std::endl;
-    }
-    printf("\nSent %d Finished !\n", i++);
+    // sound.setBuffer(micro.getBuffer());
+    // sound.play();
+    // sleep(20);
+  } catch (const std::exception &e) {
+    std::cout << "Error catched " << e.what() << std::endl;
   }
+ return (0);
 }
+

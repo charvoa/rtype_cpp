@@ -5,13 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:23:44 2015 Louis Audibert
-// Last update Sun Dec 13 08:38:19 2015 Louis Audibert
+// Last update Wed Dec 16 05:56:36 2015 Louis Audibert
 //
 
 #include <SystemGun.hh>
 
 SystemGun::SystemGun(E_Component type)
 {
+  _type = type;
   switch (type)
     {
     case C_LASER:
@@ -31,4 +32,9 @@ SystemGun::SystemGun(E_Component type)
 SystemGun::~SystemGun()
 {
   std::cout << "System Gun Destroyed" << std::endl;
+}
+
+E_Component SystemGun::getType()
+{
+  return (_type);
 }

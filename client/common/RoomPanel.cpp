@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec 16 15:22:49 2015 Nicolas Girardot
+// Last update Wed Dec 16 17:10:56 2015 Nicolas Girardot
 //
 
 #include <thread>
@@ -27,6 +27,7 @@
 
 RoomPanel::RoomPanel()
 {
+	_type = PanelFactory::ROOM_PANEL;
   _idRoom = "";
   _received = new std::map<std::string, Texture *>;
 }
@@ -79,7 +80,7 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  usleep(1000000);
+//  usleep(1000000);
 //  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
@@ -98,7 +99,7 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
     std::map<std::string, Texture *> *bigList = static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
     std::string name = (*it)->getFullPath();
     bigList->insert(std::pair<std::string, Texture *>(name, text));
-    static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getFullPath(),text));
+    static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getBasename(),text));
   }
 
   // create texture here
@@ -386,4 +387,9 @@ void		RoomPanel::back()
 void	RoomPanel::update()
 {
 
+}
+
+int	RoomPanel::getType()
+{
+	return _type;
 }
