@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 09:17:48 2015 Serge Heitzler
+// Last update Wed Dec 16 18:39:02 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -316,12 +316,16 @@ void		GamePanel::die(int id, int idDied)
   switch (id) {
   case 1:
     e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_blue));
+    break;
   case 2:
     e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_red));
+    break;
   case 3:
     e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
+    break;
   case 4:
     e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_yellow));
+    break;
   }
 
   int PosX  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosX();
@@ -355,7 +359,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
-  
+
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     {
