@@ -156,7 +156,6 @@ SettingsLoader::SettingsLoader(bool write)
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
-	std::cout << "construction d'un LOADER" << std::endl;
 	_ifs = new std::ifstream(_filepath.c_str());
 	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
 	_stringKeys["1_KEY"] = sf::Keyboard::Num1;
@@ -606,7 +605,7 @@ std::string     SettingsLoader::bindToString(Bind bind) const
 
 void        SettingsLoader::saveSettings(Settings *settings) const
 {
-	std::ofstream  ofs("../config/PersonnalConfig.ini", std::ios::out | std::ios::trunc);
+	std::ofstream  ofs("../config/PersonalConfig.ini", std::ios::out | std::ios::trunc);
 	std::string str(settingsToString(*settings));
 	std::cout << "[" << str << "]" << std::endl;
 
@@ -615,7 +614,7 @@ void        SettingsLoader::saveSettings(Settings *settings) const
 
 std::string	SettingsLoader::settingsToString(Settings const& settings) const
 {
-	std::string ret(";PersonnalConfig.ini\n[BINDS]\n");
+	std::string ret(";PersonalConfig.ini\n[BINDS]\n");
 	std::vector<Bind*> binds = settings.getBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();

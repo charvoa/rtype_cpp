@@ -116,7 +116,7 @@ void    Settings::setDifficulty(Settings::Difficulty diff)
 
 void    Settings::loadSettings()
 {
-    SettingsLoader  loader("../config/PersonnalConfig.ini");
+    SettingsLoader  loader("../config/PersonalConfig.ini");
 
     this->update(*(loader.parseSettings()));
 }
