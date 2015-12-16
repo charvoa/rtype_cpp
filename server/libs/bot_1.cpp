@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Wed Dec 16 16:15:19 2015 Nicolas Charvoz
+// Last update Wed Dec 16 08:27:00 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -36,6 +36,8 @@ void	Bot::generateY()
 
 void	Bot::update()
 {
+  _x--;
+  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
   // if (_y == HEIGHT)
   //   _direction = -1;
   // else if (_y == 0)
