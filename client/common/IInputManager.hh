@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Tue Dec 15 01:19:53 2015 Serge Heitzler
+// Last update Wed Dec 16 05:26:57 2015 Serge Heitzler
 //
 
 #ifndef							IINPUTMANAGER_HH_
@@ -29,6 +29,7 @@ public:
   virtual int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement) = 0;
   virtual std::pair<unsigned int, unsigned int>		joystickMovedInMenuAt(sf::Event& event) = 0;
   virtual std::pair<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event) = 0;
+  //  std::pair<unsigned int, unsigned int>			mouseInGamePressedAt(sf::Event& event);
   virtual std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event) = 0;
   virtual std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event) = 0;
   virtual std::pair<unsigned int, unsigned int>		joystickHardwareEvent(sf::Event& event) = 0;

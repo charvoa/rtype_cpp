@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec 16 14:06:58 2015 Nicolas Girardot
+// Last update Wed Dec 16 17:10:56 2015 Nicolas Girardot
 //
 
 #include <thread>
@@ -99,7 +99,7 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
     std::map<std::string, Texture *> *bigList = static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
     std::string name = (*it)->getFullPath();
     bigList->insert(std::pair<std::string, Texture *>(name, text));
-    static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getFullPath(),text));
+    static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getBasename(),text));
   }
 
   // create texture here
