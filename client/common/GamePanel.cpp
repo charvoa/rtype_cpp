@@ -55,6 +55,7 @@ GamePanel::GamePanel()
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::GAME_INPUT);
 
+  _type = PanelFactory::GAME_PANEL;
   _randPosY = new Random(250, 600);
   _randPlanet = new Random(0, 7);
   _randBackground = new Random(0, 2);
@@ -183,6 +184,11 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
 }
 
 GamePanel::~GamePanel() {}
+
+int			GamePanel::getType()
+{
+	return _type;
+}
 
 void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 {

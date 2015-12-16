@@ -17,6 +17,7 @@
 
 SettingsPanel::SettingsPanel()
 {
+	_type = PanelFactory::SETTINGS_PANEL;
 	_tmp = new Settings(std::string("../config/PersonnalConfig.ini"));
 }
 
@@ -330,6 +331,11 @@ void    SettingsPanel::back()
 	Client::getSound()->setEffectsVolume((global * effects) / 100);
 	Client::getSound()->setEffectsVolume((global * music) / 100);
 	window->back();
+}
+
+int		SettingsPanel::getType()
+{
+	return _type;
 }
 
 void    SettingsPanel::save()

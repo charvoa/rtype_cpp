@@ -28,7 +28,8 @@ public:
   void		exit();
   void	        update();
   void	        setUserInterface();
-  
+  int		getType();
+
 private:
 
 };

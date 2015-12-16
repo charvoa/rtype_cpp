@@ -23,7 +23,10 @@
 #include <JoinPanel.hh>
 #include <SettingsPanel.hh>
 
-StartPanel::StartPanel(){}
+StartPanel::StartPanel()
+{
+	_type = PanelFactory::START_PANEL;
+}
 
 StartPanel::~StartPanel(){}
 
@@ -100,6 +103,11 @@ void		StartPanel::setUserInterface()
     _functions.push_back((APanel::funcs)&StartPanel::demo);
     _functions.push_back((APanel::funcs)&StartPanel::settings);
     _functions.push_back((APanel::funcs)&StartPanel::exit);
+}
+
+int		StartPanel::getType()
+{
+	return _type;
 }
 
 void        StartPanel::createRoom()
