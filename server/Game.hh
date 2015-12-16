@@ -44,7 +44,6 @@ private:
   Parameters _params;
   std::string _id;
   EntityManager _eM;
-  BotManager *_bM;
   std::queue<ANetwork::t_frame> _commandQueue;
   AMutex *_mutex;
   int	_stage;
@@ -66,7 +65,8 @@ public:
   };
 
   Game();
-  Game(const Parameters&, std::list<Client *>&, const std::string&, int port);
+  Game(const Parameters&, std::list<Client *>&, const std::string&,
+       int port, std::list<Bot*>);
   ~Game();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
@@ -96,6 +96,7 @@ private:
   void sendNewEntity(int type, int id);
   void updateAmmo();
   void deleteEntity(AEntity *);
+  std::list<Bot*> _botList;
 };
 
 #endif
