@@ -9,6 +9,7 @@
 //
 
 #include <iostream>
+#include "SettingsPanel.hh"
 #include "RenderWindow.hh"
 #include "SoundManager.hh"
 
@@ -56,11 +57,24 @@ void	Sound::playMusic(const std::string &title, int repeat)
 void	Sound::playSound(const std::string &title)
 {
 	RenderWindow *window = RenderWindow::getInstance();
-	int			global = window->getSettings()->getVolume().getGlobal();
-	int			effects = window->getSettings()->getVolume().getEffects();
+	int			global;
+	int			effects;
 
-  sf::Sound *sound = new sf::Sound();
-  sound->setBuffer(_sounds[title]);
+	sf::Sound *sound = new sf::Sound();
+	std::cout << "type de mon panel : " << std::to_string(window->getPanels().top()->getType()) << std::endl;
+	if ((PanelFactory::PanelType)window->getPanels().top()->getType() == PanelFactory::SETTINGS_PANEL)
+	{
+		std::cout << "dans settings panel" << std::endl;
+		global = dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->getVolume().getGlobal();
+		effects = dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->getVolume().getEffects();
+	}
+	else
+	{
+		std::cout << "PAS dans settings panel" << std::endl;
+		global = window->getSettings()->getVolume().getGlobal();
+		effects = window->getSettings()->getVolume().getEffects();
+	}
+	sound->setBuffer(_sounds[title]);
   sound->setVolume((global * effects) / 100);
   sound->play();
 }

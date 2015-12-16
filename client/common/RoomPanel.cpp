@@ -27,6 +27,7 @@
 
 RoomPanel::RoomPanel()
 {
+	_type = PanelFactory::ROOM_PANEL;
   _idRoom = "";
   _received = new std::map<std::string, Texture *>;
 }
@@ -79,7 +80,7 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-  usleep(1000000);
+//  usleep(1000000);
 //  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
@@ -386,4 +387,9 @@ void		RoomPanel::back()
 void	RoomPanel::update()
 {
 
+}
+
+int	RoomPanel::getType()
+{
+	return _type;
 }

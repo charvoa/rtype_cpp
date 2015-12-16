@@ -48,6 +48,7 @@ public:
   static void	       	receiveFiles(int i, int j);
   std::map<std::string, Texture *> *getReceived();
   int	  		getCurrentPlayer();
+  int	getType();
 
 private:
 
