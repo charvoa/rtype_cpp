@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Tue Dec 15 12:13:56 2015 Serge Heitzler
+// Last update Wed Dec 16 01:56:06 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -113,7 +113,6 @@ GamePanel::GamePanel()
       backgroundSpace2->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame3));
       break;
     }
-      backgroundSpace1->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundGame3));
   backgroundSpace1->setPosition(0, 0);
   backgroundSpace2->setPosition(backgroundSpace2->getGlobalBounds().second.first, 0);
 
@@ -294,39 +293,18 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float	posX = (std::atoi(vector.at(1).c_str()));
   float	posY = (std::atoi(vector.at(2).c_str()));
 
-  float realPosX = (posX * 16);
-  float realPosY = (posY * 16);
-
-
-  //   int	scale = std::atoi(vector.at(3).c_str());
-
+  float realPosX = (posX * 16) + 50;
+  float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
 
 
-  // std::cout << "vector.size() " << vector.size() << std::endl;
-  // std::cout << "pos X " << posX << std::endl;
-  // std::cout << "realPos X " << realPosX << std::endl;
-  // std::cout << "pos Y " << posY << std::endl;
-  // std::cout << "realPos Y " << realPosY << std::endl;
+  std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+  if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+    {
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+    }
 
-  // static int i = 0;
-
-  // if (i == 0)
-  //   {
-  //     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
-  //   }
-
-  // i++;
-
-
-
-
-  // float moveX = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->getPosX() - realPosX;
-
-  // float moveY = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->getPosY() - realPosY;
-
-   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
 
 
    
@@ -452,13 +430,13 @@ void		GamePanel::render()
   this->drawOtherPlayer();
 
   _inputManager.joystickMovedInDirection();
+  _inputManager.keyPressedInGame();
   
   RenderWindow *window = RenderWindow::getInstance();
   for (std::map<int, Sprite*>::iterator it = _dicoSprites.begin(); it != _dicoSprites.end(); ++it)
     {
       window->draw((*it).second->getSprite());
     }
-  _inputManager.keyPressedInGame();
 }
 
 void		GamePanel::drawOtherPlayer()
