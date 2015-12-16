@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Sat Dec 12 12:52:59 2015 Antoine Garcia
-// Last update Sun Dec 13 19:42:07 2015 Nicolas Charvoz
+// Last update Wed Dec 16 13:25:35 2015 Antoine Garcia
 //
 
 #ifndef _TIMER_HPP_
@@ -31,6 +31,10 @@ public:
   seconds elapsed() const
   {
     return std::chrono::duration_cast<seconds>(high_resolution_clock::now() - _start);
+  }
+  milliseconds elapsedMilli()
+  {
+    return std::chrono::duration_cast<milliseconds>(high_resolution_clock::now() - _start);
   }
   template <typename T, typename Traits>
   friend std::basic_ostream<T, Traits>& operator<<(std::basic_ostream<T, Traits>& out, const Timer& timer)

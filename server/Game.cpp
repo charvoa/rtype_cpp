@@ -385,8 +385,8 @@ void Game::updateAmmo()
 	      rifle->update(p->getX() + 1, p->getY());
 	    }
 	  if (p->getX() >= 119){
-	    //std::cout << "DELETE ENTITY" << std::endl;
-	    //deleteEntity(rifle);
+	    std::cout << "DELETE ENTITY" << std::endl;
+	    deleteEntity(rifle);
 	  }
 	  // TIME RIFLE UPDATE
 	}
@@ -432,10 +432,21 @@ void Game::sendGameData()
 
 }
 
+void Game::updateRiffle()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_RIFLE);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*it)->update(p->getX() + 1, p->getY());
+    }
+}
+
 bool Game::run()
 {
   bool past = true;
-  Timer	timer(true);
+  Timer	timerMonster(true);
+  Timer timerRiffle(true);
   int	speed = 3;
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
@@ -453,11 +464,17 @@ bool Game::run()
 
   while (true)
     {
-      if (timer.elapsed().count()>= (speed/_stage))
+      if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
-	  timer.reset();
+	  //this->updateAmmo();
+	  timerMonster.reset();
 	  //addMonster();
 	}
+      if (timerRiffle.elapsedMilli().count() >= 0.5 )
+      {
+	  this->updateRiffle();
+	  timerRiffle.reset();
+      }
       auto currentTime = std::chrono::system_clock::now();
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
 	(currentTime - _start);
@@ -471,7 +488,6 @@ bool Game::run()
 	      std::this_thread::sleep_until(end_time);
 	      past = false;
 	    }
-	  this->updateAmmo();
 	  this->sendGameData();
 	}
     }
