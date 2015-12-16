@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec 15 17:33:33 2015 Nicolas Girardot
+// Last update Wed Dec 16 11:04:19 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -84,7 +84,6 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
       ANetwork *net = Client::getUDPNetwork();
       ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
       net->write(sender);
-      return std::make_pair(0, 0);
     }
   return std::make_pair(0, 0);
 }
