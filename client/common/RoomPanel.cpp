@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec 16 12:57:31 2015 Antoine Garcia
+// Last update Wed Dec 16 14:06:58 2015 Nicolas Girardot
 //
 
 #include <thread>
@@ -28,6 +28,7 @@
 RoomPanel::RoomPanel()
 {
   _idRoom = "";
+  _received = new std::map<std::string, Texture *>;
 }
 
 RoomPanel::~RoomPanel(){}
@@ -78,7 +79,7 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-//  usleep(1000000);
+  usleep(1000000);
 //  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
@@ -87,23 +88,18 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
       file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
 
-  // FileManager Toto("./recv/");
-  // RenderWindow *window = RenderWindow::getInstance();
+  FileManager Toto("./recv/");
+  RenderWindow *window = RenderWindow::getInstance();
 
-  // std::cout << "Is  working 1" << std::endl;
-  // std::list<File *> list = Toto.getFileListByExtension("png");
-  // std::cout << "Is  working 2" << std::endl;
-  // for (std::list<File*>::iterator it = list.begin(); it != list.end(); ++it) {
-  //   std::cout << "Is  working 3" << std::endl;
-  //   Texture *text = new Texture();
-  //   std::cout << "Is  working 4" << std::endl;
-  //   (*it)->getFullPath();
-  //   std::cout << "Is  working 5" << std::endl;
-  //   text->loadFromFile((*it)->getFullPath());
-  //   std::cout << "Is  working 6" << std::endl;
-  //   static_cast<RoomPanel*>(window->getPanels().top())->getReceived().insert(std::make_pair((*it)->getFullPath(),text));
-  //   std::cout << "Is  working 7" << std::endl;
-  // }
+  std::list<File *> list = Toto.getFileListByExtension("png");
+  for (std::list<File*>::iterator it = list.begin(); it != list.end(); ++it) {
+    Texture *text = new Texture();
+    text->loadFromFile((*it)->getFullPath());
+    std::map<std::string, Texture *> *bigList = static_cast<RoomPanel*>(window->getPanels().top())->getReceived();
+    std::string name = (*it)->getFullPath();
+    bigList->insert(std::pair<std::string, Texture *>(name, text));
+    static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getFullPath(),text));
+  }
 
   // create texture here
   // Use FileManager
@@ -111,9 +107,9 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
   // Build Texture
 }
 
-std::map<std::string, Texture*> &RoomPanel::getReceived()
+std::map<std::string, Texture*> *RoomPanel::getReceived()
 {
-  return _received;
+  return this->_received;
 }
 
 unsigned int	RoomPanel::getNbPlayers() const

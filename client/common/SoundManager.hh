@@ -31,6 +31,8 @@ public:
   void		playSound(const std::string &title);
   void		pauseMusic(const std::string &title);
   void		stopMusic(const std::string &title);
+  void		setMusicVolume(int);
+  void		setEffectsVolume(int);
 };
 
 #endif

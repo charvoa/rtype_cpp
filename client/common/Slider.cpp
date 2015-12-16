@@ -1,5 +1,6 @@
 #include "Slider.hh"
 #include "SettingsPanel.hh"
+#include "Client.hh"
 #include "Ressources.hh"
 
 
@@ -72,6 +73,7 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 				this->getSprite().setPosition(pair.first, getPosY());
 		}
 	}
+	// window->_ressources->_keyButtonNormal->getSize()._x / 2
 }
 
 bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
@@ -88,11 +90,21 @@ bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 		this->setValue((pair.first - _minX) / 7);
 		this->getSprite().setPosition(pair.first, getPosY());
 		if (_title == "global")
+		{
 			dynamic_cast<SettingsPanel*>(window->getPanels().top())->setGlobalVolume(_value);
+			Client::getSound()->setEffectsVolume(_value);
+			Client::getSound()->setMusicVolume(_value);
+		}
 		else if (_title == "effects")
+		{
 			dynamic_cast<SettingsPanel*>(window->getPanels().top())->setEffectsVolume(_value);
+			Client::getSound()->setEffectsVolume(_value);
+		}
 		else if (_title == "music")
+		{
 			dynamic_cast<SettingsPanel*>(window->getPanels().top())->setMusicVolume(_value);
+			Client::getSound()->setMusicVolume(_value);
+		}
 	}
 	return false;
 }
@@ -105,14 +117,27 @@ void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 		return;
 	if (pair.first > _maxX)
 		this->setValue(100);
+	if (pair.first < _minX)
+		this->setValue(0);
 	else
 		this->setValue((pair.first - _minX) / 7);
-	std::cout << "valeur : " << std::to_string(_value) << std::endl;
 	if (_title == "global")
+	{
 		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setGlobalVolume(_value);
+		Client::getSound()->setEffectsVolume(_value);
+		Client::getSound()->setMusicVolume(_value);
+	}
 	else if (_title == "effects")
+	{
 		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setEffectsVolume(_value);
+		Client::getSound()->setEffectsVolume(_value);
+	}
 	else if (_title == "music")
+	{
 		dynamic_cast<SettingsPanel*>(window->getPanels().top())->setMusicVolume(_value);
+		Client::getSound()->setMusicVolume(_value);
+	}
+	Client::getSound()->setMusicVolume(_value);
+	Client::getSound()->setEffectsVolume(_value);
 	_locked = true;
 }
