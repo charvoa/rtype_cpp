@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 07:52:26 2015 Serge Heitzler
+// Last update Wed Dec 16 08:02:00 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -292,7 +292,8 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   std::cout << "Creating new Entity with ID = " << id << "; Type  = " << type << std::endl;
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
   //  newSprite->scale();
-  newSprite->setPosition(-500, 500);
+  //  newSprite->setPosition(-500, 500);
+  newSprite->setPosition(500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
