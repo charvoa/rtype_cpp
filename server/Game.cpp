@@ -331,15 +331,21 @@ int Game::getNumberEnemyMax()
 
 void Game::addMonster()
 {
+  std::stringstream ss;
+
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
-      for (std::list<Bot*>::iterator it = _botList.begin();
-	   it != _botList.end();
-	   ++it)
-	{
-	  std::cout << "Je add un monstre" << std::endl;
-	}
+
+      std::cout << "Je add un monstre" << std::endl;
+
+      Random r(0, _botList.size() - 1);
+      int N = r.generate<int>();
+
+      std::list<Bot*>::iterator it = _botList.begin();
+      if (_botList.size() > N)
+	it = std::next(_botList.begin(), N);
+      this->sendNewEntity(E_BOT, (*it)->getId());
       _nbDisplay++;
     }
   else
@@ -472,7 +478,7 @@ bool Game::run()
 	{
 	  //this->updateAmmo();
 	  timerMonster.reset();
-	  //addMonster();
+	  addMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {
@@ -498,11 +504,6 @@ bool Game::run()
   return true;
 }
 
-void Game::addCommandToQueue(ANetwork::t_frame frame)
-{
-  _commandQueue.push(frame);
-
-}
 
 const std::string &Game::getId() const
 {

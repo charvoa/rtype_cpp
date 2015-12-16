@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 01:56:06 2015 Serge Heitzler
+// Last update Wed Dec 16 14:02:57 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -242,7 +242,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
   _dicoTextures.insert(std::make_pair(10, ((RenderWindow::getInstance())->_ressources->_laserYellowBig)));
   //  _dicoTextures.insert(std::make_pair(11, ((RenderWindow::getInstance())->_ressources->_riffle)));
   //  _dicoTextures.insert(std::make_pair(12, ((RenderWindow::getInstance())->_ressources->_riffle)));
-  
+
 }
 
 
@@ -255,16 +255,18 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   int	  	id = std::atoi(vector.at(1).c_str());
   int		type;
 
+
   if (typeString.find(":") == !std::string::npos)
     type = 7;
   else
     type = std::atoi(vector.at(0).c_str());
 
-  
+
+  std::cout << "Creating new Entity with ID = " << id << "; Type  = " << type << std::endl;
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
   //  newSprite->scale();
   newSprite->setPosition(-500, 500);
-  
+
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
 }
@@ -278,9 +280,9 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
 }
 
-void		GamePanel::die()
+void		GamePanel::die(int id)
 {
-
+  (void) id;
 }
 
 void		GamePanel::display(std::vector<std::string> &vector)
@@ -298,6 +300,8 @@ void		GamePanel::display(std::vector<std::string> &vector)
 
   id = std::atoi(vector.at(0).c_str());
 
+  std::cout << "Displaying with id = " << id << std::endl;
+
 
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
@@ -307,7 +311,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
 
 
 
-   
+
   // ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->move(moveX, moveY);
 
   // std::cout << "realPos X " << moveX << std::endl;
@@ -431,7 +435,6 @@ void		GamePanel::render()
 
   _inputManager.joystickMovedInDirection();
   _inputManager.keyPressedInGame();
-  
   RenderWindow *window = RenderWindow::getInstance();
   for (std::map<int, Sprite*>::iterator it = _dicoSprites.begin(); it != _dicoSprites.end(); ++it)
     {
@@ -502,7 +505,7 @@ void		GamePanel::update()
       _backgrounds.at(6).move(-2, 0);
     }
 
-  
+
   if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
     {
       _backgrounds.at(0).setPosition(_backgrounds.at(0).getGlobalBounds().second.first, 0);
@@ -512,8 +515,8 @@ void		GamePanel::update()
       _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
     }
 
-  
-  
+
+
   if (_backgrounds.at(2).getGlobalBounds().first.first <= -(_backgrounds.at(2).getGlobalBounds().second.first))
     {
       _backgrounds.at(2).setPosition(_backgrounds.at(2).getGlobalBounds().second.first, 0);
@@ -533,7 +536,7 @@ void		GamePanel::update()
     }
 
 
-  
+
   if (_backgrounds.at(6).getGlobalBounds().first.first == -500)
     {
       _backgrounds.at(6).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());

@@ -1,1 +1,1 @@
-cd server && ./config.sh
+cd server && ./config.sh && cd .. && cd client && ./config.sh
