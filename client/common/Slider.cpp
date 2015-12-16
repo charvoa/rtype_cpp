@@ -64,7 +64,6 @@ float			Slider::getPosY()
 void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 {
 	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
-	RenderWindow	*window = RenderWindow::getInstance();
 
 	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
 	{
