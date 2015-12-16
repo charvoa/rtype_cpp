@@ -381,10 +381,12 @@ void Game::updateAmmo()
 	{
 	  ComponentPosition *p = reinterpret_cast<ComponentPosition *>((rifle)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 	  if (duration.count() % 30 == 0)
-	    rifle->update(p->getX() + 2, p->getY());
-	  if (p->getX() >= 121){
-	    std::cout << "DELETE ENTITY" << std::endl;
-	    deleteEntity(rifle);
+	    {
+	      rifle->update(p->getX() + 1, p->getY());
+	    }
+	  if (p->getX() >= 119){
+	    //std::cout << "DELETE ENTITY" << std::endl;
+	    //deleteEntity(rifle);
 	  }
 	  // TIME RIFLE UPDATE
 	}
