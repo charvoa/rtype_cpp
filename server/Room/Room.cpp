@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec 16 15:18:34 2015 Antoine Garcia
+// Last update Wed Dec 16 14:04:38 2015 Nicolas Girardot
 //
 
 #include <Room.hh>
@@ -42,11 +42,13 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
   std::list<Client*>	clientList;
 
   tmp << list.size();
+  std::cout << "IS Passing through Sendfile to client" << std::endl;
   for (std::list<Bot*>::iterator it = list.begin(); it != list.end(); ++it) {
     std::cout << ">> " << (*it)->_sprite << std::endl;
     File	file(std::string("../libs/" + (*it)->_sprite));
 
     if (first) {
+      std::cout << "Is Passing in the thing" << std::endl;
       client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string(IntToString(port)  + ";" + tmp.str())), std::string(IntToString(port) + ";" + tmp.str()).size(), std::string(IntToString(port)  + ";" + tmp.str()), true), sizeof(ANetwork::t_frame));
       first = false;
     }
