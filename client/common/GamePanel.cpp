@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 09:17:48 2015 Serge Heitzler
+// Last update Wed Dec 16 09:26:29 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -304,9 +304,12 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
 {
   RenderWindow *window = RenderWindow::getInstance();
   int	id = std::atoi(vector.at(0).c_str());
-  std::map<int, Sprite*>::iterator it;
-  it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
-    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
+
+  std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+  if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+    {
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
+    }
 }
 
 void		GamePanel::die(int id, int idDied)
@@ -351,7 +354,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float	posX = (std::atoi(vector.at(1).c_str()));
   float	posY = (std::atoi(vector.at(2).c_str()));
 
-  float realPosX = (posX * 16) + 20;
+  float realPosX = (posX * 16) + 70;
   float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
@@ -361,13 +364,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
     }
-
-
-  //  ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
-
   //  std::cout << "Displaying with id = " << id << std::endl;
-
-
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
