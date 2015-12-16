@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Tue Dec 15 17:33:33 2015 Nicolas Girardot
+// Last update Wed Dec 16 01:48:37 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -57,22 +57,18 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 {
   int i = 0;
   //std::cout << "KEY " << event.key.code << std::endl;
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+      // ESCAPE KEY
+    }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-      i += 8;
-    }
+    i += 8;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-      i += 2;
-    }
+    i += 2;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    {
-      i += 4;
-    }
+    i += 4;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-      i += 1;
-    }
+    i += 1;
   if (i != 0)
     {
       ANetwork *net = Client::getUDPNetwork();

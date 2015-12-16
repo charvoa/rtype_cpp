@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Tue Dec 15 09:37:36 2015 Serge Heitzler
+// Last update Tue Dec 15 12:05:32 2015 Serge Heitzler
 //
 
 
@@ -55,6 +55,7 @@ private:
   std::map<int, Texture*>		_dicoTextures;
   Random				*_randPosY;
   Random				*_randPlanet;
+  Random				*_randBackground;
 };
 
 #endif /* GAMEPANEL_HH_ */
