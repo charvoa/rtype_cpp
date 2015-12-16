@@ -37,6 +37,8 @@ int	EntityManager::createEntity(E_EntityType type,  Client &client)
 
 int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 {
+  if (_id < 4)
+    _id = 4
   AEntity *newEntity = _entityFactory.createEntity(_id, type);
   newEntity->setType(type);
   newEntity->setParent(parent);
@@ -51,6 +53,8 @@ int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterat
 
   if (iterator > (int)bots.size())
     return (-1);
+  if (_id < 4)
+    _id = 4
   for (std::list<AEntity*>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       if (i == iterator)
@@ -80,6 +84,7 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
   newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);
+  std::cout << "id = " << _id << std::endl;
   _entities.push_back(newEntity);
   return (_id);
 }
