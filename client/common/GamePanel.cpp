@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 08:47:51 2015 Serge Heitzler
+// Last update Wed Dec 16 09:09:59 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -198,15 +198,13 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
   sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
   sentence->getText().setColor(sf::Color(255, 255, 255, 0));
   _labels.push_back(*sentence);
-
-
 }
 
 GamePanel::~GamePanel() {}
 
 int			GamePanel::getType()
 {
-	return _type;
+  return _type;
 }
 
 void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
@@ -282,7 +280,6 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   Sprite	*newSprite = new Sprite();
 
-  std::string  	typeString = vector.at(0);
   std::string  	type = vector.at(0);
   int	  	id = std::atoi(vector.at(1).c_str());
 
@@ -292,12 +289,17 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
   std::cout << "Creating new Entity with ID = " << id << "; Type  = " << type << std::endl;
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+
+
+  std::cout << "NTM" << std::endl;
+
   //  newSprite->scale();
   //  newSprite->setPosition(-500, 500);
   newSprite->setPosition(500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
+  std::cout << "NVM" << std::endl;
 }
 
 void		GamePanel::deleteEntity(std::vector<std::string> &vector)
