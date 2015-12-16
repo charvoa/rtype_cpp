@@ -32,8 +32,6 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
-
-  // _bM = new BotManager("../libs");
 }
 
 Game::~Game() {}
@@ -338,11 +336,6 @@ void Game::addMonster()
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
-      for (std::list<Bot*>::iterator it = botList.begin();
-	   it != botList.end(); ++it)
-	{
-	  this->sendNewEntity(E_BOT, _eM.createEntity(E_BOT, (*it)));
-	}
       _nbDisplay++;
     }
   else
