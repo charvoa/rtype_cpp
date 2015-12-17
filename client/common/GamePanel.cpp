@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Thu Dec 17 04:12:32 2015 Serge Heitzler
+// Last update Thu Dec 17 05:53:36 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -292,7 +292,12 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   //  newSprite->setPosition(-500, 500);
   newSprite->setPosition(500, 500);
 
+  std::cout << "[BEFORE ADD TO DIC] : " << (static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()).size() << std::endl;
+  
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
+
+  std::cout << "[AFTER ADD TO DIC] : " << (static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()).size() << std::endl;
+
 }
 
 void		GamePanel::deleteEntity(std::vector<std::string> &vector)
