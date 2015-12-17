@@ -367,7 +367,7 @@ void Game::addMonster()
   if (_nbDisplay < getNumberEnemyMax())
     {
       std::cout << "Add Monster" << std::endl;
-      Random r(0, _botList.size() - 1);
+      Random r(0, _botList.size());
 
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
 
@@ -441,7 +441,7 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 1, p->getY());
-      if (p->getX() >= 110)
+      if (p->getX() >= 121)
 	deleteEntity(*it);
     }
 }
