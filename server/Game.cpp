@@ -441,6 +441,8 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 1, p->getY());
+      if (p->getX() >= 110)
+	deleteEntity(*it);
     }
 }
 
@@ -468,9 +470,9 @@ bool Game::run()
     {
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
-	  // timerMonster.reset();
-	  // this->addMonster();
-	  // this->updateMonster();
+	  timerMonster.reset();
+	  this->addMonster();
+	  this->updateMonster();
 	}
       if (timerRiffle.elapsedMilli().count() >= 0.5 )
       {
