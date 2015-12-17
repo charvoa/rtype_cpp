@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Wed Dec 16 17:11:28 2015 Nicolas Girardot
+// Last update Thu Dec 17 04:08:43 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -65,7 +65,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
   RenderWindow *window = RenderWindow::getInstance();
   int i = 0;
   //std::cout << "KEY " << event.key.code << std::endl;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && !static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
     static_cast<GamePanel*>(window->getPanels().top())->setEscapeMenu(true);
   if (!static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
     {
