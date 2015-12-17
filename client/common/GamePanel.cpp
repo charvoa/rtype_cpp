@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Thu Dec 17 11:56:01 2015 Nicolas Girardot
+// Last update Thu Dec 17 14:49:02 2015 Nicolas Girardot
 //
 
 #include <memory>
@@ -282,16 +282,11 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   std::cout << "[CREATING] new Entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
 
-
-  std::cout << "NTM" << std::endl;
-
   //  newSprite->scale();
   //  newSprite->setPosition(-500, 500);
   newSprite->setPosition(500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
-
-  std::cout << "NVM" << std::endl;
 }
 
 void		GamePanel::deleteEntity(std::vector<std::string> &vector)
@@ -517,9 +512,15 @@ void		GamePanel::resume()
 
 void		GamePanel::exit()
 {
+  Sound *s = Client::getSound();
   _t->cancel();
   Client::getUDPNetwork()->close();
   std::cout << "EXIT" << std::endl;
+  if (s->isPlaying("gameIntro"))
+    s->stopMusic("gameIntro");
+  else
+    s->stopMusic("gameLoop");
+  s->playMusic("mainMenu");
   RenderWindow::getInstance()->back();
   RenderWindow::getInstance()->back();
 }
