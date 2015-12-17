@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Wed Dec 16 18:40:02 2015 Nicolas Girardot
+// Last update Thu Dec 17 01:32:43 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -285,7 +285,7 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
     std::cout << "LASERRRR" << std::endl;
 
 
-  std::cout << "Creating new Entity with ID = " << id << "; Type  = " << type << std::endl;
+  std::cout << "[CREATING] new Entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
 
 
@@ -305,10 +305,13 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int	id = std::atoi(vector.at(0).c_str());
 
+
+  std::cout << "[DELETING] old Entity : ID = " << id << ";" << std::endl;
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
+      std::cout << "[DELETING] Success" << std::endl;
     }
 }
 
@@ -363,12 +366,20 @@ void		GamePanel::display(std::vector<std::string> &vector)
 
   id = std::atoi(vector.at(0).c_str());
 
-  std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
-  if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+
+  if (realPosX >= 1920)
     {
-      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+      std::vector<std::string> v;
+      v.push_back(std::to_string(id));
     }
-  //  std::cout << "Displaying with id = " << id << std::endl;
+  else
+    {
+      std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+      if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+	((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+      //  std::cout << "Displaying with id = " << id << std::endl;
+    }
+
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
