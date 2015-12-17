@@ -5,16 +5,8 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Thu Dec 17 01:32:43 2015 Serge Heitzler
+// Last update Thu Dec 17 11:56:01 2015 Nicolas Girardot
 //
-
-#ifdef _WIN32
-#include "../NetworkWin.hpp"
-#include <ThreadWin.hpp>
-#else
-#include "../Network.hpp"
-#include <ThreadUnix.hpp>
-#endif
 
 #include <memory>
 #include <iostream>
@@ -62,10 +54,12 @@ GamePanel::GamePanel()
   _randBackground = new Random(0, 2);
 
   std::unique_ptr<AThread> t(new Thread(1));
+
+  _t = std::move(t);
   char str1[] = "";
   (void) str1;
-  t->attach(&readUDP, (void *)str1);
-  t->run();
+  _t->attach(&readUDP, (void *)str1);
+  _t->run();
 
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
@@ -523,7 +517,7 @@ void		GamePanel::resume()
 
 void		GamePanel::exit()
 {
-  // close UDP read && exit thread
+  _t->cancel();
   Client::getUDPNetwork()->close();
   std::cout << "EXIT" << std::endl;
   RenderWindow::getInstance()->back();

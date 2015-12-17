@@ -5,12 +5,20 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Wed Dec 16 18:04:03 2015 Nicolas Girardot
+// Last update Thu Dec 17 11:55:22 2015 Nicolas Girardot
 //
 
 
 #ifndef					GAMEPANEL_HH_
 #define					GAMEPANEL_HH_
+
+#ifdef _WIN32
+#include "../NetworkWin.hpp"
+#include <ThreadWin.hpp>
+#else
+#include "../Network.hpp"
+#include <ThreadUnix.hpp>
+#endif
 
 #include				<APanel.hh>
 #include				<OtherPlayer.hh>
@@ -19,6 +27,8 @@
 #include				<Explosion.hh>
 #include				<MainPlayer.hh>
 #include				<Random.hpp>
+#include				<memory>
+
 
 class					GamePanel : public APanel
 {
@@ -62,6 +72,7 @@ private:
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;
   std::map<std::string, Texture*>      	_dicoTextures;
+  std::unique_ptr<AThread>		_t;
   Random				*_randPosY;
   Random				*_randPlanet;
   Random				*_randBackground;
