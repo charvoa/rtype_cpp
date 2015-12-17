@@ -1,18 +1,17 @@
-#include	<File.hpp>
-#include <stdio.h>
+#include	<MicrophoneReceiver.hpp>
 
-void		my_cb(int p, void *data) {
-  printf("\rReceived : %d%%  ", p);
-  fflush(stdout);
-}
+int		main(int ac, char **av)
+{
+  MicrophoneReceiver	micro;
 
-int	main() {
-  int	port = 6545, i = 1;
-
-  while (1) {
-    File	file;
-
-    file.receiveMe("10.16.252.249", port++, "./recv/", my_cb, NULL);
-    printf("\nSent %d Finished !\n", i++);
+  try {
+    micro.init();
+    sleep(5);
+    micro.play();
+    while (micro.getStatus() == MicrophoneReceiver::Playing)
+      sf::sleep(sf::seconds(0.1f));
+  } catch (const std::exception &e) {
+    std::cout << "Error catched : " << e.what() << std::endl;
   }
+  return (0);
 }

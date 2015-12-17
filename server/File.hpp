@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Sat Dec 12 12:14:43 2015 Joris Bertomeu
+// Last update Tue Dec 15 01:25:14 2015 Joris Bertomeu
 //
 
 #ifndef			_FILE_HPP_
@@ -91,6 +91,13 @@ public:
 		       pathname.end());
   }
 
+  std::string		getBasename()
+  {
+    return std::string(std::find_if((this->_fullpath).rbegin(), (this->_fullpath).rend(),
+				    MatchPathSeparator()).base(),
+		       pathname.end());
+  }
+
   void			sendMe(int port) {
     Network		net;
     Socket		*s;
@@ -116,7 +123,6 @@ public:
       s->write(buff, local);
       size = (_size - i > D_BUF) ? D_BUF : _size - i;
     }
-    std::cout << "Sending finished into FILE" << std::endl;
     s->close();
     net.close();
     fclose(file);
