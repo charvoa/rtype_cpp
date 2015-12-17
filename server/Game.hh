@@ -84,6 +84,7 @@ private:
   Player *getPlayerByClient(Client*);
   Client *getClientBySocket(ISocket*) const;
   int  getNumberEnemyMax();
+  void sendNewEntity(std::string &, int id);
   void sendNewEntity(int type, int id);
   void deleteEntity(AEntity *);
   void updateRiffle();

@@ -227,6 +227,19 @@ void Game::updateLife(Player *p, int reset)
 
 }
 
+void Game::sendNewEntity(std::string &str, int id)
+{
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  ANetwork::t_frame	frame;
+  std::string	sendData = str + ";" + std::to_string(id);
+
+  frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
+  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+}
+
 void Game::sendNewEntity(int type, int id)
 {
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
