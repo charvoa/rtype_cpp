@@ -214,7 +214,7 @@ void Game::updateLife(Player *p, int reset)
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
   ANetwork::t_frame frameDie;
   if (hP->getLife() == 0){
-    std::string sendData = std::to_string(p->getId()) + std::to_string(p->getId());
+    std::string sendData = std::to_string(p->getId()) + ";" + std::to_string(p->getId());
     frameDie = CreateRequest::create(S_DIE, CRC::calcCRC(sendData), sendData.size(), sendData);
   }
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
