@@ -5,11 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:41:04 2015 Nicolas Charvoz
-<<<<<<< HEAD
-// Last update Sat Dec 19 22:18:37 2015 Nicolas Charvoz
-=======
-// Last update Tue Dec 15 08:25:52 2015 Joris Bertomeu
->>>>>>> a84afb76597f9bac250d1f6351d8a4fef26e7a33
 //
 
 #ifndef GAMEMANAGER_HH_

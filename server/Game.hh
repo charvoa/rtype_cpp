@@ -72,7 +72,6 @@ public:
   void handleCommand(void*, Client*);
   void deletePlayer();
 
-
   // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;
@@ -101,6 +100,7 @@ private:
   void sendNewEntity(int type, int id);
   void deleteEntity(AEntity *);
   void updateRiffle();
+  void updateLaser();
   void updateMissile();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
