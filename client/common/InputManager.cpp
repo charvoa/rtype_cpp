@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Thu Dec 17 17:38:13 2015 Nicolas Girardot
+// Last update Sat Dec 19 06:29:19 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -103,11 +103,6 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
 	  // net->write(sender);
 	}
-    }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
-    {
-      RenderWindow *window = RenderWindow::getInstance();
-      static_cast<GamePanel*>(window->getPanels().top())->addExplosion();
     }
   return std::make_pair(0, 0);
 }

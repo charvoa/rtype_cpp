@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Tue Dec 15 19:24:43 2015 Nicolas Girardot
+// Last update Sat Dec 19 15:15:22 2015 Nicolas Girardot
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -49,6 +49,7 @@ public:
   void			shoot(ANetwork::t_frame &frame);
   void			newEntity(ANetwork::t_frame &frame);
   void			deleteEntity(ANetwork::t_frame &frame);
+  void			playerLeftIG(ANetwork::t_frame &frame);
   void			downloadComplete(ANetwork::t_frame &frame);
 
 private:

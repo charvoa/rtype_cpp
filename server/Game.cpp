@@ -439,10 +439,8 @@ void Game::updateRiffle()
 
 bool Game::run()
 {
-  bool past = true;
-  Timer	timerMonster(true);
-  Timer timerRiffle(true);
   int	speed = 3;
+  Timer timerMonster(true);
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -456,35 +454,22 @@ bool Game::run()
   initPlayersPosition();
 
   _start = std::chrono::system_clock::now();
-
+  int i = 0;
+  while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+  this->addMonster();
   while (true)
     {
+      auto startTime = std::chrono::high_resolution_clock::now();
       if (timerMonster.elapsed().count()>= (speed/_stage))
-	{
-	  timerMonster.reset();
-	  this->addMonster();
-	  this->updateMonster();
-	}
-      if (timerRiffle.elapsedMilli().count() >= 0.5 )
-      {
-	  this->updateRiffle();
-	  timerRiffle.reset();
-      }
-      auto currentTime = std::chrono::system_clock::now();
-      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-	(currentTime - _start);
-      _start = currentTime;
-      auto start_time = std::chrono::steady_clock::now();
-      auto end_time = start_time + frame_duration(4);
-      if (duration.count() % 16 == 0)
-	{
-	  if (past == true)
-	    {
-	      std::this_thread::sleep_until(end_time);
-	      past = false;
-	    }
-	  this->sendGameData();
-	}
+      	{
+      	  timerMonster.reset();
+      	  this->addMonster();
+      	}
+      this->updateMonster();
+      this->updateRiffle();
+      this->sendGameData();
+      while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
+      i++;      
     }
   return true;
 }
