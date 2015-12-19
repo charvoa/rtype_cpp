@@ -72,7 +72,6 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
   x = 140;
   y = rand.generate<int>();
   dynamic_cast<SystemPos*>(newEntity->getSystemManager()->getSystemByComponent(C_POSITION))->update(x, y);
-  std::cout << "id = " << _id << std::endl;
   _entities.push_back(newEntity);
   return (_id);
 }

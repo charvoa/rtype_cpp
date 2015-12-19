@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 17 05:39:01 2015 Serge Heitzler
+// Last update Sat Dec 19 14:56:51 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -32,26 +32,16 @@ Sound		*Client::_sound = NULL;
 
 void	*readdisp(void *s)
 {
-  ANetwork::t_frame a;
   ProtocoleClient x;
+  void	*data;
   while (true)
     {
-      try
-	{
-	  a = Client::getNetwork()->read();
-	  if (&a == NULL)
-	    {
-	      std::cout << "Connection Lost with server" << std::endl;
-	      exit (0);
-	    }
-	  x.methodChecker(a);
-	}
-      catch (const std::exception &e)
-	{
-	  std::cout << e.what() << std::endl;
-	}
+      if (!(data = Client::getNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
+	std::cout << "Server Connection Lost" << std::endl;
+      }
+      else
+	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
-
   return s;
 }
 

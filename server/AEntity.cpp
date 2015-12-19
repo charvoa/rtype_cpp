@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 05:20:41 2015 Louis Audibert
+// Last update Sat Dec 19 05:36:31 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
