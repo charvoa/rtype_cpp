@@ -45,6 +45,11 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
   std::cout << "after call to entityFactory.createEntity in EntityManager" << std::endl;
   newEntity->setType(type);
   newEntity->setParent(parent);
+  if (type == E_LASER)
+    {
+      std::string name = "7:" + newEntity->getParent()->getName();
+      newEntity->setName(name);
+    }
   _entities.push_back(newEntity);
   return (_id);
 }

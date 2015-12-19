@@ -285,24 +285,22 @@ void Game::handleShoot(void *data, Client *client)
 	{
 	  id = _eM.createEntity(type, p);
 	  sendNewEntity(type, id); // Send  Bullet created
+	}
 
-	  AEntity *bullet = _eM.getEntityById(id);
-	  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-	  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
-	  std::stringstream ss;
-	  ss << type;
-
-	  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-	  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-	  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
-	    {
-	      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
-	    }
+      AEntity *bullet = _eM.getEntityById(id);
+      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+      
+      std::stringstream ss;
+      ss << type;
+      
+      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	{
+	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
 	}
     }
- 
-  
 }
 
 void Game::handleCommand(void *data, Client *client)
