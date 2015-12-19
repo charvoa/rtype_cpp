@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 18:33:48 2015 Nicolas Girardot
+// Last update Sat Dec 19 21:33:28 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -92,7 +92,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 	  ANetwork *net = Client::getUDPNetwork();
-	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSIBLE");
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSILE");
 	  net->write(sender);
 	}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
