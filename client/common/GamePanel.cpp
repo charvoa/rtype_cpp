@@ -25,9 +25,8 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
-	std::cout << "Server Connection Lost" << std::endl;
-      }
+      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame))))
+	{}
       else
 	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
@@ -41,7 +40,7 @@ GamePanel::GamePanel()
   _escapeKey = false;
 
   _type = PanelFactory::GAME_PANEL;
-  _randPosY = new Random(250, 600);
+  _randPosY = new Random(350, 500);
   _randPlanet = new Random(0, 7);
   _randBackground = new Random(0, 2);
 
@@ -52,10 +51,6 @@ GamePanel::GamePanel()
   (void) str1;
   _t->attach(&readUDP, (void *)str1);
   _t->run();
-
-  //  for (int i = 0; i != 3; i++)
-  //    _players.push_back(new OtherPlayer());
-  //init all sprites with the textures;
 
   window->setMouseCursorVisible(false);
 
@@ -107,41 +102,27 @@ GamePanel::GamePanel()
   _backgrounds.push_back(*backgroundSpace1);
   _backgrounds.push_back(*backgroundSpace2);
 
+  Sprite *planet = new Sprite;
+
+  planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
+  planet->setPosition(2500, _randPosY->generate<int>());
+  planet->scale(0.5);
+  _backgrounds.push_back(*planet);
+  
+  
+
   Sprite *topGame1 = new Sprite;
 
   topGame1->setTexture(*((RenderWindow::getInstance())->_ressources->_topGame));
   topGame1->setPosition(0, 0);
-  _backgrounds.push_back(*topGame1);
+  _inGame.push_back(*topGame1);
 
 
   Sprite *topGame2 = new Sprite;
 
   topGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_topGame));
   topGame2->setPosition(topGame2->getGlobalBounds().second.first, 0);
-  _backgrounds.push_back(*topGame2);
-
-
-  Sprite *bottomGame1 = new Sprite;
-
-bottomGame1->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGame));
- bottomGame1->setPosition(0, 860);
- _backgrounds.push_back(*bottomGame1);
-
-
-  Sprite *bottomGame2 = new Sprite;
-
-bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGame));
-  bottomGame2->setPosition(bottomGame2->getGlobalBounds().second.first, 860);
-  _backgrounds.push_back(*bottomGame2);
-
-
-  Sprite *planet = new Sprite;
-
-  planet->setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
-  planet->setPosition(2500, _randPosY->generate<int>());
-  planet->scale(0.6);
-  _backgrounds.push_back(*planet);
-
+  _inGame.push_back(*topGame2);
 
   Sprite *header = new Sprite;
 
@@ -149,13 +130,26 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
   header->setPosition(window->getSize()._x / 2, 0);
   header->setOrigin((RenderWindow::getInstance())->_ressources->_header->getSize()._x / 2, 0);
   header->scale(1.5);
-  _backgrounds.push_back(*header);
+  _inGame.push_back(*header);
+
+  Sprite *bottomGame1 = new Sprite;
+
+bottomGame1->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGame));
+ bottomGame1->setPosition(0, 860);
+ _inGame.push_back(*bottomGame1);
+
+
+  Sprite *bottomGame2 = new Sprite;
+
+bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGame));
+  bottomGame2->setPosition(bottomGame2->getGlobalBounds().second.first, 860);
+  _inGame.push_back(*bottomGame2);
 
   Sprite *hud = new Sprite;
 
   hud->setTexture(*((RenderWindow::getInstance())->_ressources->_hud));
   hud->setPosition(0, 0);
-  _backgrounds.push_back(*hud);
+  _inGame.push_back(*hud);
 
 
   Sprite *black = new Sprite;
@@ -164,13 +158,6 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
   black->setPosition(0, 0);
   black->getSprite().setColor(sf::Color(255, 255, 255, 0));
   _inGame.push_back(*black);
-
-
-//   Sprite *planet = new Sprite;
-
-// planet->setTexture(*((RenderWindow::getInstance())->_ressources->_planet->getTexture()));
-//   planet->setPosition(0, 0);
-//   _backgrounds.push_back(*planet);
 
   this->setPlayers(static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers(), static_cast<RoomPanel*>(window->getPanels().top())->getCurrentPlayer());
 
@@ -341,22 +328,13 @@ void		GamePanel::display(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int  	id;
 
-  float	posX = (std::atoi(vector.at(1).c_str()));
+  float	posX = (std::atoi(vector.at(1).c_str())) + 70;
   float	posY = (std::atoi(vector.at(2).c_str()));
 
-  float realPosX = posX + 70;
-  float realPosY = posY + 50;
-
   id = std::atoi(vector.at(0).c_str());
-  // if (realPosX >= 2000)
-  //   {
-  //     std::vector<std::string> v;
-  //     v.push_back(std::to_string(id));
-  //     static_cast<GamePanel*>(window->getPanels().top())->deleteEntity(v);
-  //   }
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
-    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(posX, posY);
   //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
 }
 
@@ -470,6 +448,8 @@ void		GamePanel::setEscapeMenu(bool value)
   static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::exit);
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString("Are you sure to exit the game ?");
+
   window->setMouseCursorVisible(true);
 }
 
@@ -489,7 +469,7 @@ void		GamePanel::resume()
   _userInterface.erase(_userInterface.begin());
   _userInterface.erase(_userInterface.begin());
 
-  _inGame.at(0).getSprite().setColor(sf::Color(255, 255, 255, 0));
+  _inGame.at(7).getSprite().setColor(sf::Color(255, 255, 255, 0));
 
   _labels.at(2).getText().setColor(sf::Color(255, 255, 255, 0));
 
@@ -521,17 +501,16 @@ void		GamePanel::render()
   else
     s->playMusic("gameLoop", 1);
   this->drawBackgrounds();
-  this->_mainPlayer->render();
-  this->drawOtherPlayer();
 
   _inputManager.joystickMovedInDirection();
   _inputManager.keyPressedInGame();
   RenderWindow *window = RenderWindow::getInstance();
+  
   for (std::map<int, Sprite*>::iterator it = _dicoSprites.begin(); it != _dicoSprites.end(); ++it)
     {
       window->draw((*it).second->getSprite());
     }
-  for (std::vector<Explosion *>::iterator it = _explosion.begin(); it != _explosion.end(); )
+  for (std::vector<Explosion *>::iterator it = _explosion.begin(); it != _explosion.end();)
     {
       window->draw((*it)->getSprite());
       (*it)->update();
@@ -540,15 +519,18 @@ void		GamePanel::render()
       else
 	it++;
     }
-  for (std::vector<Asteroid *>::iterator it = _asteroid.begin(); it != _asteroid.end(); )
+  for (std::map<int, Asteroid*>::iterator it = _dicoAsteroids.begin(); it != _dicoAsteroids.end(); ++it)
     {
-      window->draw((*it)->getSprite());
-      (*it)->update();
-      it++;
+      window->draw((*it).second->getSprite());
+      (*it).second->update();
     }
+
   this->drawInGame();
+  this->_mainPlayer->render();
+  this->drawOtherPlayer();
   this->drawUserInterface();
   this->drawLabels();
+  
 }
 
 void		GamePanel::drawOtherPlayer()
@@ -558,7 +540,7 @@ unsigned int		i = 0;
   i = 0;
   while (i < this->_otherPlayers.size() && this->_otherPlayers.size() > 0)
     {
-this->_otherPlayers.at(i)->render();
+      this->_otherPlayers.at(i)->render();
       i++;
     }
 }
@@ -568,31 +550,31 @@ void					GamePanel::setPlanetTexture(int i)
   switch (i)
     {
     case 0:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetEarth));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetEarth));
       break;
     case 1:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetExodus));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetExodus));
       break;
     case 2:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetJupiter));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetJupiter));
       break;
     case 3:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetMars));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetMars));
       break;
     case 4:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetMoon));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetMoon));
       break;
     case 5:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetNeptune));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetNeptune));
       break;
     case 6:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_planetSaturne));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_planetSaturne));
       break;
     case 7:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
       break;
     default:
-      _backgrounds.at(6).setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
+      _backgrounds.at(2).setTexture(*((RenderWindow::getInstance())->_ressources->_deathStar));
       break;
     }
 }
@@ -606,12 +588,12 @@ void		GamePanel::update()
     {
       _backgrounds.at(0).move(-1, 0);
       _backgrounds.at(1).move(-1, 0);
-      _backgrounds.at(2).move(-5, 0);
-      _backgrounds.at(3).move(-5, 0);
-      _backgrounds.at(4).move(-5, 0);
-      _backgrounds.at(5).move(-5, 0);
+      _inGame.at(0).move(-5, 0);
+      _inGame.at(1).move(-5, 0);
+      _inGame.at(3).move(-5, 0);
+      _inGame.at(4).move(-5, 0);
 
-      _backgrounds.at(6).move(-2, 0);
+      _backgrounds.at(2).move(-2, 0);
     }
 
 
@@ -626,36 +608,37 @@ void		GamePanel::update()
 
 
 
-  if (_backgrounds.at(2).getGlobalBounds().first.first <= -(_backgrounds.at(2).getGlobalBounds().second.first))
+  if (_inGame.at(0).getGlobalBounds().first.first <= -(_inGame.at(0).getGlobalBounds().second.first))
     {
-      _backgrounds.at(2).setPosition(_backgrounds.at(2).getGlobalBounds().second.first, 0);
+      _inGame.at(0).setPosition(_inGame.at(0).getGlobalBounds().second.first, 0);
     }
-  if (_backgrounds.at(3).getGlobalBounds().first.first <= -(_backgrounds.at(3).getGlobalBounds().second.first))
+  if (_inGame.at(1).getGlobalBounds().first.first <= -(_inGame.at(1).getGlobalBounds().second.first))
     {
-      _backgrounds.at(3).setPosition(_backgrounds.at(3).getGlobalBounds().second.first, 0);
-    }
-
-  if (_backgrounds.at(4).getGlobalBounds().first.first == -(_backgrounds.at(4).getGlobalBounds().second.first))
-    {
-      _backgrounds.at(4).setPosition(_backgrounds.at(4).getGlobalBounds().second.first, 860);
-    }
-  if (_backgrounds.at(5).getGlobalBounds().first.first == -(_backgrounds.at(5).getGlobalBounds().second.first))
-    {
-      _backgrounds.at(5).setPosition(_backgrounds.at(5).getGlobalBounds().second.first, 860);
+      _inGame.at(1).setPosition(_inGame.at(1).getGlobalBounds().second.first, 0);
     }
 
-
-
-  if (_backgrounds.at(6).getGlobalBounds().first.first == -500)
+  if (_inGame.at(3).getGlobalBounds().first.first == -(_inGame.at(3).getGlobalBounds().second.first))
     {
-      _backgrounds.at(6).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
+      _inGame.at(3).setPosition(_inGame.at(3).getGlobalBounds().second.first, 860);
+    }
+  if (_inGame.at(4).getGlobalBounds().first.first == -(_inGame.at(4).getGlobalBounds().second.first))
+    {
+      _inGame.at(4).setPosition(_inGame.at(4).getGlobalBounds().second.first, 860);
+    }
+
+
+
+  
+
+  if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
+    {
+      _backgrounds.at(2).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
       //      this->setPlanetTexture(_randPlanet->generate<int>());
     }
-
 
   if (_labels.at(2).getText().getColor().a > 0 && !_escapeKey)
     _labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
 
   i++;
-  
+
 }

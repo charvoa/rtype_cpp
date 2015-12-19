@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Dec 15 05:35:57 2015 Joris Bertomeu
-// Last update Tue Dec 15 06:01:53 2015 Joris Bertomeu
+// Last update Tue Dec 15 08:55:11 2015 Joris Bertomeu
 //
 
 #include		<Monitoring.hpp>
@@ -32,9 +32,34 @@ void			*_handleThread(void *ptr) {
 	me->_network.unlistenSocket(client->getSocket());
 	continue;
       }
-      // int	nbGames = 0;
-      // client->getSocket()->write(std::string("Nombre de games :" + std::to_string(nbGames)).c_str(),
-      // 				 std::string("Nombre de games :" + std::to_string(nbGames)).size());
+      me->parseCommand(data, (void*) client);
     }
   return (NULL);
+}
+
+void			Monitoring::parseCommand(void *data, void *c)
+{
+  Client		*client = reinterpret_cast<Client*>(c);
+  ANetwork::t_frame	*frame = reinterpret_cast<ANetwork::t_frame*>(data);
+
+  if (frame->idRequest == M_LIST_GAMES) {
+    int	nbGames = reinterpret_cast<Server*>(this->_server)->_gameManager.getNbGames();
+    std::list<Game>	games = reinterpret_cast<Server*>(this->_server)->_gameManager.getGames();
+    std::string		inter = "[";
+
+    //response = std::string("{\"result\":") + std::to_string(nbGames) + std::string("}");
+    for (std::list<Game>::iterator it = games.begin(); it != games.end() ; ++it)
+      {
+	inter += "{\"id\":\"" + (*it).getId() + "\", \"time\":" + std::to_string((*it).getTimestamp()) +
+	  ", \"nbPlayers\":" + std::to_string((*it).getPlayers().size()) + "},";
+      }
+    inter.pop_back();
+    inter += "]";
+    client->getSocket()->write(CreateRequest::create(1, 2, 3, inter, true), sizeof(ANetwork::t_frame));
+  } else if (frame->idRequest == M_GET_GAME_INFO) {
+
+  } else {
+    client->getSocket()->write(CreateRequest::create(1, 2, 3, "\"Bad command number\"", true), sizeof(ANetwork::t_frame));
+    std::cout << "\"Monitoring :: ParseCommand :: Bad command number\"" << std::endl;
+  }
 }

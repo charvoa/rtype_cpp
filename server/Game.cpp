@@ -30,8 +30,8 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _stage = 1;
   _nbDisplay = 0;
   _isRunning = true;
-
   _nbLeft = 0;
+  this->_timestamp = time(NULL);
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
@@ -257,6 +257,8 @@ void Game::handleShoot(void *data, Client *client)
   std::cout << "Game :: handleShoot" << std::endl;
   std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+
+  std::cout << weaponType << std::endl;
 
   Player *p = this->getPlayerByClient(client);
   E_EntityType type = E_INVALID;

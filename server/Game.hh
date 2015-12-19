@@ -79,6 +79,7 @@ public:
 
 private:
 
+  int		_timestamp;
   // ATTRIBUTES
   Parameters _params;
   std::string _id;
@@ -116,6 +117,9 @@ private:
   bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
 
+public:
+  int getTimestamp() const {return _timestamp;};
+  std::list<Client*> getPlayers() const {return this->_clients;};
 };
 
 #endif

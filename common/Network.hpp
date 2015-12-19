@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Tue Dec 15 17:21:32 2015 Nicolas Girardot
+// Last update Tue Dec 15 07:17:02 2015 Joris Bertomeu
 //
 
 #ifndef				__NETWORK_HPP__
@@ -29,7 +29,6 @@ public:
   explicit			Network() {};
   virtual			~Network() {};
   void				init(int port, Network::TYPE type) {
-    std::cout << "Network::init (" << port << ")" <<std::endl;
     if (type == Network::TCP_MODE)
       this->_socket = new Socket(AF_INET, SOCK_STREAM, 0);
     else

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Wed Dec 16 12:54:59 2015 Nicolas Girardot
+// Last update Sat Dec 19 09:35:33 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
@@ -36,6 +36,8 @@ public:
   bool		        isScale();
   float			getPosX() const;
   float			getPosY() const;
+  float			getWidth() const;
+  float			getHeight() const;
 
 private:
 
