@@ -172,7 +172,7 @@ void Game::handleMove(void *data, Client *client)
 	this->checkWall(player);
 	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-	player->update(player->refreshHitbox());
+	//player->update(player->refreshHitbox());
 	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
       }
   } catch (const std::exception &e) {
