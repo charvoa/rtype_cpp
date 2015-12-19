@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Wed Dec 16 15:54:43 2015 Serge Heitzler
+// Last update Sat Dec 19 03:28:36 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -13,13 +13,12 @@
 
 Bot::Bot(int id) : AEntity(id), _health(100), _x(WIDTH + 20), _y(0), _direction(0)
 {
-  std::cout << "Bot :: Bot2 :: Constructor" << std::endl;
   _sprite = "sprite6.png";
   _name = _sprite;
   addSystem(C_HEALTH);
   addSystem(C_POSITION);
   generateY();
-  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 
 Bot::~Bot()
@@ -36,35 +35,28 @@ void	Bot::generateY()
 
 void Bot::update()
 {
-  // _x--;
-  // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  if (_y >= (HEIGHT / 2))
+    {
+      if (_y == (HEIGHT / 2))
+  	_direction = 1;
+      else if (_y == HEIGHT)
+  	_direction = 0;
+    }
+  else if (_y <= (HEIGHT / 2) - 1)
+    {
+      if (_y == (HEIGHT / 2) - 1)
+  	_direction = 0;
+      else if (_y == 0)
+  	_direction = 1;
+    }
 
-  // ComponentPosition *pos = reinterpret_cast<ComponentPosition*>(this->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-  // std::cout << "Position of bot2 >> " << this->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
-  // 
-  // if (_y >= (HEIGHT / 2))
-  //   {
-  //     if (_y == (HEIGHT / 2))
-  // 	_direction = 1;
-  //     else if (_y == HEIGHT)
-  // 	_direction = 0;
-  //   }
-  // else if (_y <= (HEIGHT / 2) - 1)
-  //   {
-  //     if (_y == (HEIGHT / 2) - 1)
-  // 	_direction = 0;
-  //     else if (_y == 0)
-  // 	_direction = 1;
-  //   }
+  if (_direction == 1)
+    _y++;
+  else if (_direction == 0)
+    _y--;
 
-  // if (_direction == 1)
-  //   _y++;
-  // else if (_direction == 0)
-  //   _y--;
-
-  // _x--;
-  // std::cout << "Bot :: Bot2 :: Update" << std::endl;
-  // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  _x--;
+  dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 
 extern "C" AEntity* create_object(int id)
