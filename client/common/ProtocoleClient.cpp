@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 19 13:41:40 2015 Serge Heitzler
+// Last update Sun Dec 20 00:15:09 2015 Nicolas Girardot
 //
 
 #include <string>
@@ -164,7 +164,13 @@ void		ProtocoleClient::shoot(ANetwork::t_frame &frame)
   std::cout << "shoot" << std::endl;
 
   Sound *s = Client::getSound();
-  s->playMusic("laser");
+  int	type = std::atoi(x.at(0).c_str());
+  if (type == 5)
+    s->playMusic("riffle");
+  else if (type == 6)
+    s->playSound("missile");
+  else
+    s->playMusic("laser");
 }
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
