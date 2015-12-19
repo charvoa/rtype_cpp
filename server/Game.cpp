@@ -229,6 +229,7 @@ void Game::sendNewEntity(const std::string &str, int id)
   ANetwork::t_frame	frame;
   std::string	sendData = str + ";" + std::to_string(id);
 
+  std::cout << "in sendNezEntity str sent : " << sendData << std::endl;
   frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
   for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
@@ -286,15 +287,18 @@ void Game::handleShoot(void *data, Client *client)
     {
       std::cout << "parent->name = " << p->getName() << std::endl;
       id = _eM.createEntity(type, p);
-      sendNewEntity(type, id); // Send  Bullet created
 
       AEntity *bullet = _eM.getEntityById(id);
+
+      sendNewEntity(bullet->getName(), id); // Send  Bullet created
+
       ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
 
       std::stringstream ss;
-      ss << type;
+      ss << bullet->getName();
 
+      std::cout << "ss >> " << ss.str().c_str() << std::endl;
       ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
       std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
       for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
