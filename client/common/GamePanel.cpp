@@ -15,6 +15,7 @@
 #include <ProtocoleClient.hh>
 #include <AThread.hpp>
 #include <ButtonFactory.hh>
+#include <Asteroid.hh>
 
 void	*readUDP(void *s)
 {
@@ -260,7 +261,6 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 void		GamePanel::newEntity(std::vector<std::string> &vector)
 {
   RenderWindow *window = RenderWindow::getInstance();
-  Sprite	*newSprite = new Sprite();
 
   std::string  	type = vector.at(0);
   int	  	id = std::atoi(vector.at(1).c_str());
@@ -270,12 +270,11 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
 
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
-  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
-  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
 
-  //  newSprite->scale();
-  //  newSprite->setPosition(-500, 500);
-  newSprite->setPosition(500, 500);
+  Sprite	*newSprite = new Sprite();
+  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);  
+  newSprite->setPosition(-500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
@@ -345,20 +344,16 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
-  if (realPosX >= 1920)
-    {
-      std::vector<std::string> v;
-      v.push_back(std::to_string(id));
-      static_cast<GamePanel*>(window->getPanels().top())->deleteEntity(v);
-    }
-  else
-    {
-      std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
-      if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
-	((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
-      //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
-    }
-
+  // if (realPosX >= 2000)
+  //   {
+  //     std::vector<std::string> v;
+  //     v.push_back(std::to_string(id));
+  //     static_cast<GamePanel*>(window->getPanels().top())->deleteEntity(v);
+  //   }
+  std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+  if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+  //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()

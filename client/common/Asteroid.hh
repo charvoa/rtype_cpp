@@ -5,11 +5,11 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec 16 11:53:49 2015 Nicolas Girardot
-// Last update Sat Dec 19 14:18:31 2015 Nicolas Girardot
+// Last update Sat Dec 19 05:33:54 2015 Serge Heitzler
 //
 
 #ifndef ASTEROID_HH_
-#define ASTEROIDE_HH_
+#define ASTEROID_HH_
 
 #include <Sprite.hh>
 #include <Ressources.hh>
