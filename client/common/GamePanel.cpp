@@ -25,9 +25,8 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
-	std::cout << "Server Connection Lost" << std::endl;
-      }
+      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame))))
+	{}
       else
 	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
@@ -329,7 +328,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int  	id;
 
-  float	posX = (std::atoi(vector.at(1).c_str()));
+  float	posX = (std::atoi(vector.at(1).c_str())) + 70;
   float	posY = (std::atoi(vector.at(2).c_str()));
 
   id = std::atoi(vector.at(0).c_str());

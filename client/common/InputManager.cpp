@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 21:33:28 2015 Nicolas Girardot
+// Last update Sat Dec 19 13:24:55 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -29,10 +29,6 @@ InputManager::~InputManager(){}
 
 void			InputManager::setInputType(InputType type)
 {
-
-  _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
-  _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
-
   if (type == InputType::SETTINGS_INPUT)
   {
     _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
@@ -44,7 +40,6 @@ void			InputManager::setInputType(InputType type)
     {
       _functions.insert(std::make_pair(sf::Event::JoystickButtonPressed, &InputManager::joystickPressedInMenuAt));
       _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
-      _functions.insert(std::make_pair(sf::Event::JoystickMoved, &InputManager::joystickMovedInMenuAt));
       _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
     }
   if (type == InputType::JOIN_INPUT)
@@ -187,26 +182,27 @@ int						InputManager::moveYAxis(sf::Event& event, int mousePosY, int ratioYMove
     return (mousePosY + ratioYMovement);
 }
 
-std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::Event& event)
+void		InputManager::joystickMovedInMenuAt()
 {
-  RenderWindow		*window = RenderWindow::getInstance();
-  unsigned int		newPosX = sf::Mouse::getPosition().x;
-  unsigned int		newPosY = sf::Mouse::getPosition().y;
-  unsigned int		ratioXMovement = window->getSize()._x / 100;
-  unsigned int		ratioYMovement = window->getSize()._y / 100;
+  int			posX = sf::Mouse::getPosition().x;
+  int			posY = sf::Mouse::getPosition().y;
 
+  float			moveX = 0;
+  float			moveY = 0;
+  
+    /* X POSITION JOYSTICK */
+  if (posX > 25)
+    moveX += 10;
+  if (posX < -25)
+    moveX -= 10;
 
-  if (this->isMouseInWindow(Vector2(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)))
-    {
-      if (event.joystickMove.axis == sf::Joystick::X)
-	newPosX = this->moveXAxis(event, newPosX, ratioXMovement);
-      if (event.joystickMove.axis == sf::Joystick::Y)
-	newPosY = this->moveYAxis(event, newPosY, ratioYMovement);
-    }
+  /* Y POSITION JOYSTICK */
+  if (posY > 25)
+    moveY += 10;
+  if (posY < -25)
+    moveY += 10;
 
-
-  sf::Mouse::setPosition(sf::Vector2i(newPosX, newPosY));
-  return std::make_pair((unsigned int)newPosX, (unsigned int)newPosY);
+  sf::Mouse::setPosition(sf::Vector2i(posX + moveX, posY + moveY));
 }
 
 std::pair<unsigned int, unsigned int>		InputManager::mouseMovedInMenuAt(sf::Event& event)
@@ -225,15 +221,6 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
-// std::pair<unsigned int, unsigned int>		InputManager::mouseInGamePressedAt(sf::Event& event)
-// {
-
-//   if ((RenderWindow::getInstance())->getPanels().top()->updateOnPressInGame(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
-//     {
-//     }
-//   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
-// }
-
 std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf::Event& event)
 {
   (void)event;
@@ -241,23 +228,6 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf:
   return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
-std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::Event& event)
-{
-  // TODO
-  // changer la texture du controller à display
-  if (event.type == sf::Event::JoystickConnected)
-    {
-      std::cout << "joystick connected" << event.joystickConnect.joystickId << std::endl;
-
-    }
-
-  if (event.type == sf::Event::JoystickDisconnected)
-    {
-      std::cout << "joystick disconnected" << event.joystickConnect.joystickId << std::endl;
-
-    }
-  return std::make_pair(0, 0);
-}
 
 std::pair<unsigned int, unsigned int>		InputManager::textEnteredInJoinPanel(sf::Event& event)
 {
