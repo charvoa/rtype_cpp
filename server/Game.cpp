@@ -163,8 +163,8 @@ void Game::handleMove(void *data, Client *client)
     //
     auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-    std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
-    std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
+    // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
+    // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       {
 	this->checkWall(player);
@@ -278,12 +278,15 @@ void Game::handleShoot(void *data, Client *client)
       component = C_LASER;
     }
 
+  std::cout << "Before create entity" << std::endl;
   if (type != E_INVALID)
     id = _eM.createEntity(type, p);
 
   std::cout << "After create entity " << std::endl;
+
   sendNewEntity(type, id); // Send  Bullet created
 
+  std::cout << "Id I want to get in game : " << id << std::endl;
   AEntity *bullet = _eM.getEntityById(id);
   ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
   bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
@@ -345,11 +348,9 @@ void Game::updateMonster()
 {
   std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
 
-  std::cout << "bots.size = " << bots.size() << std::endl;
   for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      std::cout << "Position of bot >> " << (*it)->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
       reinterpret_cast<Bot*>(*it)->update();
     }
 }
@@ -440,6 +441,18 @@ void Game::updateRiffle()
     }
 }
 
+void Game::updateMissile()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_MISSILE);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*it)->update(p->getX() + 8, p->getY());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*it);
+    }
+}
+
 bool Game::run()
 {
   int	speed = 3;
@@ -470,6 +483,7 @@ bool Game::run()
       	}
       this->updateMonster();
       this->updateRiffle();
+      this->updateMissile();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
       i++;

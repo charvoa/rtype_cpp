@@ -41,6 +41,7 @@ add_executable(server_rtype
   Room/RoomManager.cpp
   PlayerFactory.cpp
   Player.cpp
+  Monitoring.cpp
   Client.cpp
   ../common/Thread/ThreadFactory.cpp
   Parameters.cpp

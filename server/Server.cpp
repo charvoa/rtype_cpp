@@ -37,11 +37,12 @@ void Server::init(int port)
 
   this->_botManager = new BotManager("../libs/");
   this->_roomManager.setBotManager(this->_botManager->getBotList());
-  std::list<Bot*> toto = this->_botManager->getBotList();
-  for (std::list<Bot*>::iterator it = toto.begin();
-       it != toto.end(); ++it) {
-    std::cout << ">> " << ((*it)->_sprite) << std::endl;
-  }
+  this->_monitoring.start(this);
+  // std::list<Bot*> toto = this->_botManager->getBotList();
+  // for (std::list<Bot*>::iterator it = toto.begin();
+  //      it != toto.end(); ++it) {
+  //   std::cout << ">> " << ((*it)->_sprite) << std::endl;
+  // }
 }
 
 void Server::run()

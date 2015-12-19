@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 06:29:19 2015 Serge Heitzler
+// Last update Sat Dec 19 18:33:48 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -91,17 +91,15 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 	}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-	  std::cout << "Shooting A" << std::endl;
-	  // ANetwork *net = Client::getUDPNetwork();
-	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
-	  // net->write(sender);
+	  ANetwork *net = Client::getUDPNetwork();
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSIBLE");
+	  net->write(sender);
 	}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
-	  std::cout << "Shooting E" << std::endl;
-	  // ANetwork *net = Client::getUDPNetwork();
-	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
-	  // net->write(sender);
+	  ANetwork *net = Client::getUDPNetwork();
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_LASER"), 0, "E_LASER");
+	  net->write(sender);
 	}
     }
   return std::make_pair(0, 0);
@@ -197,8 +195,6 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
   unsigned int		ratioXMovement = window->getSize()._x / 100;
   unsigned int		ratioYMovement = window->getSize()._y / 100;
 
-  // TODO
-  // ratio avec la vélocité du déplacement à voir (si j'appuie fort ou doucement sur le joystic de déplacement)
 
   if (this->isMouseInWindow(Vector2(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)))
     {
