@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Dec 15 05:12:20 2015 Joris Bertomeu
-// Last update Tue Dec 15 05:55:45 2015 Joris Bertomeu
+// Last update Tue Dec 15 06:30:06 2015 Joris Bertomeu
 //
 
 #ifndef			_MONITORING_HPP_
@@ -41,6 +41,7 @@ public:
     this->_t.run();
     std::cout << "Monitoring :: Start" << std::endl;
   };
+  void			parseCommand(void *data, void *c);
 };
 
 #endif

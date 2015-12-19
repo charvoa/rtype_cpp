@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:41:04 2015 Nicolas Charvoz
-// Last update Tue Dec 15 05:54:08 2015 Joris Bertomeu
+// Last update Tue Dec 15 08:25:52 2015 Joris Bertomeu
 //
 
 #ifndef GAMEMANAGER_HH_
@@ -29,6 +29,9 @@ public:
   Game &getGameByClient(const Client &);
   int	getNbGames() const {
     return (this->_games.size());
+  };
+  std::list<Game>	getGames() const {
+    return (this->_games);
   };
 };
 

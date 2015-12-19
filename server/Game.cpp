@@ -30,7 +30,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _stage = 1;
   _nbDisplay = 0;
   _isRunning = true;
-
+  this->_timestamp = time(NULL);
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
