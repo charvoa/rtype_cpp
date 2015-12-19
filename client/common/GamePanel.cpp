@@ -5,16 +5,8 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Sat Dec 19 02:15:39 2015 Serge Heitzler
+// Updated on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
 //
-
-#ifdef _WIN32
-#include "../NetworkWin.hpp"
-#include <ThreadWin.hpp>
-#else
-#include "../Network.hpp"
-#include <ThreadUnix.hpp>
-#endif
 
 #include <memory>
 #include <iostream>
@@ -62,10 +54,12 @@ GamePanel::GamePanel()
   _randBackground = new Random(0, 2);
 
   std::unique_ptr<AThread> t(new Thread(1));
+
+  _t = std::move(t);
   char str1[] = "";
   (void) str1;
-  t->attach(&readUDP, (void *)str1);
-  t->run();
+  _t->attach(&readUDP, (void *)str1);
+  _t->run();
 
   //  for (int i = 0; i != 3; i++)
   //    _players.push_back(new OtherPlayer());
@@ -287,6 +281,7 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
 
   //  newSprite->scale();
   //  newSprite->setPosition(-500, 500);
@@ -362,12 +357,11 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
-
-
   if (realPosX >= 1920)
     {
       std::vector<std::string> v;
       v.push_back(std::to_string(id));
+      static_cast<GamePanel*>(window->getPanels().top())->deleteEntity(v);
     }
   else
     {
@@ -520,9 +514,15 @@ void		GamePanel::resume()
 
 void		GamePanel::exit()
 {
-  // close UDP read && exit thread
+  Sound *s = Client::getSound();
+  _t->cancel();
   Client::getUDPNetwork()->close();
   std::cout << "EXIT" << std::endl;
+  if (s->isPlaying("gameIntro"))
+    s->stopMusic("gameIntro");
+  else
+    s->stopMusic("gameLoop");
+  s->playMusic("mainMenu");
   RenderWindow::getInstance()->back();
   RenderWindow::getInstance()->back();
 }

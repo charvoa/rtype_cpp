@@ -172,6 +172,7 @@ void Game::handleMove(void *data, Client *client)
 	this->checkWall(player);
 	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+	//player->update(player->refreshHitbox());
 	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
       }
   } catch (const std::exception &e) {
@@ -195,7 +196,6 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 
 void Game::updateLife(Player *p, int reset)
 {
-
   std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
