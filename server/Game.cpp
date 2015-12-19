@@ -257,6 +257,8 @@ void Game::handleShoot(void *data, Client *client)
   std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
+  std::cout << weaponType << std::endl;
+
   Player *p = this->getPlayerByClient(client);
   E_EntityType type = E_INVALID;
   E_Component component = C_INVALID;
@@ -271,6 +273,7 @@ void Game::handleShoot(void *data, Client *client)
     {
       type = E_MISSILE;
       component = C_MISSILE;
+      std::cout << "type received: E_MISSILE" << std::endl;
     }
   else if (weaponType == "E_LASER")
     {
