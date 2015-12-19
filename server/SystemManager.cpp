@@ -5,19 +5,29 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Fri Dec 18 05:36:55 2015 Louis Audibert
+// Last update Sat Dec 19 03:24:43 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
+#include <string.h>
+#include <cstring>
 
 SystemManager::SystemManager()
 {
 
 }
 
-SystemManager::SystemManager(const SystemManager &copy)
+SystemManager::SystemManager(SystemManager *copy)
 {
-  _systems = copy._systems;
+  for (std::list<ASystem*>::const_iterator it = copy->_systems.begin(); it != copy->_systems.end(); ++it)
+    {
+      if (!(*it))
+	break;
+      ASystem *tmp = (ASystem*)std::malloc(sizeof(ASystem));
+      std::memset(tmp, 0, sizeof(ASystem));
+      std::memcpy(tmp, (*it), sizeof(ASystem));
+      _systems.push_back(tmp);
+    }
 }
 
 SystemManager::~SystemManager()

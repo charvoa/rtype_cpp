@@ -44,7 +44,6 @@ void Game::addClients(std::list<Client *> &p)
     {
       _eM.createEntity(E_PLAYER, *(*it));
     }
-
 }
 
 void Game::setParameters(Parameters &p)
@@ -79,7 +78,6 @@ Player *Game::getPlayerByClient(Client *client)
     }
 
   throw std::logic_error("Cannot find this player by client");
-
 }
 
 void Game::handleHandshakeUDP(void *data, Client *client)
@@ -96,7 +94,6 @@ void Game::handleHandshakeUDP(void *data, Client *client)
 	  printf("Apres le setUDPSocket\n");
 	}
     }
-
 }
 
 std::pair<int, int> Game::getDirections(const std::string &dir)
@@ -137,7 +134,6 @@ void Game::checkWall(Player *player)
 {
   ComponentPosition *pPlayer;
 
-
   pPlayer =
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
@@ -172,13 +168,12 @@ void Game::handleMove(void *data, Client *client)
 	this->checkWall(player);
 	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-	//player->update(player->refreshHitbox());
+	player->update(player->refreshHitbox());
 	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
       }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
   }
-
 }
 
 void Game::updateScore(Player *p, Game::scoreDef score)
@@ -191,7 +186,6 @@ void Game::updateScore(Player *p, Game::scoreDef score)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
-
 }
 
 void Game::updateLife(Player *p, int reset)
@@ -224,7 +218,6 @@ void Game::updateLife(Player *p, int reset)
 	dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameDie), sizeof(ANetwork::t_frame));
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
     }
-
 }
 
 void Game::sendNewEntity(const std::string &str, int id)
@@ -251,7 +244,6 @@ void Game::sendNewEntity(int type, int id)
     {
       dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
     }
-
 }
 
 void Game::handleShoot(void *data, Client *client)
@@ -318,7 +310,6 @@ void Game::handleCommand(void *data, Client *client)
   } catch (const std::exception &e) {
     std::cout << "Cannot achieve this action" << std::endl;
   }
-
 }
 
 void *readThread(void *sData)
@@ -385,11 +376,11 @@ void Game::initPlayersPosition()
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity *>::iterator it;
   Random	rand(2, 48);
+
   for (it = _players.begin(); it != _players.end(); ++it)
     {
       (*it)->update(x, rand.generate<int>());
     }
-
 }
 
 void Game::deleteEntity(AEntity *entity)
