@@ -440,6 +440,18 @@ void Game::updateRiffle()
     }
 }
 
+void Game::updateMissile()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_MISSILE);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*it)->update(p->getX() + 8, p->getY());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*it);
+    }
+}
+
 bool Game::run()
 {
   int	speed = 3;
@@ -470,6 +482,7 @@ bool Game::run()
       	}
       this->updateMonster();
       this->updateRiffle();
+      this->updateMissile();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
       i++;

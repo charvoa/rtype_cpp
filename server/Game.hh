@@ -97,6 +97,7 @@ private:
   void sendNewEntity(int type, int id);
   void deleteEntity(AEntity *);
   void updateRiffle();
+  void updateMissile();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);
   void checkWall(Player*);
