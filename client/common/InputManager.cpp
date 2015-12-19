@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 06:29:19 2015 Serge Heitzler
+// Last update Sat Dec 19 17:42:36 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -91,17 +91,15 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 	}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-	  std::cout << "Shooting A" << std::endl;
-	  // ANetwork *net = Client::getUDPNetwork();
-	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
-	  // net->write(sender);
+	  ANetwork *net = Client::getUDPNetwork();
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSIBLE");
+	  net->write(sender);
 	}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
-	  std::cout << "Shooting E" << std::endl;
-	  // ANetwork *net = Client::getUDPNetwork();
-	  // ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
-	  // net->write(sender);
+	  ANetwork *net = Client::getUDPNetwork();
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_LASER"), 0, "E_LASER");
+	  net->write(sender);
 	}
     }
   return std::make_pair(0, 0);
