@@ -254,50 +254,55 @@ void Game::handleShoot(void *data, Client *client)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-  std::cout << "Game :: handleShoot" << std::endl;
-  std::string weaponType =
-    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
-
-  Player *p = this->getPlayerByClient(client);
-  E_EntityType type = E_INVALID;
-  E_Component component = C_INVALID;
-  int	id;
-
-  if (weaponType == "E_RIFLE")
+  if (_start < _start + std::chrono::milliseconds(100))
     {
-      type = E_RIFLE;
-      component = C_RIFLE;
-    }
-  else if (weaponType == "E_MISSILE")
-    {
-      type = E_MISSILE;
-      component = C_MISSILE;
-    }
-  else if (weaponType == "E_LASER")
-    {
-      type = E_LASER;
-      component = C_LASER;
-    }
-
-  if (type != E_INVALID)
-    {
-      id = _eM.createEntity(type, p);
-      sendNewEntity(type, id); // Send  Bullet created
-
-      AEntity *bullet = _eM.getEntityById(id);
-      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
-      std::stringstream ss;
-      ss << type;
-
-      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+      std::cout << "Game :: handleShoot" << std::endl;
+      std::string weaponType =
+	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+      
+      Player *p = this->getPlayerByClient(client);
+      E_EntityType type = E_INVALID;
+      E_Component component = C_INVALID;
+      int	id;
+      
+      if (weaponType == "E_RIFLE")
 	{
-	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	  type = E_RIFLE;
+	  component = C_RIFLE;
+	}
+      else if (weaponType == "E_MISSILE")
+	{
+	  type = E_MISSILE;
+	  component = C_MISSILE;
+	}
+      else if (weaponType == "E_LASER")
+	{
+	  type = E_LASER;
+	  component = C_LASER;
+	}
+
+      if (type != E_INVALID)
+	{
+	  id = _eM.createEntity(type, p);
+	  sendNewEntity(type, id); // Send  Bullet created
+
+	  AEntity *bullet = _eM.getEntityById(id);
+	  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+	  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+
+	  std::stringstream ss;
+	  ss << type;
+
+	  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+	  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+	  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	    {
+	      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	    }
 	}
     }
+ 
+  
 }
 
 void Game::handleCommand(void *data, Client *client)
@@ -316,7 +321,7 @@ void Game::handleCommand(void *data, Client *client)
 void *readThread(void *sData)
 {
   Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
-
+  
   ANetwork *n = s->network;
   Game *me = s->game;
   void *data;
@@ -485,8 +490,9 @@ bool Game::run()
   while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
   while (_isRunning)
     {
+      _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
-      if (timerMonster.elapsed().count()>= (speed/_stage))
+      if (timerMonster.elapsed().count() >= (speed/_stage))
       	{
       	  timerMonster.reset();
       	  this->addMonster();
