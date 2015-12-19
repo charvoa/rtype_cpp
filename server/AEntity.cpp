@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 05:20:41 2015 Louis Audibert
+// Last update Tue Dec 15 04:29:01 2015 Joris Bertomeu
 //
 
 #include <AEntity.hh>
@@ -94,6 +94,7 @@ void		AEntity::refreshSystemManager()
 
 bool		AEntity::checkColision(AEntity *entity)
 {
+  (void) entity;
   return (true);
 }
 

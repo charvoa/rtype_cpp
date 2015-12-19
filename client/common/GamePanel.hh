@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 19 05:33:00 2015 Serge Heitzler
+// Last update Sat Dec 19 06:16:50 2015 Serge Heitzler
 //
 
 
@@ -45,6 +45,7 @@ public:
   static void			        newEntity(std::vector<std::string> &vector);
   static void			        deleteEntity(std::vector<std::string> &vector);
   static void				die(int i, int id);
+  static void  				playerLeft(const std::string &playerName);
   std::vector<Sprite *>			&getSprites();
   OtherPlayer				*getPlayerByName(const std::string &name);
   Text					&getTeamScore();
@@ -58,7 +59,6 @@ public:
   std::map<std::string, Texture*>      	&getDicoTextures();
   void					setPlanetTexture(int i);
   void					setPlayers(int nbPlayer, int currentPlayer);
-  void					addExplosion();
   void					setEscapeMenu(bool value);
   bool					getEscapeMenu();
   void					resume();
