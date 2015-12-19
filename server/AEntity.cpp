@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 01:58:56 2015 Louis Audibert
+// Last update Sat Dec 19 02:21:34 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -112,13 +112,8 @@ std::list<Case*>	AEntity::refreshHitbox()
   std::list<Case*> hitbox;
   Case	*myCase;
 
+  myCase = (Case*)std::malloc(sizeof(Case));
   myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY();
-  hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX() + 1;
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY();
-  hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX() - 1;
   myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY();
   hitbox.push_back(myCase);
   myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX();
@@ -127,5 +122,6 @@ std::list<Case*>	AEntity::refreshHitbox()
   myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX();
   myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY() - 1;
   hitbox.push_back(myCase);
+  std::cout << "Hitbox ready" << std::endl;
   return (hitbox);
 }

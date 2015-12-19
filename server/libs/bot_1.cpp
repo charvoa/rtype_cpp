@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-// Last update Thu Dec 17 05:43:00 2015 Antoine Garcia
+// Last update Sat Dec 19 02:29:57 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -39,27 +39,26 @@ void	Bot::update()
   _x--;
   if (ComponentPosition *com = reinterpret_cast<ComponentPosition*>(getSystemManager()->getSystemByComponent(C_POSITION)->getComponent()))
     std::cout << "BLABLABLA" << com->getX() << std::endl;
-  //getSystemManager()->getSystemByComponent(C_POSITION)->update(1,1);
-  // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
 
 
-  // ComponentPosition *pos = reinterpret_cast<ComponentPosition*>(this->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-  // std::cout << "Position of bot1 >> " << this->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
+  ComponentPosition *pos = reinterpret_cast<ComponentPosition*>(this->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+  std::cout << "Position of bot1 >> " << this->getId() << ": " << pos->getX() << " ; " << pos->getY() << " << " << std::endl;
 
 
-  // if (_y == HEIGHT)
-  //   _direction = -1;
-  // else if (_y == 0)
-  //   _direction = 1;
+  if (_y == HEIGHT)
+    _direction = -1;
+  else if (_y == 0)
+    _direction = 1;
 
-  // if (_direction == 1)
-  //   _y++;
-  // else if (_direction == -1)
-  //   _y--;
+  if (_direction == 1)
+    _y++;
+  else if (_direction == -1)
+    _y--;
 
-  // _x--;
-  // std::cout << "Bot :: Bot1 :: Update" << std::endl;
-  // dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
+  _x--;
+  std::cout << "Bot :: Bot1 :: Update" << std::endl;
+  dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 
 extern "C" AEntity* create_object(int id)
