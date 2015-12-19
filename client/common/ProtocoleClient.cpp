@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 19 15:18:39 2015 Nicolas Girardot
+// Last update Sat Dec 19 13:08:35 2015 Serge Heitzler
 //
 
 #include <string>
@@ -104,7 +104,7 @@ void		ProtocoleClient::downloadComplete(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Download Complete" << std::endl;
   std::cout << "Player name is " << x.at(0) << std::endl;
-  //  RoomPanel::downloadComplete(x.at(0));
+  RoomPanel::downloadComplete(x.at(0));
 }
 
 void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)

@@ -25,9 +25,8 @@ void	*readUDP(void *s)
 
   while (true)
     {
-      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
-	std::cout << "Server Connection Lost" << std::endl;
-      }
+      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame))))
+	{}
       else
 	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }

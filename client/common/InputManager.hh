@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Wed Dec 16 05:27:06 2015 Serge Heitzler
+// Last update Sat Dec 19 12:31:04 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -26,7 +26,7 @@ public:
   bool						isMouseInWindow(Vector2 posMouse);
   int						moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement);
   int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement);
-  std::pair<unsigned int, unsigned int>		joystickMovedInMenuAt(sf::Event& event);
+  void						joystickMovedInMenuAt();
   std::pair<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event);
   std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event);
   //  std::pair<unsigned int, unsigned int>		mouseInGamePressedAt(sf::Event& event);

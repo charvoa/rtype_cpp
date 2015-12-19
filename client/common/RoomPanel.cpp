@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Wed Dec 16 08:51:44 2015 Serge Heitzler
+// Last update Sat Dec 19 13:09:05 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -228,7 +228,7 @@ void		RoomPanel::downloadComplete(std::string &usernameComplete)
   std::size_t pos = usernameComplete.find("player");
   unsigned int i = std::stoi(usernameComplete.substr(pos + 6));
 
-  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 6).getSprite().setColor(sf::Color(255, 255, 255, 255));
+  static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 4).getSprite().setColor(sf::Color(255, 255, 255, 255));
   i++;
 }
 
