@@ -339,9 +339,7 @@ std::vector<Explosion *>	&GamePanel::getExplosions()
 
 void		GamePanel::addExplosion()
 {
-  Explosion *t = new Explosion();
-  t->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
-  _explosion.push_back(t);
+
 }
 
 void		GamePanel::display(std::vector<std::string> &vector)
@@ -551,6 +549,12 @@ void		GamePanel::render()
 	it = _explosion.erase(it);
       else
 	it++;
+    }
+  for (std::vector<Asteroid *>::iterator it = _asteroid.begin(); it != _asteroid.end(); )
+    {
+      window->draw((*it)->getSprite());
+      (*it)->update();
+      it++;
     }
   this->drawInGame();
   this->drawUserInterface();
