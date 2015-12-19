@@ -139,8 +139,8 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN || pPlayer->getY()
-      >= sizeInGame::HEIGHT_MAX)
+  if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN||
+      pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
       this->updateLife(player, 2);
     }
@@ -434,8 +434,8 @@ void Game::updateRiffle()
   for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      (*it)->update(p->getX() + 1, p->getY());
-      if (p->getX() >= 121)
+      (*it)->update(p->getX() + 24, p->getY());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
 }
