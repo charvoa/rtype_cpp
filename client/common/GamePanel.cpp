@@ -18,26 +18,16 @@
 
 void	*readUDP(void *s)
 {
-  ANetwork::t_frame a;
+  void	*data;
   ProtocoleClient x;
 
   while (true)
     {
-      try
-	{
-	  a = Client::getUDPNetwork()->read();
-	  // if (a == NULL)
-	  // {
-	  //   std::cout << "Connection Lost with server" << std::endl;
-	  //   exit (0);
-	  // }
-	  //	  std::cout << "UDP data is " << a.data << std::endl;
-	  x.methodChecker(a);
-	}
-      catch (const std::exception &e)
-	{
-	  std::cout << e.what() << std::endl;
-	}
+      if (!(data = Client::getUDPNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
+	std::cout << "Server Connection Lost" << std::endl;
+      }
+      else
+	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
   return s;
 }
