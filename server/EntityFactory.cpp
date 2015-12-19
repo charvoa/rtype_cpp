@@ -48,17 +48,27 @@ AEntity *EntityFactory::createEntity(int &id, E_EntityType type)
   switch (type)
     {
     case E_RIFLE:
-      newEntity = new Riffle(id);
-      break;
+      {
+	newEntity = new Riffle(id);
+	break;
+      }
     case E_MISSILE:
-      newEntity = new Missile(id);
-      break;
+      {
+	newEntity = new Missile(id);
+	std::cout << "new Missile in entity Factory created" << std::endl;
+	break;
+      }
     case E_LASER:
-      newEntity = new Laser(id);
-      break;
+      {
+	newEntity = new Laser(id);
+	std::cout << "new Laser in entity Factory created" << std::endl;
+	break;
+      }
     default:
-      newEntity = new AEntity(id);
-      break;
+      {
+	newEntity = new AEntity(id);
+	break;
+      }
     }
   return (newEntity);
 }

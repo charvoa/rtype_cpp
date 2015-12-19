@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Sat Dec 19 15:16:03 2015 Nicolas Girardot
+// Last update Tue Dec 15 06:53:22 2015 Joris Bertomeu
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -56,5 +56,11 @@ typedef enum RequestFromServer
     S_DELETE_ENTITY = 123,
     S_PLAYER_LEFT_IG = 124
   } RequestFromServer;
+
+typedef enum RequestFromMonitoring
+  {
+    M_LIST_GAMES = 100,
+    M_GET_GAME_INFO = 101
+  } RequestFromMonitoring;
 
 #endif /* PROTOCOLEENUM_HH_ */

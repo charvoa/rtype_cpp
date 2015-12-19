@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Sat Dec 19 12:36:03 2015 Serge Heitzler
+// Last update Sat Dec 19 13:19:49 2015 Serge Heitzler
 //
 
 #ifndef							IINPUTMANAGER_HH_
@@ -32,7 +32,6 @@ public:
   //  std::pair<unsigned int, unsigned int>			mouseInGamePressedAt(sf::Event& event);
   virtual std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event) = 0;
   virtual std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event) = 0;
-  virtual std::pair<unsigned int, unsigned int>		joystickHardwareEvent(sf::Event& event) = 0;
 
 private:
 

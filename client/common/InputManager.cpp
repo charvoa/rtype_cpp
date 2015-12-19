@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 12:39:31 2015 Serge Heitzler
+// Last update Sat Dec 19 13:19:04 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -91,7 +91,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 	  ANetwork *net = Client::getUDPNetwork();
-	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSIBLE");
+	  ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSILE");
 	  net->write(sender);
 	}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -225,15 +225,6 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
-// std::pair<unsigned int, unsigned int>		InputManager::mouseInGamePressedAt(sf::Event& event)
-// {
-
-//   if ((RenderWindow::getInstance())->getPanels().top()->updateOnPressInGame(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y)))
-//     {
-//     }
-//   return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
-// }
-
 std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf::Event& event)
 {
   (void)event;
@@ -241,23 +232,6 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf:
   return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
-std::pair<unsigned int, unsigned int>		InputManager::joystickHardwareEvent(sf::Event& event)
-{
-  // TODO
-  // changer la texture du controller à display
-  if (event.type == sf::Event::JoystickConnected)
-    {
-      std::cout << "joystick connected" << event.joystickConnect.joystickId << std::endl;
-
-    }
-
-  if (event.type == sf::Event::JoystickDisconnected)
-    {
-      std::cout << "joystick disconnected" << event.joystickConnect.joystickId << std::endl;
-
-    }
-  return std::make_pair(0, 0);
-}
 
 std::pair<unsigned int, unsigned int>		InputManager::textEnteredInJoinPanel(sf::Event& event)
 {

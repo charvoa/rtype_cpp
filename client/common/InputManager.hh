@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Sat Dec 19 12:31:04 2015 Serge Heitzler
+// Last update Sat Dec 19 13:19:32 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
@@ -29,9 +29,7 @@ public:
   void						joystickMovedInMenuAt();
   std::pair<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event);
   std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event);
-  //  std::pair<unsigned int, unsigned int>		mouseInGamePressedAt(sf::Event& event);
   std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event);
-  std::pair<unsigned int, unsigned int>	       	joystickHardwareEvent(sf::Event& event);
   void						methodChecker(sf::Event &event);
   void						setInputType(InputType inputType);
   std::pair<unsigned int, unsigned int>	        textEnteredInJoinPanel(sf::Event& event);

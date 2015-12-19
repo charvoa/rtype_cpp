@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 18:48:10 2015 Nicolas Charvoz
+// Last update Sat Dec 19 12:09:15 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -113,17 +113,23 @@ std::list<Case*>	AEntity::refreshHitbox()
 {
   std::list<Case*> hitbox;
   Case	*myCase;
+  int	i = 0;
 
   myCase = (Case*)std::malloc(sizeof(Case));
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY();
-  hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() + 1;
-  hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - 1;
-  hitbox.push_back(myCase);
-  //  std::cout << "Hitbox ready" << std::endl;
+  while (i < 10)
+    {
+      myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+      myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() + i;
+      hitbox.push_back(myCase);
+      i++;
+    }
+  i = 1;
+  while (i < 10)
+    {
+      myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+      myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
+      hitbox.push_back(myCase);
+      i++;
+    }
   return (hitbox);
 }
