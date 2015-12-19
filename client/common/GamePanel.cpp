@@ -16,6 +16,7 @@
 #include <AThread.hpp>
 #include <ButtonFactory.hh>
 #include <Asteroid.hh>
+#include <CRC.hpp>
 
 void	*readUDP(void *s)
 {
@@ -281,7 +282,7 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
   Sprite	*newSprite = new Sprite();
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
-  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);  
+  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
   newSprite->setPosition(-500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
