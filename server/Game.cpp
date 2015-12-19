@@ -229,6 +229,7 @@ void Game::sendNewEntity(const std::string &str, int id)
   ANetwork::t_frame	frame;
   std::string	sendData = str + ";" + std::to_string(id);
 
+  std::cout << "in sendNezEntity str sent : " << sendData << std::endl;
   frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
   for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
@@ -254,17 +255,18 @@ void Game::handleShoot(void *data, Client *client)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
+
   if (_start < _start + std::chrono::milliseconds(100))
     {
       std::cout << "Game :: handleShoot" << std::endl;
       std::string weaponType =
 	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
-      
+
       Player *p = this->getPlayerByClient(client);
       E_EntityType type = E_INVALID;
       E_Component component = C_INVALID;
       int	id;
-      
+
       if (weaponType == "E_RIFLE")
 	{
 	  type = E_RIFLE;
@@ -288,12 +290,17 @@ void Game::handleShoot(void *data, Client *client)
 	}
 
       AEntity *bullet = _eM.getEntityById(id);
+
+      sendNewEntity(bullet->getName(), id); // Send  Bullet created
+
       ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-      
+
       std::stringstream ss;
-      ss << type;
-      
+      ss << bullet->getName();
+
+      std::cout << "ss >> " << ss.str().c_str() << std::endl;
+
       ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
       std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
       for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -319,7 +326,7 @@ void Game::handleCommand(void *data, Client *client)
 void *readThread(void *sData)
 {
   Game::dataThread *s = reinterpret_cast<Game::dataThread*>(sData);
-  
+
   ANetwork *n = s->network;
   Game *me = s->game;
   void *data;
@@ -448,7 +455,9 @@ void Game::updateLaser()
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       Player *player = reinterpret_cast<Player*>((*it)->getParent());
       ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+
       (*it)->update(pPlayer->getX(), pPlayer->getY());
+
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
@@ -498,6 +507,7 @@ bool Game::run()
       this->updateMonster();
       this->updateRiffle();
       this->updateMissile();
+      this->updateLaser();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
       i++;
