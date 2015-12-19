@@ -48,28 +48,6 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
   return (_id);
 }
 
-int	EntityManager::createEntitiesFromFolder(std::list<AEntity*> bots, int iterator)
-{
-  AEntity *newEntity;
-  int		i = 0;
-
-  if (iterator > (int)bots.size())
-    return (-1);
-  if (_id < 4)
-    _id = 4;
-  for (std::list<AEntity*>::iterator it = bots.begin(); it != bots.end(); ++it)
-    {
-      if (i == iterator)
-	newEntity = (*it);
-      i++;
-    }
-  newEntity->setType(E_BOT);
-  _id++;
-  newEntity->setId(_id);
-  _entities.push_back(newEntity);
-  return (_id);
-}
-
 int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 {
   Bot *newEntity = (Bot*)std::malloc(sizeof(Bot));
@@ -87,6 +65,7 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 	std::memcpy(newEntity, (*it), sizeof(Bot));
       i++;
     }
+  //newEntity->refreshSystemManager();
   newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Wed Dec 16 06:03:59 2015 Louis Audibert
+// Last update Fri Dec 18 05:36:55 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -13,6 +13,11 @@
 SystemManager::SystemManager()
 {
 
+}
+
+SystemManager::SystemManager(const SystemManager &copy)
+{
+  _systems = copy._systems;
 }
 
 SystemManager::~SystemManager()
