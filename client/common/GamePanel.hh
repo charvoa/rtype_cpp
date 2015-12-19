@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Thu Dec 17 11:55:22 2015 Nicolas Girardot
+// Last update Sat Dec 19 05:01:17 2015 Serge Heitzler
 //
 
 
@@ -71,6 +71,7 @@ private:
   MainPlayer				*_mainPlayer;
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;
+  std::map<int, Asteroid*>		_dicoAsteroids;
   std::map<std::string, Texture*>      	_dicoTextures;
   std::unique_ptr<AThread>		_t;
   Random				*_randPosY;

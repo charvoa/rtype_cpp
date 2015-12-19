@@ -15,6 +15,7 @@
 #include <ProtocoleClient.hh>
 #include <AThread.hpp>
 #include <ButtonFactory.hh>
+#include <Asteroid.hh>
 
 void	*readUDP(void *s)
 {
@@ -270,7 +271,6 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 void		GamePanel::newEntity(std::vector<std::string> &vector)
 {
   RenderWindow *window = RenderWindow::getInstance();
-  Sprite	*newSprite = new Sprite();
 
   std::string  	type = vector.at(0);
   int	  	id = std::atoi(vector.at(1).c_str());
@@ -280,12 +280,11 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
 
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
-  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
-  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
 
-  //  newSprite->scale();
-  //  newSprite->setPosition(-500, 500);
-  newSprite->setPosition(500, 500);
+  Sprite	*newSprite = new Sprite();
+  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);  
+  newSprite->setPosition(-500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
