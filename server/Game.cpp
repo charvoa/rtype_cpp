@@ -263,6 +263,8 @@ void Game::handleShoot(void *data, Client *client)
   E_Component component = C_INVALID;
   int	id;
 
+  std::cout << "Type of weapon >> " << weaponType << std::endl;
+
   if (weaponType == "E_RIFLE")
     {
       type = E_RIFLE;
@@ -445,7 +447,9 @@ void Game::updateLaser()
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       Player *player = reinterpret_cast<Player*>((*it)->getParent());
       ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+
       (*it)->update(pPlayer->getX(), pPlayer->getY());
+
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
@@ -494,6 +498,7 @@ bool Game::run()
       this->updateMonster();
       this->updateRiffle();
       this->updateMissile();
+      this->updateLaser();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
       i++;
