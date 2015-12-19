@@ -262,7 +262,8 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   std::string  	type = vector.at(0);
 
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
-  if (type.find(":") == !std::string::npos)
+  std::size_t found = type.find(":");
+  if (found == !std::string::npos)
     {
       int parent = 0;
       std::cout << "LASERRRR" << std::endl;
