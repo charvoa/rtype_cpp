@@ -65,7 +65,7 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 	std::memcpy(newEntity, (*it), sizeof(Bot));
       i++;
     }
-  //newEntity->refreshSystemManager();
+  newEntity->refreshSystemManager();
   newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);
