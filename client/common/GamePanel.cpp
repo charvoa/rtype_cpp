@@ -16,6 +16,7 @@
 #include <AThread.hpp>
 #include <ButtonFactory.hh>
 #include <Asteroid.hh>
+#include <CRC.hpp>
 
 void	*readUDP(void *s)
 {
@@ -281,7 +282,7 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
 
   Sprite	*newSprite = new Sprite();
   newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
-  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);  
+  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
   newSprite->setPosition(-500, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
@@ -343,8 +344,8 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float	posX = (std::atoi(vector.at(1).c_str()));
   float	posY = (std::atoi(vector.at(2).c_str()));
 
-  float realPosX = (posX * 16) + 70;
-  float realPosY = (posY * 16) + 50;
+  float realPosX = posX + 70;
+  float realPosY = posY + 50;
 
   id = std::atoi(vector.at(0).c_str());
   // if (realPosX >= 2000)

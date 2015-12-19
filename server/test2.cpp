@@ -6,8 +6,9 @@ int		main(int ac, char **av)
 
   try {
     micro.init();
-    sleep(5);
+    sleep(3);
     micro.play();
+    sleep(20);
     while (micro.getStatus() == MicrophoneReceiver::Playing)
       sf::sleep(sf::seconds(0.1f));
   } catch (const std::exception &e) {

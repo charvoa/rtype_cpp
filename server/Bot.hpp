@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Wed Dec 16 01:48:38 2015 Louis Audibert
+// Last update Sat Dec 19 07:55:13 2015 Louis Audibert
 //
 
 #ifndef			_BOT_HH_
@@ -15,8 +15,8 @@
 # include		<Random.hpp>
 # include		<E_Component.hh>
 
-# define HEIGHT 50
-# define WIDTH 120
+# define HEIGHT 1080
+# define WIDTH 1920
 
 class			Bot : public AEntity
 {
