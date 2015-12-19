@@ -257,20 +257,34 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 void		GamePanel::newEntity(std::vector<std::string> &vector)
 {
   RenderWindow *window = RenderWindow::getInstance();
-
-  std::string  	type = vector.at(0);
   int	  	id = std::atoi(vector.at(1).c_str());
-
-  if (type.find(":") == !std::string::npos)
-    std::cout << "LASERRRR" << std::endl;
-
+  Sprite	*newSprite = new Sprite();
+  std::string  	type = vector.at(0);
 
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
+  if (type.find(":") == !std::string::npos)
+    {
+      int parent = 0;
+      std::cout << "LASERRRR" << std::endl;
+      
+      std::size_t pos = vector.at(0).find("player");
+      parent = std::stoi(vector.at(0).substr(pos + 6)) - 1;
 
-  Sprite	*newSprite = new Sprite();
-  newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
-  newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
-  newSprite->setPosition(-500, 500);
+      std::string idString = vector.at(0).erase(1, 8);
+      type = std::stoi(idString) + parent;
+
+      newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+      newSprite->setOrigin(0, (static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]->getSize()._y / 2);
+    }
+  else
+    {
+      newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
+      newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
+    }
+
+
+
+  newSprite->setPosition(-2000, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
 
