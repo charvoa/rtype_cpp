@@ -275,12 +275,14 @@ void Game::handleShoot(void *data, Client *client)
     }
   else if (weaponType == "E_LASER")
     {
+      std::cout << "received E_LASER" << std::endl;
       type = E_LASER;
       component = C_LASER;
     }
 
   if (type != E_INVALID)
     {
+      std::cout << "parent->name = " << p->getName() << std::endl;
       id = _eM.createEntity(type, p);
       sendNewEntity(type, id); // Send  Bullet created
 
