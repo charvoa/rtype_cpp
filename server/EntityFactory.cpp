@@ -60,6 +60,7 @@ AEntity *EntityFactory::createEntity(int &id, E_EntityType type)
       }
     case E_LASER:
       {
+	std::cout << "before new Laser in entity Factory" << std::endl;
 	newEntity = new Laser(id);
 	std::cout << "new Laser in entity Factory created" << std::endl;
 	break;

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sat Dec 19 13:09:05 2015 Serge Heitzler
+// Last update Sat Dec 19 14:45:09 2015 Serge Heitzler
 //
 
 #include <thread>

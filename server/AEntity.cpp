@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 12:09:15 2015 Louis Audibert
+// Last update Sat Dec 19 15:00:46 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -98,15 +98,25 @@ bool		AEntity::checkColision(AEntity *entity)
   return (true);
 }
 
-const	std::string &AEntity::getName() const
+const std::string &AEntity::getName() const
 {
   return (_name);
+}
+
+void	AEntity::setName(std::string name)
+{
+  _name = name;
 }
 
 bool	AEntity::setParent(AEntity *parent)
 {
   _parent = parent;
   return (true);
+}
+
+AEntity	*AEntity::getParent()
+{
+  return _parent;
 }
 
 std::list<Case*>	AEntity::refreshHitbox()

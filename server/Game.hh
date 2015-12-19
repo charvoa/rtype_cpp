@@ -66,10 +66,12 @@ public:
        int port, std::list<Bot*>);
   ~Game();
   bool run();
+  std::list<Client*> &getClients();
   const Client &getClient() const;
   const std::string &getId() const;
   void handleCommand(void*, Client*);
   void deletePlayer();
+
   // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;
@@ -98,6 +100,7 @@ private:
   void sendNewEntity(int type, int id);
   void deleteEntity(AEntity *);
   void updateRiffle();
+  void updateLaser();
   void updateMissile();
   void addClients(std::list<Client *> &);
   void setParameters(Parameters &);

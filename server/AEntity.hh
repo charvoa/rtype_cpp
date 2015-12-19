@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Sat Dec 19 03:12:09 2015 Louis Audibert
+// Last update Sat Dec 19 15:00:17 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -46,7 +46,9 @@ public:
   void	refreshSystemManager();
   bool	checkColision(AEntity *entity);
   const std::string &getName() const;
+  void setName(std::string);
   bool	setParent(AEntity *);
+  AEntity *getParent();
   std::list<Case*> refreshHitbox();
 };
 

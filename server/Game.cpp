@@ -30,6 +30,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _stage = 1;
   _nbDisplay = 0;
   _isRunning = true;
+  _nbLeft = 0;
   this->_timestamp = time(NULL);
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
@@ -257,8 +258,6 @@ void Game::handleShoot(void *data, Client *client)
   std::string weaponType =
     ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-  std::cout << weaponType << std::endl;
-
   Player *p = this->getPlayerByClient(client);
   E_EntityType type = E_INVALID;
   E_Component component = C_INVALID;
@@ -276,31 +275,30 @@ void Game::handleShoot(void *data, Client *client)
     }
   else if (weaponType == "E_LASER")
     {
+      std::cout << "received E_LASER" << std::endl;
       type = E_LASER;
       component = C_LASER;
     }
 
-  std::cout << "Before create entity" << std::endl;
   if (type != E_INVALID)
-    id = _eM.createEntity(type, p);
-
-  std::cout << "After create entity " << std::endl;
-
-  sendNewEntity(type, id); // Send  Bullet created
-
-  std::cout << "Id I want to get in game : " << id << std::endl;
-  AEntity *bullet = _eM.getEntityById(id);
-  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
-  std::stringstream ss;
-  ss << type;
-
-  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
     {
-      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+      std::cout << "parent->name = " << p->getName() << std::endl;
+      id = _eM.createEntity(type, p);
+      sendNewEntity(type, id); // Send  Bullet created
+
+      AEntity *bullet = _eM.getEntityById(id);
+      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+
+      std::stringstream ss;
+      ss << type;
+
+      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	{
+	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	}
     }
 }
 
@@ -308,8 +306,6 @@ void Game::handleCommand(void *data, Client *client)
 {
   E_Command commandType =
     static_cast<E_Command>((reinterpret_cast<ANetwork::t_frame*>(data))->idRequest);
-
-  //  std::cout << "CommandType : " << commandType << std::endl;
 
   try {
     Func fp = _funcMap[commandType];
@@ -443,6 +439,20 @@ void Game::updateRiffle()
     }
 }
 
+void Game::updateLaser()
+{
+  std::list<AEntity *> rifles = _eM.getEntitiesByType(E_LASER);
+  for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      Player *player = reinterpret_cast<Player*>((*it)->getParent());
+      ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*it)->update(pPlayer->getX(), pPlayer->getY());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*it);
+    }
+}
+
 void Game::updateMissile()
 {
   std::list<AEntity *> rifles = _eM.getEntitiesByType(E_MISSILE);
@@ -499,11 +509,20 @@ const std::string &Game::getId() const
   return _id;
 }
 
+std::list<Client*> &Game::getClients()
+{
+  return _clients;
+}
+
+
 void Game::deletePlayer()
 {
   _nbLeft++;
-  if (_nbLeft >= static_cast<int>(_clients.size()))
+
+  std::cout << _nbLeft << " players left the game" << std::endl;
+  if (_nbLeft == static_cast<int>(_clients.size()))
     {
+      std::cout << " I will quit" << std::endl;
       _isRunning = false;
     }
 }
