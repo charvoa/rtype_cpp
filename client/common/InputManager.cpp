@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 13:19:04 2015 Serge Heitzler
+// Last update Sat Dec 19 13:24:55 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -29,10 +29,6 @@ InputManager::~InputManager(){}
 
 void			InputManager::setInputType(InputType type)
 {
-
-  _functions.insert(std::make_pair(sf::Event::JoystickConnected, &InputManager::joystickHardwareEvent));
-  _functions.insert(std::make_pair(sf::Event::JoystickDisconnected, &InputManager::joystickHardwareEvent));
-
   if (type == InputType::SETTINGS_INPUT)
   {
     _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
