@@ -202,6 +202,14 @@ int			GamePanel::getType()
   return _type;
 }
 
+void			GamePanel::playerLeft(const std::string &playerName)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString(playerName + " has left the game");
+}
+
 void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 {
   RenderWindow *window = RenderWindow::getInstance();
@@ -335,11 +343,6 @@ void		GamePanel::die(int id, int idDied)
 std::vector<Explosion *>	&GamePanel::getExplosions()
 {
   return _explosion;
-}
-
-void		GamePanel::addExplosion()
-{
-
 }
 
 void		GamePanel::display(std::vector<std::string> &vector)
@@ -655,10 +658,13 @@ void		GamePanel::update()
   if (_backgrounds.at(6).getGlobalBounds().first.first == -500)
     {
       _backgrounds.at(6).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
-
       //      this->setPlanetTexture(_randPlanet->generate<int>());
     }
 
 
+  if (_labels.at(2).getText().getColor().a > 0 && !_escapeKey)
+    _labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
+
   i++;
+  
 }
