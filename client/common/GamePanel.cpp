@@ -273,6 +273,8 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
       std::string idString = vector.at(0).erase(1, 8);
       type = std::stoi(idString) + parent;
 
+      std::cout << "" << std::endl;
+      
       newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
       newSprite->setOrigin(0, (static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]->getSize()._y / 2);
     }

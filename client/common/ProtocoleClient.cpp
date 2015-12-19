@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 20 00:15:09 2015 Nicolas Girardot
+// Last update Sat Dec 19 15:24:25 2015 Serge Heitzler
 //
 
 #include <string>
@@ -90,6 +90,8 @@ void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "New Entity" << std::endl;
+  std::cout << "v.at(0) " << x.at(0) << std::endl;
+  
   GamePanel::newEntity(x);
 }
 

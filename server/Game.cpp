@@ -255,38 +255,39 @@ void Game::handleShoot(void *data, Client *client)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-  std::cout << "Game :: handleShoot" << std::endl;
-  std::string weaponType =
-    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-  Player *p = this->getPlayerByClient(client);
-  E_EntityType type = E_INVALID;
-  E_Component component = C_INVALID;
-  int	id;
+  if (_start < _start + std::chrono::milliseconds(100))
+    {
+      std::cout << "Game :: handleShoot" << std::endl;
+      std::string weaponType =
+	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-  std::cout << "Type of weapon >> " << weaponType << std::endl;
+      Player *p = this->getPlayerByClient(client);
+      E_EntityType type = E_INVALID;
+      E_Component component = C_INVALID;
+      int	id;
 
-  if (weaponType == "E_RIFLE")
-    {
-      type = E_RIFLE;
-      component = C_RIFLE;
-    }
-  else if (weaponType == "E_MISSILE")
-    {
-      type = E_MISSILE;
-      component = C_MISSILE;
-    }
-  else if (weaponType == "E_LASER")
-    {
-      std::cout << "received E_LASER" << std::endl;
-      type = E_LASER;
-      component = C_LASER;
-    }
+      if (weaponType == "E_RIFLE")
+	{
+	  type = E_RIFLE;
+	  component = C_RIFLE;
+	}
+      else if (weaponType == "E_MISSILE")
+	{
+	  type = E_MISSILE;
+	  component = C_MISSILE;
+	}
+      else if (weaponType == "E_LASER")
+	{
+	  type = E_LASER;
+	  component = C_LASER;
+	}
 
-  if (type != E_INVALID)
-    {
-      std::cout << "parent->name = " << p->getName() << std::endl;
-      id = _eM.createEntity(type, p);
+      if (type != E_INVALID)
+	{
+	  id = _eM.createEntity(type, p);
+	  sendNewEntity(type, id); // Send  Bullet created
+	}
 
       AEntity *bullet = _eM.getEntityById(id);
 
@@ -299,6 +300,7 @@ void Game::handleShoot(void *data, Client *client)
       ss << bullet->getName();
 
       std::cout << "ss >> " << ss.str().c_str() << std::endl;
+
       ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
       std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
       for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -495,8 +497,9 @@ bool Game::run()
   while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
   while (_isRunning)
     {
+      _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
-      if (timerMonster.elapsed().count()>= (speed/_stage))
+      if (timerMonster.elapsed().count() >= (speed/_stage))
       	{
       	  timerMonster.reset();
       	  this->addMonster();
