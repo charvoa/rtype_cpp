@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Thu Dec 17 11:55:22 2015 Nicolas Girardot
+// Last update Sat Dec 19 14:04:33 2015 Nicolas Girardot
 //
 
 
@@ -26,6 +26,7 @@
 #include				<Sprite.hh>
 #include				<Explosion.hh>
 #include				<MainPlayer.hh>
+#include				<Asteroid.hh>
 #include				<Random.hpp>
 #include				<memory>
 
@@ -68,6 +69,7 @@ private:
 
   std::vector<Sprite*>			_sprites;
   std::vector<Explosion *>		_explosion;
+  std::vector<Asteroid *>		_asteroid;
   MainPlayer				*_mainPlayer;
   std::vector<OtherPlayer*>		_otherPlayers;
   std::map<int, Sprite*>		_dicoSprites;

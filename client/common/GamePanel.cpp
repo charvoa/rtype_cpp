@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
-// Last update Thu Dec 17 14:49:02 2015 Nicolas Girardot
+// Last update Sat Dec 19 14:17:49 2015 Nicolas Girardot
 //
 
 #include <memory>
@@ -337,9 +337,7 @@ std::vector<Explosion *>	&GamePanel::getExplosions()
 
 void		GamePanel::addExplosion()
 {
-  Explosion *t = new Explosion();
-  t->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
-  _explosion.push_back(t);
+
 }
 
 void		GamePanel::display(std::vector<std::string> &vector)
@@ -550,6 +548,12 @@ void		GamePanel::render()
 	it = _explosion.erase(it);
       else
 	it++;
+    }
+  for (std::vector<Asteroid *>::iterator it = _asteroid.begin(); it != _asteroid.end(); )
+    {
+      window->draw((*it)->getSprite());
+      (*it)->update();
+      it++;
     }
   this->drawInGame();
   this->drawUserInterface();
