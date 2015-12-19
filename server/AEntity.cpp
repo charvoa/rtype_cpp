@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Tue Dec 15 04:29:01 2015 Joris Bertomeu
+// Last update Sat Dec 19 18:48:10 2015 Nicolas Charvoz
 //
 
 #include <AEntity.hh>
@@ -124,6 +124,6 @@ std::list<Case*>	AEntity::refreshHitbox()
   myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
   myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - 1;
   hitbox.push_back(myCase);
-  std::cout << "Hitbox ready" << std::endl;
+  //  std::cout << "Hitbox ready" << std::endl;
   return (hitbox);
 }
