@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:41:04 2015 Nicolas Charvoz
-// Last update Tue Dec 15 05:54:08 2015 Joris Bertomeu
+// Last update Sat Dec 19 22:18:37 2015 Nicolas Charvoz
 //
 
 #ifndef GAMEMANAGER_HH_
@@ -26,7 +26,7 @@ public:
   bool createGame(const Parameters&, std::list<Client *>&,
 		  const std::string&, int, std::list<Bot*>);
   Game &getGameById(const std::string&);
-  Game &getGameByClient(const Client &);
+  Game *getGameByClient(Client *);
   int	getNbGames() const {
     return (this->_games.size());
   };

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 17:26:52 2015 Nicolas Charvoz
-// Last update Sat Dec 19 17:53:42 2015 Nicolas Charvoz
+// Last update Sat Dec 19 22:21:48 2015 Nicolas Charvoz
 //
 
 #include <GameManager.hh>
@@ -39,21 +39,20 @@ Game &GameManager::getGameById(const std::string &s)
   throw std::logic_error("Game with this ID not found");
 }
 
-Game &GameManager::getGameByClient(const Client &c)
+Game *GameManager::getGameByClient(Client *c)
 {
-  // for (std::list<Game>::iterator it = _games.begin();
-  //      it != _games.end() ; ++it)
-  //   {
-  //     if ((*it).getClient().getSocket()->getFd() == c.getSocket()->getFd()) {
-  // 	return (*it);
-  //     }
-  //   }
-  // throw std::logic_error("Game with this ID not found");
-
-
-  (void) c;
-  Game *g = new Game();
-
-  return *g;
-
+  for (std::list<Game>::iterator it = _games.begin();
+       it != _games.end();
+       ++it)
+    {
+      std::list<Client*> myList = (*it).getClients();
+      for (std::list<Client*>::iterator it2 = myList.begin();
+	   it2 != myList.end();
+	   it2++)
+	{
+	  if ((*it2)->getSocket()->getFd() == c->getSocket()->getFd())
+	    return &(*it);
+	}
+    }
+  throw std::logic_error("Game with this ID not found");
 }

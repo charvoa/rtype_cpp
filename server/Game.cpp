@@ -31,6 +31,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _nbDisplay = 0;
   _isRunning = true;
 
+  _nbLeft = 0;
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
@@ -497,11 +498,20 @@ const std::string &Game::getId() const
   return _id;
 }
 
+std::list<Client*> &Game::getClients()
+{
+  return _clients;
+}
+
+
 void Game::deletePlayer()
 {
   _nbLeft++;
-  if (_nbLeft >= static_cast<int>(_clients.size()))
+
+  std::cout << _nbLeft << " players left the game" << std::endl;
+  if (_nbLeft == static_cast<int>(_clients.size()))
     {
+      std::cout << " I will quit" << std::endl;
       _isRunning = false;
     }
 }
