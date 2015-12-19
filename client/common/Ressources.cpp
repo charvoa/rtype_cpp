@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Wed Dec 16 18:06:55 2015 Nicolas Girardot
+// Last update Sat Dec 19 14:01:06 2015 Nicolas Girardot
 //
 
 #include "Ressources.hh"
@@ -21,6 +21,10 @@ Ressources::Ressources()
   _explosion_red->loadFromFile("../common/misc/explosion_red.png");
   _explosion_green->loadFromFile("../common/misc/explosion_green.png");
   _explosion_yellow->loadFromFile("../common/misc/explosion_yellow.png");
+
+  _asteroid = new Texture;
+
+  _asteroid->loadFromFile("../common/misc/asteroid.png");
 
   _buttonNormal = new Texture();
   _buttonHighlight = new Texture();

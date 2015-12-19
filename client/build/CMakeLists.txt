@@ -55,6 +55,7 @@ add_executable(${EXECUTABLE_NAME}
   ../common/Client.cpp
   ../common/Settings.cpp
   ../common/Text.cpp
+  ../common/Asteroid.cpp
   ../common/Texture.cpp
   ../common/Volume.cpp
   ../common/ProtocoleClient.cpp
