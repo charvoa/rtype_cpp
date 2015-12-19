@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 19 13:08:35 2015 Serge Heitzler
+// Last update Sat Dec 19 13:29:33 2015 Serge Heitzler
 //
 
 #include <string>
@@ -89,6 +89,7 @@ void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
 void		ProtocoleClient::playerLeftIG(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Player Left IG" << std::endl;
   GamePanel::playerLeft(x.at(0));
 }
 

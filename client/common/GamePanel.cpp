@@ -328,7 +328,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int  	id;
 
-  float	posX = (std::atoi(vector.at(1).c_str()));
+  float	posX = (std::atoi(vector.at(1).c_str())) + 70;
   float	posY = (std::atoi(vector.at(2).c_str()));
 
   id = std::atoi(vector.at(0).c_str());
