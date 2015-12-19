@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Wed Dec 16 14:35:27 2015 Nicolas Girardot
+// Last update Sat Dec 19 09:40:03 2015 Serge Heitzler
 //
 
 #include <Sprite.hh>
@@ -95,4 +95,14 @@ float		Sprite::getPosX() const
 float		Sprite::getPosY() const
 {
 	return (_sprite.getPosition().y);
+}
+
+float		Sprite::getWidth() const
+{
+	return (_sprite.getGlobalBounds().width);
+}
+
+float		Sprite::getHeight() const
+{
+	return (_sprite.getGlobalBounds().height);
 }
