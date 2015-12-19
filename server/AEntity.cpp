@@ -5,13 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 01:58:56 2015 Louis Audibert
+// Last update Sat Dec 19 03:24:05 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
 
 AEntity::AEntity(int id) : _id(id)
 {
+  _systemManager = new SystemManager();
   std::cout << "new AEntity created !" << std::endl;
 }
 
@@ -24,8 +25,8 @@ AEntity::AEntity(int id, AEntity *parent)
 
 bool	AEntity::update(int x, int y)
 {
-  if (_systemManager.getSystemByComponent(C_POSITION))
-    dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(C_POSITION))->update(x, y);
+  if (_systemManager->getSystemByComponent(C_POSITION))
+    dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(x, y);
   else
     return (false);
   return (true);
@@ -33,8 +34,8 @@ bool	AEntity::update(int x, int y)
 
 bool	AEntity::update(int health)
 {
-  if (_systemManager.getSystemByComponent(C_HEALTH))
-    dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(C_HEALTH))->update(health);
+  if (_systemManager->getSystemByComponent(C_HEALTH))
+    dynamic_cast<SystemHealth*>(_systemManager->getSystemByComponent(C_HEALTH))->update(health);
   else
     return (false);
   return (true);
@@ -42,8 +43,8 @@ bool	AEntity::update(int health)
 
 bool	AEntity::update(std::list<Case*> hitbox)
 {
-  if (_systemManager.getSystemByComponent(C_HITBOX))
-    dynamic_cast<SystemHitbox*>(_systemManager.getSystemByComponent(C_HITBOX))->update(hitbox);
+  if (_systemManager->getSystemByComponent(C_HITBOX))
+    dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(hitbox);
   else
     return (false);
   return (true);
@@ -51,12 +52,12 @@ bool	AEntity::update(std::list<Case*> hitbox)
 
 void	AEntity::addSystem(E_Component type)
 {
-  _systemManager.addSystemByType(type);
+  _systemManager->addSystemByType(type);
 }
 
 void	AEntity::removeSystem(E_Component type)
 {
-  _systemManager.removeSystemByType(type);
+  _systemManager->removeSystemByType(type);
 }
 
 bool	AEntity::setType(E_EntityType type)
@@ -82,12 +83,12 @@ void	AEntity::setId(int id)
 
 SystemManager	*AEntity::getSystemManager()
 {
-  return (&_systemManager);
+  return (_systemManager);
 }
 
 void		AEntity::refreshSystemManager()
 {
-  SystemManager newSystem(_systemManager);
+  SystemManager *newSystem = new SystemManager(_systemManager);
   _systemManager = newSystem;
 }
 
@@ -112,20 +113,16 @@ std::list<Case*>	AEntity::refreshHitbox()
   std::list<Case*> hitbox;
   Case	*myCase;
 
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY();
+  myCase = (Case*)std::malloc(sizeof(Case));
+  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY();
   hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX() + 1;
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY();
+  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() + 1;
   hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX() - 1;
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY();
+  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - 1;
   hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY() + 1;
-  hitbox.push_back(myCase);
-  myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getX();
-  myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager.getSystemByComponent(C_POSITION)->getComponent())->getY() - 1;
-  hitbox.push_back(myCase);
+  std::cout << "Hitbox ready" << std::endl;
   return (hitbox);
 }
