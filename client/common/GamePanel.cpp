@@ -354,20 +354,16 @@ void		GamePanel::display(std::vector<std::string> &vector)
   float realPosY = (posY * 16) + 50;
 
   id = std::atoi(vector.at(0).c_str());
-  if (realPosX >= 1920)
-    {
-      std::vector<std::string> v;
-      v.push_back(std::to_string(id));
-      static_cast<GamePanel*>(window->getPanels().top())->deleteEntity(v);
-    }
-  else
-    {
-      std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
-      if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
-	((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
-      //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
-    }
-
+  // if (realPosX >= 2000)
+  //   {
+  //     std::vector<std::string> v;
+  //     v.push_back(std::to_string(id));
+  //     static_cast<GamePanel*>(window->getPanels().top())->deleteEntity(v);
+  //   }
+  std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
+  if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
+    ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(realPosX, realPosY);
+  //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
