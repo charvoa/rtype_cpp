@@ -657,5 +657,5 @@ void		GamePanel::update()
     _labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
 
   i++;
-  
+
 }

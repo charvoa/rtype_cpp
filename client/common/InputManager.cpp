@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 17:42:36 2015 Nicolas Girardot
+// Last update Sat Dec 19 18:33:48 2015 Nicolas Girardot
 //
 
 #include <iostream>
@@ -195,8 +195,6 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickMovedInMenuAt(sf::E
   unsigned int		ratioXMovement = window->getSize()._x / 100;
   unsigned int		ratioYMovement = window->getSize()._y / 100;
 
-  // TODO
-  // ratio avec la vélocité du déplacement à voir (si j'appuie fort ou doucement sur le joystic de déplacement)
 
   if (this->isMouseInWindow(Vector2(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)))
     {

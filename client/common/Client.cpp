@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sat Dec 19 14:56:51 2015 Nicolas Girardot
+// Last update Sat Dec 19 18:10:56 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -37,7 +37,16 @@ void	*readdisp(void *s)
   while (true)
     {
       if (!(data = Client::getNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
-	std::cout << "Server Connection Lost" << std::endl;
+	{
+	  try
+	    {
+	      Client::getNetwork()->connect(RenderWindow::getInstance()->getSettings()->getIP());
+	    }
+	  catch (const std::exception & e)
+	    {
+
+	    }
+	}
       }
       else
 	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
