@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 12:09:15 2015 Louis Audibert
+// Last update Sat Dec 19 22:59:05 2015 Nicolas Charvoz
 //
 
 #include <AEntity.hh>
@@ -107,6 +107,11 @@ bool	AEntity::setParent(AEntity *parent)
 {
   _parent = parent;
   return (true);
+}
+
+AEntity	*AEntity::getParent()
+{
+  return _parent;
 }
 
 std::list<Case*>	AEntity::refreshHitbox()
