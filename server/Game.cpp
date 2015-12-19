@@ -273,7 +273,6 @@ void Game::handleShoot(void *data, Client *client)
     {
       type = E_MISSILE;
       component = C_MISSILE;
-      std::cout << "type received: E_MISSILE" << std::endl;
     }
   else if (weaponType == "E_LASER")
     {
