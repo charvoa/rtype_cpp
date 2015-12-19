@@ -29,6 +29,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   this->addClients(client_);
   _stage = 1;
   _nbDisplay = 0;
+  _isRunning = true;
 
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
@@ -101,21 +102,21 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
   std::pair<int, int> final;
 
   if (dir == "1")
-    final = std::make_pair(0, -1);
+    final = std::make_pair(0, -16);
   else if (dir == "3")
-    final = std::make_pair(1, -1);
+    final = std::make_pair(16, -16);
   else if (dir == "2")
-    final = std::make_pair(1, 0);
+    final = std::make_pair(16, 0);
   else if (dir == "6")
-    final = std::make_pair(1, 1);
+    final = std::make_pair(16, 16);
   else if (dir == "4")
-    final = std::make_pair(0, 1);
+    final = std::make_pair(0, 16);
   else if (dir == "12")
-    final = std::make_pair(-1, 1);
+    final = std::make_pair(-16, 16);
   else if (dir == "8")
-    final = std::make_pair(-1, 0);
+    final = std::make_pair(-16, 0);
   else if (dir == "9")
-    final = std::make_pair(-1, -1);
+    final = std::make_pair(-16, -16);
   else
     final = std::make_pair(0, 0);
   return final;
@@ -123,9 +124,9 @@ std::pair<int, int> Game::getDirections(const std::string &dir)
 
 bool Game::checkMove(int x, int y)
 {
-  if (x < 0 || x > 110)
+  if (x < sizeInGame::LENGHT_MIN || sizeInGame::LENGHT_MAX)
     return false;
-  else if (y < 0 || y > 49)
+  else if (y < sizeInGame::HEIGHT_MIN || y > sizeInGame::HEIGHT_MAX)
     return false;
   return true;
 }
@@ -138,7 +139,8 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  if (pPlayer->getY() <= 1 || pPlayer->getY() >= 49)
+  if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN || pPlayer->getY()
+      >= sizeInGame::HEIGHT_MAX)
     {
       this->updateLife(player, 2);
     }
@@ -330,6 +332,7 @@ void *readThread(void *sData)
 	}
       me->handleCommand(data, client);
     }
+  return NULL;
 }
 
 int Game::getNumberEnemyMax()
@@ -457,7 +460,7 @@ bool Game::run()
 
   _start = std::chrono::system_clock::now();
 
-  while (true)
+  while (_isRunning)
     {
       if (timerMonster.elapsed().count()>= (speed/_stage))
 	{
@@ -493,4 +496,13 @@ bool Game::run()
 const std::string &Game::getId() const
 {
   return _id;
+}
+
+void Game::deletePlayer()
+{
+  _nbLeft++;
+  if (_nbLeft >= static_cast<int>(_clients.size()))
+    {
+      _isRunning = false;
+    }
 }
