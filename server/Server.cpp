@@ -56,7 +56,12 @@ void Server::run()
       client = new Client(this->_network->select());
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
 	this->_network->unlistenSocket(client->getSocket());
-	_gameManager.getGameByClient(client)->deletePlayer();
+	try {
+	  _gameManager.getGameByClient(client)->deletePlayer();
+	} catch (const std::exception &e)
+	  {
+	    std::cout << e.what() << std::endl;
+	  }
 	continue;
       }
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
