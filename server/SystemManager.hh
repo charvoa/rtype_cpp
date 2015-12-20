@@ -19,6 +19,7 @@
 # include <SystemHealth.hh>
 # include <SystemGun.hh>
 # include <SystemHitbox.hh>
+# include <cstdlib>
 
 class SystemManager
 {

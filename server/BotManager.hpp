@@ -11,15 +11,15 @@
 #ifndef			_BOTMANAGER_HPP_
 # define		_BOTMANAGER_HPP_
 
-#ifdef _WIN32
-# include		<FileManagerWin.hpp>
-#else
-# include      		<FileManager.hpp>
+# ifdef _WIN32
+#  include		<FileManagerWin.hpp>
+# else
+#  include      		<FileManager.hpp>
+# endif
 # include		<string>
 # include		<list>
 # include		<Bot.hpp>
 # include		<EntityFactory.hh>
-#endif
 
 class			BotManager
 {

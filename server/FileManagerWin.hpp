@@ -9,6 +9,7 @@
 # include		<list>
 # include		<stdexcept>
 # include		<iostream>
+# pragma comment(lib, "User32.lib")
 
 class			FileManager
 {
@@ -27,10 +28,10 @@ public:
 	  size_t	length;
 
 	  StringCchLength(_dir.c_str(), MAX_PATH, &length);
-
+	 
 	  if (length > (MAX_PATH - 3))
 	  {
-		  std::cerr << ("Directory path is too long.") << std::endl;
+		  std::cout << ("Directory path is too long.") << std::endl;
 		  return;
 	 }
 
@@ -41,15 +42,19 @@ public:
 
 	  if (_handle == INVALID_HANDLE_VALUE)
 	  {
-		  std::cerr << "First file not found" << std::endl;
+		  std::cout << "First file not found" << std::endl;
 		  return;
 	  }
-
+	  std::cout << "Before loop" << std::endl;
 	  while (FindNextFile(_handle, &ffd) != 0)
 	  {
+		  if (!std::string(ffd.cFileName).compare("..") || !std::string(ffd.cFileName).compare("."))
+			  continue;
 		  _fileList.push_back(new File(_dir + ffd.cFileName));
+		  std::cout << ffd.cFileName << std::endl;
 	  }
-	  CloseHandle(_handle);
+	  system("PAUSE");
+	  //CloseHandle(_handle);
   };
 
   virtual		~FileManager(void) {
@@ -60,7 +65,7 @@ public:
 
     for (std::list<File*>::iterator it = this->_fileList.begin(); it != this->_fileList.end(); ++it) {
       if (!(*it)->getExtension().compare(ext))
-	list.push_back((*it));
+		list.push_back((*it));
     }
     return (list);
   };
