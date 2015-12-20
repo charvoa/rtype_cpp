@@ -358,6 +358,7 @@ void Game::updateMonster()
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
+      (*it)->update((*it)->refreshHitbox());
       if (pos->getX() < -10)
 	{
 	  deleteEntity(*it);
@@ -447,6 +448,7 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 24, p->getY());
+      (*it)->update((*it)->refreshHitbox());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
@@ -462,6 +464,7 @@ void Game::updateLaser()
       ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 
       (*it)->update(pPlayer->getX(), pPlayer->getY());
+      (*it)->update((*it)->refreshHitbox());
 
       auto startedAt = reinterpret_cast<Laser*>((*it))->getLaunchTime();
       auto now = std::chrono::system_clock::now();
@@ -478,9 +481,46 @@ void Game::updateMissile()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 8, p->getY());
+      (*it)->update((*it)->refreshHitbox());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
+}
+
+void Game::checkHitBox()
+{
+  std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
+  std::list<AEntity*> ammos = _eM.getAmmoEntities();
+
+  for (std::list<AEntity*>::iterator monsterIT = monsterList.begin();
+       monsterIT != monsterList.end();
+       ++monsterIT)
+    {
+      for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
+	   ammosIT != ammos.end();
+	   ++ammosIT)
+	{
+	  std::list<Case*> caseMonster = reinterpret_cast<ComponentHitbox*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
+	  std::list<Case*> caseAmmo = reinterpret_cast<ComponentHitbox*>((*ammosIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
+	  for (std::list<Case*>::iterator case1 = caseAmmo.begin();
+	       case1 != caseAmmo.end();
+	       ++case1)
+	    {
+	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
+		   case2 != caseMonster.end();
+		   ++case2)
+		{
+		  //		  std::cout <<  " MISSILE : (" << (*case2)->x << " , " << (*case2)->y << ") | BOT : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
+ 		  if (((*case2)->x == (*case1)->x) && ((*case2)->y == (*case1)->y))
+		    {
+		      std::cout << "CONTACT ENTRE MONSTRE ET AMMO" << std::endl;
+		      //    exit(0);
+		    }
+		}
+	    }
+	}
+    }
+
 }
 
 bool Game::run()
@@ -505,6 +545,7 @@ bool Game::run()
   // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
 
   std::this_thread::sleep_for(std::chrono::seconds(2));
+  int i = 0;
   while (_isRunning)
     {
       _start = std::chrono::system_clock::now();
@@ -513,12 +554,15 @@ bool Game::run()
       if (timerMonster.elapsed().count() >= (speed/_stage))
       	{
       	  timerMonster.reset();
-      	  this->addMonster();
-      	}
+      	  if (i == 0)
+	    this->addMonster();
+	  i = 1;
+	}
       this->updateMonster();
       this->updateRiffle();
       this->updateMissile();
       this->updateLaser();
+      this->checkHitBox();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
     }

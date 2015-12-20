@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sun Dec 20 05:51:21 2015 Louis Audibert
+// Last update Sun Dec 20 17:00:09 2015 Nicolas Charvoz
 //
 
 #include <AEntity.hh>
@@ -146,11 +146,12 @@ std::list<Case*>	AEntity::refreshHitbox()
       break;
     }
 
-  myCase = (Case*)std::malloc(sizeof(Case));
+  //  myCase = (Case*)std::malloc(sizeof(Case));
   if (height == 0)
     std::cout << "empty hitbox man !" << std::endl;
   while (i < height)
     {
+      myCase = new Case;
       myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
       myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() + i;
       hitbox.push_back(myCase);
@@ -159,10 +160,19 @@ std::list<Case*>	AEntity::refreshHitbox()
   i = 0;
   while (i < height)
     {
+      myCase = new Case;
       myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
       myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
       hitbox.push_back(myCase);
       i++;
+    }
+  std::cout << "HITBOX IN AENTtity.CPP" << std::endl;
+
+  for (std::list<Case*>::iterator it = hitbox.begin();
+       it != hitbox.end();
+       ++it)
+    {
+      std::cout << "X = " << (*it)->x << " Y = " << (*it)->y << std::endl;
     }
   return (hitbox);
 }

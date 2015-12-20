@@ -114,9 +114,10 @@ private:
   void updateMonster();
   void initPlayersPosition();
   void sendGameData();
+  void checkNewStage();
+  void checkHitBox();
   bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
-  void	checkNewStage();
 
 public:
   int getTimestamp() const {return _timestamp;};

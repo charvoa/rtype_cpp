@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Sat Dec 19 03:24:43 2015 Louis Audibert
+// Last update Sun Dec 20 16:37:48 2015 Nicolas Charvoz
 //
 
 #include <SystemManager.hh>
@@ -46,7 +46,7 @@ ASystem *SystemManager::getSystemByComponent(E_Component type)
       else if ((dynamic_cast<SystemHealth*>(*it)) && type == C_HEALTH)
 	return (*it);
       else if ((dynamic_cast<SystemHitbox*>(*it)) && type == C_HITBOX)
-	return (*it);
+	  return (*it);
     }
   return (NULL);
 }

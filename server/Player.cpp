@@ -15,6 +15,7 @@ Player::Player(int id, const Client &c) : AEntity(id)
   _name = "player" + std::to_string(id);
   addSystem(C_POSITION);
   addSystem(C_HEALTH);
+  addSystem(C_HITBOX);
 }
 
 Player::~Player() {}
