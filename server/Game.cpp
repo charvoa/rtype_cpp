@@ -551,10 +551,16 @@ void Game::deletePlayer()
 
 void Game::checkNewStage()
 {
-  std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
-  if (bots.size() == 0)
+  if (_nbDisplay == 0)
     {
       _nbDisplay = 0;
       _stage++;
+      std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
+      std::string sendData = std::to_string(_stage);
+      ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
+      for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
+	{
+	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+	}
     }
 }
