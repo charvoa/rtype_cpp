@@ -487,18 +487,35 @@ void Game::updateMissile()
     }
 }
 
+std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
+{
+  int saveMax = 0;
+  int saveMin = 0;
+  std::pair<int, int> final;
+
+  for (std::list<Case*>::iterator it = listCase.begin();
+       it != listCase.end();
+       ++it)
+    {
+      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
+      saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
+    }
+  final = std::make_pair(saveMin, saveMax);
+  return final;
+}
+
 void Game::checkHitBox()
 {
   std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
 
-  for (std::list<AEntity*>::iterator monsterIT = monsterList.begin();
-       monsterIT != monsterList.end();
-       ++monsterIT)
+  for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
+       ammosIT != ammos.end();
+       ++ammosIT)
     {
-      for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
-	   ammosIT != ammos.end();
-	   ++ammosIT)
+      for (std::list<AEntity*>::iterator monsterIT = monsterList.begin();
+	   monsterIT != monsterList.end();
+	   ++monsterIT)
 	{
 	  std::list<Case*> caseMonster = reinterpret_cast<ComponentHitbox*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
 	  std::list<Case*> caseAmmo = reinterpret_cast<ComponentHitbox*>((*ammosIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
@@ -510,11 +527,13 @@ void Game::checkHitBox()
 		   case2 != caseMonster.end();
 		   ++case2)
 		{
-		  //		  std::cout <<  " MISSILE : (" << (*case2)->x << " , " << (*case2)->y << ") | BOT : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
- 		  if (((*case2)->x == (*case1)->x) && ((*case2)->y == (*case1)->y))
+		  std::pair<int, int> limitY = getMaxAndMinOfList(caseMonster);
+		  //std::cout <<  " BOT : (" << (*case2)->x << " , " << (*case2)->y << ") | MISSILE : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
+ 		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= limitY.first) && ((*case1)->y <= limitY.second)))
 		    {
-		      std::cout << "CONTACT ENTRE MONSTRE ET AMMO" << std::endl;
-		      //    exit(0);
+		      std::cout << "J'ai pas toucheyyyy" << std::endl;
+		      deleteEntity(*monsterIT);
+		      _nbDisplay--;
 		    }
 		}
 	    }
@@ -545,7 +564,6 @@ bool Game::run()
   // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
 
   std::this_thread::sleep_for(std::chrono::seconds(2));
-  int i = 0;
   while (_isRunning)
     {
       _start = std::chrono::system_clock::now();
@@ -554,9 +572,7 @@ bool Game::run()
       if (timerMonster.elapsed().count() >= (speed/_stage))
       	{
       	  timerMonster.reset();
-      	  if (i == 0)
-	    this->addMonster();
-	  i = 1;
+	  this->addMonster();
 	}
       this->updateMonster();
       this->updateRiffle();
