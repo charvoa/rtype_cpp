@@ -116,6 +116,7 @@ private:
   void sendGameData();
   bool checkMove(int, int);
   std::pair<int, int> getDirections(const std::string &);
+  void	checkNewStage();
 
 public:
   int getTimestamp() const {return _timestamp;};

@@ -509,6 +509,7 @@ bool Game::run()
     {
       _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
+      this->checkNewStage();
       if (timerMonster.elapsed().count() >= (speed/_stage))
       	{
       	  timerMonster.reset();
@@ -545,5 +546,15 @@ void Game::deletePlayer()
     {
       std::cout << " I will quit" << std::endl;
       _isRunning = false;
+    }
+}
+
+void Game::checkNewStage()
+{
+  std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+  if (bots.size() == 0)
+    {
+      _nbDisplay = 0;
+      _stage++;
     }
 }
