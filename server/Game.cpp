@@ -290,7 +290,7 @@ void Game::handleShoot(void *data, Client *client)
 	  //	  sendNewEntity(type, id); // Send  Bullet created
 	}
 
-      
+
       AEntity *bullet = _eM.getEntityById(id);
       sendNewEntity(bullet->getName(), id); // Send  Bullet created
 
@@ -495,7 +495,7 @@ bool Game::run()
   _start = std::chrono::system_clock::now();
 
   int i = 0;
-  //while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+  while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
   while (_isRunning)
     {
       _start = std::chrono::system_clock::now();
