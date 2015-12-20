@@ -356,8 +356,13 @@ void Game::updateMonster()
 
   for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
-      // ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
+      if (pos->getX() < -10)
+	{
+	  deleteEntity(*it);
+	  _nbDisplay--;
+	}
     }
 }
 
