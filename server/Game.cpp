@@ -358,6 +358,7 @@ void Game::updateMonster()
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
+      (*it)->update((*it)->refreshHitbox());
       if (pos->getX() < -10)
 	{
 	  deleteEntity(*it);
