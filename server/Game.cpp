@@ -495,7 +495,9 @@ bool Game::run()
   _start = std::chrono::system_clock::now();
 
   int i = 0;
-  while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+  // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
+
+  std::this_thread::sleep_for(std::chrono::seconds(2));
   while (_isRunning)
     {
       _start = std::chrono::system_clock::now();
