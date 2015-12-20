@@ -229,7 +229,6 @@ void Game::sendNewEntity(const std::string &str, int id)
   ANetwork::t_frame	frame;
   std::string	sendData = str + ";" + std::to_string(id);
 
-  std::cout << "in sendNezEntity str sent : " << sendData << std::endl;
   frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
   for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
@@ -494,7 +493,7 @@ bool Game::run()
 
   _start = std::chrono::system_clock::now();
 
-  int i = 0;
+  //int i = 0;
   // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
 
   std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -513,7 +512,7 @@ bool Game::run()
       this->updateLaser();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
-      i++;
+      //i++;
     }
   return true;
 }
