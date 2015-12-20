@@ -260,22 +260,20 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   int	  	id = std::atoi(vector.at(1).c_str());
   Sprite	*newSprite = new Sprite();
   std::string  	type = vector.at(0);
-
+ 
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
   std::size_t found = type.find(":");
-  if (found == !std::string::npos)
+  if (found != std::string::npos)
     {
       int parent = 0;
-      std::cout << "LASERRRR" << std::endl;
       
       std::size_t pos = vector.at(0).find("player");
       parent = std::stoi(vector.at(0).substr(pos + 6)) - 1;
 
       std::string idString = vector.at(0).erase(1, 8);
-      type = std::stoi(idString) + parent;
-
-      std::cout << "" << std::endl;
       
+      type = std::to_string(std::stoi(idString) + parent);
+
       newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
       newSprite->setOrigin(0, (static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]->getSize()._y / 2);
     }

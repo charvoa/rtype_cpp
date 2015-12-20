@@ -286,11 +286,12 @@ void Game::handleShoot(void *data, Client *client)
       if (type != E_INVALID)
 	{
 	  id = _eM.createEntity(type, p);
-	  sendNewEntity(type, id); // Send  Bullet created
+	  std::cout << "OMICH" << std::endl;
+	  //	  sendNewEntity(type, id); // Send  Bullet created
 	}
 
+      
       AEntity *bullet = _eM.getEntityById(id);
-
       sendNewEntity(bullet->getName(), id); // Send  Bullet created
 
       ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
