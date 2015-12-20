@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Sat Dec 19 15:00:17 2015 Louis Audibert
+// Last update Sun Dec 20 14:35:28 2015 Nicolas Charvoz
 //
 
 #ifndef _AENTITY_HH_
@@ -13,6 +13,7 @@
 
 # include <iostream>
 # include <list>
+# include <chrono>
 # include <E_EntityType.hh>
 # include <E_Component.hh>
 # include <SystemManager.hh>
@@ -20,6 +21,7 @@
 
 class AEntity
 {
+
 protected:
   int		_id;
   E_EntityType	_type;

@@ -264,23 +264,23 @@ void Game::handleShoot(void *data, Client *client)
 
       Player *p = this->getPlayerByClient(client);
       E_EntityType type = E_INVALID;
-      E_Component component = C_INVALID;
+      //      E_Component component = C_INVALID;
       int	id;
 
       if (weaponType == "E_RIFLE")
 	{
 	  type = E_RIFLE;
-	  component = C_RIFLE;
+	  // component = C_RIFLE;
 	}
       else if (weaponType == "E_MISSILE")
 	{
 	  type = E_MISSILE;
-	  component = C_MISSILE;
+	  //component = C_MISSILE;
 	}
       else if (weaponType == "E_LASER")
 	{
 	  type = E_LASER;
-	  component = C_LASER;
+	  //component = C_LASER;
 	}
 
       if (type != E_INVALID)
@@ -357,7 +357,7 @@ void Game::updateMonster()
 
   for (std::list<AEntity *>::iterator it = bots.begin(); it != bots.end(); ++it)
     {
-      ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      // ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
     }
 }
@@ -459,7 +459,10 @@ void Game::updateLaser()
 
       (*it)->update(pPlayer->getX(), pPlayer->getY());
 
-      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+      auto startedAt = reinterpret_cast<Laser*>((*it))->getLaunchTime();
+      auto now = std::chrono::system_clock::now();
+      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - startedAt);
+      if (duration.count() >= 1000)
 	deleteEntity(*it);
     }
 }
@@ -494,9 +497,6 @@ bool Game::run()
 
   _start = std::chrono::system_clock::now();
 
-  int i = 0;
-  // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
-
   std::this_thread::sleep_for(std::chrono::seconds(2));
   while (_isRunning)
     {
@@ -513,7 +513,6 @@ bool Game::run()
       this->updateLaser();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));
-      i++;
     }
   return true;
 }
