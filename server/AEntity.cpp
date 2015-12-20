@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Sat Dec 19 15:00:46 2015 Louis Audibert
+// Last update Sun Dec 20 05:26:17 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -124,9 +124,32 @@ std::list<Case*>	AEntity::refreshHitbox()
   std::list<Case*> hitbox;
   Case	*myCase;
   int	i = 0;
+  int	height = 0;
+
+  if (_name == "sprite3.png")
+    height = 74;
+  else if (_name == "sprite6.png")
+    height = 82;
+  else if (_name == "sprite1.png")
+    height = 15;
+
+  switch (_type)
+    {
+    case E_LASER:
+      height = 17;
+      break;
+    case E_PLAYER:
+      height = 44;
+      break;
+    default:
+      height = 5;
+      break;
+    }
 
   myCase = (Case*)std::malloc(sizeof(Case));
-  while (i < 10)
+  if (height == 0)
+    std::cout << "empty hitbox man !" << std::endl;
+  while (i < height)
     {
       myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
       myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() + i;
@@ -134,7 +157,7 @@ std::list<Case*>	AEntity::refreshHitbox()
       i++;
     }
   i = 1;
-  while (i < 10)
+  while (i < height)
     {
       myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
       myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
