@@ -5,11 +5,6 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec  7 00:54:35 2015 Louis Audibert
-<<<<<<< HEAD
-// Last update Sun Dec 20 16:38:48 2015 Nicolas Charvoz
-=======
-// Last update Sun Dec 20 07:10:11 2015 Louis Audibert
->>>>>>> 552b730d25c20f089732f4a681fbfc0002191495
 //
 
 #include <iostream>
