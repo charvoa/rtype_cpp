@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Mon Dec 21 02:32:35 2015 Louis Audibert
+// Last update Mon Dec 21 04:13:59 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -26,6 +26,7 @@ SystemManager::SystemManager(SystemManager *copy)
       ASystem *tmp = (ASystem*)std::malloc(sizeof(ASystem));
       std::memset(tmp, 0, sizeof(ASystem));
       std::memcpy(tmp, (*it), sizeof(ASystem));
+      std::memcpy(tmp->getComponent(), (*it)->getComponent(), sizeof(AComponent));
       _systems.push_back(tmp);
     }
 }

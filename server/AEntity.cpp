@@ -162,9 +162,6 @@ std::list<Case*>	AEntity::refreshHitbox()
     // //   break;
     }
 
-  //  myCase = (Case*)std::malloc(sizeof(Case));
-  if (height == 0)
-    std::cout << "empty hitbox man !" << std::endl;
   while (i < height)
     {
       myCase = new Case;
