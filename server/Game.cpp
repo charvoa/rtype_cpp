@@ -549,6 +549,13 @@ void Game::checkHitBox()
  		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= limitY.first) && ((*case1)->y <= limitY.second)))
 		    {
 		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
+		      Player *p;
+
+		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
+			  != nullptr)
+			{
+			  this->updateScore(p, scoreDef::KILLED);
+			}
 		      deleteEntity(*monsterIT);
 		      _nbDisplay--;
 		    }
