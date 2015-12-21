@@ -166,7 +166,7 @@ void Game::checkWall(Player *player)
 
 void Game::handleMove(void *data, Client *client)
 {
-  std::cout << "Game :: handleMove" << std::endl;
+  //  std::cout << "Game :: handleMove" << std::endl;
   ComponentPosition *pPlayer;
   try {
     Player *player = this->getPlayerByClient(client);
@@ -210,7 +210,7 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 
 void Game::updateLife(Player *p, int reset)
 {
-  std::cout << "UPDATE LIFE " << std::endl;
+  //  std::cout << "UPDATE LIFE " << std::endl;
   ComponentHealth *hP =
     reinterpret_cast<ComponentHealth*>(p->getSystemManager()
 				       ->getSystemByComponent(C_HEALTH)
@@ -274,7 +274,7 @@ void Game::handleShoot(void *data, Client *client)
 
   if (_start < _start + std::chrono::milliseconds(100))
     {
-      std::cout << "Game :: handleShoot" << std::endl;
+      //      std::cout << "Game :: handleShoot" << std::endl;
       std::string weaponType =
 	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
@@ -299,30 +299,28 @@ void Game::handleShoot(void *data, Client *client)
 	  //component = C_LASER;
 	}
 
+      AEntity *bullet;
+
       if (type != E_INVALID)
 	{
 	  id = _eM.createEntity(type, p);
-	  std::cout << "OMICH" << std::endl;
-	  //	  sendNewEntity(type, id); // Send  Bullet created
-	}
+	  bullet = _eM.getEntityById(id);
+	  sendNewEntity(bullet->getName(), id); // Send  Bullet created
 
+	  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+	  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
 
-      AEntity *bullet = _eM.getEntityById(id);
-      sendNewEntity(bullet->getName(), id); // Send  Bullet created
+	  std::stringstream ss;
+	  ss << bullet->getName();
 
-      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+	  //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
 
-      std::stringstream ss;
-      ss << bullet->getName();
-
-      std::cout << "ss >> " << ss.str().c_str() << std::endl;
-
-      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
-	{
-	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+	  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+	  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	    {
+	      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+	    }
 	}
     }
 }
@@ -336,7 +334,7 @@ void Game::handleCommand(void *data, Client *client)
     Func fp = _funcMap[commandType];
     (this->*fp)(data, client);
   } catch (const std::exception &e) {
-    std::cout << "Cannot achieve this action" << std::endl;
+    std::cout << e.what() << std::endl;
   }
 }
 
@@ -390,7 +388,7 @@ void Game::addMonster()
 
   if (_nbDisplay < getNumberEnemyMax())
     {
-      std::cout << "Add Monster" << std::endl;
+      //      std::cout << "Add Monster" << std::endl;
       Random r(0, _botList.size());
 
       int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
@@ -398,8 +396,8 @@ void Game::addMonster()
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
-  else
-    std::cout << "Monster Full for this Stage" << std::endl;
+  else {}
+  //    std::cout << "Monster Full for this Stage" << std::endl;
 }
 
 void Game::initPlayersPosition()
@@ -550,7 +548,7 @@ void Game::checkHitBox()
 		  //std::cout <<  " BOT : (" << (*case2)->x << " , " << (*case2)->y << ") | MISSILE : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
  		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= limitY.first) && ((*case1)->y <= limitY.second)))
 		    {
-		      std::cout << "J'ai pas toucheyyyy" << std::endl;
+		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
 		      deleteEntity(*monsterIT);
 		      _nbDisplay--;
 		    }

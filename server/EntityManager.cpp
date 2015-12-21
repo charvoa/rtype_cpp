@@ -108,7 +108,6 @@ std::list<AEntity*>  EntityManager::getEntities()
 
 AEntity	*EntityManager::getEntityById(int id)
 {
-  std::cout << "Id I want to get in getEnetityById : " << id << std::endl;
   for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if (id == (*it)->getId())
