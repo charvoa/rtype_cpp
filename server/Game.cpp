@@ -559,14 +559,25 @@ void Game::checkHitBox()
 		    {
 		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
 		      Player *p;
-		      deleteEntity(*monsterIT);
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
 			  != nullptr)
 			{
 			  this->updateScore(p, scoreDef::KILLED);
 			  deleteEntity(*ammosIT);
 			  //			  isBreakable = true;
-			  std::cout << "J'ai touch" << std::endl;
+			  std::stringstream ss;
+
+			  ss << p->getId();
+			  ss << ";";
+			  ss << (*monsterIT)->getId();
+			  ANetwork::t_frame frame = CreateRequest::create(S_DIE, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+			  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+			  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+			    {
+			      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+			    }
+			  deleteEntity(*monsterIT);
+
 			  isBreak = true;
 			  break;
 			}
