@@ -20,7 +20,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   : _params(params_), _id(id_), _botList(botList_)
 {
   srand(time(NULL));
-
+  _canAddMonster = true;
   _mutex = new Mutex();
   this->_clients = client_;
   this->_network = new Network();
@@ -386,7 +386,7 @@ void Game::addMonster()
 {
   std::stringstream ss;
 
-  if (_nbDisplay < getNumberEnemyMax())
+  if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
     {
       //      std::cout << "Add Monster" << std::endl;
       Random r(0, _botList.size());
@@ -396,7 +396,8 @@ void Game::addMonster()
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
-  else {}
+  else
+    _canAddMonster = false;
   //    std::cout << "Monster Full for this Stage" << std::endl;
 }
 
@@ -549,6 +550,13 @@ void Game::checkHitBox()
  		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= limitY.first) && ((*case1)->y <= limitY.second)))
 		    {
 		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
+		      Player *p;
+
+		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
+			  != nullptr)
+			{
+			  this->updateScore(p, scoreDef::KILLED);
+			}
 		      deleteEntity(*monsterIT);
 		      _nbDisplay--;
 		    }
@@ -644,6 +652,7 @@ void Game::checkNewStage()
 {
   if (_nbDisplay == 0)
     {
+      _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
       std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);

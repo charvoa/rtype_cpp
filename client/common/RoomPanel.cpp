@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sat Dec 19 14:45:09 2015 Serge Heitzler
+// Last update Mon Dec 21 10:51:35 2015 Nicolas Girardot
 //
 
 #include <thread>
@@ -80,7 +80,7 @@ void		setFileProgression(int p, void *data)
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-//  usleep(1000000);
+  usleep(1000000);
 //  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
