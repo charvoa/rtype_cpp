@@ -16,17 +16,24 @@ endif(CMAKE_COMPILER_IS_GNUCC)
 
 include_directories(. ../common Room ../common/Thread)
 
-add_executable( server_rtype
+add_executable(server_rtype
   main.cpp
   Server.cpp
-  Health.cpp
+  ComponentHealth.cpp
+  ComponentMissile.cpp
+  ComponentLaser.cpp
+  ComponentRiffle.cpp
+  ComponentPosition.cpp
+  ComponentHitbox.cpp
+  ComponentShield.cpp
   Missile.cpp
+  Riffle.cpp
   Laser.cpp
-  Rifle.cpp
-  Position.cpp
   SystemHealth.cpp
   SystemPos.cpp
   SystemGun.cpp
+  SystemHitbox.cpp
+  SystemShield.cpp
   SystemManager.cpp
   AEntity.cpp
   EntityManager.cpp
@@ -36,6 +43,7 @@ add_executable( server_rtype
   Room/RoomManager.cpp
   PlayerFactory.cpp
   Player.cpp
+  Monitoring.cpp
   Client.cpp
   ../common/Thread/ThreadFactory.cpp
   Parameters.cpp
@@ -48,4 +56,4 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
 find_package (Threads)
 
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_THREAD_LIBS_INIT} "-ldl")

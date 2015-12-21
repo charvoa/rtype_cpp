@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Sat Dec  5 16:51:01 2015 Joris Bertomeu
+// Last update Fri Dec 11 22:38:39 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
@@ -49,6 +49,7 @@ public :
   virtual ISocket	*select() = 0;
   virtual void		listenSocket(ISocket *socket) = 0;
   virtual void		unlistenSocket(ISocket *socket) = 0;
+  virtual ISocket	*getSocket() = 0;
 };
 
 #endif

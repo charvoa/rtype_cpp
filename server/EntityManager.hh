@@ -5,18 +5,19 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:08:09 2015 Louis Audibert
-// Last update Tue Dec  8 22:18:40 2015 Nicolas Charvoz
 //
 
 #ifndef _ENTITYMANAGER_HH_
 # define _ENTITYMANAGER_HH_
 
-# include <vector>
+# include <list>
 # include <iostream>
 # include <EntityFactory.hh>
 # include <AEntity.hh>
 # include <E_EntityType.hh>
 # include <PlayerFactory.hh>
+# include <Bot.hpp>
+# include <Random.hpp>
 
 class EntityManager
 {
@@ -24,20 +25,23 @@ private:
   int		_id;
   EntityFactory _entityFactory;
   PlayerFactory _playerFactory;
-  std::vector<AEntity*> _entities;
+  std::list<AEntity*> _entities;
 
 public:
   EntityManager();
   ~EntityManager();
 
-  bool		createEntity(E_EntityType type);
-  bool		createEntity(E_EntityType type, const Client &);
-  bool		createEntitiesFromFolder(const std::string &filename, E_EntityType type);
-  void		removeEntity(AEntity &entity);
+  int		createEntity(E_EntityType type);
+  int		createEntity(E_EntityType type,  Client &);
+  int		createEntity(E_EntityType type, AEntity *);
+  //int		createEntitiesFromFolder( std::string &filename, E_EntityType type);
+  int		createEntitiesFromFolder(std::list<Bot*> bots, int iterator);
+  void		removeEntity(AEntity *entity);
   void		removeEntityById(int id);
-  AEntity	*getEntityById(int id);
-  std::vector<AEntity*> getEntitiesByType(E_EntityType type);
-  void		update();
+  std::list<AEntity*>  getEntities() ;
+  AEntity	*getEntityById(int id) ;
+  std::list<AEntity*>  getEntitiesByType(E_EntityType type) ;
+  std::list<AEntity*>  getAmmoEntities() ;
 };
 
 #endif /* _ENTITYMANAGER_HH_ */

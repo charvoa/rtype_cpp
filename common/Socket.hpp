@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Thu Dec 10 22:58:29 2015 Nicolas Charvoz
+// Last update Mon Dec 14 20:08:39 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -23,6 +23,7 @@
 # include	<arpa/inet.h>
 # include	<iostream>
 # include	<stdlib.h>
+# include	<ANetwork.hpp>
 
 class		Socket : public ISocket
 {
@@ -63,13 +64,24 @@ class		Socket : public ISocket
   };
 
   void		*read(int size) {
+    int		toto;
+
     if (this->_mode == SOCK_STREAM)
-      return (this->read_tcp(size));
+      return (this->read_tcp(size, &toto));
     else
-      return (this->read_udp(size));
+      return (this->read_udp(size, &toto));
+  };
+
+  void		*read(int size, int *fill) {
+    if (this->_mode == SOCK_STREAM)
+      return (this->read_tcp(size, fill));
+    else
+      return (this->read_udp(size, fill));
   };
 
   int		write(void *data, int size) {
+    if (!data)
+      return (0);
     if (this->_mode == SOCK_STREAM)
       return (this->write_tcp(data, size));
     else
@@ -85,26 +97,33 @@ class		Socket : public ISocket
     return (this->_fd);
   };
 
+  bool		isEqualTo(ISocket *s) {
+    if (!memcmp(&(this->_me.sin_addr), &(dynamic_cast<Socket*>(s)->_me.sin_addr), sizeof(this->_me.sin_addr)) &&
+	this->_me.sin_port == dynamic_cast<Socket*>(s)->_me.sin_port)
+      return (true);
+    return (false);
+  };
+
 private:
-  void		*read_tcp(int size) {
+  void		*read_tcp(int size, int *fill) {
     void	*data;
 
     data = malloc(size + 1);
     bzero(data, size + 1);
-    if (::read(this->_fd, data, size) <= 0) {
+    if ((*fill = ::read(this->_fd, data, size)) <= 0) {
       this->close();
       return (NULL);
     }
     return (data);
   };
 
-  void		*read_udp(int size) {
+  void		*read_udp(int size, int *fill) {
     void	*data;
     socklen_t	meSize = sizeof(struct sockaddr_in);
 
     data = malloc(size + 1);
     bzero(data, size + 1);
-    ::recvfrom(this->_fd, data, size, 0, (struct sockaddr*) &_me, &meSize);
+    *fill = ::recvfrom(this->_fd, data, size, 0, (struct sockaddr*) &_me, &meSize);
     if (&(this->_me) != NULL)
       this->_init = true;
     return (data);

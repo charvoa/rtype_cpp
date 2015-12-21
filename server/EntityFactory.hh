@@ -5,14 +5,21 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 01:52:27 2015 Louis Audibert
-// Last update Tue Dec  8 05:03:47 2015 Louis Audibert
+// Last update Wed Dec 16 02:29:39 2015 Louis Audibert
 //
 
 #ifndef _ENTITYFACTORY_HH_
 # define _ENTITYFACTORY_HH_
 
 # include <AEntity.hh>
-# include <DLLoader.hpp>
+# include <Riffle.hh>
+# include <Missile.hh>
+# include <Laser.hh>
+# ifdef _WIN32
+#  include <DynLibLoaderWin.hpp>
+# else
+#  include <DynLibLoader.hpp>
+# endif
 
 class EntityFactory
 {
@@ -22,6 +29,7 @@ public:
 
   AEntity *createEntity(int &id);
   AEntity *createEntity(const std::string &filename, int &id);
+  AEntity *createEntity(int &id, E_EntityType type);
 };
 
 #endif /* _ENTITYFACTORY_HH_ */

@@ -5,14 +5,14 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:56:26 2015 Serge Heitzler
-// Last update Mon Dec  7 12:17:43 2015 Serge Heitzler
+// Last update Sat Dec 19 09:40:03 2015 Serge Heitzler
 //
 
-#include "Sprite.hh"
+#include <Sprite.hh>
 
 Sprite::Sprite()
 {
-  
+  _isScale = false;
 }
 
 Sprite::~Sprite()
@@ -43,6 +43,7 @@ void			Sprite::setPosition(float x, float y)
 void			Sprite::scale(float ratio)
 {
   _sprite.scale(ratio, ratio);
+  _isScale = true;
 }
 
 void			Sprite::setOrigin(float x, float y)
@@ -61,17 +62,47 @@ void			Sprite::rotate(float angle)
   _sprite.rotate(angle);
 }
 
+void			Sprite::setIfScale(bool value)
+{
+  _isScale = value;
+}
+
+bool			Sprite::isScale()
+{
+  return _isScale;
+}
+
 sf::Sprite     		&Sprite::getSprite()
 {
   return _sprite;
 }
 
-std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>>     		Sprite::getGlobalBounds()
+std::pair<std::pair<int, int>, std::pair<int, int>>     		Sprite::getGlobalBounds()
 {
-  unsigned int	posX = _sprite.getGlobalBounds().left;
-  unsigned int	posY = _sprite.getGlobalBounds().top;
-  unsigned int  width = _sprite.getGlobalBounds().width;
-  unsigned int  height = _sprite.getGlobalBounds().height;
+  int	posX = _sprite.getGlobalBounds().left;
+  int	posY = _sprite.getGlobalBounds().top;
+  int  width = _sprite.getGlobalBounds().width;
+  int  height = _sprite.getGlobalBounds().height;
 
   return std::make_pair(std::make_pair(posX, posY), std::make_pair(width, height));
+}
+
+float		Sprite::getPosX() const
+{
+	return (_sprite.getPosition().x);
+}
+
+float		Sprite::getPosY() const
+{
+	return (_sprite.getPosition().y);
+}
+
+float		Sprite::getWidth() const
+{
+	return (_sprite.getGlobalBounds().width);
+}
+
+float		Sprite::getHeight() const
+{
+	return (_sprite.getGlobalBounds().height);
 }

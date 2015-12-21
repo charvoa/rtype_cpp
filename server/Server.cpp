@@ -34,6 +34,15 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_JOIN_ROOM, &Server::joinRoom);
   this->_commandManager.addFunction(C_LAUNCH_GAME, &Server::createGame);
   this->_commandManager.addFunction(C_PLAYER_LEFT, &Server::playerLeftRoom);
+
+  this->_botManager = new BotManager("../libs/");
+  this->_roomManager.setBotManager(this->_botManager->getBotList());
+  this->_monitoring.start(this);
+  // std::list<Bot*> toto = this->_botManager->getBotList();
+  // for (std::list<Bot*>::iterator it = toto.begin();
+  //      it != toto.end(); ++it) {
+  //   std::cout << ">> " << ((*it)->_sprite) << std::endl;
+  // }
 }
 
 void Server::run()
@@ -47,18 +56,28 @@ void Server::run()
       client = new Client(this->_network->select());
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
 	this->_network->unlistenSocket(client->getSocket());
+	try {
+	  _gameManager.getGameByClient(client)->deletePlayer(client);
+	} catch (const std::exception &e)
+	  {
+	    std::cout << e.what() << std::endl;
+	    try{
+	      _roomManager.getRoomByClient(client).deletePlayer(client);
+	    }
+	    catch(const std::exception &ee){
+	      std::cout << ee.what() << std::endl;
+	    }
+	  }
 	continue;
       }
-      //std::cout << std::string(((ANetwork::t_frame*) data)->data) << std::endl;
-      //client->getSocket()->write((void*) CreateRequest::create(1, 2, 3, "Thank you !", true), sizeof(ANetwork::t_frame));
       this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
 					   client, this);
     }
 }
 
-void sendMessage(std::vector<Client *> &c ,unsigned char type)
+void sendMessage(std::list<Client *> &c ,unsigned char type)
 {
-   for (std::vector<Client *>::iterator it = c.begin();
+   for (std::list<Client *>::iterator it = c.begin();
 	 it != c.end() ; ++it)
       {
 	ANetwork::t_frame frame = CreateRequest::create(type,
@@ -77,48 +96,34 @@ void *newGameThread(void *data)
   Server *me = s->server;
 
   Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
-  std::vector<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
+  std::list<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   std::stringstream ss;
-  int i = 0;
 
-
-  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port)))
+  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port,
+				   me->_botManager->getBotList())))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
-
-
-
-      //JORIS LA J4ENVOIE LE PORT SUR LE QUEL SE CONNECTER MAIS ENSUITE JE SAIS PAS OU PLACER LENVOI DE L'ID
-
-      for (std::vector<Client *>::iterator it = c.begin();
+      for (std::list<Client *>::iterator it = c.begin();
 	   it != c.end() ; ++it)
 	{
 	  ss << me->_port;
 	  ss << ";";
-	  ss << "0";
-	  std::cout << "DATA SEND : " << ss.str().c_str() << std::endl;
-	  ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)S_INIT_UDP,
+	  ss << (*it)->getSocket()->getFd();
+	  ANetwork::t_frame frameToSend = CreateRequest::create((unsigned char)
+								S_INIT_UDP,
 								CRC::calcCRC(ss.str().c_str()),
-								0,
+								ss.str().size(),
 								ss.str().c_str());
 	  (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),
 				    sizeof(ANetwork::t_frame));
+	  std::cout << "Writing on socket : "
+		    << ((ANetwork::t_frame*)&frameToSend)->data << std::endl;
 	  ss.str("");
 	  ss.clear();
 	}
-
-
-
-
-
-
       me->_roomManager.deleteRoom(s->frame.data);
       me->_gameManager.getGameById(s->frame.data).run();
-
-
-
-
     }
   else
     {
@@ -139,14 +144,14 @@ bool Server::createGame(ANetwork::t_frame frame, void *data)
 
 
   // TELL CLIENT WHO HE IS FOR UDP
-  std::vector<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
+  std::list<Client *> c = _roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
   t1->attach(&newGameThread, reinterpret_cast<void*>(s));
   t1->run();
-  t1->join();
+  // t1->join();
 
   return true;
 }
@@ -165,8 +170,15 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
    Client	*client = reinterpret_cast<Client *>(data);
 
    std::cout << "SERVER :: JoinRoom" << std::endl;
+   try {
    _roomManager.getRoombyId(frame.data).addPlayer(client);
-
+   }catch(const std::exception &e)
+     {
+       std::string sendData = e.what();
+       ANetwork::t_frame frameToSend = CreateRequest::create(S_JOIN_ERROR, CRC::calcCRC(sendData), 0, sendData);
+       client->getSocket()->write(reinterpret_cast<void *>(&frameToSend), sizeof(ANetwork::t_frame));
+       std::cout << e.what() << std::endl;
+     }
    return true;
 }
 

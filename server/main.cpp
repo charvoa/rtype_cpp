@@ -4,12 +4,12 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Last update Wed Dec  9 06:47:17 2015 Louis Audibert
+// Last update Tue Dec 15 05:33:29 2015 Joris Bertomeu
 // Last update Mon Nov 30 05:50:36 2015 Antoine Garcia
 //
 
-# include	<Server.hh>
-# include	<EntityManager.hh>
+#include	<Server.hh>
+#include	<EntityManager.hh>
 #ifdef __unix__
 # include	<ThreadUnix.hpp>
 #elif defined(_WIN32) || defined(WIN32)
@@ -19,6 +19,7 @@
 #include <Mutex.hpp>
 #include <ANetwork.hpp>
 #include <CreateRequest.hpp>
+#include <Bot.hpp>
 
 int		main(int ac, char **av)
 {

@@ -5,7 +5,6 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:41:04 2015 Nicolas Charvoz
-// Last update Thu Dec 10 19:07:20 2015 Nicolas Charvoz
 //
 
 #ifndef GAMEMANAGER_HH_
@@ -17,16 +16,22 @@ class GameManager {
 
 private:
 
-  std::vector<Game> _games;
+  std::list<Game> _games;
 
-  public:
+public:
 
   GameManager();
   ~GameManager();
-  bool createGame(const Parameters&, std::vector<Client *>&,
-		  const std::string&, int);
+  bool createGame(const Parameters&, std::list<Client *>&,
+		  const std::string&, int, std::list<Bot*>);
   Game &getGameById(const std::string&);
-  Game &getGameByClient(const Client &);
+  Game *getGameByClient(Client *);
+  int	getNbGames() const {
+    return (this->_games.size());
+  };
+  std::list<Game>	getGames() const {
+    return (this->_games);
+  };
 };
 
 #endif

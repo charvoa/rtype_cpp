@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:41 2015 Serge Heitzler
-// Last update Thu Dec 10 14:47:50 2015 Serge Heitzler
+// Last update Sun Dec 13 11:10:07 2015 Serge Heitzler
 //
 
 #ifndef RENDERWINDOW_HH_
@@ -27,7 +27,7 @@ public:
   void				close();
   bool				isOpen();
   bool				pollEvent(sf::Event& event);
-  bool			        waitEvent(sf::Event& event);
+  bool			    waitEvent(sf::Event& event);
   Vector2		   	getSize() const;
   void				setVerticalSyncEnabled(bool value);
   void				setMouseCursorVisible(bool value);
@@ -38,10 +38,11 @@ public:
   void				clear(const sf::Color &color = sf::Color(0, 0, 0, 255));
   void				addPanel(PanelFactory::PanelType);
   void				back();
-  Settings			*getSettings();
+  Settings			*getSettings() const;
   void				setSettings(Settings*);
   void				setWindow(sf::VideoMode, std::string const& title);
   std::stack<APanel*>		&getPanels();
+  void				setActive(bool value);
 
   Ressources			*_ressources;
   

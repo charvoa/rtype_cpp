@@ -5,23 +5,24 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:23:44 2015 Louis Audibert
-// Last update Tue Dec  8 22:23:43 2015 Nicolas Charvoz
+// Last update Mon Dec 21 01:33:53 2015 Louis Audibert
 //
 
 #include <SystemGun.hh>
 
 SystemGun::SystemGun(E_Component type)
 {
+  _type = type;
   switch (type)
     {
-    case E_LASER:
-      _component = new Laser();
+    case C_LASER:
+      _component = new ComponentLaser();
       break;
-    case E_RIFLE:
-      _component = new Rifle();
+    case C_RIFLE:
+      _component = new ComponentRiffle();
       break;
-    case E_MISSILE:
-      _component = new Missile();
+    case C_MISSILE:
+      _component = new ComponentMissile();
       break;
     default:
       break;
@@ -30,5 +31,9 @@ SystemGun::SystemGun(E_Component type)
 
 SystemGun::~SystemGun()
 {
-  std::cout << "System Gun Destroyed" << std::endl;
+}
+
+E_Component SystemGun::getType()
+{
+  return (_type);
 }

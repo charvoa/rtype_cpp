@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:23:59 2015 Joris Bertomeu
-// Last update Wed Dec  9 15:25:19 2015 Nicolas Charvoz
+// Last update Fri Dec 11 22:39:21 2015 Joris Bertomeu
 //
 
 #ifndef				__NETWORKWIN_HPP__
@@ -14,7 +14,7 @@
 # include			<ANetwork.hpp>
 # include			<SocketWin.hpp>
 # include			<list>
-# inclue			<ProtocoleEnum>
+# include			<ProtocoleEnum.hh>
 # define			_WINSOCK_DEPRECATED_NO_WARNINGS 1
 
 class				Network : public ANetwork
@@ -149,6 +149,10 @@ public:
 	  this->_fdSize -= 1;
 	  this->_sList.remove(socket);
     FD_CLR(socket->getFd(), &_fdList);
+  };
+
+  virtual ISocket			*getSocket() {
+    return (this->_socket);
   };
 };
 

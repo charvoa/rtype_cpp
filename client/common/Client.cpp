@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Thu Dec 10 23:36:40 2015 Serge Heitzler
+// Last update Mon Dec 21 10:34:20 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -24,35 +24,41 @@
 #include <chrono>
 #include <thread>
 #include <Ressources.hh>
-
+#include <GamePanel.hh>
 
 ANetwork	*Client::_network = NULL;
 ANetwork	*Client::_UDPnetwork = NULL;
-Sound *Client::_sound = NULL;
+Sound		*Client::_sound = NULL;
 
 void	*readdisp(void *s)
 {
-  ANetwork::t_frame a;
+  RenderWindow *window = RenderWindow::getInstance();
   ProtocoleClient x;
+  void	*data;
   while (true)
     {
-      std::cout << "Thread" << std::endl;
-      try
+      if (!(data = Client::getNetwork()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
 	{
-	  a = Client::getNetwork()->read();
-	  std::cout << "Data Is " << a.data << std::endl;
-	  x.methodChecker(a);
-	}
-      catch (const std::exception &e)
-	{
-	  std::cout << e.what() << std::endl;
-	}
-    }
+	  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color::Red);
+	  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString("Connection lost !");
+	  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
+	  try
+	    {
+	      Client::getNetwork()->connect(RenderWindow::getInstance()->getSettings()->getIP());
+	    }
+	  catch (const std::exception & e)
+	    {
 
+	    }
+	}
+      }
+      else
+	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
+    }
   return s;
 }
 
-Client::Client()
+Client::Client(int port) : _port(port)
 {
 
 }
@@ -64,67 +70,73 @@ Client::~Client()
 
 void	Client::Start()
 {
-  RenderWindow *window = RenderWindow::getInstance();
+  //Creating Everything
 
+  RenderWindow *window = RenderWindow::getInstance();
   _network = new Network();
   _UDPnetwork = new Network();
-  _network->init(4253, ANetwork::TCP_MODE);
-  _network->connect("0");
+  _sound = new Sound();
+
+  //Connecting to server
+
+  _network->init(window->getSettings()->getPort(), ANetwork::TCP_MODE);
+  std::cout << "I p IS : " << window->getSettings()->getIP() << " And port is " << window->getSettings()->getPort() << std::endl;
+  _network->connect(window->getSettings()->getIP());
+
+  //Sending Handshake
 
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
   _network->write(sender);
-  
-  //  _network->connect("10.16.252.241");
-  _UDPnetwork->init(4254, ANetwork::UDP_MODE);
-  //_UDPnetwork->connect("0");
 
-  Texture	*splashScreenTexture = new Texture();
-  Sprite	*splashScreen = new Sprite();
+  //Creating SF::window
 
-  splashScreenTexture->loadFromFile("../common/misc/background.png");
-  splashScreen->setTexture(*splashScreenTexture);
-  splashScreen->setPosition(0, 0);
-  splashScreen->scale(1.1);
-
-  
   window->setWindow(sf::VideoMode(1920, 1080, 32), "R-Pint");
   window->setFramerateLimit(60);
   window->clear();
 
+  //Creating Textures for splash screen
+
+  Texture	*splashScreenTexture = new Texture();
+  Sprite	*splashScreen = new Sprite();
+
+  splashScreenTexture->loadFromFile("../common/misc/splash_screen.png");
+  splashScreen->setTexture(*splashScreenTexture);
+  splashScreen->setPosition(0, 0);
+
+  //Display Splash screen and loading Ressources
+
   window->draw(splashScreen->getSprite());
   window->display();
-
   window->_ressources = new Ressources();
-
-
   //sleep(2);
-  int i = 255;
-  while (i >= 0)
-    {
-      splashScreen->getSprite().setColor(sf::Color(i, i, i, 255));
-      window->draw(splashScreen->getSprite());
-      window->display();
-      i--;
-    }
 
-  std::cout << "IIL" << std::endl;
   window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  std::cout << "IIL" << std::endl;
   window->getPanels().top()->setUserInterface();
-  
 
-  _sound = new Sound();
-  _sound->registerMusic("../common/misc/menuMusic.ogg", "mainMenu");
+  //Adding & playing music for Menu
+
+  _sound->registerSound("../common/misc/mouseHover.ogg", "hover");
+  _sound->registerSound("../common/misc/accessDenied.ogg", "denied");
+  _sound->registerSound("../common/misc/metalDoorOpen.ogg", "door");
+  _sound->registerMusic("../common/misc/laserSound.ogg", "riffle");
+  _sound->registerSound("../common/misc/rocketSound.ogg", "missile");
+  _sound->registerSound("../common/misc/megaLaser1.ogg", "laser");
+  _sound->registerMusic("../common/misc/menuMusic1.ogg", "mainMenu");
+  _sound->registerSound("../common/misc/explosion1.ogg", "explosion1");
+  _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
+  _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
   _sound->playMusic("mainMenu");
+
+  //Threading the Read
+
   std::unique_ptr<AThread> t(new Thread(1));
   char str1[] = "";
   (void) str1;
   t->attach(&readdisp, (void *)str1);
   t->run();
 
+  //Main Loop
 
-
-  
   while(window->isOpen())
     {
       window->getPanels().top()->update();
@@ -136,6 +148,9 @@ void	Client::Start()
       	  window->getPanels().top()->getInputManager().methodChecker(event);
       	}
     }
+
+  //Closing Thread and Window
+
   t->cancel();
   _network->close();
 }

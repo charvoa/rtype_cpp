@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Dec  7 03:02:01 2015 Serge Heitzler
-// Last update Thu Dec 10 23:30:52 2015 Serge Heitzler
+// Last update Sat Dec 12 06:23:27 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -33,5 +33,48 @@ void			ButtonFactory::create(Vector2 pos, std::string &title)
   (RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
 
   (RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(*text);
+
+}
+
+Slider			*ButtonFactory::createSlider(Vector2 pos, std::string& title, float xmin, float xmax)
+{
+	Slider		*button = new Slider(title);
+
+	button->setState(Button::StateButton::NORMAL);
+
+	button->setLimit(xmin, xmax);
+	button->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_sliderNormal);
+	button->getSprite().scale(0.7);
+	button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_sliderNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_sliderNormal->getSize()._y / 2);
+	button->getSprite().setPosition(pos._x, pos._y);
+
+	(RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
+
+	(RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(Text());
+	return (button);
+}
+
+void			ButtonFactory::createKeyButton(Vector2 pos, std::string &title, unsigned int id)
+{
+	KeyButton		*button = new KeyButton();
+	Text		       	*text = new Text();
+
+	text->setString(title);
+	button->setId(id);
+	text->setSize(25);
+	text->setStyle(1);
+	text->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
+	text->setPosition(pos);
+	text->setColor(Color::WHITE);
+
+	button->setState(Button::StateButton::NORMAL);
+
+	button->getSprite().setTexture(*(RenderWindow::getInstance())->_ressources->_keyButtonNormal);
+	button->getSprite().scale(0.7);
+	button->getSprite().setOrigin((RenderWindow::getInstance())->_ressources->_keyButtonNormal->getSize()._x / 2, (RenderWindow::getInstance())->_ressources->_keyButtonNormal->getSize()._y / 2);
+	button->getSprite().setPosition(pos._x, pos._y);
+	(RenderWindow::getInstance())->getPanels().top()->getUserInterface().push_back(button);
+
+	(RenderWindow::getInstance())->getPanels().top()->getLabels().push_back(*text);
 
 }

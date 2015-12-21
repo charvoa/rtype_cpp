@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Thu Dec 10 20:57:08 2015 Nicolas Charvoz
+// Last update Sun Dec 20 06:29:01 2015 Antoine Garcia
 //
 
 
@@ -18,6 +18,7 @@
 # include <algorithm>
 # include <random>
 # include <RoomManager.hh>
+# include <Random.hpp>
 
 RoomManager::RoomManager() : _rooms(0)
 {}
@@ -29,34 +30,26 @@ std::string	RoomManager::generateId()
 {
   std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   std::string id;
-  std::random_device rd;
-  std::mt19937 mt(rd());
-  std::uniform_int_distribution<int> dist(0, str.size() - 1);
+  Random	random(str);
   for (int i = 0; i < 4; i++)
     {
-      int	random_variable = dist(mt);
-      id += str[random_variable];
+
+      id += random.generate<char>();
     }
   return id;
 }
 
 void	RoomManager::createNewRoom(Client *client)
 {
-  Room	room(generateId(), client);
+  Room	room(generateId(), client, this->_botManager);
   _rooms.push_back(room);
-  std::string	sendData = "player1;" + room.getId() + ";1";
-  ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
-						  CRC::calcCRC(sendData),
-						  0, sendData);
-  client->getSocket()->write(reinterpret_cast<void *>(&frame),
-			     sizeof(ANetwork::t_frame));
   std::cout << "Create Room With Id" << room.getId() << std::endl;
 }
 
 Room&	RoomManager::getRoombyId(const std::string &id)
 {
   // return _rooms.front();
-  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+  for (std::list<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
 	return (*it);
@@ -64,9 +57,27 @@ Room&	RoomManager::getRoombyId(const std::string &id)
   throw std::logic_error("No room with this id found");
 }
 
+Room&	RoomManager::getRoomByClient(Client *c)
+{
+  for (std::list<Room>::iterator it = _rooms.begin();
+       it != _rooms.end();
+       ++it)
+    {
+      std::list<Client*> myList = (*it).getAllPlayers();
+      for (std::list<Client*>::iterator it2 = myList.begin();
+	   it2 != myList.end();
+	   it2++)
+	{
+	  if ((*it2)->getSocket()->getFd() == c->getSocket()->getFd())
+	    return (*it);
+	}
+    }
+  throw std::logic_error("Room with this client not found");
+}
+
 bool	RoomManager::roomExists(const std::string &id)
 {
-  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+  for (std::list<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
 	return (true);
@@ -76,7 +87,7 @@ bool	RoomManager::roomExists(const std::string &id)
 
 void	RoomManager::deleteRoom(const std::string &id)
 {
-  for (std::vector<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
+  for (std::list<Room>::iterator it = _rooms.begin(); it != _rooms.end(); ++it)
     {
       if((*it).getId() == id)
 	{
@@ -85,4 +96,9 @@ void	RoomManager::deleteRoom(const std::string &id)
 	  return;
 	}
     }
+}
+
+void		RoomManager::setBotManager(std::list<Bot*> bots)
+{
+  this->_botManager = bots;
 }

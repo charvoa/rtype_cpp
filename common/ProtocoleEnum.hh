@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Thu Dec 10 20:58:16 2015 Nicolas Charvoz
+// Last update Sun Dec 20 06:54:47 2015 Antoine Garcia
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -26,7 +26,6 @@ typedef enum E_Command
     C_LOAD_SPRITE_SUCCESS = 11,
     C_LOAD_SPRITE_ERROR = 12,
     C_LOAD_SPRITE_IN_PROGRESS = 13,
-    C_SEND_MD5 = 14
   } E_Command;
 
 typedef enum RequestFromServer
@@ -47,11 +46,22 @@ typedef enum RequestFromServer
     S_PLAYER_DEAD = 113,
     S_LIFE = 114,
     S_SCORE = 115,
-    S_NEW_WAVE = 116,
+    S_SET_CURRENT_WAVE = 116,
     S_END_GAME = 117,
     S_LOAD_SPRITES = 118,
-    S_CHECK_MD5 = 119,
-    S_FILE_TOTAL_SIZE = 120
+    S_FILE_TOTAL_SIZE = 119,
+    S_NEW_ENTITY = 120,
+    S_SHOOT = 121,
+    S_DOWNLOAD_COMPLETE = 122,
+    S_DELETE_ENTITY = 123,
+    S_PLAYER_LEFT_IG = 124,
+    S_NEW_WAVE = 125
   } RequestFromServer;
+
+typedef enum RequestFromMonitoring
+  {
+    M_LIST_GAMES = 100,
+    M_GET_GAME_INFO = 101
+  } RequestFromMonitoring;
 
 #endif /* PROTOCOLEENUM_HH_ */

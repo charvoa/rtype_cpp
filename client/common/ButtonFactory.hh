@@ -17,12 +17,16 @@
 #include <Text.hh>
 #include <RenderWindow.hh>
 #include <Color.hh>
+#include <Slider.hh>
+#include <KeyButton.hh>
 
 class	        ButtonFactory
 {
 public:
 
   static void			create(Vector2 pos, std::string &title);
+  static Slider			*createSlider(Vector2 pos, std::string& title, float xmin, float xmax);
+  static void			createKeyButton(Vector2 pos, std::string &title, unsigned int id);
 private:
 
 };

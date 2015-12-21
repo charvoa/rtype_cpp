@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:09 2015 Viveka BARNEAUD
-// Last update Wed Dec  9 09:25:40 2015 Serge Heitzler
+// Last update Wed Dec 16 05:26:45 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -16,6 +16,8 @@
 APanel::APanel()
 {
   std::cout << "CONSTRUCTOR APANEL" << std::endl;
+  RenderWindow *window = RenderWindow::getInstance();
+  window->setMouseCursorVisible(true);
 }
 
 APanel::~APanel()
@@ -50,6 +52,41 @@ bool		APanel::updateOnPress(std::pair<unsigned int, unsigned int> pair)
       i++;
     }
   return false;
+}
+
+// bool		APanel::updateOnPressInGame(std::pair<unsigned int, unsigned int> pair)
+// {
+//   unsigned int		i = 0;
+//   while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+//     {
+//       if (this->_userInterface.at(i)->updateOnPress(pair))
+// 	{
+// 	  (*this.*_functions.at(i))();
+// 	  return true;
+// 	}
+//       i++;
+//     }
+//   return false;
+// }
+
+void		APanel::setKeyButton(sf::Event event)
+{
+	unsigned int		i = 0;
+	while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+	{
+		this->_userInterface.at(i)->setBind(event);
+		i++;
+	}
+}
+
+void		APanel::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
+{
+	unsigned int		i = 0;
+	while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+	{
+		this->_userInterface.at(i)->updateOnRelease(pair);
+		i++;
+	}
 }
 
 void		APanel::render()
@@ -132,4 +169,30 @@ std::vector<Sprite>			&APanel::getInGame()
 InputManager	&APanel::getInputManager()
 {
   return _inputManager;
+}
+
+void			APanel::setEffectsVolume(int vol)
+{
+	(void)vol;
+}
+
+void			APanel::setGlobalVolume(int vol)
+{
+	(void)vol;
+}
+
+void			APanel::setMusicVolume(int vol)
+{
+	(void)vol;
+}
+
+typedef void(APanel::*funcs)();
+std::vector<funcs>	&APanel::getFunctions()
+{
+  return _functions;
+}
+
+int	APanel::getType()
+{
+	return _type;
 }

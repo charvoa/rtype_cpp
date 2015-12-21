@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec  2 16:53:07 2015 Nicolas Girardot
-// Last update Thu Dec 10 14:59:30 2015 Serge Heitzler
+// Last update Wed Dec 16 06:22:09 2015 Serge Heitzler
 //
 
 #include <JoinPanel.hh>
@@ -27,6 +27,8 @@ JoinPanel::~JoinPanel() {}
 void	        JoinPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
+  _type = PanelFactory::JOIN_PANEL;
+  window->getSettings()->dumpBinds();
   getInputManager().setInputType(InputType::JOIN_INPUT);
 
   Sprite *backgroundSpace = new Sprite;
@@ -73,10 +75,11 @@ void	        JoinPanel::setUserInterface()
   Text		       	*id = new Text();
   
   id->setString("");
-  id->setSize(50);
+  id->setSize(60);
   id->setStyle(1);
   id->setOrigin(id->getText().getGlobalBounds().width / 2, id->getText().getGlobalBounds().height / 2);
   id->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+  id->setFont(*((RenderWindow::getInstance())->_ressources->_fontSecond));
   id->setColor(Color::WHITE);
   _labels.push_back(*id);
 
@@ -89,6 +92,26 @@ void	        JoinPanel::setUserInterface()
   text->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.3));
   text->setColor(Color::WHITE);
   _labels.push_back(*text);
+
+
+  Text		       	*error = new Text();
+  
+  error->setString("");
+  error->setSize(40);
+  error->setStyle(1);
+  error->setOrigin(text->getText().getGlobalBounds().width / 2, text->getText().getGlobalBounds().height / 2);
+  error->setFont(*((RenderWindow::getInstance())->_ressources->_fontSecond));
+  error->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.4));
+  error->setColor(Color::RED);
+  _labels.push_back(*error);
+
+
+  _alpha = 0;
+}
+
+int		JoinPanel::getType()
+{
+	return (PanelFactory::PanelType)_type;
 }
 
 void    JoinPanel::join()
@@ -122,4 +145,40 @@ void    JoinPanel::updateOnTextEntered(int key)
   _labels.at(2).setString(_room);
   _labels.at(2).setOrigin(_labels.at(2).getText().getGlobalBounds().width / 2, _labels.at(2).getText().getGlobalBounds().height / 2);
   _labels.at(2).setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.5));
+}
+
+void	JoinPanel::setError(const std::string &error)
+{
+
+  Sound *s = Client::getSound();
+  RenderWindow *window = RenderWindow::getInstance();
+  static_cast<JoinPanel*>(window->getPanels().top())->setAlpha(255);
+  static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).setString(error);
+
+
+  static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).setOrigin(static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).getText().getGlobalBounds().width / 2, static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).getText().getGlobalBounds().height / 2);
+
+  
+  static_cast<JoinPanel*>(window->getPanels().top())->getLabels().at(4).getText().setColor(sf::Color(255, 0, 0, static_cast<JoinPanel*>(window->getPanels().top())->getAlpha()));
+
+  s->playSound("denied");  
+}
+
+void	        JoinPanel::update()
+{
+  if (_alpha > 0)
+    {
+      _labels.at(4).getText().setColor(sf::Color(255, 0, 0, _alpha));
+      _alpha--;
+    } 
+}
+
+int	JoinPanel::getAlpha()
+{
+  return _alpha;
+}
+
+void	JoinPanel::setAlpha(int value)
+{
+  _alpha = value;
 }

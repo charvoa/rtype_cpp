@@ -4,23 +4,24 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Thu Dec  3 05:18:09 2015 Louis Audibert
+// Started on  Sun Dec 13 05:07:55 2015 Louis Audibert
+// Last update Sun Dec 20 16:37:58 2015 Nicolas Charvoz
 //
 
 #include <Laser.hh>
 
-Laser::Laser()
+Laser::Laser(int id) : AEntity(id)
 {
-  _dmg = 100;
+  addSystem(C_POSITION);
+  addSystem(C_HITBOX);
+  _launchTime = std::chrono::system_clock::now();
 }
 
 Laser::~Laser()
 {
-  std::cout << "Laser Component Destroyed" << std::endl;
+
 }
 
-int	Laser::getDamages() const
-{
-  return (_dmg);
+std::chrono::time_point<std::chrono::system_clock> Laser::getLaunchTime() const {
+  return _launchTime;
 }

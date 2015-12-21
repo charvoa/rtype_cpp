@@ -19,8 +19,9 @@
 class SettingsLoader : public IParser
 {
 public:
+	SettingsLoader(bool);
   SettingsLoader(const std::string & filepath);
-  ~SettingsLoader();
+  virtual ~SettingsLoader();
 
   std::string getValueOf(const std::string &) const;
   std::string getValueOfKey(const std::string &) const;
@@ -35,33 +36,34 @@ public:
   int         getMusicVolume() const;
   std::vector<std::string>	getKeys() const;
   std::vector<std::string>	getJoysticks() const;
-  std::vector<Bind>   getBinds() const;
+  std::vector<Bind*>   getBinds() const;
 
   Settings::Difficulty    getDefaultDifficulty() const;
-  std::vector<Bind>		createDefaultBinds() const;
+  std::vector<Bind*>		createDefaultBinds() const;
 
   void    saveSettings(Settings *) const;
 
   int     stringToInteger(std::string const&) const;
   sf::Keyboard::Key	stringToKey(std::string const&) const;
-  sf::Joystick::Axis stringToJoystick(std::string const&) const;
+  JoystickEvent	stringToJoystick(std::string const&) const;
 
   bool	keyExists(std::string const&) const;
   bool	axisExists(std::string const&) const;
+  bool	joystickIsEqual(JoystickEvent const&, JoystickEvent const&) const;
 
   std::string keyToString(sf::Keyboard::Key) const;
-  std::string joystickToString(sf::Joystick::Axis) const;
+  std::string joystickToString(JoystickEvent) const;
   std::string bindTypeToString(Bind::BindType) const;
   std::string bindToString(Bind) const;
   std::string settingsToString(Settings const&) const;
+  std::string difficultyToString(Settings::Difficulty) const;
 
 private:
   const std::string _filepath;
   bool    _fileExists;
   std::map<std::string, sf::Keyboard::Key> _stringKeys;
-  std::map<std::string, sf::Joystick::Axis> _stringAxis;
+  std::map<std::string, JoystickEvent> _stringAxis;
   std::ifstream   *_ifs;
-  std::ofstream   *_ofs;
 };
 
 #endif // SETTINGSLOADER_HH

@@ -5,15 +5,15 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Dec  2 05:57:07 2015 Serge Heitzler
-// Last update Mon Dec  7 10:46:07 2015 Serge Heitzler
+// Last update Sat Dec 19 09:35:33 2015 Serge Heitzler
 //
 
 #ifndef SPRITE_HH_
 #define SPRITE_HH_
 
 #include <map>
-#include "ISprite.hh"
-#include "Color.hh"
+#include <ISprite.hh>
+#include <Color.hh>
 
 class		      Sprite : public ISprite
 {
@@ -30,12 +30,19 @@ public:
   void			move(float x, float y);
   void			rotate(float angle);
   void			setTextureRect(float posX, float posY, float width, float height);
-  std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>>			getGlobalBounds();
+  std::pair<std::pair<int, int>, std::pair<int, int>>			getGlobalBounds();
   sf::Sprite		&getSprite();
-  
+  void		        setIfScale(bool value);
+  bool		        isScale();
+  float			getPosX() const;
+  float			getPosY() const;
+  float			getWidth() const;
+  float			getHeight() const;
+
 private:
 
   sf::Sprite		_sprite;
+  bool			_isScale;
 
 };
 

@@ -13,7 +13,7 @@
 
 LoadingPanel::LoadingPanel() : APanel()
 {
-    Settings    *settings = new Settings("PersonnalConfig.ini");
+    Settings    *settings = new Settings("PersonalConfig.ini");
 
     (void) settings;
     // create InputManager with settings

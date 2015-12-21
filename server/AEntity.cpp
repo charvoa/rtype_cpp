@@ -5,25 +5,25 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Wed Dec  9 06:51:57 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
 
 AEntity::AEntity(int id) : _id(id)
 {
-  std::cout << "new AEntity created !" << std::endl;
+  _systemManager = new SystemManager();
 }
 
-AEntity::~AEntity()
+AEntity::AEntity(int id, AEntity *parent)
 {
-  std::cout << "AEntity Destroyed" << std::endl;
+  _id = id;
+  _parent = parent;
 }
 
 bool	AEntity::update(int x, int y)
 {
-  if (_systemManager.getSystemByComponent(E_POSITION))
-    dynamic_cast<SystemPos*>(_systemManager.getSystemByComponent(E_POSITION))->update(x, y);
+  if (_systemManager->getSystemByComponent(C_POSITION))
+    dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(x, y);
   else
     return (false);
   return (true);
@@ -31,23 +31,39 @@ bool	AEntity::update(int x, int y)
 
 bool	AEntity::update(int health)
 {
-  if (_systemManager.getSystemByComponent(E_HEALTH))
-    dynamic_cast<SystemHealth*>(_systemManager.getSystemByComponent(E_HEALTH))->update(health);
+  if (_systemManager->getSystemByComponent(C_HEALTH))
+    dynamic_cast<SystemHealth*>(_systemManager->getSystemByComponent(C_HEALTH))->update(health);
   else
     return (false);
   return (true);
 }
 
-// void	AEntity::update()
-// {
+bool	AEntity::update(std::list<Case*> hitbox)
+{
+  if (_systemManager->getSystemByComponent(C_HITBOX))
+    dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(hitbox);
+  else
+    return (false);
+  return (true);
+}
 
-// }
+bool	AEntity::update(bool shield)
+{
+  if (_systemManager->getSystemByComponent(C_SHIELD))
+    dynamic_cast<SystemShield*>(_systemManager->getSystemByComponent(C_SHIELD))->update(shield);
+  else
+    return (false);
+  return (true);
+}
 
 void	AEntity::addSystem(E_Component type)
 {
-  std::cout << "before calling the systemManager.addSystemByType(" << type << ")" << std::endl;
-  _systemManager.addSystemByType(type);
-  std::cout << "after calling addSystemByType" << std::endl;
+  _systemManager->addSystemByType(type);
+}
+
+void	AEntity::removeSystem(E_Component type)
+{
+  _systemManager->removeSystemByType(type);
 }
 
 bool	AEntity::setType(E_EntityType type)
@@ -66,7 +82,114 @@ int	AEntity::getId() const
   return (_id);
 }
 
+void	AEntity::setId(int id)
+{
+  _id = id;
+}
+
 SystemManager	*AEntity::getSystemManager()
 {
-  return (&_systemManager);
+  return (_systemManager);
+}
+
+void		AEntity::refreshSystemManager()
+{
+  SystemManager *newSystem = new SystemManager(_systemManager);
+  _systemManager = newSystem;
+}
+
+bool		AEntity::checkColision(AEntity *entity)
+{
+  (void) entity;
+  return (true);
+}
+
+const std::string &AEntity::getName() const
+{
+  return (_name);
+}
+
+void	AEntity::setName(std::string name)
+{
+  _name = name;
+}
+
+bool	AEntity::setParent(AEntity *parent)
+{
+  _parent = parent;
+  return (true);
+}
+
+AEntity	*AEntity::getParent()
+{
+  return _parent;
+}
+
+std::list<Case*>	AEntity::refreshHitbox()
+{
+  std::list<Case*> hitbox;
+  Case	*myCase;
+  int	i = 0;
+  int	height = 0;
+
+  if (_name == "sprite1.png")
+    height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
+  else if (_name == "sprite3.png")
+    height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
+  if (_name == "sprite3.png")
+    height = 74;
+  else if (_name == "sprite6.png")
+    height = 82;
+  else
+    height = 10;
+
+  switch (_type)
+    {
+    case E_LASER:
+      height = 17;
+      break;
+    case E_PLAYER:
+      height = 44;
+      break;
+    default:
+      height = 10;
+      break;
+    //  // case E_MISSILE:
+    // //   height = 5;
+    // //   break;
+    // // case E_RIFLE:
+    // //   height = 5;
+    // //   break;
+    }
+
+  while (i < height)
+    {
+      myCase = new Case;
+      myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+      myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
+      hitbox.push_back(myCase);
+      i++;
+    }
+  //  i = 0;
+  // while (i < height)
+  //   {
+  //     myCase = new Case;
+  //     myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
+  //     myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
+  //     hitbox.push_back(myCase);
+  //     i++;
+  //   }
+  // std::cout << "HITBOX IN AENTtity.CPP" << std::endl;
+
+  // for (std::list<Case*>::iterator it = hitbox.begin();
+  //      it != hitbox.end();
+  //      ++it)
+  //   {
+  //     std::cout << "X = " << (*it)->x << " Y = " << (*it)->y << std::endl;
+  //   }
+  return (hitbox);
 }

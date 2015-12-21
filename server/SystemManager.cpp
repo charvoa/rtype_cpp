@@ -5,30 +5,51 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Wed Dec  9 06:48:09 2015 Louis Audibert
+// Last update Mon Dec 21 05:30:11 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
+#include <string.h>
+#include <cstring>
 
 SystemManager::SystemManager()
 {
 
 }
 
+SystemManager::SystemManager(SystemManager *copy)
+{
+  for (std::list<ASystem*>::const_iterator it = copy->_systems.begin(); it != copy->_systems.end(); ++it)
+    {
+      if (!(*it))
+	break;
+      ASystem *tmp = (ASystem*)std::malloc(sizeof(ASystem));
+      AComponent *comp = (AComponent*)std::malloc(sizeof(AComponent));
+      std::memset(tmp, 0, sizeof(ASystem));
+      std::memcpy(tmp, (*it), sizeof(ASystem));
+      comp = tmp->getComponent();
+      std::memcpy(comp, (*it)->getComponent(), sizeof(AComponent));
+      _systems.push_back(tmp);
+    }
+}
+
 SystemManager::~SystemManager()
 {
-  std::cout << "SystemManager Destroyed." << std::endl;
 }
 
 ASystem *SystemManager::getSystemByComponent(E_Component type)
 {
-  for (std::vector<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
+  for (std::list<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
     {
-      if ((dynamic_cast<SystemGun*>(*it)) && (type == E_MISSILE || type == E_RIFLE || type == E_LASER))
+      if ((dynamic_cast<SystemGun*>(*it)) && (type == C_MISSILE || type == C_RIFLE || type == C_LASER))
 	return (*it);
-      else if ((dynamic_cast<SystemPos*>(*it)) && type == E_POSITION)
+      else if ((dynamic_cast<SystemPos*>(*it)) && type == C_POSITION)
 	return (*it);
-      else if ((dynamic_cast<SystemHealth*>(*it)) && type == E_HEALTH)
+      else if ((dynamic_cast<SystemHealth*>(*it)) && type == C_HEALTH)
+	return (*it);
+      else if ((dynamic_cast<SystemHitbox*>(*it)) && type == C_HITBOX)
+	return (*it);
+      else if ((dynamic_cast<SystemShield*>(*it)) && type == C_SHIELD)
 	return (*it);
     }
   return (NULL);
@@ -40,15 +61,30 @@ void	SystemManager::addSystemByType(E_Component type)
     {
       switch (type)
 	{
-	case E_POSITION:
+	case C_POSITION:
 	  _systems.push_back(new SystemPos());
 	  break;
-	case E_HEALTH:
+	case C_HEALTH:
 	  _systems.push_back(new SystemHealth());
+	  break;
+	case C_HITBOX:
+	  _systems.push_back(new SystemHitbox());
+	  break;
+	case C_SHIELD:
+	  _systems.push_back(new SystemShield());
 	  break;
 	default:
 	  _systems.push_back(new SystemGun(type));
 	  break;
 	}
+    }
+}
+
+void	SystemManager::removeSystemByType(E_Component type)
+{
+  for (std::list<ASystem*>::iterator it = _systems.begin(); it != _systems.end(); ++it)
+    {
+      if (dynamic_cast<SystemGun*>(*it)->getType() == type)
+	_systems.erase(it);
     }
 }

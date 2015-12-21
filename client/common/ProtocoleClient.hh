@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Thu Dec 10 17:06:30 2015 Nicolas Girardot
+// Last update Mon Dec 21 03:06:09 2015 Serge Heitzler
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -23,6 +23,7 @@ public:
   ~ProtocoleClient();
 
   void			initProtocoleClient();
+  void			initUDP(ANetwork::t_frame &frame);
   void			handshake(ANetwork::t_frame &frame);
   void			display(ANetwork::t_frame &frame);
   void			createRoom(ANetwork::t_frame &frame);
@@ -33,6 +34,7 @@ public:
   void			playerLeft(ANetwork::t_frame &frame);
   void			changeHost(ANetwork::t_frame &frame);
   void			die(ANetwork::t_frame &frame);
+  void			newEnemy(ANetwork::t_frame &frame);
   void			playerDead(ANetwork::t_frame &frame);
   void			life(ANetwork::t_frame &frame);
   void	       		score(ANetwork::t_frame &frame);
@@ -43,6 +45,12 @@ public:
   void			createRoomSuccess(ANetwork::t_frame &frame);
   void			createRoomError(ANetwork::t_frame &frame);
   void			gameNotLaunched(ANetwork::t_frame &frame);
+  void			fileTotalSize(ANetwork::t_frame &frame);
+  void			shoot(ANetwork::t_frame &frame);
+  void			newEntity(ANetwork::t_frame &frame);
+  void			deleteEntity(ANetwork::t_frame &frame);
+  void			playerLeftIG(ANetwork::t_frame &frame);
+  void			downloadComplete(ANetwork::t_frame &frame);
 
 private:
 

@@ -8,13 +8,155 @@
 // Last update Thu Dec  3 13:19:53 2015 Serge Heitzler
 //
 
-#include <cstdlib>
+#include <iostream>
 #include "SettingsLoader.hh"
+
+SettingsLoader::SettingsLoader(bool write)
+{
+	_ifs = NULL;
+	if (write == false)
+	{
+		_stringKeys["0"] = sf::Keyboard::Num0;
+		_stringKeys["1"] = sf::Keyboard::Num1;
+		_stringKeys["2"] = sf::Keyboard::Num2;
+		_stringKeys["3"] = sf::Keyboard::Num3;
+		_stringKeys["4"] = sf::Keyboard::Num4;
+		_stringKeys["5"] = sf::Keyboard::Num5;
+		_stringKeys["6"] = sf::Keyboard::Num6;
+		_stringKeys["7"] = sf::Keyboard::Num7;
+		_stringKeys["8"] = sf::Keyboard::Num8;
+		_stringKeys["9"] = sf::Keyboard::Num9;
+		_stringKeys["0"] = sf::Keyboard::Num0;
+		_stringKeys["UP"] = sf::Keyboard::Up;
+		_stringKeys["DOWN"] = sf::Keyboard::Down;
+		_stringKeys["LEFT"] = sf::Keyboard::Left;
+		_stringKeys["RIGHT"] = sf::Keyboard::Right;
+		_stringKeys["SPACE"] = sf::Keyboard::Space;
+		_stringKeys["ESC"] = sf::Keyboard::Escape;
+		_stringKeys["RETURN"] = sf::Keyboard::Return;
+		_stringKeys["A"] = sf::Keyboard::A;
+		_stringKeys["Z"] = sf::Keyboard::Z;
+		_stringKeys["E"] = sf::Keyboard::E;
+		_stringKeys["R"] = sf::Keyboard::R;
+		_stringKeys["T"] = sf::Keyboard::T;
+		_stringKeys["Y"] = sf::Keyboard::Y;
+		_stringKeys["U"] = sf::Keyboard::U;
+		_stringKeys["I"] = sf::Keyboard::I;
+		_stringKeys["O"] = sf::Keyboard::O;
+		_stringKeys["P"] = sf::Keyboard::P;
+		_stringKeys["Q"] = sf::Keyboard::Q;
+		_stringKeys["S"] = sf::Keyboard::S;
+		_stringKeys["D"] = sf::Keyboard::D;
+		_stringKeys["F"] = sf::Keyboard::F;
+		_stringKeys["G"] = sf::Keyboard::G;
+		_stringKeys["H"] = sf::Keyboard::H;
+		_stringKeys["J"] = sf::Keyboard::J;
+		_stringKeys["K"] = sf::Keyboard::K;
+		_stringKeys["L"] = sf::Keyboard::L;
+		_stringKeys["M"] = sf::Keyboard::M;
+		_stringKeys["W"] = sf::Keyboard::W;
+		_stringKeys["X"] = sf::Keyboard::X;
+		_stringKeys["C"] = sf::Keyboard::C;
+		_stringKeys["V"] = sf::Keyboard::V;
+		_stringKeys["B"] = sf::Keyboard::B;
+		_stringKeys["N"] = sf::Keyboard::N;
+		_stringKeys["PAD 0"] = sf::Keyboard::Numpad0;
+		_stringKeys["PAD 1"] = sf::Keyboard::Numpad1;
+		_stringKeys["PAD 2"] = sf::Keyboard::Numpad2;
+		_stringKeys["PAD 3"] = sf::Keyboard::Numpad3;
+		_stringKeys["PAD 4"] = sf::Keyboard::Numpad4;
+		_stringKeys["PAD 5"] = sf::Keyboard::Numpad5;
+		_stringKeys["PAD 6"] = sf::Keyboard::Numpad6;
+		_stringKeys["PAD 7"] = sf::Keyboard::Numpad7;
+		_stringKeys["PAD 8"] = sf::Keyboard::Numpad8;
+		_stringKeys["PAD 9"] = sf::Keyboard::Numpad9;
+
+		_stringAxis["UP"] = JoystickEvent(sf::Joystick::X);
+		_stringAxis["DOWN"] = JoystickEvent(sf::Joystick::X);
+		_stringAxis["LEFT"] = JoystickEvent(sf::Joystick::Y);
+		_stringAxis["RIGHT"] = JoystickEvent(sf::Joystick::Y);
+		_stringAxis["X"] = JoystickEvent(0);
+		_stringAxis["Y"] = JoystickEvent(2);
+		_stringAxis["A"] = JoystickEvent(1);
+		_stringAxis["B"] = JoystickEvent(3);
+		_stringAxis["L1"] = JoystickEvent(sf::Joystick::Z);
+		_stringAxis["L2"] = JoystickEvent(sf::Joystick::Z);
+		_stringAxis["R1"] = JoystickEvent(sf::Joystick::R);
+		_stringAxis["R2"] = JoystickEvent(sf::Joystick::R);
+		return;
+	}
+	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
+	_stringKeys["1_KEY"] = sf::Keyboard::Num1;
+	_stringKeys["2_KEY"] = sf::Keyboard::Num2;
+	_stringKeys["3_KEY"] = sf::Keyboard::Num3;
+	_stringKeys["4_KEY"] = sf::Keyboard::Num4;
+	_stringKeys["5_KEY"] = sf::Keyboard::Num5;
+	_stringKeys["6_KEY"] = sf::Keyboard::Num6;
+	_stringKeys["7_KEY"] = sf::Keyboard::Num7;
+	_stringKeys["8_KEY"] = sf::Keyboard::Num8;
+	_stringKeys["9_KEY"] = sf::Keyboard::Num9;
+	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
+	_stringKeys["ARROW_UP_KEY"] = sf::Keyboard::Up;
+	_stringKeys["ARROW_DOWN_KEY"] = sf::Keyboard::Down;
+	_stringKeys["ARROW_LEFT_KEY"] = sf::Keyboard::Left;
+	_stringKeys["ARROW_RIGHT_KEY"] = sf::Keyboard::Right;
+	_stringKeys["SPACE_KEY"] = sf::Keyboard::Space;
+	_stringKeys["ESCAPE_KEY"] = sf::Keyboard::Escape;
+	_stringKeys["RETURN_KEY"] = sf::Keyboard::Return;
+	_stringKeys["A_KEY"] = sf::Keyboard::A;
+	_stringKeys["Z_KEY"] = sf::Keyboard::Z;
+	_stringKeys["E_KEY"] = sf::Keyboard::E;
+	_stringKeys["R_KEY"] = sf::Keyboard::R;
+	_stringKeys["T_KEY"] = sf::Keyboard::T;
+	_stringKeys["Y_KEY"] = sf::Keyboard::Y;
+	_stringKeys["U_KEY"] = sf::Keyboard::U;
+	_stringKeys["I_KEY"] = sf::Keyboard::I;
+	_stringKeys["O_KEY"] = sf::Keyboard::O;
+	_stringKeys["P_KEY"] = sf::Keyboard::P;
+	_stringKeys["Q_KEY"] = sf::Keyboard::Q;
+	_stringKeys["S_KEY"] = sf::Keyboard::S;
+	_stringKeys["D_KEY"] = sf::Keyboard::D;
+	_stringKeys["F_KEY"] = sf::Keyboard::F;
+	_stringKeys["G_KEY"] = sf::Keyboard::G;
+	_stringKeys["H_KEY"] = sf::Keyboard::H;
+	_stringKeys["J_KEY"] = sf::Keyboard::J;
+	_stringKeys["K_KEY"] = sf::Keyboard::K;
+	_stringKeys["L_KEY"] = sf::Keyboard::L;
+	_stringKeys["M_KEY"] = sf::Keyboard::M;
+	_stringKeys["W_KEY"] = sf::Keyboard::W;
+	_stringKeys["X_KEY"] = sf::Keyboard::X;
+	_stringKeys["C_KEY"] = sf::Keyboard::C;
+	_stringKeys["V_KEY"] = sf::Keyboard::V;
+	_stringKeys["B_KEY"] = sf::Keyboard::B;
+	_stringKeys["N_KEY"] = sf::Keyboard::N;
+	_stringKeys["PAD_0_KEY"] = sf::Keyboard::Numpad0;
+	_stringKeys["PAD_1_KEY"] = sf::Keyboard::Numpad1;
+	_stringKeys["PAD_2_KEY"] = sf::Keyboard::Numpad2;
+	_stringKeys["PAD_3_KEY"] = sf::Keyboard::Numpad3;
+	_stringKeys["PAD_4_KEY"] = sf::Keyboard::Numpad4;
+	_stringKeys["PAD_5_KEY"] = sf::Keyboard::Numpad5;
+	_stringKeys["PAD_6_KEY"] = sf::Keyboard::Numpad6;
+	_stringKeys["PAD_7_KEY"] = sf::Keyboard::Numpad7;
+	_stringKeys["PAD_8_KEY"] = sf::Keyboard::Numpad8;
+	_stringKeys["PAD_9_KEY"] = sf::Keyboard::Numpad9;
+
+	_stringAxis["JOYSTICK_UP"] = JoystickEvent(sf::Joystick::X);
+	_stringAxis["JOYSTICK_DOWN"] = JoystickEvent(sf::Joystick::X);
+	_stringAxis["JOYSTICK_LEFT"] = JoystickEvent(sf::Joystick::Y);
+	_stringAxis["JOYSTICK_RIGHT"] = JoystickEvent(sf::Joystick::Y);
+	_stringAxis["JOYSTICK_X"] = JoystickEvent(0);
+	_stringAxis["JOYSTICK_Y"] = JoystickEvent(2);
+	_stringAxis["JOYSTICK_A"] = JoystickEvent(1);
+	_stringAxis["JOYSTICK_B"] = JoystickEvent(3);
+	_stringAxis["JOYSTICK_L1"] = JoystickEvent(sf::Joystick::Z);
+	_stringAxis["JOYSTICK_L2"] = JoystickEvent(sf::Joystick::Z);
+	_stringAxis["JOYSTICK_R1"] = JoystickEvent(sf::Joystick::R);
+	_stringAxis["JOYSTICK_R2"] = JoystickEvent(sf::Joystick::R);
+}
 
 SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath)
 {
 	_ifs = new std::ifstream(_filepath.c_str());
-	_ofs = new std::ofstream(_filepath.c_str(), std::ios::out);
 	_stringKeys["0_KEY"] = sf::Keyboard::Num0;
 	_stringKeys["1_KEY"] = sf::Keyboard::Num1;
   _stringKeys["2_KEY"] = sf::Keyboard::Num2;
@@ -70,21 +212,21 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
   _stringKeys["PAD_8_KEY"] = sf::Keyboard::Numpad8;
   _stringKeys["PAD_9_KEY"] = sf::Keyboard::Numpad9;
 
-  _stringAxis["JOYSTICK_UP"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_DOWN"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_LEFT"] = sf::Joystick::Y;
-  _stringAxis["JOYSTICK_RIGHT"] = sf::Joystick::Y;
-  //TODO
-  _stringAxis["JOYSTICK_X"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_Y"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_A"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_B"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_L1"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_L2"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_R1"] = sf::Joystick::X;
-  _stringAxis["JOYSTICK_R2"] = sf::Joystick::X;
+  _stringAxis["JOYSTICK_UP"] = JoystickEvent(sf::Joystick::X);
+  _stringAxis["JOYSTICK_DOWN"] = JoystickEvent(sf::Joystick::X);
+  _stringAxis["JOYSTICK_LEFT"] = JoystickEvent(sf::Joystick::Y);
+  _stringAxis["JOYSTICK_RIGHT"] = JoystickEvent(sf::Joystick::Y);
+  _stringAxis["JOYSTICK_X"] = JoystickEvent(0);
+  _stringAxis["JOYSTICK_Y"] = JoystickEvent(2);
+  _stringAxis["JOYSTICK_A"] = JoystickEvent(1);
+  _stringAxis["JOYSTICK_B"] = JoystickEvent(3);
+  _stringAxis["JOYSTICK_L1"] = JoystickEvent(sf::Joystick::Z);
+  _stringAxis["JOYSTICK_L2"] = JoystickEvent(sf::Joystick::Z);
+  _stringAxis["JOYSTICK_R1"] = JoystickEvent(sf::Joystick::R);
+  _stringAxis["JOYSTICK_R2"] = JoystickEvent(sf::Joystick::R);
+  std::string line;
 
-	if (!_ifs->good())
+  if (!_ifs->good() || !std::getline(*_ifs, line))
     {
       _fileExists = false;
       return;
@@ -92,30 +234,39 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
   _fileExists = true;
 }
 
-SettingsLoader::~SettingsLoader() {}
+SettingsLoader::~SettingsLoader()
+{
+	if (_ifs == NULL)
+		return;
+	_ifs->close();
+	delete _ifs;
+}
 
 std::string     SettingsLoader::removeSpaces(std::string const& str) const
 {
     unsigned int it = 0;
     unsigned int end = str.length();
-	std::string ret(str);
+	std::string ret;
 
     while (it != end)
     {
-        if (ret.at(it) == ' ' ||
-            ret.at(it) == '\t')
-            ret.erase(it, 1);
+		if (str.at(it) != ' ' && str.at(it) != '\t')
+			ret.push_back(str.at(it));
         ++it;
     }
     return (ret);
 }
 
+
 std::string     SettingsLoader::getValueOf(std::string const& label) const
 {
     std::string	line;
     std::string	value;
+	if (_fileExists == false)
+	{
+		return ("0");
+	}
     _ifs->seekg(0, _ifs->beg);
-
     while (std::getline(*_ifs, line))
       {
         line = removeSpaces(line);
@@ -127,6 +278,10 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
         }
       }
     _ifs->clear();
+	if (label == "ip")
+		return "10.16.253.148";
+	else if (label == "port")
+		return "4242";
     return ("LABEL_NOT_FOUND");
 }
 
@@ -190,6 +345,7 @@ Volume      SettingsLoader::getVolume() const
     int     music = 0;
     Volume ret(50, 50, 50);
 
+
     if (_fileExists == false)
         return (ret);
     global = getGlobalVolume();
@@ -198,7 +354,6 @@ Volume      SettingsLoader::getVolume() const
     ret.setEffects(effects);
     ret.setGlobal(global);
     ret.setMusic(music);
-
     return (ret);
 }
 
@@ -248,10 +403,10 @@ std::vector<std::string>	SettingsLoader::getKeys() const
   return (ret);
 }
 
-sf::Joystick::Axis		SettingsLoader::stringToJoystick(std::string const& str) const
+JoystickEvent		SettingsLoader::stringToJoystick(std::string const& str) const
 {
 	if (!axisExists(str))
-		return (sf::Joystick::X); // TODO sf::Joystick::axisError
+		return (JoystickEvent(-1));
 	return (_stringAxis.find(str)->second);
 }
 
@@ -280,19 +435,18 @@ std::vector<std::string>	SettingsLoader::getJoysticks() const
   return (ret);
 }
 
-std::vector<Bind>	SettingsLoader::createDefaultBinds() const
+std::vector<Bind*>	SettingsLoader::createDefaultBinds() const
 {
-	Bind    moveUp(Bind::MOVE_UP_BIND, sf::Keyboard::Up, sf::Joystick::X);
-    Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, sf::Joystick::X);
-    Bind    moveLeft(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, sf::Joystick::Y);
-    Bind    moveRight(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, sf::Joystick::Y);
-	// TROUVER LE SF JOYSTICK QUI CORRESPOND
-    Bind    shoot(Bind::ATTACK_BIND, sf::Keyboard::Space, sf::Joystick::X);
-    Bind    weapon1(Bind::WEAPON_1, sf::Keyboard::Num1, sf::Joystick::X);
-    Bind    weapon2(Bind::WEAPON_2, sf::Keyboard::Num2, sf::Joystick::X);
-    Bind    weapon3(Bind::WEAPON_3, sf::Keyboard::Num3, sf::Joystick::X);
-    Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, sf::Joystick::X);
-    std::vector<Bind>   defaultBinds;
+	Bind    *moveUp = new Bind(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
+    Bind    *moveDown = new Bind(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
+    Bind    *moveLeft = new Bind(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
+    Bind    *moveRight = new Bind(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, JoystickEvent(sf::Joystick::Y));
+    Bind    *shoot = new Bind(Bind::ATTACK_BIND, sf::Keyboard::Space, JoystickEvent(sf::Joystick::R));
+    Bind    *weapon1 = new Bind(Bind::WEAPON_1, sf::Keyboard::Num1, JoystickEvent(1));
+    Bind    *weapon2 = new Bind(Bind::WEAPON_2, sf::Keyboard::Num2, JoystickEvent(2));
+    Bind    *weapon3 = new Bind(Bind::WEAPON_3, sf::Keyboard::Num3, JoystickEvent(3));
+    Bind    *leaveGame = new Bind(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
+    std::vector<Bind*>   defaultBinds;
 
     defaultBinds.push_back(moveUp);
     defaultBinds.push_back(moveDown);
@@ -306,44 +460,44 @@ std::vector<Bind>	SettingsLoader::createDefaultBinds() const
     return (defaultBinds);
 }
 
-std::vector<Bind>   SettingsLoader::getBinds() const
+std::vector<Bind*>   SettingsLoader::getBinds() const
 {
-    Bind    moveUp(Bind::MOVE_UP_BIND, sf::Keyboard::Up, sf::Joystick::X);
-    Bind    moveDown(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, sf::Joystick::X);
-    Bind    moveLeft(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, sf::Joystick::X);
-    Bind    moveRight(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, sf::Joystick::X);
-    Bind    shoot(Bind::ATTACK_BIND, sf::Keyboard::Space, sf::Joystick::X);
-    Bind    weapon1(Bind::WEAPON_1, sf::Keyboard::Num1, sf::Joystick::X);
-    Bind    weapon2(Bind::WEAPON_2, sf::Keyboard::Num2, sf::Joystick::X);
-    Bind    weapon3(Bind::WEAPON_3, sf::Keyboard::Num3, sf::Joystick::X);
-    Bind    leaveGame(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, sf::Joystick::X);
-    std::vector<Bind>   binds;
+	Bind    *moveUp= new Bind(Bind::MOVE_UP_BIND, sf::Keyboard::Up, JoystickEvent(sf::Joystick::X));
+	Bind    *moveDown= new Bind(Bind::MOVE_DOWN_BIND, sf::Keyboard::Down, JoystickEvent(sf::Joystick::X));
+	Bind    *moveLeft = new Bind(Bind::MOVE_LEFT_BIND, sf::Keyboard::Left, JoystickEvent(sf::Joystick::Y));
+	Bind    *moveRight = new Bind(Bind::MOVE_RIGHT_BIND, sf::Keyboard::Right, JoystickEvent(sf::Joystick::Y));
+	Bind    *shoot = new Bind(Bind::ATTACK_BIND, sf::Keyboard::Space, JoystickEvent(sf::Joystick::R));
+	Bind    *weapon1 = new Bind(Bind::WEAPON_1, sf::Keyboard::Num1, JoystickEvent(1));
+	Bind    *weapon2 = new Bind(Bind::WEAPON_2, sf::Keyboard::Num2, JoystickEvent(2));
+	Bind    *weapon3 = new Bind(Bind::WEAPON_3, sf::Keyboard::Num3, JoystickEvent(3));
+	Bind    *leaveGame = new Bind(Bind::LEAVE_GAME_BIND, sf::Keyboard::Escape, JoystickEvent(sf::Joystick::Z));
+	std::vector<Bind*>   binds;
 
-    if (_fileExists == false)
+	binds.push_back(moveUp);
+	binds.push_back(moveDown);
+	binds.push_back(moveLeft);
+	binds.push_back(moveRight);
+	binds.push_back(shoot);
+	binds.push_back(weapon1);
+	binds.push_back(weapon2);
+	binds.push_back(weapon3);
+	binds.push_back(leaveGame);
+	if (_fileExists == false)
       return (createDefaultBinds());
-
     std::vector<std::string>keys = getKeys();
     std::vector<std::string>joysticks = getJoysticks();
-    std::vector<std::string>::const_iterator itk = keys.begin();
-    std::vector<Bind>::iterator itb = binds.begin();
+	std::vector<std::string>::const_iterator itk = keys.begin();
+    std::vector<Bind*>::iterator itb = binds.begin();
     std::vector<std::string>::const_iterator endk = keys.end();
     std::vector<std::string>::const_iterator itj = joysticks.begin();
 
-    binds.push_back(moveUp);
-    binds.push_back(moveDown);
-    binds.push_back(moveLeft);
-    binds.push_back(moveRight);
-    binds.push_back(shoot);
-    binds.push_back(weapon1);
-    binds.push_back(weapon2);
-    binds.push_back(weapon3);
-    binds.push_back(leaveGame);
     while (itk != endk)
       {
-	(*itb).setKey(stringToKey(*itk));
-	(*itb).setJoystick(stringToJoystick(*itj));
-	itk++;
-	itj++;
+		(*itb)->setKey(stringToKey(*itk));
+		(*itb)->setJoystick(stringToJoystick(*itj));
+		itk++;
+		itj++;
+		itb++;
       }
     return (binds);
 }
@@ -359,6 +513,20 @@ Settings::Difficulty    SettingsLoader::getDefaultDifficulty() const
     if (diff == "HARD_MODE")
         return (Settings::HARD_MODE);
     return (Settings::MEDIUM_MODE);
+}
+
+std::string		SettingsLoader::difficultyToString(Settings::Difficulty diff) const
+{
+	switch (diff)
+	{
+	case Settings::EASY_MODE:
+		return ("EASY_MODE");
+	case Settings::MEDIUM_MODE:
+		return ("MEDIUM_MODE");
+	case Settings::HARD_MODE:
+		return ("HARD_MODE");
+	}
+	return ("MEDIUM_MODE");
 }
 
 std::string     SettingsLoader::bindTypeToString(Bind::BindType type) const
@@ -388,21 +556,36 @@ std::string     SettingsLoader::bindTypeToString(Bind::BindType type) const
     }
 }
 
-std::string     SettingsLoader::joystickToString(sf::Joystick::Axis joystick) const
+bool		SettingsLoader::joystickIsEqual(JoystickEvent const& a, JoystickEvent const& b) const
 {
-	std::map<std::string, sf::Joystick::Axis>::const_iterator it = _stringAxis.begin();
-	std::map<std::string, sf::Joystick::Axis>::const_iterator end = _stringAxis.end();
+	if (a.isAxis() != b.isAxis())
+		return false;
+	if (a.isAxis() == true)
+	{
+		if (a.getAxis() == b.getAxis())
+			return true;
+		return false;
+	}
+	if (a.getButton() == b.getButton())
+		return true;
+	return false;
+}
+
+std::string     SettingsLoader::joystickToString(JoystickEvent joystick) const
+{
+	std::map<std::string, JoystickEvent>::const_iterator it = _stringAxis.begin();
+	std::map<std::string, JoystickEvent>::const_iterator end = _stringAxis.end();
 
 	while (it != end)
 	{
-		if (it->second == joystick)
+		if (joystickIsEqual(it->second, joystick))
 			return (it->first);
 		++it;
 	}
 	return ("NO_BIND");
 }
 
-std::string     SettingsLoader::keyToString(sf::Keyboard::Key key) const
+std::string		SettingsLoader::keyToString(sf::Keyboard::Key key) const
 {
 	std::map<std::string, sf::Keyboard::Key>::const_iterator it = _stringKeys.begin();
 	std::map<std::string, sf::Keyboard::Key>::const_iterator end = _stringKeys.end();
@@ -413,7 +596,7 @@ std::string     SettingsLoader::keyToString(sf::Keyboard::Key key) const
 			return (it->first);
 		++it;
 	}
-	return ("NO_Bind");
+	return ("NO_BIND");
 }
 
 std::string     SettingsLoader::bindToString(Bind bind) const
@@ -428,20 +611,53 @@ std::string     SettingsLoader::bindToString(Bind bind) const
 
 void        SettingsLoader::saveSettings(Settings *settings) const
 {
-    std::string settingsString(settingsToString(*settings));
+	std::ofstream  ofs("../config/PersonalConfig.ini", std::ios::out | std::ios::trunc);
+	std::string str(settingsToString(*settings));
 
-    *_ofs << settingsString;
+    ofs << str;
 }
 
 std::string	SettingsLoader::settingsToString(Settings const& settings) const
 {
-	(void)settings;
-	return ("TODO");
+	std::string ret(";PersonalConfig.ini\n[BINDS]\n");
+	std::vector<Bind*> binds = settings.getBinds();
+	std::vector<Bind*>::const_iterator it = binds.begin();
+	std::vector<Bind*>::const_iterator end = binds.end();
+
+	while (it != end)
+	{
+		ret += bindToString(**it);
+		++it;
+	}
+	ret += "[VOLUME]\n";
+	ret += "global=" + std::to_string(settings.getVolume().getGlobal()) += "\n";
+	ret += "effects=" + std::to_string(settings.getVolume().getEffects()) += "\n";
+	ret += "music=" + std::to_string(settings.getVolume().getMusic()) += "\n";
+	ret += "[DIFFICULTY]\n";
+	ret += "default=" + difficultyToString(settings.getDefaultDifficulty()) += "\n";
+	ret += "[NETWORK]\n";
+	ret += "ip=" + settings.getIP() += "\n";
+	ret += "port=" + std::to_string(settings.getPort()) += "\n";
+	return (ret);
 }
 
 Settings	*SettingsLoader::parseSettings() const
 {
-  Settings	*ret = new Settings(getVolume(), getBinds(), getDefaultDifficulty());
+	Volume vol = getVolume();
+	std::vector<Bind*> binds = getBinds();
+	std::string ip;
+	int port;
+	if (_fileExists == false)
+	{
+		ip = "10.16.253.148";
+		port = 4242;
+	}
+	else
+	{
+		port = std::stoi(getValueOf("port"));
+		ip = getValueOf("ip");
+	}
+	  Settings	*ret = new Settings(vol, binds, getDefaultDifficulty(), ip, port);
 
   return (ret);
 }

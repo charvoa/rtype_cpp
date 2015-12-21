@@ -9,13 +9,13 @@
 //
 
 #ifndef _THREADFACTORY_HH_
-#define _THREADFACTORY_HH_
+# define _THREADFACTORY_HH_
 
-#ifdef __unix__
-#include "ThreadUnix.hpp"
-#elif defined(_WIN32) || defined(WIN32)
-#include "ThreadWin.hpp"
-#endif
+# ifdef __unix__
+#  include "ThreadUnix.hpp"
+# elif defined(_WIN32) || defined(WIN32)
+#  include "ThreadWin.hpp"
+# endif
 
 class ThreadFactory
 {

@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Sun Dec  6 08:45:28 2015 Antoine Garcia
+// Last update Sat Dec 12 09:39:29 2015 Joris Bertomeu
 //
 
 #ifndef		__ISOCKET_HPP_
@@ -21,6 +21,7 @@ public:
   virtual void	*read(int) = 0;
   virtual void	close() = 0;
   virtual int	write(void *, int) = 0;
+  virtual void	*read(int, int*) = 0;
 # ifdef _WIN32
   virtual SOCKET	getFd() const = 0;
   virtual void		setForUDP(SOCKADDR_IN *s) = 0;
@@ -28,6 +29,7 @@ public:
   virtual int	getFd() const = 0;
   virtual void	setForUDP(struct sockaddr_in *s) = 0;
 # endif
+  virtual bool		isEqualTo(ISocket *s) = 0;
 };
 
 #endif

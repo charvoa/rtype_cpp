@@ -5,18 +5,60 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Thu Dec 10 06:04:44 2015 Antoine Garcia
+// Last update Mon Dec 21 07:23:10 2015 Serge Heitzler
 //
 
 #include <Room.hh>
+#include <sstream>
 
 Room::Room() {}
 
-Room::Room(const std::string &id, Client *client):_id(id)
+std::string		IntToString(int a)
+{
+  std::ostringstream	temp;
+  temp << a;
+  return (temp.str());
+}
+
+Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(id)
 {
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
+  this->_botList = botList;
+  std::string	sendData = "player1;" + id + ";1";
+  ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
+						  CRC::calcCRC(sendData),
+						  0, sendData);
+  client->getSocket()->write(reinterpret_cast<void *>(&frame),
+			     sizeof(ANetwork::t_frame));
+   sendFileToClient(client, botList);
   //_owner = client;
+}
+
+void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
+  std::ostringstream	tmp;
+  int			port = Random(6000, 7000).generate<int>();
+  int			first = true;
+  std::list<Client*>	clientList;
+
+  tmp << list.size();
+  std::cout << "IS Passing through Sendfile to client" << std::endl;
+  for (std::list<Bot*>::iterator it = list.begin(); it != list.end(); ++it) {
+    std::cout << ">> " << (*it)->_sprite << std::endl;
+    File	file(std::string("../libs/" + (*it)->_sprite));
+
+    if (first) {
+      std::cout << "Is Passing in the thing" << std::endl;
+      client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string(IntToString(port)  + ";" + tmp.str())), std::string(IntToString(port) + ";" + tmp.str()).size(), std::string(IntToString(port)  + ";" + tmp.str()), true), sizeof(ANetwork::t_frame));
+      first = false;
+    }
+    file.sendMe(port++);
+    clientList = this->getAllPlayers();
+    for (std::list<Client*>::iterator it2 = clientList.begin(); it2 != clientList.end(); ++it2) {
+      (*it2)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("player" + IntToString(this->_clientManager->getClientPosition(*it2) + 1)), true), sizeof(ANetwork::t_frame));
+    }
+  }
+
 }
 
 Room::~Room()
@@ -41,10 +83,10 @@ void	Room::sendPlayerJoin(Client *client)
 
 void	Room::sendRoomPlayerJoin(Client *client)
 {
-  std::vector<Client *>::iterator	it;
-  std::vector<Client *> clients = getAllPlayers();
+  std::list<Client *>::iterator	it;
+  std::list<Client *> clients = getAllPlayers();
   int	clientPos = _clientManager->getClientPosition(client) + 1;
-  for (it = clients.begin() ; it != clients.end() ; ++it)
+  for (it = clients.begin(); it != clients.end(); ++it)
     {
       std::string sendData = "player" + std::to_string(clientPos);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_PLAYER_CONNECTED, CRC::calcCRC(sendData), 0, sendData);
@@ -71,10 +113,11 @@ void	Room::addPlayer(Client *client)
       _clientManager->addClients(client);
       sendPlayerJoin(client);
       sendRoomPlayerJoin(client);
+      sendFileToClient(client, this->_botList);
     }
   else
     sendError(client);
-  for (std::vector<Client *>::const_iterator it = getAllPlayers().begin(); it != getAllPlayers().end(); ++it)
+  for (std::list<Client *>::const_iterator it = getAllPlayers().begin(); it != getAllPlayers().end(); ++it)
     {
       std::cout << (*it)->getSocket()->getFd() << std::endl;
     }
@@ -82,8 +125,8 @@ void	Room::addPlayer(Client *client)
 
 void	Room::sendPlayerLeft(int playerID)
 {
-  std::vector<Client *>::iterator	it;
-  std::vector<Client *>	clients = getAllPlayers();
+  std::list<Client *>::iterator	it;
+  std::list<Client *>	clients = getAllPlayers();
 
   for (it = clients.begin(); it != clients.end(); ++it)
     {
@@ -101,14 +144,14 @@ void	Room::deletePlayer(Client *client)
    sendPlayerLeft(playerID);
 }
 
-std::vector<Client *>&	Room::getAllPlayers()
+std::list<Client *>&	Room::getAllPlayers()
 {
   return _clientManager->getAllClients();
 }
 
 void	Room::setParameters(Parameters &params)
 {
-  params = _parameter;
+  _parameter = params;
 }
 
 const Parameters&	Room::getParameters() const

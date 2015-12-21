@@ -4,27 +4,26 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Started on  Sat Nov 28 05:48:05 2015 Louis Audibert
-// Last update Thu Dec  3 05:18:04 2015 Louis Audibert
+// Started on  Sun Dec 13 05:05:58 2015 Louis Audibert
+// Last update Sun Dec 20 14:35:25 2015 Nicolas Charvoz
 //
 
 #ifndef _LASER_HH_
 # define _LASER_HH_
 
-# include <string>
-# include <iostream>
-# include <AComponent.hpp>
+# include <AEntity.hh>
 
-class Laser : public AComponent
+class Laser : public AEntity
 {
-private:
-  int	_dmg;
+
+private :
+
+  std::chrono::time_point<std::chrono::system_clock> _launchTime;
 
 public:
-  Laser();
+  Laser(int id);
   ~Laser();
-
-  int	getDamages() const;
+  std::chrono::time_point<std::chrono::system_clock> getLaunchTime() const;
 };
 
-#endif /* _LASER_HH_ */
+#endif /* _LASER_HH_  */

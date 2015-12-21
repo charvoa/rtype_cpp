@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 01:57:34 2015 Louis Audibert
-// Last update Mon Dec  7 06:04:48 2015 Louis Audibert
+// Last update Sun Dec 13 05:18:05 2015 Louis Audibert
 //
 
 #ifndef _SYSTEMHEALTH_HH_
@@ -13,7 +13,7 @@
 
 # include <iostream>
 # include <ASystem.hpp>
-# include <Health.hh>
+# include <ComponentHealth.hh>
 
 class SystemHealth : public ASystem
 {

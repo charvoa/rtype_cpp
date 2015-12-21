@@ -4,27 +4,20 @@
 // Made by Louis Audibert
 // Login   <audibel@epitech.net>
 //
-// Started on  Sat Nov 28 05:48:05 2015 Louis Audibert
-// Last update Thu Dec  3 05:19:36 2015 Louis Audibert
+// Started on  Sun Dec 13 05:00:00 2015 Louis Audibert
+// Last update Sun Dec 13 08:37:42 2015 Louis Audibert
 //
 
 #ifndef _MISSILE_HH_
 # define _MISSILE_HH_
 
-# include <string>
-# include <iostream>
-# include <AComponent.hpp>
+# include <AEntity.hh>
 
-class Missile : public AComponent
+class Missile : public AEntity
 {
-private:
-  int	_dmg;
-
 public:
-  Missile();
+  Missile(int id);
   ~Missile();
-
-  int	getDamages() const;
 };
 
-#endif /* _MISSILE_HH_ */
+#endif /* _MISSILE_HH_  */
