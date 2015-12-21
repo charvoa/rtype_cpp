@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Mon Dec 21 01:12:13 2015 Louis Audibert
+// Last update Mon Dec 21 01:29:03 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -13,14 +13,12 @@
 AEntity::AEntity(int id) : _id(id)
 {
   _systemManager = new SystemManager();
-  std::cout << "new AEntity created !" << std::endl;
 }
 
 AEntity::AEntity(int id, AEntity *parent)
 {
   _id = id;
   _parent = parent;
-  std::cout << "new AEntity with a parent created !" << std::endl;
 }
 
 bool	AEntity::update(int x, int y)
@@ -143,12 +141,15 @@ std::list<Case*>	AEntity::refreshHitbox()
     case E_PLAYER:
       height = 44;
       break;
-    case E_MISSILE:
+    default:
       height = 5;
       break;
-    case E_RIFLE:
-      height = 5;
-      break;
+    // case E_MISSILE:
+    //   height = 5;
+    //   break;
+    // case E_RIFLE:
+    //   height = 5;
+    //   break;
     }
 
   //  myCase = (Case*)std::malloc(sizeof(Case));

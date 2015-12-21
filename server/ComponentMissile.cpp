@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:53:48 2015 Louis Audibert
-// Last update Sun Dec 13 04:54:06 2015 Louis Audibert
+// Last update Mon Dec 21 01:26:50 2015 Louis Audibert
 //
 
 #include <ComponentMissile.hh>
@@ -17,7 +17,6 @@ ComponentMissile::ComponentMissile()
 
 ComponentMissile::~ComponentMissile()
 {
-  std::cout << "Missile Component Destroyed" << std::endl;
 }
 
 int	ComponentMissile::getDamages() const

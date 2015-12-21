@@ -593,10 +593,10 @@ bool Game::run()
       	  timerMonster.reset();
 	  this->addMonster();
 	}
-      this->updateMonster();
       this->updateRiffle();
       this->updateMissile();
       this->updateLaser();
+      this->updateMonster();
       this->checkHitBox();
       this->sendGameData();
       while (std::chrono::high_resolution_clock::now() < startTime + std::chrono::milliseconds(16));

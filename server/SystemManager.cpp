@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:32:03 2015 Louis Audibert
-// Last update Sun Dec 20 16:37:48 2015 Nicolas Charvoz
+// Last update Mon Dec 21 01:27:00 2015 Louis Audibert
 //
 
 #include <SystemManager.hh>
@@ -32,7 +32,6 @@ SystemManager::SystemManager(SystemManager *copy)
 
 SystemManager::~SystemManager()
 {
-  std::cout << "SystemManager Destroyed." << std::endl;
 }
 
 ASystem *SystemManager::getSystemByComponent(E_Component type)

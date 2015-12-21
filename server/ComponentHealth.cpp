@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Nov 28 05:33:26 2015 Louis Audibert
-// Last update Sun Dec 13 05:25:00 2015 Louis Audibert
+// Last update Mon Dec 21 01:26:24 2015 Louis Audibert
 //
 
 #include <ComponentHealth.hh>
@@ -17,7 +17,6 @@ ComponentHealth::ComponentHealth()
 
 ComponentHealth::~ComponentHealth()
 {
-  std::cout << "Health component Destroyed" << std::endl;
 }
 
 unsigned int ComponentHealth::getLife() const

@@ -15,12 +15,10 @@ EntityFactory::EntityFactory()
 
 EntityFactory::~EntityFactory()
 {
-  std::cout << "EntityFactory Destroyed" << std::endl;
 }
 
 AEntity	*EntityFactory::createEntity(int &id)
 {
-  std::cout << "new AEntity created !" << std::endl;
   id++;
   return (new AEntity(id));
 }
@@ -55,14 +53,11 @@ AEntity *EntityFactory::createEntity(int &id, E_EntityType type)
     case E_MISSILE:
       {
 	newEntity = new Missile(id);
-	std::cout << "new Missile in entity Factory created" << std::endl;
 	break;
       }
     case E_LASER:
       {
-	std::cout << "before new Laser in entity Factory" << std::endl;
 	newEntity = new Laser(id);
-	std::cout << "new Laser in entity Factory created" << std::endl;
 	break;
       }
     default:
