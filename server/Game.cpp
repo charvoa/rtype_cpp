@@ -397,7 +397,7 @@ void Game::addMonster()
       _nbDisplay++;
     }
   else
-    _canAddMonster = false
+    _canAddMonster = false;
   //    std::cout << "Monster Full for this Stage" << std::endl;
 }
 
