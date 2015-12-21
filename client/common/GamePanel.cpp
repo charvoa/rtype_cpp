@@ -70,7 +70,7 @@ GamePanel::GamePanel()
 
   Text	*waveNumber = new Text();
 
-  waveNumber->setString("0");
+  waveNumber->setString("1");
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
   waveNumber->setOrigin(waveNumber->getText().getGlobalBounds().width / 2, waveNumber->getText().getGlobalBounds().height / 2);

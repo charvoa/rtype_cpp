@@ -199,6 +199,7 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 {
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  std::cout << "Player current score : " << p->getScore()  << "; score added : " << score << std::endl;
   std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
   ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
