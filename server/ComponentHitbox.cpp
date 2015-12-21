@@ -5,19 +5,19 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 11:06:08 2015 Louis Audibert
-// Last update Sun Dec 13 05:22:51 2015 Louis Audibert
+// Last update Mon Dec 21 10:26:34 2015 Nicolas Charvoz
 //
 
 #include <ComponentHitbox.hh>
 
 ComponentHitbox::ComponentHitbox()
 {
-  std::cout << "new Hitbox Component created" << std::endl;
+  //  std::cout << "new Hitbox Component created" << std::endl;
 }
 
 ComponentHitbox::~ComponentHitbox()
 {
-  std::cout << "Hitbox Component destroyed" << std::endl;
+  //std::cout << "Hitbox Component destroyed" << std::endl;
 }
 
 std::list<Case*>	ComponentHitbox::getHitbox()

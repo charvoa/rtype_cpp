@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 02:23:44 2015 Louis Audibert
-// Last update Wed Dec 16 05:56:36 2015 Louis Audibert
+// Last update Mon Dec 21 10:27:03 2015 Nicolas Charvoz
 //
 
 #include <SystemGun.hh>
@@ -31,7 +31,7 @@ SystemGun::SystemGun(E_Component type)
 
 SystemGun::~SystemGun()
 {
-  std::cout << "System Gun Destroyed" << std::endl;
+  //  std::cout << "System Gun Destroyed" << std::endl;
 }
 
 E_Component SystemGun::getType()

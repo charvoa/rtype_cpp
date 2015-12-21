@@ -148,6 +148,8 @@ std::list<Case*>	AEntity::refreshHitbox()
     case E_RIFLE:
       height = 5;
       break;
+    default:
+      break;
     }
 
   //  myCase = (Case*)std::malloc(sizeof(Case));
