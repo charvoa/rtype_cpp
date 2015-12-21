@@ -90,6 +90,7 @@ private:
   std::chrono::time_point<std::chrono::system_clock> _start;
   std::list<Bot*> _botList;
   bool _isRunning;
+  bool _canAddMonster;
   int _nbLeft;
   int _nbInGame;
 
