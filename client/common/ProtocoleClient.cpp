@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 19 16:33:26 2015 Serge Heitzler
+// Last update Mon Dec 21 03:07:29 2015 Serge Heitzler
 //
 
 #include <string>
@@ -67,7 +67,7 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_PLAYER_DEAD, &ProtocoleClient::playerDead));
   _functions.insert(std::make_pair(S_LIFE, &ProtocoleClient::life));
   _functions.insert(std::make_pair(S_SCORE, &ProtocoleClient::score));
-  _functions.insert(std::make_pair(S_SET_CURRENT_WAVE, &ProtocoleClient::setCurrentWave));
+  _functions.insert(std::make_pair(S_NEW_WAVE, &ProtocoleClient::newWave));
   _functions.insert(std::make_pair(S_END_GAME, &ProtocoleClient::endGame));
   _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
   _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
@@ -79,10 +79,10 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
 }
 
-void		ProtocoleClient::setCurrentWave(ANetwork::t_frame &frame)
+void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "New Entity" << std::endl;
+  std::cout << "New Wave : " <<  x.at(0) << std::endl;
   GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
 }
 

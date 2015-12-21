@@ -350,7 +350,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(posX, posY);
-  //      std::cout << "Displaying with id : " << id << "; posX : " << realPosX << "; posY : " << realPosY << std::endl;
+  //  std::cout << "Displaying with id : " << id << "; posX : " << posX << "; posY : " << posY << std::endl;
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
