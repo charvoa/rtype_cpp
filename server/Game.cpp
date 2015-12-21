@@ -594,7 +594,7 @@ bool Game::run()
       _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
       this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() >= 2))
+      if (timerMonster.elapsed().count() >= (speed/_stage))// && (_timerWave->elapsed().count() >= 2))
       	{
       	  timerMonster.reset();
 	  this->addMonster();
