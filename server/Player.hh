@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Wed Dec 16 06:07:49 2015 Louis Audibert
+// Last update Mon Dec 21 04:21:34 2015 Antoine Garcia
 //
 
 #ifndef PLAYER_HH_
@@ -16,6 +16,7 @@
 # include <AEntity.hh>
 # include <string>
 # include <iostream>
+# include <Timer.hpp>
 
 class Player : public AEntity
 {
@@ -27,7 +28,7 @@ private:
   Client _client;
   int _missiles;
   int _laser;
-
+  Timer	*_lastShoot;
 public:
   Player(int id, const Client &);
   ~Player();
@@ -38,6 +39,7 @@ public:
   void setScore(int);
   void addSystem(E_Component);
   void shoot(E_Component);
+  Timer *getLastShoot();
 };
 
 #endif

@@ -274,14 +274,13 @@ void Game::handleShoot(void *data, Client *client)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-
-  if (_start < _start + std::chrono::milliseconds(100))
+  Player *p = this->getPlayerByClient(client);
+  if (p->getLastShoot()->elapsedMilli().count() >= 100)
     {
       //      std::cout << "Game :: handleShoot" << std::endl;
       std::string weaponType =
 	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-      Player *p = this->getPlayerByClient(client);
       E_EntityType type = E_INVALID;
       //      E_Component component = C_INVALID;
       int	id;
@@ -324,6 +323,7 @@ void Game::handleShoot(void *data, Client *client)
 	    {
 	      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
 	    }
+	  p->getLastShoot()->reset();
 	}
     }
 }
