@@ -200,6 +200,7 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 {
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
+  std::cout << "Player current score : " << p->getScore()  << "; score added : " << score << std::endl;
   std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
   ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -598,11 +599,10 @@ bool Game::run()
   std::this_thread::sleep_for(std::chrono::seconds(2));
   while (_isRunning)
     {
-      _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
       if (!_canAddMonster)
 	this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2))
+      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2) && startTime - _start > std::chrono::milliseconds(8000))
       	{
       	  timerMonster.reset();
 	  this->addMonster();

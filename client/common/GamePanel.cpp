@@ -70,7 +70,7 @@ GamePanel::GamePanel()
 
   Text	*waveNumber = new Text();
 
-  waveNumber->setString("0");
+  waveNumber->setString("1");
   waveNumber->setSize(60);
   waveNumber->setStyle(1);
   waveNumber->setOrigin(waveNumber->getText().getGlobalBounds().width / 2, waveNumber->getText().getGlobalBounds().height / 2);
@@ -164,7 +164,7 @@ bottomGame2->setTexture(*((RenderWindow::getInstance())->_ressources->_bottomGam
 
   Text	*sentence = new Text();
 
-  sentence->setString("Are you sure to exit the game ?");
+  sentence->setString("Wave 1");
   sentence->setSize(80);
   sentence->setStyle(1);
   sentence->setOrigin(sentence->getText().getGlobalBounds().width / 2, sentence->getText().getGlobalBounds().height / 2);
@@ -382,6 +382,12 @@ void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
+  
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setString("Wave " + std::to_string(value));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
+  
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 }
 
@@ -609,7 +615,11 @@ void		GamePanel::update()
       _inGame.at(4).move(-5, 0);
 
       _backgrounds.at(2).move(-2, 0);
+
     }
+  if (i == 492)
+    _labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
+
 
 
   if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
