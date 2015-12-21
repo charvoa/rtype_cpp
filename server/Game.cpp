@@ -35,6 +35,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
+  _timerWave = new Timer(true);
 }
 
 Game::~Game() {}
@@ -570,7 +571,6 @@ bool Game::run()
 {
   int	speed = 3;
   Timer timerMonster(true);
-  _timerWave = new Timer(true);
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -593,8 +593,9 @@ bool Game::run()
     {
       _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
-      this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() >= 2))
+      if (!_canAddMonster)
+	this->checkNewStage();
+      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2))
       	{
       	  timerMonster.reset();
 	  this->addMonster();
@@ -652,7 +653,6 @@ void Game::checkNewStage()
 {
   if (_nbDisplay == 0)
     {
-      _timerWave->reset();
       _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
