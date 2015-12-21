@@ -16,3 +16,5 @@ test_rtype
 server_rtype
 unitTest/build/
 client/build/recv/
+*.so
+PersonalConfig.ini
