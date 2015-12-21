@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Mon Dec 21 01:04:52 2015 Louis Audibert
+// Last update Mon Dec 21 10:12:30 2015 Nicolas Charvoz
 //
 
 #include <AEntity.hh>
@@ -13,14 +13,14 @@
 AEntity::AEntity(int id) : _id(id)
 {
   _systemManager = new SystemManager();
-  std::cout << "new AEntity created !" << std::endl;
+  //  std::cout << "new AEntity created !" << std::endl;
 }
 
 AEntity::AEntity(int id, AEntity *parent)
 {
   _id = id;
   _parent = parent;
-  std::cout << "new AEntity with a parent created !" << std::endl;
+  //std::cout << "new AEntity with a parent created !" << std::endl;
 }
 
 bool	AEntity::update(int x, int y)

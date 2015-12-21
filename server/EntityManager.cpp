@@ -42,7 +42,7 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
   if (_id < 4)
     _id = 4;
   AEntity *newEntity = _entityFactory.createEntity(_id, type);
-  std::cout << "after call to entityFactory.createEntity in EntityManager" << std::endl;
+  //  std::cout << "after call to entityFactory.createEntity in EntityManager" << std::endl;
   newEntity->setType(type);
   newEntity->setParent(parent);
   if (type == E_LASER)
@@ -110,7 +110,7 @@ std::list<AEntity*>  EntityManager::getEntities()
 
 AEntity	*EntityManager::getEntityById(int id)
 {
-  std::cout << "Id I want to get in getEnetityById : " << id << std::endl;
+  //std::cout << "Id I want to get in getEnetityById : " << id << std::endl;
   for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       if (id == (*it)->getId())
