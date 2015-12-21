@@ -402,7 +402,7 @@ void Game::addMonster()
     }
   else{
     _canAddMonster = false;
-    std::cout << "Monster Full for this Stage" << std::endl;
+    //    std::cout << "Monster Full for this Stage" << std::endl;
   }
 }
 
@@ -532,6 +532,7 @@ void Game::checkHitBox()
   std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
 
+  bool isBreak = false;
   for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
        ammosIT != ammos.end();
        ++ammosIT)
@@ -546,6 +547,8 @@ void Game::checkHitBox()
 	       case1 != caseAmmo.end();
 	       ++case1)
 	    {
+	      if (isBreak == true)
+		break;
 	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
 		   case2 != caseMonster.end();
 		   ++case2)
@@ -562,6 +565,10 @@ void Game::checkHitBox()
 			{
 			  this->updateScore(p, scoreDef::KILLED);
 			  deleteEntity(*ammosIT);
+			  //			  isBreakable = true;
+			  std::cout << "J'ai touch" << std::endl;
+			  isBreak = true;
+			  break;
 			}
 		      //_nbDisplay--;
 		    }
@@ -636,9 +643,9 @@ void Game::deletePlayer(Client *c)
     std::cout << e.what() << std::endl;
   }
 
-  std::string sendData = p->getUsername();
+  std::string sendData = p->getName();
 
-  std::cout << p->getUsername() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
+  std::cout << p->getName() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
 
   ANetwork::t_frame frame = CreateRequest::create(S_PLAYER_LEFT_IG, CRC::calcCRC(sendData), sendData.size(), sendData);
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
