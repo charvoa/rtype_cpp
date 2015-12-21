@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Mon Dec 21 01:04:52 2015 Louis Audibert
+// Last update Mon Dec 21 01:12:13 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -154,10 +154,10 @@ std::list<Case*>	AEntity::refreshHitbox()
   //  myCase = (Case*)std::malloc(sizeof(Case));
   if (height == 0)
     std::cout << "empty hitbox man !" << std::endl;
-  while (i < (height * 2))
+  while (i < height)
     {
       myCase = new Case;
-      myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX() - 150;
+      myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
       myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
       hitbox.push_back(myCase);
       i++;
