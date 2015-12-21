@@ -94,7 +94,7 @@ private:
   bool _canAddMonster;
   int _nbLeft;
   int _nbInGame;
-  Timer	*_timerWave;
+  Timer *_timerWave;
   // METHODS
   Player *getPlayerByClient(Client*);
   Player *getPlayerByClientTCP(Client*);

@@ -35,6 +35,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
+  _timerWave = new Timer(true);
 }
 
 Game::~Game() {}
@@ -380,7 +381,7 @@ void Game::updateMonster()
       if (pos->getX() < -10)
 	{
 	  deleteEntity(*it);
-	  _nbDisplay--;
+	  // _nbDisplay--;
 	}
     }
 }
@@ -399,9 +400,10 @@ void Game::addMonster()
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
-  else
+  else{
     _canAddMonster = false;
-  //    std::cout << "Monster Full for this Stage" << std::endl;
+    std::cout << "Monster Full for this Stage" << std::endl;
+  }
 }
 
 void Game::initPlayersPosition()
@@ -574,7 +576,6 @@ bool Game::run()
 {
   int	speed = 3;
   Timer timerMonster(true);
-  _timerWave = new Timer(true);
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -597,8 +598,9 @@ bool Game::run()
     {
       _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
-      this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage))// && (_timerWave->elapsed().count() >= 2))
+      if (!_canAddMonster)
+	this->checkNewStage();
+      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2))
       	{
       	  timerMonster.reset();
 	  this->addMonster();
@@ -654,12 +656,14 @@ void Game::deletePlayer(Client *c)
 
 void Game::checkNewStage()
 {
-  if (_nbDisplay == 0)
+  std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+
+  if (bots.size() == 0)
     {
-      _timerWave->reset();
       _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
+      std::cout << "I SEND NEW WAVE" << _stage << std::endl;
       std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
       std::string sendData = std::to_string(_stage);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
