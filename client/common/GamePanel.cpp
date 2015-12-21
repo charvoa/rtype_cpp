@@ -186,6 +186,8 @@ void			GamePanel::playerLeft(const std::string &playerName)
 
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString(playerName + " has left the game");
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
+
 }
 
 void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
