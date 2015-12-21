@@ -555,14 +555,14 @@ void Game::checkHitBox()
 		    {
 		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
 		      Player *p;
-
+		      deleteEntity(*monsterIT);
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
 			  != nullptr)
 			{
 			  this->updateScore(p, scoreDef::KILLED);
+			  deleteEntity(*ammosIT);
 			}
-		      deleteEntity(*monsterIT);
-		      _nbDisplay--;
+		      //_nbDisplay--;
 		    }
 		}
 	    }
