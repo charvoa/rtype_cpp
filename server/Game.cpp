@@ -215,7 +215,10 @@ void Game::updateLife(Player *p, int reset)
 				       ->getSystemByComponent(C_HEALTH)
 				       ->getComponent());
   if (reset == 0)
-    p->update(hP->getLife() - 1);
+    {
+      int newlife = hP->getLife() - 1;
+      p->update(newlife);
+    }
   else if (reset == 1)
     p->update(3);
   else if (reset == 2)

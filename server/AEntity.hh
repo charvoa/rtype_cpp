@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Sun Dec 20 07:08:17 2015 Louis Audibert
+// Last update Mon Dec 21 02:28:59 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -38,6 +38,7 @@ public:
   bool	update(int, int);
   bool	update(int);
   bool	update(std::list<Case*>);
+  bool	update(bool);
   virtual void	addSystem(E_Component type);
   void	removeSystem(E_Component type);
   bool	setType(E_EntityType type);

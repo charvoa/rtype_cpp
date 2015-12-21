@@ -47,6 +47,15 @@ bool	AEntity::update(std::list<Case*> hitbox)
   return (true);
 }
 
+bool	AEntity::update(bool shield)
+{
+  if (_systemManager->getSystemByComponent(C_SHIELD))
+    dynamic_cast<SystemShield*>(_systemManager->getSystemByComponent(C_SHIELD))->update(shield);
+  else
+    return (false);
+  return (true);
+}
+
 void	AEntity::addSystem(E_Component type)
 {
   _systemManager->addSystemByType(type);
