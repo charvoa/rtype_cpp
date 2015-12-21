@@ -532,7 +532,7 @@ void Game::checkHitBox()
   std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
 
-  bool isBreakable = false;
+  bool isBreak = false;
   for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
        ammosIT != ammos.end();
        ++ammosIT)
@@ -544,9 +544,11 @@ void Game::checkHitBox()
 	  std::list<Case*> caseMonster = reinterpret_cast<ComponentHitbox*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
 	  std::list<Case*> caseAmmo = reinterpret_cast<ComponentHitbox*>((*ammosIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
 	  for (std::list<Case*>::iterator case1 = caseAmmo.begin();
-	       case1 != caseAmmo.end() && isBreakable;
+	       case1 != caseAmmo.end();
 	       ++case1)
 	    {
+	      if (isBreak == true)
+		break;
 	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
 		   case2 != caseMonster.end();
 		   ++case2)
@@ -563,7 +565,9 @@ void Game::checkHitBox()
 			{
 			  this->updateScore(p, scoreDef::KILLED);
 			  deleteEntity(*ammosIT);
-			  isBreakable = true;
+			  //			  isBreakable = true;
+			  std::cout << "J'ai touch" << std::endl;
+			  isBreak = true;
 			  break;
 			}
 		      //_nbDisplay--;
