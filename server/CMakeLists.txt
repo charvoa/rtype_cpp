@@ -25,6 +25,7 @@ add_executable(server_rtype
   ComponentRiffle.cpp
   ComponentPosition.cpp
   ComponentHitbox.cpp
+  ComponentShield.cpp
   Missile.cpp
   Riffle.cpp
   Laser.cpp
@@ -32,6 +33,7 @@ add_executable(server_rtype
   SystemPos.cpp
   SystemGun.cpp
   SystemHitbox.cpp
+  SystemShield.cpp
   SystemManager.cpp
   AEntity.cpp
   EntityManager.cpp
