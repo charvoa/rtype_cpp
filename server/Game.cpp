@@ -216,7 +216,10 @@ void Game::updateLife(Player *p, int reset)
 				       ->getSystemByComponent(C_HEALTH)
 				       ->getComponent());
   if (reset == 0)
-    p->update(hP->getLife() - 1);
+    {
+      int newlife = hP->getLife() - 1;
+      p->update(newlife);
+    }
   else if (reset == 1)
     p->update(3);
   else if (reset == 2)
@@ -377,7 +380,7 @@ void Game::updateMonster()
       if (pos->getX() < -10)
 	{
 	  deleteEntity(*it);
-	  _nbDisplay--;
+	  // _nbDisplay--;
 	}
     }
 }
@@ -396,9 +399,10 @@ void Game::addMonster()
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
-  else
+  else{
     _canAddMonster = false;
-  //    std::cout << "Monster Full for this Stage" << std::endl;
+    std::cout << "Monster Full for this Stage" << std::endl;
+  }
 }
 
 void Game::initPlayersPosition()
@@ -651,11 +655,14 @@ void Game::deletePlayer(Client *c)
 
 void Game::checkNewStage()
 {
-  if (_nbDisplay == 0)
+  std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
+
+  if (bots.size() == 0)
     {
       _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
+      std::cout << "I SEND NEW WAVE" << _stage << std::endl;
       std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
       std::string sendData = std::to_string(_stage);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);

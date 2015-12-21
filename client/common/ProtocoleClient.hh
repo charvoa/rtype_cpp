@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Sat Dec 19 22:14:14 2015 Nicolas Girardot
+// Last update Mon Dec 21 03:06:09 2015 Serge Heitzler
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -38,7 +38,7 @@ public:
   void			playerDead(ANetwork::t_frame &frame);
   void			life(ANetwork::t_frame &frame);
   void	       		score(ANetwork::t_frame &frame);
-  void			setCurrentWave(ANetwork::t_frame &frame);
+  void			newWave(ANetwork::t_frame &frame);
   void			endGame(ANetwork::t_frame &frame);
   void			loadSprites(ANetwork::t_frame &frame);
   void			methodChecker(ANetwork::t_frame &frame);

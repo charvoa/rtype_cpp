@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Mon Dec 14 07:03:19 2015 Serge Heitzler
+// Last update Mon Dec 21 03:22:38 2015 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>
@@ -117,6 +117,7 @@ void	OtherPlayer::setUsername(const std::string &username)
 void	OtherPlayer::setScore(int a)
 {
   _score->setString(std::to_string(a));
+  _score->setOrigin(_score->getText().getGlobalBounds().width / 2, _score->getText().getGlobalBounds().height / 2);
 }
 
 void		OtherPlayer::render()

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Mon Dec 14 17:37:12 2015 Nicolas Girardot
+// Last update Mon Dec 21 03:21:54 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -141,6 +141,7 @@ void		MainPlayer::setNbLife(unsigned int nb)
 void		MainPlayer::setScore(unsigned int score)
 {
   _score->getText().setString(std::to_string(score));
+  _score->setOrigin(_score->getText().getGlobalBounds().width / 2, _score->getText().getGlobalBounds().height / 2);
 }
 
 void		MainPlayer::render()
