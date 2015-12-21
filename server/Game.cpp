@@ -662,6 +662,7 @@ void Game::checkNewStage()
       _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
+      _timerWave->reset();
       std::cout << "I SEND NEW WAVE" << _stage << std::endl;
       std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
       std::string sendData = std::to_string(_stage);
