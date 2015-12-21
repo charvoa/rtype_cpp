@@ -31,7 +31,7 @@ public:
 	 
 	  if (length > (MAX_PATH - 3))
 	  {
-		  std::cout << ("Directory path is too long.") << std::endl;
+		  std::cout << "Directory path is too long." << std::endl;
 		  return;
 	 }
 
