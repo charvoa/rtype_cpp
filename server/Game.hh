@@ -32,6 +32,7 @@
 # include <map>
 # include <thread>
 # include <BotManager.hpp>
+# include <Timer.hpp>
 
 class Game {
 
@@ -93,7 +94,7 @@ private:
   bool _canAddMonster;
   int _nbLeft;
   int _nbInGame;
-
+  Timer	*_timerWave;
   // METHODS
   Player *getPlayerByClient(Client*);
   Player *getPlayerByClientTCP(Client*);
