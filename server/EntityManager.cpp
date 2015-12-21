@@ -57,7 +57,7 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
   Bot *newEntity = (Bot*)std::malloc(sizeof(Bot));
   int		i = 0;
   int		x, y = 0;
-  Random	rand(0, 51);
+  Random	rand(80, 800);
 
   if (iterator > (int)bots.size())
     return (-1);
@@ -73,7 +73,7 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
   newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);
-  x = 140;
+  x = 2200;
   y = rand.generate<int>();
   dynamic_cast<SystemPos*>(newEntity->getSystemManager()->getSystemByComponent(C_POSITION))->update(x, y);
   _entities.push_back(newEntity);
