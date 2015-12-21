@@ -401,7 +401,7 @@ void Game::addMonster()
     }
   else{
     _canAddMonster = false;
-    std::cout << "Monster Full for this Stage" << std::endl;
+    //    std::cout << "Monster Full for this Stage" << std::endl;
   }
 }
 
@@ -531,6 +531,7 @@ void Game::checkHitBox()
   std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
 
+  bool isBreakable = false;
   for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
        ammosIT != ammos.end();
        ++ammosIT)
@@ -542,7 +543,7 @@ void Game::checkHitBox()
 	  std::list<Case*> caseMonster = reinterpret_cast<ComponentHitbox*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
 	  std::list<Case*> caseAmmo = reinterpret_cast<ComponentHitbox*>((*ammosIT)->getSystemManager()->getSystemByComponent(C_HITBOX)->getComponent())->getHitbox();
 	  for (std::list<Case*>::iterator case1 = caseAmmo.begin();
-	       case1 != caseAmmo.end();
+	       case1 != caseAmmo.end() && isBreakable;
 	       ++case1)
 	    {
 	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
@@ -561,6 +562,8 @@ void Game::checkHitBox()
 			{
 			  this->updateScore(p, scoreDef::KILLED);
 			  deleteEntity(*ammosIT);
+			  isBreakable = true;
+			  break;
 			}
 		      //_nbDisplay--;
 		    }
