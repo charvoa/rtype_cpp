@@ -129,6 +129,8 @@ std::list<Case*>	AEntity::refreshHitbox()
     height = 82;
   else if (_name == "sprite1.png")
     height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
   else
     height = 10;
 
@@ -141,14 +143,14 @@ std::list<Case*>	AEntity::refreshHitbox()
       height = 44;
       break;
     default:
-      height = 5;
+      height = 10;
       break;
-    // case E_MISSILE:
-    //   height = 5;
-    //   break;
-    // case E_RIFLE:
-    //   height = 5;
-    //   break;
+    //  // case E_MISSILE:
+    // //   height = 5;
+    // //   break;
+    // // case E_RIFLE:
+    // //   height = 5;
+    // //   break;
     }
 
   //  myCase = (Case*)std::malloc(sizeof(Case));
