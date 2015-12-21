@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Tue Dec 15 01:29:51 2015 Joris Bertomeu
+// Last update Mon Dec 21 10:30:03 2015 Nicolas Charvoz
 //
 
 #ifndef			_FILE_HPP_
@@ -65,7 +65,7 @@ public:
       throw (std::logic_error("File :: Constructor : Error while openning \"" + fullpath + "\""));
     fseek(file, 0L, SEEK_END);
     this->_size = ftell(file);
-    std::cout << "Size : " << _size << std::endl;
+    //    std::cout << "Size : " << _size << std::endl;
     fclose(file);
   };
 

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Sat Dec 12 11:06:54 2015 Louis Audibert
-// Last update Mon Dec 21 01:28:02 2015 Louis Audibert
+// Last update Mon Dec 21 01:33:23 2015 Louis Audibert
 //
 
 #include <SystemHitbox.hh>
