@@ -64,8 +64,8 @@ void Server::run()
 	    try{
 	      _roomManager.getRoomByClient(client).deletePlayer(client);
 	    }
-	    catch(const std::exception &e){
-	      std::cout << e.what() << std::endl;
+	    catch(const std::exception &ee){
+	      std::cout << ee.what() << std::endl;
 	    }
 	  }
 	continue;

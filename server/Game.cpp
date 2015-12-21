@@ -507,15 +507,17 @@ void Game::updateMissile()
 std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
 {
   int saveMax = 0;
-  int saveMin = 0;
+  int saveMin;
+
   std::pair<int, int> final;
 
   for (std::list<Case*>::iterator it = listCase.begin();
        it != listCase.end();
        ++it)
     {
-      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
       saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
+      saveMin = saveMax;
+      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
     }
   final = std::make_pair(saveMin, saveMax);
   return final;
