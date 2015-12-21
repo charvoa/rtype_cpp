@@ -641,7 +641,7 @@ void Game::deletePlayer(Client *c)
 
   std::string sendData = p->getUsername();
 
-  std::cout << p->getUsername() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
+  std::cout << p->getName() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
 
   ANetwork::t_frame frame = CreateRequest::create(S_PLAYER_LEFT_IG, CRC::calcCRC(sendData), sendData.size(), sendData);
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
