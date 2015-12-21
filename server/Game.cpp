@@ -643,7 +643,7 @@ void Game::deletePlayer(Client *c)
     std::cout << e.what() << std::endl;
   }
 
-  std::string sendData = p->getUsername();
+  std::string sendData = p->getName();
 
   std::cout << p->getName() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
 
