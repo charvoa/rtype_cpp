@@ -16,6 +16,7 @@ Player::Player(int id, const Client &c) : AEntity(id)
   addSystem(C_POSITION);
   addSystem(C_HEALTH);
   addSystem(C_HITBOX);
+  _lastShoot = new Timer(true);
 }
 
 Player::~Player() {}
@@ -68,4 +69,9 @@ void Player::shoot(E_Component type)
       if (_laser == 0)
 	removeSystem(C_LASER);
     }
+}
+
+Timer	*Player::getLastShoot()
+{
+  return _lastShoot;
 }
