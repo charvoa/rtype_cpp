@@ -132,14 +132,18 @@ std::list<Case*>	AEntity::refreshHitbox()
   int	i = 0;
   int	height = 0;
 
+  if (_name == "sprite1.png")
+    height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
+  else if (_name == "sprite3.png")
+    height = 15;
+  else if (_name == "sprite2.png")
+    height = 67;
   if (_name == "sprite3.png")
     height = 74;
   else if (_name == "sprite6.png")
     height = 82;
-  else if (_name == "sprite1.png")
-    height = 15;
-  else if (_name == "sprite2.png")
-    height = 67;
   else
     height = 10;
 
