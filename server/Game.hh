@@ -70,7 +70,7 @@ public:
   const Client &getClient() const;
   const std::string &getId() const;
   void handleCommand(void*, Client*);
-  void deletePlayer();
+  void deletePlayer(Client*);
 
   // ATTRIBUTES
   std::list<Client *> _clients;
@@ -91,9 +91,11 @@ private:
   std::list<Bot*> _botList;
   bool _isRunning;
   int _nbLeft;
+  int _nbInGame;
 
   // METHODS
   Player *getPlayerByClient(Client*);
+  Player *getPlayerByClientTCP(Client*);
   Client *getClientBySocket(ISocket*) const;
   int  getNumberEnemyMax();
   void sendNewEntity(const std::string &, int id);

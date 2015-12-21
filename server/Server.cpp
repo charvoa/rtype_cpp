@@ -57,15 +57,15 @@ void Server::run()
       if (!(data = client->getSocket()->read(sizeof(ANetwork::t_frame)))) { //Client Disconnected
 	this->_network->unlistenSocket(client->getSocket());
 	try {
-	  _gameManager.getGameByClient(client)->deletePlayer();
+	  _gameManager.getGameByClient(client)->deletePlayer(client);
 	} catch (const std::exception &e)
 	  {
 	    std::cout << e.what() << std::endl;
 	    try{
 	      _roomManager.getRoomByClient(client).deletePlayer(client);
 	    }
-	    catch(const std::exception &e){
-	      std::cout << e.what() << std::endl;
+	    catch(const std::exception &ee){
+	      std::cout << ee.what() << std::endl;
 	    }
 	  }
 	continue;

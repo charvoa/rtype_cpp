@@ -31,6 +31,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _nbDisplay = 0;
   _isRunning = true;
   _nbLeft = 0;
+  _nbInGame = client_.size();;
   this->_timestamp = time(NULL);
   _funcMap.insert(std::make_pair(C_HANDSHAKE_UDP, &Game::handleHandshakeUDP));
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
@@ -81,6 +82,22 @@ Player *Game::getPlayerByClient(Client *client)
 
   throw std::logic_error("Cannot find this player by client");
 }
+
+Player *Game::getPlayerByClientTCP(Client *client)
+{
+  std::list<AEntity*> _players = _eM.getEntitiesByType(E_PLAYER);
+
+  for (std::list<AEntity*>::iterator it = _players.begin();
+       it != _players.end();
+       ++it)
+    {
+      Player *ptmp = reinterpret_cast<Player*>(*it);
+      if (ptmp->getClient().getSocket()->getFd() == client->getSocket()->getFd())
+	return (ptmp);
+    }
+  throw std::logic_error("Cannot find this player by TCP client");
+}
+
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
@@ -490,15 +507,17 @@ void Game::updateMissile()
 std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
 {
   int saveMax = 0;
-  int saveMin = 0;
+  int saveMin;
+
   std::pair<int, int> final;
 
   for (std::list<Case*>::iterator it = listCase.begin();
        it != listCase.end();
        ++it)
     {
-      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
       saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
+      saveMin = saveMax;
+      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
     }
   final = std::make_pair(saveMin, saveMax);
   return final;
@@ -585,7 +604,6 @@ bool Game::run()
   return true;
 }
 
-
 const std::string &Game::getId() const
 {
   return _id;
@@ -596,13 +614,28 @@ std::list<Client*> &Game::getClients()
   return _clients;
 }
 
-
-void Game::deletePlayer()
+void Game::deletePlayer(Client *c)
 {
   _nbLeft++;
+  Player *p;
 
-  std::cout << _nbLeft << " players left the game" << std::endl;
-  if (_nbLeft == static_cast<int>(_clients.size()))
+  try {
+    p = this->getPlayerByClientTCP(c);
+  } catch (const std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::string sendData = p->getUsername();
+
+  std::cout << p->getUsername() << " left the game ... Still " << _nbInGame - _nbLeft << " players remaining." << std::endl;
+
+  ANetwork::t_frame frame = CreateRequest::create(S_PLAYER_LEFT_IG, CRC::calcCRC(sendData), sendData.size(), sendData);
+  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+    {
+      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+  if (_nbLeft == _nbInGame || (_nbInGame - _nbLeft) < 0)
     {
       std::cout << " I will quit" << std::endl;
       _isRunning = false;
