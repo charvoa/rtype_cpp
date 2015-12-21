@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:32 2015 Louis Audibert
-// Last update Mon Dec 21 01:03:17 2015 Louis Audibert
+// Last update Mon Dec 21 01:04:52 2015 Louis Audibert
 //
 
 #include <AEntity.hh>
@@ -132,6 +132,8 @@ std::list<Case*>	AEntity::refreshHitbox()
     height = 82;
   else if (_name == "sprite1.png")
     height = 15;
+  else
+    height = 10;
 
   switch (_type)
     {
@@ -141,7 +143,10 @@ std::list<Case*>	AEntity::refreshHitbox()
     case E_PLAYER:
       height = 44;
       break;
-    default:
+    case E_MISSILE:
+      height = 5;
+      break;
+    case E_RIFLE:
       height = 5;
       break;
     }
