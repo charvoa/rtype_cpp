@@ -8,7 +8,6 @@
 //
 
 #include <Game.hh>
-#include <Timer.hpp>
 #include <Random.hpp>
 
 Game::Game()
@@ -571,6 +570,7 @@ bool Game::run()
 {
   int	speed = 3;
   Timer timerMonster(true);
+  _timerWave = new Timer(true);
   ThreadFactory *tF = new ThreadFactory;
   std::unique_ptr<AThread> t1(tF->createThread());
 
@@ -594,7 +594,7 @@ bool Game::run()
       _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
       this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage))
+      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() >= 2))
       	{
       	  timerMonster.reset();
 	  this->addMonster();
@@ -652,6 +652,7 @@ void Game::checkNewStage()
 {
   if (_nbDisplay == 0)
     {
+      _timerWave->reset();
       _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
