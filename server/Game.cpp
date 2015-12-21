@@ -596,11 +596,10 @@ bool Game::run()
   std::this_thread::sleep_for(std::chrono::seconds(2));
   while (_isRunning)
     {
-      _start = std::chrono::system_clock::now();
       auto startTime = std::chrono::high_resolution_clock::now();
       if (!_canAddMonster)
 	this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2))
+      if (timerMonster.elapsed().count() >= (speed/_stage) && (_timerWave->elapsed().count() > 2) && startTime - _start > std::chrono::milliseconds(8000))
       	{
       	  timerMonster.reset();
 	  this->addMonster();
