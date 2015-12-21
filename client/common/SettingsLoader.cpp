@@ -224,11 +224,10 @@ SettingsLoader::SettingsLoader(std::string const& filepath) : _filepath(filepath
   _stringAxis["JOYSTICK_L2"] = JoystickEvent(sf::Joystick::Z);
   _stringAxis["JOYSTICK_R1"] = JoystickEvent(sf::Joystick::R);
   _stringAxis["JOYSTICK_R2"] = JoystickEvent(sf::Joystick::R);
+  std::string line;
 
-  std::cout << "CONSTRUCT SETTINGS LOADER READER" << std::endl;
-	if (!_ifs->good())
+  if (!_ifs->good() || !std::getline(*_ifs, line))
     {
-		std::cout << "file not found" << std::endl;
       _fileExists = false;
       return;
     }
@@ -247,24 +246,27 @@ std::string     SettingsLoader::removeSpaces(std::string const& str) const
 {
     unsigned int it = 0;
     unsigned int end = str.length();
-	std::string ret(str);
+	std::string ret;
 
     while (it != end)
     {
-        if (ret.at(it) == ' ' ||
-            ret.at(it) == '\t')
-            ret.erase(it, 1);
+		if (str.at(it) != ' ' && str.at(it) != '\t')
+			ret.push_back(str.at(it));
         ++it;
     }
     return (ret);
 }
 
+
 std::string     SettingsLoader::getValueOf(std::string const& label) const
 {
     std::string	line;
     std::string	value;
+	if (_fileExists == false)
+	{
+		return ("0");
+	}
     _ifs->seekg(0, _ifs->beg);
-
     while (std::getline(*_ifs, line))
       {
         line = removeSpaces(line);
@@ -276,6 +278,10 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
         }
       }
     _ifs->clear();
+	if (label == "ip")
+		return "10.16.253.148";
+	else if (label == "port")
+		return "4242";
     return ("LABEL_NOT_FOUND");
 }
 
@@ -607,7 +613,6 @@ void        SettingsLoader::saveSettings(Settings *settings) const
 {
 	std::ofstream  ofs("../config/PersonalConfig.ini", std::ios::out | std::ios::trunc);
 	std::string str(settingsToString(*settings));
-	std::cout << "[" << str << "]" << std::endl;
 
     ofs << str;
 }
@@ -640,7 +645,19 @@ Settings	*SettingsLoader::parseSettings() const
 {
 	Volume vol = getVolume();
 	std::vector<Bind*> binds = getBinds();
-  Settings	*ret = new Settings(vol, binds, getDefaultDifficulty(), getValueOf("ip"), std::stoi(getValueOf("port")));
+	std::string ip;
+	int port;
+	if (_fileExists == false)
+	{
+		ip = "10.16.253.148";
+		port = 4242;
+	}
+	else
+	{
+		port = std::stoi(getValueOf("port"));
+		ip = getValueOf("ip");
+	}
+	  Settings	*ret = new Settings(vol, binds, getDefaultDifficulty(), ip, port);
 
   return (ret);
 }
