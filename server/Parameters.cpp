@@ -5,14 +5,14 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec  1 05:32:07 2015 Louis Audibert
-// Last update Sat Dec 12 14:10:43 2015 Antoine Garcia
+// Last update Tue Dec 22 08:38:09 2015 Antoine Garcia
 //
 
 #include <Parameters.hh>
 
 Parameters::Parameters()
 {
-  _difficulty = E_EASY;
+  _difficulty = E_MEDIUM;
 }
 
 Parameters::~Parameters()
