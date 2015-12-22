@@ -63,7 +63,7 @@ void Player::addSystem(E_Component type)
     _laser = 1;
 }
 
-void	Player::sendShoot(E_Component type, int nb)
+void	Player::sendShoot(E_EntityType type, int nb)
 {
   std::string sendData = std::to_string(type) + ";" + std::to_string(nb);
   ANetwork::t_frame frame = CreateRequest::create(S_AMMO_LEFT, CRC::calcCRC(sendData), sendData.size(), sendData);
@@ -76,6 +76,7 @@ bool Player::shoot(E_Component type)
       if (_missiles >= 1)
 	{
 	  _missiles--;
+	  sendShoot(E_MISSILE,_missiles);
 	  return (true);
 	}
       else
@@ -86,6 +87,7 @@ bool Player::shoot(E_Component type)
       if (_laser >= 1)
 	{
 	  _laser--;
+	  sendShoot(E_LASER,_laser);
 	  return (true);
 	}
       else

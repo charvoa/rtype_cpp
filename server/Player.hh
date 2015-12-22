@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Tue Dec 22 06:23:12 2015 Antoine Garcia
+// Last update Tue Dec 22 06:54:48 2015 Antoine Garcia
 //
 
 #ifndef PLAYER_HH_
@@ -29,7 +29,7 @@ private:
   int _missiles;
   int _laser;
   Timer	*_lastShoot;
-  void sendShoot(E_Component, int);
+  void sendShoot(E_EntityType, int);
 public:
   Player(int id, const Client &);
   ~Player();
