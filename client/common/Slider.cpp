@@ -228,7 +228,6 @@ void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> p
 	RenderWindow	*window = RenderWindow::getInstance();
 	ANetwork *net = Client::getNetwork();
 	ANetwork::t_frame sender;
-	net->write(sender);
 	std::string diff;
 
 	if (_locked == true)
