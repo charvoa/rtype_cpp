@@ -210,6 +210,7 @@ bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
   Client	*client = reinterpret_cast<Client *>(data);
   try
     {
+      std::cout << "ROOM SETTING CHANGED" << std::endl;
       Room room = _roomManager.getRoomByClient(client);
       Parameters param;
       E_Difficulty	difficulty = (E_Difficulty)std::atoi(frame.data);
