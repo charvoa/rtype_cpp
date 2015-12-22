@@ -42,6 +42,11 @@ void			AMenuElement::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 	(void)pair;
 }
 
+void			AMenuElement::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair)
+{
+	(void)pair;
+}
+
 void			AMenuElement::setBind(sf::Event event)
 {
 	(void)event;

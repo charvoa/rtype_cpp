@@ -23,6 +23,9 @@ public:
 	float		getPosY();
 	float		getPosX();
 	void		setLimit(float, float);
+	bool		difficultyUpdateOnPress(std::pair<unsigned int, unsigned int>);
+	void		difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int>);
+	void		difficultyUpdateOnMove(std::pair<unsigned int, unsigned int>);
 
 private:
 	float		_minX;
