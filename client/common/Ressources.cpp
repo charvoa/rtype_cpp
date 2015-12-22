@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Sat Dec 19 14:01:06 2015 Nicolas Girardot
+// Last update Tue Dec 22 06:17:03 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -36,7 +36,6 @@ Ressources::Ressources()
 
   _buttonNormal->loadFromFile("../common/misc/button_normal.png");
   _buttonHighlight->loadFromFile("../common/misc/button_highlight.png");
-  //  _buttonSelect->loadFromFile("../common/misc/button_normal.png");
   _slide->loadFromFile("../common/misc/slider.png");
   _sliderNormal->loadFromFile("../common/misc/slideButton.png");
   _keyButtonNormal->loadFromFile("../common/misc/keyButton_normal.png");

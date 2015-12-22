@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Tue Dec 22 05:24:03 2015 Serge Heitzler
+// Last update Tue Dec 22 06:33:25 2015 Serge Heitzler
 //
 
 
@@ -42,6 +42,7 @@ public:
   static void				setCurrentWave(unsigned int value);
   static void				display(std::vector<std::string> &vector);
   static void			        newEntity(std::vector<std::string> &vector);
+  static void			        ammoLeft(std::vector<std::string> &vector);
   static void			        deleteEntity(std::vector<std::string> &vector);
   static void				die(int i, int id);
   static void  				playerLeft(const std::string &playerName);
@@ -52,7 +53,6 @@ public:
   std::vector<Sprite *>			&getSprites();
   OtherPlayer				*getPlayerByName(const std::string &name);
   Text					&getTeamScore();
-  MainPlayer				*getMainPlayer();
   Text					&getCurrentWave();
   void					render();
   void					update();
@@ -67,6 +67,7 @@ public:
   void					resume();
   void					exit();
   int					getType();
+  MainPlayer				&getMainPlayer();
 
 private:
 

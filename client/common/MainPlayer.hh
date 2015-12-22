@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Tue Dec 22 04:40:16 2015 Serge Heitzler
+// Last update Tue Dec 22 06:28:13 2015 Serge Heitzler
 //
 
 #ifndef MAINPLAYER_HH_
@@ -13,6 +13,7 @@
 
 #include <Text.hh>
 #include <Sprite.hh>
+#include <vector>
 
 class MainPlayer
 {
@@ -20,12 +21,14 @@ public:
   MainPlayer(unsigned int id);
   ~MainPlayer();
 
+  void			ammoLeft(std::vector<std::string> &vector);
   const std::string	&getUsername() const;
   unsigned int	        getScore();
-  void		setNbRocket(unsigned int nb);
-  void		setNbLife(unsigned int nb);
-  void	        setScore(unsigned int score);
-  void		render();
+  void			setNbRocket(unsigned int nb);
+  void			setNbLaser(unsigned int nb);
+  void			setNbLife(unsigned int nb);
+  void			setScore(unsigned int score);
+  void			render();
 
 private:
 
@@ -37,6 +40,7 @@ private:
 
   unsigned int 			_nbrLife;
   unsigned int	       		_nbrRocket;
+  unsigned int			_id;
 
   std::vector<Sprite*>		_hearts;
   std::vector<Sprite*>		_ammos;

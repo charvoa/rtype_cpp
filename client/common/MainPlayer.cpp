@@ -5,11 +5,12 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Tue Dec 22 04:49:15 2015 Serge Heitzler
+// Last update Tue Dec 22 06:35:47 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
 #include <MainPlayer.hh>
+#include <GamePanel.hh>
 
 MainPlayer::MainPlayer(unsigned int id)
 {
@@ -21,7 +22,8 @@ MainPlayer::MainPlayer(unsigned int id)
   _nbrRocket = 0;
   _score = new Text();
   _nbrRocketText = new Text();
-
+  _id = id;
+  
   Sprite	*riffle = new Sprite();
   Sprite	*rocket = new Sprite();
   Sprite	*laser = new Sprite();
@@ -110,12 +112,56 @@ const std::string	&MainPlayer::getUsername() const
   return _username;
 }
 
+void		        MainPlayer::ammoLeft(std::vector<std::string> &v)
+{
+  unsigned int value = std::atoi(v.at(1).c_str());
+
+  if (v.at(0) == "E_MISSILE")
+    this->setNbRocket(value);
+  else
+    this->setNbLaser(value);
+}
+
 void		MainPlayer::setNbRocket(unsigned int nb)
 {
   _nbrRocket = nb;
   if (_nbrRocket <= 0)
     _ammos.at(1)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_rocketBlack->getTexture()));
-  _nbrRocketText->getText().setString(std::to_string(nb));
+  else
+    _ammos.at(1)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_rocket->getTexture()));
+  
+  _nbrRocketText->getText().setString(std::to_string(nb));  
+  _nbrRocketText->setOrigin(_nbrRocketText->getText().getGlobalBounds().width / 2, _nbrRocketText->getText().getGlobalBounds().height / 2);
+}
+
+void		MainPlayer::setNbLaser(unsigned int nb)
+{
+  if (nb > 0)
+    {
+      switch (_id)
+	{
+	case 0:
+	  _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserBlackLittle->getTexture()));
+	  break;
+	case 1:
+	  _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserBlueLittle->getTexture()));
+	  break;
+	case 2:
+	  _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserRedLittle->getTexture()));
+	  break;
+	case 3:
+	  _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserGreenLittle->getTexture()));
+	  break;
+	case 4:
+	  _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserYellowLittle->getTexture()));
+	  break;
+	default:
+	  _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserBlackLittle->getTexture()));
+	  break;
+	}
+    }
+  else
+    _ammos.at(2)->getSprite().setTexture(((RenderWindow::getInstance())->_ressources->_laserBlackLittle->getTexture()));
 }
 
 void		MainPlayer::setNbLife(unsigned int nb)

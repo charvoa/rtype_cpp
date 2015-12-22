@@ -65,7 +65,7 @@ GamePanel::GamePanel()
   teamScore->setSize(25);
   teamScore->setStyle(1);
   teamScore->setOrigin(teamScore->getText().getGlobalBounds().width / 2, teamScore->getText().getGlobalBounds().height / 2);
-  teamScore->setPosition(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.027));
+  teamScore->setPosition(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.029));
   teamScore->setColor(Color::WHITE);
   _labels.push_back(*teamScore);
 
@@ -109,8 +109,7 @@ GamePanel::GamePanel()
   planet->setPosition(2500, _randPosY->generate<int>());
   planet->scale(0.5);
   _backgrounds.push_back(*planet);
-  
-  
+    
 
   Sprite *topGame1 = new Sprite;
 
@@ -179,6 +178,18 @@ GamePanel::~GamePanel() {}
 int			GamePanel::getType()
 {
   return _type;
+}
+
+void			GamePanel::ammoLeft(std::vector<std::string> &v)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+
+  static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().ammoLeft(v);
+}
+
+MainPlayer		&GamePanel::getMainPlayer()
+{
+  return *_mainPlayer;
 }
 
 void			GamePanel::playerLeft(const std::string &playerName)
@@ -404,10 +415,10 @@ OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
   return NULL;
 }
 
-MainPlayer		*GamePanel::getMainPlayer()
-{
-  return _mainPlayer;
-}
+// MainPlayer		*GamePanel::getMainPlayer()
+// {
+//   return _mainPlayer;
+// }
 
 void		GamePanel::setTeamScore(unsigned int score)
 {
@@ -427,9 +438,9 @@ void		GamePanel::setScore(const std::string &name, int score)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-  if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() == name)
+  if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().getUsername() == name)
     {
-      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->setScore(score);
+      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().setScore(score);
     }
   else
     {
@@ -452,10 +463,10 @@ void		GamePanel::setLife(const std::string &name, int life)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-  std::cout << "Player Name is " << static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() << std::endl;
-  if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->getUsername() == name)
+  std::cout << "Player Name is " << static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().getUsername() << std::endl;
+  if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().getUsername() == name)
     {
-      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer()->setNbLife(life);
+      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().setNbLife(life);
     }
   else
     {
@@ -476,12 +487,13 @@ void		GamePanel::setEscapeMenu(bool value)
 
   _escapeKey = value;
   std::string name = "RESUME";
+
   ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.7), name);
   name = "EXIT";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.75, window->getSize()._y * 0.7), name);
   static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::resume);
   static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::exit);
-  static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite().setColor(sf::Color(255, 255, 255, 255));
+  static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(6).getSprite().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString("Are you sure to exit the game ?");
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
@@ -505,7 +517,7 @@ void		GamePanel::resume()
   _userInterface.erase(_userInterface.begin());
   _userInterface.erase(_userInterface.begin());
 
-  _inGame.at(7).getSprite().setColor(sf::Color(255, 255, 255, 0));
+  _inGame.at(6).getSprite().setColor(sf::Color(255, 255, 255, 0));
 
   _labels.at(2).getText().setColor(sf::Color(255, 255, 255, 0));
 
