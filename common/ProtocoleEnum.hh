@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Sun Dec 20 06:54:47 2015 Antoine Garcia
+// Last update Tue Dec 22 06:21:13 2015 Serge Heitzler
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -55,7 +55,8 @@ typedef enum RequestFromServer
     S_DOWNLOAD_COMPLETE = 122,
     S_DELETE_ENTITY = 123,
     S_PLAYER_LEFT_IG = 124,
-    S_NEW_WAVE = 125
+    S_NEW_WAVE = 125,
+    S_AMMO_LEFT = 126
   } RequestFromServer;
 
 typedef enum RequestFromMonitoring
