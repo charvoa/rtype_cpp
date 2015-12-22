@@ -36,6 +36,7 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
   _funcMap.insert(std::make_pair(C_MOVE, &Game::handleMove));
   _funcMap.insert(std::make_pair(C_SHOOT, &Game::handleShoot));
   _timerWave = new Timer(true);
+  _botManager = new BotManager("../libs/");
 }
 
 Game::~Game() {}
@@ -393,9 +394,7 @@ void Game::addMonster()
   if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
     {
       //      std::cout << "Add Monster" << std::endl;
-      Random r(0, _botList.size());
-
-      int id = _eM.createEntitiesFromFolder(_botList, r.generate<int>());
+      int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
 
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
