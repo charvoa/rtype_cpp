@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Tue Dec 22 06:35:47 2015 Serge Heitzler
+// Last update Tue Dec 22 06:55:47 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -116,7 +116,7 @@ void		        MainPlayer::ammoLeft(std::vector<std::string> &v)
 {
   unsigned int value = std::atoi(v.at(1).c_str());
 
-  if (v.at(0) == "E_MISSILE")
+  if (std::atoi(v.at(0).c_str()) == 6)
     this->setNbRocket(value);
   else
     this->setNbLaser(value);
