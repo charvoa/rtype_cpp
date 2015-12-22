@@ -10,6 +10,7 @@
 # include <ProtocoleEnum.hh>
 # include <ANetwork.hpp>
 # include <Player.hh>
+# include <CRC.hpp>
 # include <CreateRequest.hpp>
 
 Player::Player(int id, const Client &c) : AEntity(id)
@@ -65,8 +66,8 @@ void Player::addSystem(E_Component type)
 void	Player::sendShoot(E_Component type, int nb)
 {
   std::string sendData = std::to_string(type) + ";" + std::to_string(nb);
-  // ANetwork::t_frame frame = CreateRequest::create(S_AMMO_LEFT, CRC::calcCRC(sendData), sendData.size(), sendData);
-  //_client.getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame);
+  ANetwork::t_frame frame = CreateRequest::create(S_AMMO_LEFT, CRC::calcCRC(sendData), sendData.size(), sendData);
+  _client.getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 }
 bool Player::shoot(E_Component type)
 {
