@@ -125,27 +125,12 @@ AEntity	*AEntity::getParent()
   return _parent;
 }
 
-std::list<Case*>	AEntity::refreshHitbox()
+std::list<Case*>	AEntity::refreshHitboxEntity()
 {
   std::list<Case*> hitbox;
   Case	*myCase;
   int	i = 0;
   int	height = 0;
-
-  if (_name == "sprite1.png")
-    height = 15;
-  else if (_name == "sprite2.png")
-    height = 67;
-  else if (_name == "sprite3.png")
-    height = 15;
-  else if (_name == "sprite2.png")
-    height = 67;
-  if (_name == "sprite3.png")
-    height = 74;
-  else if (_name == "sprite6.png")
-    height = 82;
-  else
-    height = 10;
 
   switch (_type)
     {
@@ -158,12 +143,6 @@ std::list<Case*>	AEntity::refreshHitbox()
     default:
       height = 10;
       break;
-    //  // case E_MISSILE:
-    // //   height = 5;
-    // //   break;
-    // // case E_RIFLE:
-    // //   height = 5;
-    // //   break;
     }
 
   while (i < height)
@@ -174,22 +153,5 @@ std::list<Case*>	AEntity::refreshHitbox()
       hitbox.push_back(myCase);
       i++;
     }
-  //  i = 0;
-  // while (i < height)
-  //   {
-  //     myCase = new Case;
-  //     myCase->x = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getX();
-  //     myCase->y = reinterpret_cast<ComponentPosition*>(_systemManager->getSystemByComponent(C_POSITION)->getComponent())->getY() - i;
-  //     hitbox.push_back(myCase);
-  //     i++;
-  //   }
-  // std::cout << "HITBOX IN AENTtity.CPP" << std::endl;
-
-  // for (std::list<Case*>::iterator it = hitbox.begin();
-  //      it != hitbox.end();
-  //      ++it)
-  //   {
-  //     std::cout << "X = " << (*it)->x << " Y = " << (*it)->y << std::endl;
-  //   }
   return (hitbox);
 }
