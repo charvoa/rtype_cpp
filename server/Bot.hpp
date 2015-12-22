@@ -5,11 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-<<<<<<< HEAD
-// Last update Tue Dec 22 03:23:54 2015 Serge Heitzler
-=======
-// Last update Tue Dec 22 03:41:52 2015 Louis Audibert
->>>>>>> 49b093a12f7a3f18d08a428aed8ed12e80af0bcd
+// Last update Tue Dec 22 03:49:55 2015 Serge Heitzler
 //
 
 #ifndef			_BOT_HH_
@@ -35,11 +31,8 @@ private:
   int	_health;
 
   virtual void		generateY();
-<<<<<<< HEAD
   virtual void		generateX();
-=======
   virtual std::list<Case*> refreshHitbox();
->>>>>>> 49b093a12f7a3f18d08a428aed8ed12e80af0bcd
 
 public:
   explicit		Bot(int id);
