@@ -259,6 +259,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
   _dicoTextures.insert(std::make_pair("8", ((RenderWindow::getInstance())->_ressources->_laserRedBig)));
   _dicoTextures.insert(std::make_pair("9", ((RenderWindow::getInstance())->_ressources->_laserGreenBig)));
   _dicoTextures.insert(std::make_pair("10", ((RenderWindow::getInstance())->_ressources->_laserYellowBig)));
+  _dicoTextures.insert(std::make_pair("11", ((RenderWindow::getInstance())->_ressources->_enemyBullet)));
 
   for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->end(); ++it)
     {
@@ -339,6 +340,23 @@ void		GamePanel::die(int id, int idDied)
     e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_yellow));
     break;
   }
+
+  switch (idDied)
+    {
+    case 1:
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idDied])->getSprite().setColor(sf::Color(255, 255, 255, 0));
+      break;
+    case 2:
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idDied])->getSprite().setColor(sf::Color(255, 255, 255, 0));
+      break;
+    case 3:
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idDied])->getSprite().setColor(sf::Color(255, 255, 255, 0));
+      break;
+    case 4:
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idDied])->getSprite().setColor(sf::Color(255, 255, 255, 0));
+      break;
+    }
+  
 
   int PosX  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosX();
   int PosY  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosY();

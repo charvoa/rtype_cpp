@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:51 2015 Serge Heitzler
-// Last update Tue Dec 22 08:28:54 2015 Serge Heitzler
+// Last update Tue Dec 22 08:45:24 2015 Serge Heitzler
 //
 
 #ifndef RESSOURCES_HH_
@@ -78,6 +78,7 @@ public:
   Texture		*_laserGreenBig;
   Texture		*_laserYellowLittle;
   Texture		*_laserYellowBig;
+  Texture		*_enemyBullet;
 
 
   Texture		*_planetEarth;

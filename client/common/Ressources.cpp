@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Tue Dec 22 08:28:43 2015 Serge Heitzler
+// Last update Tue Dec 22 08:45:08 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -90,6 +90,7 @@ Ressources::Ressources()
   _laserGreenBig = new Texture();
   _laserYellowLittle = new Texture();
   _laserYellowBig = new Texture();
+  _enemyBullet = new Texture();
 
   _hud->loadFromFile("../common/misc/hud.png");
   _header->loadFromFile("../common/misc/header.png");
@@ -111,6 +112,7 @@ Ressources::Ressources()
   _laserGreenBig->loadFromFile("../common/misc/laser_green_big.png");
   _laserYellowLittle->loadFromFile("../common/misc/laser_yellow_little.png");
   _laserYellowBig->loadFromFile("../common/misc/laser_yellow_big.png");
+  _enemyBullet->loadFromFile("../common/misc/enemy_bullet.png");
 
   _planetEarth = new Texture();
   _planetExodus = new Texture();
