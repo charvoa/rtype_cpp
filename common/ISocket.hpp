@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Nov 17 23:55:57 2015 Joris Bertomeu
-// Last update Sat Dec 12 09:39:29 2015 Joris Bertomeu
+// Last update Tue Dec 22 13:44:59 2015 Joris Bertomeu
 //
 
 #ifndef		__ISOCKET_HPP_
@@ -13,6 +13,8 @@
 # ifdef		_WIN32
 #  include	<winsock2.h>
 # endif
+# include	<string>
+
 class		ISocket
 {
 public:
@@ -22,6 +24,7 @@ public:
   virtual void	close() = 0;
   virtual int	write(void *, int) = 0;
   virtual void	*read(int, int*) = 0;
+  virtual std::string getIP() = 0;
 # ifdef _WIN32
   virtual SOCKET	getFd() const = 0;
   virtual void		setForUDP(SOCKADDR_IN *s) = 0;

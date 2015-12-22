@@ -51,8 +51,8 @@ public:
 
   enum sizeInGame {
     LENGHT_MIN = 0,
-    HEIGHT_MIN = 35,
-    HEIGHT_MAX = 855,
+    HEIGHT_MIN = 54,
+    HEIGHT_MAX = 838,
     LENGHT_MAX = 1920
   };
 
@@ -124,8 +124,10 @@ private:
   std::pair<int, int> getDirections(const std::string &);
 
 public:
-  int getTimestamp() const {return _timestamp;};
-  std::list<Client*> getPlayers() const {return this->_clients;};
+  int			getTimestamp() const {return _timestamp;  };
+  std::list<Client*>	getPlayers() const {return this->_clients;};
+  EntityManager		*getEntityManager() {return &(this->_eM); };
+  int			getStage() const {return (this->_stage);  };
 };
 
 #endif
