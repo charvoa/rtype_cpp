@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Fri Dec  4 23:35:41 2015 Nicolas Charvoz
-// Last update Mon Dec 14 17:51:08 2015 Joris Bertomeu
+// Last update Tue Dec 15 09:25:45 2015 Joris Bertomeu
 //
 
 #ifndef _CREATEREQUEST_HPP_
@@ -56,6 +56,19 @@ public:
     memset(frame->data, 0, 49);
     memcpy(frame->data, data_.c_str(), data_.size());
 
+    return frame;
+  };
+
+  static ANetwork::t_frameMonit *createMonit(int id_, const std::string &data_, bool ret)
+  {
+    (void)ret;
+    ANetwork::t_frameMonit *frame = (ANetwork::t_frameMonit*)
+      malloc(sizeof(ANetwork::t_frameMonit));
+
+    memset(frame, 0, sizeof(ANetwork::t_frameMonit));
+    frame->idRequest = id_;
+    memset(frame->data, 0, 4096);
+    memcpy(frame->data, data_.c_str(), data_.size());
     return frame;
   };
 
