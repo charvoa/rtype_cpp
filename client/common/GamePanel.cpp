@@ -39,6 +39,7 @@ GamePanel::GamePanel()
   getInputManager().setInputType(InputType::GAME_INPUT);
   _escapeKey = false;
 
+  _score = 0;
   _type = PanelFactory::GAME_PANEL;
   _randPosY = new Random(350, 500);
   _randPlanet = new Random(0, 7);
@@ -61,10 +62,10 @@ GamePanel::GamePanel()
   Text	*teamScore = new Text();
 
   teamScore->setString("0");
-  teamScore->setSize(40);
+  teamScore->setSize(25);
   teamScore->setStyle(1);
   teamScore->setOrigin(teamScore->getText().getGlobalBounds().width / 2, teamScore->getText().getGlobalBounds().height / 2);
-  teamScore->setPosition(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.025));
+  teamScore->setPosition(Vector2(window->getSize()._x / 2, window->getSize()._y * 0.027));
   teamScore->setColor(Color::WHITE);
   _labels.push_back(*teamScore);
 
@@ -393,13 +394,6 @@ void		GamePanel::setCurrentWave(unsigned int value)
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 }
 
-void		GamePanel::setTeamScore(unsigned int value)
-{
-  RenderWindow *window = RenderWindow::getInstance();
-
-  static_cast<GamePanel*>(window->getPanels().top())->getTeamScore().setString(std::to_string(value));
-}
-
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
 {
   for (std::vector<OtherPlayer *>::iterator it = _otherPlayers.begin(); it != _otherPlayers.end(); it++)
@@ -414,6 +408,20 @@ MainPlayer		*GamePanel::getMainPlayer()
 {
   return _mainPlayer;
 }
+
+void		GamePanel::setTeamScore(unsigned int score)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+  
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).setString(std::to_string(score));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).getText().setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).getText().getGlobalBounds().height / 2);
+}
+
+unsigned int		GamePanel::getTeamScoreString()
+{
+  return _score;
+}
+
 
 void		GamePanel::setScore(const std::string &name, int score)
 {
@@ -434,6 +442,10 @@ void		GamePanel::setScore(const std::string &name, int score)
 	}
       player->setScore(score);
     }
+
+  static_cast<GamePanel*>(window->getPanels().top())->setTeamScore(static_cast<GamePanel*>(window->getPanels().top())->getTeamScoreString() + score);
+
+
 }
 
 void		GamePanel::setLife(const std::string &name, int life)
@@ -472,6 +484,7 @@ void		GamePanel::setEscapeMenu(bool value)
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(0).getSprite().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString("Are you sure to exit the game ?");
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
 
   window->setMouseCursorVisible(true);
 }

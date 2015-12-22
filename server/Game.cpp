@@ -277,7 +277,7 @@ void Game::handleShoot(void *data, Client *client)
     (std::chrono::system_clock::now() - _start);
 
   Player *p = this->getPlayerByClient(client);
-  if (p->getLastShoot()->elapsedMilli().count() >= 100)
+  if (p->getLastShoot()->elapsedMilli().count() >= 500)
     {
       //      std::cout << "Game :: handleShoot" << std::endl;
       std::string weaponType =

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 19 13:08:02 2015 Serge Heitzler
+// Last update Tue Dec 22 05:24:03 2015 Serge Heitzler
 //
 
 
@@ -39,13 +39,16 @@ public:
 
   static void				setScore(const std::string &name, int life);
   static void		       		setLife(const std::string &name, int life);
-  static void				setTeamScore(unsigned int value);
   static void				setCurrentWave(unsigned int value);
   static void				display(std::vector<std::string> &vector);
   static void			        newEntity(std::vector<std::string> &vector);
   static void			        deleteEntity(std::vector<std::string> &vector);
   static void				die(int i, int id);
   static void  				playerLeft(const std::string &playerName);
+  void  				setTeamScore(unsigned int score);
+  unsigned int  			getTeamScoreString();
+  
+
   std::vector<Sprite *>			&getSprites();
   OtherPlayer				*getPlayerByName(const std::string &name);
   Text					&getTeamScore();
@@ -79,6 +82,7 @@ private:
   Random				*_randPlanet;
   Random				*_randBackground;
   bool					_escapeKey;
+  unsigned int				_score;
 };
 
 #endif /* GAMEPANEL_HH_ */

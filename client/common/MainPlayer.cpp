@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Mon Dec 21 03:21:54 2015 Serge Heitzler
+// Last update Tue Dec 22 04:49:15 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -146,7 +146,7 @@ void		MainPlayer::setScore(unsigned int score)
 
 void		MainPlayer::render()
 {
-    unsigned int		i = 0;
+  unsigned int		i = 0;
 
   (RenderWindow::getInstance())->draw(_spaceShip->getSprite());
   while (i < this->_hearts.size() && this->_hearts.size() > 0)
