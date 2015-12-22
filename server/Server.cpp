@@ -34,7 +34,7 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_JOIN_ROOM, &Server::joinRoom);
   this->_commandManager.addFunction(C_LAUNCH_GAME, &Server::createGame);
   this->_commandManager.addFunction(C_PLAYER_LEFT, &Server::playerLeftRoom);
-
+  this->_commandManager.addFunction(C_CHANGE_SETTINGS, &Server::changeRoomSettings);
   this->_botManager = new BotManager("../libs/");
   this->_roomManager.setBotManager(this->_botManager->getBotList());
   this->_monitoring.start(this);
@@ -201,4 +201,9 @@ bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
       room.deletePlayer(client);
     }
   return true;
+}
+
+bool changeRoomSettings(ANetwork::t_frame frame, void *data)
+{
+  std::cout << "SETTINGS ROOM CALLED" << std::endl;
 }
