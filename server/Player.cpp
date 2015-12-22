@@ -17,6 +17,9 @@ Player::Player(int id, const Client &c) : AEntity(id)
   addSystem(C_HEALTH);
   addSystem(C_HITBOX);
   _lastShoot = new Timer(true);
+  _rifleShooted = 0;
+  _missileShooted = 0;
+  _laserShooted = 0;
 }
 
 Player::~Player() {}
@@ -74,4 +77,25 @@ void Player::shoot(E_Component type)
 Timer	*Player::getLastShoot()
 {
   return _lastShoot;
+}
+
+void	Player::increaseShooted(const std::string &weaponType, int i)
+{
+  if (weaponType == "E_RIFLE")
+    _rifleShooted += i;
+  else if (weaponType == "E_MISSILE")
+    _missileShooted += i;
+  else if (weaponType == "E_LASER")
+    _laserShooted += i;
+}
+
+int	Player::getShooted(const std::string &weaponType)
+{
+  if (weaponType == "E_RIFLE")
+    return (_rifleShooted);
+  else if (weaponType == "E_MISSILE")
+    return (_missileShooted);
+  else if (weaponType == "E_LASER")
+    return (_laserShooted);
+  return 0;
 }

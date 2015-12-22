@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec  5 11:18:33 2015 Joris Bertomeu
-// Last update Mon Dec 14 20:08:39 2015 Joris Bertomeu
+// Last update Tue Dec 22 13:55:44 2015 Joris Bertomeu
 //
 
 #ifndef		__SOCKET__HPP_
@@ -61,6 +61,10 @@ class		Socket : public ISocket
   virtual void		setForUDP(struct sockaddr_in *s) {
     this->_init = true;
     this->_me = *s;
+  };
+
+  virtual std::string	getIP() {
+    return (std::string(inet_ntoa(this->_me.sin_addr)));
   };
 
   void		*read(int size) {

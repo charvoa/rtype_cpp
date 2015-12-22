@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Dec 15 05:35:57 2015 Joris Bertomeu
-// Last update Tue Dec 15 13:32:42 2015 Joris Bertomeu
+// Last update Tue Dec 22 15:22:07 2015 Joris Bertomeu
 //
 
 #include		<Monitoring.hpp>
@@ -38,21 +38,36 @@ void			*_handleThread(void *ptr) {
   return (NULL);
 }
 
-void			Monitoring::parseCommand(void *data, void *c)
+void				Monitoring::parseCommand(void *data, void *c)
 {
-  Client		*client = reinterpret_cast<Client*>(c);
+  Client			*client = reinterpret_cast<Client*>(c);
   ANetwork::t_frameMonit	*frame = reinterpret_cast<ANetwork::t_frameMonit*>(data);
 
   if (frame->idRequest == M_LIST_GAMES) {
-    int	nbGames = reinterpret_cast<Server*>(this->_server)->_gameManager.getNbGames();
-    std::list<Game>	games = reinterpret_cast<Server*>(this->_server)->_gameManager.getGames();
-    std::string		inter = "[";
+    int				nbGames = reinterpret_cast<Server*>(this->_server)->_gameManager.getNbGames();
+    std::list<Game>		games = reinterpret_cast<Server*>(this->_server)->_gameManager.getGames();
+    std::string			inter = "[";
 
     (void) nbGames;
     for (std::list<Game>::iterator it = games.begin(); it != games.end() ; ++it)
       {
-	inter += "{\"id\":\"" + (*it).getId() + "\", \"time\":" + std::to_string((*it).getTimestamp()) +
-	  ", \"nbPlayers\":" + std::to_string((*it).getPlayers().size()) + "},";
+	int			score = 0;
+	std::string		cInter = "[";
+
+	std::list<AEntity*> pList = (*it).getEntityManager()->getEntitiesByType(E_PLAYER);
+	for (std::list<AEntity*>::iterator itP = pList.begin(); itP != pList.end(); ++itP) {
+	  score += reinterpret_cast<Player*>(*itP)->getScore();
+	  cInter += "{\"ip\" : \"" + reinterpret_cast<Player*>(*itP)->getClient().getUDPSocket()->getIP() +
+	    "\", \"score\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getScore()) +
+	    ", \"rifle\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getShooted("E_RIFLE")) +
+	    ", \"missile\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getShooted("E_MISSILE")) +
+	    ", \"laser\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getShooted("E_LASER")) +
+	    "},";
+	}
+	cInter.pop_back();
+	cInter += "]";
+	inter += "{\"id\":\"" + (*it).getId() + "\", \"wave\": " + std::to_string((*it).getStage()) + ",\"time\":" + std::to_string(time(NULL) - (*it).getTimestamp()) +
+	  ", \"nbPlayers\":" + std::to_string((*it).getPlayers().size()) + ", \"score\": " + std::to_string(score) + ", \"clients\" : " + cInter + "},";
       }
     inter.pop_back();
     inter += "]";
