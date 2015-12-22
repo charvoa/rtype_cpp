@@ -624,11 +624,13 @@ bool Game::run()
   while (_isRunning)
     {
       auto startTime = std::chrono::high_resolution_clock::now();
+      if (this->checkGameOver() == true)
+	break;
       if (!_canAddMonster)
 	this->checkNewStage();
       if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && startTime - _start > std::chrono::milliseconds(8000))
-      	{
-      	  timerMonster.reset();
+	{
+	  timerMonster.reset();
 	  this->addMonster();
 	}
       this->updateRiffle();
@@ -699,4 +701,79 @@ void Game::checkNewStage()
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 	}
     }
+}
+
+const std::list<Player*>&	sortForHighScore(std::list<AEntity*> &a, int l, int r)
+{
+  int i, j = a.size(), k = 0, n = a.size();
+  std::list<Player*> result;
+  result.push_front(dynamic_cast<Player*>(a.front()));
+  a.pop_front();
+  while(k < n)
+    {
+      k = result.size();
+      for(i = 0; i < k; i++)
+	{
+	  if(j != 0)
+	    {
+	      if(dynamic_cast<Player*>(a.front())->getScore() < result.front()->getScore())
+		{
+		  result.push_back(dynamic_cast<Player*>(a.front()));
+		  result.push_back(result.front());
+		  result.pop_front();
+		  a.pop_front();
+		  j = a.size();
+		}
+	      else
+		{
+		  result.push_back(result.front());
+		  result.pop_front();
+		}
+	    }
+	  if(j == 1)
+	    {
+	      if(dynamic_cast<Player*>(a.front())->getScore() > result.front()->getScore())
+		{
+		  result.push_back(result.front());
+		  result.pop_front();
+		  result.push_back(dynamic_cast<Player*>(a.front()));
+		  a.pop_front();
+		  j = a.size();
+		  if(j == 0)
+		    break;
+
+		}
+	    }
+	  else if(j == 0)
+	    {
+	      result.push_back(result.front());
+	      result.pop_front();
+	    }
+	}
+    }
+  return result;
+}
+
+bool	Game::checkGameOver()
+{
+  int	countDead = 0;
+  std::list<AEntity*>	list = _eM.getEntitiesByType(E_PLAYER);
+  std::list<Player*>	sendlist;
+  for (std::list<AEntity*>::iterator it = list.begin(); it!= list.end(); ++it)
+    {
+      Player *player = dynamic_cast<Player *>(*it);
+      ComponentHealth *health = reinterpret_cast<ComponentHealth*>((*it)->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent());
+      if (health->getLife() != 0)
+  	break;
+      else
+  	countDead++;
+    }
+   if (countDead == (int)list.size())
+     {
+       std::cout << "GAME OVER" << std::endl;
+       if (list.size() > 1)
+	 sendlist = sortForHighScore(list, 0, list.size() -1);
+       return (true);
+     }
+   return (false);
 }

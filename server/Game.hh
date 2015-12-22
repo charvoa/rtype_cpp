@@ -121,6 +121,7 @@ private:
   void checkNewStage();
   void checkHitBox();
   bool checkMove(int, int);
+  bool checkGameOver();
   std::pair<int, int> getDirections(const std::string &);
 
 public:
