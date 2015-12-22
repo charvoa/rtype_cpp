@@ -452,8 +452,6 @@ void Game::sendGameData()
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
 	  //std::cout << "SS in data : " << ss.str().c_str() << std::endl;
-	  if (dynamic_cast<ComponentHealth*>(dynamic_cast<Player*>(*it2)->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent()))
-	    std::cout << "ABDEL" << std::endl;
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 
 	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))
