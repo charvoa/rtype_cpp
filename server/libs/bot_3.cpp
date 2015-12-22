@@ -10,13 +10,14 @@
 #include <iostream>
 #include <Bot.hpp>
 
-Bot::Bot(int id) : AEntity(id), _health(50), _x(WIDTH + 100), _y(0)
+Bot::Bot(int id) : AEntity(id), _health(50), _y(0)
 {
   _sprite = "sprite1.png";
   _name = _sprite;
   addSystem(C_HEALTH);
   addSystem(C_POSITION);
   addSystem(C_HITBOX);
+  generateX();
   generateY();
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
@@ -26,16 +27,23 @@ Bot::~Bot()
 
 }
 
+void	Bot::generateX()
+{
+  Random rand(WIDTH + 100, WIDTH + 900);
+
+  _x = rand.generate<int>();
+}
+
 void	Bot::generateY()
 {
-  Random rand(35, HEIGHT + 1);
+  Random rand(100, 700);
 
   _y = rand.generate<int>();
 }
 
 void	Bot::update()
 {
-  _x -= 5;
+  _x -= 7;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
 

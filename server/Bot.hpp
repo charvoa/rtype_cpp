@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Sat Dec 19 08:39:46 2015 Louis Audibert
+// Last update Tue Dec 22 03:23:54 2015 Serge Heitzler
 //
 
 #ifndef			_BOT_HH_
@@ -30,6 +30,7 @@ private:
   int	_health;
 
   virtual void		generateY();
+  virtual void		generateX();
 
 public:
   explicit		Bot(int id);

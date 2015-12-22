@@ -5,19 +5,20 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec 21 01:45:11 2015 Louis Audibert
-// Last update Mon Dec 21 02:08:08 2015 Louis Audibert
+// Last update Tue Dec 22 03:42:33 2015 Serge Heitzler
 //
 
 #include <iostream>
 #include <Bot.hpp>
 
-Bot::Bot(int id) : AEntity(id), _health(50), _x(WIDTH + 100), _y(0), _direction(1)
+Bot::Bot(int id) : AEntity(id), _health(50), _y(0), _direction(1)
 {
   _sprite = "sprite2.png";
   _name = _sprite;
   addSystem(C_HEALTH);
   addSystem(C_POSITION);
   addSystem(C_HITBOX);
+  generateX();
   generateY();
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
 }
@@ -25,6 +26,13 @@ Bot::Bot(int id) : AEntity(id), _health(50), _x(WIDTH + 100), _y(0), _direction(
 Bot::~Bot()
 {
 
+}
+
+void	Bot::generateX()
+{
+  Random rand(WIDTH + 100, WIDTH + 900);
+
+  _x = rand.generate<int>();
 }
 
 void	Bot::generateY()
@@ -38,7 +46,7 @@ void	Bot::update()
 {
   if (_x > 900)
     _direction = -1;
-  else if (_x < 400)
+  else if (_x < 600)
     _direction = 1;
   else
     _direction = 0;
