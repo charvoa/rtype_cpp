@@ -130,6 +130,9 @@ void	        RoomPanel::setUserInterface()
 
   Sprite *slideDifficulty = new Sprite;
 
+  slideDifficulty->setTexture(*((window)->_ressources->_slide));
+  slideDifficulty->setPosition((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.2);
+
   _difficulty = ButtonFactory::createSlider(Vector2(slideDifficulty->getPosX() + x,
 	  window->getSize()._y * 0.2 + (window->_ressources->_sliderNormal->getSize()._y / 2)), name,
 	  slideDifficulty->getPosX(),
@@ -137,8 +140,6 @@ void	        RoomPanel::setUserInterface()
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender;
   
-  slideDifficulty->setTexture(*((window)->_ressources->_slide));
-  slideDifficulty->setPosition((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.2);
 
   sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
   net->write(sender);
