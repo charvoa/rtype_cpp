@@ -71,8 +71,8 @@ void Server::run()
 	continue;
       }
       ANetwork::t_frame *frame = reinterpret_cast<ANetwork::t_frame*>(data);
-      std::cout << frame->idRequest << std::endl;
-      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
+      if (frame->idRequest < 110)
+	this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
 					   client, this);
     }
 }
