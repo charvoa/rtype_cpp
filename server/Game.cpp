@@ -703,55 +703,25 @@ void Game::checkNewStage()
     }
 }
 
-const std::list<Player*>&	sortForHighScore(std::list<AEntity*> &a, int l, int r)
+void	sendGameOver(const std::list<Player*>& list)
 {
-  int i, j = a.size(), k = 0, n = a.size();
-  std::list<Player*> result;
-  result.push_front(dynamic_cast<Player*>(a.front()));
-  a.pop_front();
-  while(k < n)
+  std::string sendData;
+  std::cout << "GAME OVER SIZE" << list.size() << std::endl;
+  for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
     {
-      k = result.size();
-      for(i = 0; i < k; i++)
-	{
-	  if(j != 0)
-	    {
-	      if(dynamic_cast<Player*>(a.front())->getScore() < result.front()->getScore())
-		{
-		  result.push_back(dynamic_cast<Player*>(a.front()));
-		  result.push_back(result.front());
-		  result.pop_front();
-		  a.pop_front();
-		  j = a.size();
-		}
-	      else
-		{
-		  result.push_back(result.front());
-		  result.pop_front();
-		}
-	    }
-	  if(j == 1)
-	    {
-	      if(dynamic_cast<Player*>(a.front())->getScore() > result.front()->getScore())
-		{
-		  result.push_back(result.front());
-		  result.pop_front();
-		  result.push_back(dynamic_cast<Player*>(a.front()));
-		  a.pop_front();
-		  j = a.size();
-		  if(j == 0)
-		    break;
-
-		}
-	    }
-	  else if(j == 0)
-	    {
-	      result.push_back(result.front());
-	      result.pop_front();
-	    }
-	}
+      sendData += (*it)->getName() + ";" + std::to_string((*it)->getScore()) + ";";
     }
-  return result;
+  std::cout << sendData << std::endl;
+  ANetwork::t_frame frame = CreateRequest::create(S_END_GAME, CRC::calcCRC(sendData), sendData.size(), sendData);
+  for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
+    {
+      (*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+}
+
+bool	sortHighScore(Player *one, Player *two)
+{
+  return(one->getScore() > two->getScore());
 }
 
 bool	Game::checkGameOver()
@@ -762,6 +732,7 @@ bool	Game::checkGameOver()
   for (std::list<AEntity*>::iterator it = list.begin(); it!= list.end(); ++it)
     {
       Player *player = dynamic_cast<Player *>(*it);
+      sendlist.push_back(player);
       ComponentHealth *health = reinterpret_cast<ComponentHealth*>((*it)->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent());
       if (health->getLife() != 0)
   	break;
@@ -770,9 +741,10 @@ bool	Game::checkGameOver()
     }
    if (countDead == (int)list.size())
      {
+       std::cout << countDead << std::endl;
        std::cout << "GAME OVER" << std::endl;
-       if (list.size() > 1)
-	 sendlist = sortForHighScore(list, 0, list.size() -1);
+       sendlist.sort(sortHighScore);
+       sendGameOver(sendlist);
        return (true);
      }
    return (false);
