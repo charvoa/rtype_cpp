@@ -401,16 +401,26 @@ void Game::addMonster()
 {
   std::stringstream ss;
 
-  if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
+  if ((_stage % 3 == 0) && (_eM.getEntitiesByType(E_BOT).size() == 0))
     {
-      //      std::cout << "Add Monster" << std::endl;
-      int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+      std::cout << "ADDING BOSS" << std::endl;
+      int id = _eM.createEntitiesFromFolder(_botManager->createBoss(), 0);
 
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
-      _nbDisplay++;
+      _canAddMonster = false;
     }
-  else{
-    _canAddMonster = false;
+  else if (_stage % 3 != 0){
+    if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
+      {
+	//      std::cout << "Add Monster" << std::endl;
+	int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+
+	this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
+	_nbDisplay++;
+      }
+    else{
+      _canAddMonster = false;
+    }
     //    std::cout << "Monster Full for this Stage" << std::endl;
   }
 }
@@ -685,7 +695,6 @@ void Game::deletePlayer(Client *c)
 void Game::checkNewStage()
 {
   std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
-
   if (bots.size() == 0)
     {
       _canAddMonster = true;
