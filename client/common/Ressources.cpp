@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Tue Dec 22 06:17:03 2015 Serge Heitzler
+// Last update Tue Dec 22 08:28:43 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -43,7 +43,6 @@ Ressources::Ressources()
 
   _backgroundStartPanel = new Texture();
   _backgroundRoomPanel = new Texture();
-  _backgroundSettingsPanel = new Texture();
   _backgroundBlack = new Texture();
   _backgroundGame1 = new Texture();
   _backgroundGame2 = new Texture();
@@ -59,7 +58,6 @@ Ressources::Ressources()
 
   _backgroundStartPanel->loadFromFile("../common/misc/background.png");
   _backgroundRoomPanel->loadFromFile("../common/misc/room_background.png");
-  _backgroundSettingsPanel->loadFromFile("../common/misc/settings_background.png");
   _backgroundGame1->loadFromFile("../common/misc/background_in_game.png");
   _backgroundGame2->loadFromFile("../common/misc/background_in_game_2.png");
   _backgroundGame3->loadFromFile("../common/misc/background_in_game_3.png");

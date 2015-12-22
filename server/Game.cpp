@@ -303,7 +303,7 @@ void Game::handleShoot(void *data, Client *client)
 	  type = E_LASER;
 	  component = C_LASER;
 	}
-
+      p->increaseShooted(weaponType, 1);
       AEntity *bullet;
 
       if (type != E_INVALID)
