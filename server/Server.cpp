@@ -207,5 +207,16 @@ bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
 
 bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
 {
-  std::cout << "SETTINGS ROOM CALLED" << std::endl;
+  Client	*client = reinterpret_cast<Client *>(data);
+  try
+    {
+      Room room = _roomManager.getRoomByClient(client);
+      Parameters param;
+      E_Difficulty	difficulty = (E_Difficulty)std::atoi(frame.data);
+      param.setDifficulty(difficulty);
+      room.setParameters(param);
+    } catch(const std::exception &e)
+    {
+      std::cout << e.what() << std::endl;
+    }
 }
