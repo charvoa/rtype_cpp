@@ -203,7 +203,7 @@ bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
   return true;
 }
 
-bool changeRoomSettings(ANetwork::t_frame frame, void *data)
+bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
 {
   std::cout << "SETTINGS ROOM CALLED" << std::endl;
 }
