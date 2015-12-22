@@ -149,7 +149,6 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), x.at(1).size(), x.at(1));
   std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
 
-
   RenderWindow *window = RenderWindow::getInstance();
   window->getPanels().push(static_cast<GamePanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
 }

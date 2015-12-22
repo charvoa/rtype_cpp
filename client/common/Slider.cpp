@@ -2,7 +2,8 @@
 #include "SettingsPanel.hh"
 #include "Client.hh"
 #include "Ressources.hh"
-
+#include <CRC.hpp>
+#include <E_Difficulty.hh>
 
 Slider::Slider(std::string const& title)
 {
@@ -225,6 +226,10 @@ bool			Slider::difficultyUpdateOnPress(std::pair<unsigned int, unsigned int> pai
 void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
 	RenderWindow	*window = RenderWindow::getInstance();
+	ANetwork *net = Client::getNetwork();
+	ANetwork::t_frame sender;
+	net->write(sender);
+	std::string diff;
 
 	if (_locked == true)
 		return;
@@ -237,24 +242,29 @@ void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> p
 	{
 	case 1:
 	{
+		diff = std::to_string(E_EASY);
 		window->getSettings()->setDifficulty(Settings::EASY_MODE);
 		break;
 	}
 	case 2:
 	{
+		diff = std::to_string(E_MEDIUM);
 		window->getSettings()->setDifficulty(Settings::MEDIUM_MODE);
 		break;
 	}
 	case 3:
 	{
+		diff = std::to_string(E_HARD);
 		window->getSettings()->setDifficulty(Settings::HARD_MODE);
 		break;
 	}
 	default:
 	{
+		diff = std::to_string(E_MEDIUM);
 		window->getSettings()->setDifficulty(Settings::MEDIUM_MODE);
 		break;
 	}
 	}
-	std::cout << "difficulty set !" << std::endl;
+	sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
+	net->write(sender);
 }

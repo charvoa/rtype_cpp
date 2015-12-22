@@ -24,6 +24,7 @@
 #include <iostream>
 #include <GamePanel.hh>
 #include <File.hpp>
+#include <E_Difficulty.hh>
 
 RoomPanel::RoomPanel()
 {
@@ -40,7 +41,8 @@ void	        RoomPanel::setUserInterface()
   RenderWindow *window = RenderWindow::getInstance();
   Sprite *background = new Sprite;
   Sprite *slideDifficulty = new Sprite;
-
+  ANetwork *net = Client::getNetwork();
+  ANetwork::t_frame sender;
   getInputManager().setInputType(InputType::ROOM_INPUT);
 
   slideDifficulty->setTexture(*((window)->_ressources->_slide));
@@ -59,12 +61,24 @@ void	        RoomPanel::setUserInterface()
 
   name = "difficulty";
   float x;
+  std::string diff;
   if (window->getSettings()->getDefaultDifficulty() == Settings::EASY_MODE)
+  {
+	  diff = std::to_string(E_EASY);
 	  x = window->_ressources->_sliderNormal->getSize()._x / 3;
+  }
   else if (window->getSettings()->getDefaultDifficulty() == Settings::MEDIUM_MODE)
+  {
+	  diff = std::to_string(E_MEDIUM);
 	  x = window->_ressources->_slide->getSize()._x / 2;
+  }
   else
+  {
+	  diff = std::to_string(E_HARD);
 	  x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+  }
+  sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
+  net->write(sender);
   _difficulty = ButtonFactory::createSlider(Vector2(slideDifficulty->getPosX() + x,
 	  window->getSize()._y * 0.2 + (window->_ressources->_sliderNormal->getSize()._y / 2)), name,
 	  slideDifficulty->getPosX(),

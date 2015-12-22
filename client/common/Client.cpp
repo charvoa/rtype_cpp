@@ -111,7 +111,8 @@ void	Client::Start()
   //sleep(2);
 
 	window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  window->getPanels().top()->setUserInterface();
+//	window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
+	window->getPanels().top()->setUserInterface();
 
   //Adding & playing music for Menu
 
