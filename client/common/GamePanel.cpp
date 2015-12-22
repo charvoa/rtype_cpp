@@ -358,7 +358,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   int  	id;
 
   float	posX = (std::atoi(vector.at(1).c_str())) + 70;
-  float	posY = (std::atoi(vector.at(2).c_str()));
+  float	posY = (std::atoi(vector.at(2).c_str())) + 20;
 
   id = std::atoi(vector.at(0).c_str());
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);

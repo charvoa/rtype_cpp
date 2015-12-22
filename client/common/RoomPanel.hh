@@ -12,6 +12,7 @@
 #define ROOMPANEL_HH_
 
 #include <map>
+#include <Slider.hh>
 #include <string>
 #include <Button.hh>
 #include <Settings.hh>
@@ -58,6 +59,7 @@ private:
   unsigned int		_nbPlayers;
   int			_currentPlayer;
   std::map<std::string, Texture*>	*_received;
+  Slider		*_difficulty;
 };
 
 #endif /* !ROOMPANEL_HH_ */

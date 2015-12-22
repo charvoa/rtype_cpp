@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec 21 01:45:11 2015 Louis Audibert
-// Last update Tue Dec 22 03:46:25 2015 Serge Heitzler
+// Last update Tue Dec 22 07:02:58 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -71,12 +71,12 @@ void	Bot::update()
   else
     _direction = 0;
 
-  if (_direction == 1 && _y < 855)
+  if (_direction == 1 && _y < 820)
     _y++;
-  else if (_direction == -1 && _y > 35)
+  else if (_direction == -1 && _y > 70)
     _y--;
 
-  _x--;
+  _x -= 4;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
 }

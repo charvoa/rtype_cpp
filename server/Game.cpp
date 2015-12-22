@@ -145,7 +145,7 @@ bool Game::checkMove(int x, int y)
 {
   if (x < sizeInGame::LENGHT_MIN || x > sizeInGame::LENGHT_MAX)
     return false;
-  else if (y < sizeInGame::HEIGHT_MIN || y > sizeInGame::HEIGHT_MAX)
+  else if (y < sizeInGame::HEIGHT_MIN - 16 || y > sizeInGame::HEIGHT_MAX + 16)
     return false;
   return true;
 }
@@ -158,8 +158,7 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
-  std::cout << "PLayer CHECK WALL: " << pPlayer->getX() << " " << pPlayer->getY() << std::endl;
-  if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN||
+  if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN ||
       pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
       std::cout << "JE RENTRE DEDANS" << std::endl;
@@ -188,11 +187,11 @@ void Game::handleMove(void *data, Client *client)
     // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
     if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
       {
-	this->checkWall(player);
 	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
 	player->update(player->refreshHitboxEntity());
 	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
+	this->checkWall(player);
       }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
