@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Wed Nov 25 16:38:49 2015 Nicolas Charvoz
-// Last update Fri Dec 11 22:38:39 2015 Joris Bertomeu
+// Last update Tue Dec 15 09:21:33 2015 Joris Bertomeu
 //
 
 #ifndef ANETWORK_HPP_
@@ -33,6 +33,11 @@ public :
     int			sizeData;
     char		data[49];
   }			t_frame;
+  typedef struct	s_frameMonit {
+    unsigned int	idRequest;
+    char		data[4096];
+  }			t_frameMonit;
+
 
   ANetwork() {};
   virtual		~ANetwork() {};

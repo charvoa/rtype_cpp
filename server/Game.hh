@@ -72,7 +72,7 @@ public:
   const std::string &getId() const;
   void handleCommand(void*, Client*);
   void deletePlayer(Client*);
-
+  BotManager	*_botManager;
   // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;

@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Sat Dec 12 02:10:01 2015 Joris Bertomeu
-// Last update Wed Dec 16 02:36:26 2015 Louis Audibert
+// Last update Tue Dec 22 01:55:59 2015 Antoine Garcia
 //
 
 #ifndef			_BOTMANAGER_HPP_
@@ -20,7 +20,7 @@
 # include		<list>
 # include		<Bot.hpp>
 # include		<EntityFactory.hh>
-
+# include <Random.hpp>
 class			BotManager
 {
 private:
@@ -47,6 +47,24 @@ public:
 
   std::list<Bot*>	getBotList() {
     return (this->_botList);
+  }
+
+  std::list<Bot*>	createBot()
+  {
+    std::list<Bot*>	list;
+    std::list<File *> fileList;
+    int			id = 1;
+# ifdef			_WIN32
+    fileList = this->_fileManager->getFileListByExtension("dll");
+# else
+    fileList = this->_fileManager->getFileListByExtension("so");
+# endif
+    Random rand(0 ,fileList.size());
+    int i = rand.generate<int>();
+    auto it = fileList.begin();
+    std::advance(it, i);
+    list.push_back((Bot*) this->_ef.createEntity((*it)->getFullPath(), id));
+    return list;
   }
 };
 
