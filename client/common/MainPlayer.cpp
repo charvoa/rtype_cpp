@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec 12 06:40:19 2015 Serge Heitzler
-// Last update Tue Dec 22 06:55:47 2015 Serge Heitzler
+// Last update Tue Dec 22 06:58:06 2015 Serge Heitzler
 //
 
 #include <RenderWindow.hh>
@@ -96,7 +96,7 @@ MainPlayer::MainPlayer(unsigned int id)
   _score->setPosition(Vector2(window->getSize()._x * 0.17, window->getSize()._y * 0.95));
   _score->setColor(Color::WHITE);
 
-  _nbrRocketText->setString("0");
+  _nbrRocketText->setString("5");
   _nbrRocketText->setSize(30);
   _nbrRocketText->setStyle(1);
   _nbrRocketText->setOrigin(_nbrRocketText->getText().getGlobalBounds().width / 2, _nbrRocketText->getText().getGlobalBounds().height / 2);
