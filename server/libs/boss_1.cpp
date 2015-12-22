@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:41:34 2015 Louis Audibert
-// Last update Tue Dec 22 03:45:59 2015 Serge Heitzler
+// Last update Tue Dec 22 04:26:36 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -33,14 +33,12 @@ Bot::~Bot()
 
 void	Bot::generateX()
 {
-  _x = 445;
+  _x = WIDTH + 200;
 }
 
 void	Bot::generateY()
 {
-  Random rand(35, HEIGHT + 1);
-
-  _y = rand.generate<int>();
+  _y = 445;
 }
 
 std::list<Case*> Bot::refreshHitbox()
@@ -68,7 +66,7 @@ void	Bot::update()
   else
     _direction = 1;
   if (_direction == -1)
-    _x--;
+    _x -= 3;
 
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
