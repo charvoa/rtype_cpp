@@ -172,26 +172,28 @@ void Game::handleMove(void *data, Client *client)
   ComponentPosition *pPlayer;
   try {
     Player *player = this->getPlayerByClient(client);
-
+    ComponentHealth *health = dynamic_cast<ComponentHealth*>(player->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent());
     std::stringstream ss;
-
-    //if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
-    pPlayer =
-      reinterpret_cast<ComponentPosition*>(player->getSystemManager()
-					   ->getSystemByComponent(C_POSITION)
-					   ->getComponent());
-    //
-    auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
-
-    // std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
-    // std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
-    if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
+    if (health->getLife() != 0)
       {
-	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
-	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-	player->update(player->refreshHitboxEntity());
-	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
-	this->checkWall(player);
+	//if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
+	pPlayer =
+	  reinterpret_cast<ComponentPosition*>(player->getSystemManager()
+					       ->getSystemByComponent(C_POSITION)
+					       ->getComponent());
+	//
+	auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+
+	// std::cout << "Position of player before move : " << pPlayer->getX() << " | " << pPlayer->getY() << std::endl;
+	// std::cout << "Position of player before move : " << pPlayer->getX() + newMove.first  << " | " << pPlayer->getY() + newMove.second << std::endl;
+	if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
+	  {
+	    //	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
+	    player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
+	    player->update(player->refreshHitboxEntity());
+	    //      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
+	    this->checkWall(player);
+	  }
       }
   } catch (const std::exception &e) {
     std::cout << "Cannot move : " << e.what() << std::endl;
@@ -278,57 +280,61 @@ void Game::handleShoot(void *data, Client *client)
     (std::chrono::system_clock::now() - _start);
 
   Player *p = this->getPlayerByClient(client);
-  if (p->getLastShoot()->elapsedMilli().count() >= 500)
+  ComponentHealth *health = dynamic_cast<ComponentHealth*>(p->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent());
+  if (health->getLife() != 0)
     {
-      //      std::cout << "Game :: handleShoot" << std::endl;
-      std::string weaponType =
-	((reinterpret_cast<ANetwork::t_frame*>(data))->data);
+      if (p->getLastShoot()->elapsedMilli().count() >= 500)
+	{
+	  //      std::cout << "Game :: handleShoot" << std::endl;
+	  std::string weaponType =
+	    ((reinterpret_cast<ANetwork::t_frame*>(data))->data);
 
-      E_EntityType type = E_INVALID;
-      E_Component component;
-      int	id;
+	  E_EntityType type = E_INVALID;
+	  E_Component component;
+	  int	id;
 
-      if (weaponType == "E_RIFLE")
-	{
-	  type = E_RIFLE;
-	  component = C_RIFLE;
-	}
-      else if (weaponType == "E_MISSILE")
-	{
-	  type = E_MISSILE;
-	  component = C_MISSILE;
-	}
-      else if (weaponType == "E_LASER")
-	{
-	  type = E_LASER;
-	  component = C_LASER;
-	}
-      p->increaseShooted(weaponType, 1);
-      AEntity *bullet;
-
-      if (type != E_INVALID)
-	{
-	  if (p->shoot(component) == true)
+	  if (weaponType == "E_RIFLE")
 	    {
-	      id = _eM.createEntity(type, p);
-	      bullet = _eM.getEntityById(id);
-	      sendNewEntity(bullet->getName(), id); // Send  Bullet created
+	      type = E_RIFLE;
+	      component = C_RIFLE;
+	    }
+	  else if (weaponType == "E_MISSILE")
+	    {
+	      type = E_MISSILE;
+	      component = C_MISSILE;
+	    }
+	  else if (weaponType == "E_LASER")
+	    {
+	      type = E_LASER;
+	      component = C_LASER;
+	    }
+	  p->increaseShooted(weaponType, 1);
+	  AEntity *bullet;
 
-	      ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
-	      bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
-	      std::stringstream ss;
-	      ss << bullet->getName();
-
-	      //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
-
-	      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
-	      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
-	      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	  if (type != E_INVALID)
+	    {
+	      if (p->shoot(component) == true)
 		{
-		  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+		  id = _eM.createEntity(type, p);
+		  bullet = _eM.getEntityById(id);
+		  sendNewEntity(bullet->getName(), id); // Send  Bullet created
+
+		  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+		  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
+
+		  std::stringstream ss;
+		  ss << bullet->getName();
+
+		  //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
+
+		  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+		  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+		  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+		    {
+		      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
+		    }
+		  p->getLastShoot()->reset();
 		}
-	      p->getLastShoot()->reset();
 	    }
 	}
     }
