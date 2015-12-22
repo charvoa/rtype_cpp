@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Mon Dec 21 07:16:54 2015 Serge Heitzler
+// Last update Tue Dec 22 06:29:13 2015 Serge Heitzler
 //
 
 #include <string>
@@ -77,6 +77,14 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_DELETE_ENTITY, &ProtocoleClient::deleteEntity));
   _functions.insert(std::make_pair(S_DOWNLOAD_COMPLETE, &ProtocoleClient::downloadComplete));
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
+  _functions.insert(std::make_pair(S_AMMO_LEFT, &ProtocoleClient::ammoLeft));
+}
+
+void		ProtocoleClient::ammoLeft(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Ammo Left : " <<  x.at(0) << std::endl;
+  GamePanel::ammoLeft(x);
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Tue Dec 22 14:28:30 2015 Joris Bertomeu
+// Last update Tue Dec 22 16:07:21 2015 Joris Bertomeu
 //
 
 #ifndef PLAYER_HH_
@@ -32,7 +32,7 @@ private:
   int	_rifleShooted;
   int	_missileShooted;
   int	_laserShooted;
-
+  void sendShoot(E_EntityType, int);
 public:
   Player(int id, const Client &);
   ~Player();
@@ -42,7 +42,7 @@ public:
   int getScore() const;
   void setScore(int);
   void addSystem(E_Component);
-  void shoot(E_Component);
+  bool shoot(E_Component);
   Timer *getLastShoot();
   void increaseShooted(const std::string &, int);
   int getShooted(const std::string &);

@@ -39,13 +39,17 @@ void	        RoomPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
   Sprite *background = new Sprite;
+  Sprite *slideDifficulty = new Sprite;
 
-  getInputManager().setInputType(InputType::MENU_INPUT);
+  getInputManager().setInputType(InputType::ROOM_INPUT);
+
+  slideDifficulty->setTexture(*((window)->_ressources->_slide));
+  slideDifficulty->setPosition((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.2);
 
   background->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundRoomPanel));
   background->setPosition(0, 0);
   _backgrounds.push_back(*background);
-
+  _backgrounds.push_back(*slideDifficulty);
 
   std::string name = "BACK";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.95), name);
@@ -53,6 +57,18 @@ void	        RoomPanel::setUserInterface()
   name = "LAUNCH";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.9, window->getSize()._y * 0.95), name);
 
+  name = "difficulty";
+  float x;
+  if (window->getSettings()->getDefaultDifficulty() == Settings::EASY_MODE)
+	  x = window->_ressources->_sliderNormal->getSize()._x / 3;
+  else if (window->getSettings()->getDefaultDifficulty() == Settings::MEDIUM_MODE)
+	  x = window->_ressources->_slide->getSize()._x / 2;
+  else
+	  x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+  _difficulty = ButtonFactory::createSlider(Vector2(slideDifficulty->getPosX() + x,
+	  window->getSize()._y * 0.2 + (window->_ressources->_sliderNormal->getSize()._y / 2)), name,
+	  slideDifficulty->getPosX(),
+	  slideDifficulty->getPosX() + window->_ressources->_slide->getSize()._x);
 
   // _userInterface.at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 0));
   // _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));
@@ -60,13 +76,51 @@ void	        RoomPanel::setUserInterface()
   _functions.push_back((APanel::funcs)&RoomPanel::back);
   _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
 
-
-
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_blackShip));
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_blueShip));
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_redShip));
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_greenShip));
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_yellowShip));
+
+  Text		       	*easy = new Text();
+
+  easy->setString("EASY");
+  easy->setSize(15);
+  easy->setStyle(1);
+  easy->setOrigin(easy->getText().getGlobalBounds().width / 2, easy->getText().getGlobalBounds().height / 2);
+  easy->setPosition(Vector2((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.27));
+  easy->setColor(Color::WHITE);
+  _labels.push_back(*easy);
+
+  Text		       	*medium = new Text();
+
+  medium->setString("MEDIUM");
+  medium->setSize(15);
+  medium->setStyle(1);
+  medium->setOrigin(medium->getText().getGlobalBounds().width / 2, medium->getText().getGlobalBounds().height / 2);
+  medium->setPosition(Vector2((window->getSize()._x / 2), window->getSize()._y * 0.27));
+  medium->setColor(Color::WHITE);
+  _labels.push_back(*medium);
+
+  Text		       	*hard = new Text();
+
+  hard->setString("HARD");
+  hard->setSize(15);
+  hard->setStyle(1);
+  hard->setOrigin(hard->getText().getGlobalBounds().width / 2, hard->getText().getGlobalBounds().height / 2);
+  hard->setPosition(Vector2((window->getSize()._x / 2) + (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.27));
+  hard->setColor(Color::WHITE);
+  _labels.push_back(*hard);
+
+  Text		       	*difficulty = new Text();
+
+  difficulty->setString("DIFFICULTY");
+  difficulty->setSize(40);
+  difficulty->setStyle(1);
+  difficulty->setOrigin(difficulty->getText().getGlobalBounds().width / 2, difficulty->getText().getGlobalBounds().height / 2);
+  difficulty->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.14));
+  difficulty->setColor(Color::WHITE);
+  _labels.push_back(*difficulty);
 
   this->createPlayers();
 }

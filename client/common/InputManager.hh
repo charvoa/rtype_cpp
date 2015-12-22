@@ -36,6 +36,7 @@ public:
   std::pair<unsigned int, unsigned int>	        keyPressedInGame();
   std::pair<unsigned int, unsigned int>			keyEntered(sf::Event& event);
   std::pair<unsigned int, unsigned int>			dropSlider(sf::Event& event);
+  std::pair<unsigned int, unsigned int>			dropSliderDifficulty(sf::Event& event);
 
 private:
 

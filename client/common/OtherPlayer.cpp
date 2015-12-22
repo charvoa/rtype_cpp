@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Mon Dec 21 03:22:38 2015 Serge Heitzler
+// Last update Tue Dec 22 04:49:03 2015 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>

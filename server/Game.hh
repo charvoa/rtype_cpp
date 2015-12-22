@@ -51,8 +51,8 @@ public:
 
   enum sizeInGame {
     LENGHT_MIN = 0,
-    HEIGHT_MIN = 35,
-    HEIGHT_MAX = 855,
+    HEIGHT_MIN = 54,
+    HEIGHT_MAX = 838,
     LENGHT_MAX = 1920
   };
 

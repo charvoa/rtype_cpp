@@ -51,7 +51,12 @@ void			InputManager::setInputType(InputType type)
       _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
       _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
     }
-
+  if (type == ROOM_INPUT)
+  {
+	  _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
+	  _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
+	  _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
+  }
 }
 
 
@@ -251,6 +256,12 @@ void		InputManager::methodChecker(sf::Event &event)
 std::pair<unsigned int, unsigned int>		InputManager::dropSlider(sf::Event& event)
 {
 	(RenderWindow::getInstance())->getPanels().top()->updateOnRelease(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y));
+	return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::dropSliderDifficulty(sf::Event& event)
+{
+	(RenderWindow::getInstance())->getPanels().top()->difficultyUpdateOnRelease(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y));
 	return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 
