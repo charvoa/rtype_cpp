@@ -189,7 +189,7 @@ void Game::handleMove(void *data, Client *client)
 	this->checkWall(player);
 	//	if (reinterpret_cast<Mutex*>(_mutex)->try_lock()) {
 	player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
-	player->update(player->refreshHitbox());
+	player->update(player->refreshHitboxEntity());
 	//      	} reinterpret_cast<Mutex*>(_mutex)->unlock();
       }
   } catch (const std::exception &e) {
@@ -378,7 +378,7 @@ void Game::updateMonster()
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
-      (*it)->update((*it)->refreshHitbox());
+      //(*it)->update((*it)->refreshHitbox());
       if (pos->getX() < -10)
 	{
 	  deleteEntity(*it);
@@ -468,7 +468,7 @@ void Game::updateRiffle()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 24, p->getY());
-      (*it)->update((*it)->refreshHitbox());
+      (*it)->update((*it)->refreshHitboxEntity());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
@@ -484,7 +484,7 @@ void Game::updateLaser()
       ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 
       (*it)->update(pPlayer->getX(), pPlayer->getY());
-      (*it)->update((*it)->refreshHitbox());
+      (*it)->update((*it)->refreshHitboxEntity());
 
       auto startedAt = reinterpret_cast<Laser*>((*it))->getLaunchTime();
       auto now = std::chrono::system_clock::now();
@@ -501,30 +501,31 @@ void Game::updateMissile()
     {
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*it)->update(p->getX() + 8, p->getY());
-      (*it)->update((*it)->refreshHitbox());
+      (*it)->update((*it)->refreshHitboxEntity());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
     }
 }
 
-std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
-{
-  int saveMax = 0;
-  int saveMin;
+// std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
+// {
+//   int saveMax = 0;
+//   int saveMin;
 
-  std::pair<int, int> final;
+//   std::pair<int, int> final;
 
-  for (std::list<Case*>::iterator it = listCase.begin();
-       it != listCase.end();
-       ++it)
-    {
-      saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
-      saveMin = saveMax;
-      saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
-    }
-  final = std::make_pair(saveMin, saveMax);
-  return final;
-}
+//   for (std::list<Case*>::iterator it = listCase.begin();
+//        it != listCase.end();
+//        ++it)
+//     {
+//       saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
+//       saveMin = saveMax;
+//       saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
+//     }
+//   std::cout << "Max hitboxY = " << saveMax << " Min hitboxY = " << saveMin << std::endl;
+//   final = std::make_pair(saveMin, saveMax);
+//   return final;
+// }
 
 void Game::checkHitBox()
 {
@@ -552,9 +553,9 @@ void Game::checkHitBox()
 		   case2 != caseMonster.end();
 		   ++case2)
 		{
-		  std::pair<int, int> limitY = getMaxAndMinOfList(caseMonster);
+		  //std::pair<int, int> limitY = getMaxAndMinOfList(caseMonster);
 		  //std::cout <<  " BOT : (" << (*case2)->x << " , " << (*case2)->y << ") | MISSILE : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
- 		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= limitY.first) && ((*case1)->y <= limitY.second)))
+ 		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 		    {
 		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
 		      Player *p;

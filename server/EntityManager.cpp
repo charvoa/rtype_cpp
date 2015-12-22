@@ -56,7 +56,6 @@ int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 {
   Bot *newEntity = bots.back();
 
-  newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);
   _entities.push_back(newEntity);
