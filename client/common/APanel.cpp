@@ -79,6 +79,16 @@ void		APanel::setKeyButton(sf::Event event)
 	}
 }
 
+void		APanel::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair)
+{
+	unsigned int		i = 0;
+	while (i < this->_userInterface.size() && this->_userInterface.size() > 0)
+	{
+		this->_userInterface.at(i)->difficultyUpdateOnRelease(pair);
+		i++;
+	}
+}
+
 void		APanel::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
 	unsigned int		i = 0;

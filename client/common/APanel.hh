@@ -30,6 +30,7 @@ public:
   virtual bool		updateOnPress(std::pair<unsigned int, unsigned int> pair);
   //  virtual bool		updateOnPressInGame(std::pair<unsigned int, unsigned int> pair);
   virtual void		updateOnRelease(std::pair<unsigned int, unsigned int> pair);
+  virtual void		difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair);
   virtual void		setKeyButton(sf::Event);
   virtual void		update();
   virtual void		render();
