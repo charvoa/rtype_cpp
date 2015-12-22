@@ -158,9 +158,11 @@ void Game::checkWall(Player *player)
     reinterpret_cast<ComponentPosition*>(player->getSystemManager()
 					 ->getSystemByComponent(C_POSITION)
 					 ->getComponent());
+  std::cout << "PLayer CHECK WALL: " << pPlayer->getX() << " " << pPlayer->getY() << std::endl;
   if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN||
       pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
+      std::cout << "JE RENTRE DEDANS" << std::endl;
       this->updateLife(player, 2);
     }
 }
@@ -414,7 +416,7 @@ void Game::initPlayersPosition()
   int	x = 10;
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity *>::iterator it;
-  Random	rand(40, 850);
+  Random	rand(100, 800);
 
   for (it = _players.begin(); it != _players.end(); ++it)
     {
@@ -451,7 +453,8 @@ void Game::sendGameData()
 	  std::stringstream ss;
 	  ss << (*it2)->getId() << ";" << std::to_string(pPlayer->getX()) << ";" << std::to_string(pPlayer->getY());
 	  //std::cout << "SS in data : " << ss.str().c_str() << std::endl;
-
+	  if (dynamic_cast<ComponentHealth*>(dynamic_cast<Player*>(*it2)->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent()))
+	    std::cout << "ABDEL" << std::endl;
 	  ANetwork::t_frame frameToSend = CreateRequest::create(S_DISPLAY, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 
 	  if (!(dynamic_cast<Player*>((*it))->getClient().getUDPSocket()))
