@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Mon Dec 21 07:23:10 2015 Serge Heitzler
+// Last update Tue Dec 22 11:00:02 2015 Antoine Garcia
 //
 
 #include <Room.hh>
@@ -25,6 +25,7 @@ Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(i
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
   this->_botList = botList;
+  _parameter = new Parameters();
   std::string	sendData = "player1;" + id + ";1";
   ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
 						  CRC::calcCRC(sendData),
@@ -151,10 +152,10 @@ std::list<Client *>&	Room::getAllPlayers()
 
 void	Room::setParameters(Parameters &params)
 {
-  _parameter = params;
+  _parameter->setDifficulty(params.getDifficulty());
 }
 
-const Parameters&	Room::getParameters() const
+Parameters*	Room::getParameters()
 {
   return _parameter;
 }

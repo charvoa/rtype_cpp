@@ -97,12 +97,12 @@ void *newGameThread(void *data)
 
   Server *me = s->server;
 
-  Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
+  Parameters *p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
   std::list<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   std::stringstream ss;
 
-  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port,
+  if ((me->_gameManager.createGame(*p, c, s->frame.data, s->port,
 				   me->_botManager->getBotList())))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
