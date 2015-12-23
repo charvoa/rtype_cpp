@@ -97,12 +97,12 @@ void *newGameThread(void *data)
 
   Server *me = s->server;
 
-  Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
+  Parameters *p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
   std::list<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   std::stringstream ss;
 
-  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port,
+  if ((me->_gameManager.createGame(*p, c, s->frame.data, s->port,
 				   me->_botManager->getBotList())))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
@@ -207,5 +207,17 @@ bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
 
 bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
 {
-  std::cout << "SETTINGS ROOM CALLED" << std::endl;
+  Client	*client = reinterpret_cast<Client *>(data);
+  try
+    {
+      std::cout << "ROOM SETTING CHANGED" << std::endl;
+      Room room = _roomManager.getRoomByClient(client);
+      Parameters param;
+      E_Difficulty	difficulty = (E_Difficulty)std::atoi(frame.data);
+      param.setDifficulty(difficulty);
+      room.setParameters(param);
+    } catch(const std::exception &e)
+    {
+      std::cout << e.what() << std::endl;
+    }
 }

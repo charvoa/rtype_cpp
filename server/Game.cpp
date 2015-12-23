@@ -401,16 +401,25 @@ void Game::addMonster()
 {
   std::stringstream ss;
 
-  if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
+  if ((_stage % 3 == 0) && (_eM.getEntitiesByType(E_BOT).size() == 0))
     {
       //      std::cout << "Add Monster" << std::endl;
       int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
-
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
-      _nbDisplay++;
+      _canAddMonster = false;
     }
-  else{
-    _canAddMonster = false;
+  else if (_stage % 3 != 0){
+    if ((_nbDisplay < getNumberEnemyMax()) && _canAddMonster)
+      {
+	//      std::cout << "Add Monster" << std::endl;
+	int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+
+	this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
+	_nbDisplay++;
+      }
+    else{
+      _canAddMonster = false;
+    }
     //    std::cout << "Monster Full for this Stage" << std::endl;
   }
 }
@@ -624,11 +633,13 @@ bool Game::run()
   while (_isRunning)
     {
       auto startTime = std::chrono::high_resolution_clock::now();
+      if (this->checkGameOver() == true)
+	break;
       if (!_canAddMonster)
 	this->checkNewStage();
       if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && startTime - _start > std::chrono::milliseconds(8000))
-      	{
-      	  timerMonster.reset();
+	{
+	  timerMonster.reset();
 	  this->addMonster();
 	}
       this->updateRiffle();
@@ -683,7 +694,6 @@ void Game::deletePlayer(Client *c)
 void Game::checkNewStage()
 {
   std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
-
   if (bots.size() == 0)
     {
       _canAddMonster = true;
@@ -697,6 +707,98 @@ void Game::checkNewStage()
       for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
 	{
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+	}
+    }
+}
+
+void	sendGameOver(const std::list<Player*>& list)
+{
+  std::string sendData;
+  std::cout << "GAME OVER SIZE" << list.size() << std::endl;
+  for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
+    {
+      sendData += (*it)->getName() + ";" + std::to_string((*it)->getScore()) + ";";
+    }
+  std::cout << sendData << std::endl;
+  ANetwork::t_frame frame = CreateRequest::create(S_END_GAME, CRC::calcCRC(sendData), sendData.size(), sendData);
+  for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
+    {
+      (*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+    }
+}
+
+bool	sortHighScore(Player *one, Player *two)
+{
+  return(one->getScore() > two->getScore());
+}
+
+bool	Game::checkGameOver()
+{
+  int	countDead = 0;
+  std::list<AEntity*>	list = _eM.getEntitiesByType(E_PLAYER);
+  std::list<Player*>	sendlist;
+  for (std::list<AEntity*>::iterator it = list.begin(); it!= list.end(); ++it)
+    {
+      Player *player = dynamic_cast<Player *>(*it);
+      sendlist.push_back(player);
+      ComponentHealth *health = reinterpret_cast<ComponentHealth*>((*it)->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent());
+      if (health->getLife() != 0)
+  	break;
+      else
+  	countDead++;
+    }
+   if (countDead == (int)list.size())
+     {
+       std::cout << countDead << std::endl;
+       std::cout << "GAME OVER" << std::endl;
+       sendlist.sort(sortHighScore);
+       sendGameOver(sendlist);
+       return (true);
+     }
+   return (false);
+}
+
+void Game::shootBot(Bot *sender, const std::string &s)
+{
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+    (std::chrono::system_clock::now() - _start);
+
+  //      std::cout << "Game :: handleShoot" << std::endl;
+  std::string weaponType = s;
+
+  E_EntityType type = E_INVALID;
+  int	id;
+
+  if (weaponType == "E_RIFLE")
+    type = E_RIFLE;
+  else if (weaponType == "E_MISSILE")
+    type = E_MISSILE;
+  else if (weaponType == "E_LASER")
+    type = E_LASER;
+  else
+    type = E_RIFLE;
+
+  AEntity *bullet;
+
+  if (type != E_INVALID)
+    {
+      id = _eM.createEntity(type, sender);
+      bullet = _eM.getEntityById(id);
+      sendNewEntity(bullet->getName(), id); // Send  Bullet created
+
+      ComponentPosition *sPos = dynamic_cast<ComponentPosition *>(sender->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      bullet->update(sPos->getX(), sPos->getY()); // Position Bullet to Player position
+
+      std::stringstream ss;
+      ss << bullet->getName();
+
+      //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
+
+      ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+      std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+      for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
+	{
+	  dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frameHealth), sizeof(ANetwork::t_frame));
 	}
     }
 }

@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Tue Dec 22 03:49:55 2015 Serge Heitzler
+// Last update Tue Dec 22 14:19:17 2015 Antoine Garcia
 //
 
 #ifndef			_BOT_HH_

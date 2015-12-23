@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Sat Dec 12 12:35:07 2015 Joris Bertomeu
+// Last update Tue Dec 22 10:59:06 2015 Antoine Garcia
 //
 
 #ifndef _ROOM_HH_
@@ -25,7 +25,7 @@ class	Room
   std::list<Bot*> _botList;
   std::string	_id;
   ClientManager	*_clientManager;
-  Parameters	_parameter;
+  Parameters	*_parameter;
   Client	_owner;
   void		sendPlayerJoin(Client *);
   void		sendRoomPlayerJoin(Client *);
@@ -40,7 +40,7 @@ public:
   void	deletePlayer(Client *);
   std::list<Client*>&	getAllPlayers();
   void			setParameters(Parameters &);
-  const Parameters&	getParameters() const;
+  Parameters*		getParameters();
   void			sendFileToClient(Client *client, std::list<Bot*> list);
 };
 

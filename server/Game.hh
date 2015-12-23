@@ -36,7 +36,7 @@
 
 class Game {
 
-typedef std::chrono::duration<int, std::ratio<1, 60>> frame_duration;
+  typedef std::chrono::duration<int, std::ratio<1, 60>> frame_duration;
   typedef void(Game::*Func)(void*, Client*);
   std::map<E_Command, Func> _funcMap;
 
@@ -66,21 +66,26 @@ public:
   Game(const Parameters&, std::list<Client *>&, const std::string&,
        int port, std::list<Bot*>);
   ~Game();
-  bool run();
-  std::list<Client*> &getClients();
-  const Client &getClient() const;
-  const std::string &getId() const;
-  void handleCommand(void*, Client*);
-  void deletePlayer(Client*);
-  BotManager	*_botManager;
+  bool			run();
+  const Client		&getClient() const;
+  const std::string	&getId() const;
+  void			handleCommand(void*, Client*);
+  void			deletePlayer(Client*);
+  void			shootBot(Bot*, const std::string &s = "");
+  int			getTimestamp() const {return _timestamp;  };
+  int			getStage() const {return (this->_stage);  };
+  std::list<Client*>	getPlayers() const {return this->_clients;};
+  std::list<Client*>	&getClients();
+  EntityManager		*getEntityManager() {return &(this->_eM); };
   // ATTRIBUTES
   std::list<Client *> _clients;
   ANetwork *_network;
+  BotManager	*_botManager;
 
 private:
 
-  int		_timestamp;
   // ATTRIBUTES
+  int		_timestamp;
   Parameters _params;
   std::string _id;
   EntityManager _eM;
@@ -121,13 +126,9 @@ private:
   void checkNewStage();
   void checkHitBox();
   bool checkMove(int, int);
+  bool checkGameOver();
   std::pair<int, int> getDirections(const std::string &);
 
-public:
-  int			getTimestamp() const {return _timestamp;  };
-  std::list<Client*>	getPlayers() const {return this->_clients;};
-  EntityManager		*getEntityManager() {return &(this->_eM); };
-  int			getStage() const {return (this->_stage);  };
 };
 
 #endif
