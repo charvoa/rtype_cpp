@@ -41,6 +41,7 @@ GamePanel::GamePanel()
   _endGame = false;
 
   _score = 0;
+  _wave = 1;
   _type = PanelFactory::GAME_PANEL;
   _randPosY = new Random(350, 500);
   _randPlanet = new Random(0, 7);
@@ -459,6 +460,33 @@ void		GamePanel::die(int id, int idDied)
 
 }
 
+void		GamePanel::hit(int id, int idDied)
+{
+  RenderWindow *window = RenderWindow::getInstance();
+  Explosion *e = new Explosion();
+  switch (id) {
+  case 1:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_blue));
+    break;
+  case 2:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_red));
+    break;
+  case 3:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
+    break;
+  case 4:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_yellow));
+    break;
+  }
+  e->scale(0.5);
+
+  int PosX  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosX();
+  int PosY  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosY();
+  e->setPosition(PosX, PosY);
+  static_cast<GamePanel*>(window->getPanels().top())->getExplosions().push_back(e);
+
+}
+
 std::vector<Explosion *>	&GamePanel::getExplosions()
 {
   return _explosion;
@@ -516,12 +544,19 @@ void		GamePanel::setCurrentWave(unsigned int value)
 
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 
+  static_cast<GamePanel*>(window->getPanels().top())->setWaveNumber(value);
+
   while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
     }
 
+}
+
+void			GamePanel::setWaveNumber(unsigned int value)
+{
+  _wave = value;
 }
 
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
@@ -763,64 +798,67 @@ void		GamePanel::update()
 
   if (!_endGame)
     {
-      if (i > 492)
-	{
-	  _backgrounds.at(0).move(-1, 0);
-	  _backgrounds.at(1).move(-1, 0);
-	  _inGame.at(0).move(-5, 0);
-	  _inGame.at(1).move(-5, 0);
-	  _inGame.at(3).move(-5, 0);
-	  _inGame.at(4).move(-5, 0);
-
-	  _backgrounds.at(2).move(-2, 0);
-
-	}
+      
       if (i == 492)
 	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
 
-
-
-      if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
-	{
-	  _backgrounds.at(0).setPosition(_backgrounds.at(0).getGlobalBounds().second.first, 0);
-	}
-      if (_backgrounds.at(1).getGlobalBounds().first.first == -(_backgrounds.at(1).getGlobalBounds().second.first))
-	{
-	  _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
-	}
-
-
-
-      if (_inGame.at(0).getGlobalBounds().first.first <= -(_inGame.at(0).getGlobalBounds().second.first))
-	{
-	  _inGame.at(0).setPosition(_inGame.at(0).getGlobalBounds().second.first, 0);
-	}
-      if (_inGame.at(1).getGlobalBounds().first.first <= -(_inGame.at(1).getGlobalBounds().second.first))
-	{
-	  _inGame.at(1).setPosition(_inGame.at(1).getGlobalBounds().second.first, 0);
-	}
-
-      if (_inGame.at(3).getGlobalBounds().first.first == -(_inGame.at(3).getGlobalBounds().second.first))
-	{
-	  _inGame.at(3).setPosition(_inGame.at(3).getGlobalBounds().second.first, 860);
-	}
-      if (_inGame.at(4).getGlobalBounds().first.first == -(_inGame.at(4).getGlobalBounds().second.first))
-	{
-	  _inGame.at(4).setPosition(_inGame.at(4).getGlobalBounds().second.first, 860);
-	}
-
-
-
-
-
-      if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
-	{
-	  _backgrounds.at(2).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
-	  //      this->setPlanetTexture(_randPlanet->generate<int>());
-	}
-
       if (_labels.at(2).getText().getColor().a > 0 && !_escapeKey)
 	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
+
+      if (_wave % 5 != 0)
+	{
+	  if (i > 492)
+	    {
+	      _backgrounds.at(0).move(-1, 0);
+	      _backgrounds.at(1).move(-1, 0);
+	      _inGame.at(0).move(-5, 0);
+	      _inGame.at(1).move(-5, 0);
+	      _inGame.at(3).move(-5, 0);
+	      _inGame.at(4).move(-5, 0);
+
+	      _backgrounds.at(2).move(-2, 0);
+
+	    }
+
+
+
+	  if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
+	    {
+	      _backgrounds.at(0).setPosition(_backgrounds.at(0).getGlobalBounds().second.first, 0);
+	    }
+	  if (_backgrounds.at(1).getGlobalBounds().first.first == -(_backgrounds.at(1).getGlobalBounds().second.first))
+	    {
+	      _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
+	    }
+
+
+
+	  if (_inGame.at(0).getGlobalBounds().first.first <= -(_inGame.at(0).getGlobalBounds().second.first))
+	    {
+	      _inGame.at(0).setPosition(_inGame.at(0).getGlobalBounds().second.first, 0);
+	    }
+	  if (_inGame.at(1).getGlobalBounds().first.first <= -(_inGame.at(1).getGlobalBounds().second.first))
+	    {
+	      _inGame.at(1).setPosition(_inGame.at(1).getGlobalBounds().second.first, 0);
+	    }
+
+	  if (_inGame.at(3).getGlobalBounds().first.first == -(_inGame.at(3).getGlobalBounds().second.first))
+	    {
+	      _inGame.at(3).setPosition(_inGame.at(3).getGlobalBounds().second.first, 860);
+	    }
+	  if (_inGame.at(4).getGlobalBounds().first.first == -(_inGame.at(4).getGlobalBounds().second.first))
+	    {
+	      _inGame.at(4).setPosition(_inGame.at(4).getGlobalBounds().second.first, 860);
+	    }
+
+
+	  if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
+	    {
+	      _backgrounds.at(2).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
+	      //      this->setPlanetTexture(_randPlanet->generate<int>());
+	    }
+
+	}
     }
 
   i++;
