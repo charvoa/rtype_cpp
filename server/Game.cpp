@@ -401,7 +401,7 @@ void Game::addMonster()
   if ((_stage % 3 == 0) && (_eM.getEntitiesByType(E_BOT).size() == 0))
     {
       //      std::cout << "Add Monster" << std::endl;
-      int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+      int id = _eM.createEntitiesFromFolder(_botManager->createBoss(), 0);
       Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
 
       b->addGame(this);
