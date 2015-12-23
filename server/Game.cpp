@@ -254,6 +254,7 @@ void Game::sendNewEntity(const std::string &str, int id)
   ANetwork::t_frame	frame;
   std::string	sendData = str + ";" + std::to_string(id);
 
+  std::cout << "DATA QUE J'ENVOIE >> " << sendData << std::endl;
   frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
   for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
@@ -321,12 +322,9 @@ void Game::handleShoot(void *data, Client *client)
 
 		  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 		  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
 		  std::stringstream ss;
 		  ss << bullet->getName();
-
 		  //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
-
 		  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 		  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
 		  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -404,7 +402,10 @@ void Game::addMonster()
   if ((_stage % 3 == 0) && (_eM.getEntitiesByType(E_BOT).size() == 0))
     {
       //      std::cout << "Add Monster" << std::endl;
-      int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+      int id = _eM.createEntitiesFromFolder(_botManager->createBoss(), 0);
+      Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
+
+      b->addGame(this);
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _canAddMonster = false;
     }
@@ -413,6 +414,10 @@ void Game::addMonster()
       {
 	//      std::cout << "Add Monster" << std::endl;
 	int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+
+	Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
+
+	b->addGame(this);
 
 	this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
 	_nbDisplay++;
@@ -481,6 +486,7 @@ void Game::sendGameData()
 
 void Game::updateRiffle()
 {
+  //HUMAN UPDATE
   std::list<AEntity *> rifles = _eM.getEntitiesByType(E_RIFLE);
   for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
     {
@@ -489,6 +495,17 @@ void Game::updateRiffle()
       (*it)->update((*it)->refreshHitboxEntity());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
+    }
+
+  // BOT UPDATE
+  std::list<AEntity *> botRifles = _eM.getEntitiesByType(E_BOT_AMMO);
+  for (std::list<AEntity *>::iterator botIT = botRifles.begin(); botIT != botRifles.end(); ++botIT)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*botIT)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*botIT)->update(p->getX() - 24, p->getY());
+      (*botIT)->update((*botIT)->refreshHitboxEntity());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*botIT);
     }
 }
 
@@ -525,30 +542,13 @@ void Game::updateMissile()
     }
 }
 
-// std::pair<int, int> getMaxAndMinOfList(std::list<Case*> &listCase)
-// {
-//   int saveMax = 0;
-//   int saveMin;
-
-//   std::pair<int, int> final;
-
-//   for (std::list<Case*>::iterator it = listCase.begin();
-//        it != listCase.end();
-//        ++it)
-//     {
-//       saveMax = ((*it)->y > saveMax) ? (*it)->y : saveMax;
-//       saveMin = saveMax;
-//       saveMin = ((*it)->y < saveMin) ? (*it)->y : saveMin;
-//     }
-//   std::cout << "Max hitboxY = " << saveMax << " Min hitboxY = " << saveMin << std::endl;
-//   final = std::make_pair(saveMin, saveMax);
-//   return final;
-// }
-
 void Game::checkHitBox()
 {
   std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
+  std::list<AEntity*> playerList = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
+
+  monsterList.splice(monsterList.end(), playerList);
 
   bool isBreak = false;
   for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
@@ -567,22 +567,20 @@ void Game::checkHitBox()
 	    {
 	      if (isBreak == true)
 		break;
+	      if ((*ammosIT)->getParent()->getId() == (*monsterIT)->getId())
+		break;
 	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
 		   case2 != caseMonster.end();
 		   ++case2)
 		{
-		  //std::pair<int, int> limitY = getMaxAndMinOfList(caseMonster);
-		  //std::cout <<  " BOT : (" << (*case2)->x << " , " << (*case2)->y << ") | MISSILE : (" << (*case1)->x << " , " << (*case1)->y << "|" << std::endl;
  		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 		    {
-		      //		      std::cout << "J'ai pas toucheyyyy" << std::endl;
 		      Player *p;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
 			  != nullptr)
 			{
 			  this->updateScore(p, scoreDef::KILLED);
 			  deleteEntity(*ammosIT);
-			  //			  isBreakable = true;
 			  std::stringstream ss;
 
 			  ss << p->getId();
@@ -595,11 +593,9 @@ void Game::checkHitBox()
 			      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 			    }
 			  deleteEntity(*monsterIT);
-
 			  isBreak = true;
 			  break;
 			}
-		      //_nbDisplay--;
 		    }
 		}
 	    }
@@ -770,22 +766,22 @@ void Game::shootBot(Bot *sender, const std::string &s)
   int	id;
 
   if (weaponType == "E_RIFLE")
-    type = E_RIFLE;
+    type = E_BOT_AMMO;
   else if (weaponType == "E_MISSILE")
     type = E_MISSILE;
   else if (weaponType == "E_LASER")
     type = E_LASER;
   else
-    type = E_RIFLE;
+    type = E_BOT_AMMO;
 
   AEntity *bullet;
 
   if (type != E_INVALID)
     {
-      id = _eM.createEntity(type, sender);
+      id = _eM.createEntity(E_RIFLE, sender);
       bullet = _eM.getEntityById(id);
-      sendNewEntity(bullet->getName(), id); // Send  Bullet created
-
+      bullet->setType(E_BOT_AMMO);
+      sendNewEntity(bullet->getType(), id); // Send  Bullet created
       ComponentPosition *sPos = dynamic_cast<ComponentPosition *>(sender->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       bullet->update(sPos->getX(), sPos->getY()); // Position Bullet to Player position
 

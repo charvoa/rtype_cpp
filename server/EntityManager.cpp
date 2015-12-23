@@ -118,7 +118,7 @@ std::list<AEntity*>  EntityManager::getAmmoEntities()
   for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       type = (*it)->getType();
-      if (type == E_RIFLE || type == E_MISSILE || type == E_LASER)
+      if (type == E_RIFLE || type == E_MISSILE || type == E_LASER || type == E_BOT_AMMO)
 	Ammos.push_back(*it);
     }
   return (Ammos);

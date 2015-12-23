@@ -5,14 +5,16 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec 21 01:45:11 2015 Louis Audibert
-// Last update Tue Dec 22 07:02:58 2015 Serge Heitzler
+// Last update Wed Dec 23 08:30:55 2015 Louis Audibert
 //
 
 #include <iostream>
 #include <Bot.hpp>
+#include <Game.hh>
 
 Bot::Bot(int id) : AEntity(id), _health(50), _y(0), _direction(1)
 {
+  _timerShoot = new Timer(true);
   _sprite = "sprite2.png";
   _name = _sprite;
   _type = E_BOT;
@@ -79,6 +81,11 @@ void	Bot::update()
   _x -= 4;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
+  if (_timerShoot->elapsed().count() > 2)
+    {
+      _timerShoot->reset();
+      _currentGame->shootBot(this);
+    }
 }
 
 extern "C" AEntity* create_object(int id)
