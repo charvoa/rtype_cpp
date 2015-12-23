@@ -5,19 +5,19 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:18:36 2015 Serge Heitzler
-// Last update Fri Dec 11 15:11:22 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:02:47 2015 Serge Heitzler
 //
 
-#ifndef TEXT_HH_
-#define TEXT_HH_
+#ifndef		TEXT_HH_
+#define		TEXT_HH_
 
-#include <SFML/Graphics.hpp>
-#include <string>
-#include <Vector2.hh>
-#include <IText.hh>
-#include <SFont.hh>
-#include <Color.hh>
-#include <AMenuElement.hh>
+#include	<SFML/Graphics.hpp>
+#include	<string>
+#include	<Vector2.hh>
+#include	<IText.hh>
+#include	<SFont.hh>
+#include	<Color.hh>
+#include	<AMenuElement.hh>
 
 class	        Text : public IText
 {
@@ -27,18 +27,18 @@ public:
   Text(const std::string &string, SFont &font, unsigned int characterSize=30);
   ~Text();
 
-  void			setFont(SFont& font);
-  void			setColor(Color::Tint);
-  void			setSize(unsigned int size);
-  void			setString(const std::string& title);
-  void			setPosition(Vector2 pos);
-  void		        setOrigin(float x, float y);
-  void		        setStyle(uint32_t style);
-  sf::Text		&getText();
+  void	       	setFont(SFont& font);
+  void 		setColor(Color::Tint);
+  void 		setSize(unsigned int size);
+  void 		setString(const std::string& title);
+  void 		setPosition(Vector2 pos);
+  void 	        setOrigin(float x, float y);
+  void 	        setStyle(uint32_t style);
+  sf::Text     	&getText();
 
 private :
 
-  sf::Text		_text;
+  sf::Text     	_text;
 
 };
 

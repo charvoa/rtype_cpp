@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:51 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 17:14:46 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:15:28 2015 Serge Heitzler
 //
 
 #ifndef BIND_HH
@@ -47,4 +47,4 @@ private:
   JoystickEvent _joystick;
 };
 
-#endif // BIND_HH
+#endif /* !BIND_HH */

@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Wed Dec  9 04:57:09 2015 Serge Heitzler
-// Last update Tue Dec 15 06:31:20 2015 Serge Heitzler
+// Last update Sun Dec 27 08:10:29 2015 Serge Heitzler
 //
 
 #ifndef JOINPANEL_HH
@@ -29,7 +29,7 @@ public:
   void		        update();
   void			back();
   void			updateOnTextEntered(int);
-  int		getType();
+  int			getType();
 
 private:
 
@@ -39,4 +39,4 @@ private:
   int			_alpha;
 };
 
-#endif // JOINPANEL_HH
+#endif /* !JOINPANEL_HH */

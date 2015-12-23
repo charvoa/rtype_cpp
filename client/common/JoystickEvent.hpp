@@ -19,6 +19,16 @@ public:
 	};
 	~JoystickEvent() {};
 
+	void		setAxis(sf::Joystick::Axis axis) {
+		_isAxis = true;
+		_axis = axis;
+	}
+
+	void		setButton(int button) {
+		_isAxis = false;
+		_button = button;
+	}
+
 	bool		isAxis() const { return _isAxis; }
 
 	sf::Joystick::Axis	getAxis() const { return _axis; }
@@ -32,6 +42,18 @@ public:
 		else
 			_button = event._button;
 		return *this;
+	}
+
+	bool			isEqual(JoystickEvent const& b) {
+		if (_isAxis == b._isAxis)
+		{
+			if (_axis == b._axis)
+				return true;
+			return false;
+		}
+		if (_button == b._button)
+			return true;
+		return false;
 	}
 };
 

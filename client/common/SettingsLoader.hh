@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:54 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 16:47:07 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:05:41 2015 Serge Heitzler
 //
 
 #ifndef SETTINGSLOADER_HH
@@ -13,13 +13,13 @@
 
 #include <fstream>
 #include <SFML/Graphics.hpp>
-#include "IParser.hh"
-#include "Settings.hh"
+#include <IParser.hh>
+#include <Settings.hh>
 
 class SettingsLoader : public IParser
 {
 public:
-	SettingsLoader(bool);
+  SettingsLoader(bool);
   SettingsLoader(const std::string & filepath);
   virtual ~SettingsLoader();
 
@@ -66,4 +66,4 @@ private:
   std::ifstream   *_ifs;
 };
 
-#endif // SETTINGSLOADER_HH
+#endif /* !SETTINGSLOADER_HH */

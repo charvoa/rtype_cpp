@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:49 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 17:40:34 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:06:26 2015 Serge Heitzler
 //
 
 #ifndef SETTINGS_H
@@ -13,22 +13,22 @@
 
 #include <string>
 #include <vector>
-#include "Bind.hh"
-#include "Volume.hh"
+#include <Bind.hh>
+#include <Volume.hh>
 
 class Settings
 {
 public:
-    typedef enum e_difficulty
+typedef enum e_difficulty
     {
-        EASY_MODE,
+EASY_MODE,
         MEDIUM_MODE,
         HARD_MODE
     } Difficulty;
 
     Settings(std::string const& filepath);
     Settings(Volume, std::vector<Bind*>, Settings::Difficulty);
-	Settings(Volume, std::vector<Bind*>, Settings::Difficulty, std::string const&, int);
+Settings(Volume, std::vector<Bind*>, Settings::Difficulty, std::string const&, int);
     ~Settings();
 
     Volume getVolume() const;
@@ -62,4 +62,4 @@ private:
 	int			_port;
 };
 
-#endif // SETTINGS_H
+#endif /* !SETTINGS_HH */

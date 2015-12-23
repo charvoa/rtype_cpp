@@ -576,7 +576,7 @@ void Game::checkHitBox()
 		{
 		  if ((*ammosIT)->getParent()->getType() == E_BOT)
 		    {
-		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y)))
+		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 			{
 			  deleteEntity(*ammosIT);
 			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 2);
@@ -584,7 +584,8 @@ void Game::checkHitBox()
 			  break;
 			}
 		    }
- 		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
+ 		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
+			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX() < (*case2)->x)
 		    {
 		      Player *p;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
@@ -594,6 +595,24 @@ void Game::checkHitBox()
 			  deleteEntity(*ammosIT);
 			  std::stringstream ss;
 
+			  if (reinterpret_cast<Bot*>(*monsterIT)->_isBoss)
+			    {
+			      ComponentHealth *healthBoss = reinterpret_cast<ComponentHealth*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HEALTH)
+												 ->getComponent());
+			      int newLife = healthBoss->getLife() - 1;
+			      (*monsterIT)->update(newLife);
+			      ss << p->getId();
+			      ss << ";";
+			      ss << (*monsterIT)->getId();
+			      ANetwork::t_frame frame = CreateRequest::create(S_DIE, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+			      std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+			      for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+				    {
+				      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+				    }
+			      if (healthBoss->getLife() <= 0)
+				deleteEntity(*monsterIT);
+			    }
 			  ss << p->getId();
 			  ss << ";";
 			  ss << (*monsterIT)->getId();

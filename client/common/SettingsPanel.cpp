@@ -254,14 +254,6 @@ void	SettingsPanel::setUserInterface()
 	leaveGame->setColor(Color::WHITE);
 	_labels.push_back(*leaveGame);
 
-/*	Text			*diff = new Text();
-	diff->setString("DEFAULT DIFFICULTY");
-	diff->setSize(80);
-	diff->setStyle(1);
-	diff->setOrigin(diff->getText().getGlobalBounds().width / 2, diff->getText().getGlobalBounds().height / 2);
-	diff->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.05));
-	diff->setColor(Color::WHITE);
-	_labels.push_back(*diff);*/
 }
 
 void    SettingsPanel::setGlobalVolume(int global)
