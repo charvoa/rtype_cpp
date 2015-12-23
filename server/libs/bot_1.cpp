@@ -75,6 +75,7 @@ void	Bot::update()
   _x--;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
+
 }
 
 extern "C" AEntity* create_object(int id)

@@ -321,12 +321,9 @@ void Game::handleShoot(void *data, Client *client)
 
 		  ComponentPosition *pPos = dynamic_cast<ComponentPosition *>(p->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 		  bullet->update(pPos->getX(), pPos->getY()); // Position Bullet to Player position
-
 		  std::stringstream ss;
 		  ss << bullet->getName();
-
 		  //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
-
 		  ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
 		  std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
 		  for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -405,6 +402,9 @@ void Game::addMonster()
     {
       //      std::cout << "Add Monster" << std::endl;
       int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+      Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
+
+      b->addGame(this);
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _canAddMonster = false;
     }
@@ -413,6 +413,10 @@ void Game::addMonster()
       {
 	//      std::cout << "Add Monster" << std::endl;
 	int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
+
+	Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
+
+	b->addGame(this);
 
 	this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
 	_nbDisplay++;
@@ -481,6 +485,7 @@ void Game::sendGameData()
 
 void Game::updateRiffle()
 {
+  //HUMAN UPDATE
   std::list<AEntity *> rifles = _eM.getEntitiesByType(E_RIFLE);
   for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
     {
@@ -489,6 +494,17 @@ void Game::updateRiffle()
       (*it)->update((*it)->refreshHitboxEntity());
       if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
 	deleteEntity(*it);
+    }
+
+  // BOT UPDATE
+  std::list<AEntity *> botRifles = _eM.getEntitiesByType(E_BOT_AMMO);
+  for (std::list<AEntity *>::iterator botIT = botRifles.begin(); botIT != botRifles.end(); ++botIT)
+    {
+      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*botIT)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
+      (*botIT)->update(p->getX() - 24, p->getY());
+      (*botIT)->update((*botIT)->refreshHitboxEntity());
+      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+	deleteEntity(*botIT);
     }
 }
 
