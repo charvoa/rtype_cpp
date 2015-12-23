@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Tue Dec 22 06:29:13 2015 Serge Heitzler
+// Last update Wed Dec 23 05:58:34 2015 Serge Heitzler
 //
 
 #include <string>
@@ -263,6 +263,10 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
 {
   (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "endGame" << std::endl;
+  std::cout << "x.at(0) : " << x.at(0) << std::endl;
+  std::cout << "x.at(1) : " << x.at(1) << std::endl;
 }
 
 void		ProtocoleClient::loadSprites(ANetwork::t_frame &frame)
