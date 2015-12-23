@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 18:32:59 2015 Joris Bertomeu
-// Last update Mon Dec 21 10:30:03 2015 Nicolas Charvoz
+// Last update Tue Dec 22 23:34:14 2015 Joris Bertomeu
 //
 
 #ifndef			_FILE_HPP_
@@ -110,9 +110,12 @@ public:
 
     file = fopen(this->_fullpath.c_str(), "rb");
     net.init(port, ANetwork::TCP_MODE);
+    std::cout << "2" << std::endl;
     net.bind();
     net.listen(2);
+    std::cout << "3" << std::endl;
     s = (Socket*) net.select();
+    std::cout << "4" << std::endl;
     frame = (ANetwork::t_frame*) s->read(sizeof(Network::t_frame));
     (void)frame;
     s->write(CreateRequest::create(1, 2, 3, IntToString(_size), true), sizeof(ANetwork::t_frame));
