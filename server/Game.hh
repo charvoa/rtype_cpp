@@ -100,7 +100,6 @@ private:
   int _nbLeft;
   int _nbInGame;
   Timer *_timerWave;
-
   // METHODS
   Player *getPlayerByClient(Client*);
   Player *getPlayerByClientTCP(Client*);
