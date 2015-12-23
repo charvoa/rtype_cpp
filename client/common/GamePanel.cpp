@@ -195,10 +195,36 @@ MainPlayer		&GamePanel::getMainPlayer()
 void			GamePanel::playerLeft(const std::string &playerName)
 {
   RenderWindow *window = RenderWindow::getInstance();
-
+  std::size_t pos = playerName.find("player");
+  int idLeft = std::stoi(playerName.substr(pos + 6));
+  
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString(playerName + " has left the game");
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
+
+  Explosion *e = new Explosion();
+  switch (idLeft) {
+  case 1:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_blue));
+    break;
+  case 2:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_red));
+    break;
+  case 3:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_green));
+    break;
+  case 4:
+    e->setTexture(*(RenderWindow::getInstance()->_ressources->_explosion_yellow));
+    break;
+  }
+
+  int PosX  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idLeft]->getPosX();
+  int PosY  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idLeft]->getPosY();
+  e->setPosition(PosX, PosY);
+  static_cast<GamePanel*>(window->getPanels().top())->getExplosions().push_back(e);
+
+  ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idLeft])->getSprite().setColor(sf::Color(255, 255, 255, 0));
+  ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idLeft])->getSprite().setPosition(-500, 500);
 
 }
 
@@ -413,7 +439,7 @@ Text		&GamePanel::getCurrentWave()
 void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
-
+  unsigned int i = 1;
   
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setString("Wave " + std::to_string(value));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
@@ -421,6 +447,13 @@ void		GamePanel::setCurrentWave(unsigned int value)
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
   
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
+
+  while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
+    {
+      ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
+      i++;
+    }
+    
 }
 
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
