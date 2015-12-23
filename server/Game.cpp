@@ -405,7 +405,6 @@ void Game::addMonster()
     {
       //      std::cout << "Add Monster" << std::endl;
       int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
-
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _nbDisplay++;
     }
