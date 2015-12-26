@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec 21 10:34:20 2015 Nicolas Girardot
+// Last update Sat Dec 26 19:35:26 2015 Nicolas Girardot
 //
 
 #ifdef _WIN32
@@ -124,6 +124,7 @@ void	Client::Start()
   _sound->registerSound("../common/misc/megaLaser1.ogg", "laser");
   _sound->registerMusic("../common/misc/menuMusic1.ogg", "mainMenu");
   _sound->registerSound("../common/misc/explosion1.ogg", "explosion1");
+  _sound->registerSound("../common/misc/gameOver.ogg", "endGame");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
   _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
   _sound->playMusic("mainMenu");
