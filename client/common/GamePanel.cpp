@@ -110,7 +110,7 @@ GamePanel::GamePanel()
   planet->setPosition(2500, _randPosY->generate<int>());
   planet->scale(0.5);
   _backgrounds.push_back(*planet);
-    
+
 
   Sprite *topGame1 = new Sprite;
 
@@ -193,7 +193,7 @@ void			GamePanel::endGame(std::vector<std::string> &v)
   static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(6).getSprite().setColor(sf::Color(255, 255, 255, 255));
 
   Text	*sentence = new Text();
-  
+
   sentence->setString("GAME OVER");
   sentence->setSize(100);
   sentence->setStyle(1);
@@ -201,8 +201,8 @@ void			GamePanel::endGame(std::vector<std::string> &v)
   sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.25));
   sentence->getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().push_back(*sentence);
-  
-  
+
+
   while (i <= max)
     {
       Text	*sentence = new Text();
@@ -231,22 +231,22 @@ void			GamePanel::endGame(std::vector<std::string> &v)
 	break;
       }
 
-      
+
       i++;
     }
   std::string name = "exit";
-  
+
   ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.4 + 400), name);
   static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::exit);
 
   window->setMouseCursorVisible(true);
   static_cast<GamePanel*>(window->getPanels().top())->setEndGame(true);
 
-  // if (s->isPlaying("gameIntro"))
-  //   s->stopMusic("gameIntro");
-  // if (s->isPlaying("gameLoop"))
-  //   s->stopMusic("gameLoop");
-  //  s->playMusic("endGame");
+  if (s->isPlaying("gameIntro"))
+    s->stopMusic("gameIntro");
+  if (s->isPlaying("gameLoop"))
+     s->stopMusic("gameLoop");
+  s->playSound("endGame");
 }
 
 void			GamePanel::ammoLeft(std::vector<std::string> &v)
@@ -266,7 +266,7 @@ void			GamePanel::playerLeft(const std::string &playerName)
   RenderWindow *window = RenderWindow::getInstance();
   std::size_t pos = playerName.find("player");
   int idLeft = std::stoi(playerName.substr(pos + 6));
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setString(playerName + " has left the game");
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
@@ -370,18 +370,18 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   int	  	id = std::atoi(vector.at(1).c_str());
   Sprite	*newSprite = new Sprite();
   std::string  	type = vector.at(0);
- 
+
   std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
   std::size_t found = type.find(":");
   if (found != std::string::npos)
     {
       int parent = 0;
-      
+
       std::size_t pos = vector.at(0).find("player");
       parent = std::stoi(vector.at(0).substr(pos + 6)) - 1;
 
       std::string idString = vector.at(0).erase(1, 8);
-      
+
       type = std::to_string(std::stoi(idString) + parent);
 
       newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
@@ -451,7 +451,7 @@ void		GamePanel::die(int id, int idDied)
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idDied])->getSprite().setColor(sf::Color(255, 255, 255, 0));
       break;
     }
-  
+
 
   int PosX  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosX();
   int PosY  = static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()[idDied]->getPosY();
@@ -509,12 +509,12 @@ void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
   unsigned int i = 1;
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setString("Wave " + std::to_string(value));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().setColor(sf::Color(255, 255, 255, 255));
 
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(2).getText().getGlobalBounds().height / 2);
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getCurrentWave().setString(std::to_string(value));
 
   while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
@@ -522,7 +522,7 @@ void		GamePanel::setCurrentWave(unsigned int value)
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
     }
-    
+
 }
 
 OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
@@ -543,7 +543,7 @@ OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
 void		GamePanel::setTeamScore(unsigned int score)
 {
   RenderWindow *window = RenderWindow::getInstance();
-  
+
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).setString(std::to_string(score));
   static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).getText().setOrigin(static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).getText().getGlobalBounds().width / 2, static_cast<GamePanel*>(window->getPanels().top())->getLabels().at(0).getText().getGlobalBounds().height / 2);
 }
@@ -683,7 +683,7 @@ void		GamePanel::render()
   _inputManager.joystickMovedInDirection();
   _inputManager.keyPressedInGame();
   RenderWindow *window = RenderWindow::getInstance();
-  
+
   for (std::map<int, Sprite*>::iterator it = _dicoSprites.begin(); it != _dicoSprites.end(); ++it)
     {
       window->draw((*it).second->getSprite());
@@ -708,7 +708,7 @@ void		GamePanel::render()
   this->drawOtherPlayer();
   this->drawUserInterface();
   this->drawLabels();
-  
+
 }
 
 void		GamePanel::drawOtherPlayer()
@@ -812,7 +812,7 @@ void		GamePanel::update()
 
 
 
-  
+
 
       if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
 	{
