@@ -220,4 +220,5 @@ bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
     {
       std::cout << e.what() << std::endl;
     }
+  return true;
 }
