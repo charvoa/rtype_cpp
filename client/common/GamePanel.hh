@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Tue Dec 22 06:33:25 2015 Serge Heitzler
+// Last update Sat Dec 26 10:29:16 2015 Serge Heitzler
 //
 
 
@@ -41,6 +41,7 @@ public:
   static void		       		setLife(const std::string &name, int life);
   static void				setCurrentWave(unsigned int value);
   static void				display(std::vector<std::string> &vector);
+  static void			        endGame(std::vector<std::string> &vector);
   static void			        newEntity(std::vector<std::string> &vector);
   static void			        ammoLeft(std::vector<std::string> &vector);
   static void			        deleteEntity(std::vector<std::string> &vector);
@@ -64,6 +65,8 @@ public:
   void					setPlayers(int nbPlayer, int currentPlayer);
   void					setEscapeMenu(bool value);
   bool					getEscapeMenu();
+  void					setEndGame(bool value);
+  bool					getEndGame();
   void					resume();
   void					exit();
   int					getType();
@@ -83,6 +86,7 @@ private:
   Random				*_randPlanet;
   Random				*_randBackground;
   bool					_escapeKey;
+  bool					_endGame;
   unsigned int				_score;
 };
 

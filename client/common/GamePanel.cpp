@@ -38,6 +38,7 @@ GamePanel::GamePanel()
   RenderWindow *window = RenderWindow::getInstance();
   getInputManager().setInputType(InputType::GAME_INPUT);
   _escapeKey = false;
+  _endGame = false;
 
   _score = 0;
   _type = PanelFactory::GAME_PANEL;
@@ -178,6 +179,73 @@ GamePanel::~GamePanel() {}
 int			GamePanel::getType()
 {
   return _type;
+}
+
+void			GamePanel::endGame(std::vector<std::string> &v)
+{
+  Sound *s = Client::getSound();
+  RenderWindow *window = RenderWindow::getInstance();
+  int i = 1;
+  int max = v.size() / 2;
+  int j = 0;
+
+  static_cast<GamePanel*>(window->getPanels().top())->getInGame().at(6).getSprite().setColor(sf::Color(255, 255, 255, 255));
+
+  Text	*sentence = new Text();
+  
+  sentence->setString("GAME OVER");
+  sentence->setSize(100);
+  sentence->setStyle(1);
+  sentence->setOrigin(sentence->getText().getGlobalBounds().width / 2, sentence->getText().getGlobalBounds().height / 2);
+  sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.25));
+  sentence->getText().setColor(sf::Color(255, 255, 255, 255));
+  static_cast<GamePanel*>(window->getPanels().top())->getLabels().push_back(*sentence);
+  
+  
+  while (i <= max)
+    {
+      Text	*sentence = new Text();
+      std::size_t pos = v.at(j).find("player");
+      int id = std::stoi(v.at(j).substr(pos + 6));
+      sentence->setString(v.at(j) + " : " + v.at(j + 1));
+      sentence->setSize(80 - i * 10);
+      sentence->setStyle(1);
+      sentence->setOrigin(sentence->getText().getGlobalBounds().width / 2, sentence->getText().getGlobalBounds().height / 2);
+      sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.4 + (i - 1) * 100));
+      static_cast<GamePanel*>(window->getPanels().top())->getLabels().push_back(*sentence);
+      j += 2;
+
+      switch (id) {
+      case 1:
+	sentence->getText().setColor(sf::Color::Blue);
+	break;
+      case 2:
+	sentence->getText().setColor(sf::Color::Red);
+	break;
+      case 3:
+	sentence->getText().setColor(sf::Color::Green);
+	break;
+      case 4:
+	sentence->getText().setColor(sf::Color::Yellow);
+	break;
+      }
+
+      
+      i++;
+    }
+  std::string name = "exit";
+  
+  ButtonFactory::create(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.4 + 400), name);
+  static_cast<GamePanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&GamePanel::exit);
+
+  window->setMouseCursorVisible(true);
+  static_cast<GamePanel*>(window->getPanels().top())->setEndGame(true);
+
+  if (s->isPlaying("gameIntro"))
+    s->stopMusic("gameIntro");
+  else
+    s->stopMusic("gameLoop");
+  s->playMusic("endGame");
 }
 
 void			GamePanel::ammoLeft(std::vector<std::string> &v)
@@ -532,6 +600,16 @@ void		GamePanel::setLife(const std::string &name, int life)
     }
 }
 
+void		GamePanel::setEndGame(bool value)
+{
+  _endGame = value;
+}
+
+bool		GamePanel::getEndGame()
+{
+  return _endGame;
+}
+
 void		GamePanel::setEscapeMenu(bool value)
 {
   RenderWindow *window = RenderWindow::getInstance();
@@ -683,64 +761,67 @@ void		GamePanel::update()
 {
   static unsigned int i = 0;
 
-  if (i > 492)
+  if (!_endGame)
     {
-      _backgrounds.at(0).move(-1, 0);
-      _backgrounds.at(1).move(-1, 0);
-      _inGame.at(0).move(-5, 0);
-      _inGame.at(1).move(-5, 0);
-      _inGame.at(3).move(-5, 0);
-      _inGame.at(4).move(-5, 0);
+      if (i > 492)
+	{
+	  _backgrounds.at(0).move(-1, 0);
+	  _backgrounds.at(1).move(-1, 0);
+	  _inGame.at(0).move(-5, 0);
+	  _inGame.at(1).move(-5, 0);
+	  _inGame.at(3).move(-5, 0);
+	  _inGame.at(4).move(-5, 0);
 
-      _backgrounds.at(2).move(-2, 0);
+	  _backgrounds.at(2).move(-2, 0);
 
-    }
-  if (i == 492)
-    _labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
-
-
-
-  if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
-    {
-      _backgrounds.at(0).setPosition(_backgrounds.at(0).getGlobalBounds().second.first, 0);
-    }
-  if (_backgrounds.at(1).getGlobalBounds().first.first == -(_backgrounds.at(1).getGlobalBounds().second.first))
-    {
-      _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
-    }
+	}
+      if (i == 492)
+	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
 
 
 
-  if (_inGame.at(0).getGlobalBounds().first.first <= -(_inGame.at(0).getGlobalBounds().second.first))
-    {
-      _inGame.at(0).setPosition(_inGame.at(0).getGlobalBounds().second.first, 0);
-    }
-  if (_inGame.at(1).getGlobalBounds().first.first <= -(_inGame.at(1).getGlobalBounds().second.first))
-    {
-      _inGame.at(1).setPosition(_inGame.at(1).getGlobalBounds().second.first, 0);
-    }
+      if (_backgrounds.at(0).getGlobalBounds().first.first == -(_backgrounds.at(0).getGlobalBounds().second.first))
+	{
+	  _backgrounds.at(0).setPosition(_backgrounds.at(0).getGlobalBounds().second.first, 0);
+	}
+      if (_backgrounds.at(1).getGlobalBounds().first.first == -(_backgrounds.at(1).getGlobalBounds().second.first))
+	{
+	  _backgrounds.at(1).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, 0);
+	}
 
-  if (_inGame.at(3).getGlobalBounds().first.first == -(_inGame.at(3).getGlobalBounds().second.first))
-    {
-      _inGame.at(3).setPosition(_inGame.at(3).getGlobalBounds().second.first, 860);
-    }
-  if (_inGame.at(4).getGlobalBounds().first.first == -(_inGame.at(4).getGlobalBounds().second.first))
-    {
-      _inGame.at(4).setPosition(_inGame.at(4).getGlobalBounds().second.first, 860);
-    }
+
+
+      if (_inGame.at(0).getGlobalBounds().first.first <= -(_inGame.at(0).getGlobalBounds().second.first))
+	{
+	  _inGame.at(0).setPosition(_inGame.at(0).getGlobalBounds().second.first, 0);
+	}
+      if (_inGame.at(1).getGlobalBounds().first.first <= -(_inGame.at(1).getGlobalBounds().second.first))
+	{
+	  _inGame.at(1).setPosition(_inGame.at(1).getGlobalBounds().second.first, 0);
+	}
+
+      if (_inGame.at(3).getGlobalBounds().first.first == -(_inGame.at(3).getGlobalBounds().second.first))
+	{
+	  _inGame.at(3).setPosition(_inGame.at(3).getGlobalBounds().second.first, 860);
+	}
+      if (_inGame.at(4).getGlobalBounds().first.first == -(_inGame.at(4).getGlobalBounds().second.first))
+	{
+	  _inGame.at(4).setPosition(_inGame.at(4).getGlobalBounds().second.first, 860);
+	}
 
 
 
   
 
-  if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
-    {
-      _backgrounds.at(2).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
-      //      this->setPlanetTexture(_randPlanet->generate<int>());
-    }
+      if (_backgrounds.at(2).getGlobalBounds().first.first == -500)
+	{
+	  _backgrounds.at(2).setPosition(_backgrounds.at(1).getGlobalBounds().second.first, _randPosY->generate<int>());
+	  //      this->setPlanetTexture(_randPlanet->generate<int>());
+	}
 
-  if (_labels.at(2).getText().getColor().a > 0 && !_escapeKey)
-    _labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
+      if (_labels.at(2).getText().getColor().a > 0 && !_escapeKey)
+	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
+    }
 
   i++;
 
