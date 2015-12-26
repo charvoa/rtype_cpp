@@ -587,7 +587,6 @@ void Game::checkHitBox()
 			{
 			  deleteEntity(*ammosIT);
 			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 2);
-			  deleteEntity(*monsterIT);
 			  isBreak = true;
 			  break;
 			}
