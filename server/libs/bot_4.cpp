@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <Bot.hpp>
-#include <Game.hh>
 
 Bot::Bot(int id) : AEntity(id), _health(50), _y(0), _direction(1)
 {
@@ -84,7 +83,6 @@ void	Bot::update()
   if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
     {
       _timerShoot->reset();
-      _currentGame->shootBot(this);
     }
 }
 

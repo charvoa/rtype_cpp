@@ -15,14 +15,12 @@
 
 APanel::APanel()
 {
-  std::cout << "CONSTRUCTOR APANEL" << std::endl;
   RenderWindow *window = RenderWindow::getInstance();
   window->setMouseCursorVisible(true);
 }
 
 APanel::~APanel()
 {
-  std::cout << "DESTRUCTOR APANEL" << std::endl;
 }
 
 void		APanel::update(){}
