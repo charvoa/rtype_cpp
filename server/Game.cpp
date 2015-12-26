@@ -503,7 +503,7 @@ void Game::updateRiffle()
       ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*botIT)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       (*botIT)->update(p->getX() - 24, p->getY());
       (*botIT)->update((*botIT)->refreshHitboxEntity());
-      if (p->getX() >= sizeInGame::LENGHT_MAX + 20)
+      if (p->getX() <= sizeInGame::LENGHT_MIN - 20)
 	deleteEntity(*botIT);
     }
 }
@@ -583,15 +583,14 @@ void Game::checkHitBox()
 		{
 		  if ((*ammosIT)->getParent()->getType() == E_BOT)
 		    {
-		      std::cout << "BOT AMMO" << std::endl;
-		      std::cout << "case 1 x : " << (*case1)->x << std::endl;
-		      std::cout << "case 2 x : " << (*case2)->x << std::endl;
-		      std::cout << "case 1 y : " << (*case1)->y << std::endl;
-		      std::cout << "case 2 y : " << (*case2)->y << std::endl;
-		      std::cout << "case monster front y : " << caseMonster.front()->y << std::endl;
-		      std::cout << "case monster back y : " << caseMonster.back()->y << std::endl;
 		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y)))
-			std::cout << "PLAYER TOUCHE" << std::endl;
+			{
+			  deleteEntity(*ammosIT);
+			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 2);
+			  deleteEntity(*monsterIT);
+			  isBreak = true;
+			  break;
+			}
 		    }
  		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 		    {
@@ -653,7 +652,8 @@ bool Game::run()
 	break;
       if (!_canAddMonster)
 	this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && startTime - _start > std::chrono::milliseconds(8000))
+      if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && startTime - _start >
+	  std::chrono::milliseconds(8000))
 	{
 	  timerMonster.reset();
 	  this->addMonster();
