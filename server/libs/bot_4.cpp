@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec 21 01:45:11 2015 Louis Audibert
-// Last update Wed Dec 23 08:30:55 2015 Louis Audibert
+// Last update Thu Dec 24 02:28:49 2015 Louis Audibert
 //
 
 #include <iostream>
@@ -81,7 +81,7 @@ void	Bot::update()
   _x -= 4;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
-  if (_timerShoot->elapsed().count() > 2)
+  if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
     {
       _timerShoot->reset();
       _currentGame->shootBot(this);
