@@ -254,7 +254,6 @@ void Game::sendNewEntity(const std::string &str, int id)
   ANetwork::t_frame	frame;
   std::string	sendData = str + ";" + std::to_string(id);
 
-  std::cout << "DATA QUE J'ENVOIE >> " << sendData << std::endl;
   frame = CreateRequest::create(S_NEW_ENTITY, CRC::calcCRC(sendData), sendData.size(),sendData);
   for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
@@ -548,9 +547,14 @@ void Game::checkHitBox()
   std::list<AEntity*> playerList = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
 
+  std::cout << "PlayerList size : " << playerList.size() << std::endl;
+  std::cout << "MonsterList size : " << monsterList.size() << std::endl;
   monsterList.splice(monsterList.end(), playerList);
 
+  std::cout << "AllList size : " << monsterList.size() << std::endl;
+
   bool isBreak = false;
+
   for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
        ammosIT != ammos.end();
        ++ammosIT)
@@ -565,9 +569,7 @@ void Game::checkHitBox()
 	       case1 != caseAmmo.end();
 	       ++case1)
 	    {
-	      if (isBreak == true)
-		break;
-	      if ((*ammosIT)->getParent()->getId() == (*monsterIT)->getId())
+	      if ((isBreak == true) || ((*ammosIT)->getParent()->getId() == (*monsterIT)->getId()))
 		break;
 	      for (std::list<Case*>::iterator case2 = caseMonster.begin();
 		   case2 != caseMonster.end();
@@ -576,6 +578,7 @@ void Game::checkHitBox()
  		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 		    {
 		      Player *p;
+		      Bot *bot;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
 			  != nullptr)
 			{
@@ -593,6 +596,25 @@ void Game::checkHitBox()
 			      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 			    }
 			  deleteEntity(*monsterIT);
+			  isBreak = true;
+			  break;
+			}
+		      else if ((bot = reinterpret_cast<Bot*>((*ammosIT)->getParent()))
+			!= nullptr)
+			{
+			  deleteEntity(*ammosIT);
+			  std::stringstream ss;
+
+			  ss << bot->getId();
+			  ss << ";";
+			  ss << (*monsterIT)->getId();
+			  ANetwork::t_frame frame = CreateRequest::create(S_DIE, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+			  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+			  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+			    {
+			      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+			    }
+			  //			  deleteEntity(*monsterIT);
 			  isBreak = true;
 			  break;
 			}
