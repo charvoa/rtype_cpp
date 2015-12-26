@@ -17,7 +17,7 @@
 # include <Client.hh>
 # include <E_EntityType.hh>
 # include <ThreadFactory.hh>
-# include <Mutex.hpp>
+//# include <Mutex.hpp>
 # include <memory>
 # include <CreateRequest.hpp>
 # ifdef _WIN32
@@ -90,7 +90,7 @@ private:
   std::string _id;
   EntityManager _eM;
   std::queue<ANetwork::t_frame> _commandQueue;
-  AMutex *_mutex;
+  //AMutex *_mutex;
   int	_stage;
   int	_nbDisplay;
   std::chrono::time_point<std::chrono::system_clock> _start;

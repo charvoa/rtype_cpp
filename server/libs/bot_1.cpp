@@ -80,7 +80,7 @@ void	Bot::update()
   if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
     {
       _timerShoot->reset();
-      _currentGame->shootBot(this);
+      //_currentGame->shootBot(this);
     }
 }
 
