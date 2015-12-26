@@ -213,9 +213,9 @@ void			GamePanel::endGame(std::vector<std::string> &v)
       sentence->setStyle(1);
       sentence->setOrigin(sentence->getText().getGlobalBounds().width / 2, sentence->getText().getGlobalBounds().height / 2);
       sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.4 + (i - 1) * 100));
-      static_cast<GamePanel*>(window->getPanels().top())->getLabels().push_back(*sentence);
       j += 2;
 
+      std::cout << "ID DIEEDDDD = " << id << std::endl;
       switch (id) {
       case 1:
 	sentence->getText().setColor(sf::Color::Blue);
@@ -231,6 +231,7 @@ void			GamePanel::endGame(std::vector<std::string> &v)
 	break;
       }
 
+      static_cast<GamePanel*>(window->getPanels().top())->getLabels().push_back(*sentence);
       
       i++;
     }
