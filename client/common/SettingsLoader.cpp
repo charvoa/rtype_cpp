@@ -335,6 +335,8 @@ int         SettingsLoader::getMusicVolume() const
 
 int			SettingsLoader::stringToInteger(std::string const& str) const
 {
+	if (str == "")
+		return (0);
 	return (std::stoi(str));
 }
 
