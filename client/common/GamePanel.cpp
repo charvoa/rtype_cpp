@@ -184,6 +184,7 @@ int			GamePanel::getType()
 void			GamePanel::endGame(std::vector<std::string> &v)
 {
   Sound *s = Client::getSound();
+  (void)s;
   RenderWindow *window = RenderWindow::getInstance();
   int i = 1;
   int max = v.size() / 2;
@@ -241,11 +242,11 @@ void			GamePanel::endGame(std::vector<std::string> &v)
   window->setMouseCursorVisible(true);
   static_cast<GamePanel*>(window->getPanels().top())->setEndGame(true);
 
-  if (s->isPlaying("gameIntro"))
-    s->stopMusic("gameIntro");
-  else
-    s->stopMusic("gameLoop");
-  s->playMusic("endGame");
+  // if (s->isPlaying("gameIntro"))
+  //   s->stopMusic("gameIntro");
+  // if (s->isPlaying("gameLoop"))
+  //   s->stopMusic("gameLoop");
+  //  s->playMusic("endGame");
 }
 
 void			GamePanel::ammoLeft(std::vector<std::string> &v)
