@@ -583,10 +583,17 @@ void Game::checkHitBox()
 		{
 		  if ((*ammosIT)->getParent()->getType() == E_BOT)
 		    {
-		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
+		      std::cout << "BOT AMMO" << std::endl;
+		      std::cout << "case 1 x : " << (*case1)->x << std::endl;
+		      std::cout << "case 2 x : " << (*case2)->x << std::endl;
+		      std::cout << "case 1 y : " << (*case1)->y << std::endl;
+		      std::cout << "case 2 y : " << (*case2)->y << std::endl;
+		      std::cout << "case monster front y : " << caseMonster.front()->y << std::endl;
+		      std::cout << "case monster back y : " << caseMonster.back()->y << std::endl;
+		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y)))
 			std::cout << "PLAYER TOUCHE" << std::endl;
 		    }
- 		  if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
+ 		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 		    {
 		      Player *p;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
