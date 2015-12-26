@@ -20,7 +20,6 @@ Game::Game(const Parameters &params_, std::list<Client *> &client_,
 {
   srand(time(NULL));
   _canAddMonster = true;
-  _mutex = new Mutex();
   this->_clients = client_;
   this->_network = new Network();
   this->_network->init(port_ + 1, ANetwork::UDP_MODE);
@@ -404,9 +403,6 @@ void Game::addMonster()
     {
       //      std::cout << "Add Monster" << std::endl;
       int id = _eM.createEntitiesFromFolder(_botManager->createBoss(), 0);
-      Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
-
-      b->addGame(this);
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _canAddMonster = false;
     }
@@ -415,10 +411,6 @@ void Game::addMonster()
       {
 	//      std::cout << "Add Monster" << std::endl;
 	int id = _eM.createEntitiesFromFolder(_botManager->createBot(), 0);
-
-	Bot *b = reinterpret_cast<Bot*>(_eM.getEntityById(id));
-
-	b->addGame(this);
 
 	this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
 	_nbDisplay++;
@@ -652,8 +644,8 @@ bool Game::run()
 	break;
       if (!_canAddMonster)
 	this->checkNewStage();
-      if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && startTime - _start >
-	  std::chrono::milliseconds(8000))
+    if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && ((int) startTime.time_since_epoch().count() - (int) _start.time_since_epoch().count()) >
+	  std::chrono::milliseconds(8000).count())
 	{
 	  timerMonster.reset();
 	  this->addMonster();
