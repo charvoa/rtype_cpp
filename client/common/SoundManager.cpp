@@ -61,16 +61,13 @@ void	Sound::playSound(const std::string &title)
 	int			effects;
 
 	sf::Sound *sound = new sf::Sound();
-	std::cout << "type de mon panel : " << std::to_string(window->getPanels().top()->getType()) << std::endl;
 	if ((PanelFactory::PanelType)window->getPanels().top()->getType() == PanelFactory::SETTINGS_PANEL)
 	{
-		std::cout << "dans settings panel" << std::endl;
 		global = dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->getVolume().getGlobal();
 		effects = dynamic_cast<SettingsPanel*>(window->getPanels().top())->getTemporarySettings()->getVolume().getEffects();
 	}
 	else
 	{
-		std::cout << "PAS dans settings panel" << std::endl;
 		global = window->getSettings()->getVolume().getGlobal();
 		effects = window->getSettings()->getVolume().getEffects();
 	}

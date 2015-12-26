@@ -20,8 +20,6 @@
 # define HEIGHT 855
 # define WIDTH 1920
 
-class Game;
-
 class			Bot : public AEntity
 {
 public:
@@ -34,7 +32,6 @@ private:
   int	_y;
   int	_health;
   Timer *_timerShoot;
-  Game *_currentGame;
 
   virtual void		generateY();
   virtual void		generateX();
@@ -44,9 +41,11 @@ public:
   explicit		Bot(int id);
   virtual		~Bot();
   virtual void		update();
-  void			addGame(Game *g) {
-    _currentGame = g;
-  }
+  bool			isInScreen() const {
+	  if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
+		  return true;
+	  return false;
+  };
 };
 
 #endif

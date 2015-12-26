@@ -385,6 +385,8 @@ void Game::updateMonster()
     {
       ComponentPosition *pos = reinterpret_cast<ComponentPosition*>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       reinterpret_cast<Bot*>(*it)->update();
+	  if (reinterpret_cast<Bot*>(*it)->isInScreen() == true)
+          shootBot(reinterpret_cast<Bot*>(*it));
       //(*it)->update((*it)->refreshHitbox());
       if (pos->getX() < -10)
 	{

@@ -74,8 +74,6 @@ void	SettingsPanel::setUserInterface()
 	_backgrounds.push_back(*slideEffects);
 	_backgrounds.push_back(*slideMusic);
 
-	// Button
-
 	std::string name = "SAVE";
 	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.9), name);
 	name = "DEFAULT";
