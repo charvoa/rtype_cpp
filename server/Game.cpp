@@ -513,7 +513,6 @@ void Game::updateLaser()
   std::list<AEntity *> rifles = _eM.getEntitiesByType(E_LASER);
   for (std::list<AEntity *>::iterator it = rifles.begin(); it != rifles.end(); ++it)
     {
-      ComponentPosition *p = reinterpret_cast<ComponentPosition *>((*it)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
       Player *player = reinterpret_cast<Player*>((*it)->getParent());
       ComponentPosition *pPlayer = reinterpret_cast<ComponentPosition *>((player)->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent());
 

@@ -54,6 +54,7 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 
 int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 {
+  (void)iterator;
   Bot *newEntity = bots.back();
 
   _id++;

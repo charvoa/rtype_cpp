@@ -96,6 +96,7 @@ bool Player::shoot(E_Component type)
       else
 	return(false);
     }
+  return true;
 }
 
 Timer	*Player::getLastShoot()
