@@ -763,6 +763,9 @@ void Game::deletePlayer(Client *c)
       std::cout << " I will quit" << std::endl;
       _isRunning = false;
     }
+  try {
+    deleteEntity(p);
+  } catch (const std::exception &e) {std::cout << e.what() << std::endl;}
 }
 
 void Game::checkNewStage()
