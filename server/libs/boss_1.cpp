@@ -5,13 +5,12 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:41:34 2015 Louis Audibert
-// Last update Sun Dec 27 18:26:36 2015 Nicolas Charvoz
 //
 
 #include <iostream>
 #include <Bot.hpp>
 
-Bot::Bot(int id) : AEntity(id), _health(1500), _y(0), _direction(1)
+Bot::Bot(int id) : AEntity(id), _health(50), _y(0), _direction(1)
 {
   _timerShoot = new Timer(true);
   _sprite = "sprite4.png";
@@ -69,12 +68,11 @@ void	Bot::update()
   if (_direction == -1)
     _x -= 3;
 
+  if (_direction == 2 && _y >= 250)
+    _y -= 5;
 
-  if (_direction == 2 && _y >= 300)
-    _y--;
-
-  if (_direction == 3 && _y <= 590)
-    _y++;
+  if (_direction == 3 && _y <= 640)
+    _y += 5;
 
   if (_y == 300)
     _direction = 3;
@@ -86,13 +84,13 @@ void	Bot::update()
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
 }
 
-bool Bot::isInScreen() const {
-  if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
-    _timerShoot->reset();
-    return true;
-  }
-  return false;
-}
+// bool Bot::isInScreen() const {
+//   if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
+//     _timerShoot->reset();
+//     return true;
+//   }
+//   return false;
+// }
 
 extern "C" AEntity* create_object(int id)
 {
