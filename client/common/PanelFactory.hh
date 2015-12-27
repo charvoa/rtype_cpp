@@ -5,13 +5,13 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Tue Dec  8 03:18:12 2015 Serge Heitzler
+// Last update Sun Dec 27 08:07:47 2015 Serge Heitzler
 //
 
 #ifndef PANELFACTORY_HH
 #define PANELFACTORY_HH
 
-#include "APanel.hh"
+#include <APanel.hh>
 
 class PanelFactory
 {
@@ -35,4 +35,4 @@ public:
   static APanel    *createPanel(PanelType);
 };
 
-#endif
+#endif /* !PANELFACTORY_HH_ */

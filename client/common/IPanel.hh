@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:51:23 2015 Viveka BARNEAUD
-// Last update Mon Nov 30 09:51:24 2015 Viveka BARNEAUD
+// Last update Sun Dec 27 08:11:41 2015 Serge Heitzler
 //
 
 #ifndef IPANEL_HH
@@ -17,4 +17,4 @@ class   IPanel
     virtual void hide() = 0;
 };
 
-#endif // IPANEL_HH
+#endif /* !IPANEL_HH */

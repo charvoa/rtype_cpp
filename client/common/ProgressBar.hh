@@ -5,13 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Tue Dec  1 14:05:18 2015 Serge Heitzler
-// Last update Wed Dec  2 04:40:00 2015 Serge Heitzler
+// Last update Sun Dec 27 08:07:06 2015 Serge Heitzler
 //
 
 #ifndef PROGRESSBAR_HH_
 #define PROGRESSBAR_HH_
 
-#include "AMenuElement.hh"
+#include <AMenuElement.hh>
 
 class	        ProgressBar : public AMenuElement
 {

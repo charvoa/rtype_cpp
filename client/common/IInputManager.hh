@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Sat Dec 19 13:19:49 2015 Serge Heitzler
+// Last update Sun Dec 27 08:12:43 2015 Serge Heitzler
 //
 
 #ifndef							IINPUTMANAGER_HH_
@@ -14,8 +14,8 @@
 #include						<SFML/Graphics.hpp>
 #include						<string>
 #include						<map>
-#include						"IRenderWindow.hh"
-#include						"InputTypeEnum.hh"
+#include						<IRenderWindow.hh>
+#include						<InputTypeEnum.hh>
 
 class							IInputManager
 {
@@ -29,7 +29,6 @@ public:
   virtual int						moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement) = 0;
   virtual void						joystickMovedInMenuAt() = 0;
   virtual std::pair<unsigned int, unsigned int>		mouseMovedInMenuAt(sf::Event& event) = 0;
-  //  std::pair<unsigned int, unsigned int>			mouseInGamePressedAt(sf::Event& event);
   virtual std::pair<unsigned int, unsigned int>		mouseInMenuPressedAt(sf::Event& event) = 0;
   virtual std::pair<unsigned int, unsigned int>		joystickPressedInMenuAt(sf::Event& event) = 0;
 

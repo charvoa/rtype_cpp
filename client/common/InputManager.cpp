@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sun Dec 27 07:46:50 2015 Serge Heitzler
+// Last update Sun Dec 27 08:19:34 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -53,9 +53,9 @@ void			InputManager::setInputType(InputType type)
     }
   if (type == ROOM_INPUT)
   {
-	  _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
-	  _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
-	  _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
+    _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
+    _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
+    _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
   }
 }
 
