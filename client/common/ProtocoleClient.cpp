@@ -281,6 +281,6 @@ void		ProtocoleClient::methodChecker(ANetwork::t_frame &frame)
   for (PointersOnFuncs::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == frame.idRequest)
-	(*this.*_functions[static_cast<RequestFromServer>(frame.idRequest)])(frame);
+		(*this.*_functions[static_cast<RequestFromServer>(frame.idRequest)])(frame);
     }
 }
