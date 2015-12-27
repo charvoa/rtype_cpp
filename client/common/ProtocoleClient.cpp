@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Dec 26 10:04:51 2015 Serge Heitzler
+// Last update Sun Dec 27 10:39:43 2015 Serge Heitzler
 //
 
 #include <string>
@@ -75,6 +75,7 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_DOWNLOAD_COMPLETE, &ProtocoleClient::downloadComplete));
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
   _functions.insert(std::make_pair(S_AMMO_LEFT, &ProtocoleClient::ammoLeft));
+  _functions.insert(std::make_pair(S_HIT, &ProtocoleClient::hit));
 }
 
 void		ProtocoleClient::ammoLeft(ANetwork::t_frame &frame)
@@ -82,6 +83,13 @@ void		ProtocoleClient::ammoLeft(ANetwork::t_frame &frame)
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "Ammo Left : " <<  x.at(0) << std::endl;
   GamePanel::ammoLeft(x);
+}
+
+void		ProtocoleClient::hit(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Hit" << std::endl;
+  GamePanel::hit(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
