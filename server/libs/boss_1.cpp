@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:41:34 2015 Louis Audibert
-// Last update Sun Dec 27 18:26:36 2015 Nicolas Charvoz
+// Last update Sun Dec 27 18:30:27 2015 Nicolas Charvoz
 //
 
 #include <iostream>
@@ -86,13 +86,13 @@ void	Bot::update()
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
 }
 
-bool Bot::isInScreen() const {
-  if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
-    _timerShoot->reset();
-    return true;
-  }
-  return false;
-}
+// bool Bot::isInScreen() const {
+//   if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
+//     _timerShoot->reset();
+//     return true;
+//   }
+//   return false;
+// }
 
 extern "C" AEntity* create_object(int id)
 {
