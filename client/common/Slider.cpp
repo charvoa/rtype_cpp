@@ -188,7 +188,6 @@ void			Slider::difficultyUpdateOnMove(std::pair<unsigned int, unsigned int> pair
 			}
 		}
 	}
-	// window->_ressources->_keyButtonNormal->getSize()._x / 2
 }
 
 bool			Slider::difficultyUpdateOnPress(std::pair<unsigned int, unsigned int> pair)
