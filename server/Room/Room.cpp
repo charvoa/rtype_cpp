@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec 22 23:33:36 2015 Joris Bertomeu
+// Last update Wed Dec 23 01:16:58 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
@@ -33,6 +33,9 @@ Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(i
   client->getSocket()->write(reinterpret_cast<void *>(&frame),
 			     sizeof(ANetwork::t_frame));
    sendFileToClient(client, botList);
+   for (std::list<std::string>::iterator it = this->_transfertFinished.begin(); it != this->_transfertFinished.end(); ++it) {
+     client->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, *it, true), sizeof(ANetwork::t_frame));
+   }
   //_owner = client;
 }
 
@@ -53,11 +56,11 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
       client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string(IntToString(port)  + ";" + tmp.str())), std::string(IntToString(port) + ";" + tmp.str()).size(), std::string(IntToString(port)  + ";" + tmp.str()), true), sizeof(ANetwork::t_frame));
       first = false;
     }
-    std::cout << "1" << std::endl;
     file.sendMe(port++);
     clientList = this->getAllPlayers();
+    this->_transfertFinished.push_back(std::string("player" + IntToString(this->_clientManager->getClientPosition(client) + 1)));
     for (std::list<Client*>::iterator it2 = clientList.begin(); it2 != clientList.end(); ++it2) {
-      (*it2)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("player" + IntToString(this->_clientManager->getClientPosition(*it2) + 1)), true), sizeof(ANetwork::t_frame));
+      (*it2)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("player" + IntToString(this->_clientManager->getClientPosition(client) + 1)), true), sizeof(ANetwork::t_frame));
     }
   }
 

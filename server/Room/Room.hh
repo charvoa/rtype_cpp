@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Mon Nov 30 08:52:59 2015 Antoine Garcia
-// Last update Tue Dec 22 10:59:06 2015 Antoine Garcia
+// Last update Wed Dec 23 01:06:20 2015 Joris Bertomeu
 //
 
 #ifndef _ROOM_HH_
@@ -22,6 +22,7 @@
 
 class	Room
 {
+  std::list<std::string>	_transfertFinished;
   std::list<Bot*> _botList;
   std::string	_id;
   ClientManager	*_clientManager;
