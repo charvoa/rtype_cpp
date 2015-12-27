@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 27 12:50:42 2015 Serge Heitzler
+// Last update Sun Dec 27 13:46:51 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -190,7 +190,6 @@ void	RoomPanel::minusNbPlayers()
 
 void	RoomPanel::addNbPlayers()
 {
-	std::cout << "add nb players" << std::endl;
   _nbPlayers++;
 }
 
@@ -260,13 +259,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
     {
     case 0:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::BLUE);
-      // static_cast<RoomPanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&RoomPanel::launchGame);
-
-      // static_cast<RoomPanel*>(window->getPanels().top())->getUserInterface().at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-
-      // static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(1).getText().setColor(sf::Color(255, 255, 255, 255));
-
-
       break;
     case 1:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::RED);
@@ -319,14 +311,12 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 
       getLabels().at(i + 2).setString(vector.at(i));
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
-	  std::cout << "nb player++" << std::endl;
       _nbPlayers++;
       i++;
     }
   i--;
   _players.at(i)->setCurrentClient(true);
   _currentPlayer = i + 1;
-  std::cout << "NOMBRE DE PLAYERS DANS ROOM PANEL : " << _nbPlayers << std::endl;
 
   switch (i)
     {

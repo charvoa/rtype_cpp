@@ -357,7 +357,6 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 
   for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->end(); ++it)
     {
-      std::cout << "Received file with name : " << (*it).first << std::endl;
       _dicoTextures.insert(std::make_pair((*it).first, (*it).second));
     }
 }
@@ -522,6 +521,12 @@ Text		&GamePanel::getCurrentWave()
   return _labels.at(1);
 }
 
+APanel	*returnSeconds(std::stack<APanel*>a)
+{
+  a.pop();
+  return a.top();
+}
+
 void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
@@ -536,11 +541,8 @@ void		GamePanel::setCurrentWave(unsigned int value)
 
   static_cast<GamePanel*>(window->getPanels().top())->setWaveNumber(value);
 
-  std::cout << "NEW WAVE INCOMING : " << value << std::endl;
-  std::cout << "i : " << i << " et nb players : " << static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() << std::endl;
-  while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
+  while (i <= static_cast<RoomPanel*>(returnSeconds(window->getPanels()))->getNbPlayers())
     {
-		std::cout << "before segfault" << std::endl;
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
     }
@@ -605,8 +607,10 @@ void		GamePanel::setLife(const std::string &name, int life)
       OtherPlayer *player;
       player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
       if (player == NULL)
-	return ;
-      player->setLife(life);
+	{
+	  return ;
+	}
+      player->setNbLife(life);
     }
 }
 
@@ -772,7 +776,7 @@ void		GamePanel::update()
 
   if (!_endGame)
     {
-      
+
       if (i == 492)
 	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
 
