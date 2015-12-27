@@ -522,6 +522,12 @@ Text		&GamePanel::getCurrentWave()
   return _labels.at(1);
 }
 
+APanel	*returnSeconds(std::stack<APanel*>a)
+{
+  a.pop();
+  return a.top();
+}
+
 void		GamePanel::setCurrentWave(unsigned int value)
 {
   RenderWindow *window = RenderWindow::getInstance();
@@ -537,7 +543,7 @@ void		GamePanel::setCurrentWave(unsigned int value)
   static_cast<GamePanel*>(window->getPanels().top())->setWaveNumber(value);
 
   std::cout << "In GamePanel Nb Player is : " << static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() << std::endl;
-  while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
+  while (i <= static_cast<RoomPanel*>(returnSeconds(window->getPanels()))->getNbPlayers())
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
@@ -770,7 +776,7 @@ void		GamePanel::update()
 
   if (!_endGame)
     {
-      
+
       if (i == 492)
 	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, 255));
 
