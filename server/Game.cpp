@@ -650,6 +650,7 @@ void Game::checkHitBox()
 			      ComponentHealth *healthBoss = reinterpret_cast<ComponentHealth*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HEALTH)
 											       ->getComponent());
 			      int newLife = healthBoss->getLife() - 1;
+			      std::cout << "HERE IS HIS NEW LIFE :" << newLife << std::endl;
 			      (*monsterIT)->update(newLife);
 			      ss << p->getId();
 			      ss << ";";
@@ -788,7 +789,7 @@ void Game::checkNewStage()
       for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
 	{
 	  Player *p = dynamic_cast<Player*>(*it);
-	  this->updateLife(p,2);
+	  this->updateLife(p,1);
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 	}
     }
