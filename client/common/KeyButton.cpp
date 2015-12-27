@@ -76,7 +76,10 @@ void		KeyButton::setBind(sf::Event event)
 		newTitle = loader->keyToString(code);
 		if (isKeyUsed(code))
 			return;
+		break;
 	}
+	default:
+		return;
 	}
 	(window->getPanels().top()->getLabels().at(_id)).setString(newTitle);
 	(window->getPanels().top()->getLabels().at(_id)).setOrigin((window->getPanels().top()->getLabels().at(_id)).getText().getGlobalBounds().width / 2, (window->getPanels().top()->getLabels().at(_id)).getText().getGlobalBounds().height / 2);
