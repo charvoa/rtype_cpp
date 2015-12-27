@@ -607,9 +607,13 @@ void		GamePanel::setLife(const std::string &name, int life)
     {
       OtherPlayer *player;
       player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
+      std::cout << "OTHER PLAYER" << std::endl;
       if (player == NULL)
-	return ;
-      player->setLife(life);
+	{
+	  std::cout << "PLAYER is NULL" << std::endl;
+	  return ;
+	}
+      player->setNbLife(life);
     }
 }
 
