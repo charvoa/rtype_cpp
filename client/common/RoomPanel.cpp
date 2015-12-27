@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 27 12:50:42 2015 Serge Heitzler
+// Last update Sun Dec 27 13:46:51 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -209,6 +209,7 @@ void		RoomPanel::newPlayer(std::string &newUsername)
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(i + 1));
 
   static_cast<RoomPanel*>(window->getPanels().top())->addNbPlayers();
+  std::cout << "In RoomPanel Nb Player is : " << static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() << std::endl;
 }
 
 std::vector<Player*>	&RoomPanel::getPlayers()
@@ -259,13 +260,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
     {
     case 0:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::BLUE);
-      // static_cast<RoomPanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&RoomPanel::launchGame);
-
-      // static_cast<RoomPanel*>(window->getPanels().top())->getUserInterface().at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-
-      // static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(1).getText().setColor(sf::Color(255, 255, 255, 255));
-
-
       break;
     case 1:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::RED);
