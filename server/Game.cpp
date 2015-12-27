@@ -591,7 +591,6 @@ void Game::checkHitBox()
 		    {
 		      if (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
 			{
-			  std::cout << "LASER IS HITTING" << std::endl;
 			  Player *p;
 			  if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
 			      != nullptr)
