@@ -165,7 +165,7 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
       file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
 
-  FileManager Toto("recv\\");
+  FileManager Toto("./recv/");
   RenderWindow *window = RenderWindow::getInstance();
 
   std::list<File *> list = Toto.getFileListByExtension("png");
