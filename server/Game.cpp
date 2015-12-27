@@ -779,11 +779,8 @@ void Game::deletePlayer(Client *c)
 void Game::checkNewStage()
 {
   std::list<AEntity *> bots = _eM.getEntitiesByType(E_BOT);
-  int addSystem = _stage / 5;
   if (bots.size() == 0)
     {
-      if (_stage - addSystem * 5 == 1)
-
       _canAddMonster = true;
       _nbDisplay = 0;
       _stage++;
@@ -795,10 +792,6 @@ void Game::checkNewStage()
       for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
 	{
 	  Player *p = dynamic_cast<Player*>(*it);
-	  if (_stage - (addSystem * 5) == 1){
-	    p->addSystem(C_MISSILE);
-	    p->addSystem(C_LASER);
-	  }
 	  this->updateLife(p,1);
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 	}
