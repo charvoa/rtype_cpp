@@ -32,7 +32,12 @@ public:
     if (!(this->_handle = opendir(dir.c_str())))
       throw (std::logic_error(std::string("FileManager :: Error while openning \"" + dir + "\"")));
     while ((dp = readdir(this->_handle))) {
-      this->_fileList.push_back(new File(std::string(this->_dir + dp->d_name)));
+		try {
+			this->_fileList.push_back(new File(std::string(this->_dir + dp->d_name)));
+		}
+		catch (const std::exception &e) {
+			std::cout << "FileManager :: Exception :: " << e.what() << std::endl;
+		}
     }
   };
 

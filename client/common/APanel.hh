@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:56 2015 Viveka BARNEAUD
-// Last update Wed Dec 16 05:26:49 2015 Serge Heitzler
+// Last update Sun Dec 27 08:17:03 2015 Serge Heitzler
 //
 
 #ifndef APANEL_HH
@@ -28,13 +28,13 @@ public:
 
   virtual void		updateOnMove(std::pair<unsigned int, unsigned int> pair);
   virtual bool		updateOnPress(std::pair<unsigned int, unsigned int> pair);
-  //  virtual bool		updateOnPressInGame(std::pair<unsigned int, unsigned int> pair);
   virtual void		updateOnRelease(std::pair<unsigned int, unsigned int> pair);
+  virtual void		difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair);
   virtual void		setKeyButton(sf::Event);
   virtual void		update();
   virtual void		render();
   virtual void		hide();
-  virtual void		    setUserInterface();
+  virtual void	        setUserInterface();
   virtual void		setGlobalVolume(int);
   virtual void		setEffectsVolume(int);
   virtual void		setMusicVolume(int);
@@ -61,9 +61,9 @@ protected:
   std::vector<Text>			_labels;
   std::vector<Sprite>	      		_inGame;
   InputManager				_inputManager;
-  int		_type;
+  int					_type;
   std::vector<funcs>			_functions;
 
 };
 
-#endif // APANEL_HH
+#endif /* APANEL_HH */

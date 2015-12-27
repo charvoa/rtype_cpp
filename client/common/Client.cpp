@@ -5,14 +5,14 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Mon Dec 21 10:34:20 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:18:09 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
-#include "../NetworkWin.hpp"
+#include <NetworkWin.hpp>
 #include <ThreadWin.hpp>
 #else
-#include "../Network.hpp"
+#include <Network.hpp>
 #include <ThreadUnix.hpp>
 #endif
 
@@ -53,7 +53,7 @@ void	*readdisp(void *s)
 	}
       }
       else
-	x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
+		x.methodChecker(*reinterpret_cast<ANetwork::t_frame*>(data));
     }
   return s;
 }
@@ -110,8 +110,9 @@ void	Client::Start()
   window->_ressources = new Ressources();
   //sleep(2);
 
-  window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-  window->getPanels().top()->setUserInterface();
+	window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
+//	window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
+	window->getPanels().top()->setUserInterface();
 
   //Adding & playing music for Menu
 
@@ -123,6 +124,7 @@ void	Client::Start()
   _sound->registerSound("../common/misc/megaLaser1.ogg", "laser");
   _sound->registerMusic("../common/misc/menuMusic1.ogg", "mainMenu");
   _sound->registerSound("../common/misc/explosion1.ogg", "explosion1");
+  _sound->registerSound("../common/misc/gameOver.ogg", "endGame");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
   _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
   _sound->playMusic("mainMenu");

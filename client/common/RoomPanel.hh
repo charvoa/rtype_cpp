@@ -12,16 +12,13 @@
 #define ROOMPANEL_HH_
 
 #include <map>
+#include <Slider.hh>
 #include <string>
 #include <Button.hh>
 #include <Settings.hh>
 #include <APanel.hh>
 #include <Player.hh>
-#ifdef _WIN32
-#include <FileManagerWin.hpp>
-#else
 #include <FileManager.hpp>
-#endif
 
 class RoomPanel : public APanel
 {
@@ -58,6 +55,7 @@ private:
   unsigned int		_nbPlayers;
   int			_currentPlayer;
   std::map<std::string, Texture*>	*_received;
+  Slider		*_difficulty;
 };
 
 #endif /* !ROOMPANEL_HH_ */

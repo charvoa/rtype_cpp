@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 13:24:55 2015 Serge Heitzler
+// Last update Sun Dec 27 08:19:34 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -51,7 +51,12 @@ void			InputManager::setInputType(InputType type)
       _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
       _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
     }
-
+  if (type == ROOM_INPUT)
+  {
+    _functions.insert(std::make_pair(sf::Event::MouseButtonPressed, &InputManager::mouseInMenuPressedAt));
+    _functions.insert(std::make_pair(sf::Event::MouseButtonReleased, &InputManager::dropSlider));
+    _functions.insert(std::make_pair(sf::Event::MouseMoved, &InputManager::mouseMovedInMenuAt));
+  }
 }
 
 
@@ -59,7 +64,6 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 {
   RenderWindow *window = RenderWindow::getInstance();
   int i = 0;
-  //std::cout << "KEY " << event.key.code << std::endl;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && !static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
     static_cast<GamePanel*>(window->getPanels().top())->setEscapeMenu(true);
   if (!static_cast<GamePanel*>(window->getPanels().top())->getEscapeMenu())
@@ -138,6 +142,22 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
   {
     ANetwork *net = Client::getUDPNetwork();
     ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
+    net->write(sender);
+    return std::make_pair(0, 0);
+  }
+
+  if (sf::Joystick::isButtonPressed(0, 1))
+  {
+    ANetwork *net = Client::getUDPNetwork();
+    ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSILE");
+    net->write(sender);
+    return std::make_pair(0, 0);
+  }
+
+  if (sf::Joystick::isButtonPressed(0, 2))
+  {
+    ANetwork *net = Client::getUDPNetwork();
+    ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_LASER"), 0, "E_LASER");
     net->write(sender);
     return std::make_pair(0, 0);
   }
@@ -251,6 +271,12 @@ void		InputManager::methodChecker(sf::Event &event)
 std::pair<unsigned int, unsigned int>		InputManager::dropSlider(sf::Event& event)
 {
 	(RenderWindow::getInstance())->getPanels().top()->updateOnRelease(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y));
+	return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
+}
+
+std::pair<unsigned int, unsigned int>		InputManager::dropSliderDifficulty(sf::Event& event)
+{
+	(RenderWindow::getInstance())->getPanels().top()->difficultyUpdateOnRelease(std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y));
 	return std::make_pair((unsigned int)event.mouseButton.x, (unsigned int)event.mouseButton.y);
 }
 

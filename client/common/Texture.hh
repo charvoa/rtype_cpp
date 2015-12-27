@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 // 
 // Started on  Mon Nov 23 08:18:31 2015 Serge Heitzler
-// Last update Mon Dec  7 02:17:38 2015 Serge Heitzler
+// Last update Sun Dec 27 08:01:50 2015 Serge Heitzler
 //
 
 #ifndef		TEXTURE_HH_
@@ -13,8 +13,8 @@
 
 #include	<SFML/Graphics.hpp>
 #include	<string>
-#include	"ITexture.hh"
-#include	"Vector2.hh"
+#include	<ITexture.hh>
+#include	<Vector2.hh>
 
 class	        Texture : public ITexture
 {

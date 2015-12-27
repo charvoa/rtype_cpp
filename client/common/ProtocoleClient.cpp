@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Mon Dec 21 07:16:54 2015 Serge Heitzler
+// Last update Sun Dec 27 10:39:43 2015 Serge Heitzler
 //
 
 #include <string>
@@ -56,15 +56,12 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_HANDSHAKE, &ProtocoleClient::handshake));
   _functions.insert(std::make_pair(S_DISPLAY, &ProtocoleClient::display));
   _functions.insert(std::make_pair(S_CREATE_ROOM, &ProtocoleClient::createRoom));
-  _functions.insert(std::make_pair(S_CREATE_ROOM_ERROR, &ProtocoleClient::createRoomError));
   _functions.insert(std::make_pair(S_JOIN_SUCCESS, &ProtocoleClient::joinSuccess));
   _functions.insert(std::make_pair(S_JOIN_ERROR, &ProtocoleClient::joinError));
   _functions.insert(std::make_pair(S_GAME_LAUNCHED, &ProtocoleClient::gameLaunched));
   _functions.insert(std::make_pair(S_NEW_PLAYER_CONNECTED, &ProtocoleClient::newPlayerConnected));
   _functions.insert(std::make_pair(S_PLAYER_LEFT, &ProtocoleClient::playerLeft));
-  _functions.insert(std::make_pair(S_CHANGE_HOST, &ProtocoleClient::changeHost));
   _functions.insert(std::make_pair(S_DIE, &ProtocoleClient::die));
-  _functions.insert(std::make_pair(S_PLAYER_DEAD, &ProtocoleClient::playerDead));
   _functions.insert(std::make_pair(S_LIFE, &ProtocoleClient::life));
   _functions.insert(std::make_pair(S_SCORE, &ProtocoleClient::score));
   _functions.insert(std::make_pair(S_NEW_WAVE, &ProtocoleClient::newWave));
@@ -77,6 +74,22 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_DELETE_ENTITY, &ProtocoleClient::deleteEntity));
   _functions.insert(std::make_pair(S_DOWNLOAD_COMPLETE, &ProtocoleClient::downloadComplete));
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
+  _functions.insert(std::make_pair(S_AMMO_LEFT, &ProtocoleClient::ammoLeft));
+  _functions.insert(std::make_pair(S_HIT, &ProtocoleClient::hit));
+}
+
+void		ProtocoleClient::ammoLeft(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Ammo Left : " <<  x.at(0) << std::endl;
+  GamePanel::ammoLeft(x);
+}
+
+void		ProtocoleClient::hit(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Hit" << std::endl;
+  GamePanel::hit(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
@@ -90,7 +103,7 @@ void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
   std::cout << "New Entity" << std::endl;
-  
+
   GamePanel::newEntity(x);
 }
 
@@ -140,7 +153,6 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
     }
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), x.at(1).size(), x.at(1));
   std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
-
 
   RenderWindow *window = RenderWindow::getInstance();
   window->getPanels().push(static_cast<GamePanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
@@ -256,6 +268,9 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
 {
   (void) frame;
+  std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "endGame" << std::endl;
+  GamePanel::endGame(x);  
 }
 
 void		ProtocoleClient::loadSprites(ANetwork::t_frame &frame)
@@ -274,6 +289,6 @@ void		ProtocoleClient::methodChecker(ANetwork::t_frame &frame)
   for (PointersOnFuncs::iterator it = _functions.begin(); it != _functions.end(); ++it)
     {
       if ((*it).first == frame.idRequest)
-	(*this.*_functions[static_cast<RequestFromServer>(frame.idRequest)])(frame);
+		(*this.*_functions[static_cast<RequestFromServer>(frame.idRequest)])(frame);
     }
 }

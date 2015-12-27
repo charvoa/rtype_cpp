@@ -5,15 +5,15 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:17 2015 Serge Heitzler
-// Last update Tue Dec  8 07:35:45 2015 Serge Heitzler
+// Last update Sun Dec 27 08:11:01 2015 Serge Heitzler
 //
 
 #ifndef ITEXT_HH_
 #define ITEXT_HH_
 
 #include <string>
-#include "SFont.hh"
-#include "Color.hh"
+#include <SFont.hh>
+#include <Color.hh>
 
 class		      IText
 {

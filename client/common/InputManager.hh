@@ -5,13 +5,13 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Wed Nov 25 05:31:24 2015 Serge Heitzler
-// Last update Sat Dec 19 13:19:32 2015 Serge Heitzler
+// Last update Sun Dec 27 08:12:21 2015 Serge Heitzler
 //
 
 #ifndef INPUTMANAGER_HH_
 #define INPUTMANAGER_HH_
 
-#include "IInputManager.hh"
+#include <IInputManager.hh>
 
 class					        InputManager : public IInputManager
 {
@@ -36,6 +36,7 @@ public:
   std::pair<unsigned int, unsigned int>	        keyPressedInGame();
   std::pair<unsigned int, unsigned int>			keyEntered(sf::Event& event);
   std::pair<unsigned int, unsigned int>			dropSlider(sf::Event& event);
+  std::pair<unsigned int, unsigned int>			dropSliderDifficulty(sf::Event& event);
 
 private:
 

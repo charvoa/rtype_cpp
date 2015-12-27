@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Mon Dec 21 07:23:10 2015 Serge Heitzler
+// Last update Wed Dec 23 01:16:58 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
@@ -25,6 +25,7 @@ Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(i
   _clientManager = new ClientManager();
   _clientManager->addClients(client);
   this->_botList = botList;
+  _parameter = new Parameters();
   std::string	sendData = "player1;" + id + ";1";
   ANetwork::t_frame frame = CreateRequest::create(S_JOIN_SUCCESS,
 						  CRC::calcCRC(sendData),
@@ -32,6 +33,9 @@ Room::Room(const std::string &id, Client *client, std::list<Bot*> botList):_id(i
   client->getSocket()->write(reinterpret_cast<void *>(&frame),
 			     sizeof(ANetwork::t_frame));
    sendFileToClient(client, botList);
+   for (std::list<std::string>::iterator it = this->_transfertFinished.begin(); it != this->_transfertFinished.end(); ++it) {
+     client->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, *it, true), sizeof(ANetwork::t_frame));
+   }
   //_owner = client;
 }
 
@@ -54,8 +58,9 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
     }
     file.sendMe(port++);
     clientList = this->getAllPlayers();
+    this->_transfertFinished.push_back(std::string("player" + IntToString(this->_clientManager->getClientPosition(client) + 1)));
     for (std::list<Client*>::iterator it2 = clientList.begin(); it2 != clientList.end(); ++it2) {
-      (*it2)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("player" + IntToString(this->_clientManager->getClientPosition(*it2) + 1)), true), sizeof(ANetwork::t_frame));
+      (*it2)->getSocket()->write(CreateRequest::create(S_DOWNLOAD_COMPLETE, 42, 42, std::string("player" + IntToString(this->_clientManager->getClientPosition(client) + 1)), true), sizeof(ANetwork::t_frame));
     }
   }
 
@@ -151,10 +156,10 @@ std::list<Client *>&	Room::getAllPlayers()
 
 void	Room::setParameters(Parameters &params)
 {
-  _parameter = params;
+  _parameter->setDifficulty(params.getDifficulty());
 }
 
-const Parameters&	Room::getParameters() const
+Parameters*	Room::getParameters()
 {
   return _parameter;
 }

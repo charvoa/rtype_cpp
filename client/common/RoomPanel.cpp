@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Mon Dec 21 10:51:35 2015 Nicolas Girardot
+// Last update Tue Dec 22 09:23:15 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -24,10 +24,11 @@
 #include <iostream>
 #include <GamePanel.hh>
 #include <File.hpp>
+#include <E_Difficulty.hh>
 
 RoomPanel::RoomPanel()
 {
-	_type = PanelFactory::ROOM_PANEL;
+  _type = PanelFactory::ROOM_PANEL;
   _idRoom = "";
   _received = new std::map<std::string, Texture *>;
 }
@@ -39,13 +40,11 @@ void	        RoomPanel::setUserInterface()
 {
   RenderWindow *window = RenderWindow::getInstance();
   Sprite *background = new Sprite;
-
-  getInputManager().setInputType(InputType::MENU_INPUT);
+  getInputManager().setInputType(InputType::ROOM_INPUT);
 
   background->setTexture(*((RenderWindow::getInstance())->_ressources->_backgroundRoomPanel));
   background->setPosition(0, 0);
   _backgrounds.push_back(*background);
-
 
   std::string name = "BACK";
   ButtonFactory::create(Vector2(window->getSize()._x * 0.1, window->getSize()._y * 0.95), name);
@@ -60,8 +59,6 @@ void	        RoomPanel::setUserInterface()
   _functions.push_back((APanel::funcs)&RoomPanel::back);
   _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
 
-
-
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_blackShip));
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_blueShip));
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_redShip));
@@ -69,6 +66,86 @@ void	        RoomPanel::setUserInterface()
   _spaceShipsTextures.push_back(((RenderWindow::getInstance())->_ressources->_yellowShip));
 
   this->createPlayers();
+
+  name = "difficulty";
+  float x;
+  std::string diff;
+  if (window->getSettings()->getDefaultDifficulty() == Settings::EASY_MODE)
+  {
+	  diff = std::to_string(E_EASY);
+	  x = window->_ressources->_sliderNormal->getSize()._x / 3;
+  }
+  else if (window->getSettings()->getDefaultDifficulty() == Settings::MEDIUM_MODE)
+  {
+	  diff = std::to_string(E_MEDIUM);
+	  x = window->_ressources->_slide->getSize()._x / 2;
+  }
+  else
+  {
+	  diff = std::to_string(E_HARD);
+	  x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+  }
+
+
+  Text		       	*easy = new Text();
+
+  easy->setString("EASY");
+  easy->setSize(15);
+  easy->setStyle(1);
+  easy->setOrigin(easy->getText().getGlobalBounds().width / 2, easy->getText().getGlobalBounds().height / 2);
+  easy->setPosition(Vector2((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.27));
+  easy->setColor(Color::WHITE);
+  _labels.push_back(*easy);
+
+  Text		       	*medium = new Text();
+
+  medium->setString("MEDIUM");
+  medium->setSize(15);
+  medium->setStyle(1);
+  medium->setOrigin(medium->getText().getGlobalBounds().width / 2, medium->getText().getGlobalBounds().height / 2);
+  medium->setPosition(Vector2((window->getSize()._x / 2), window->getSize()._y * 0.27));
+  medium->setColor(Color::WHITE);
+  _labels.push_back(*medium);
+
+  Text		       	*hard = new Text();
+
+  hard->setString("HARD");
+  hard->setSize(15);
+  hard->setStyle(1);
+  hard->setOrigin(hard->getText().getGlobalBounds().width / 2, hard->getText().getGlobalBounds().height / 2);
+  hard->setPosition(Vector2((window->getSize()._x / 2) + (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.27));
+  hard->setColor(Color::WHITE);
+  _labels.push_back(*hard);
+
+  Text		       	*difficulty = new Text();
+
+  difficulty->setString("DIFFICULTY");
+  difficulty->setSize(40);
+  difficulty->setStyle(1);
+  difficulty->setOrigin(difficulty->getText().getGlobalBounds().width / 2, difficulty->getText().getGlobalBounds().height / 2);
+  difficulty->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.14));
+  difficulty->setColor(Color::WHITE);
+  _labels.push_back(*difficulty);
+
+
+  Sprite *slideDifficulty = new Sprite;
+
+  slideDifficulty->setTexture(*((window)->_ressources->_slide));
+  slideDifficulty->setPosition((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.2);
+
+  _difficulty = ButtonFactory::createSlider(Vector2(slideDifficulty->getPosX() + x,
+	  window->getSize()._y * 0.2 + (window->_ressources->_sliderNormal->getSize()._y / 2)), name,
+	  slideDifficulty->getPosX(),
+	  slideDifficulty->getPosX() + window->_ressources->_slide->getSize()._x);
+  ANetwork *net = Client::getNetwork();
+  ANetwork::t_frame sender;
+  
+
+  sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
+  net->write(sender);
+
+  _backgrounds.push_back(*slideDifficulty);
+
 }
 
 void		setFileProgression(int p, void *data)

@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Nov 30 06:37:36 2015 Louis Audibert
-// Last update Mon Dec 21 02:28:59 2015 Louis Audibert
+// Last update Tue Dec 22 03:05:22 2015 Louis Audibert
 //
 
 #ifndef _AENTITY_HH_
@@ -52,7 +52,7 @@ public:
   void setName(std::string);
   bool	setParent(AEntity *);
   AEntity *getParent();
-  virtual std::list<Case*> refreshHitbox();
+  std::list<Case*> refreshHitboxEntity();
 };
 
 #endif /* _AENTITY_HH_ */

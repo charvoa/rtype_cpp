@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 13:16:46 2015 Serge Heitzler
-// Last update Sat Dec 19 14:01:06 2015 Nicolas Girardot
+// Last update Tue Dec 22 08:45:08 2015 Serge Heitzler
 //
 
 #include "Ressources.hh"
@@ -36,7 +36,6 @@ Ressources::Ressources()
 
   _buttonNormal->loadFromFile("../common/misc/button_normal.png");
   _buttonHighlight->loadFromFile("../common/misc/button_highlight.png");
-  //  _buttonSelect->loadFromFile("../common/misc/button_normal.png");
   _slide->loadFromFile("../common/misc/slider.png");
   _sliderNormal->loadFromFile("../common/misc/slideButton.png");
   _keyButtonNormal->loadFromFile("../common/misc/keyButton_normal.png");
@@ -44,7 +43,6 @@ Ressources::Ressources()
 
   _backgroundStartPanel = new Texture();
   _backgroundRoomPanel = new Texture();
-  _backgroundSettingsPanel = new Texture();
   _backgroundBlack = new Texture();
   _backgroundGame1 = new Texture();
   _backgroundGame2 = new Texture();
@@ -60,7 +58,6 @@ Ressources::Ressources()
 
   _backgroundStartPanel->loadFromFile("../common/misc/background.png");
   _backgroundRoomPanel->loadFromFile("../common/misc/room_background.png");
-  _backgroundSettingsPanel->loadFromFile("../common/misc/settings_background.png");
   _backgroundGame1->loadFromFile("../common/misc/background_in_game.png");
   _backgroundGame2->loadFromFile("../common/misc/background_in_game_2.png");
   _backgroundGame3->loadFromFile("../common/misc/background_in_game_3.png");
@@ -93,6 +90,7 @@ Ressources::Ressources()
   _laserGreenBig = new Texture();
   _laserYellowLittle = new Texture();
   _laserYellowBig = new Texture();
+  _enemyBullet = new Texture();
 
   _hud->loadFromFile("../common/misc/hud.png");
   _header->loadFromFile("../common/misc/header.png");
@@ -114,6 +112,7 @@ Ressources::Ressources()
   _laserGreenBig->loadFromFile("../common/misc/laser_green_big.png");
   _laserYellowLittle->loadFromFile("../common/misc/laser_yellow_little.png");
   _laserYellowBig->loadFromFile("../common/misc/laser_yellow_big.png");
+  _enemyBullet->loadFromFile("../common/misc/enemy_bullet.png");
 
   _planetEarth = new Texture();
   _planetExodus = new Texture();

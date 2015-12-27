@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Sun Dec 20 06:54:47 2015 Antoine Garcia
+// Last update Sun Dec 27 16:06:03 2015 Nicolas Charvoz
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -34,28 +34,27 @@ typedef enum RequestFromServer
     S_HANDSHAKE = 101,
     S_DISPLAY = 102,
     S_CREATE_ROOM = 103,
-    S_CREATE_ROOM_ERROR = 104,
-    S_JOIN_SUCCESS = 105,
-    S_JOIN_ERROR = 106,
-    S_GAME_LAUNCHED = 107,
-    S_GAME_NOT_LAUNCHED = 108,
-    S_NEW_PLAYER_CONNECTED = 109,
-    S_PLAYER_LEFT = 110,
-    S_CHANGE_HOST = 111,
-    S_DIE = 112,
-    S_PLAYER_DEAD = 113,
-    S_LIFE = 114,
-    S_SCORE = 115,
-    S_SET_CURRENT_WAVE = 116,
-    S_END_GAME = 117,
-    S_LOAD_SPRITES = 118,
-    S_FILE_TOTAL_SIZE = 119,
-    S_NEW_ENTITY = 120,
-    S_SHOOT = 121,
-    S_DOWNLOAD_COMPLETE = 122,
-    S_DELETE_ENTITY = 123,
-    S_PLAYER_LEFT_IG = 124,
-    S_NEW_WAVE = 125
+    S_JOIN_SUCCESS = 104,
+    S_JOIN_ERROR = 105,
+    S_GAME_LAUNCHED = 106,
+    S_GAME_NOT_LAUNCHED = 107,
+    S_NEW_PLAYER_CONNECTED = 108,
+    S_PLAYER_LEFT = 109,
+    S_HIT = 110,
+    S_DIE = 111,
+    S_LIFE = 112,
+    S_SCORE = 113,
+    S_SET_CURRENT_WAVE = 114,
+    S_END_GAME = 115,
+    S_LOAD_SPRITES = 116,
+    S_FILE_TOTAL_SIZE = 117,
+    S_NEW_ENTITY = 118,
+    S_SHOOT = 119,
+    S_DOWNLOAD_COMPLETE = 120,
+    S_DELETE_ENTITY = 121,
+    S_PLAYER_LEFT_IG = 122,
+    S_NEW_WAVE = 123,
+    S_AMMO_LEFT = 124
   } RequestFromServer;
 
 typedef enum RequestFromMonitoring

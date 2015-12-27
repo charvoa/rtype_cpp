@@ -34,7 +34,7 @@ void Server::init(int port)
   this->_commandManager.addFunction(C_JOIN_ROOM, &Server::joinRoom);
   this->_commandManager.addFunction(C_LAUNCH_GAME, &Server::createGame);
   this->_commandManager.addFunction(C_PLAYER_LEFT, &Server::playerLeftRoom);
-
+  this->_commandManager.addFunction(C_CHANGE_SETTINGS, &Server::changeRoomSettings);
   this->_botManager = new BotManager("../libs/");
   this->_roomManager.setBotManager(this->_botManager->getBotList());
   this->_monitoring.start(this);
@@ -70,7 +70,9 @@ void Server::run()
 	  }
 	continue;
       }
-      this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
+      ANetwork::t_frame *frame = reinterpret_cast<ANetwork::t_frame*>(data);
+      if (frame->idRequest < 110)
+	this->_commandManager.executeCommand(*(reinterpret_cast<ANetwork::t_frame*>(data)),
 					   client, this);
     }
 }
@@ -95,12 +97,12 @@ void *newGameThread(void *data)
 
   Server *me = s->server;
 
-  Parameters p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
+  Parameters *p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
   std::list<Client *> c = me->_roomManager.getRoombyId(s->frame.data).getAllPlayers();
 
   std::stringstream ss;
 
-  if ((me->_gameManager.createGame(p, c, s->frame.data, s->port,
+  if ((me->_gameManager.createGame(*p, c, s->frame.data, s->port,
 				   me->_botManager->getBotList())))
     {
       sendMessage(c, (unsigned char)S_GAME_LAUNCHED);
@@ -199,6 +201,24 @@ bool	Server::playerLeftRoom(ANetwork::t_frame frame, void *data)
   else
     {
       room.deletePlayer(client);
+    }
+  return true;
+}
+
+bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
+{
+  Client	*client = reinterpret_cast<Client *>(data);
+  try
+    {
+      std::cout << "ROOM SETTING CHANGED" << std::endl;
+      Room room = _roomManager.getRoomByClient(client);
+      Parameters param;
+      E_Difficulty	difficulty = (E_Difficulty)std::atoi(frame.data);
+      param.setDifficulty(difficulty);
+      room.setParameters(param);
+    } catch(const std::exception &e)
+    {
+      std::cout << e.what() << std::endl;
     }
   return true;
 }

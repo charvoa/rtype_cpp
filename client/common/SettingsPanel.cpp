@@ -74,8 +74,6 @@ void	SettingsPanel::setUserInterface()
 	_backgrounds.push_back(*slideEffects);
 	_backgrounds.push_back(*slideMusic);
 
-	// Button
-
 	std::string name = "SAVE";
 	ButtonFactory::create(Vector2(window->getSize()._x * 0.25, window->getSize()._y * 0.9), name);
 	name = "DEFAULT";
@@ -105,11 +103,11 @@ void	SettingsPanel::setUserInterface()
 	}
 
 	name = "global";
-	_global = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	_global = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getGlobal() * 7, window->getSize()._y * 0.25), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + window->_ressources->_slide->getSize()._x);
 	name = "effects";
-	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	_effects = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getEffects() * 7, window->getSize()._y * 0.35), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + window->_ressources->_slide->getSize()._x);
 	name = "music";
-	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + 700);
+	_music = ButtonFactory::createSlider(Vector2((window->getSize()._x * 0.05) + _tmp->getVolume().getMusic()* 7, window->getSize()._y * 0.45), name, (window->getSize()._x * 0.05), (window->getSize()._x * 0.05) + window->_ressources->_slide->getSize()._x);
 
 	Text		       	*title = new Text();
 
@@ -256,14 +254,6 @@ void	SettingsPanel::setUserInterface()
 	leaveGame->setColor(Color::WHITE);
 	_labels.push_back(*leaveGame);
 
-/*	Text			*diff = new Text();
-	diff->setString("DEFAULT DIFFICULTY");
-	diff->setSize(80);
-	diff->setStyle(1);
-	diff->setOrigin(diff->getText().getGlobalBounds().width / 2, diff->getText().getGlobalBounds().height / 2);
-	diff->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.05));
-	diff->setColor(Color::WHITE);
-	_labels.push_back(*diff);*/
 }
 
 void    SettingsPanel::setGlobalVolume(int global)

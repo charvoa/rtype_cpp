@@ -5,7 +5,7 @@
 # include		<string>
 # include		<sys/types.h>
 # include		<windows.h>
-# include		<strsafe.h>
+//# include		<strsafe.h>
 # include		<list>
 # include		<stdexcept>
 # include		<iostream>
@@ -27,17 +27,8 @@ public:
 	  DWORD		dwError = 0;
 	  size_t	length;
 
-	  StringCchLength(_dir.c_str(), MAX_PATH, &length);
-	 
-	  if (length > (MAX_PATH - 3))
-	  {
-		  std::cout << "Directory path is too long." << std::endl;
-		  return;
-	 }
-
-	  StringCchCopy(szDir, MAX_PATH, _dir.c_str());
-	  StringCchCat(szDir, MAX_PATH, TEXT("\\*"));
-
+	  strcpy(szDir, _dir.c_str());
+	  strcat(szDir, "\\*");
 	  _handle = FindFirstFile(szDir, &ffd);
 
 	  if (_handle == INVALID_HANDLE_VALUE)

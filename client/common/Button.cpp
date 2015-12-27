@@ -38,7 +38,6 @@ void			Button::updateOnMove(std::pair<unsigned int, unsigned int> pair)
     {
       if (_hover == false)
 	{
-	  std::cout << "In If : Hover" << std::endl;
 	  Sound *s = Client::getSound();
 	  s->playSound("hover");
 	  _hover = true;

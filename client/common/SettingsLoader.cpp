@@ -273,6 +273,8 @@ std::string     SettingsLoader::getValueOf(std::string const& label) const
         if (line.find(label) != std::string::npos)
         {
 	  _ifs->clear();
+	  if (line.find("=") == std::string::npos)
+		  return ("");
 	  value = line.substr(line.find("=") + 1, std::string::npos);
 	  return (value);
         }
@@ -335,6 +337,12 @@ int         SettingsLoader::getMusicVolume() const
 
 int			SettingsLoader::stringToInteger(std::string const& str) const
 {
+	if (str == "" || str.empty())
+		return (0);
+	if (std::stoi(str) >= 100)
+		return (100);
+	if (std::stoi(str) <= 0)
+		return (0);
 	return (std::stoi(str));
 }
 

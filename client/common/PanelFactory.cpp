@@ -5,17 +5,16 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:51:41 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 16:40:19 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:33:00 2015 Serge Heitzler
 //
 
-#include "PanelFactory.hh"
-#include "RoomPanel.hh"
-#include "SettingsPanel.hh"
-#include "GamePanel.hh"
-#include "DemoPanel.hh"
-#include "JoinPanel.hh"
-#include "StartPanel.hh"
-#include "LoadingPanel.hh"
+#include <PanelFactory.hh>
+#include <RoomPanel.hh>
+#include <SettingsPanel.hh>
+#include <GamePanel.hh>
+#include <DemoPanel.hh>
+#include <JoinPanel.hh>
+#include <StartPanel.hh>
 
 PanelFactory::PanelFactory()
 {
@@ -41,6 +40,6 @@ APanel		*PanelFactory::createPanel(PanelType type)
     case START_PANEL:
       return (new StartPanel);
     default:
-      return (new LoadingPanel);
+      return (new StartPanel);
     }
 }

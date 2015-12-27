@@ -2,7 +2,8 @@
 #include "SettingsPanel.hh"
 #include "Client.hh"
 #include "Ressources.hh"
-
+#include <CRC.hpp>
+#include <E_Difficulty.hh>
 
 Slider::Slider(std::string const& title)
 {
@@ -65,6 +66,11 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 {
 	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
 
+	if (_title == "difficulty")
+	{
+		difficultyUpdateOnMove(pair);
+		return;
+	}
 	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
 	{
 		if (_locked == false)
@@ -73,13 +79,15 @@ void			Slider::updateOnMove(std::pair<unsigned int, unsigned int> pair)
 				this->getSprite().setPosition(pair.first, getPosY());
 		}
 	}
-	// window->_ressources->_keyButtonNormal->getSize()._x / 2
 }
 
 bool			Slider::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 {
 	RenderWindow	*window = RenderWindow::getInstance();
 	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
+
+	if (_title == "difficulty")
+		return difficultyUpdateOnPress(pair);
 
 	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
 	{
@@ -113,6 +121,12 @@ void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
 	RenderWindow	*window = RenderWindow::getInstance();
 	
+	if (_title == "difficulty")
+	{
+		difficultyUpdateOnRelease(pair);
+		return;
+	}
+
 	if (_locked == true)
 		return;
 	if (pair.first > _maxX)
@@ -140,4 +154,123 @@ void			Slider::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 	Client::getSound()->setMusicVolume(_value);
 	Client::getSound()->setEffectsVolume(_value);
 	_locked = true;
+}
+
+void			Slider::difficultyUpdateOnMove(std::pair<unsigned int, unsigned int> pair)
+{
+	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
+	RenderWindow *window = RenderWindow::getInstance();
+
+	float origin = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
+	float cursor = pair.first - _minX;
+
+	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
+	{
+		if (_locked == false)
+		{
+			if (pair.first <= _maxX && pair.first >= _minX)
+			{
+				if (cursor <= window->_ressources->_slide->getSize()._x / 3)
+				{
+					this->setValue(1);
+					this->getSprite().setPosition(origin + window->_ressources->_sliderNormal->getSize()._x / 3, getPosY());
+				}
+				else if (cursor <= 2 * window->_ressources->_slide->getSize()._x / 3)
+				{
+					this->setValue(2);
+					this->getSprite().setPosition(origin + window->_ressources->_slide->getSize()._x / 2, getPosY());
+				}
+				else
+				{
+					this->setValue(3);
+					this->getSprite().setPosition(origin + window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3, getPosY());
+				}
+			}
+		}
+	}
+}
+
+bool			Slider::difficultyUpdateOnPress(std::pair<unsigned int, unsigned int> pair)
+{
+	RenderWindow	*window = RenderWindow::getInstance();
+	std::pair<std::pair<unsigned int, unsigned int>, std::pair<unsigned int, unsigned int>> rect = this->getSprite().getGlobalBounds();
+	float origin = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
+	ANetwork *net = Client::getNetwork();
+	ANetwork::t_frame sender;
+	std::string diff;
+
+	if (pair.first >= rect.first.first && pair.first <= (rect.first.first + rect.second.first) && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
+	{
+		_locked = false;
+	}
+	else if (pair.first <= _maxX && pair.first >= _minX && pair.second >= rect.first.second && pair.second <= (rect.first.second + rect.second.second))
+	{
+		pair.first -= _minX;
+		if (pair.first <= window->_ressources->_slide->getSize()._x / 3)
+		{
+			diff = std::to_string(E_EASY);
+			this->setValue(1);
+			this->getSprite().setPosition(origin + window->_ressources->_sliderNormal->getSize()._x / 3, getPosY());
+		}
+		else if (pair.first <= 2 * window->_ressources->_slide->getSize()._x / 3)
+		{
+			diff = std::to_string(E_MEDIUM);
+			this->setValue(2);
+			this->getSprite().setPosition(origin + window->_ressources->_slide->getSize()._x / 2, getPosY());
+		}
+		else
+		{
+			diff = std::to_string(E_HARD);
+			this->setValue(3);
+			this->getSprite().setPosition(origin + window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3, getPosY());
+		}
+	}
+	sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
+	net->write(sender);
+	return false;
+}
+
+void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair)
+{
+	RenderWindow	*window = RenderWindow::getInstance();
+	ANetwork *net = Client::getNetwork();
+	ANetwork::t_frame sender;
+	std::string diff;
+
+	if (_locked == true)
+		return;
+	if (pair.first > _maxX)
+		this->setValue(3);
+	if (pair.first < _minX)
+		this->setValue(1);
+	_locked = true;
+	switch (_value)
+	{
+	case 1:
+	{
+		diff = std::to_string(E_EASY);
+		window->getSettings()->setDifficulty(Settings::EASY_MODE);
+		break;
+	}
+	case 2:
+	{
+		diff = std::to_string(E_MEDIUM);
+		window->getSettings()->setDifficulty(Settings::MEDIUM_MODE);
+		break;
+	}
+	case 3:
+	{
+		diff = std::to_string(E_HARD);
+		window->getSettings()->setDifficulty(Settings::HARD_MODE);
+		break;
+	}
+	default:
+	{
+		diff = std::to_string(E_MEDIUM);
+		window->getSettings()->setDifficulty(Settings::MEDIUM_MODE);
+		break;
+	}
+	}
+	sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
+	net->write(sender);
 }

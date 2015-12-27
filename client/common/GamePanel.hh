@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 19 13:08:02 2015 Serge Heitzler
+// Last update Sun Dec 27 10:39:00 2015 Serge Heitzler
 //
 
 
@@ -13,10 +13,10 @@
 #define					GAMEPANEL_HH_
 
 #ifdef _WIN32
-#include "../NetworkWin.hpp"
+#include <NetworkWin.hpp>
 #include <ThreadWin.hpp>
 #else
-#include "../Network.hpp"
+#include <Network.hpp>
 #include <ThreadUnix.hpp>
 #endif
 
@@ -39,17 +39,22 @@ public:
 
   static void				setScore(const std::string &name, int life);
   static void		       		setLife(const std::string &name, int life);
-  static void				setTeamScore(unsigned int value);
   static void				setCurrentWave(unsigned int value);
   static void				display(std::vector<std::string> &vector);
+  static void			        endGame(std::vector<std::string> &vector);
   static void			        newEntity(std::vector<std::string> &vector);
+  static void			        ammoLeft(std::vector<std::string> &vector);
   static void			        deleteEntity(std::vector<std::string> &vector);
   static void				die(int i, int id);
+  static void			        hit(int i, int id);
   static void  				playerLeft(const std::string &playerName);
+  void  				setTeamScore(unsigned int score);
+  unsigned int  			getTeamScoreString();
+  
+
   std::vector<Sprite *>			&getSprites();
   OtherPlayer				*getPlayerByName(const std::string &name);
   Text					&getTeamScore();
-  MainPlayer				*getMainPlayer();
   Text					&getCurrentWave();
   void					render();
   void					update();
@@ -61,9 +66,13 @@ public:
   void					setPlayers(int nbPlayer, int currentPlayer);
   void					setEscapeMenu(bool value);
   bool					getEscapeMenu();
+  void					setEndGame(bool value);
+  bool					getEndGame();
   void					resume();
   void					exit();
   int					getType();
+  MainPlayer				&getMainPlayer();
+  void					setWaveNumber(unsigned int value);
 
 private:
 
@@ -79,6 +88,9 @@ private:
   Random				*_randPlanet;
   Random				*_randBackground;
   bool					_escapeKey;
+  bool					_endGame;
+  unsigned int				_score;
+  unsigned int				_wave;
 };
 
-#endif /* GAMEPANEL_HH_ */
+#endif /* !GAMEPANEL_HH_ */

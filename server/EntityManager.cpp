@@ -54,28 +54,11 @@ int	EntityManager::createEntity(E_EntityType type, AEntity *parent)
 
 int	EntityManager::createEntitiesFromFolder(std::list<Bot*> bots, int iterator)
 {
-  Bot *newEntity = (Bot*)std::malloc(sizeof(Bot));
-  int		i = 0;
-  int		x, y = 0;
-  Random	rand(80, 800);
+  (void)iterator;
+  Bot *newEntity = bots.back();
 
-  if (iterator > (int)bots.size())
-    return (-1);
-  if (_id < 4)
-    _id = 4;
-  for (std::list<Bot*>::iterator it = bots.begin(); it != bots.end(); ++it)
-    {
-      if (i == iterator)
-	std::memcpy(newEntity, (*it), sizeof(Bot));
-      i++;
-    }
-  newEntity->refreshSystemManager();
-  newEntity->setType(E_BOT);
   _id++;
   newEntity->setId(_id);
-  x = 2200;
-  y = rand.generate<int>();
-  dynamic_cast<SystemPos*>(newEntity->getSystemManager()->getSystemByComponent(C_POSITION))->update(x, y);
   _entities.push_back(newEntity);
   return (_id);
 }
@@ -136,7 +119,7 @@ std::list<AEntity*>  EntityManager::getAmmoEntities()
   for (std::list<AEntity*>::iterator it = _entities.begin(); it != _entities.end(); ++it)
     {
       type = (*it)->getType();
-      if (type == E_RIFLE || type == E_MISSILE || type == E_LASER)
+      if (type == E_RIFLE || type == E_MISSILE || type == E_LASER || type == E_BOT_AMMO)
 	Ammos.push_back(*it);
     }
   return (Ammos);
