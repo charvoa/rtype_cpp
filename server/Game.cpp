@@ -584,6 +584,11 @@ void Game::checkHitBox()
 			  break;
 			}
 		    }
+		  else if ((*ammosIT)->getType() == E_LASER)
+		    {
+		      if (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
+			std::cout << "LASER IS HITTING" << std::endl;
+		    }
  		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
 			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX() < (*case2)->x)
 		    {
