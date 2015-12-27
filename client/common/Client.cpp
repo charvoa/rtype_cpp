@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sun Dec 27 08:18:09 2015 Serge Heitzler
+// Last update Sun Dec 27 12:36:33 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -80,7 +80,7 @@ void	Client::Start()
   //Connecting to server
 
   _network->init(window->getSettings()->getPort(), ANetwork::TCP_MODE);
-  std::cout << "I p IS : " << window->getSettings()->getIP() << " And port is " << window->getSettings()->getPort() << std::endl;
+  std::cout << "Connecting to : " << window->getSettings()->getIP() << ":" << window->getSettings()->getPort() << std::endl;
   _network->connect(window->getSettings()->getIP());
 
   //Sending Handshake

@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 22 09:23:15 2015 Serge Heitzler
+// Last update Sun Dec 27 12:50:42 2015 Serge Heitzler
 //
 
 #include <thread>
@@ -150,17 +150,14 @@ void	        RoomPanel::setUserInterface()
 
 void		setFileProgression(int p, void *data)
 {
-  //  std::cout << p << std::endl;
   (void)p;
   (void)data;
 }
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-//  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
-      std::cout << "Passing Thourhg" << port << std::endl;
       File	file;
       file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
@@ -174,11 +171,6 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
     text->loadFromFile((*it)->getFullPath());
     static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getBasename(),text));
   }
-
-  // create texture here
-  // Use FileManager
-  // Get all png files from ./recv/
-  // Build Texture
 }
 
 std::map<std::string, Texture*> *RoomPanel::getReceived()
@@ -238,8 +230,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
 
   std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
-
-  std::cout << "id to remove " << idToRemove << std::endl;
 
   if (idToRemove + 1  >= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
     {
@@ -322,7 +312,6 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 
   while (i < vector.size() - 2)
     {
-      std::cout << vector.at(i) << std::endl;
       getPlayers().at(i)->setUsername(vector.at(i));
       _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
 
@@ -330,14 +319,6 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       getLabels().at(i + 2).setString(vector.at(i));
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
       _nbPlayers++;
-
-      // if (i == 0)
-      // 	{
-      // 	  _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
-      // 	  _userInterface.at(2)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-      // 	  _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));
-      // 	}
-
       i++;
     }
   i--;
