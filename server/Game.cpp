@@ -594,6 +594,24 @@ void Game::checkHitBox()
 			  deleteEntity(*ammosIT);
 			  std::stringstream ss;
 
+			  if (reinterpret_cast<Bot*>(*monsterIT)->_isBoss)
+			    {
+			      ComponentHealth *healthBoss = reinterpret_cast<ComponentHealth*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_POSITION)
+												 ->getComponent());
+			      int newLife = healthBoss->getLife() - 1;
+			      (*monsterIT)->update(newLife);
+			      ss << p->getId();
+			      ss << ";";
+			      ss << (*monsterIT)->getId();
+			      ANetwork::t_frame frame = CreateRequest::create(S_DIE, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+			      std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+			      for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+				    {
+				      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+				    }
+			      if (healthBoss->getLife() <= 0)
+				deleteEntity(*monsterIT);
+			    }
 			  ss << p->getId();
 			  ss << ";";
 			  ss << (*monsterIT)->getId();
