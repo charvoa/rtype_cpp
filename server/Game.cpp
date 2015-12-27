@@ -376,11 +376,9 @@ void Game::updateMonster()
       reinterpret_cast<Bot*>(*it)->update();
       if (reinterpret_cast<Bot*>(*it)->isInScreen() == true)
 	shootBot(reinterpret_cast<Bot*>(*it));
-      //(*it)->update((*it)->refreshHitbox());
       if (pos->getX() < -100)
 	{
 	  deleteEntity(*it);
-	  // _nbDisplay--;
 	}
     }
 }
@@ -588,7 +586,6 @@ void Game::checkHitBox()
 			      != nullptr)
 			    {
 			      this->updateScore(p, scoreDef::KILLED);
-			      //	      deleteEntity(*ammosIT);
 			      std::stringstream ss;
 			      if (reinterpret_cast<Bot*>(*monsterIT)->_isBoss)
 				{
@@ -649,7 +646,6 @@ void Game::checkHitBox()
 			      if (dynamic_cast<Laser*>(*ammosIT) != nullptr)
 				newLife = healthBoss->getLife() - 5;
 
-			      std::cout << "HERE IS HIS NEW LIFE :" << newLife << std::endl;
 			      (*monsterIT)->update(newLife);
 			      ss << p->getId();
 			      ss << ";";
@@ -705,9 +701,6 @@ bool Game::run()
   initPlayersPosition();
 
   _start = std::chrono::system_clock::now();
-
-  //int i = 0;
-  // while (std::chrono::high_resolution_clock::now() < _start + std::chrono::milliseconds(500));
 
   std::this_thread::sleep_for(std::chrono::seconds(2));
   while (_isRunning)
@@ -781,7 +774,6 @@ void Game::checkNewStage()
       _nbDisplay = 0;
       _stage++;
       _timerWave->reset();
-      std::cout << "I SEND NEW WAVE" << _stage << std::endl;
       std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
       std::string sendData = std::to_string(_stage);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
@@ -797,12 +789,10 @@ void Game::checkNewStage()
 void	sendGameOver(const std::list<Player*>& list)
 {
   std::string sendData;
-  std::cout << "GAME OVER SIZE" << list.size() << std::endl;
   for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
     {
       sendData += (*it)->getName() + ";" + std::to_string((*it)->getScore()) + ";";
     }
-  std::cout << sendData << std::endl;
   ANetwork::t_frame frame = CreateRequest::create(S_END_GAME, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
     {
@@ -832,8 +822,6 @@ bool	Game::checkGameOver()
     }
    if (countDead == (int)list.size())
      {
-       std::cout << countDead << std::endl;
-       std::cout << "GAME OVER" << std::endl;
        sendlist.sort(sortHighScore);
        sendGameOver(sendlist);
        return (true);
@@ -846,7 +834,6 @@ void Game::shootBot(Bot *sender, const std::string &s)
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now() - _start);
 
-  //      std::cout << "Game :: handleShoot" << std::endl;
   std::string weaponType = s;
 
   E_EntityType type = E_INVALID;
@@ -874,8 +861,6 @@ void Game::shootBot(Bot *sender, const std::string &s)
 
       std::stringstream ss;
       ss << bullet->getName();
-
-      //   std::cout << "ss >> " << ss.str().c_str() << std::endl;
 
       ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
       std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
