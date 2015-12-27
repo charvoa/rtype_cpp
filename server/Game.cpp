@@ -161,7 +161,7 @@ void Game::checkWall(Player *player)
       pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
       std::cout << "JE RENTRE DEDANS" << std::endl;
-      this->updateLife(player, 2);
+      this->updateLife(player, 0);
     }
 }
 
