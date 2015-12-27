@@ -582,8 +582,19 @@ void Game::checkHitBox()
 			  && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX()
 			  > (*case2)->x)
 			{
+			  std::stringstream ss;
+
+			  ss << (*ammosIT)->getParent()->getId();
+			  ss << ";";
+			  ss << (*monsterIT)->getId();
 			  deleteEntity(*ammosIT);
-			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 2);
+			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 0);
+			  ANetwork::t_frame frame = CreateRequest::create(S_HIT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
+			  std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
+			  for (std::list<AEntity*>::iterator it = _players.begin(); it != _players.end(); ++it)
+			    {
+			      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
+			    }
 			  isBreak = true;
 			  break;
 			}
