@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sat Dec 19 13:24:55 2015 Serge Heitzler
+// Last update Sun Dec 27 07:46:50 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -142,6 +142,22 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
   {
     ANetwork *net = Client::getUDPNetwork();
     ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_RIFLE"), 0, "E_RIFLE");
+    net->write(sender);
+    return std::make_pair(0, 0);
+  }
+
+  if (sf::Joystick::isButtonPressed(0, 1))
+  {
+    ANetwork *net = Client::getUDPNetwork();
+    ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_MISSILE"), 0, "E_MISSILE");
+    net->write(sender);
+    return std::make_pair(0, 0);
+  }
+
+  if (sf::Joystick::isButtonPressed(0, 2))
+  {
+    ANetwork *net = Client::getUDPNetwork();
+    ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_SHOOT, CRC::calcCRC("E_LASER"), 0, "E_LASER");
     net->write(sender);
     return std::make_pair(0, 0);
   }
