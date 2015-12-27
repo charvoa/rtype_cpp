@@ -343,6 +343,7 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
   i--;
   _players.at(i)->setCurrentClient(true);
   _currentPlayer = i + 1;
+  std::cout << "NOMBRE DE PLAYERS DANS ROOM PANEL : " << _nbPlayers << std::endl;
 
   switch (i)
     {

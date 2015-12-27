@@ -546,8 +546,11 @@ void		GamePanel::setCurrentWave(unsigned int value)
 
   static_cast<GamePanel*>(window->getPanels().top())->setWaveNumber(value);
 
+  std::cout << "NEW WAVE INCOMING" << std::endl;
+  std::cout << "i : " << i << " et nb players : " << static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() << std::endl;
   while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
     {
+		std::cout << "before segfault" << std::endl;
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
     }
