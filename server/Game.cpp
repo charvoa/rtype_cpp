@@ -542,14 +542,13 @@ void Game::checkHitBox()
   std::list<AEntity*> monsterList = _eM.getEntitiesByType(E_BOT);
   std::list<AEntity*> playerList = _eM.getEntitiesByType(E_PLAYER);
   std::list<AEntity*> ammos = _eM.getAmmoEntities();
+  bool isBreak = false;
 
   // std::cout << "PlayerList size : " << playerList.size() << std::endl;
   // std::cout << "MonsterList size : " << monsterList.size() << std::endl;
   monsterList.splice(monsterList.end(), playerList);
 
   //  std::cout << "AllList size : " << monsterList.size() << std::endl;
-
-  bool isBreak = false;
 
   for (std::list<AEntity*>::iterator ammosIT  = ammos.begin();
        ammosIT != ammos.end();
@@ -579,7 +578,9 @@ void Game::checkHitBox()
 		{
 		  if ((*ammosIT)->getParent()->getType() == E_BOT)
 		    {
-		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y)))
+		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y))
+			  && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX()
+			  > (*case2)->x)
 			{
 			  std::stringstream ss;
 
