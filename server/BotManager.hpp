@@ -11,11 +11,7 @@
 #ifndef			_BOTMANAGER_HPP_
 # define		_BOTMANAGER_HPP_
 
-# ifdef _WIN32
-#  include		<FileManagerWin.hpp>
-# else
-#  include      		<FileManager.hpp>
-# endif
+# include      		<FileManager.hpp>
 # include		<string>
 # include		<list>
 # include		<Bot.hpp>
