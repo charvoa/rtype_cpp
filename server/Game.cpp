@@ -576,7 +576,7 @@ void Game::checkHitBox()
 		{
 		  if ((*ammosIT)->getParent()->getType() == E_BOT)
 		    {
-		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y)))
+		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
 			{
 			  deleteEntity(*ammosIT);
 			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 2);
@@ -584,7 +584,13 @@ void Game::checkHitBox()
 			  break;
 			}
 		    }
- 		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
+		  else if ((*ammosIT)->getType() == E_LASER)
+		    {
+		      if (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
+			std::cout << "LASER IS HITTING" << std::endl;
+		    }
+ 		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
+			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX() < (*case2)->x)
 		    {
 		      Player *p;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
@@ -596,7 +602,7 @@ void Game::checkHitBox()
 
 			  if (reinterpret_cast<Bot*>(*monsterIT)->_isBoss)
 			    {
-			      ComponentHealth *healthBoss = reinterpret_cast<ComponentHealth*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_POSITION)
+			      ComponentHealth *healthBoss = reinterpret_cast<ComponentHealth*>((*monsterIT)->getSystemManager()->getSystemByComponent(C_HEALTH)
 												 ->getComponent());
 			      int newLife = healthBoss->getLife() - 1;
 			      (*monsterIT)->update(newLife);

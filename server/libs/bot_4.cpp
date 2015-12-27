@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Mon Dec 21 01:45:11 2015 Louis Audibert
-// Last update Thu Dec 24 02:28:49 2015 Louis Audibert
+// Last update Tue Dec 22 23:28:47 2015 Joris Bertomeu
 //
 
 #include <iostream>
@@ -80,10 +80,6 @@ void	Bot::update()
   _x -= 4;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
-  if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
-    {
-      _timerShoot->reset();
-    }
 }
 
 extern "C" AEntity* create_object(int id)

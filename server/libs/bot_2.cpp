@@ -87,10 +87,6 @@ void Bot::update()
   _x--;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
-  if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
-    {
-      _timerShoot->reset();
-    }
 }
 
 extern "C" AEntity* create_object(int id)

@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Tue Dec 22 11:00:02 2015 Antoine Garcia
+// Last update Tue Dec 22 23:33:36 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
@@ -53,6 +53,7 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
       client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string(IntToString(port)  + ";" + tmp.str())), std::string(IntToString(port) + ";" + tmp.str()).size(), std::string(IntToString(port)  + ";" + tmp.str()), true), sizeof(ANetwork::t_frame));
       first = false;
     }
+    std::cout << "1" << std::endl;
     file.sendMe(port++);
     clientList = this->getAllPlayers();
     for (std::list<Client*>::iterator it2 = clientList.begin(); it2 != clientList.end(); ++it2) {

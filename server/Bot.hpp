@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Fri Dec 11 16:14:33 2015 Joris Bertomeu
-// Last update Wed Dec 23 08:08:41 2015 Louis Audibert
+// Last update Tue Dec 22 23:27:59 2015 Joris Bertomeu
 //
 
 #ifndef			_BOT_HH_
@@ -42,9 +42,11 @@ public:
   virtual		~Bot();
   virtual void		update();
   bool			isInScreen() const {
-	  if (_timerShoot->elapsed().count() > 2 && _x < WIDTH)
-		  return true;
-	  return false;
+    if (_timerShoot->elapsed().count() > 2 && _x < WIDTH) {
+      _timerShoot->reset();
+      return true;
+    }
+    return false;
   };
 };
 
