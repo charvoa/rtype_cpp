@@ -404,7 +404,7 @@ void Game::addMonster()
       //      std::cout << "Add Monster" << std::endl;
       int id = _eM.createEntitiesFromFolder(_botManager->createBoss(), 0);
       AEntity	*entity = _eM.getEntityById(id);
-      int lifeBoss = 10 * _params.getDifficulty() * getPlayers().size();
+      int lifeBoss = (10 * _params.getDifficulty() * getPlayers().size()) + _stage;
       entity->update(lifeBoss);
       this->sendNewEntity(_eM.getEntityById(id)->getName(), id);
       _canAddMonster = false;
