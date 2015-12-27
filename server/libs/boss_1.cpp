@@ -5,7 +5,7 @@
 // Login   <audibel@epitech.net>
 //
 // Started on  Tue Dec 15 05:41:34 2015 Louis Audibert
-// Last update Sun Dec 27 09:30:32 2015 Serge Heitzler
+// Last update Sun Dec 27 09:31:16 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -68,7 +68,6 @@ void	Bot::update()
     _direction = 2;
   if (_direction == -1)
     _x -= 3;
-
   
   if (_direction == 2 && _y >= 250)
     _y -= 5;
@@ -84,6 +83,14 @@ void	Bot::update()
 
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
+}
+
+bool Bot::isInScreen() const {
+  if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
+    _timerShoot->reset();
+    return true;
+  }
+  return false;
 }
 
 extern "C" AEntity* create_object(int id)
