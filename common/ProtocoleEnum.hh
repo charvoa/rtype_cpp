@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  1 10:50:13 2015 Serge Heitzler
-// Last update Sat Dec 26 16:47:49 2015 Nicolas Girardot
+// Last update Sun Dec 27 16:06:03 2015 Nicolas Charvoz
 //
 
 #ifndef PROTOCOLEENUM_HH_
@@ -40,20 +40,21 @@ typedef enum RequestFromServer
     S_GAME_NOT_LAUNCHED = 107,
     S_NEW_PLAYER_CONNECTED = 108,
     S_PLAYER_LEFT = 109,
-    S_DIE = 110,
-    S_LIFE = 111,
-    S_SCORE = 112,
-    S_SET_CURRENT_WAVE = 113,
-    S_END_GAME = 114,
-    S_LOAD_SPRITES = 115,
-    S_FILE_TOTAL_SIZE = 116,
-    S_NEW_ENTITY = 117,
-    S_SHOOT = 118,
-    S_DOWNLOAD_COMPLETE = 119,
-    S_DELETE_ENTITY = 120,
-    S_PLAYER_LEFT_IG = 121,
-    S_NEW_WAVE = 122,
-    S_AMMO_LEFT = 123
+    S_HIT = 110,
+    S_DIE = 111,
+    S_LIFE = 112,
+    S_SCORE = 113,
+    S_SET_CURRENT_WAVE = 114,
+    S_END_GAME = 115,
+    S_LOAD_SPRITES = 116,
+    S_FILE_TOTAL_SIZE = 117,
+    S_NEW_ENTITY = 118,
+    S_SHOOT = 119,
+    S_DOWNLOAD_COMPLETE = 120,
+    S_DELETE_ENTITY = 121,
+    S_PLAYER_LEFT_IG = 122,
+    S_NEW_WAVE = 123,
+    S_AMMO_LEFT = 124
   } RequestFromServer;
 
 typedef enum RequestFromMonitoring
