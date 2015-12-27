@@ -339,6 +339,10 @@ int			SettingsLoader::stringToInteger(std::string const& str) const
 {
 	if (str == "" || str.empty())
 		return (0);
+	if (std::stoi(str) >= 100)
+		return (100);
+	if (std::stoi(str) <= 0)
+		return (0);
 	return (std::stoi(str));
 }
 
