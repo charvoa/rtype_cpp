@@ -216,7 +216,6 @@ void			GamePanel::endGame(std::vector<std::string> &v)
       sentence->setPosition(Vector2(window->getSize()._x * 0.5, window->getSize()._y * 0.4 + (i - 1) * 100));
       j += 2;
 
-      std::cout << "ID DIEEDDDD = " << id << std::endl;
       switch (id) {
       case 1:
 	sentence->getText().setColor(sf::Color::Blue);
@@ -358,7 +357,7 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 
   for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->end(); ++it)
     {
-      std::cout << "filename : " << (*it).first << std::endl;
+      std::cout << "Received file with name : " << (*it).first << std::endl;
       _dicoTextures.insert(std::make_pair((*it).first, (*it).second));
     }
 }
@@ -371,7 +370,6 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   Sprite	*newSprite = new Sprite();
   std::string  	type = vector.at(0);
 
-  std::cout << "[SUCCESS] creating entity : ID = " << id << "; Type  = " << type << ";" << std::endl;
   std::size_t found = type.find(":");
   if (found != std::string::npos)
     {
@@ -392,15 +390,9 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
       newSprite->setTexture(*((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type]));
       newSprite->setOrigin(((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._x / 2, ((static_cast<GamePanel*>(window->getPanels().top())->getDicoTextures())[type])->getSize()._y / 2);
     }
-
-
-
   newSprite->setPosition(-2000, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
-
-  //  std::cout << "[INFO] size dicoSprites : " << (static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites()).size() << std::endl;
-
 }
 
 void		GamePanel::deleteEntity(std::vector<std::string> &vector)
@@ -413,7 +405,6 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
-      std::cout << "[SUCCESS] Deleting id :" << id << std::endl;
     }
 }
 
@@ -504,7 +495,6 @@ void		GamePanel::display(std::vector<std::string> &vector)
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(posX, posY);
-  //  std::cout << "Displaying with id : " << id << "; posX : " << posX << "; posY : " << posY << std::endl;
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
@@ -546,6 +536,7 @@ void		GamePanel::setCurrentWave(unsigned int value)
 
   static_cast<GamePanel*>(window->getPanels().top())->setWaveNumber(value);
 
+  std::cout << "In GamePanel Nb Player is : " << static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() << std::endl;
   while (i <= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
@@ -569,11 +560,6 @@ OtherPlayer	*GamePanel::getPlayerByName(const std::string &name)
   return NULL;
 }
 
-// MainPlayer		*GamePanel::getMainPlayer()
-// {
-//   return _mainPlayer;
-// }
-
 void		GamePanel::setTeamScore(unsigned int score)
 {
   RenderWindow *window = RenderWindow::getInstance();
@@ -586,7 +572,6 @@ unsigned int		GamePanel::getTeamScoreString()
 {
   return _score;
 }
-
 
 void		GamePanel::setScore(const std::string &name, int score)
 {
@@ -601,36 +586,24 @@ void		GamePanel::setScore(const std::string &name, int score)
       OtherPlayer *player;
       player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
       if (player == NULL)
-	{
-	  std::cout << "Player does not exist" << std::endl;
-	  return ;
-	}
+	return ;
       player->setScore(score);
     }
-
   static_cast<GamePanel*>(window->getPanels().top())->setTeamScore(static_cast<GamePanel*>(window->getPanels().top())->getTeamScoreString() + score);
-
-
 }
 
 void		GamePanel::setLife(const std::string &name, int life)
 {
   RenderWindow *window = RenderWindow::getInstance();
 
-  std::cout << "Player Name is " << static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().getUsername() << std::endl;
   if (static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().getUsername() == name)
-    {
-      static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().setNbLife(life);
-    }
+    static_cast<GamePanel*>(window->getPanels().top())->getMainPlayer().setNbLife(life);
   else
     {
       OtherPlayer *player;
       player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
       if (player == NULL)
-	{
-	  std::cout << "Player does not exist" << std::endl;
-	  return ;
-	}
+	return ;
       player->setLife(life);
     }
 }
@@ -696,7 +669,6 @@ void		GamePanel::exit()
   Sound *s = Client::getSound();
   _t->cancel();
   Client::getUDPNetwork()->close();
-  std::cout << "EXIT" << std::endl;
   if (s->isPlaying("gameIntro"))
     s->stopMusic("gameIntro");
   else
@@ -805,7 +777,7 @@ void		GamePanel::update()
       if (_labels.at(2).getText().getColor().a > 0 && !_escapeKey)
 	_labels.at(2).getText().setColor(sf::Color(255, 255, 255, _labels.at(2).getText().getColor().a - 1));
 
-      if (_wave % 5 != 0)
+      if (_wave % 3 != 0)
 	{
 	  if (i > 492)
 	    {

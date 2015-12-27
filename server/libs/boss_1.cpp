@@ -68,17 +68,15 @@ void	Bot::update()
   if (_direction == -1)
     _x -= 3;
 
-  if (_direction == 2 && _y >= 250)
-    _y -= 5;
-
-  if (_direction == 3 && _y <= 640)
-    _y += 5;
-
-  if (_y == 300)
+  if (_y == 250)
     _direction = 3;
-
-  if (_y == 590)
+  if (_y == 640)
     _direction = 2;
+
+  if (_direction == 2 && _y > 250)
+    _y -= 5;
+  if (_direction == 3 && _y < 640)
+    _y += 5;
 
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());

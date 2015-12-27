@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sun Dec 27 08:19:34 2015 Serge Heitzler
+// Last update Sun Dec 27 12:54:03 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -107,9 +107,6 @@ std::pair<unsigned int, unsigned int>   		InputManager::keyPressedInGame()
 std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event& event)
 {
   (void)event;
-
-  std::cout << "joy key " << event.joystickButton.button << std::endl;
-
   return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
@@ -184,8 +181,6 @@ bool						InputManager::isMouseInWindow(Vector2 posMouse)
 
 int						InputManager::moveXAxis(sf::Event& event, int mousePosX, int ratioXMovement)
 {
-  std::cout << "Y axis moved!" << std::endl;
-  std::cout << "new position: " << event.joystickMove.position << std::endl;
   if (event.joystickMove.position < 0)
     return (mousePosX - ratioXMovement);
   else
@@ -194,8 +189,6 @@ int						InputManager::moveXAxis(sf::Event& event, int mousePosX, int ratioXMove
 
 int						InputManager::moveYAxis(sf::Event& event, int mousePosY, int ratioYMovement)
 {
-  std::cout << "X axis moved!" << std::endl;
-  std::cout << "new position: " << event.joystickMove.position << std::endl;
   if (event.joystickMove.position < 0)
     return (mousePosY - ratioYMovement);
   else
@@ -244,7 +237,6 @@ std::pair<unsigned int, unsigned int>		InputManager::mouseInMenuPressedAt(sf::Ev
 std::pair<unsigned int, unsigned int>		InputManager::joystickPressedInMenuAt(sf::Event& event)
 {
   (void)event;
-  std::cout << "joystick pressed in menu at x " << sf::Mouse::getPosition().x << " && y " << sf::Mouse::getPosition().y << std::endl;
   return std::make_pair(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 }
 
