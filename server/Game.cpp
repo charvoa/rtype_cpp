@@ -387,7 +387,7 @@ void Game::updateMonster()
 	  if (reinterpret_cast<Bot*>(*it)->isInScreen() == true)
           shootBot(reinterpret_cast<Bot*>(*it));
       //(*it)->update((*it)->refreshHitbox());
-      if (pos->getX() < -10)
+      if (pos->getX() < -100)
 	{
 	  deleteEntity(*it);
 	  // _nbDisplay--;
@@ -576,7 +576,7 @@ void Game::checkHitBox()
 		{
 		  if ((*ammosIT)->getParent()->getType() == E_BOT)
 		    {
-		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y)))
+		      if ((*case1)->x <= (*case2)->x && (*case1)->y && (((*case1)->y <= caseMonster.front()->y) && ((*case1)->y >= caseMonster.back()->y)))
 			{
 			  deleteEntity(*ammosIT);
 			  this->updateLife(reinterpret_cast<Player*>(*monsterIT), 2);
@@ -587,10 +587,14 @@ void Game::checkHitBox()
 		  else if ((*ammosIT)->getType() == E_LASER)
 		    {
 		      if (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
-			std::cout << "LASER IS HITTING" << std::endl;
+			{
+			  std::cout << "LASER IS HITTING" << std::endl;
+
+			}
 		    }
  		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
-			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX() < (*case2)->x)
+			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX()
+			   < (*case2)->x)
 		    {
 		      Player *p;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
@@ -616,7 +620,11 @@ void Game::checkHitBox()
 				      dynamic_cast<Player*>((*it))->getClient().getUDPSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 				    }
 			      if (healthBoss->getLife() <= 0)
-				deleteEntity(*monsterIT);
+				{
+				  deleteEntity(*monsterIT);
+				}
+			      isBreak = true;
+			      break;
 			    }
 			  ss << p->getId();
 			  ss << ";";
