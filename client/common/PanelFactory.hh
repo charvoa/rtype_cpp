@@ -5,13 +5,13 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Tue Dec  8 03:18:12 2015 Serge Heitzler
+// Last update Sun Dec 27 08:28:58 2015 Serge Heitzler
 //
 
 #ifndef PANELFACTORY_HH
 #define PANELFACTORY_HH
 
-#include "APanel.hh"
+#include <APanel.hh>
 
 class PanelFactory
 {
@@ -28,11 +28,10 @@ public:
         GAME_PANEL,
         DEMO_PANEL,
         JOIN_PANEL,
-        START_PANEL,
-        LOADING_PANEL
+        START_PANEL
     } PanelType;
 
   static APanel    *createPanel(PanelType);
 };
 
-#endif
+#endif /* !PANELFACTORY_HH_ */

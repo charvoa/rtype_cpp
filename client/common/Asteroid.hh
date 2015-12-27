@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Dec 16 11:53:49 2015 Nicolas Girardot
-// Last update Sat Dec 19 05:33:54 2015 Serge Heitzler
+// Last update Sun Dec 27 08:17:27 2015 Serge Heitzler
 //
 
 #ifndef ASTEROID_HH_
@@ -41,4 +41,4 @@ private:
   bool		_delete;
 };
 
-#endif
+#endif /* !ASTEROID_HH */

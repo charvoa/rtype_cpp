@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Tue Dec 22 05:44:07 2015 Serge Heitzler
+// Last update Sun Dec 27 08:06:56 2015 Serge Heitzler
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <map>
-#include "../ANetwork.hpp"
+#include <ANetwork.hpp>
 #include <ProtocoleEnum.hh>
 
 class			ProtocoleClient

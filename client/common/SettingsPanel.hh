@@ -5,18 +5,18 @@
 // Login   <barnea_v@epitech.net>
 // 
 // Started on  Mon Nov 30 09:51:58 2015 Viveka BARNEAUD
-// Last update Thu Dec  3 14:00:33 2015 Serge Heitzler
+// Last update Sun Dec 27 08:05:16 2015 Serge Heitzler
 //
 
 #ifndef SETTINGSPANEL_H
 #define SETTINGSPANEL_H
 
-#include "Slider.hh"
-#include "Volume.hh"
-#include "Settings.hh"
-#include "APanel.hh"
-#include "Bind.hh"
-#include "Button.hh"
+#include <Slider.hh>
+#include <Volume.hh>
+#include <Settings.hh>
+#include <APanel.hh>
+#include <Bind.hh>
+#include <Button.hh>
 
 class SettingsPanel : public APanel
 {
@@ -36,10 +36,10 @@ public:
   int		getType();
 
 private:
-    Settings    *_tmp;
-	Slider		*_global;
-	Slider		*_effects;
-	Slider		*_music;
+  Settings    *_tmp;
+  Slider		*_global;
+  Slider		*_effects;
+  Slider		*_music;
 };
 
-#endif // SETTINGSPANEL_H
+#endif /* SETTINGSPANEL_HH_ */

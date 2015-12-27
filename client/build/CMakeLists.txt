@@ -46,7 +46,6 @@ add_executable(${EXECUTABLE_NAME}
   ../common/GamePanel.cpp
   ../common/JoinPanel.cpp
   ../common/InputManager.cpp
-  ../common/LoadingPanel.cpp
   ../common/StartPanel.cpp
   ../common/PanelFactory.cpp
   ../common/Player.cpp

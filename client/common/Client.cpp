@@ -5,14 +5,14 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sat Dec 26 19:35:26 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:18:09 2015 Serge Heitzler
 //
 
 #ifdef _WIN32
-#include "../NetworkWin.hpp"
+#include <NetworkWin.hpp>
 #include <ThreadWin.hpp>
 #else
-#include "../Network.hpp"
+#include <Network.hpp>
 #include <ThreadUnix.hpp>
 #endif
 

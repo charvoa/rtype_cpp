@@ -5,12 +5,11 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:20:13 2015 Serge Heitzler
-// Last update Sun Dec 13 11:09:05 2015 Serge Heitzler
+// Last update Sun Dec 27 08:11:24 2015 Serge Heitzler
 //
 
 #ifndef IRENDERWINDOW_HH_
 #define IRENDERWINDOW_HH_
-
 
 #include <string>
 #include <cstdint>
@@ -18,8 +17,7 @@
 #include <SFML/Window/ContextSettings.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
-#include "IVideoMode.hh"
-#include "Vector2.hh"
+#include <Vector2.hh>
 
 class  		      IRenderWindow
 {

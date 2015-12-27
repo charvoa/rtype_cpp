@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sat Dec 26 10:29:16 2015 Serge Heitzler
+// Last update Sun Dec 27 08:13:33 2015 Serge Heitzler
 //
 
 
@@ -13,10 +13,10 @@
 #define					GAMEPANEL_HH_
 
 #ifdef _WIN32
-#include "../NetworkWin.hpp"
+#include <NetworkWin.hpp>
 #include <ThreadWin.hpp>
 #else
-#include "../Network.hpp"
+#include <Network.hpp>
 #include <ThreadUnix.hpp>
 #endif
 
@@ -90,4 +90,4 @@ private:
   unsigned int				_score;
 };
 
-#endif /* GAMEPANEL_HH_ */
+#endif /* !GAMEPANEL_HH_ */

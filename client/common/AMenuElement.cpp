@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Sat Dec  5 07:30:19 2015 Serge Heitzler
-// Last update Wed Dec  9 13:41:41 2015 Nicolas Girardot
+// Last update Sun Dec 27 08:16:23 2015 Serge Heitzler
 //
 
 #include <iostream>
@@ -39,17 +39,17 @@ bool			AMenuElement::updateOnPress(std::pair<unsigned int, unsigned int> pair)
 
 void			AMenuElement::updateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
-	(void)pair;
+  (void)pair;
 }
 
 void			AMenuElement::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> pair)
 {
-	(void)pair;
+  (void)pair;
 }
 
 void			AMenuElement::setBind(sf::Event event)
 {
-	(void)event;
+  (void)event;
 }
 
 Sprite			&AMenuElement::getSprite()

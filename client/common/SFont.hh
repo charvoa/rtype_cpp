@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 23 08:19:43 2015 Serge Heitzler
-// Last update Thu Dec 10 23:31:37 2015 Serge Heitzler
+// Last update Sun Dec 27 08:04:32 2015 Serge Heitzler
 //
 
 #ifndef FONT_HH_
@@ -13,7 +13,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "IFont.hh"
+#include <IFont.hh>
 
 class	        SFont : public IFont
 {
@@ -21,7 +21,7 @@ public:
   SFont();
   SFont(const std::string &filename);
   ~SFont();
-
+  
   void		loadFromFile(const std::string &filename);
   sf::Font     	&getFont();
 
