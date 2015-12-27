@@ -732,6 +732,8 @@ void Game::checkNewStage()
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
       for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
 	{
+	  Player *p = dynamic_cast<Player*>(*it);
+	  this->updateLife(p,2);
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 	}
     }
