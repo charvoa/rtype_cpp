@@ -677,7 +677,7 @@ bool Game::run()
       if (!_canAddMonster)
 	this->checkNewStage();
     if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && ((int) startTime.time_since_epoch().count() - (int) _start.time_since_epoch().count()) >
-	  std::chrono::milliseconds(8000).count())
+	  std::chrono::milliseconds(8500).count())
 	{
 	  timerMonster.reset();
 	  this->addMonster();
@@ -746,6 +746,8 @@ void Game::checkNewStage()
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
       for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
 	{
+	  Player *p = dynamic_cast<Player*>(*it);
+	  this->updateLife(p,2);
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 	}
     }
