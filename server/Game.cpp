@@ -387,7 +387,7 @@ void Game::updateMonster()
 	  if (reinterpret_cast<Bot*>(*it)->isInScreen() == true)
           shootBot(reinterpret_cast<Bot*>(*it));
       //(*it)->update((*it)->refreshHitbox());
-      if (pos->getX() < -10)
+      if (pos->getX() < -100)
 	{
 	  deleteEntity(*it);
 	  // _nbDisplay--;
@@ -585,7 +585,8 @@ void Game::checkHitBox()
 			}
 		    }
  		  else if ((*case1)->x >= (*case2)->x && (*case1)->y && (((*case1)->y >= caseMonster.front()->y) && ((*case1)->y <= caseMonster.back()->y))
-			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX() < (*case2)->x)
+			   && reinterpret_cast<ComponentPosition*>((*ammosIT)->getParent()->getSystemManager()->getSystemByComponent(C_POSITION)->getComponent())->getX()
+			   < (*case2)->x)
 		    {
 		      Player *p;
 		      if ((p = reinterpret_cast<Player*>((*ammosIT)->getParent()))
