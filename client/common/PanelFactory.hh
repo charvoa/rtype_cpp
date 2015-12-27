@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 10:15:28 2015 Nicolas Girardot
-// Last update Sun Dec 27 08:07:47 2015 Serge Heitzler
+// Last update Sun Dec 27 08:28:58 2015 Serge Heitzler
 //
 
 #ifndef PANELFACTORY_HH
@@ -28,8 +28,7 @@ public:
         GAME_PANEL,
         DEMO_PANEL,
         JOIN_PANEL,
-        START_PANEL,
-        LOADING_PANEL
+        START_PANEL
     } PanelType;
 
   static APanel    *createPanel(PanelType);
