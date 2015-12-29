@@ -40,7 +40,7 @@ GamePanel::GamePanel()
   _escapeKey = false;
   _endGame = false;
 
-  _score = 0;
+  _teamScore = 0;
   _wave = 1;
   _type = PanelFactory::GAME_PANEL;
   _randPosY = new Random(350, 500);
@@ -575,7 +575,12 @@ void		GamePanel::setTeamScore(unsigned int score)
 
 unsigned int		GamePanel::getTeamScoreString()
 {
-  return _score;
+  return _teamScore;
+}
+
+void			GamePanel::setTeamScoreString(int score)
+{
+  _teamScore += (unsigned int)score;
 }
 
 void		GamePanel::setScore(const std::string &name, int score)
@@ -594,7 +599,8 @@ void		GamePanel::setScore(const std::string &name, int score)
 	return ;
       player->setScore(score);
     }
-  static_cast<GamePanel*>(window->getPanels().top())->setTeamScore(static_cast<GamePanel*>(window->getPanels().top())->getTeamScoreString() + score);
+  static_cast<GamePanel*>(window->getPanels().top())->setTeamScoreString(50);
+    static_cast<GamePanel*>(window->getPanels().top())->setTeamScore(static_cast<GamePanel*>(window->getPanels().top())->getTeamScoreString());
 }
 
 void		GamePanel::setLife(const std::string &name, int life)
