@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Sun Dec 13 11:08:09 2015 Serge Heitzler
+// Last update Tue Dec 29 09:56:20 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -13,7 +13,7 @@
 RenderWindow *RenderWindow::_renderWindow = NULL;
 RenderWindow::RenderWindow()
 {
-	_settings = new Settings("../config/PersonalConfig.ini");
+  _settings = new Settings("../config/PersonalConfig.ini");
 }
 
 RenderWindow	*RenderWindow::getInstance()
