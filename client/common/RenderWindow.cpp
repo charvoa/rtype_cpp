@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Tue Dec 29 09:56:20 2015 Serge Heitzler
+// Last update Tue Dec 29 09:58:06 2015 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
@@ -30,7 +30,7 @@ RenderWindow::~RenderWindow()
 
 void		RenderWindow::setWindow(sf::VideoMode vm, std::string const& title)
 {
-  _window = new sf::RenderWindow(vm, title);
+  _window = new sf::RenderWindow(vm, title, sf::Style::Fullscreen);
 }
 
 void		RenderWindow::setFramerateLimit(unsigned int limit)
@@ -112,10 +112,6 @@ void	RenderWindow::setActive(bool value)
 void    RenderWindow::addPanel(PanelFactory::PanelType type)
 {
   type = type;
-  //    PanelFactory factory;
-
-    //    _panels.push(factory.createPanel(type));
-    //    _panels.top()->render();
 }
 
 void    RenderWindow::back()
