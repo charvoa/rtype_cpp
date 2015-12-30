@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 16:48:25 2015 Nicolas Girardot
-// Last update Sun Dec 27 10:39:00 2015 Serge Heitzler
+// Last update Tue Dec 29 08:07:40 2015 Serge Heitzler
 //
 
 
@@ -50,6 +50,7 @@ public:
   static void  				playerLeft(const std::string &playerName);
   void  				setTeamScore(unsigned int score);
   unsigned int  			getTeamScoreString();
+  void					setTeamScoreString(int score);
   
 
   std::vector<Sprite *>			&getSprites();
@@ -89,7 +90,7 @@ private:
   Random				*_randBackground;
   bool					_escapeKey;
   bool					_endGame;
-  unsigned int				_score;
+  unsigned int				_teamScore;
   unsigned int				_wave;
 };
 
