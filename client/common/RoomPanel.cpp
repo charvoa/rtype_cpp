@@ -70,7 +70,6 @@ void	        RoomPanel::setUserInterface()
   name = "difficulty";
   float x;
   std::string diff;
-  diff = "3";
   if (window->getSettings()->getDefaultDifficulty() == Settings::EASY_MODE)
   {
 	  diff = std::to_string(E_EASY);
@@ -416,9 +415,9 @@ void		RoomPanel::createPlayers()
 void		RoomPanel::setSlider(int diff)
 {
   RenderWindow	*window = RenderWindow::getInstance();
-  float x;
+  float x = 0;
   float xbase = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
-  std::cout << "diff : " << diff << std::endl;
+
   switch (diff)
     {
     case 1:
