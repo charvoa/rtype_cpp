@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sat Jan  2 19:27:25 2016 Nicolas Girardot
+// Last update Sat Jan  2 22:54:21 2016 Nicolas Girardot
 //
 
 #include <string>
@@ -78,7 +78,9 @@ void		ProtocoleClient::initProtocoleClient()
 
 void		ProtocoleClient::setSlider(ANetwork::t_frame &frame)
 {
+  std::cout << "Data is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
+  std::cout << "Sending " << std::atoi(x.at(0).c_str()) << "To vivecouille" << std::endl;
   RoomPanel::setSlider(std::atoi(x.at(0).c_str()));
 }
 
