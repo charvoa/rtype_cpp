@@ -46,6 +46,7 @@ public:
   std::map<std::string, Texture *> *getReceived();
   int	  		getCurrentPlayer();
   int	getType();
+  void	setSlider(int);
 
 private:
 

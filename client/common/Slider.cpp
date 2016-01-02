@@ -16,6 +16,11 @@ Slider::~Slider()
 {
 }
 
+void		Slider::setPosX(float x)
+{
+	_sprite->setPosition(x, getPosY());
+}
+
 void		Slider::setTitle(std::string const& title)
 {
 	_title = title;

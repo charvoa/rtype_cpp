@@ -410,6 +410,37 @@ void		RoomPanel::createPlayers()
 
 }
 
+void		RoomPanel::setSlider(int diff)
+{
+	RenderWindow	*window = RenderWindow::getInstance();
+	float x;
+	float xbase = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
+
+	switch (diff)
+	{
+	case 1:
+	{
+		x = window->_ressources->_sliderNormal->getSize()._x / 3;
+		break;
+	}
+	case 2:
+	{
+		x = window->_ressources->_slide->getSize()._x / 2;
+		break;
+	}
+	case 3:
+	{
+		x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+		break;
+	}
+	default:
+	{
+		x = window->_ressources->_slide->getSize()._x / 2;
+		break;
+	}
+	}
+	_difficulty->setPosX(xbase + x);
+}
 
 void		RoomPanel::difficulty(Settings::Difficulty diff)
 {
