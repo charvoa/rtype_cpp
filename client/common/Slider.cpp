@@ -242,12 +242,10 @@ void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> p
 	ANetwork::t_frame sender;
 	std::string diff;
 
-	if (_locked == true)
-		return;
-	if (pair.first > _maxX)
+/*	if (pair.first > _maxX)
 		this->setValue(3);
 	if (pair.first < _minX)
-		this->setValue(1);
+		this->setValue(1);*/
 	_locked = true;
 	switch (_value)
 	{
@@ -276,6 +274,7 @@ void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> p
 		break;
 	}
 	}
+	std::cout << "value sent : " << _value << std::endl;
 	sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
 	net->write(sender);
 }
