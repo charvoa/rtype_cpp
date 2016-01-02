@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 27 12:58:19 2015 Serge Heitzler
+// Last update Sat Jan  2 19:27:25 2016 Nicolas Girardot
 //
 
 #include <string>
@@ -73,6 +73,13 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
   _functions.insert(std::make_pair(S_AMMO_LEFT, &ProtocoleClient::ammoLeft));
   _functions.insert(std::make_pair(S_HIT, &ProtocoleClient::hit));
+  _functions.insert(std::make_pair(S_ROOM_SETTINGS_CHANGED, &ProtocoleClient::setSlider));
+}
+
+void		ProtocoleClient::setSlider(ANetwork::t_frame &frame)
+{
+  std::vector<std::string> x = split(frame.data, ';');
+  RoomPanel::setSlider(std::atoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::ammoLeft(ANetwork::t_frame &frame)
@@ -90,7 +97,6 @@ void		ProtocoleClient::hit(ANetwork::t_frame &frame)
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
@@ -217,7 +223,7 @@ void		ProtocoleClient::score(ANetwork::t_frame &frame)
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
 {
   std::vector<std::string> x = split(frame.data, ';');
-  GamePanel::endGame(x);  
+  GamePanel::endGame(x);
 }
 
 void		ProtocoleClient::methodChecker(ANetwork::t_frame &frame)

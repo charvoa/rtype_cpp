@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 27 13:46:51 2015 Serge Heitzler
+// Last update Sat Jan  2 19:59:58 2016 Nicolas Girardot
 //
 
 #include <thread>
@@ -139,7 +139,7 @@ void	        RoomPanel::setUserInterface()
 	  slideDifficulty->getPosX() + window->_ressources->_slide->getSize()._x);
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender;
-  
+
 
   sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
   net->write(sender);
@@ -412,34 +412,39 @@ void		RoomPanel::createPlayers()
 
 void		RoomPanel::setSlider(int diff)
 {
-	RenderWindow	*window = RenderWindow::getInstance();
-	float x;
-	float xbase = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
+  RenderWindow	*window = RenderWindow::getInstance();
+  float x;
+  float xbase = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
 
-	switch (diff)
-	{
-	case 1:
-	{
-		x = window->_ressources->_sliderNormal->getSize()._x / 3;
-		break;
-	}
-	case 2:
-	{
-		x = window->_ressources->_slide->getSize()._x / 2;
-		break;
-	}
-	case 3:
-	{
-		x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
-		break;
-	}
-	default:
-	{
-		x = window->_ressources->_slide->getSize()._x / 2;
-		break;
-	}
-	}
-	_difficulty->setPosX(xbase + x);
+  switch (diff)
+    {
+    case 1:
+      {
+	x = window->_ressources->_sliderNormal->getSize()._x / 3;
+	break;
+      }
+    case 2:
+      {
+	x = window->_ressources->_slide->getSize()._x / 2;
+	break;
+      }
+    case 3:
+      {
+	x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+	break;
+      }
+    default:
+      {
+	x = window->_ressources->_slide->getSize()._x / 2;
+	break;
+      }
+    }
+  static_cast<RoomPanel*>(window->getPanels().top())->getDifficulty()->setPosX(xbase + x);
+}
+
+Slider		*RoomPanel::getDifficulty()
+{
+  return _difficulty;
 }
 
 void		RoomPanel::difficulty(Settings::Difficulty diff)
