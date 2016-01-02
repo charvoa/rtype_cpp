@@ -784,6 +784,7 @@ void Game::checkNewStage()
 	{
 	  Player *p = dynamic_cast<Player*>(*it);
 	  this->updateLife(p,1);
+	  p->resetBullet();
 	  dynamic_cast<Player*>(*it)->getClient().getSocket()->write(reinterpret_cast<void*>(&frame), sizeof(ANetwork::t_frame));
 	}
     }
