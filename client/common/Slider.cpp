@@ -242,6 +242,7 @@ void			Slider::difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int> p
 	ANetwork::t_frame sender;
 	std::string diff = "";
 
+	(void)pair;
 	_locked = true;
 	switch (_value)
 	{
