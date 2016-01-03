@@ -40,7 +40,7 @@ GamePanel::GamePanel()
   _escapeKey = false;
   _endGame = false;
 
-  _score = 0;
+  _teamScore = 0;
   _wave = 1;
   _type = PanelFactory::GAME_PANEL;
   _randPosY = new Random(350, 500);
@@ -357,7 +357,6 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 
   for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->end(); ++it)
     {
-      std::cout << "Received file with name : " << (*it).first << std::endl;
       _dicoTextures.insert(std::make_pair((*it).first, (*it).second));
     }
 }
@@ -575,7 +574,12 @@ void		GamePanel::setTeamScore(unsigned int score)
 
 unsigned int		GamePanel::getTeamScoreString()
 {
-  return _score;
+  return _teamScore;
+}
+
+void			GamePanel::setTeamScoreString(int score)
+{
+  _teamScore += (unsigned int)score;
 }
 
 void		GamePanel::setScore(const std::string &name, int score)
@@ -594,7 +598,8 @@ void		GamePanel::setScore(const std::string &name, int score)
 	return ;
       player->setScore(score);
     }
-  static_cast<GamePanel*>(window->getPanels().top())->setTeamScore(static_cast<GamePanel*>(window->getPanels().top())->getTeamScoreString() + score);
+  static_cast<GamePanel*>(window->getPanels().top())->setTeamScoreString(50);
+    static_cast<GamePanel*>(window->getPanels().top())->setTeamScore(static_cast<GamePanel*>(window->getPanels().top())->getTeamScoreString());
 }
 
 void		GamePanel::setLife(const std::string &name, int life)
@@ -608,8 +613,10 @@ void		GamePanel::setLife(const std::string &name, int life)
       OtherPlayer *player;
       player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
       if (player == NULL)
-	return ;
-      player->setLife(life);
+	{
+	  return ;
+	}
+      player->setNbLife(life);
     }
 }
 

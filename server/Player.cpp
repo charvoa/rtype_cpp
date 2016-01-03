@@ -124,3 +124,9 @@ int	Player::getShooted(const std::string &weaponType)
     return (_laserShooted);
   return 0;
 }
+
+void	Player::resetBullet()
+{
+  _missiles = 3;
+  _laser = 1;
+}

@@ -5,7 +5,7 @@
 // Login   <nicolaschr@epitech.net>
 //
 // Started on  Tue Dec  1 14:25:25 2015 Nicolas Charvoz
-// Last update Tue Dec 22 16:07:21 2015 Joris Bertomeu
+// Last update Sat Jan  2 03:32:27 2016 Antoine Garcia
 //
 
 #ifndef PLAYER_HH_
@@ -43,6 +43,7 @@ public:
   void setScore(int);
   void addSystem(E_Component);
   bool shoot(E_Component);
+  void	resetBullet();
   Timer *getLastShoot();
   void increaseShooted(const std::string &, int);
   int getShooted(const std::string &);
