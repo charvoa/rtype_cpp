@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec 29 09:56:16 2015 Serge Heitzler
+// Last update Sun Jan  3 02:29:25 2016 Serge Heitzler
 //
 
 #include <iostream>
@@ -228,6 +228,13 @@ void		StartPanel::update()
 	_backgrounds.at(4).move(-10,0);
     }
 
+
+  if (i == 270)
+    {
+      Sound *Sound = Client::getSound();
+      Sound->playSound("logoSound");
+      std::cout << "JE LANCE LE SON" << std::endl;
+    }
 
   if (i > 360 && i < 411)
     {

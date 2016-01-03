@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec 29 17:27:55 2015 Nicolas Girardot
+// Last update Sun Jan  3 02:28:12 2016 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -108,11 +108,9 @@ void	Client::Start()
   window->draw(splashScreen->getSprite());
   window->display();
   window->_ressources = new Ressources();
-  //sleep(2);
 
-	window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-//	window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
-	window->getPanels().top()->setUserInterface();
+  window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
+  window->getPanels().top()->setUserInterface();
 
   //Adding & playing music for Menu
 
@@ -127,7 +125,7 @@ void	Client::Start()
   _sound->registerSound("../common/misc/gameOver.ogg", "endGame");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
   _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
-  _sound->registerMusic("../common/misc/BimBamBoum.ogg", "logoSound");
+  _sound->registerSound("../common/misc/BimBamBoum.ogg", "logoSound");
   _sound->playMusic("mainMenu");
 
   //Threading the Read

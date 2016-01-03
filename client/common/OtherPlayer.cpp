@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Sun Dec 27 14:30:34 2015 Serge Heitzler
+// Last update Sun Jan  3 02:16:55 2016 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>
@@ -117,10 +117,6 @@ void		OtherPlayer::setNbLife(unsigned int nb)
     {
       _hearts.at(i)->getSprite().setColor(sf::Color(255, 255, 255, 0));
       i++;
-    }
-  if (_nbrLife <= 0)
-    {
-      _spaceShip->setTexture(*((RenderWindow::getInstance())->_ressources->_blackShip));
     }
 }
 
