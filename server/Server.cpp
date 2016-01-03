@@ -93,8 +93,6 @@ void *newGameThread(void *data)
 {
   Server::serializeThread *s = reinterpret_cast<Server::serializeThread*>(data);
 
-  std::cout << "Server :: void* newGameThread" << std::endl;
-
   Server *me = s->server;
 
   Parameters *p = me->_roomManager.getRoombyId(s->frame.data).getParameters();
@@ -119,8 +117,6 @@ void *newGameThread(void *data)
 								ss.str().c_str());
 	  (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),
 				    sizeof(ANetwork::t_frame));
-	  std::cout << "Writing on socket : "
-		    << ((ANetwork::t_frame*)&frameToSend)->data << std::endl;
 	  ss.str("");
 	  ss.clear();
 	}
@@ -171,7 +167,6 @@ bool	Server::joinRoom(ANetwork::t_frame frame, void *data)
 {
    Client	*client = reinterpret_cast<Client *>(data);
 
-   std::cout << "SERVER :: JoinRoom" << std::endl;
    try {
    _roomManager.getRoombyId(frame.data).addPlayer(client);
    }catch(const std::exception &e)
@@ -210,7 +205,6 @@ bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
   Client	*client = reinterpret_cast<Client *>(data);
   try
     {
-      std::cout << "ROOM SETTING CHANGED" << std::endl;
       Room room = _roomManager.getRoomByClient(client);
       Parameters param;
       E_Difficulty	difficulty = (E_Difficulty)std::atoi(frame.data);
