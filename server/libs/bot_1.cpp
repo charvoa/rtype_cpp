@@ -63,17 +63,17 @@ std::list<Case*> Bot::refreshHitbox()
 
 void	Bot::update()
 {
-  if (_y == HEIGHT)
+  if (_y >= HEIGHT - 15)
     _direction = -1;
-  else if (_y == 35)
+  else if (_y <= 50)
     _direction = 1;
 
   if (_direction == 1)
-    _y++;
+    _y += 4;
   else if (_direction == -1)
-    _y--;
+    _y -= 4;
 
-  _x--;
+  _x -= 2;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
 }

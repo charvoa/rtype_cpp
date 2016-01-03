@@ -64,31 +64,26 @@ void	Bot::update()
   if (_x >= 1500)
     _direction = -1;
   else
-    _direction = 2;
-  if (_direction == -1)
+    _direction = 1;
+  if (_direction == -1 && _x >= 1500)
     _x -= 3;
 
-  if (_y == 250)
-    _direction = 3;
-  if (_y == 640)
+  if (_y <= 270)
     _direction = 2;
-
-  if (_direction == 2 && _y > 250)
-    _y -= 5;
-  if (_direction == 3 && _y < 640)
+  if (_y >= 620)
+    _direction = 1;
+  else
+    _direction = 2;
+  
+  if (_direction == 2 && _y < 620)
     _y += 5;
+  if (_direction == 1 && _y > 270)
+    _y -= 5;
 
+  
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
 }
-
-// bool Bot::isInScreen() const {
-//   if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
-//     _timerShoot->reset();
-//     return true;
-//   }
-//   return false;
-// }
 
 extern "C" AEntity* create_object(int id)
 {

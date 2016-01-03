@@ -711,7 +711,7 @@ bool Game::run()
       if (!_canAddMonster)
 	this->checkNewStage();
     if (timerMonster.elapsed().count() >= (speed/_stage) && timerMonster.elapsed().count() >= 1 && (_timerWave->elapsed().count() > 2) && ((int) startTime.time_since_epoch().count() - (int) _start.time_since_epoch().count()) >
-	  std::chrono::milliseconds(8500).count())
+	  std::chrono::milliseconds(9500).count())
 	{
 	  timerMonster.reset();
 	  this->addMonster();
