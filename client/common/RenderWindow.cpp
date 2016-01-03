@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Tue Dec 29 09:58:06 2015 Serge Heitzler
+// Last update Sun Jan  3 10:34:00 2016 Nicolas Charvoz
 //
 
 #include "RenderWindow.hh"
@@ -30,7 +30,7 @@ RenderWindow::~RenderWindow()
 
 void		RenderWindow::setWindow(sf::VideoMode vm, std::string const& title)
 {
-  _window = new sf::RenderWindow(vm, title, sf::Style::Fullscreen);
+  _window = new sf::RenderWindow(vm, title);
 }
 
 void		RenderWindow::setFramerateLimit(unsigned int limit)
