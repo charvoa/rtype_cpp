@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:49:27 2015 Nicolas Girardot
-// Last update Tue Dec 22 04:49:03 2015 Serge Heitzler
+// Last update Sun Jan  3 02:16:55 2016 Serge Heitzler
 //
 
 #include <OtherPlayer.hh>
@@ -102,6 +102,22 @@ OtherPlayer::~OtherPlayer()
 void	OtherPlayer::setLife(unsigned int i)
 {
   _nbrLife = i;
+}
+
+void		OtherPlayer::setNbLife(unsigned int nb)
+{
+  unsigned int i = 0;
+  _nbrLife = nb;
+  while (i < _nbrLife)
+    {
+      _hearts.at(i)->getSprite().setColor(sf::Color(255, 255, 255, 255));
+      i++;
+    }
+  while (i < 3)
+    {
+      _hearts.at(i)->getSprite().setColor(sf::Color(255, 255, 255, 0));
+      i++;
+    }
 }
 
 const std::string &OtherPlayer::getUsername()

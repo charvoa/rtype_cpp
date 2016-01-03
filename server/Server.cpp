@@ -210,6 +210,12 @@ bool Server::changeRoomSettings(ANetwork::t_frame frame, void *data)
       E_Difficulty	difficulty = (E_Difficulty)std::atoi(frame.data);
       param.setDifficulty(difficulty);
       room.setParameters(param);
+      std::list<Client*> clients = room.getAllPlayers();
+      ANetwork::t_frame frameToSend = CreateRequest::create(S_ROOM_SETTINGS_CHANGED,CRC::calcCRC(frame.data),0,frame.data);
+      for(std::list<Client*>::iterator it = clients.begin();it != clients.end(); ++it)
+	{
+	  (*it)->getSocket()->write(reinterpret_cast<void*>(&frameToSend),sizeof(ANetwork::t_frame));
+	}
     } catch(const std::exception &e)
     {
       std::cout << e.what() << std::endl;

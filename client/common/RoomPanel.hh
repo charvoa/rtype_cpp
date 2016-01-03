@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Thu Dec 10 02:20:53 2015 Serge Heitzler
-// Last update Wed Dec 16 11:20:29 2015 Nicolas Girardot
+// Last update Sat Jan  2 19:57:30 2016 Nicolas Girardot
 //
 
 #ifndef ROOMPANEL_HH_
@@ -46,6 +46,8 @@ public:
   std::map<std::string, Texture *> *getReceived();
   int	  		getCurrentPlayer();
   int	getType();
+  Slider		*getDifficulty();
+  static void	setSlider(int);
 
 private:
 

@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:51:45 2015 Nicolas Girardot
-// Last update Tue Dec 22 04:49:10 2015 Serge Heitzler
+// Last update Sun Dec 27 14:31:27 2015 Serge Heitzler
 //
 
 #ifndef OTHERPLAYER_HH_
@@ -25,8 +25,9 @@ public:
   void			setUsername(const std::string &);
   Sprite		&getSprite();
   const std::string	&getUsername();
-  void			setScore(int );
+  void			setScore(int);
   void			render();
+  void			setNbLife(unsigned int nb);
 
 private:
 
@@ -34,7 +35,7 @@ private:
   Sprite			*_spaceShip;
   Sprite			*_greyBack;
   Text				*_score;
-  int				_nbrLife;
+  unsigned int 			_nbrLife;
   std::vector<Sprite*>		_hearts;
 };
 

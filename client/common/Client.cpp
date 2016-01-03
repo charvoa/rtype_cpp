@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Sun Dec 27 08:18:09 2015 Serge Heitzler
+// Last update Sun Jan  3 02:28:12 2016 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -80,7 +80,7 @@ void	Client::Start()
   //Connecting to server
 
   _network->init(window->getSettings()->getPort(), ANetwork::TCP_MODE);
-  std::cout << "I p IS : " << window->getSettings()->getIP() << " And port is " << window->getSettings()->getPort() << std::endl;
+  std::cout << "Connecting to : " << window->getSettings()->getIP() << ":" << window->getSettings()->getPort() << std::endl;
   _network->connect(window->getSettings()->getIP());
 
   //Sending Handshake
@@ -108,11 +108,9 @@ void	Client::Start()
   window->draw(splashScreen->getSprite());
   window->display();
   window->_ressources = new Ressources();
-  //sleep(2);
 
-	window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
-//	window->getPanels().push(static_cast<RoomPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::ROOM_PANEL)));
-	window->getPanels().top()->setUserInterface();
+  window->getPanels().push(static_cast<StartPanel*>(PanelFactory::createPanel(PanelFactory::PanelType::START_PANEL)));
+  window->getPanels().top()->setUserInterface();
 
   //Adding & playing music for Menu
 
@@ -127,6 +125,7 @@ void	Client::Start()
   _sound->registerSound("../common/misc/gameOver.ogg", "endGame");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
   _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
+  _sound->registerSound("../common/misc/BimBamBoum.ogg", "logoSound");
   _sound->playMusic("mainMenu");
 
   //Threading the Read

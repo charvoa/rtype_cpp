@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Tue Dec  8 06:44:52 2015 Serge Heitzler
-// Last update Sun Dec 27 10:39:43 2015 Serge Heitzler
+// Last update Sun Jan  3 01:57:09 2016 Serge Heitzler
 //
 
 #include <string>
@@ -58,16 +58,13 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_CREATE_ROOM, &ProtocoleClient::createRoom));
   _functions.insert(std::make_pair(S_JOIN_SUCCESS, &ProtocoleClient::joinSuccess));
   _functions.insert(std::make_pair(S_JOIN_ERROR, &ProtocoleClient::joinError));
-  _functions.insert(std::make_pair(S_GAME_LAUNCHED, &ProtocoleClient::gameLaunched));
   _functions.insert(std::make_pair(S_NEW_PLAYER_CONNECTED, &ProtocoleClient::newPlayerConnected));
   _functions.insert(std::make_pair(S_PLAYER_LEFT, &ProtocoleClient::playerLeft));
   _functions.insert(std::make_pair(S_DIE, &ProtocoleClient::die));
   _functions.insert(std::make_pair(S_LIFE, &ProtocoleClient::life));
   _functions.insert(std::make_pair(S_SCORE, &ProtocoleClient::score));
-  _functions.insert(std::make_pair(S_NEW_WAVE, &ProtocoleClient::newWave));
+  _functions.insert(std::make_pair(S_SET_CURRENT_WAVE, &ProtocoleClient::newWave));
   _functions.insert(std::make_pair(S_END_GAME, &ProtocoleClient::endGame));
-  _functions.insert(std::make_pair(S_LOAD_SPRITES, &ProtocoleClient::loadSprites));
-  _functions.insert(std::make_pair(S_GAME_NOT_LAUNCHED, &ProtocoleClient::gameNotLaunched));
   _functions.insert(std::make_pair(S_FILE_TOTAL_SIZE, &ProtocoleClient::fileTotalSize));
   _functions.insert(std::make_pair(S_SHOOT, &ProtocoleClient::shoot));
   _functions.insert(std::make_pair(S_NEW_ENTITY, &ProtocoleClient::newEntity));
@@ -76,72 +73,76 @@ void		ProtocoleClient::initProtocoleClient()
   _functions.insert(std::make_pair(S_PLAYER_LEFT_IG, &ProtocoleClient::playerLeftIG));
   _functions.insert(std::make_pair(S_AMMO_LEFT, &ProtocoleClient::ammoLeft));
   _functions.insert(std::make_pair(S_HIT, &ProtocoleClient::hit));
+  _functions.insert(std::make_pair(S_ROOM_SETTINGS_CHANGED, &ProtocoleClient::setSlider));
+}
+
+void		ProtocoleClient::setSlider(ANetwork::t_frame &frame)
+{
+  //  std::cout << "Data in setSlider is ::" << frame.data << std::endl;
+  std::vector<std::string> x = split(frame.data, ';');
+  RoomPanel::setSlider(std::atoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::ammoLeft(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in ammoLeft is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Ammo Left : " <<  x.at(0) << std::endl;
   GamePanel::ammoLeft(x);
 }
 
 void		ProtocoleClient::hit(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in hit is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Hit" << std::endl;
   GamePanel::hit(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::newWave(ANetwork::t_frame &frame)
 {
+  std::cout << "Data in setCurrentWave is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "New Wave : " <<  x.at(0) << std::endl;
-  GamePanel::setCurrentWave(std::atoi(x.at(0).c_str()));
+  GamePanel::setCurrentWave(std::stoi(x.at(0).c_str()));
 }
 
 void		ProtocoleClient::newEntity(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in newEntity is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "New Entity" << std::endl;
-
   GamePanel::newEntity(x);
 }
 
 void		ProtocoleClient::playerLeftIG(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in playerLeftIG is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Player Left IG" << std::endl;
   GamePanel::playerLeft(x.at(0));
 }
 
 void		ProtocoleClient::deleteEntity(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in deleteEntity is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Delete Entity" << std::endl;
   GamePanel::deleteEntity(x);
 }
 
 void		ProtocoleClient::downloadComplete(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in downloadComplete is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Download Complete" << std::endl;
-  std::cout << "Player name is " << x.at(0) << std::endl;
   RoomPanel::downloadComplete(x.at(0));
 }
 
 void		ProtocoleClient::fileTotalSize(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in fileTotalSize is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Is Passing in Total Size" << std::endl;
   RoomPanel::receiveFiles(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
 {
-  std::cout << "Creating UDP" << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
   ANetwork *net = Client::getUDPNetwork();
-  std::cout << x.at(0) << " :::::::: " << x.at(1) << std::endl;
   try
     {
       net->init(std::atoi(x.at(0).c_str()), ANetwork::UDP_MODE);
@@ -152,8 +153,7 @@ void		ProtocoleClient::initUDP(ANetwork::t_frame &frame)
       std::cout << e.what() << std::endl;
     }
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE_UDP, CRC::calcCRC(x.at(1)), x.at(1).size(), x.at(1));
-  std::cout << " WRITE IS SENDING ::: " << net->write(sender) << std::endl;
-
+  net->write(sender);
   RenderWindow *window = RenderWindow::getInstance();
   window->getPanels().push(static_cast<GamePanel*>(PanelFactory::createPanel(PanelFactory::PanelType::GAME_PANEL)));
 }
@@ -165,20 +165,17 @@ void		ProtocoleClient::handshake(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::display(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in display is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  //  std::cout << "Display" << std::endl;
-
   GamePanel::display(x);
 }
 
 void		ProtocoleClient::shoot(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in shoot is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "shoot" << std::endl;
-
   Sound *s = Client::getSound();
   int	type = std::atoi(x.at(0).c_str());
-  std::cout << "bistrouketteeeee" << std::endl;
   if (type == 5)
     s->playMusic("riffle");
   else if (type == 6)
@@ -189,99 +186,65 @@ void		ProtocoleClient::shoot(ANetwork::t_frame &frame)
 
 void		ProtocoleClient::createRoom(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in createRoom is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Create room" << std::endl;
   StartPanel::goToRoom(x, 0);
-}
-
-void		ProtocoleClient::createRoomError(ANetwork::t_frame &frame)
-{
-  std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Create room Error" << std::endl;
-  (void) x;
 }
 
 void		ProtocoleClient::joinSuccess(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in joinSuccess is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Join Success" << std::endl;
   StartPanel::goToRoom(x, 1);
 }
 
 void		ProtocoleClient::joinError(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in joinError is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Join Error" << std::endl;
   JoinPanel::setError(x.at(0));
-}
-
-void		ProtocoleClient::gameLaunched(ANetwork::t_frame &frame)
-{
-  std::cout << "Game Is launched" << std::endl;
-  (void) frame;
 }
 
 void		ProtocoleClient::newPlayerConnected(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in newPlayerConnected is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "New Player Connected" << std::endl;
   RoomPanel::newPlayer(x.at(0));
 }
 
 void		ProtocoleClient::playerLeft(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in playerLeft is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
   RoomPanel::playerLeft(x);
 }
 
-void		ProtocoleClient::changeHost(ANetwork::t_frame &frame)
-{
-  (void) frame;
-}
-
 void		ProtocoleClient::die(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in die is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "die" << std::endl;
   GamePanel::die(std::atoi(x.at(0).c_str()), std::atoi(x.at(1).c_str()));
-}
-
-void		ProtocoleClient::playerDead(ANetwork::t_frame &frame)
-{
-  (void) frame;
 }
 
 void		ProtocoleClient::life(ANetwork::t_frame &frame)
 {
+  std::cout << "Data in life is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "life" << std::endl;
   GamePanel::setLife(x.at(0), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::score(ANetwork::t_frame &frame)
 {
+  //  std::cout << "Data in score is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "Score" << std::endl;
   GamePanel::setScore(x.at(0), std::atoi(x.at(1).c_str()));
 }
 
 void		ProtocoleClient::endGame(ANetwork::t_frame &frame)
 {
-  (void) frame;
+  std::cout << "Data in endGame is ::" << frame.data << std::endl;
   std::vector<std::string> x = split(frame.data, ';');
-  std::cout << "endGame" << std::endl;
-  GamePanel::endGame(x);  
-}
-
-void		ProtocoleClient::loadSprites(ANetwork::t_frame &frame)
-{
-  (void) frame;
-}
-
-void		ProtocoleClient::gameNotLaunched(ANetwork::t_frame &frame)
-{
-  std::cout << "GAME IS NOT LAUNCHED" << std::endl;
-  (void) frame;
+  GamePanel::endGame(x);
 }
 
 void		ProtocoleClient::methodChecker(ANetwork::t_frame &frame)

@@ -64,7 +64,7 @@ std::list<Case*> Bot::refreshHitbox()
 
 void	Bot::update()
 {
-  _x -= 7;
+  _x -= 8;
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
 }

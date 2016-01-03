@@ -38,7 +38,7 @@ void	Bot::generateX()
 
 void	Bot::generateY()
 {
-  _y = 445;
+  _y = 270;
 }
 
 std::list<Case*> Bot::refreshHitbox()
@@ -61,36 +61,32 @@ std::list<Case*> Bot::refreshHitbox()
 
 void	Bot::update()
 {
+  static int i = 0;
   if (_x >= 1500)
     _direction = -1;
-  else
-    _direction = 2;
+  
   if (_direction == -1)
-    _x -= 3;
+    _x -= 2;
 
-  if (_direction == 2 && _y >= 250)
-    _y -= 5;
+  if (i == 310)
+    _direction = 1;
+  
+  if (_y <= 270 && _direction != -1)
+    _direction = 2;
 
-  if (_direction == 3 && _y <= 640)
-    _y += 5;
-
-  if (_y == 300)
+  if (_y >= 620 && _direction != -1)
     _direction = 3;
 
-  if (_y == 590)
-    _direction = 2;
+  if (_direction == 2)
+    _y += 5;
+  if (_direction == 3)
+    _y -= 5;
 
+  
   dynamic_cast<SystemPos*>(_systemManager->getSystemByComponent(C_POSITION))->update(_x, _y);
   dynamic_cast<SystemHitbox*>(_systemManager->getSystemByComponent(C_HITBOX))->update(refreshHitbox());
+  i++;
 }
-
-// bool Bot::isInScreen() const {
-//   if (_timerShoot->elapsedMilli().count() > 500 && _x < WIDTH) {
-//     _timerShoot->reset();
-//     return true;
-//   }
-//   return false;
-// }
 
 extern "C" AEntity* create_object(int id)
 {

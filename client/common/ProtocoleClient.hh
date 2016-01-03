@@ -5,7 +5,7 @@
 // Login   <sergeheitzler@epitech.net>
 //
 // Started on  Mon Nov 30 08:38:18 2015 Serge Heitzler
-// Last update Sun Dec 27 10:36:16 2015 Serge Heitzler
+// Last update Sat Jan  2 19:24:54 2016 Nicolas Girardot
 //
 
 #ifndef PROTOCOLECLIENT_HH_
@@ -29,22 +29,16 @@ public:
   void			createRoom(ANetwork::t_frame &frame);
   void			joinSuccess(ANetwork::t_frame &frame);
   void			joinError(ANetwork::t_frame &frame);
-  void			gameLaunched(ANetwork::t_frame &frame);
   void		       	newPlayerConnected(ANetwork::t_frame &frame);
   void			playerLeft(ANetwork::t_frame &frame);
-  void			changeHost(ANetwork::t_frame &frame);
   void			die(ANetwork::t_frame &frame);
   void			newEnemy(ANetwork::t_frame &frame);
-  void			playerDead(ANetwork::t_frame &frame);
   void			life(ANetwork::t_frame &frame);
   void	       		score(ANetwork::t_frame &frame);
   void			newWave(ANetwork::t_frame &frame);
   void			endGame(ANetwork::t_frame &frame);
-  void			loadSprites(ANetwork::t_frame &frame);
   void			methodChecker(ANetwork::t_frame &frame);
   void			createRoomSuccess(ANetwork::t_frame &frame);
-  void			createRoomError(ANetwork::t_frame &frame);
-  void			gameNotLaunched(ANetwork::t_frame &frame);
   void			fileTotalSize(ANetwork::t_frame &frame);
   void			shoot(ANetwork::t_frame &frame);
   void			newEntity(ANetwork::t_frame &frame);
@@ -53,6 +47,7 @@ public:
   void			downloadComplete(ANetwork::t_frame &frame);
   void		        ammoLeft(ANetwork::t_frame &frame);
   void		        hit(ANetwork::t_frame &frame);
+  void			setSlider(ANetwork::t_frame &frame);
 
 private:
 

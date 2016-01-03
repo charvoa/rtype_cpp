@@ -32,6 +32,7 @@ void		updateOnRelease(std::pair<unsigned int, unsigned int>);
 void		updateOnMove(std::pair<unsigned int, unsigned int>);
 float		getPosY();
 float		getPosX();
+void		setPosX(float);
 void		setLimit(float, float);
 bool		difficultyUpdateOnPress(std::pair<unsigned int, unsigned int>);
 void		difficultyUpdateOnRelease(std::pair<unsigned int, unsigned int>);

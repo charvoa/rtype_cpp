@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Tue Dec 22 09:23:15 2015 Serge Heitzler
+// Last update Sat Jan  2 19:59:58 2016 Nicolas Girardot
 //
 
 #include <thread>
@@ -133,13 +133,15 @@ void	        RoomPanel::setUserInterface()
   slideDifficulty->setTexture(*((window)->_ressources->_slide));
   slideDifficulty->setPosition((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.2);
 
+ // x = 0;
   _difficulty = ButtonFactory::createSlider(Vector2(slideDifficulty->getPosX() + x,
 	  window->getSize()._y * 0.2 + (window->_ressources->_sliderNormal->getSize()._y / 2)), name,
 	  slideDifficulty->getPosX(),
 	  slideDifficulty->getPosX() + window->_ressources->_slide->getSize()._x);
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender;
-  
+
+//  setSlider(window->getSettings()->getDefaultDifficulty() + 1);
 
   sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
   net->write(sender);
@@ -150,17 +152,14 @@ void	        RoomPanel::setUserInterface()
 
 void		setFileProgression(int p, void *data)
 {
-  //  std::cout << p << std::endl;
   (void)p;
   (void)data;
 }
 
 void		RoomPanel::receiveFiles(int port, int nbrFiles)
 {
-//  std::this_thread::sleep_for(1);
   for (int a = 0; a < nbrFiles; a++)
     {
-      std::cout << "Passing Thourhg" << port << std::endl;
       File	file;
       file.receiveMe(RenderWindow::getInstance()->getSettings()->getIP(), port++, "./recv/", setFileProgression, NULL);
     }
@@ -174,11 +173,6 @@ void		RoomPanel::receiveFiles(int port, int nbrFiles)
     text->loadFromFile((*it)->getFullPath());
     static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->insert(std::make_pair((*it)->getBasename(),text));
   }
-
-  // create texture here
-  // Use FileManager
-  // Get all png files from ./recv/
-  // Build Texture
 }
 
 std::map<std::string, Texture*> *RoomPanel::getReceived()
@@ -239,8 +233,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
   std::size_t pos = vector.at(0).find("player");
   unsigned int idToRemove = std::stoi(vector.at(0).substr(pos + 6)) - 1;
 
-  std::cout << "id to remove " << idToRemove << std::endl;
-
   if (idToRemove + 1  >= static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers())
     {
       static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(idToRemove + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(0));
@@ -269,13 +261,6 @@ void		RoomPanel::playerLeft(std::vector<std::string> &vector)
     {
     case 0:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::BLUE);
-      // static_cast<RoomPanel*>(window->getPanels().top())->getFunctions().push_back((APanel::funcs)&RoomPanel::launchGame);
-
-      // static_cast<RoomPanel*>(window->getPanels().top())->getUserInterface().at(1)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-
-      // static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(1).getText().setColor(sf::Color(255, 255, 255, 255));
-
-
       break;
     case 1:
       static_cast<RoomPanel*>(window->getPanels().top())->getLabels().at(idToChange + 2).setColor(Color::RED);
@@ -322,7 +307,6 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
 
   while (i < vector.size() - 2)
     {
-      std::cout << vector.at(i) << std::endl;
       getPlayers().at(i)->setUsername(vector.at(i));
       _backgrounds.at(i + 1).setTexture(*_spaceShipsTextures.at(i + 1));
 
@@ -330,14 +314,6 @@ void		RoomPanel::updatePlayers(std::vector<std::string> &vector, int from)
       getLabels().at(i + 2).setString(vector.at(i));
       getLabels().at(i + 2).setOrigin(_labels.at(i + 2).getText().getGlobalBounds().width / 2, _labels.at(i + 2).getText().getGlobalBounds().height / 2);
       _nbPlayers++;
-
-      // if (i == 0)
-      // 	{
-      // 	  _functions.push_back((APanel::funcs)&RoomPanel::launchGame);
-      // 	  _userInterface.at(2)->getSprite().getSprite().setColor(sf::Color(255, 255, 255, 255));
-      // 	  _labels.at(1).getText().setColor(sf::Color(255, 255, 255, 255));
-      // 	}
-
       i++;
     }
   i--;
@@ -436,6 +412,42 @@ void		RoomPanel::createPlayers()
 
 }
 
+void		RoomPanel::setSlider(int diff)
+{
+  RenderWindow	*window = RenderWindow::getInstance();
+  float x = 0;
+  float xbase = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
+
+  switch (diff)
+    {
+    case 1:
+      {
+	x = window->_ressources->_sliderNormal->getSize()._x / 3;
+	break;
+      }
+    case 2:
+      {
+	x = window->_ressources->_slide->getSize()._x / 2;
+	break;
+      }
+    case 3:
+      {
+	x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+	break;
+      }
+    default:
+      {
+	x = window->_ressources->_slide->getSize()._x / 2;
+	break;
+      }
+    }
+  static_cast<RoomPanel*>(window->getPanels().top())->getDifficulty()->setPosX(xbase + x);
+}
+
+Slider		*RoomPanel::getDifficulty()
+{
+  return _difficulty;
+}
 
 void		RoomPanel::difficulty(Settings::Difficulty diff)
 {
