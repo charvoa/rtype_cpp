@@ -1,7 +1,7 @@
 //
 // GamePanel.cpp for RTypoe in /home/nicolas/rendu/rtype_cpp/client/common
 //
-// Made @OCby Nicolas Girardot
+// Made @by Nicolas Girardot
 // Login   <girard_s@epitech.net>
 //
 // Started on  Fri Dec 11 14:06:17 2015 Nicolas Girardot
@@ -41,6 +41,7 @@ GamePanel::GamePanel()
   _endGame = false;
 
   _teamScore = 0;
+  _playerLeft = 0;
   _wave = 1;
   _type = PanelFactory::GAME_PANEL;
   _randPosY = new Random(350, 500);
@@ -258,6 +259,16 @@ void			GamePanel::ammoLeft(std::vector<std::string> &v)
 MainPlayer		&GamePanel::getMainPlayer()
 {
   return *_mainPlayer;
+}
+
+void				        GamePanel::addPlayerLeft()
+{
+  _playerLeft++;
+}
+
+unsigned int	       		        GamePanel::getPlayerLeft()
+{
+  return _playerLeft;
 }
 
 void			GamePanel::playerLeft(const std::string &playerName)
@@ -490,8 +501,8 @@ void		GamePanel::display(std::vector<std::string> &vector)
   RenderWindow *window = RenderWindow::getInstance();
   int  	id;
 
-  float	posX = (std::atoi(vector.at(1).c_str())) + 70;
-  float	posY = (std::atoi(vector.at(2).c_str())) + 20;
+  float	posX = (std::atoi(vector.at(1).c_str())) + 50;
+  float	posY = (std::atoi(vector.at(2).c_str()));
 
   id = std::atoi(vector.at(0).c_str());
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
@@ -545,11 +556,10 @@ void		GamePanel::setCurrentWave(unsigned int value)
 
   static_cast<GamePanel*>(window->getPanels().top())->setWaveNumber(value);
 
-  while (i <= static_cast<RoomPanel*>(returnSeconds(window->getPanels()))->getNbPlayers())
+  while (i <= static_cast<RoomPanel*>(returnSeconds(window->getPanels()))->getNbPlayers() - static_cast<GamePanel*>(window->getPanels().top())->getPlayerLeft())
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
-        std::cout << "ici" << std::endl;
     }
 }
 
