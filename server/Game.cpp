@@ -222,8 +222,16 @@ void Game::updateLife(Player *p, int reset)
     p->update(0);
 
   std::stringstream health;
+  hP =
+    reinterpret_cast<ComponentHealth*>(p->getSystemManager()
+				       ->getSystemByComponent(C_HEALTH)
+				       ->getComponent());
 
-  health << p->getName() << ";" << hP->getLife();
+  unsigned int life = hP->getLife();
+  if (life > 3)
+    life = 3;
+  health << p->getName() << ";" << life;
+  std::cout << "HEALTH IN UPDATE LIFE : " << health.str().c_str() << std::endl;
   ANetwork::t_frame frameHealth = CreateRequest::create(S_LIFE, CRC::calcCRC(health.str().c_str()), health.str().size(), health.str().c_str());
   ANetwork::t_frame frameDie;
   if (hP->getLife() == 0){
@@ -779,7 +787,7 @@ void Game::checkNewStage()
       _timerWave->reset();
       std::list<AEntity *> players = _eM.getEntitiesByType(E_PLAYER);
       std::string sendData = std::to_string(_stage);
-      ANetwork::t_frame frame = CreateRequest::create(S_NEW_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
+      ANetwork::t_frame frame = CreateRequest::create(S_SET_CURRENT_WAVE, CRC::calcCRC(sendData), sendData.size(), sendData);
       for (std::list<AEntity*>::iterator it = players.begin(); it != players.end(); ++it)
 	{
 	  Player *p = dynamic_cast<Player*>(*it);

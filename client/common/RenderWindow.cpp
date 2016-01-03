@@ -5,7 +5,6 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Wed Nov 25 11:05:48 2015 Nicolas Girardot
-// Last update Sat Jan  2 14:06:27 2016 Serge Heitzler
 //
 
 #include "RenderWindow.hh"
