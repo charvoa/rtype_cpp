@@ -5,7 +5,7 @@
 // Login   <jobertomeu@epitech.net>
 //
 // Started on  Tue Dec 15 05:35:57 2015 Joris Bertomeu
-// Last update Tue Dec 22 15:22:07 2015 Joris Bertomeu
+// Last update Sun Jan  3 17:16:27 2016 Joris Bertomeu
 //
 
 #include		<Monitoring.hpp>
@@ -62,7 +62,7 @@ void				Monitoring::parseCommand(void *data, void *c)
 	    ", \"rifle\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getShooted("E_RIFLE")) +
 	    ", \"missile\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getShooted("E_MISSILE")) +
 	    ", \"laser\" : " + std::to_string(reinterpret_cast<Player*>(*itP)->getShooted("E_LASER")) +
-	    "},";
+	    ", \"life\" : " + std::to_string(reinterpret_cast<ComponentHealth*>(reinterpret_cast<Player*>(*itP)->getSystemManager()->getSystemByComponent(C_HEALTH)->getComponent())->getLife()) + "},";
 	}
 	cInter.pop_back();
 	cInter += "]";
