@@ -357,7 +357,6 @@ void		GamePanel::setPlayers(int nbPlayer, int currentPlayer)
 
   for (std::map<std::string, Texture*>::iterator it = static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->begin(); it != static_cast<RoomPanel*>(window->getPanels().top())->getReceived()->end(); ++it)
     {
-      std::cout << "Received file with name : " << (*it).first << std::endl;
       _dicoTextures.insert(std::make_pair((*it).first, (*it).second));
     }
 }
@@ -393,6 +392,8 @@ void		GamePanel::newEntity(std::vector<std::string> &vector)
   newSprite->setPosition(-2000, 500);
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).insert(std::make_pair(id, newSprite));
+
+  //  std::cout << "new entity  id : " << id << " type : " << type << std::endl;
 }
 
 void		GamePanel::deleteEntity(std::vector<std::string> &vector)
@@ -406,6 +407,7 @@ void		GamePanel::deleteEntity(std::vector<std::string> &vector)
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).erase(it);
     }
+  //    std::cout << "Delete id : " << id << std::endl;
 }
 
 void		GamePanel::die(int id, int idDied)
@@ -495,6 +497,7 @@ void		GamePanel::display(std::vector<std::string> &vector)
   std::map<int, Sprite*>::iterator it = ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).find(id);
   if (it != ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())).end())
     ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[id])->setPosition(posX, posY);
+  //  std::cout << "Display id : " << id << std::endl;
 }
 
 std::map<int, Sprite*>		&GamePanel::getDicoSprites()
@@ -546,8 +549,8 @@ void		GamePanel::setCurrentWave(unsigned int value)
     {
       ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[i])->getSprite().setColor(sf::Color(255, 255, 255, 255));
       i++;
+        std::cout << "ici" << std::endl;
     }
-
 }
 
 void			GamePanel::setWaveNumber(unsigned int value)
@@ -613,10 +616,8 @@ void		GamePanel::setLife(const std::string &name, int life)
     {
       OtherPlayer *player;
       player = static_cast<GamePanel*>(window->getPanels().top())->getPlayerByName(name);
-      std::cout << "OTHER PLAYER" << std::endl;
       if (player == NULL)
 	{
-	  std::cout << "PLAYER is NULL" << std::endl;
 	  return ;
 	}
       player->setNbLife(life);

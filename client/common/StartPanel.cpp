@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Tue Dec 29 10:05:14 2015 Serge Heitzler
+// Last update Sun Jan  3 01:40:06 2016 Serge Heitzler
 //
 
 #include <iostream>
@@ -233,6 +233,7 @@ void		StartPanel::update()
     {
       Sound *Sound = Client::getSound();
       Sound->playSound("logoSound");
+      std::cout << "JE LANCE LE SON" << std::endl;
     }
 
   if (i > 360 && i < 411)

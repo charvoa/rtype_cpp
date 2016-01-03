@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:50:28 2015 Viveka BARNEAUD
-// Last update Sun Dec 27 13:46:51 2015 Serge Heitzler
+// Last update Sat Jan  2 19:59:58 2016 Nicolas Girardot
 //
 
 #include <thread>
@@ -133,13 +133,15 @@ void	        RoomPanel::setUserInterface()
   slideDifficulty->setTexture(*((window)->_ressources->_slide));
   slideDifficulty->setPosition((window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2), window->getSize()._y * 0.2);
 
+ // x = 0;
   _difficulty = ButtonFactory::createSlider(Vector2(slideDifficulty->getPosX() + x,
 	  window->getSize()._y * 0.2 + (window->_ressources->_sliderNormal->getSize()._y / 2)), name,
 	  slideDifficulty->getPosX(),
 	  slideDifficulty->getPosX() + window->_ressources->_slide->getSize()._x);
   ANetwork *net = Client::getNetwork();
   ANetwork::t_frame sender;
-  
+
+//  setSlider(window->getSettings()->getDefaultDifficulty() + 1);
 
   sender = CreateRequest::create((unsigned char)C_CHANGE_SETTINGS, CRC::calcCRC(diff), 0, diff);
   net->write(sender);
@@ -209,7 +211,6 @@ void		RoomPanel::newPlayer(std::string &newUsername)
   static_cast<RoomPanel*>(window->getPanels().top())->getBackgrounds().at(i + 1).setTexture(*(static_cast<RoomPanel*>(window->getPanels().top())->getTextures()).at(i + 1));
 
   static_cast<RoomPanel*>(window->getPanels().top())->addNbPlayers();
-  std::cout << "In RoomPanel Nb Player is : " << static_cast<RoomPanel*>(window->getPanels().top())->getNbPlayers() << std::endl;
 }
 
 std::vector<Player*>	&RoomPanel::getPlayers()
@@ -411,6 +412,42 @@ void		RoomPanel::createPlayers()
 
 }
 
+void		RoomPanel::setSlider(int diff)
+{
+  RenderWindow	*window = RenderWindow::getInstance();
+  float x = 0;
+  float xbase = (window->getSize()._x / 2) - (window->_ressources->_slide->getSize()._x / 2);
+
+  switch (diff)
+    {
+    case 1:
+      {
+	x = window->_ressources->_sliderNormal->getSize()._x / 3;
+	break;
+      }
+    case 2:
+      {
+	x = window->_ressources->_slide->getSize()._x / 2;
+	break;
+      }
+    case 3:
+      {
+	x = window->_ressources->_slide->getSize()._x - window->_ressources->_sliderNormal->getSize()._x / 3;
+	break;
+      }
+    default:
+      {
+	x = window->_ressources->_slide->getSize()._x / 2;
+	break;
+      }
+    }
+  static_cast<RoomPanel*>(window->getPanels().top())->getDifficulty()->setPosX(xbase + x);
+}
+
+Slider		*RoomPanel::getDifficulty()
+{
+  return _difficulty;
+}
 
 void		RoomPanel::difficulty(Settings::Difficulty diff)
 {
