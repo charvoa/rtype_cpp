@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Sat Dec  5 10:16:26 2015 Nicolas Girardot
-// Last update Tue Dec 29 10:06:33 2015 Serge Heitzler
+// Last update Sun Jan  3 02:28:12 2016 Serge Heitzler
 //
 
 #ifdef _WIN32
@@ -125,7 +125,7 @@ void	Client::Start()
   _sound->registerSound("../common/misc/gameOver.ogg", "endGame");
   _sound->registerMusic("../common/misc/GameMusicIntro.ogg", "gameIntro");
   _sound->registerMusic("../common/misc/GameMusicLoop.ogg", "gameLoop");
-  _sound->registerMusic("../common/misc/BimBamBoum.ogg", "logoSound");
+  _sound->registerSound("../common/misc/BimBamBoum.ogg", "logoSound");
   _sound->playMusic("mainMenu");
 
   //Threading the Read

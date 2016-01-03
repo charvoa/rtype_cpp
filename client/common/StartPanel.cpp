@@ -5,7 +5,7 @@
 // Login   <barnea_v@epitech.net>
 //
 // Started on  Mon Nov 30 09:52:01 2015 Viveka BARNEAUD
-// Last update Sun Jan  3 01:40:06 2016 Serge Heitzler
+// Last update Sun Jan  3 02:29:25 2016 Serge Heitzler
 //
 
 #include <iostream>
@@ -229,7 +229,7 @@ void		StartPanel::update()
     }
 
 
-  if (i == 300)
+  if (i == 270)
     {
       Sound *Sound = Client::getSound();
       Sound->playSound("logoSound");
