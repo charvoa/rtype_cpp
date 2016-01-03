@@ -101,16 +101,12 @@ Player *Game::getPlayerByClientTCP(Client *client)
 
 void Game::handleHandshakeUDP(void *data, Client *client)
 {
-  std::cout << "Game :: handleHandshakeUDP " << std::endl;
-
   std::list<AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end(); ++it)
     {
       if (dynamic_cast<Player*>((*it))->getClient().getSocket()->getFd() == std::atoi(((ANetwork::t_frame*)data)->data))
 	{
-	  printf("Entre dans le if dans HandShake UDP\n");
 	  dynamic_cast<Player*>((*it))->getClient().setUDPSocket(client->getSocket());
-	  printf("Apres le setUDPSocket\n");
 	}
     }
 }
@@ -160,8 +156,7 @@ void Game::checkWall(Player *player)
   if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN ||
       pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
-      std::cout << "JE RENTRE DEDANS" << std::endl;
-      this->updateLife(player, 0);
+      this->updateLife(player, 2);
     }
 }
 
@@ -179,7 +174,6 @@ void Game::handleMove(void *data, Client *client)
 					       ->getSystemByComponent(C_POSITION)
 					       ->getComponent());
 	auto newMove = this->getDirections((reinterpret_cast<ANetwork::t_frame*>(data))->data);
-
 	if (this->checkMove(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second))
 	  {
 	    player->update(pPlayer->getX() + newMove.first, pPlayer->getY() + newMove.second);
@@ -188,7 +182,7 @@ void Game::handleMove(void *data, Client *client)
 	  }
       }
   } catch (const std::exception &e) {
-    std::cout << "Cannot move : " << e.what() << std::endl;
+    std::cout << "Game :: Player cannot move" << e.what() << std::endl;
   }
 }
 
@@ -196,7 +190,7 @@ void Game::updateScore(Player *p, Game::scoreDef score)
 {
   std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
   p->setScore(p->getScore() + score);
-  std::cout << "Player current score : " << p->getScore()  << "; score added : " << score << std::endl;
+  std::cout << "Game :: " << p->getClient().getUDPSocket()->getIP() << " -> "<< p->getScore()  << "; score added : " << score << std::endl;
   std::string sendData = p->getName() + ";" + std::to_string(p->getScore());
   ANetwork::t_frame frame = CreateRequest::create(S_SCORE, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)
@@ -653,7 +647,6 @@ void Game::checkHitBox()
 				newLife = healthBoss->getLife() - 3;
 			      if (dynamic_cast<Laser*>(*ammosIT) != nullptr)
 				newLife = healthBoss->getLife() - 5;
-
 			      (*monsterIT)->update(newLife);
 			      ss << p->getId();
 			      ss << ";";
@@ -873,7 +866,6 @@ void Game::shootBot(Bot *sender, const std::string &s)
 
       std::stringstream ss;
       ss << bullet->getName();
-
       ANetwork::t_frame frameHealth = CreateRequest::create(S_SHOOT, CRC::calcCRC(ss.str().c_str()), ss.str().size(), ss.str().c_str());
       std::list <AEntity *> _players = _eM.getEntitiesByType(E_PLAYER);
       for (std::list<AEntity *>::iterator it = _players.begin(); it != _players.end() ; ++it)

@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 01:37:26 2015 Antoine Garcia
-// Last update Sun Dec 20 06:29:01 2015 Antoine Garcia
+// Last update Wed Dec 23 01:42:08 2015 Joris Bertomeu
 //
 
 
@@ -91,7 +91,7 @@ void	RoomManager::deleteRoom(const std::string &id)
     {
       if((*it).getId() == id)
 	{
-	  std::cout << "DELETE ROOM" << std::endl;
+	  std::cout << "RoomManager :: DeleteRoom \"" << id << "\"" << std::endl;
 	  _rooms.erase(it);
 	  return;
 	}
