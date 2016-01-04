@@ -5,8 +5,19 @@ This project is a video game based on the famous R-Type.
 ## Installation
 
 1. Clone the repo.
-2. `./install.sh` will compile everything you'll need to play the game.
-3. See Usage
+2. You'll need all of this :
+   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+   - sudo apt-get update -qq
+   - sudo apt-get install -y cmake
+   - sudo apt-get install -y make
+   - sudo apt-get install -y g++-4.8
+   - export CXX="g++-4.8"
+   - wget http://sfml-dev.org/download/sfml/2.1/SFML-2.1-linux-gcc-64bits.tar.bz2 -O /tmp/sfml.tar.bz2
+   - tar -xjvf /tmp/sfml.tar.bz2
+   - sudo cp -r SFML-2.1/* /usr/
+   - sudo apt-get install -y libjpeg62-dev libsndfile1-dev libglew1.5 libglew1.5-dev libfreetype6 libjpeg-turbo8 libjpeg8 libopenal-data libopenal1  libxrandr2 libxrender1 libsoil1
+3. `./install.sh` will compile everything you'll need to play the game.
+4. See Usage
 
 ## Usage
 
