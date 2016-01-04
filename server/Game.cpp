@@ -156,7 +156,7 @@ void Game::checkWall(Player *player)
   if (pPlayer->getY() <= sizeInGame::HEIGHT_MIN ||
       pPlayer->getY() >= sizeInGame::HEIGHT_MAX)
     {
-      this->updateLife(player, 2);
+      this->updateLife(player, 0);
     }
 }
 
@@ -797,6 +797,7 @@ void	sendGameOver(const std::list<Player*>& list)
   for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)
     {
       sendData += (*it)->getName() + ";" + std::to_string((*it)->getScore()) + ";";
+      std::cout << "SEND GAME OVER : " << sendData << std::endl;
     }
   ANetwork::t_frame frame = CreateRequest::create(S_END_GAME, CRC::calcCRC(sendData), sendData.size(), sendData);
   for (std::list<Player*>::const_iterator it = list.begin() ; it != list.end() ; ++it)

@@ -287,17 +287,19 @@ void    SettingsPanel::setBind(Bind bind)
 void    SettingsPanel::defaultSettings()
 {
 	RenderWindow	*window = RenderWindow::getInstance();
-	std::vector<Bind*> binds = _tmp->getBinds();
+	SettingsLoader *loader = new SettingsLoader(false);
+	std::vector<Bind*> binds = loader->createDefaultBinds();
 	std::vector<Bind*>::const_iterator it = binds.begin();
 	std::vector<Bind*>::const_iterator end = binds.end();
-	SettingsLoader *loader = new SettingsLoader(false);
 	int id = 3;
 
 	while (it != end)
 	{
 		(window->getPanels().top()->getLabels().at(id)).setString(loader->keyToString((*it)->getKey()));
+		(window->getPanels().top()->getLabels().at(id)).setOrigin((window->getPanels().top()->getLabels().at(id)).getText().getGlobalBounds().width / 2, (window->getPanels().top()->getLabels().at(id)).getText().getGlobalBounds().height / 2);
 		id++;
 		(window->getPanels().top()->getLabels().at(id)).setString(loader->joystickToString((*it)->getJoystick()));
+		(window->getPanels().top()->getLabels().at(id)).setOrigin((window->getPanels().top()->getLabels().at(id)).getText().getGlobalBounds().width / 2, (window->getPanels().top()->getLabels().at(id)).getText().getGlobalBounds().height / 2);
 		id++;
 		it++;
 	}
