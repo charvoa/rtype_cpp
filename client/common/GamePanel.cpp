@@ -304,6 +304,7 @@ void			GamePanel::playerLeft(const std::string &playerName)
 
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idLeft])->getSprite().setColor(sf::Color(255, 255, 255, 0));
   ((static_cast<GamePanel*>(window->getPanels().top())->getDicoSprites())[idLeft])->getSprite().setPosition(-500, 500);
+  static_cast<GamePanel*>(window->getPanels().top())->addPlayerLeft();
 
 }
 

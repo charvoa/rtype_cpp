@@ -5,7 +5,7 @@
 // Login   <girard_s@epitech.net>
 //
 // Started on  Tue Dec  8 11:12:47 2015 Nicolas Girardot
-// Last update Sun Dec 27 12:54:03 2015 Serge Heitzler
+// Last update Sun Jan  3 09:42:13 2016 Serge Heitzler
 //
 
 #include <iostream>
@@ -112,8 +112,10 @@ std::pair<unsigned int, unsigned int>		InputManager::joystickPressedAt(sf::Event
 
 std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection()
 {
+  std::cout << "TOTOTOTOTO" << std::endl;
   float posX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
   float posY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+  std::cout << "TATATATATA" << std::endl;
 
   int i = 0;
 
@@ -135,6 +137,7 @@ std::pair<unsigned int, unsigned int>   		InputManager::joystickMovedInDirection
     i += 1;
 
 
+  std::cout << "TITITITITI" << std::endl;
   if (sf::Joystick::isButtonPressed(0, 0))
   {
     ANetwork *net = Client::getUDPNetwork();
