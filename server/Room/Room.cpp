@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec 23 01:16:58 2015 Joris Bertomeu
+// Last update Wed Dec 23 01:32:32 2015 Joris Bertomeu
 //
 
 #include <Room.hh>
@@ -46,13 +46,11 @@ void			Room::sendFileToClient(Client *client, std::list<Bot*> list) {
   std::list<Client*>	clientList;
 
   tmp << list.size();
-  std::cout << "IS Passing through Sendfile to client" << std::endl;
   for (std::list<Bot*>::iterator it = list.begin(); it != list.end(); ++it) {
-    std::cout << ">> " << (*it)->_sprite << std::endl;
+    //std::cout << ">> " << (*it)->_sprite << std::endl;
     File	file(std::string("../libs/" + (*it)->_sprite));
 
     if (first) {
-      std::cout << "Is Passing in the thing" << std::endl;
       client->getSocket()->write((void*) CreateRequest::create(S_FILE_TOTAL_SIZE, CRC::calcCRC(std::string(IntToString(port)  + ";" + tmp.str())), std::string(IntToString(port) + ";" + tmp.str()).size(), std::string(IntToString(port)  + ";" + tmp.str()), true), sizeof(ANetwork::t_frame));
       first = false;
     }
@@ -98,7 +96,6 @@ void	Room::sendRoomPlayerJoin(Client *client)
       if ((*it)->getSocket()->getFd() != client->getSocket()->getFd())
 	{
 	  int test = (*it)->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
-	  std::cout << "I WROTE " << test << "to FD" << (*it)->getSocket()->getFd() << std::endl;
 	}
     }
 }
