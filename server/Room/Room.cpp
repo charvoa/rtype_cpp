@@ -5,7 +5,7 @@
 // Login   <antoinegarcia@epitech.net>
 //
 // Started on  Tue Dec  1 05:29:21 2015 Antoine Garcia
-// Last update Wed Dec 23 01:32:32 2015 Joris Bertomeu
+// Last update Mon Jan  4 05:17:15 2016 Serge Heitzler
 //
 
 #include <Room.hh>
@@ -94,9 +94,7 @@ void	Room::sendRoomPlayerJoin(Client *client)
       std::string sendData = "player" + std::to_string(clientPos);
       ANetwork::t_frame frame = CreateRequest::create(S_NEW_PLAYER_CONNECTED, CRC::calcCRC(sendData), 0, sendData);
       if ((*it)->getSocket()->getFd() != client->getSocket()->getFd())
-	{
-	  int test = (*it)->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
-	}
+	(*it)->getSocket()->write(reinterpret_cast<void *>(&frame), sizeof(ANetwork::t_frame));
     }
 }
 
