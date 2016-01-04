@@ -81,8 +81,13 @@ void	Client::Start()
 
   _network->init(window->getSettings()->getPort(), ANetwork::TCP_MODE);
   std::cout << "Connecting to : " << window->getSettings()->getIP() << ":" << window->getSettings()->getPort() << std::endl;
-  _network->connect(window->getSettings()->getIP());
-
+  try {
+	  _network->connect(window->getSettings()->getIP());
+  }
+  catch (const std::exception &e)
+  {
+	  std::cerr << e.what() << std::endl;
+  }
   //Sending Handshake
 
   ANetwork::t_frame sender = CreateRequest::create((unsigned char)C_HANDSHAKE, CRC::calcCRC("Bonjour 1.0"), 0, "Bonjour 1.0");
