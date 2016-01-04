@@ -22,9 +22,9 @@ This project is a video game based on the famous R-Type.
 ## Usage
 
 1. After cloning and compiling everything you'll have two executable files, one is the server and the other one is the client.
-2. First launch a server on your computer using `./server_rtype`.
+2. First launch a server on your computer using `cd server/build && ./server_rtype`.
 3. Then go to `client/config/PersonalConfig.ini`, set the IP with the IP's computer where the server is launched (0 for localhost) and set the port (default is 4253)
-4. Launch the client on your computer using `./client_rtype`
+4. Launch the client on your computer : `cd client/build && ./r-type_client`
 5. Enjoy ! 
 
 ## Contributing
