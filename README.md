@@ -1,4 +1,4 @@
-#R-PINT [![Build Status](https://travis-ci.org/charvoa/rtype_cpp.svg?token=pSML9SHkZtFx2hRSmJ4q&branch=master)](https://travis-ci.org/charvoa/rtype_cpp)
+#RPINT [![Build Status](https://travis-ci.org/charvoa/rtype_cpp.svg?branch=master)](https://travis-ci.org/charvoa/rtype_cpp)
 
 This project is a video game based on the famous R-Type.
 
